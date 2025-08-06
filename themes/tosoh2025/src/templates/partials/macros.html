@@ -1,0 +1,48 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: false
+  label: Macros
+-->
+
+{% set size_to_px = {
+"none": 0,
+"2xs": 2,
+"xs": 8,
+"sm": 16,
+"base": 24,
+"md": 32,
+"lg": 48,
+"xl": 64,
+"2xl": 96,
+"3xl": 128,
+"4xl": 192
+} %}
+
+{%- macro decoration_attrs(settings) -%}
+path="{{ settings.path }}"
+mainSegments="{{ settings.main_segments|map('size')|join(',') }}"
+mainWidths="{{ settings.main_segments|map('width')|join(',') }}"
+mainColors="{{ settings.main_segments|map('color')|join(',') }}"
+accentSegments="{{ settings.accent_segments|map('size')|join(',') }}"
+accentWidths="{{ settings.accent_segments|map('width')|join(',') }}"
+accentColors="{{ settings.accent_segments|map('color')|join(',') }}"
+zIndex="{{ settings.z_index or 10 }}"
+offsetSplit="{{ size_to_px[settings.offset_split] or 32 }}"
+offsetT="{{ size_to_px[settings.offset_top] or 0 }}"
+offsetR="{{ size_to_px[settings.offset_right] or 0 }}"
+offsetB="{{ size_to_px[settings.offset_bottom] or 0 }}"
+offsetL="{{ size_to_px[settings.offset_left] or 0 }}"
+dualPathsEnabled="{{ settings.accent_segments|length > 1 }}"
+{%- endmacro -%}
+
+{%- macro container_attrs(settings) -%}
+pt="{{ settings.pt_mobile }}" pr="{{ settings.pr_mobile }}"
+pb="{{ settings.pb_mobile }}" pl="{{ settings.pl_mobile }}"
+mdPt="{{ settings.pt_desktop }}" mdPr="{{ settings.pr_desktop }}"
+mdPb="{{ settings.pb_desktop }}" mdPl="{{ settings.pl_desktop }}"
+bgColor="{{ settings.bg_color }}" textColor="{{ settings.text_color }}"
+offsetX="{{ settings.offset_x_mobile ? settings.offset_x_mobile ~ 'rem' : 'auto' }}"
+offsetY="{{ settings.offset_y_mobile ? settings.offset_y_mobile ~ 'rem' : 'auto' }}"
+mdOffsetX="{{ settings.offset_x_desktop ? settings.offset_x_desktop ~ 'rem' : 'auto' }}"
+mdOffsetY="{{ settings.offset_y_desktop ? settings.offset_y_desktop ~ 'rem' : 'auto' }}"
+{%- endmacro -%}

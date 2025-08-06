@@ -1,0 +1,33 @@
+tosoh-modal {
+  display: contents;
+
+  .dialog {
+    display: flex;
+    flex-direction: column;
+    min-width: 16rem;
+    width: 48rem;
+    max-width: 90vw;
+    height: calc(100vh - var(--space-md));
+    max-height: 36rem;
+    background: white;
+    border-radius: 1rem;
+
+    > .dialog__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid lightgray;
+
+      > tosoh-modal-action {
+        display: contents;
+        cursor: pointer;
+      }
+    }
+
+    > .dialog__body {
+      padding: 2rem;
+      overflow-y: auto;
+    }
+  }
+}

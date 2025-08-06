@@ -1,0 +1,71 @@
+<!--
+  templateType: section
+  label: Flex Column w/ Quarter Circle Image (right)
+  description: "Flex Column with a wedge-shaped image at the right side of the content block."
+  isAvailableForNewContent: true
+  screenshotPath: ../../images/previews/fc-qc-img-alt.png
+-->
+
+{% set columns = [
+  {
+    type: "content",
+    content: {
+      eyebrow: "<p>Lorem Ipsum</p>",
+      title: "<h3>Lorem ipsum dolor sit amet</h3>",
+      description: "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>",
+      is_cta: false,
+      link: { url: { href: "https://www.hairc.com" } },
+      link_label: "Learn more",
+      link_variant: "link with-arrow"
+    },
+    column_settings: {
+      flex_factor: 3,
+      align: "center",
+      pt_mobile: "md",
+      pt_desktop: "lg",
+      pb_mobile: "md",
+      pb_desktop: "lg",
+      pl_mobile: "md",
+      pl_desktop: "lg",
+      pr_mobile: "md",
+      pr_desktop: "lg",
+      bg_color: "lime",
+      text_color: "petrol"
+    }
+  },
+  {
+    type: "media",
+    media: {
+      type: "image",
+      image: { src: "https://45980862.fs1.hubspotusercontent-na1.net/hubfs/45980862/placeholder.png" },
+      media_shape: "quarter-circle-br"
+    },
+    column_settings: {
+      flex_factor: 2,
+    },
+  }
+] %}
+
+{% set module_settings = {
+  gap: "none",
+  pt_mobile: "md",
+  pt_desktop: "md",
+  pr_mobile: "md",
+  pr_desktop: "2xl",
+  pb_mobile: "md",
+  pb_desktop: "md",
+  pl_mobile: "md",
+  pl_desktop: "2xl"
+} %}
+
+{% dnd_section %}
+{% dnd_column %}
+{% dnd_row %}
+{% dnd_module path="../../modules/FlexColumns", fields={
+  columns: columns,
+  module_settings: module_settings,
+} %}
+{% end_dnd_module %}
+{% end_dnd_row %}
+{% end_dnd_column %}
+{% end_dnd_section %}

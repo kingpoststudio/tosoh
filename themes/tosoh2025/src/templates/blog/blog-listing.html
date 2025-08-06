@@ -1,0 +1,116 @@
+<!--
+    templateType: blog_listing
+    isAvailableForNewContent: true
+    label: Blog Listing
+-->
+
+{% extends "../layouts/base.html" %}
+{% block body %}
+
+{% set blog_id = content.parent_blog.id or "default" %}
+{% set standard_posts = [] %}
+{% set featured_posts = tag
+? blog_recent_tag_posts(blog_id, [tag, "featured"], 9, "AND")
+: blog_recent_tag_posts(blog_id, "featured", 9) %}
+
+{% for post in contents %}
+{% set tag_str = post.tag_list|map("slug")|join(" ") %}
+
+{% if "featured" not in tag_str %}
+{% do standard_posts.append(post) %}
+{% endif %}
+{% endfor %}
+
+{%- macro render_listing(post) %}
+<tosoh-content alignment="start" gap="sm" class="w-full max-w-md mb-base">
+  <div slot="eyebrow" class="flex flex-col gap-xs w-full">
+    <img class="w-full aspect-standard object-cover" src="{{ post.featured_image }}" width="360" alt="{{ post.title }}">
+    <div>
+      {% for tag in post.tag_list %}
+      {% set tag_href = blog_tag_url(blog_id, tag.slug) %}
+
+      <a href="{{ tag_href }}">{{ tag.label }}</a>{%- if not loop.last %}, {% endif -%}
+      {% endfor %}
+    </div>
+  </div>
+  <a slot="title" href="{{ post.absolute_url }}">
+    <span class="font-semibold">{{ post.title }}</strong>
+  </a>
+</tosoh-content>
+{% endmacro -%}
+
+{% macro format_publish_date(date) -%}
+{{ date|datetimeformat('%-m/%e/%Y') }}
+{% endmacro -%}
+
+{# Blog Listing #}
+<main>
+
+  {# Featured Banner #}
+  {% if featured_posts|length > 0 and current_page_num == 1 %}
+
+  <tosoh-hero-banner bgColor="petrol" imageVariant="pill">
+    <h1 slot="title">{{ featured_posts[0].title }}</h1>
+    <p slot="description">{{ featured_posts[0].meta_description|truncate(240) }}</p>
+    <a slot="cta" class="button" href="{{ featured_posts[0].absolute_url }}">Read more</a>
+    <img slot="image" src="{{ featured_posts[0].featured_image }}" alt="{{ featured_posts[0].title }}">
+  </tosoh-hero-banner>
+
+  {% else %}
+  {# Standard Banner #}
+  {% module "hero_banner"
+  path="../../modules/HeroBanner"
+  bgColor="petrol"
+  title="<h1>Blog</h1>"
+  is_condensed="true"
+  %}
+  {% endif %}
+
+  {% if featured_posts|length > 1 %}
+  <tosoh-container pt="lg" pr="md" pb="lg" pl="md" mdPt="lg" mdPr="2xl" mdPb="xl" mdPl="2xl" bgColor="cream">
+    <div class="flex flex-col gap-md">
+      {% if featured_posts|length > 1 %}
+      <h3>Additional featured</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-base w-fit mx-auto">
+        {% for post in featured_posts %}
+        {% if loop.index > 1 %}
+        {{ render_listing(post) }}
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endif %}
+    </div>
+  </tosoh-container>
+  {% endif %}
+
+  {% module "blog_tag_filter" path="../../modules/blog/BlogTagFilter" %}
+
+  <tosoh-container pt="lg" pr="md" pb="lg" pl="md" mdPt="lg" mdPr="2xl" mdPb="xl" mdPl="2xl" bgColor="cream">
+    <div class="flex flex-col gap-md">
+      {% for group in standard_posts|batch(4, false) %}
+      {% set groupIndex = loop.index0 %}
+      {% set isRevealed = groupIndex == 0 ? "isRevealed=\"true\"" : null %}
+
+      <tosoh-reveal-group groupId="{{ groupIndex }}" {{ isRevealed }}>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-center gap-base w-fit mx-auto">
+          {% for post in group %}
+          {% set tag_list = post.tag_list|map("slug")|join(" ") %}
+          {% if post is truthy and "featured" not in tag_list %}
+          {{ render_listing(post) }}
+          {% endif %}
+          {% endfor %}
+        </div>
+
+        {% if !loop.last %}
+        <tosoh-reveal-group variant="action" groupId="{{ groupIndex + 1 }}" class="block w-fit mx-auto mt-base">
+          <button>Load more</button>
+        </tosoh-reveal-group>
+        {% endif %}
+      </tosoh-reveal-group>
+      {% endfor %}
+    </div>
+  </tosoh-container>
+</main>
+
+{% endblock body %}

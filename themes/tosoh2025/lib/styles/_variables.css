@@ -1,0 +1,82 @@
+:root {
+  /* Colors */
+  --color-petrol: #27424a;
+  --color-petrol-light: #3f6b78;
+  --color-petrol-lighter: #5f99ab;
+  --color-petrol-lightest: #94bbc7;
+  --color-cream: #feffe3;
+  --color-sand: #eaeac1;
+  --color-lime: #c2f970;
+  --color-lime-light: #d4ff7f;
+  --color-lime-lighter: #e4ff8f;
+  --color-lime-lightest: #f4ff9f;
+  --color-teal: #34d9be;
+  --color-teal-light: #3cecc8;
+  --color-teal-lighter: #4ef0d2;
+  --color-teal-lightest: #5ef4dc;
+  --color-rust: #e07662;
+  --color-rust-light: #f38a77;
+  --color-rust-lighter: #f5a493;
+  --color-rust-lightest: #f7b6b0;
+  --color-gray: #bfc7c9;
+  --color-black: #1a1a1a;
+  --color-white: #f1f3f3;
+  --color-error: #dc3545;
+  --color-shadow: #27424a20;
+
+  /* Spacings */
+  --scale: min(16px, 3.2vw);
+
+  @media (min-width: 768px) {
+    --scale: min(16px, 1.4vw);
+  }
+
+  --page-max-width: 1536px;
+  --page-width-wide: min(95%, calc(var(--page-max-width) * 0.95));
+  --page-width-snug: min(90%, calc(var(--page-max-width) * 0.9));
+  --page-width-narrow: min(85%, calc(var(--page-max-width) * 0.85));
+  --page-width-tight: min(80%, calc(var(--page-max-width) * 0.8));
+
+  @media (min-width: 768px) {
+    --page-width-wide: min(90%, calc(var(--page-max-width) * 0.9));
+    --page-width-snug: min(80%, calc(var(--page-max-width) * 0.8));
+    --page-width-narrow: min(70%, calc(var(--page-max-width) * 0.7));
+    --page-width-tight: min(60%, calc(var(--page-max-width) * 0.6));
+  }
+
+  --space-0: 0;
+  --space-none: 0;
+  --space-2xs: 0.25rem;
+  --space-xs: 0.5rem;
+  --space-sm: 0.675rem;
+  --space: 1rem;
+  --space-base: var(--scale);
+  --space-md: 2rem;
+  --space-lg: 3rem;
+  --space-xl: 4rem;
+  --space-2xl: 6rem;
+  --space-3xl: 8rem;
+  --space-4xl: 12rem;
+
+  @media (min-width: 768px) {
+    --space-4xl: 16rem;
+  }
+
+  /* Fonts */
+  --font-family: neue-haas-grotesk-display,
+  sans-serif;
+  --font-family-heading: "Niramit",
+  sans-serif;
+
+  --font-size-xs: 0.8rem;
+  --font-size-sm: 0.9rem;
+  --font-size-base: var(--scale);
+  --font-size-md: 1.25rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 1.75rem;
+  --font-size-2xl: 2.5rem;
+  --font-size-3xl: 3rem;
+  --font-size-4xl: 3.5rem;
+  --font-size-5xl: 4.5rem;
+  --font-size-6xl: 5.5rem;
+}

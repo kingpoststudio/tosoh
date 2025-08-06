@@ -1,0 +1,85 @@
+{% import "../../templates/partials/macros.html" as macros %}
+
+<tosoh-container {{ macros.container_attrs(module.module_settings) }}>
+  <div class="flex flex-col items-center gap-md mx-auto">
+    {% if module.title %}
+    <h3 class="mb-md">{{ module.title }}</h3>
+    {% endif %}
+
+    <div class="flex flex-col md:flex-row justify-center gap-base">
+      {# Pie Chart(s) #}
+      {% if module.variant == "pie" %}
+
+      {% for chart in module.pie_charts %}
+      <div class="flex-1 flex flex-col items-center">
+        <tosoh-pie-chart value="{{ chart.value || 0 }}" color="{{ chart.color || 'petrol' }}">
+          <tosoh-in-view>
+            <div class="flex flex-col items-center gap-xs">
+              <p class="text-sm">{{ chart.chart_label }}</p>
+              <strong class="text-2xl">
+                {% if chart.prefix %}
+                <span>{{ chart.prefix }}</span>
+                {% endif %}
+                <span>{{ chart.value }}</span>
+                {% if chart.suffix %}
+                <span>{{ chart.suffix }}</span>
+                {% endif %}
+              </strong>
+            </div>
+          </tosoh-in-view>
+        </tosoh-pie-chart>
+        {% if chart.description %}
+        <strong class="text-sm text-center p-base">{{ chart.description }}</strong>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      {# Bar Chart(s) #}
+      {% elif module.variant == "bar" %}
+
+      {# Rose Chart #}
+      {% elif module.variant == "rose" %}
+      {% set values = module.rose_chart.slices|map("value")|join(",") %}
+
+      <div class="flex flex-col md:flex-row items-center justify-center gap-xl">
+        <div class="min-w-base">
+          {% set svgColors = ["", "-light", "-lighter", "-lightest"] %}
+
+          <table>
+            <tbody>
+              <tr class="text-sm text-petrol-lighter uppercase">
+                <th></th>
+                <th class="font-medium text-left" colspan="2">Value</th>
+                <th class="font-medium text-right">Amount</th>
+              </tr>
+              {% for slice in module.rose_chart.slices %}
+              {% set svgColor = "text-" ~ module.rose_chart.color ~ svgColors[loop.index0] %}
+              <tr>
+                <td>
+                  <div class="flex flex-col items-center">
+                    <svg width="1rem" height="1rem" viewBox="0 0 16 16" class="{{ svgColor }}">
+                      <circle cx="8" cy="8" r="8" fill="currentColor" />
+                    </svg>
+                  </div>
+                </td>
+                <td class="text-left" colspan="2">
+                  {{ slice.slice_label }}
+                </td>
+                <td class="text-right font-semibold">
+                  <div class="flex flex-col items-end">
+                    <span>{{ slice.value }}</span>
+                  </div>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <div class="min-w-sm">
+          <tosoh-rose-chart color="{{ module.rose_chart.color }}" values="{{ values }}"></tosoh-rose-chart>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</tosoh-container>

@@ -1,0 +1,25 @@
+{% import "../../../templates/partials/macros.html" as macros %}
+
+{% set blog_id = content.parent_blog.id or "default" %}
+
+<tosoh-container {{ macros.container_attrs(module.module_settings) }}>
+  <tosoh-scroll-x scrollbarHeight="1px">
+    <div class="flex flex-col gap-base w-full">
+      {% if module.title %}
+      <h3>{{ module.title }}</h3>
+      {% endif %}
+
+      <div class="flex gap-md min-w-lg mx-auto">
+        <a href="{{ content.parent_blog.absolute_url }}" class="button tab {{ !tag ? 'active' : null }}">
+          {{ module.show_all_label or "Show all" }}
+        </a>
+
+        {% for t in module.tags %}
+        {% set active = tag == t.tag.slug ? "active" : null %}
+        {% set tag_href = blog_tag_url(blog_id, t.tag.slug) %}
+        <a href="{{ tag_href }}" class="button tab {{ active }}">{{ t.tag.name }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </tosoh-scroll-x>
+</tosoh-container>

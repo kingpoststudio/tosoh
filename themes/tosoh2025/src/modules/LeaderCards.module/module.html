@@ -1,0 +1,37 @@
+{% import "../../templates/partials/macros.html" as macros %}
+
+{% macro render_leader_card(card) %}
+<tosoh-leader-card href="{{ card.link.url.href }}">
+  {% if card.image.src %}
+  <img slot="image" class="aspect-square object-cover" src="{{ card.image.src }}"
+    alt="{{ card.image.alt or card.title }}" width="480">
+  {% endif %}
+  {% if card.title %}
+  <p slot="eyebrow">{{ card.title }}</p>
+  {% endif %}
+  {% if card.leader %}
+  <h4 slot="name">{{ card.leader }}</h4>
+  {% endif %}
+</tosoh-leader-card>
+{% endmacro %}
+
+<tosoh-container {{ macros.container_attrs(module.module_settings) }}>
+  <div class="flex flex-col items-center gap-md mx-auto">
+    {% if module.title %}
+    <h3 class="mb-md">{{ module.title }}</h3>
+    {% endif %}
+
+    <div class="grid grid-cols-1 md:grid-cols-3 justify-center gap-base">
+      {% for card in module.cards %}
+      {% if card.animation_settings.is_animated %}
+      <tosoh-in-view x="{{ card.animation_settings.x_travel }}" y="{{ card.animation_settings.y_travel }}"
+        delay="{{ card.animation_settings.delay }}" duration="{{ card.animation_settings.duration }}">
+        {{ render_leader_card(card) }}
+      </tosoh-in-view>
+      {% else %}
+      {{ render_leader_card(card) }}
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</tosoh-container>

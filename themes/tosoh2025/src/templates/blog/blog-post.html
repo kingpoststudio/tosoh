@@ -1,0 +1,242 @@
+<!--
+    templateType: blog_post
+    isAvailableForNewContent: true
+    label: Blog Post
+-->
+
+{% extends "../layouts/base.html" %}
+{% block body %}
+
+{% macro format_publish_date(date) %}
+{{ date|datetimeformat('%-m/%e/%Y') }}
+{% endmacro %}
+
+<main>
+  {% module "hero_banner"
+  path="../../modules/HeroBanner"
+  bg_color="petrol"
+  is_decorated="true"
+  is_share_displayed="true"
+  eyebrow="{{ content.tag_list[0].slug }}"
+  title="<h1 class=\"as-h2\">{{ content.title }}</h1>"
+  description="<p>{{ content.blog_author.display_name }}</p>"
+  image={ src: content.featured_image, alt: content.title }
+  image_variant="circle-bottom"
+  decoration_settings={
+  is_enabled: true,
+  path: "ML,MM,MR,BR",
+  main_segments: [
+  { size: 100, width: 2, color: "transparent" },
+  { size: 73, width: 1, color: "cream" }
+  ],
+  accent_segments: [
+  { size: 100, width: 1, color: "gray" },
+  { size: 80, width: 2, color: "lime" }
+  ],
+  z_index: 10,
+  offset_split: "lg",
+  offset_top: "none",
+  offset_right: "2xl",
+  offset_bottom: "none",
+  offset_left: "none"
+  }
+  %}
+
+  <tosoh-line path="TR,MR,BR" mainsegments="100" mainwidths="1" maincolors="petrol" accentsegments="100"
+    accentwidths="2" accentcolors="lime" zindex="10" offsetsplit="48" offsett="0" offsetr="96" offsetb="0" offsetl="0"
+    dualpathsenabled="true">
+    <tosoh-container pt="md" pr="md" pb="md" pl="md" mdpt="xl" mdpr="4xl" mdpb="xl" mdpl="4xl">
+      <div class="w-full">
+        {{ content.post_body }}
+      </div>
+    </tosoh-container>
+  </tosoh-line>
+
+  {% module "service_cards"
+  path="../../modules/ServiceCards"
+  title="<h2 class=\"as-h3\">Related Services</h2>",
+  is_inline_layout=true,
+  cards=[{
+  title: "Concept",
+  description: "Expert grounding for big ideas - collaborative and mission-driven.",
+  link: { url: { href: "/concept" } },
+  },
+  {
+  title: "Engineering design",
+  description: "From initial concept to precision design - seamless, integrated, yours.",
+  link: { url: { href: "/engineering-design" } },
+  },
+  {
+  title: "Manufacturing",
+  description: "Where prototype meets production - compliant, stable, and real-world ready.",
+  link: { url: { href: "/manufacturing" } },
+  },
+  {
+  title: "Support",
+  description: "Performance that lasts. Sustaining your solutions in the real world.",
+  link: { url: { href: "/support" } }
+  }],
+  module_settings={
+  bg_color: "petrol",
+  text_color: "lime",
+  pt_mobile: "md",
+  pt_desktop: "lg",
+  pr_mobile: "md",
+  pr_desktop: "2xl",
+  pb_mobile: "md",
+  pb_desktop: "lg",
+  pl_mobile: "md",
+  pl_desktop: "2xl"
+  },
+  decoration_settings={
+  is_enabled: true,
+  path: "TR,MR,BR,BM",
+  main_segments: [
+  { size: 95, width: 1, color: "sand" },
+  { size: 5, width: 1, color: "transparent" }
+  ],
+  accent_segments: [
+  { size: 100, width: 2, color: "lime" },
+  { size: 5, width: 2, color: "transparent" }
+  ],
+  z_index: 10,
+  offset_split: "lg",
+  offset_top: "none",
+  offset_right: "2xl",
+  offset_bottom: "3xl",
+  offset_left: "none"
+  }
+  %}
+
+  {% module "cta_block"
+  path="../../modules/FlexColumns",
+  columns=[{
+  type: "content",
+  content: {
+  align: "center",
+  title: "<h3>Ready to Transform Your Business?</h3>",
+  is_cta: false,
+  link: { url: { href: "/contact" } },
+  link_label: "Get Started Today",
+  link_variant: "button theme-lime"
+  },
+  column_settings: {
+  flex_factor: 1,
+  align: "center",
+  justify: "center",
+  bg_color: "",
+  text_color: "",
+  border_color: "transparent"
+  },
+  animation_settings: {
+  is_animated: true,
+  delay: 300,
+  duration: 800,
+  x_travel: "0",
+  y_travel: "1rem"
+  }
+  }],
+  module_settings={
+  bg_color: "cream",
+  text_color: "petrol",
+  gap: "none",
+  overflow_scroll_x: false,
+  is_reversed_mobile: false,
+  pt_mobile: "xl",
+  pt_desktop: "xl",
+  pr_mobile: "md",
+  pr_desktop: "4xl",
+  pb_mobile: "xl",
+  pb_desktop: "3xl",
+  pl_mobile: "md",
+  pl_desktop: "4xl"
+  },
+  decoration_settings={
+  is_enabled: true,
+  path: "TL,BL,BM,BR",
+  main_segments: [{ size: 100, width: 1, color: "petrol" }],
+  accent_segments: [{ size: 100, width: 2, color: "lime" }],
+  z_index: 10,
+  offset_split: "lg",
+  offset_top: "none",
+  offset_right: "2xl",
+  offset_bottom: "base",
+  offset_left: "4xl"
+  } %}
+
+  {# {% module "insight_cards"
+  path="../../modules/InsightCards"
+  title="Helpful Insights"
+  cards=[
+  {
+  eyebrow: "Guide",
+  title: "Digital Strategy Playbook",
+  description: "A comprehensive guide to building effective digital strategies that drive growth and innovation.",
+  link: { url: { href: "/resources/digital-strategy-playbook" }, open_in_new_tab: false },
+  animation_settings: {
+  is_animated: true,
+  delay: 100,
+  duration: 600,
+  x_travel: "0",
+  y_travel: "1rem"
+  }
+  },
+  {
+  eyebrow: "Whitepaper",
+  title: "Future of Work Report",
+  description: "Insights and trends shaping the modern workplace and how organizations can adapt to change.",
+  link: { url: { href: "/resources/future-of-work-report" }, open_in_new_tab: false },
+  animation_settings: {
+  is_animated: true,
+  delay: 200,
+  duration: 600,
+  x_travel: "0",
+  y_travel: "1rem"
+  }
+  },
+  {
+  eyebrow: "Case Study",
+  title: "Enterprise Transformation",
+  description: "How we helped a Fortune 500 company modernize their operations and achieve 40% efficiency gains.",
+  link: { url: { href: "/case-studies/enterprise-transformation" }, open_in_new_tab: false },
+  animation_settings: {
+  is_animated: true,
+  delay: 300,
+  duration: 600,
+  x_travel: "0",
+  y_travel: "1rem"
+  }
+  }],
+  module_settings={
+  bg_color: "cream",
+  text_color: "petrol",
+  pt_mobile: "lg",
+  pt_desktop: "xl",
+  pr_mobile: "md",
+  pr_desktop: "2xl",
+  pb_mobile: "lg",
+  pb_desktop: "xl",
+  pl_mobile: "md",
+  pl_desktop: "2xl"
+  },
+  decoration_settings={
+  is_enabled: true,
+  path: "TL,TM,TR,MR,BR",
+  main_segments: [
+  { size: 85, width: 2, color: "lime" },
+  { size: 15, width: 2, color: "transparent" }
+  ],
+  z_index: 10,
+  offset_split: "lg",
+  offset_top: "2xs",
+  offset_right: "4xl",
+  offset_bottom: "lg",
+  offset_left: "2xl"
+  } %} #}
+
+  {% module "related_blog_posts"
+  path="../../modules/blog/RelatedBlogPosts"
+  %}
+</main>
+
+{% endblock body %}

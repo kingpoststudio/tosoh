@@ -1,0 +1,57 @@
+{% import "../../templates/partials/macros.html" as macros %}
+
+{%- macro render_service_card(card) %}
+<tosoh-service-card href="{{ card.link.url.href }}">
+  <h4 slot="title">{{ card.title }}</h4>
+  <p slot="description">{{ card.description }}</p>
+</tosoh-service-card>
+{% endmacro -%}
+
+<tosoh-line {{ macros.decoration_attrs(module.decoration_settings) }}>
+  <tosoh-container {{ macros.container_attrs(module.module_settings) }}>
+
+    {# Inline Layout #}
+    {% if module.is_inline_layout %}
+    <div class="flex flex-col md:flex-row items-start gap-md w-full" style="z-index:20;">
+      {% if module.title %}
+      <div class="flex-1">{{ module.title }}</div>
+      {% endif %}
+
+      <div class="flex-3 grid grid-cols-1 md:grid-cols-2 gap-sm justify-center">
+        {% for card in module.cards %}
+        {% if card.animation_settings.is_animated %}
+        <tosoh-in-view x="{{ card.animation_settings.x_travel }}" y="{{ card.animation_settings.y_travel }}"
+          delay="{{ card.animation_settings.delay }}" duration="{{ card.animation_settings.duration }}">
+          {{ render_service_card(card) }}
+        </tosoh-in-view>
+        {% else %}
+        {{ render_service_card(card) }}
+        {% endif %}
+        {% endfor %}
+      </div>
+      <div class="flex-1"></div>
+    </div>
+
+    {# Vertical Layout #}
+    {% else %}
+    <div class="flex flex-col items-center gap-md w-full" style="z-index:20;">
+      {% if module.title %}
+      <div class="w-full md:w-1/2 text-center">{{ module.title }}</div>
+      {% endif %}
+
+      <div class="grid grid-cols-1 md:grid-cols-{{ module.col_qty }} gap-sm justify-center w-full">
+        {% for card in module.cards %}
+        {% if card.animation_settings.is_animated %}
+        <tosoh-in-view x="{{ card.animation_settings.x_travel }}" y="{{ card.animation_settings.y_travel }}"
+          delay="{{ card.animation_settings.delay }}" duration="{{ card.animation_settings.duration }}">
+          {{ render_service_card(card) }}
+        </tosoh-in-view>
+        {% else %}
+        {{ render_service_card(card) }}
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </tosoh-container>
+</tosoh-line>

@@ -1,0 +1,26 @@
+<!--
+  templateType: error_page
+  isAvailableForNewContent: true
+  label: 500 Error
+-->
+
+{% extends '../layouts/base.html' %}
+
+{% block body %}
+
+<main>
+  <tosoh-container pt="lg" pb="lg" pl="md" pr="md" mdpt="lg" mdpb="2xl" mdpl="lg" mdpr="2xl">
+    <tosoh-content class="mx-auto" alignment="center">
+      <svg slot="eyebrow" width="64" height="64" viewBox="0 0 16 16">
+        <path fill="var(--color-rust)"
+          d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0-2A5 5 0 1 0 8 3a5 5 0 0 0 0 10zm0-9a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+      </svg>
+      <h3 slot="title">Something went wrong.</h3>
+      <p slot="description">An internal server error occurred. Please click the button below to return to the
+        homepage.</p>
+      <a class="button" href="/" slot="cta">Go Home</a>
+    </tosoh-content>
+  </tosoh-container>
+</main>
+
+{% endblock body %}

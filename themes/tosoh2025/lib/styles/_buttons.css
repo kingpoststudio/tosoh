@@ -1,0 +1,136 @@
+button,
+a.button,
+input.hs-button,
+input[type="submit"] {
+  display: inline-block;
+  min-width: 8rem;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  font-size: var(--font-size-xs);
+  line-height: 1.5;
+  letter-spacing: 1px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--color-petrol);
+  border-radius: 4rem;
+  background: var(--color-lime);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out,
+    color 0.3s ease-in-out,
+    opacity 0.2s ease-in-out;
+
+  &:hover {
+    background: var(--color-cream);
+  }
+
+  &:active {
+    opacity: 0.7;
+    background: var(--color-lime);
+  }
+
+  &.theme-petrol {
+    background: var(--color-petrol);
+    color: var(--color-cream);
+
+    &:hover {
+      background: var(--color-cream);
+      color: var(--color-petrol);
+    }
+
+    &:active {
+      opacity: 0.7;
+      background: var(--color-cream);
+    }
+  }
+
+  &.theme-lime {
+    background: var(--color-lime);
+    color: var(--color-petrol);
+
+    &:hover {
+      background: var(--color-petrol);
+      color: var(--color-cream);
+    }
+
+    &:active {
+      opacity: 0.7;
+      background: var(--color-petrol);
+    }
+  }
+
+  &.size-lg {
+    min-width: 9rem;
+    padding: 0.75rem 1.25rem;
+    font-size: var(--font-size-sm);
+  }
+
+  &.size-xl {
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    font-size: var(--font-size-sm);
+  }
+
+  &.tab {
+    all: unset;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    min-width: 8rem;
+    max-width: 16rem;
+    padding: 1.5rem var(--space);
+    font-weight: 450;
+    text-align: center;
+    cursor: pointer;
+    transition: text-shadow 0.2s ease-in-out;
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 0.2rem;
+      background: transparent;
+      transition: background 0.2s ease-in-out;
+    }
+
+    &:hover {
+      text-shadow: 0 0 1px var(--color-petrol-lightest);
+
+      &:after {
+        background: var(--color-petrol-lightest);
+      }
+    }
+
+    &.active {
+      text-shadow: 0 0 1px var(--color-petrol);
+
+      &:after {
+        background: var(--color-petrol);
+      }
+    }
+  }
+}
+
+input[type="submit"] {
+  max-width: 24rem;
+  background: var(--color-petrol);
+  color: var(--color-cream);
+
+  &:hover {
+    background: var(--color-lime);
+    color: var(--color-petrol);
+  }
+
+  &:active {
+    opacity: 0.7;
+    background: var(--color-lime);
+  }
+}
+
+.tab-group {
+  display: flex;
+}

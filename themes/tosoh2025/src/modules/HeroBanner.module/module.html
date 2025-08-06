@@ -1,0 +1,44 @@
+{% import "../../templates/partials/macros.html" as macros %}
+
+{% set condensed = module.is_condensed ? 'condensed=true' : undefined %}
+{% set decorated = module.is_decorated ? 'decorated=true' : undefined %}
+
+{%- macro render_hero_banner() %}
+<tosoh-hero-banner {{ condensed }} {{ decorated }} bgColor="{{ module.bg_color }}"
+  imageVariant="{{ module.image_variant }}">
+  {% if module.eyebrow %}
+  <div slot="eyebrow">{{ module.eyebrow }}</div>
+  {% endif %}
+  {% if module.title %}
+  <div slot="title">{{ module.title }}</div>
+  {% endif %}
+  {% if module.description %}
+  <div slot="description">{{ module.description }}</div>
+  {% endif %}
+  {% if module.is_cta and module.cta %}
+  <div slot="cta">
+    {% cta "hero_cta" guid="{{ module.cta }}" %}
+  </div>
+  {% elif !module.is_cta and module.link.url.href %}
+  <a slot="cta" class="button" href="{{ module.link.url.href }}">{{ module.link_label }}</a>
+  {% endif %}
+  {% if module.is_pattern and module.pattern %}
+  <tosoh-pattern slot="image" pattern="{{ module.pattern }}" color="{{ module.pattern_color }}"
+    scale="{{ module.pattern_scale }}"></tosoh-pattern>
+  {% elif module.image.src %}
+  <img slot="image" src="{{ module.image.src }}" alt="{{ module.image.alt or module.title }}" width="960"
+    loading="eager">
+  {% endif %}
+  {% if module.is_share_displayed %}
+  <tosoh-share slot="cta"></tosoh-share>
+  {% endif %}
+</tosoh-hero-banner>
+{%- endmacro %}
+
+{%- if decorated %}
+<tosoh-line {{ macros.decoration_attrs(module.decoration_settings) }}>
+  {{ render_hero_banner() }}
+</tosoh-line>
+{%- else %}
+{{ render_hero_banner() }}
+{%- endif %}

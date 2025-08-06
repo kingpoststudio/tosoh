@@ -1,0 +1,82 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: HubDB Leadership
+-->
+
+{# Page-level gated form field #}
+{% form 'gated_form' label='Gated document form', export_to_template_context=true, no_wrapper=true %}
+{% boolean 'gated_dialog_enabled' label='Is dated form in dialog?', value=false, export_to_template_context=true,
+no_wrapper=true %}
+
+{% extends "../layouts/base.html" %}
+
+{% block body %}
+
+{% set insight = dynamic_page_hubdb_row %}
+
+<main>
+
+  {# Insight: View #}
+  {% if insight %}
+
+  {% module "hero_banner"
+  path="../../modules/HeroBanner"
+  bg_color="lime"
+  title="<h1>One partner. Every stage.</h1>"
+  description="<p>Engineered around you - from first sketch to final delivery.</p>"
+  is_pattern="true"
+  pattern="stacker"
+  image_variant="square"
+  %}
+
+  <tosoh-container pt="md" pr="md" pb="md" pl="md" mdpt="xl" mdpr="3xl" mdpb="xl" mdpl="3xl">
+    <div class="flex flex-col gap-md w-full">
+      <tosoh-leader-card orientation="x">
+        <img slot="image" src="{{ insight.image.url }}" alt="{{ insight.image.alt_text or insight.title }}"
+          class="w-full object-cover" width="480">
+        <p slot="eyebrow">{{ insight.title }}</p>
+        <h3 slot="name">{{ insight.name }}</h3>
+      </tosoh-leader-card>
+
+      <div class="as-richtext">
+        {{ insight.content_body }}
+      </div>
+    </div>
+  </tosoh-container>
+
+  {# Events: Listing #}
+  {% elif dynamic_page_hubdb_table_id %}
+
+  {% set rows = hubdb_table_rows(dynamic_page_hubdb_table_id, "&deactivate=false") %}
+
+  {% module "hero_banner"
+  path="../../modules/HeroBanner"
+  bg_color="lime"
+  title="<h1>One partner. Every stage.</h1>"
+  description="<p>Engineered around you - from first sketch to final delivery.</p>"
+  is_pattern="true"
+  pattern="stacker"
+  image_variant="square"
+  %}
+
+  <tosoh-container pt="md" pr="md" pb="md" pl="md" mdpt="xl" mdpr="2xl" mdpb="xl" mdpl="2xl">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-base mx-auto">
+      {% for row in rows %}
+      {% set href = content.absolute_url ~ "/" ~ row.hs_path %}
+      <tosoh-leader-card href="{{ href }}">
+        <img slot="image" src="{{ row.image.url }}" alt="{{ row.image.alt_text or row.name }}"
+          class="w-full object-cover" width="480">
+        <p slot="eyebrow">{{ row.title }}</p>
+        <h3 slot="name">{{ row.name }}</h3>
+      </tosoh-leader-card>
+      {% endfor %}
+    </div>
+  </tosoh-container>
+  {% endif %}
+
+  {% dnd_area "main_dnd" %}
+  {% end_dnd_area %}
+</main>
+
+{% endblock body %}
