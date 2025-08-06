@@ -4,11 +4,17 @@
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
     "module": "ESNext",
+    "moduleResolution": "bundler",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["bun-types", "web"]
+    "types": ["bun-types", "web"],
+    "baseUrl": ".",
+    "paths": {
+      "$lib/*": ["lib/*"]
+    }
   },
+  "include": ["lib/**/*", "src/**/*", "index.html"],
   "exclude": ["node_modules"]
 }
