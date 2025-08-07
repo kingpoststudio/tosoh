@@ -1,2 +1,1 @@
-import './components';
-import './styles/main.css';
+export {};

@@ -2,11 +2,11 @@
 import fg from 'fast-glob';
 import { resolve } from 'node:path';
 import { defineConfig, type Plugin } from 'vite';
-import { viteStaticCopy } from 'vite-plugin-static-copy';
-import uploadToHubSpot from 'vite-plugin-upload-to-hubspot';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import postcssPresetEnv from 'postcss-preset-env';
+import tailwindcss from '@tailwindcss/vite';
+import { viteStaticCopy } from 'vite-plugin-static-copy';
 import { hsFieldkitPlugin } from 'hs-fieldkit/vitePlugin';
+import uploadToHubSpot from 'vite-plugin-upload-to-hubspot';
 
 interface WatchOptions {
   glob?: string;
@@ -41,6 +41,7 @@ export default defineConfig(({ command, mode }) => {
         absolute: true,
       }),
       svelte(),
+      tailwindcss(),
       viteStaticCopy({
         targets: [
           { src: 'src/modules/*', dest: 'modules' },
@@ -57,16 +58,11 @@ export default defineConfig(({ command, mode }) => {
         account: mode || "develop",
       }),
     ]
-    : [svelte()];
+    : [tailwindcss(), svelte()];
 
   return {
     mode: 'production',
     publicDir: false,
-    css: {
-      postcss: {
-        plugins: [postcssPresetEnv],
-      },
-    },
     build: {
       minify: false, /* Allow HubSpot to minify for us. */
       outDir: 'dist',
