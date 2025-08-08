@@ -11,9 +11,7 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["bun-types", "web"],
     "baseUrl": ".",
-    "paths": {
-      "$lib/*": ["lib/*"]
-    }
+    "paths": { "$lib/*": ["lib/*"] }
   },
   "include": ["lib/**/*", "src/**/*", "index.html"],
   "exclude": ["node_modules"]

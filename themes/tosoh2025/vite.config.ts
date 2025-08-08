@@ -35,36 +35,36 @@ export default defineConfig(({ command, mode }) => {
 
   const plugins = isBuild
     ? [
-      watchGlob({
-        glob: 'src/**/*.{html,ts}',
-        ignore: ['src/modules/**/fields.json'],
-        absolute: true,
-      }),
-      svelte(),
-      tailwindcss(),
-      viteStaticCopy({
-        targets: [
-          { src: 'src/modules/*', dest: 'modules' },
-          { src: 'src/templates/*', dest: 'templates' },
-          { src: 'src/images/*', dest: 'images' },
-          { src: 'src/fields.json', dest: '' },
-          { src: 'src/theme.json', dest: '' },
-        ],
-      }),
-      hsFieldkitPlugin(['src/modules/**/fields.ts']),
-      uploadToHubSpot({
-        src: 'dist',
-        dest: "TosohTheme2025",
-        account: mode || "develop",
-      }),
-    ]
+        watchGlob({
+          glob: 'src/**/*.{html,ts}',
+          ignore: ['src/modules/**/fields.json'],
+          absolute: true,
+        }),
+        svelte(),
+        tailwindcss(),
+        viteStaticCopy({
+          targets: [
+            { src: 'src/modules/*', dest: 'modules' },
+            { src: 'src/templates/*', dest: 'templates' },
+            { src: 'src/images/*', dest: 'images' },
+            { src: 'src/fields.json', dest: '' },
+            { src: 'src/theme.json', dest: '' },
+          ],
+        }),
+        hsFieldkitPlugin(['src/modules/**/fields.ts']),
+        uploadToHubSpot({
+          src: 'dist',
+          dest: 'TosohTheme2025',
+          account: mode || 'develop',
+        }),
+      ]
     : [tailwindcss(), svelte()];
 
   return {
     mode: 'production',
     publicDir: false,
     build: {
-      minify: false, /* Allow HubSpot to minify for us. */
+      minify: false /* Allow HubSpot to minify for us. */,
       outDir: 'dist',
       rollupOptions: {
         input: {

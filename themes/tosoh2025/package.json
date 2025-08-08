@@ -5,20 +5,32 @@
   "scripts": {
     "dev": "vite",
     "dev:hs": "bunx --bun vite build --watch --mode develop",
-    "deploy": "bunx --bun vite build --mode develop",
+    "build": "bunx --bun vite build",
+    "build:dev": "bunx --bun vite build --mode development",
+    "build:prod": "bunx --bun vite build --mode production",
+    "deploy": "bunx --bun vite build --mode production",
     "deploy:production": "bunx --bun vite build --mode production",
+    "format": "prettier --write \"**/*.{ts,js,svelte,html,css,json,md}\" \"!dist/**\" \"!build/**\" \"!node_modules/**\"",
+    "format:check": "prettier --check \"**/*.{ts,js,svelte,html,css,json,md}\" \"!dist/**\" \"!build/**\" \"!node_modules/**\"",
+    "format:lib": "prettier --write \"lib/**/*.{ts,js,svelte,css}\"",
+    "format:src": "prettier --write \"src/**/*.{html,css,json}\"",
+    "format:templates": "prettier --write \"src/templates/**/*.html\"",
+    "type-check": "tsc --noEmit",
     "hs:init": "hs init",
     "hs:auth": "hs auth"
   },
   "devDependencies": {
     "@hubspot/cli": "^7.5.4",
     "@hubspot/local-dev-lib": "^3.16.0",
-    "@sveltejs/vite-plugin-svelte": "^6.1.0",
+    "@sveltejs/vite-plugin-svelte": "^6.1.1",
     "@tsconfig/svelte": "^5.0.4",
     "@types/bun": "latest",
     "@types/web": "latest",
     "fast-glob": "^3.3.3",
     "hs-fieldkit": "^0.1.8",
+    "prettier": "^3.6.2",
+    "prettier-plugin-svelte": "^3.4.0",
+    "prettier-plugin-tailwindcss": "^0.6.14",
     "typescript": "^5.9.2",
     "vite": "^7.1.0",
     "vite-plugin-static-copy": "^3.1.1",
@@ -30,5 +42,58 @@
     "svelte": "^5.38.0",
     "svelte-inview": "^4.0.4",
     "tailwindcss": "^4.1.11"
+  },
+  "prettier": {
+    "semi": true,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "plugins": [
+      "prettier-plugin-svelte",
+      "prettier-plugin-tailwindcss"
+    ],
+    "overrides": [
+      {
+        "files": "lib/**/*.svelte",
+        "options": {
+          "parser": "svelte"
+        }
+      },
+      {
+        "files": "lib/**/*.{ts,js}",
+        "options": {
+          "parser": "typescript"
+        }
+      },
+      {
+        "files": "src/**/*.html",
+        "options": {
+          "parser": "html",
+          "printWidth": 120,
+          "htmlWhitespaceSensitivity": "ignore",
+          "bracketSameLine": true
+        }
+      },
+      {
+        "files": "src/**/*.{json,css}",
+        "options": {
+          "tabWidth": 2
+        }
+      },
+      {
+        "files": [
+          "*.html",
+          "index.html"
+        ],
+        "options": {
+          "parser": "html",
+          "printWidth": 120,
+          "htmlWhitespaceSensitivity": "ignore",
+          "bracketSameLine": true
+        }
+      }
+    ]
   }
 }

@@ -1,4 +1,4 @@
-import type { ThemeColor } from "./global";
+import type { ThemeColor } from './global';
 
 export interface HubSpotMenu {
   activeBranch: boolean | null;
