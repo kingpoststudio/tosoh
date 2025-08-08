@@ -1,1 +1,119 @@
 @import "tailwindcss";
+
+@theme {
+  /* Tosoh Brand Colors */
+  --color-true-black: #000000;
+  --color-true-white: #ffffff;
+
+  /* Tosoh brand color palette */
+  --color-imperial-red: #ed1a3b;
+  --color-aztec-gold: #c19e4f;
+  --color-spanish-green: #009552;
+  --color-myrtle-green: #2a7278;
+  --color-metallic-seaweed: #0e759a;
+  --color-pewter-blue: #87b2b2;
+  --color-max-purple: #7f317e;
+
+  /* Gray scale */
+  --color-light-gray: #eeefef;
+  --color-spanish-gray: #95939b;
+  --color-silver-gray: #6d6e71;
+
+  /* Semantic colors */
+  --color-primary: #ed1a3b;
+  --color-text: #27272A;
+  --color-bg: #ffffff;
+  --color-overlay: #000000b3;
+  --color-error: #e60000;
+
+  /* Spacing system matching Tosoh variables */
+  --spacing-2xs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-base: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 3rem;
+  --spacing-xl: 4rem;
+  --spacing-2xl: 6rem;
+  --spacing-3xl: 8rem;
+  --spacing-4xl: 16rem;
+
+  /* Max width system */
+  --max-width-page: 1440px;
+  --max-width-page-wide: 90%;
+  --max-width-page-snug: 80%;
+  --max-width-page-narrow: 70%;
+  --max-width-page-tight: 60%;
+
+  /* Typography system */
+  --font-family-body: Univers, sans-serif;
+  --font-family-heading: UniversCond, sans-serif;
+  --font-family-sans: Univers, sans-serif;
+
+  /* Font sizes - only custom sizes that differ from Tailwind defaults */
+  --font-size-xs: 0.7rem;
+  --line-height-xs: 1.5;
+  --font-size-sm: 0.9rem;
+  --line-height-sm: 1.5;
+  --font-size-base: var(--scale, 1rem);
+  --line-height-base: 1.5;
+  --font-size-xl: 1.375rem;
+  --line-height-xl: 1.4;
+  --font-size-2xl: 1.5rem;
+  --line-height-2xl: 1.3;
+  --font-size-4xl: 2.75rem;
+  --line-height-4xl: 1.2;
+  --font-size-5xl: 3.5rem;
+  --line-height-5xl: 1.1;
+  --font-size-6xl: 4rem;
+  --line-height-6xl: 1;
+  --font-size-7xl: 5rem;
+  --line-height-7xl: 1;
+  --font-size-8xl: 6rem;
+  --line-height-8xl: 1;
+
+  /* Animation and transitions */
+  --transition-duration-DEFAULT: 200ms;
+  --transition-duration-fast: 150ms;
+  --transition-duration-slow: 325ms;
+  --transition-duration-slower: 525ms;
+  --transition-duration-slowest: 825ms;
+
+  --transition-timing-function-tosoh: cubic-bezier(0.55, 0.15, 0.5, 0.9);
+  --transition-timing-function-slide: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+
+  /* Shadows */
+  --box-shadow-tosoh: 0 0 0.5rem 0 rgba(0, 0, 0, 0.1);
+  --box-shadow-light: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  --box-shadow-medium: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  --box-shadow-heavy: 0 8px 16px 0 rgba(0, 0, 0, 0.15);
+
+  /* Animation keyframes */
+  --animate-slide-in: slide-in 325ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  --animate-slide-in-slow: slide-in 525ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  --animate-slide-in-slower: slide-in 825ms cubic-bezier(0.215, 0.610, 0.355, 1.000);
+}
+
+/* Responsive scale CSS variables */
+:root {
+  --scale: min(16px, 3vw);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --scale: min(16px, 1.4vw);
+  }
+}
+
+/* Keyframe definitions */
+@keyframes slide-in {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
