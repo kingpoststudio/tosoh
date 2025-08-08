@@ -2,8 +2,6 @@
 
 <script lang="ts">
   import { innerWidth } from 'svelte/reactivity/window';
-  import NavMobile from './NavMobile.svelte';
-  import NavDesktop from './NavDesktop.svelte';
 
   const MOBILE_BREAKPOINT = 768;
 
@@ -22,25 +20,13 @@
 
 <header bind:this={headerRef} class:scrolled={isScrolled} class:fixed>
   {#if innerWidth.current && innerWidth.current < MOBILE_BREAKPOINT}
-    <div class="mobile">
-      <NavMobile>
-        <svelte:element this={'slot'} name="logo" slot="logo" />
-        <svelte:element this={'slot'} name="cta" slot="cta" />
-      </NavMobile>
-    </div>
+    <div class="mobile"></div>
   {:else}
-    <div class="desktop">
-      <NavDesktop>
-        <svelte:element this={'slot'} name="logo" slot="logo" />
-        <svelte:element this={'slot'} name="cta" slot="cta" />
-      </NavDesktop>
-    </div>
+    <div class="desktop"></div>
   {/if}
 </header>
 
 <style lang="postcss">
-  @reference "../../styles/main.css";
-
   * {
     box-sizing: border-box;
     margin: 0;
@@ -52,6 +38,7 @@
     top: 0;
     left: 0;
     width: 100%;
+    @apply bg-imperial-red;
     z-index: var(--z-index-header);
     transition: background 150ms ease-in-out;
 
