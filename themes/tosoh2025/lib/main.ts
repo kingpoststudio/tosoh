@@ -1,1 +1,1 @@
-import "./components/Header/Header.svelte";
+export { default as Header } from "./components/Header/Header.svelte";

@@ -38,7 +38,8 @@
     top: 0;
     left: 0;
     width: 100%;
-    @apply bg-imperial-red;
+    height: 6rem;
+    background-color: var(--color-imperial-red);
     z-index: var(--z-index-header);
     transition: background 150ms ease-in-out;
 
