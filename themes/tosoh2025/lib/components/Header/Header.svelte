@@ -2,6 +2,7 @@
 
 <script lang="ts">
   import { innerWidth } from 'svelte/reactivity/window';
+  import NavDesktop from './NavDesktop.svelte';
 
   const MOBILE_BREAKPOINT = 768;
 
@@ -22,7 +23,9 @@
   {#if innerWidth.current && innerWidth.current < MOBILE_BREAKPOINT}
     <div class="mobile"></div>
   {:else}
-    <div class="desktop"></div>
+    <div class="desktop">
+      <NavDesktop />
+    </div>
   {/if}
 </header>
 
@@ -38,8 +41,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 6rem;
-    background-color: var(--color-imperial-red);
+    background: var(--color-white);
     z-index: var(--z-index-header);
     transition: background 150ms ease-in-out;
 
