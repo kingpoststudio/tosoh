@@ -103,21 +103,6 @@ const mockHeader = {
           }
         ]
       },
-      {
-        label: "Specifications",
-        url: "/specifications",
-        children: []
-      },
-      {
-        label: "Contact",
-        url: "/contact"
-        // No children property - completely childless
-      },
-      {
-        label: "Login",
-        url: "/login"
-        // No children property - completely childless
-      }
     ]
   }
 };
