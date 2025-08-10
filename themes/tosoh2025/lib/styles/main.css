@@ -8,6 +8,9 @@
   --color-metallic-seaweed: #0e759a;
   --color-pewter-blue: #87b2b2;
   --color-max-purple: #7f317e;
+  --color-off-white: #f0f0f0;
+  --color-light-gray: #f5f5f5;
+  --color-cloud-gray: #dfdfdf;
 
   --spacing-2xs: 0.25rem;
   --spacing-xs: 0.5rem;
@@ -23,8 +26,7 @@
 
   --max-width-page: 90rem;
 
-  --font-family-body: Univers, ui-sans-serif, system-ui, sans-serif;
-  --font-family-heading: UniversCond, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: Arial, ui-sans-serif, system-ui, sans-serif;
 
   --font-size-xs: 0.7rem;
   --font-size-sm: 0.9rem;
@@ -54,6 +56,12 @@
   --scale: min(16px, 3vw);
 }
 
+html {
+  @apply font-sans;
+  @apply font-normal;
+  @apply tracking-[0.01rem];
+}
+
 @media (min-width: 768px) {
   :root {
     --scale: min(16px, 1.4vw);
@@ -70,4 +78,8 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+.button {
+  @apply bg-imperial-red hover:bg-imperial-red focus:ring-imperial-red px-base py-xs rounded-lg text-white transition-colors duration-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 }

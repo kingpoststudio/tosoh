@@ -63,7 +63,7 @@
           >
             {@render navItem(item)}
             {#if activeMenuItem === i && hasChildren(item)}
-              <div class="dropdown" transition:fade={{ duration: 200 }}>
+              <div class="dropdown" out:fade={{ duration: 25 }}>
                 <ul class="second-level">
                   {#each item.children ?? [] as secondLevel}
                     {#if secondLevel.label || !hasChildren(secondLevel)}
@@ -116,15 +116,14 @@
     transition: color 200ms ease-in-out;
 
     &:hover {
-      color: var(--color-primary, #ed1a3b);
+      color: var(--color-primary, var(--color-imperial-red));
     }
   }
 
   .wrapper {
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    align-items: flex-end;
     gap: var(--spacing-md);
     width: 100%;
     max-width: var(--page-max-width);
@@ -134,6 +133,7 @@
 
   nav {
     height: 100%;
+    margin-left: auto;
 
     ul {
       list-style: none;
@@ -145,7 +145,6 @@
       flex-direction: row;
       align-items: center;
       height: 100%;
-      gap: var(--spacing-base, 1rem);
 
       > li {
         position: relative;
@@ -157,12 +156,10 @@
           display: inline-flex;
           align-items: center;
           height: 100%;
-          font-size: clamp(0.75rem, 1.2vw, 0.95rem);
-          font-weight: 600;
-          padding-inline: var(--spacing-sm, 0.75rem);
-          color: var(--color-text, #333);
+          font-size: 0.9rem;
+          padding-inline: var(--spacing-sm);
+          padding-bottom: var(--spacing-sm);
           text-align: center;
-          letter-spacing: 0.025em;
           transition: color 200ms ease-in-out;
 
           &:after {
@@ -172,22 +169,22 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            height: 2px;
-            background: var(--color-primary, #ed1a3b);
+            height: 0.125rem;
+            background: var(--color-primary, var(--color-imperial-red));
             opacity: 0;
             transform: scaleX(0);
             transition: all 200ms ease-in-out;
           }
 
           &:hover {
-            color: var(--color-primary, #ed1a3b);
+            color: var(--color-primary, var(--color-imperial-red));
           }
         }
 
         &.active {
           > a,
           > span {
-            color: var(--color-primary, #ed1a3b);
+            color: var(--color-primary, var(--color-imperial-red));
 
             &:after {
               opacity: 1;
@@ -200,7 +197,7 @@
         > .dropdown {
           position: absolute;
           top: 100%;
-          left: 0;
+          left: -2rem;
           z-index: 1000;
           max-width: 24rem;
           min-width: 16rem;
@@ -214,7 +211,7 @@
           > ul.second-level {
             display: flex;
             flex-direction: column;
-            padding: 0 0 var(--spacing-sm, 0.75rem) 0;
+            padding: 0 0 var(--spacing-sm) 0;
             overflow-y: auto;
             max-height: inherit;
 
@@ -226,15 +223,13 @@
               > a,
               > span {
                 display: block;
-                padding: var(--spacing-sm, 0.75rem) var(--spacing-md, 2rem);
-                font-size: var(--font-size);
-                font-weight: 600;
-                color: var(--color-text, #333);
-                border-bottom: 1px solid var(--color-border, #f0f0f0);
+                padding: var(--spacing-sm) var(--spacing-base);
+                font-size: 0.95rem;
+                border-bottom: 1px solid var(--color-off-white);
                 transition: all 200ms ease-in-out;
 
                 &:hover {
-                  color: var(--color-primary, #ed1a3b);
+                  color: var(--color-primary, var(--color-imperial-red));
                 }
               }
 
@@ -242,7 +237,7 @@
               > ul.third-level {
                 display: flex;
                 flex-direction: column;
-                background: var(--color-background-light, #f8f9fa);
+                background: var(--color-light-gray);
 
                 > li {
                   width: 100%;
@@ -250,24 +245,17 @@
                   > a,
                   > span {
                     display: block;
-                    padding: var(--spacing-xs, 0.5rem) var(--spacing-md, 2rem)
-                      var(--spacing-xs, 0.5rem) var(--spacing-lg, 3rem);
+                    padding: var(--spacing-xs) var(--spacing-md);
                     font-size: 0.9rem;
                     font-weight: 400;
-                    color: var(--color-text-light, #666);
-                    border-bottom: 1px solid var(--color-border-light, #eee);
+                    border-bottom: 1px solid var(--color-off-white);
                     transition: all 200ms ease-in-out;
 
                     &:hover {
                       background: white;
-                      color: var(--color-primary, #ed1a3b);
-                      padding-left: calc(var(--spacing-lg, 3rem) + var(--spacing-xs, 0.5rem));
+                      color: var(--color-primary, var(--color-imperial-red));
+                      padding-left: calc(var(--spacing-md) + 0.25rem);
                     }
-                  }
-
-                  &:last-child > a,
-                  &:last-child > span {
-                    border-bottom: none;
                   }
                 }
               }
