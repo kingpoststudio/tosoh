@@ -152,7 +152,7 @@
       flex-direction: row;
       align-items: center;
       height: 100%;
-      gap: var(--space-lg, 3rem);
+      gap: var(--space-base, 1rem);
 
       > li {
         position: relative;
