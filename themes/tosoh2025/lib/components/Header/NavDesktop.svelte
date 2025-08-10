@@ -111,7 +111,7 @@
 
   a {
     color: var(--color-text, #333);
-    font-size: 0.95rem;
+    font-size: var(--font-size);
     text-decoration: none;
     transition: color 200ms ease-in-out;
 
@@ -120,22 +120,15 @@
     }
   }
 
-  a.logo {
-    display: flex;
-    width: 10rem;
-    padding-bottom: var(--space-sm, 0.75rem);
-  }
-
   .wrapper {
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-md, 2rem);
+    gap: var(--spacing-md);
     width: 100%;
-    max-width: var(--page-max-width, 1200px);
-    height: var(--header-height, 80px);
-    padding: var(--space-md, 2rem) var(--space-lg, 3rem) 0;
+    max-width: var(--page-max-width);
+    padding: 0 var(--spacing-md);
     margin: 0 auto;
   }
 
@@ -152,7 +145,7 @@
       flex-direction: row;
       align-items: center;
       height: 100%;
-      gap: var(--space-base, 1rem);
+      gap: var(--spacing-base, 1rem);
 
       > li {
         position: relative;
@@ -166,10 +159,9 @@
           height: 100%;
           font-size: clamp(0.75rem, 1.2vw, 0.95rem);
           font-weight: 600;
-          padding-inline: var(--space-sm, 0.75rem);
+          padding-inline: var(--spacing-sm, 0.75rem);
           color: var(--color-text, #333);
           text-align: center;
-          text-transform: uppercase;
           letter-spacing: 0.025em;
           transition: color 200ms ease-in-out;
 
@@ -214,15 +206,15 @@
           min-width: 16rem;
           max-height: min(36rem, 60vh);
           background: white;
-          border-radius: 0.5rem;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-          border: 1px solid var(--color-border, #e5e5e5);
+          border-bottom-left-radius: 0.5rem;
+          border-bottom-right-radius: 0.5rem;
+          box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
           overflow: hidden;
 
           > ul.second-level {
             display: flex;
             flex-direction: column;
-            padding: var(--space-sm, 0.75rem) 0;
+            padding: 0 0 var(--spacing-sm, 0.75rem) 0;
             overflow-y: auto;
             max-height: inherit;
 
@@ -234,22 +226,16 @@
               > a,
               > span {
                 display: block;
-                padding: var(--space-sm, 0.75rem) var(--space-md, 2rem);
-                font-size: 1rem;
+                padding: var(--spacing-sm, 0.75rem) var(--spacing-md, 2rem);
+                font-size: var(--font-size);
                 font-weight: 600;
                 color: var(--color-text, #333);
                 border-bottom: 1px solid var(--color-border, #f0f0f0);
                 transition: all 200ms ease-in-out;
 
                 &:hover {
-                  background: var(--color-background-hover, #f8f9fa);
                   color: var(--color-primary, #ed1a3b);
                 }
-              }
-
-              &:last-child > a,
-              &:last-child > span {
-                border-bottom: none;
               }
 
               /* Third-level menu */
@@ -257,7 +243,6 @@
                 display: flex;
                 flex-direction: column;
                 background: var(--color-background-light, #f8f9fa);
-                border-top: 1px solid var(--color-border, #e5e5e5);
 
                 > li {
                   width: 100%;
@@ -265,7 +250,8 @@
                   > a,
                   > span {
                     display: block;
-                    padding: var(--space-xs, 0.5rem) var(--space-md, 2rem) var(--space-xs, 0.5rem) var(--space-lg, 3rem);
+                    padding: var(--spacing-xs, 0.5rem) var(--spacing-md, 2rem)
+                      var(--spacing-xs, 0.5rem) var(--spacing-lg, 3rem);
                     font-size: 0.9rem;
                     font-weight: 400;
                     color: var(--color-text-light, #666);
@@ -275,7 +261,7 @@
                     &:hover {
                       background: white;
                       color: var(--color-primary, #ed1a3b);
-                      padding-left: calc(var(--space-lg, 3rem) + var(--space-xs, 0.5rem));
+                      padding-left: calc(var(--spacing-lg, 3rem) + var(--spacing-xs, 0.5rem));
                     }
                   }
 
@@ -295,6 +281,6 @@
   .cta {
     display: flex;
     align-items: center;
-    gap: var(--space-md, 2rem);
+    gap: var(--spacing-md, 2rem);
   }
 </style>
