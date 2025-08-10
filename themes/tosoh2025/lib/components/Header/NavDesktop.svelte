@@ -66,18 +66,27 @@
               <div class="dropdown" transition:fade={{ duration: 200 }}>
                 <ul class="second-level">
                   {#each item.children ?? [] as secondLevel}
-                    <li>
-                      {@render navItem(secondLevel)}
-                      {#if hasChildren(secondLevel)}
-                        <ul class="third-level">
-                          {#each secondLevel.children ?? [] as thirdLevel}
-                            <li>
-                              {@render navItem(thirdLevel)}
-                            </li>
-                          {/each}
-                        </ul>
-                      {/if}
-                    </li>
+                    {#if secondLevel.label || !hasChildren(secondLevel)}
+                      <li>
+                        {@render navItem(secondLevel)}
+                        {#if hasChildren(secondLevel)}
+                          <ul class="third-level">
+                            {#each secondLevel.children ?? [] as thirdLevel}
+                              <li>
+                                {@render navItem(thirdLevel)}
+                              </li>
+                            {/each}
+                          </ul>
+                        {/if}
+                      </li>
+                    {:else}
+                      <!-- Skip this section and render its children directly -->
+                      {#each secondLevel.children ?? [] as thirdLevel}
+                        <li>
+                          {@render navItem(thirdLevel)}
+                        </li>
+                      {/each}
+                    {/if}
                   {/each}
                 </ul>
               </div>
@@ -155,11 +164,13 @@
           display: inline-flex;
           align-items: center;
           height: 100%;
-          font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+          font-size: clamp(0.75rem, 1.2vw, 0.95rem);
           font-weight: 600;
           padding-inline: var(--space-sm, 0.75rem);
           color: var(--color-text, #333);
           text-align: center;
+          text-transform: uppercase;
+          letter-spacing: 0.025em;
           transition: color 200ms ease-in-out;
 
           &:after {
@@ -201,6 +212,7 @@
           z-index: 1000;
           max-width: 24rem;
           min-width: 16rem;
+          max-height: min(36rem, 60vh);
           background: white;
           border-radius: 0.5rem;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -211,6 +223,8 @@
             display: flex;
             flex-direction: column;
             padding: var(--space-sm, 0.75rem) 0;
+            overflow-y: auto;
+            max-height: inherit;
 
             > li {
               display: flex;
@@ -251,7 +265,7 @@
                   > a,
                   > span {
                     display: block;
-                    padding: var(--space-xs, 0.5rem) var(--space-xl, 4rem);
+                    padding: var(--space-xs, 0.5rem) var(--space-md, 2rem) var(--space-xs, 0.5rem) var(--space-lg, 3rem);
                     font-size: 0.9rem;
                     font-weight: 400;
                     color: var(--color-text-light, #666);
@@ -261,7 +275,7 @@
                     &:hover {
                       background: white;
                       color: var(--color-primary, #ed1a3b);
-                      padding-left: calc(var(--space-xl, 4rem) + var(--space-xs, 0.5rem));
+                      padding-left: calc(var(--space-lg, 3rem) + var(--space-xs, 0.5rem));
                     }
                   }
 
