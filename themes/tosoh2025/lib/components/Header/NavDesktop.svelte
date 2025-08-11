@@ -97,6 +97,10 @@
     {/if}
   </nav>
 
+  <div class="aux">
+    <svelte:element this={'slot'} name="aux" />
+  </div>
+
   <div class="cta">
     <svelte:element this={'slot'} name="cta" />
   </div>
@@ -266,6 +270,12 @@
         }
       }
     }
+  }
+
+  .aux {
+    position: absolute;
+    top: var(--spacing-sm);
+    right: var(--spacing-md);
   }
 
   .cta {
