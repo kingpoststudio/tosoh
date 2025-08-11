@@ -25,21 +25,21 @@
   --spacing-4xl: 12rem;
   --spacing-5xl: 16rem;
 
-  --container-8xl: 90rem;
+  --container-8xl: 96rem;
 
   --max-width-page: 90rem;
 
   --font-sans: Arial, ui-sans-serif, system-ui, sans-serif;
 
-  --font-size-xs: 0.7rem;
-  --font-size-sm: 0.9rem;
-  --font-size-base: var(--scale, 1rem);
-  --font-size-xl: 1.375rem;
-  --font-size-4xl: 2.75rem;
-  --font-size-5xl: 3.5rem;
-  --font-size-6xl: 4rem;
-  --font-size-7xl: 5rem;
-  --font-size-8xl: 6rem;
+  --text-xs: 0.7rem;
+  --text-sm: 0.9rem;
+  --text-base: var(--scale, 1rem);
+  --text-xl: 1.375rem;
+  --text-4xl: 2.75rem;
+  --text-5xl: 3.5rem;
+  --text-6xl: 4rem;
+  --text-7xl: 5rem;
+  --text-8xl: 6rem;
 
   --transition-duration-slow: 325ms;
   --transition-duration-slower: 525ms;
@@ -55,32 +55,11 @@
   --animate-slide-in-slower: slide-in 825ms var(--ease-slide);
 }
 
-:root {
-  --scale: min(16px, 3vw);
-}
-
 html {
+  font-size: min(16px, 3.6vw);
   @apply font-sans;
   @apply font-normal;
   @apply tracking-[0.01rem];
-}
-
-@media (min-width: 768px) {
-  :root {
-    --scale: min(16px, 1.4vw);
-  }
-}
-
-@keyframes slide-in {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 
 button,
