@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { fade, slide } from 'svelte/transition';
+  import { fade, slide, fly } from 'svelte/transition';
   import { onMount } from 'svelte';
 
   type MenuItem = {
@@ -148,7 +148,7 @@
     >
       <div
         class="menu"
-        transition:slide={{ duration: 300, axis: 'x' }}
+        transition:fly={{ duration: 300, x: -300 }}
         onclick={(e) => e.stopPropagation()}
         onkeydown={(e) => e.stopPropagation()}
         role="dialog"
@@ -210,8 +210,8 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
+    min-height: 5.5rem;
     padding: var(--spacing-sm) var(--spacing-md);
-    background: white;
     border-bottom: 1px solid var(--color-off-white);
 
     > div {
@@ -223,6 +223,10 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+    }
+
+    .aux {
+      margin-top: var(--spacing-sm);
     }
 
     /* Hamburger Button */
@@ -275,21 +279,6 @@
         stroke-width: 0.15rem;
       }
     }
-
-    &.menu-header {
-      padding: var(--spacing-base);
-      border-bottom: 1px solid var(--color-off-white);
-      background: var(--color-light-gray);
-
-      .cta {
-        margin-bottom: var(--spacing-sm);
-      }
-
-      .aux {
-        display: flex;
-        justify-content: flex-end;
-      }
-    }
   }
 
   /* Mobile Menu Overlay */
@@ -311,11 +300,11 @@
     .menu {
       position: absolute;
       top: 0;
-      right: 0;
+      left: 0;
       width: min(85vw, 24rem);
       height: 100vh;
       background: white;
-      box-shadow: -0.5rem 0 2rem rgba(0, 0, 0, 0.2);
+      box-shadow: 0.5rem 0 2rem rgba(0, 0, 0, 0.2);
       overflow-y: auto;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
