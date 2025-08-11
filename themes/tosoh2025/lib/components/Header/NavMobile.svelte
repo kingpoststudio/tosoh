@@ -355,7 +355,7 @@
 
           &:hover {
             color: var(--color-imperial-red);
-            background: var(--color-gray-100);
+            background: var(--color-white);
           }
         }
 
@@ -368,7 +368,7 @@
           justify-content: center;
           height: 2rem;
           aspect-ratio: 1 / 1;
-          color: var(--color-imperial-red);
+          color: var(--color-gray-800);
           background: var(--color-white);
           border: 0.125rem solid var(--color-gray-100);
           border-radius: 0.5rem;
@@ -376,7 +376,7 @@
           transition: background 200ms ease-in-out;
 
           svg {
-            transition: transform 200ms var(--ease-tosoh);
+            transition: transform 200ms ease-in-out;
 
             &.expanded {
               transform: rotate(90deg);
@@ -388,7 +388,7 @@
       &.level-2 {
         .link,
         .label {
-          padding-left: calc(var(--spacing-base) * 2);
+          padding-left: calc(var(--spacing-base) * 3);
           background: var(--color-gray-100);
         }
       }
@@ -396,7 +396,7 @@
       &.level-3 {
         .link,
         .label {
-          padding-left: calc(var(--spacing-base) * 3);
+          padding-left: calc(var(--spacing-base) * 4);
         }
       }
     }

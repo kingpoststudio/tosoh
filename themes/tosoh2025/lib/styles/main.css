@@ -34,15 +34,6 @@
   --transition-duration-slow: 325ms;
   --transition-duration-slower: 525ms;
   --transition-duration-slowest: 825ms;
-
-  --ease-tosoh: cubic-bezier(0.55, 0.15, 0.5, 0.9);
-  --ease-slide: cubic-bezier(0.215, 0.61, 0.355, 1);
-
-  --drop-shadow-tosoh: 0 0 0.5rem rgb(0 0 0 / 0.1);
-
-  --animate-slide-in: slide-in 325ms var(--ease-slide);
-  --animate-slide-in-slow: slide-in 525ms var(--ease-slide);
-  --animate-slide-in-slower: slide-in 825ms var(--ease-slide);
 }
 
 html {

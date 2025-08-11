@@ -248,7 +248,7 @@
                   > a,
                   > span {
                     display: block;
-                    padding: var(--spacing-xs) var(--spacing-base);
+                    padding: var(--spacing-xs) var(--spacing-md);
                     font-size: 0.9rem;
                     font-weight: 400;
                     border-bottom: 1px solid var(--color-gray-200);
@@ -260,7 +260,7 @@
                     &:hover {
                       background: white;
                       color: var(--color-primary, var(--color-imperial-red));
-                      padding-left: calc(var(--spacing-base) + 0.25rem);
+                      padding-left: calc(var(--spacing-md) + 0.25rem);
                     }
                   }
                 }
