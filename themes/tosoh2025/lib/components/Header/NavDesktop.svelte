@@ -215,7 +215,7 @@
           > ul.level-2 {
             display: flex;
             flex-direction: column;
-            padding: 0 0 var(--spacing-sm) 0;
+            padding: var(--spacing-xs) 0 var(--spacing-sm) 0;
             overflow-y: auto;
             max-height: inherit;
 
@@ -232,7 +232,7 @@
                 transition: color 200ms ease-in-out;
 
                 &:hover {
-                  color: var(--color-primary, var(--color-imperial-red));
+                  color: var(--color-imperial-red);
                 }
               }
 

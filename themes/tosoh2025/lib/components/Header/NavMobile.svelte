@@ -304,7 +304,7 @@
       -webkit-overflow-scrolling: touch;
 
       /* Mobile-specific optimizations */
-      @media (max-width: 480px) {
+      @media (max-width: 30rem) {
         width: 100vw;
       }
     }
