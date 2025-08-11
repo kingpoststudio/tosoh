@@ -80,6 +80,8 @@ html {
   }
 }
 
-.button {
-  @apply bg-imperial-red hover:bg-imperial-red focus:ring-imperial-red px-base py-xs rounded-lg text-white transition-colors duration-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+button,
+a.button,
+*[role='button'] {
+  @apply bg-imperial-red hover:bg-imperial-red focus:ring-imperial-red px-base py-xs cursor-pointer rounded-lg text-sm text-white uppercase inset-shadow-sm inset-shadow-red-700 transition-shadow duration-200 hover:inset-shadow-red-800 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 }

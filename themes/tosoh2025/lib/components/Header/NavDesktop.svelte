@@ -208,6 +208,7 @@
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
           overflow: hidden;
 
+          /* Second-level menu */
           > ul.second-level {
             display: flex;
             flex-direction: column;
@@ -223,7 +224,7 @@
               > a,
               > span {
                 display: block;
-                padding: var(--spacing-sm) var(--spacing-base);
+                padding: var(--spacing-sm);
                 font-size: 0.95rem;
                 border-bottom: 1px solid var(--color-off-white);
                 transition: all 200ms ease-in-out;
@@ -245,7 +246,7 @@
                   > a,
                   > span {
                     display: block;
-                    padding: var(--spacing-xs) var(--spacing-md);
+                    padding: var(--spacing-xs) var(--spacing-base);
                     font-size: 0.9rem;
                     font-weight: 400;
                     border-bottom: 1px solid var(--color-off-white);
@@ -254,7 +255,7 @@
                     &:hover {
                       background: white;
                       color: var(--color-primary, var(--color-imperial-red));
-                      padding-left: calc(var(--spacing-md) + 0.25rem);
+                      padding-left: calc(var(--spacing-base) + 0.25rem);
                     }
                   }
                 }
