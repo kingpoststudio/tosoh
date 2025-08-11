@@ -117,7 +117,6 @@
 {/snippet}
 
 <div class="wrapper">
-  <!-- Header Bar -->
   <div class="header">
     <a class="logo" href="/" aria-label="Home" onclick={closeMenu}>
       <svelte:element this={'slot'} name="logo" />
@@ -137,7 +136,6 @@
     </button>
   </div>
 
-  <!-- Mobile Menu Overlay -->
   {#if isMenuOpen}
     <div
       class="overlay"
@@ -158,14 +156,32 @@
         aria-label="Navigation menu"
         tabindex="-1"
       >
-        <!-- CTA and Aux at top -->
         <div class="header">
-          <div class="cta">
-            <svelte:element this={'slot'} name="cta" />
+          <div>
+            <div class="cta">
+              <svelte:element this={'slot'} name="cta" />
+            </div>
+            <div class="aux">
+              <svelte:element this={'slot'} name="aux" />
+            </div>
           </div>
-          <div class="aux">
-            <svelte:element this={'slot'} name="aux" />
-          </div>
+          <button class="close" onclick={closeMenu} aria-label="Close menu">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15 5L5 15M5 5L15 15"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
         </div>
 
         <!-- Main Navigation -->
@@ -199,9 +215,14 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    padding: var(--spacing-sm) var(--spacing-base);
+    padding: var(--spacing-xs) var(--spacing-base);
     background: white;
     border-bottom: 1px solid var(--color-off-white);
+
+    > div {
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .logo {
@@ -215,8 +236,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 3rem;
+    height: 3rem;
     padding: 0;
     background: transparent;
     border: none;
@@ -237,31 +258,31 @@
   .hamburger-icon {
     display: flex;
     flex-direction: column;
-    width: 1.5rem;
-    height: 1.125rem;
+    width: 2rem;
+    height: 1.5rem;
     position: relative;
 
     span {
       display: block;
       width: 100%;
-      height: 2px;
+      height: 3px;
       background: var(--color-imperial-red);
-      border-radius: 1px;
+      border-radius: 1.5px;
       transition: all 300ms var(--ease-tosoh);
       transform-origin: center;
 
       &:nth-child(1) {
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.375rem;
       }
 
       &:nth-child(2) {
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.375rem;
       }
     }
 
     &.open {
       span:nth-child(1) {
-        transform: translateY(0.375rem) rotate(45deg);
+        transform: translateY(0.5rem) rotate(45deg);
       }
 
       span:nth-child(2) {
@@ -270,7 +291,7 @@
       }
 
       span:nth-child(3) {
-        transform: translateY(-0.375rem) rotate(-45deg);
+        transform: translateY(-0.5rem) rotate(-45deg);
       }
     }
   }
