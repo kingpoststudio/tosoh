@@ -1,8 +1,5 @@
 <svelte:options customElement="tosoh-footer" />
 
-<script lang="ts">
-</script>
-
 <footer>
   <div class="position-bl grid"></div>
   <div class="wrapper"></div>
@@ -44,16 +41,28 @@
           linear-gradient(to bottom, white 1px, transparent 1px);
         background-size: 2rem 2rem;
         opacity: 0.1;
+        mask: radial-gradient(circle at center, white 40%, transparent 80%);
+        -webkit-mask: radial-gradient(circle at center, white 40%, transparent 80%);
       }
 
       &.position-bl {
         bottom: -200%;
-        left: -70%;
+        left: -56rem;
+
+        @media (min-width: 48rem) {
+          bottom: -200%;
+          left: -60%;
+        }
       }
 
       &.position-tr {
         top: -200%;
-        right: -70%;
+        right: -56rem;
+
+        @media (min-width: 48rem) {
+          top: -200%;
+          right: -60%;
+        }
       }
     }
 

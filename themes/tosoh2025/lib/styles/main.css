@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap');
+
 @import 'tailwindcss';
 
 @theme {
@@ -27,7 +29,7 @@
 
   --max-width-page: 90rem;
 
-  --font-sans: Arial, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
 
   --text-scale-mobile: min(16px, 3.5vw);
   --text-scale-desktop: min(16px, 1.5vw);
@@ -38,7 +40,7 @@
 }
 
 html {
-  @apply text-default text-scale-mobile md:text-scale-desktop font-sans font-normal tracking-[0.01rem] md:text-base;
+  @apply text-default text-scale-mobile md:text-scale-desktop font-sans font-normal md:text-base;
 }
 
 button,
