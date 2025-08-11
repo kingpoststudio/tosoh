@@ -248,7 +248,7 @@
           display: block;
           width: 100%;
           height: 0.2rem;
-          background: var(--color-gray-800);
+          background: var(--color-zinc-800);
         }
       }
     }
@@ -269,7 +269,7 @@
       svg {
         width: 2.25rem;
         height: 2.25rem;
-        stroke: var(--color-gray-800);
+        stroke: var(--color-zinc-800);
         stroke-width: 0.125rem;
       }
     }
@@ -325,10 +325,10 @@
     }
 
     .item {
-      border-bottom: 1px solid var(--color-gray-200);
+      border-bottom: 1px solid var(--color-zinc-200);
 
       &:first-child {
-        border-top: 1px solid var(--color-gray-200);
+        border-top: 1px solid var(--color-zinc-200);
       }
 
       &:last-child:not(.level-1) {
@@ -368,9 +368,9 @@
           justify-content: center;
           height: 2rem;
           aspect-ratio: 1 / 1;
-          color: var(--color-gray-800);
+          color: var(--color-zinc-800);
           background: var(--color-white);
-          border: 0.125rem solid var(--color-gray-100);
+          border: 0.125rem solid var(--color-zinc-100);
           border-radius: 0.5rem;
           cursor: pointer;
           transition: background 200ms ease-in-out;
@@ -389,7 +389,7 @@
         .link,
         .label {
           padding-left: calc(var(--spacing-base) * 3);
-          background: var(--color-gray-100);
+          background: var(--color-zinc-100);
         }
       }
 

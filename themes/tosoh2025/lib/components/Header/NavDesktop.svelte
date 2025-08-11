@@ -109,7 +109,7 @@
   }
 
   a {
-    color: var(--color-gray-900);
+    color: var(--color-zinc-900);
     font-size: var(--font-size);
     text-decoration: none;
     transition: color 200ms ease-in-out;
@@ -204,7 +204,7 @@
           min-width: 16rem;
           max-height: min(36rem, 60vh);
           background: white;
-          border: 1px solid var(--color-gray-200);
+          border: 1px solid var(--color-zinc-200);
           border-bottom-left-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
@@ -228,7 +228,7 @@
                 display: block;
                 padding: var(--spacing-sm);
                 font-size: 0.95rem;
-                border-bottom: 1px solid var(--color-gray-200);
+                border-bottom: 1px solid var(--color-zinc-200);
                 transition: color 200ms ease-in-out;
 
                 &:hover {
@@ -240,7 +240,7 @@
               > ul.level-3 {
                 display: flex;
                 flex-direction: column;
-                background: var(--color-gray-100);
+                background: var(--color-zinc-100);
 
                 > li {
                   width: 100%;
@@ -251,7 +251,7 @@
                     padding: var(--spacing-xs) var(--spacing-md);
                     font-size: 0.9rem;
                     font-weight: 400;
-                    border-bottom: 1px solid var(--color-gray-200);
+                    border-bottom: 1px solid var(--color-zinc-200);
                     transition:
                       background 200ms ease-in-out,
                       color 200ms ease-in-out,
