@@ -44,7 +44,7 @@
   {/if}
 {/snippet}
 
-<div class="wrapper">
+<header>
   <a class="logo" href="/" aria-label="Home">
     <svelte:element this={'slot'} name="logo" />
   </a>
@@ -59,7 +59,7 @@
           >
             {@render navItem(item)}
             {#if activeMenuItem === i && hasChildren(item)}
-              <div class="dropdown" out:fade={{ duration: 25 }}>
+              <div class="dropdown" in:fade={{ duration: 100 }}>
                 <ul class="level-2">
                   {#each item.children ?? [] as secondLevel}
                     {#if secondLevel.label || !hasChildren(secondLevel)}
@@ -99,7 +99,7 @@
   <div class="cta">
     <svelte:element this={'slot'} name="cta" />
   </div>
-</div>
+</header>
 
 <style lang="postcss">
   * {
@@ -119,7 +119,7 @@
     }
   }
 
-  .wrapper {
+  header {
     position: relative;
     display: flex;
     align-items: flex-end;
@@ -128,6 +128,7 @@
     max-width: var(--container-8xl);
     padding: var(--spacing-base) var(--spacing-md);
     margin: 0 auto;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
   }
 
   nav {
@@ -198,7 +199,7 @@
         > .dropdown {
           position: absolute;
           top: calc(100% + 1px);
-          left: -2rem;
+          left: -1rem;
           z-index: 1000;
           max-width: 24rem;
           min-width: 12rem;
