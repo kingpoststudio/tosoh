@@ -80,7 +80,6 @@
                         {/if}
                       </li>
                     {:else}
-                      <!-- Skip this section and render its children directly -->
                       {#each secondLevel.children ?? [] as thirdLevel}
                         <li>
                           {@render navItem(thirdLevel)}

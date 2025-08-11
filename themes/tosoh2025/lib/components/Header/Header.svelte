@@ -3,6 +3,7 @@
 <script lang="ts">
   import { innerWidth } from 'svelte/reactivity/window';
   import NavDesktop from './NavDesktop.svelte';
+  import NavMobile from './NavMobile.svelte';
 
   const MOBILE_BREAKPOINT = 768;
 
@@ -21,7 +22,9 @@
 
 <header bind:this={headerRef} class:scrolled={isScrolled} class:fixed>
   {#if innerWidth.current && innerWidth.current < MOBILE_BREAKPOINT}
-    <div class="mobile"></div>
+    <div class="mobile">
+      <NavMobile />
+    </div>
   {:else}
     <div class="desktop">
       <NavDesktop />
