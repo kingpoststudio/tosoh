@@ -201,12 +201,12 @@
           left: -2rem;
           z-index: 1000;
           max-width: 24rem;
-          min-width: 16rem;
+          min-width: 12rem;
           max-height: min(36rem, 60vh);
+          font-size: 0.9rem;
           background: white;
           border: 1px solid var(--color-zinc-200);
-          border-bottom-left-radius: 0.5rem;
-          border-bottom-right-radius: 0.5rem;
+          border-radius: 0.5rem;
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
           overflow: hidden;
 
@@ -226,8 +226,7 @@
               > a,
               > span {
                 display: block;
-                padding: var(--spacing-sm);
-                font-size: 0.95rem;
+                padding: var(--spacing-xs) var(--spacing-sm);
                 border-bottom: 1px solid var(--color-zinc-200);
                 transition: color 200ms ease-in-out;
 
@@ -248,7 +247,7 @@
                   > a,
                   > span {
                     display: block;
-                    padding: var(--spacing-xs) var(--spacing-md);
+                    padding: var(--spacing-xs) var(--spacing-base);
                     font-size: 0.9rem;
                     font-weight: 400;
                     border-bottom: 1px solid var(--color-zinc-200);
@@ -260,7 +259,7 @@
                     &:hover {
                       background: white;
                       color: var(--color-primary, var(--color-imperial-red));
-                      padding-left: calc(var(--spacing-md) + 0.25rem);
+                      padding-left: calc(var(--spacing-base) + 0.25rem);
                     }
                   }
                 }

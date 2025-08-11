@@ -1,13 +1,14 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-default: #222222;
+  --color-default: #212121;
   --color-imperial-red: #ed1a3b;
   --color-aztec-gold: #c19e4f;
   --color-spanish-green: #009552;
   --color-myrtle-green: #2a7278;
   --color-metallic-seaweed: #0e759a;
   --color-pewter-blue: #87b2b2;
+  --color-navy-blue: #0d3b54;
   --color-max-purple: #7f317e;
 
   --spacing-2xs: 0.25rem;
@@ -43,7 +44,7 @@ html {
 button,
 .button,
 *[role='button'] {
-  @apply bg-imperial-red focus:ring-imperial-red px-md py-xs cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow,ring] duration-200 hover:bg-imperial-red hover:inset-shadow-red-800 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply bg-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow,ring] duration-200 hover:inset-shadow-red-800 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 
   &.outlined {
     @apply border-imperial-red text-imperial-red border bg-white inset-shadow-none hover:shadow-md hover:shadow-zinc-200;
