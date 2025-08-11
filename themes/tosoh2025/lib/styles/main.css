@@ -24,6 +24,8 @@
   --spacing-4xl: 12rem;
   --spacing-5xl: 16rem;
 
+  --container-8xl: 90rem;
+
   --max-width-page: 90rem;
 
   --font-sans: Arial, ui-sans-serif, system-ui, sans-serif;
@@ -83,5 +85,5 @@ html {
 button,
 a.button,
 *[role='button'] {
-  @apply bg-imperial-red hover:bg-imperial-red focus:ring-imperial-red px-base py-xs cursor-pointer rounded-lg text-sm text-white uppercase inset-shadow-sm inset-shadow-red-700 transition-shadow duration-200 hover:inset-shadow-red-800 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply bg-imperial-red focus:ring-imperial-red px-base py-xs cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-all duration-200 hover:bg-red-500 hover:inset-shadow-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 }

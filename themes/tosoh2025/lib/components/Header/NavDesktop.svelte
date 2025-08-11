@@ -126,8 +126,8 @@
     align-items: flex-end;
     gap: var(--spacing-md);
     width: 100%;
-    max-width: var(--page-max-width);
-    padding: 0 var(--spacing-md);
+    max-width: var(--container-8xl);
+    padding: var(--spacing-base) var(--spacing-md);
     margin: 0 auto;
   }
 
@@ -156,7 +156,7 @@
           display: inline-flex;
           align-items: center;
           height: 100%;
-          font-size: 0.9rem;
+          font-size: 0.95rem;
           padding-inline: var(--spacing-sm);
           padding-bottom: var(--spacing-sm);
           text-align: center;
@@ -203,6 +203,7 @@
           min-width: 16rem;
           max-height: min(36rem, 60vh);
           background: white;
+          border: 1px solid var(--color-off-white);
           border-bottom-left-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
