@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
+  --color-default: #222222;
   --color-imperial-red: #ed1a3b;
   --color-aztec-gold: #c19e4f;
   --color-spanish-green: #009552;
@@ -8,10 +9,9 @@
   --color-metallic-seaweed: #0e759a;
   --color-pewter-blue: #87b2b2;
   --color-max-purple: #7f317e;
-  --color-off-white: #f0f0f0;
   --color-light-gray: #f5f5f5;
-  --color-cloud-gray: #dfdfdf;
-  --color-stone-gray: #505050;
+  --color-cloud-gray: #efefef;
+  --color-stone-gray: #696969;
 
   --spacing-2xs: 0.25rem;
   --spacing-xs: 0.5rem;
@@ -31,8 +31,8 @@
 
   --font-sans: Arial, ui-sans-serif, system-ui, sans-serif;
 
-  --text-scale: min(16px, 3.5vw);
-  --text-scale-md: min(16px, 1.5vw);
+  --text-scale-mobile: min(16px, 3.5vw);
+  --text-scale-desktop: min(16px, 1.5vw);
 
   --transition-duration-slow: 325ms;
   --transition-duration-slower: 525ms;
@@ -49,7 +49,7 @@
 }
 
 html {
-  @apply text-scale md:text-scale-md font-sans font-normal tracking-[0.01rem] md:text-base;
+  @apply text-default text-scale-mobile md:text-scale-desktop font-sans font-normal tracking-[0.01rem] md:text-base;
 }
 
 button,

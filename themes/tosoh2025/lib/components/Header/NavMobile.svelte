@@ -86,7 +86,6 @@
           aria-label="Toggle submenu for {item.label}"
         >
           <svg
-            class="icon"
             class:expanded={expandedItems.has(itemPath)}
             width="16"
             height="16"
@@ -190,9 +189,10 @@
 <style lang="postcss">
   * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
-  /* Global focus styles - very light */
   button:focus,
   a:focus {
     outline: 1px solid rgba(237, 26, 59, 0.1);
@@ -212,7 +212,7 @@
     width: 100%;
     min-height: 5.5rem;
     padding: var(--spacing-sm) var(--spacing-md);
-    border-bottom: 1px solid var(--color-off-white);
+    border-bottom: 1px solid var(--color-light-gray);
 
     > div {
       display: flex;
@@ -220,6 +220,7 @@
     }
 
     .logo {
+      flex: none;
       display: flex;
       align-items: center;
       text-decoration: none;
@@ -254,7 +255,7 @@
           display: block;
           width: 100%;
           height: 0.2rem;
-          background: var(--color-stone-gray);
+          background: var(--color-default);
         }
       }
     }
@@ -275,7 +276,7 @@
       svg {
         width: 2.5rem;
         height: 2.5rem;
-        stroke: var(--color-stone-gray);
+        stroke: var(--color-default);
         stroke-width: 0.125rem;
       }
     }
@@ -318,8 +319,6 @@
 
   /* Navigation */
   .navigation {
-    padding: var(--spacing-sm) 0;
-
     .menu-list,
     .submenu {
       list-style: none;
@@ -333,103 +332,72 @@
     }
 
     .item {
-      border-bottom: 1px solid var(--color-off-white);
-
-      &:last-child {
-        border-bottom: none;
-      }
-
       .content {
         display: flex;
         align-items: center;
         justify-content: space-between;
         min-height: 3rem;
-        padding: 0 var(--spacing-md);
 
         .link,
         .label {
           flex: 1;
-          display: block;
-          padding: var(--spacing-sm) 0;
-          color: var(--color-text, #333);
-          text-decoration: none;
+          padding: var(--spacing-sm) 0 var(--spacing-sm) var(--spacing-md);
           font-family: var(--font-sans);
           line-height: 1.4;
-          transition: all 200ms ease-in-out;
+          color: inherit;
+          text-decoration: none;
+          transition:
+            color 200ms ease-in-out,
+            background 200ms ease-in-out;
 
           &:hover {
             color: var(--color-imperial-red);
-            background: var(--color-off-white);
+            background: var(--color-light-gray);
           }
-        }
-
-        .label {
-          font-weight: 500;
         }
 
         /* Expand Button */
         .expand {
+          position: absolute;
+          right: var(--spacing-base);
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 2rem;
-          height: 2rem;
-          color: white;
-          background: var(--color-imperial-red);
-          border: none;
-          border-radius: 0.5rem;
+          height: 2.25rem;
+          aspect-ratio: 1 / 1;
+          background: white;
+          border: 0.2rem solid var(--color-cloud-gray);
+          border-radius: 50%;
           cursor: pointer;
-          transition: all 200ms ease-in-out;
+          transition: background 200ms ease-in-out;
 
-          &:hover {
-            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
-            background: color-mix(in srgb, var(--color-imperial-red) 85%, black);
-          }
-
-          &:focus {
-            outline: 1px solid rgba(237, 26, 59, 0.1);
-            outline-offset: -1px;
-          }
-
-          .icon {
+          svg {
             transition: transform 200ms var(--ease-tosoh);
 
             &.expanded {
               transform: rotate(90deg);
             }
           }
-        }
-      }
 
-      /* Level-specific styling */
-      &.level-1 {
-        .link,
-        .label {
-          font-size: 1rem;
-          font-weight: 500;
+          &:hover {
+            background: var(--color-cloud-gray);
+          }
         }
       }
 
       &.level-2 {
-        background: var(--color-light-gray);
-
         .link,
         .label {
+          background: var(--color-light-gray);
           padding-left: calc(var(--spacing-base) * 2);
-          font-size: 0.95rem;
-          font-weight: 400;
         }
       }
 
       &.level-3 {
-        background: var(--color-off-white);
-
         .link,
         .label {
           padding-left: calc(var(--spacing-base) * 3);
-          font-size: 0.9rem;
-          font-weight: 400;
-          color: #666;
+          transition: padding-left 200ms ease-in-out;
 
           &:hover {
             color: var(--color-imperial-red);
