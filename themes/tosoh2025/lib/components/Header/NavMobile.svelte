@@ -193,12 +193,6 @@
     padding: 0;
   }
 
-  button:focus,
-  a:focus {
-    outline: 1px solid rgba(237, 26, 59, 0.1);
-    outline-offset: 1px;
-  }
-
   .wrapper {
     position: relative;
     width: 100%;
@@ -254,7 +248,7 @@
           display: block;
           width: 100%;
           height: 0.2rem;
-          background: var(--color-default);
+          background: var(--color-gray-800);
         }
       }
     }
@@ -275,7 +269,7 @@
       svg {
         width: 2.25rem;
         height: 2.25rem;
-        stroke: var(--color-default);
+        stroke: var(--color-gray-800);
         stroke-width: 0.125rem;
       }
     }
@@ -331,10 +325,10 @@
     }
 
     .item {
-      border-bottom: 1px solid var(--color-cloud-gray);
+      border-bottom: 1px solid var(--color-gray-200);
 
       &:first-child {
-        border-top: 1px solid var(--color-cloud-gray);
+        border-top: 1px solid var(--color-gray-200);
       }
 
       &:last-child:not(.level-1) {
@@ -361,7 +355,7 @@
 
           &:hover {
             color: var(--color-imperial-red);
-            background: var(--color-light-gray);
+            background: var(--color-gray-100);
           }
         }
 
@@ -372,11 +366,12 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 2.25rem;
+          height: 2rem;
           aspect-ratio: 1 / 1;
-          background: white;
-          border: 0.15rem solid var(--color-cloud-gray);
-          border-radius: 50%;
+          color: var(--color-imperial-red);
+          background: var(--color-white);
+          border: 0.125rem solid var(--color-gray-100);
+          border-radius: 0.5rem;
           cursor: pointer;
           transition: background 200ms ease-in-out;
 
@@ -387,10 +382,6 @@
               transform: rotate(90deg);
             }
           }
-
-          &:hover {
-            background: var(--color-cloud-gray);
-          }
         }
       }
 
@@ -398,7 +389,7 @@
         .link,
         .label {
           padding-left: calc(var(--spacing-base) * 2);
-          background: var(--color-light-gray);
+          background: var(--color-gray-100);
         }
       }
 

@@ -51,11 +51,7 @@
 
   <nav aria-label="Main navigation">
     {#if menu}
-      <ul
-        class="first-level"
-        onmouseleave={handleMenuMouseLeave}
-        onmouseenter={handleMenuMouseEnter}
-      >
+      <ul class="level-1" onmouseleave={handleMenuMouseLeave} onmouseenter={handleMenuMouseEnter}>
         {#each menu.children ?? [] as item, i}
           <li
             class={activeMenuItem === i ? 'active' : undefined}
@@ -64,13 +60,13 @@
             {@render navItem(item)}
             {#if activeMenuItem === i && hasChildren(item)}
               <div class="dropdown" out:fade={{ duration: 25 }}>
-                <ul class="second-level">
+                <ul class="level-2">
                   {#each item.children ?? [] as secondLevel}
                     {#if secondLevel.label || !hasChildren(secondLevel)}
                       <li>
                         {@render navItem(secondLevel)}
                         {#if hasChildren(secondLevel)}
-                          <ul class="third-level">
+                          <ul class="level-3">
                             {#each secondLevel.children ?? [] as thirdLevel}
                               <li>
                                 {@render navItem(thirdLevel)}
@@ -113,7 +109,7 @@
   }
 
   a {
-    color: var(--color-text, #333);
+    color: var(--color-gray-900);
     font-size: var(--font-size);
     text-decoration: none;
     transition: color 200ms ease-in-out;
@@ -143,7 +139,7 @@
     }
 
     /* First-level menu */
-    > ul.first-level {
+    > ul.level-1 {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -176,7 +172,9 @@
             background: var(--color-primary, var(--color-imperial-red));
             opacity: 0;
             transform: scaleX(0);
-            transition: all 200ms ease-in-out;
+            transition:
+              opacity 200ms ease-in-out,
+              transform 200ms ease-in-out;
           }
 
           &:hover {
@@ -199,21 +197,21 @@
         /* Dropdown menu */
         > .dropdown {
           position: absolute;
-          top: 100%;
+          top: calc(100% + 1px);
           left: -2rem;
           z-index: 1000;
           max-width: 24rem;
           min-width: 16rem;
           max-height: min(36rem, 60vh);
           background: white;
-          border: 1px solid var(--color-light-gray);
+          border: 1px solid var(--color-gray-200);
           border-bottom-left-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
           overflow: hidden;
 
           /* Second-level menu */
-          > ul.second-level {
+          > ul.level-2 {
             display: flex;
             flex-direction: column;
             padding: 0 0 var(--spacing-sm) 0;
@@ -230,8 +228,8 @@
                 display: block;
                 padding: var(--spacing-sm);
                 font-size: 0.95rem;
-                border-bottom: 1px solid var(--color-light-gray);
-                transition: all 200ms ease-in-out;
+                border-bottom: 1px solid var(--color-gray-200);
+                transition: color 200ms ease-in-out;
 
                 &:hover {
                   color: var(--color-primary, var(--color-imperial-red));
@@ -239,10 +237,10 @@
               }
 
               /* Third-level menu */
-              > ul.third-level {
+              > ul.level-3 {
                 display: flex;
                 flex-direction: column;
-                background: var(--color-light-gray);
+                background: var(--color-gray-100);
 
                 > li {
                   width: 100%;
@@ -253,8 +251,11 @@
                     padding: var(--spacing-xs) var(--spacing-base);
                     font-size: 0.9rem;
                     font-weight: 400;
-                    border-bottom: 1px solid var(--color-light-gray);
-                    transition: all 200ms ease-in-out;
+                    border-bottom: 1px solid var(--color-gray-200);
+                    transition:
+                      background 200ms ease-in-out,
+                      color 200ms ease-in-out,
+                      padding-left 200ms ease-in-out;
 
                     &:hover {
                       background: white;

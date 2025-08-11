@@ -9,9 +9,6 @@
   --color-metallic-seaweed: #0e759a;
   --color-pewter-blue: #87b2b2;
   --color-max-purple: #7f317e;
-  --color-light-gray: #f5f5f5;
-  --color-cloud-gray: #eeeeee;
-  --color-stone-gray: #696969;
 
   --spacing-2xs: 0.25rem;
   --spacing-xs: 0.5rem;
@@ -55,7 +52,7 @@ html {
 button,
 .button,
 *[role='button'] {
-  @apply bg-imperial-red focus:ring-imperial-red px-md py-xs cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-all duration-200 hover:bg-red-500 hover:inset-shadow-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply bg-imperial-red focus:ring-imperial-red px-md py-xs cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow,ring] duration-200 hover:bg-red-500 hover:inset-shadow-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 
   &.outlined {
     @apply border-imperial-red text-imperial-red border bg-white inset-shadow-none hover:shadow-md hover:shadow-gray-100;
@@ -64,5 +61,5 @@ button,
 
 .link,
 a[href]:not(.button) {
-  @apply text-imperial-red hover:text-imperial-red hover:decoration-imperial-red underline decoration-transparent underline-offset-2 transition-all duration-200;
+  @apply text-imperial-red hover:text-imperial-red hover:decoration-imperial-red underline decoration-transparent underline-offset-2 transition-[color,text-decoration-color] duration-200;
 }
