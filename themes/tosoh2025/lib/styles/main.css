@@ -85,7 +85,11 @@ html {
 button,
 .button,
 *[role='button'] {
-  @apply bg-imperial-red focus:ring-imperial-red px-base py-xs cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-all duration-200 hover:bg-red-500 hover:inset-shadow-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply bg-imperial-red focus:ring-imperial-red px-md py-xs cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-all duration-200 hover:bg-red-500 hover:inset-shadow-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+
+  &.outlined {
+    @apply border border-imperial-red text-imperial-red bg-white inset-shadow-none hover:shadow-md hover:shadow-gray-100;
+  }
 }
 
 .link,
