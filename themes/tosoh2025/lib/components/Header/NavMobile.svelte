@@ -166,20 +166,8 @@
             </div>
           </div>
           <button class="close" onclick={closeMenu} aria-label="Close menu">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 5L5 15M5 5L15 15"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
+            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M15 5L5 15M5 5L15 15" />
             </svg>
           </button>
         </div>
@@ -202,6 +190,13 @@
 <style lang="postcss">
   * {
     box-sizing: border-box;
+  }
+
+  /* Global focus styles - very light */
+  button:focus,
+  a:focus {
+    outline: 1px solid rgba(237, 26, 59, 0.1);
+    outline-offset: 1px;
   }
 
   .wrapper {
@@ -245,17 +240,42 @@
         position: relative;
         display: flex;
         flex-direction: column;
+        justify-content: center;
         gap: 0.3rem;
-        width: 2.25rem;
+        width: 2.5rem;
+        padding: 0.25rem;
+        aspect-ratio: 1 / 1;
 
         span {
           display: block;
           width: 100%;
           height: 0.2rem;
-          background: #222;
+          background: var(--color-stone-gray);
         }
       }
     }
+
+    /* Close Button */
+    .close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.25rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: background-color 200ms ease-in-out;
+      width: 2.5rem;
+      aspect-ratio: 1 / 1;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        stroke: var(--color-stone-gray);
+        stroke-width: 0.15rem;
+      }
+    }
+
     &.menu-header {
       padding: var(--spacing-base);
       border-bottom: 1px solid var(--color-off-white);
@@ -281,7 +301,6 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     z-index: 9999;
-    backdrop-filter: blur(2px);
 
     &:focus-within {
       .menu {
@@ -377,8 +396,8 @@
           }
 
           &:focus {
-            outline: 2px solid var(--color-imperial-red);
-            outline-offset: -2px;
+            outline: 1px solid rgba(237, 26, 59, 0.1);
+            outline-offset: -1px;
           }
 
           .icon {

@@ -11,6 +11,7 @@
   --color-off-white: #f0f0f0;
   --color-light-gray: #f5f5f5;
   --color-cloud-gray: #dfdfdf;
+  --color-stone-gray: #505050;
 
   --spacing-2xs: 0.25rem;
   --spacing-xs: 0.5rem;
@@ -88,7 +89,7 @@ button,
   @apply bg-imperial-red focus:ring-imperial-red px-md py-xs cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-all duration-200 hover:bg-red-500 hover:inset-shadow-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 
   &.outlined {
-    @apply border border-imperial-red text-imperial-red bg-white inset-shadow-none hover:shadow-md hover:shadow-gray-100;
+    @apply border-imperial-red text-imperial-red border bg-white inset-shadow-none hover:shadow-md hover:shadow-gray-100;
   }
 }
 
