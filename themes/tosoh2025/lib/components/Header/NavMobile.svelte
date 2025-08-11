@@ -212,7 +212,6 @@
     width: 100%;
     min-height: 5.5rem;
     padding: var(--spacing-sm) var(--spacing-md);
-    border-bottom: 1px solid var(--color-light-gray);
 
     > div {
       display: flex;
@@ -270,12 +269,12 @@
       border: none;
       cursor: pointer;
       transition: background-color 200ms ease-in-out;
-      width: 2.5rem;
+      width: 2.25rem;
       aspect-ratio: 1 / 1;
 
       svg {
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.25rem;
+        height: 2.25rem;
         stroke: var(--color-default);
         stroke-width: 0.125rem;
       }
@@ -332,17 +331,27 @@
     }
 
     .item {
+      border-bottom: 1px solid var(--color-cloud-gray);
+
+      &:first-child {
+        border-top: 1px solid var(--color-cloud-gray);
+      }
+
+      &:last-child:not(.level-1) {
+        border-bottom: none;
+      }
+
       .content {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 3rem;
 
         .link,
         .label {
           flex: 1;
           padding: var(--spacing-sm) 0 var(--spacing-sm) var(--spacing-md);
           font-family: var(--font-sans);
+          font-size: 0.95rem;
           line-height: 1.4;
           color: inherit;
           text-decoration: none;
@@ -366,7 +375,7 @@
           height: 2.25rem;
           aspect-ratio: 1 / 1;
           background: white;
-          border: 0.2rem solid var(--color-cloud-gray);
+          border: 0.15rem solid var(--color-cloud-gray);
           border-radius: 50%;
           cursor: pointer;
           transition: background 200ms ease-in-out;
@@ -388,8 +397,8 @@
       &.level-2 {
         .link,
         .label {
-          background: var(--color-light-gray);
           padding-left: calc(var(--spacing-base) * 2);
+          background: var(--color-light-gray);
         }
       }
 
@@ -397,12 +406,6 @@
         .link,
         .label {
           padding-left: calc(var(--spacing-base) * 3);
-          transition: padding-left 200ms ease-in-out;
-
-          &:hover {
-            color: var(--color-imperial-red);
-            padding-left: calc(var(--spacing-base) * 3 + 0.25rem);
-          }
         }
       }
     }
