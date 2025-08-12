@@ -63,7 +63,7 @@ export default defineConfig(({ command, mode }) => {
     mode: 'production',
     publicDir: false,
     build: {
-      minify: false /* Allow HubSpot to minify for us. */,
+      minify: false,
       outDir: 'dist',
       rollupOptions: {
         input: {
