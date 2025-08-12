@@ -4,25 +4,41 @@
 
 <!doctype html>
 <html lang="{{ html_lang }}" {{ html_lang_dir }}>
-  <head>
-    <meta charset="utf-8" />
-    {% if page_meta.html_title %}
-    <title>{{ page_meta.html_title }}</title>
-    {% endif %} {% if brand_settings.favicon.src %}
-    <link rel="shortcut icon" href="{{ brand_settings.favicon.src }}" />
-    {% endif %}
-    <meta name="description" content="{{ page_meta.meta_description }}" />
 
-    {{ require_js(get_asset_url('/TosohTheme2025/build/js/main.js'), { async: false, position: 'head' }) }} {{
-    require_css(get_asset_url('/TosohTheme2025/build/css/main.css')) }} {% if template_css %} {{
-    require_css(get_asset_url(template_css)) }} {% endif %} {{ standard_header_includes }}
-  </head>
+<head>
+  <meta charset="utf-8" />
+  {% if page_meta.html_title %}
+  <title>{{ page_meta.html_title }}</title>
+  {% endif %}
 
-  <body class="with-navigation {{ builtin_body_classes }}">
-    {% block header %} {% module "global_header" path="../../modules/globals/Header.module", label="Header" %} {%
-    endblock header %} {% block body %} {% endblock body %} {% block footer %} {% module "global_footer"
-    path="../../modules/globals/Footer.module", label="Footer" %} {% endblock footer %}
-  </body>
+  {% if brand_settings.favicon.src %}
+  <link rel="shortcut icon" href="{{ brand_settings.favicon.src }}" />
+  {% endif %}
+  <meta name="description" content="{{ page_meta.meta_description }}" />
 
-  {{ standard_footer_includes }}
+  {{ require_js(get_asset_url('/TosohTheme2025/build/js/main.js'), { async: false, position: 'head' }) }}
+  {{ require_css(get_asset_url('/TosohTheme2025/build/css/main.css')) }}
+
+  {% if template_css %}
+  {{ require_css(get_asset_url(template_css)) }}
+  {% endif %}
+
+  {{ standard_header_includes }}
+</head>
+
+<body class="with-navigation {{ builtin_body_classes }}">
+  {% block header %}
+  {% module "global_header" path="../../modules/globals/Header.module", label="Header" %}
+  {% endblock header %}
+
+  {% block body %}
+  {% endblock body %}
+
+  {% block footer %}
+  {% module "global_footer" path="../../modules/globals/Footer.module", label="Footer" %}
+  {% endblock footer %}
+</body>
+
+{{ standard_footer_includes }}
+
 </html>
