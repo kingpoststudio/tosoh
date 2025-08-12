@@ -1,31 +1,25 @@
-import { groupField, linkField, menuField, textField } from 'hs-fieldkit';
+import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
 
 const generateFields = () => [
-  menuField('menu', 'Footer menu'),
-  groupField('socials', 'Social Links', {
-    children: [
-      linkField('linkedin', 'LinkedIn', {
-        inline_help_text: 'Link to the LinkedIn profile',
-      }),
-      linkField('youtube', 'YouTube', {
-        inline_help_text: 'Link to the YouTube channel',
-      }),
-    ],
+  imageField('logo', 'Logo'),
+  textField('info', 'Information block', {
+    default: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.,',
   }),
-  groupField('legal', 'Legal Text/Links', {
-    children: [
-      textField('copyright', 'Copyright text', {
-        inline_help_text: 'Text to display in the copyright notice',
-        default: '© {{ year }} HiArc. All rights reserved.',
-      }),
-      linkField('privacy', 'Privacy Policy', {
-        inline_help_text: 'Link to the privacy policy page',
-      }),
-      linkField('tos', 'Terms of Service', {
-        inline_help_text: 'Link to the terms of service page',
-      }),
-    ],
+  textField('copyright', 'Copyright', {
+    inline_help_text: 'Text to display in the copyright notice',
+    default: '© {{ year }} Tosoh Diagnostics. All rights reserved.',
   }),
+  groupField('legal', 'Legal links', {
+    children: [
+      textField('linkLabel', 'Link label'),
+      linkField('link', 'Link'),
+    ],
+    occurrence: {
+      min: null,
+      max: 3,
+    },
+  }),
+  linkField('linkedin', 'LinkedIn'),
 ];
 
 export default generateFields;

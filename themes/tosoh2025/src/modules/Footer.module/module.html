@@ -1,54 +1,45 @@
-{% require_js position="head" %}
-{% set menu = menu(module.menu) %}
+<tosoh-grid-accent>
+  <div class="max-w-8xl mx-auto text-white text-sm">
+    <div class="flex flex-col items-center justify-center gap-sm w-full h-full py-xl px-md">
+      {% if module.logo.src %}
+      <img class="w-24" src="{{ module.logo.src }}" alt="{{ module.logo.alt or 'Tosoh Logo' }}">
+      {% else %}
+      <img class="w-24" src="https://landing.tosoh-diagnostics.com/hubfs/tosoh-logo-white.png" alt="Tosoh Logo">
+      {% endif %}
 
-<script>
-  const footerMenu = {{ menu|tojson }};
+      {% if module.info %}
+      <p class="w-full md:w-1/2 text-center">{{ module.info }}</p>
+      {% endif %}
+    </div>
 
-  window.Hiarc = window.Hiarc || {};
-  window.Hiarc.footerNavigationMenu = footerMenu;
-</script>
-{% end_require_js %}
+    <div class="flex flex-col md:flex-row items-center justify-between gap-sm p-md border-t border-white/10">
+      {% if module.copyright %}
+      <p>{{ module.copyright }}</p>
+      {% endif %}
 
-<hiarc-footer>
-  <hiarc-logo icon="simple" slot="logo"></hiarc-logo>
+      <div class="flex items-center gap-xs">
+        {% if module.legal|length %}
+        <div class="flex divide-x *:px-sm first:pl-0 last:pr-0">
+          {% for legal in module.legal %}
+          {% set legal_target = legal.link.open_in_new_tab ? "_blank" : "_self"%}
+          <a class="text-white" href="{{ legal.link.url.href }}" target="{{ legal_target }}">
+            {{ legal.linkLabel }}
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}git
 
-  {% if module.socials.linkedin.url.href %}
-  {% set linkTarget = module.socials.linkedin.open_in_new_tab ? "_blank" : "_self" %}
-  <a slot="socials" class="contents" href="{{ module.socials.linkedin.url.href }}" target="{{ linkTarget }}"
-    rel="noopener" aria-label="LinkedIn">
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M5.87618 3.69575C5.87579 4.47663 5.56587 5.22536 5.0146 5.77724C4.46332 6.32913 3.71585 6.63895 2.93662 6.63856C2.15739 6.63817 1.41023 6.3276 0.859508 5.77516C0.308785 5.22273 -0.000389247 4.47368 3.67792e-07 3.69281C0.000389983 2.91194 0.310311 2.1632 0.861586 1.61132C1.41286 1.05944 2.16033 0.74961 2.93956 0.75C3.71879 0.750391 4.46595 1.06097 5.01667 1.6134C5.5674 2.16584 5.87657 2.91488 5.87618 3.69575ZM5.96432 8.8188H0.088143V27.25H5.96432V8.8188ZM15.2487 8.8188H9.40189V27.25H15.1899V17.578C15.1899 12.19 22.1973 11.6895 22.1973 17.578V27.25H28V15.5759C28 6.49282 17.6285 6.83141 15.1899 11.292L15.2487 8.8188Z"
-        fill="#C2F970" />
-    </svg>
-  </a>
-  {% endif %}
-
-  {% if module.socials.youtube.url.href %}
-  {% set linkTarget = module.socials.youtube.open_in_new_tab ? "_blank" : "_self" %}
-  <a slot="socials" class="contents" href="{{ module.socials.youtube.url.href }}" target="{{ linkTarget }}"
-    rel="noopener" aria-label="YouTube">
-    <svg width="28" height="24" viewBox="0 0 28 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd" clip-rule="evenodd"
-        d="M14 2C15.197 2 16.4248 2.0308 17.6148 2.0812L19.0204 2.1484L20.3658 2.2282L21.6258 2.3136L22.7766 2.4032C24.0257 2.49825 25.2011 3.03101 26.0959 3.90764C26.9908 4.78428 27.5475 5.94855 27.6682 7.1954L27.7242 7.7904L27.8292 9.0644C27.9272 10.3846 28 11.8238 28 13.2C28 14.5762 27.9272 16.0154 27.8292 17.3356L27.7242 18.6096L27.6682 19.2046C27.5475 20.4517 26.9905 21.6161 26.0954 22.4928C25.2003 23.3694 24.0245 23.9021 22.7752 23.9968L21.6272 24.085L20.3672 24.1718L19.0204 24.2516L17.6148 24.3188C16.4106 24.371 15.2054 24.398 14 24.4C12.7946 24.398 11.5894 24.371 10.3852 24.3188L8.9796 24.2516L7.6342 24.1718L6.3742 24.085L5.2234 23.9968C3.97434 23.9018 2.79888 23.369 1.90406 22.4924C1.00924 21.6157 0.452467 20.4514 0.3318 19.2046L0.2758 18.6096L0.1708 17.3356C0.0641658 15.9596 0.0071955 14.5801 0 13.2C0 11.8238 0.0728 10.3846 0.1708 9.0644L0.2758 7.7904L0.3318 7.1954C0.45242 5.94877 1.009 4.78467 1.90353 3.90807C2.79806 3.03146 3.97319 2.49856 5.222 2.4032L6.3714 2.3136L7.6314 2.2282L8.9782 2.1484L10.3838 2.0812C11.5885 2.02902 12.7942 2.00195 14 2ZM11.2 9.805V16.595C11.2 17.2418 11.9 17.645 12.46 17.323L18.34 13.928C18.4679 13.8543 18.5742 13.7483 18.6481 13.6205C18.722 13.4927 18.7609 13.3476 18.7609 13.2C18.7609 13.0524 18.722 12.9073 18.6481 12.7795C18.5742 12.6517 18.4679 12.5457 18.34 12.472L12.46 9.0784C12.3323 9.00465 12.1874 8.96584 12.0399 8.96586C11.8924 8.96589 11.7475 9.00475 11.6198 9.07853C11.4921 9.15232 11.386 9.25844 11.3123 9.38621C11.2386 9.51398 11.1999 9.6589 11.2 9.8064V9.805Z"
-        fill="#C2F970" />
-    </svg>
-  </a>
-  {% endif %}
-
-  {% if module.legal.copyright %}
-  <p class="text-xs text-cream" slot="copyright">{{ module.legal.copyright }}</p>
-  {% endif %}
-
-  {% if module.legal.privacy.url.href %}
-  {% set linkTarget = module.legal.privacy.open_in_new_tab ? "_blank" : "_self" %}
-  <a class="text-xs text-cream" href="{{ module.legal.privacy.url.href }}" target="{{ linkTarget }}"
-    slot="privacy">Privacy Policy</a>
-  {% endif %}
-
-  {% if module.legal.tos.url.href %}
-  {% set linkTarget = module.legal.tos.open_in_new_tab ? "_blank" : "_self" %}
-  <a class="text-xs text-cream" href="{{ module.legal.tos.url.href }}" target="{{ linkTarget }}" slot="terms">Terms of
-    Service</a>
-  {% endif %}
-</hiarc-footer>
+        {% if module.linkedin.url.href %}
+        {% set linkedin_target = module.linkedin.open_in_new_tab ? "_blank" : "_self"%}
+        <a class="text-white mb-xs" href="{{ module.linkedin.url.href }}" target="{{ linkedin_target }}">
+          <svg width="1.5rem" height="1.5rem" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M3.93833 0C2.89382 0 1.89209 0.41493 1.15351 1.15351C0.41493 1.89209 0 2.89382 0 3.93833C0 4.98284 0.41493 5.98458 1.15351 6.72316C1.89209 7.46174 2.89382 7.87667 3.93833 7.87667C4.98284 7.87667 5.98458 7.46174 6.72316 6.72316C7.46174 5.98458 7.87667 4.98284 7.87667 3.93833C7.87667 2.89382 7.46174 1.89209 6.72316 1.15351C5.98458 0.41493 4.98284 0 3.93833 0ZM0.231667 11.12C0.170225 11.12 0.111299 11.1444 0.0678534 11.1879C0.0244075 11.2313 0 11.2902 0 11.3517V35.445C0 35.5729 0.103787 35.6767 0.231667 35.6767H7.645C7.70644 35.6767 7.76537 35.6523 7.80881 35.6088C7.85226 35.5654 7.87667 35.5064 7.87667 35.445V11.3517C7.87667 11.2902 7.85226 11.2313 7.80881 11.1879C7.76537 11.1444 7.70644 11.12 7.645 11.12H0.231667ZM12.2783 11.12C12.2169 11.12 12.158 11.1444 12.1145 11.1879C12.0711 11.2313 12.0467 11.2902 12.0467 11.3517V35.445C12.0467 35.5729 12.1505 35.6767 12.2783 35.6767H19.6917C19.7531 35.6767 19.812 35.6523 19.8555 35.6088C19.8989 35.5654 19.9233 35.5064 19.9233 35.445V22.4717C19.9233 21.55 20.2894 20.6662 20.9411 20.0145C21.5928 19.3628 22.4767 18.9967 23.3983 18.9967C24.32 18.9967 25.2038 19.3628 25.8555 20.0145C26.5072 20.6662 26.8733 21.55 26.8733 22.4717V35.445C26.8733 35.5729 26.9771 35.6767 27.105 35.6767H34.5183C34.5798 35.6767 34.6387 35.6523 34.6821 35.6088C34.7256 35.5654 34.75 35.5064 34.75 35.445V19.4693C34.75 14.9712 30.8395 11.4536 26.3637 11.8595C24.979 11.9865 23.6226 12.3292 22.3438 12.8751L19.9233 13.913V11.3517C19.9233 11.2902 19.8989 11.2313 19.8555 11.1879C19.812 11.1444 19.7531 11.12 19.6917 11.12H12.2783Z"
+              fill="currentColor" />
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</tosoh-grid-accent>

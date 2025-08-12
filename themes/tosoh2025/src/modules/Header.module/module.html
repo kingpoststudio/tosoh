@@ -19,7 +19,8 @@
   {% if module.ctas|length %}
   <div slot="cta" class="flex flex-row gap-sm md:pb-2xs">
     {% for cta in module.ctas %}
-    <a class="{{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}">
+    {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self"%}
+    <a class="{{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
       {{ cta.linkLabel }}
     </a>
     {% endfor %}
@@ -29,7 +30,8 @@
   {% if module.aux|length %}
   <div slot="aux" class="flex gap-sm text-sm uppercase">
     {% for aux in module.aux %}
-    <a href="{{ aux.link.url.href }}">{{ aux.linkLabel }}</a>
+    {% set aux_target = aux.link.open_in_new_tab ? "_blank" : "_self"%}
+    <a href="{{ aux.link.url.href }}" target="{{ aux_target }}">{{ aux.linkLabel }}</a>
     {% endfor %}
   </div>
   {% endif %}
