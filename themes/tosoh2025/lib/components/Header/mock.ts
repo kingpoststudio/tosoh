@@ -1,4 +1,6 @@
-// Tosoh navigation mock data
+import type { HubSpotMenu } from "../../../types/hubspot";
+import "../../../types/global";
+
 const mockHeader = {
   mainNavigationMenu: {
     children: [
@@ -105,18 +107,9 @@ const mockHeader = {
       },
     ],
   },
+} as {
+  mainNavigationMenu: HubSpotMenu;
 };
-
-// Set up the window object
-declare global {
-  interface Window {
-    Tosoh: {
-      Header: {
-        mainNavigationMenu: typeof mockHeader.mainNavigationMenu;
-      };
-    };
-  }
-}
 
 window.Tosoh = window.Tosoh || {};
 window.Tosoh.Header = mockHeader;

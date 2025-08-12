@@ -2,35 +2,23 @@
 
 <script lang="ts">
   import { innerWidth } from 'svelte/reactivity/window';
-  import NavDesktop from './NavDesktop.svelte';
   import NavMobile from './NavMobile.svelte';
-
-  const MOBILE_BREAKPOINT = 768;
-
-  let headerRef: HTMLElement;
-  let { fixed } = $props();
-  let isScrolled = $state(false);
-
-  function handleScroll() {
-    if (!headerRef || !fixed) return;
-    const headerHeight = headerRef.clientHeight;
-    isScrolled = window.scrollY > headerHeight / 2;
-  }
-
-  const isMobile = $derived((innerWidth.current ?? 1024) < MOBILE_BREAKPOINT);
+  import NavDesktop from './NavDesktop.svelte';
 </script>
 
-<svelte:window on:scroll={handleScroll} />
-
-<header bind:this={headerRef} class:scrolled={isScrolled}>
-  {#if isMobile}
-    <div class="mobile">
-      <NavMobile />
-    </div>
+<header>
+  {#if innerWidth.current && innerWidth.current < 768}
+    <NavMobile>
+      <svelte:element this={'slot'} name="logo" slot="logo" />
+      <svelte:element this={'slot'} name="cta" slot="cta" />
+      <svelte:element this={'slot'} name="aux" slot="aux" />
+    </NavMobile>
   {:else}
-    <div class="desktop">
-      <NavDesktop />
-    </div>
+    <NavDesktop>
+      <svelte:element this={'slot'} name="logo" slot="logo" />
+      <svelte:element this={'slot'} name="cta" slot="cta" />
+      <svelte:element this={'slot'} name="aux" slot="aux" />
+    </NavDesktop>
   {/if}
 </header>
 
@@ -57,21 +45,5 @@
     background: var(--color-white);
     z-index: var(--z-index-header);
     transition: background 150ms ease-in-out;
-
-    div.mobile {
-      display: block;
-
-      @media (min-width: 768px) {
-        display: none;
-      }
-    }
-
-    div.desktop {
-      display: none;
-
-      @media (min-width: 768px) {
-        display: block;
-      }
-    }
   }
 </style>
