@@ -4,21 +4,15 @@
   import { innerWidth } from 'svelte/reactivity/window';
   import NavMobile from './NavMobile.svelte';
   import NavDesktop from './NavDesktop.svelte';
+
+  const MOBILE_BREAKPOINT = 768;
 </script>
 
 <header>
-  {#if innerWidth.current && innerWidth.current < 768}
-    <NavMobile>
-      <svelte:element this={'slot'} name="logo" slot="logo" />
-      <svelte:element this={'slot'} name="cta" slot="cta" />
-      <svelte:element this={'slot'} name="aux" slot="aux" />
-    </NavMobile>
+  {#if innerWidth.current && innerWidth.current < MOBILE_BREAKPOINT}
+    <NavMobile />
   {:else}
-    <NavDesktop>
-      <svelte:element this={'slot'} name="logo" slot="logo" />
-      <svelte:element this={'slot'} name="cta" slot="cta" />
-      <svelte:element this={'slot'} name="aux" slot="aux" />
-    </NavDesktop>
+    <NavDesktop />
   {/if}
 </header>
 

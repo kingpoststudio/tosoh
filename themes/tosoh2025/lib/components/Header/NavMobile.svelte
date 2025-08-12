@@ -1,30 +1,12 @@
 <script lang="ts">
+  import { onDestroy } from 'svelte';
+  import { on } from 'svelte/events';
   import { fade, slide, fly } from 'svelte/transition';
-  import { onMount } from 'svelte';
+  import type { HubSpotMenu } from '../../../types/hubspot';
 
-  type MenuItem = {
-    label: string;
-    url?: string;
-    children?: MenuItem[];
-  };
-
-  type Menu = {
-    children?: MenuItem[];
-  };
-
-  let menu: Menu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
+  let menu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
   let isMenuOpen = $state(false);
   let expandedItems: Set<string> = $state(new Set());
-
-  onMount(() => {
-    function handleKeydown(event: KeyboardEvent) {
-      if (event.key === 'Escape' && isMenuOpen) {
-        closeMenu();
-      }
-    }
-    window.addEventListener('keydown', handleKeydown);
-    return () => window.removeEventListener('keydown', handleKeydown);
-  });
 
   function toggleMenu() {
     isMenuOpen = !isMenuOpen;
@@ -53,7 +35,7 @@
     expandedItems = new Set(expandedItems);
   }
 
-  function hasChildren(item: MenuItem): boolean {
+  function hasChildren(item: HubSpotMenu): boolean {
     return !!(item.children && item.children.length > 0);
   }
 
@@ -64,9 +46,19 @@
   function getItemPath(indices: number[]): string {
     return indices.join('-');
   }
+
+  const keydownHandler = on(window, 'keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      isMenuOpen = false;
+    }
+  });
+
+  onDestroy(() => {
+    keydownHandler();
+  });
 </script>
 
-{#snippet navItem(item: MenuItem, indices: number[] = [], level: number = 1)}
+{#snippet navItem(item: HubSpotMenu, indices: number[] = [], level: number = 1)}
   <li class="item level-{level}">
     <div class="content">
       {#if item.url}

@@ -1,17 +1,8 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
+  import type { HubSpotMenu } from '../../../types/hubspot';
 
-  type MenuItem = {
-    label: string;
-    url?: string;
-    children?: MenuItem[];
-  };
-
-  type Menu = {
-    children?: MenuItem[];
-  };
-
-  let menu: Menu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
+  let menu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
   let activeMenuItem: number | null = $state(null);
   let timeout: ReturnType<typeof setTimeout> | null = $state(null);
 
@@ -31,12 +22,12 @@
     if (timeout) clearTimeout(timeout);
   }
 
-  function hasChildren(item: MenuItem): boolean {
+  function hasChildren(item: HubSpotMenu): boolean {
     return !!(item.children && item.children.length > 0);
   }
 </script>
 
-{#snippet navItem(item: MenuItem)}
+{#snippet navItem(item: HubSpotMenu)}
   {#if item.url}
     <a href={item.url}>{@html item.label}</a>
   {:else}
@@ -51,7 +42,11 @@
 
   <nav aria-label="Main navigation">
     {#if menu}
-      <ul class="level-1" onmouseleave={handleMenuMouseLeave} onmouseenter={handleMenuMouseEnter}>
+      <ul
+        class="first-level"
+        onmouseleave={handleMenuMouseLeave}
+        onmouseenter={handleMenuMouseEnter}
+      >
         {#each menu.children ?? [] as item, i}
           <li
             class={activeMenuItem === i ? 'active' : undefined}
@@ -60,13 +55,13 @@
             {@render navItem(item)}
             {#if activeMenuItem === i && hasChildren(item)}
               <div class="dropdown" in:fade={{ duration: 100 }}>
-                <ul class="level-2">
+                <ul class="second-level">
                   {#each item.children ?? [] as secondLevel}
                     {#if secondLevel.label || !hasChildren(secondLevel)}
                       <li>
                         {@render navItem(secondLevel)}
                         {#if hasChildren(secondLevel)}
-                          <ul class="level-3">
+                          <ul class="third-level">
                             {#each secondLevel.children ?? [] as thirdLevel}
                               <li>
                                 {@render navItem(thirdLevel)}
@@ -140,7 +135,7 @@
     }
 
     /* First-level menu */
-    > ul.level-1 {
+    > ul.first-level {
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -214,7 +209,7 @@
           overflow: hidden;
 
           /* Second-level menu */
-          > ul.level-2 {
+          > ul.second-level {
             display: flex;
             flex-direction: column;
             padding: var(--spacing-xs) 0 var(--spacing-sm) 0;
@@ -239,7 +234,7 @@
               }
 
               /* Third-level menu */
-              > ul.level-3 {
+              > ul.third-level {
                 display: flex;
                 flex-direction: column;
                 background: var(--color-zinc-100);
