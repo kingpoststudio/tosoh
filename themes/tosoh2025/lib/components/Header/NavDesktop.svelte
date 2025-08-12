@@ -115,7 +115,7 @@
     transition: color 200ms ease-in-out;
 
     &:hover {
-      color: var(--color-primary, var(--color-imperial-red));
+      color: var(--color-imperial-red);
     }
   }
 
@@ -170,7 +170,7 @@
             bottom: 0;
             width: 100%;
             height: 0.125rem;
-            background: var(--color-primary, var(--color-imperial-red));
+            background: var(--color-imperial-red);
             opacity: 0;
             transform: scaleX(0);
             transition:
@@ -179,14 +179,14 @@
           }
 
           &:hover {
-            color: var(--color-primary, var(--color-imperial-red));
+            color: var(--color-imperial-red);
           }
         }
 
         &.active {
           > a,
           > span {
-            color: var(--color-primary, var(--color-imperial-red));
+            color: var(--color-imperial-red);
 
             &:after {
               opacity: 1;
@@ -200,13 +200,13 @@
           position: absolute;
           top: calc(100% + 1px);
           left: -1rem;
-          z-index: 1000;
+          z-index: var(--z-index-dropdown);
           max-width: 24rem;
           min-width: 12rem;
           max-height: min(36rem, 60vh);
           font-size: 0.9rem;
-          background: white;
-          border: 1px solid var(--color-zinc-200);
+          background: var(--color-white);
+          border: 1px solid var(--color-zinc-300);
           border-radius: 0.5rem;
           box-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.2);
           overflow: hidden;
@@ -259,7 +259,7 @@
 
                     &:hover {
                       background: white;
-                      color: var(--color-primary, var(--color-imperial-red));
+                      color: var(--color-imperial-red);
                       padding-left: calc(var(--spacing-base) + 0.25rem);
                     }
                   }

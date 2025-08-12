@@ -33,6 +33,14 @@
 </header>
 
 <style lang="postcss">
+  :host {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: var(--z-index-header);
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;

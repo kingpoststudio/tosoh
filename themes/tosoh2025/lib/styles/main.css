@@ -37,6 +37,17 @@
   --transition-duration-slow: 325ms;
   --transition-duration-slower: 525ms;
   --transition-duration-slowest: 825ms;
+
+  /* Z-Index Scale */
+  --z-index-background: 10;
+  --z-index-content: 20;
+  --z-index-dropdown: 30;
+  --z-index-sticky: 40;
+  --z-index-header: 50;
+  --z-index-overlay: 60;
+  --z-index-modal: 70;
+  --z-index-toast: 80;
+  --z-index-tooltip: 90;
 }
 
 html {
@@ -46,10 +57,10 @@ html {
 button,
 .button,
 *[role='button'] {
-  @apply bg-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red cursor-pointer rounded-lg text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow,ring] duration-200 hover:inset-shadow-red-800 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply from-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red border-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-medium text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow,ring] duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 
   &.outlined {
-    @apply border-imperial-red text-imperial-red border bg-white inset-shadow-none hover:shadow-md hover:shadow-zinc-200;
+    @apply border text-imperial-red bg-white inset-shadow-none;
   }
 }
 

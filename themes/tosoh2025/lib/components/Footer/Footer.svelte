@@ -1,10 +1,12 @@
-<svelte:options customElement="tosoh-grid-accent" />
+<svelte:options customElement="tosoh-footer" />
 
-<div class="wrapper">
+<footer>
   <div class="position-bl grid"></div>
-  <svelte:element this={'slot'} />
+  <div class="wrapper">
+    <svelte:element this={'slot'} />
+  </div>
   <div class="position-tr grid"></div>
-</div>
+</footer>
 
 <style lang="postcss">
   :host {
@@ -19,7 +21,7 @@
     padding: 0;
   }
 
-  .wrapper {
+  footer {
     position: relative;
     background: var(--color-navy-blue);
     overflow: hidden;
@@ -52,22 +54,35 @@
       }
 
       &.position-bl {
-        bottom: max(-200%, -32rem);
+        bottom: -200%;
         left: -56rem;
 
         @media (min-width: 48rem) {
+          bottom: -200%;
           left: -60%;
         }
       }
 
       &.position-tr {
-        top: max(-200%, -32rem);
+        top: -200%;
         right: -56rem;
 
         @media (min-width: 48rem) {
+          top: -200%;
           right: -60%;
         }
       }
+    }
+
+    > .wrapper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      min-height: 20rem;
+      max-width: var(--container-8xl);
+      margin: 0 auto;
+      z-index: 2;
     }
   }
 </style>
