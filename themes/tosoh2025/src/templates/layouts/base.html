@@ -26,16 +26,16 @@
   {{ standard_header_includes }}
 </head>
 
-<body class="with-navigation {{ builtin_body_classes }}">
+<body class="{{ builtin_body_classes }}">
   {% block header %}
-  {% module "global_header" path="../../modules/globals/Header.module", label="Header" %}
+  {% module "global_header" path="/TosohTheme2025/modules/globals/Header.module", label="Header" %}
   {% endblock header %}
 
   {% block body %}
   {% endblock body %}
 
   {% block footer %}
-  {% module "global_footer" path="../../modules/globals/Footer.module", label="Footer" %}
+  {% module "global_footer" path="/TosohTheme2025/modules/globals/Footer.module", label="Footer" %}
   {% endblock footer %}
 </body>
 

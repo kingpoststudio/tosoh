@@ -21,7 +21,6 @@
 
   .wrapper {
     position: relative;
-    background: var(--color-navy-blue);
     overflow: hidden;
 
     > .grid {

@@ -16,12 +16,14 @@
     const headerHeight = headerRef.clientHeight;
     isScrolled = window.scrollY > headerHeight / 2;
   }
+
+  const isMobile = $derived((innerWidth.current ?? 1024) < MOBILE_BREAKPOINT);
 </script>
 
 <svelte:window on:scroll={handleScroll} />
 
-<header bind:this={headerRef} class:scrolled={isScrolled} class:fixed>
-  {#if innerWidth.current && innerWidth.current < MOBILE_BREAKPOINT}
+<header bind:this={headerRef} class:scrolled={isScrolled}>
+  {#if isMobile}
     <div class="mobile">
       <NavMobile />
     </div>
@@ -55,13 +57,6 @@
     background: var(--color-white);
     z-index: var(--z-index-header);
     transition: background 150ms ease-in-out;
-
-    &.fixed {
-      position: fixed;
-    }
-
-    &.scrolled {
-    }
 
     div.mobile {
       display: block;
