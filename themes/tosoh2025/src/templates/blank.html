@@ -4,13 +4,8 @@
   label: Blank
 -->
 
-{% extends "./layouts/base.html" %}
+{% extends "./layouts/base.html" %} {% block body %}
 
-{% block body %}
-
-<main>
-  {% dnd_area 'main_dnd' %}
-  {% end_dnd_area %}
-</main>
+<main>{% dnd_area 'main_dnd' %} {% end_dnd_area %}</main>
 
 {% endblock body %}

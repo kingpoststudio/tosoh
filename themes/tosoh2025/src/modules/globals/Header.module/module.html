@@ -12,11 +12,11 @@
 <tosoh-header>
   {% if module.logo.src %}
   <img slot="logo" src="{{ module.logo.src }}" alt="{{ module.logo.alt or 'Tosoh' }}"
-    class="h-18 md:h-20 w-auto md:py-xs" />
+    class="md:py-xs h-18 w-auto md:h-20" />
   {% endif %}
 
   {% if module.ctas|length %}
-  <div slot="cta" class="flex flex-row gap-sm md:pb-2xs">
+  <div slot="cta" class="gap-sm md:pb-2xs flex flex-row">
     {% for cta in module.ctas %}
     {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self"%}
     <a class="{{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
@@ -27,7 +27,7 @@
   {% endif %}
 
   {% if module.aux|length %}
-  <div slot="aux" class="flex gap-sm text-sm uppercase">
+  <div slot="aux" class="gap-sm flex text-sm uppercase">
     {% for aux in module.aux %}
     {% set aux_target = aux.link.open_in_new_tab ? "_blank" : "_self"%}
     <a href="{{ aux.link.url.href }}" target="{{ aux_target }}">{{ aux.linkLabel }}</a>

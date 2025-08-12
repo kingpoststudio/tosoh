@@ -1,57 +1,58 @@
 ﻿<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tosoh Tailwind Configuration Demo</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tosoh Tailwind Configuration Demo</title>
+    <script type="module" src="lib/components/Header/mock.ts"></script>
+    <script type="module" src="lib/main.ts"></script>
+    <link rel="stylesheet" href="lib/styles/main.css" />
+  </head>
 
-  <script type="module" src="lib/components/Header/mock.ts"></script>
-  <script type="module" src="lib/main.ts"></script>
-  <link rel="stylesheet" href="lib/styles/main.css" />
-</head>
-
-<body>
-  <tosoh-header>
-    <img slot="logo" src="https://www.pngkey.com/png/full/641-6419535_tosoh-com-tosoh-bioscience.png"
-      alt="Tosoh Diagnostics Logo" class="h-18 md:h-20 w-auto md:py-xs" />
-    <div slot="cta" class="flex flex-row gap-sm md:pb-2xs">
-      <a class="button">Contact</a>
-      <a class="button outlined">Login</a>
-    </div>
-    <div slot="aux" class="flex gap-sm text-sm uppercase">
-      <a href="#">Help</a>
-      <a href="#">Settings</a>
-    </div>
-  </tosoh-header>
-  <div class="bg-zinc-400 min-h-[100vh]"></div>
-  <tosoh-grid-accent>
-    <div class="max-w-8xl mx-auto text-white text-sm">
-      <div class="flex flex-col items-center justify-center gap-sm w-full h-full py-xl px-md">
-        <img class="w-24" src="https://landing.tosoh-diagnostics.com/hubfs/tosoh-logo-white.png" alt="Tosoh Logo">
-        <p class="w-full md:w-1/2 text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-          tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+  <body>
+    <tosoh-header>
+      <img
+        slot="logo"
+        src="https://www.pngkey.com/png/full/641-6419535_tosoh-com-tosoh-bioscience.png"
+        alt="Tosoh Diagnostics Logo"
+        class="md:py-xs h-18 w-auto md:h-20" />
+      <div slot="cta" class="gap-sm md:pb-2xs flex flex-row">
+        <a class="button">Contact</a>
+        <a class="button outlined">Login</a>
       </div>
-      <div class="flex flex-col md:flex-row items-center justify-between gap-sm p-md border-t border-white/10">
-        <p>Copyright ©2025 Tosoh Bioscience. All rights reserved.</p>
-        <div class="flex items-center gap-xs">
-          <div class="flex divide-x *:px-sm first:pl-0 last:pr-0">
-            <a class="text-white" href="#">Privacy Policy</a>
-            <a class="text-white" href="#">Terms of Service</a>
+      <div slot="aux" class="gap-sm flex text-sm uppercase">
+        <a href="#">Help</a>
+        <a href="#">Settings</a>
+      </div>
+    </tosoh-header>
+    <div class="min-h-[100vh] bg-zinc-400"></div>
+    <tosoh-grid-accent>
+      <div class="max-w-8xl mx-auto text-sm text-white">
+        <div class="gap-sm py-xl px-md flex h-full w-full flex-col items-center justify-center">
+          <img class="w-24" src="https://landing.tosoh-diagnostics.com/hubfs/tosoh-logo-white.png" alt="Tosoh Logo" />
+          <p class="w-full text-center md:w-1/2">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
+            dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          </p>
+        </div>
+        <div class="gap-sm p-md flex flex-col items-center justify-between border-t border-white/10 md:flex-row">
+          <p>Copyright ©2025 Tosoh Bioscience. All rights reserved.</p>
+          <div class="gap-xs flex items-center">
+            <div class="*:px-sm flex divide-x first:pl-0 last:pr-0">
+              <a class="text-white" href="#">Privacy Policy</a>
+              <a class="text-white" href="#">Terms of Service</a>
+            </div>
+            <a class="mb-xs text-white" href="https://www.linkedin.com/company/tosoh-bioscience">
+              <svg width="1.5rem" height="1.5rem" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M3.93833 0C2.89382 0 1.89209 0.41493 1.15351 1.15351C0.41493 1.89209 0 2.89382 0 3.93833C0 4.98284 0.41493 5.98458 1.15351 6.72316C1.89209 7.46174 2.89382 7.87667 3.93833 7.87667C4.98284 7.87667 5.98458 7.46174 6.72316 6.72316C7.46174 5.98458 7.87667 4.98284 7.87667 3.93833C7.87667 2.89382 7.46174 1.89209 6.72316 1.15351C5.98458 0.41493 4.98284 0 3.93833 0ZM0.231667 11.12C0.170225 11.12 0.111299 11.1444 0.0678534 11.1879C0.0244075 11.2313 0 11.2902 0 11.3517V35.445C0 35.5729 0.103787 35.6767 0.231667 35.6767H7.645C7.70644 35.6767 7.76537 35.6523 7.80881 35.6088C7.85226 35.5654 7.87667 35.5064 7.87667 35.445V11.3517C7.87667 11.2902 7.85226 11.2313 7.80881 11.1879C7.76537 11.1444 7.70644 11.12 7.645 11.12H0.231667ZM12.2783 11.12C12.2169 11.12 12.158 11.1444 12.1145 11.1879C12.0711 11.2313 12.0467 11.2902 12.0467 11.3517V35.445C12.0467 35.5729 12.1505 35.6767 12.2783 35.6767H19.6917C19.7531 35.6767 19.812 35.6523 19.8555 35.6088C19.8989 35.5654 19.9233 35.5064 19.9233 35.445V22.4717C19.9233 21.55 20.2894 20.6662 20.9411 20.0145C21.5928 19.3628 22.4767 18.9967 23.3983 18.9967C24.32 18.9967 25.2038 19.3628 25.8555 20.0145C26.5072 20.6662 26.8733 21.55 26.8733 22.4717V35.445C26.8733 35.5729 26.9771 35.6767 27.105 35.6767H34.5183C34.5798 35.6767 34.6387 35.6523 34.6821 35.6088C34.7256 35.5654 34.75 35.5064 34.75 35.445V19.4693C34.75 14.9712 30.8395 11.4536 26.3637 11.8595C24.979 11.9865 23.6226 12.3292 22.3438 12.8751L19.9233 13.913V11.3517C19.9233 11.2902 19.8989 11.2313 19.8555 11.1879C19.812 11.1444 19.7531 11.12 19.6917 11.12H12.2783Z"
+                  fill="currentColor" />
+              </svg>
+            </a>
           </div>
-          <a class="text-white mb-xs" href="https://www.linkedin.com/company/tosoh-bioscience">
-            <svg width="1.5rem" height="1.5rem" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                d="M3.93833 0C2.89382 0 1.89209 0.41493 1.15351 1.15351C0.41493 1.89209 0 2.89382 0 3.93833C0 4.98284 0.41493 5.98458 1.15351 6.72316C1.89209 7.46174 2.89382 7.87667 3.93833 7.87667C4.98284 7.87667 5.98458 7.46174 6.72316 6.72316C7.46174 5.98458 7.87667 4.98284 7.87667 3.93833C7.87667 2.89382 7.46174 1.89209 6.72316 1.15351C5.98458 0.41493 4.98284 0 3.93833 0ZM0.231667 11.12C0.170225 11.12 0.111299 11.1444 0.0678534 11.1879C0.0244075 11.2313 0 11.2902 0 11.3517V35.445C0 35.5729 0.103787 35.6767 0.231667 35.6767H7.645C7.70644 35.6767 7.76537 35.6523 7.80881 35.6088C7.85226 35.5654 7.87667 35.5064 7.87667 35.445V11.3517C7.87667 11.2902 7.85226 11.2313 7.80881 11.1879C7.76537 11.1444 7.70644 11.12 7.645 11.12H0.231667ZM12.2783 11.12C12.2169 11.12 12.158 11.1444 12.1145 11.1879C12.0711 11.2313 12.0467 11.2902 12.0467 11.3517V35.445C12.0467 35.5729 12.1505 35.6767 12.2783 35.6767H19.6917C19.7531 35.6767 19.812 35.6523 19.8555 35.6088C19.8989 35.5654 19.9233 35.5064 19.9233 35.445V22.4717C19.9233 21.55 20.2894 20.6662 20.9411 20.0145C21.5928 19.3628 22.4767 18.9967 23.3983 18.9967C24.32 18.9967 25.2038 19.3628 25.8555 20.0145C26.5072 20.6662 26.8733 21.55 26.8733 22.4717V35.445C26.8733 35.5729 26.9771 35.6767 27.105 35.6767H34.5183C34.5798 35.6767 34.6387 35.6523 34.6821 35.6088C34.7256 35.5654 34.75 35.5064 34.75 35.445V19.4693C34.75 14.9712 30.8395 11.4536 26.3637 11.8595C24.979 11.9865 23.6226 12.3292 22.3438 12.8751L19.9233 13.913V11.3517C19.9233 11.2902 19.8989 11.2313 19.8555 11.1879C19.812 11.1444 19.7531 11.12 19.6917 11.12H12.2783Z"
-                fill="currentColor" />
-            </svg>
-          </a>
         </div>
       </div>
-    </div>
-    </div>
-  </tosoh-grid-accent>
-</body>
-
+    </tosoh-grid-accent>
+  </body>
 </html>

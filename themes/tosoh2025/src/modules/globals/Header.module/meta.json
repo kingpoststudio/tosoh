@@ -3,11 +3,7 @@
   "external_js": [],
   "global": true,
   "help_text": "",
-  "host_template_types": [
-    "PAGE",
-    "BLOG_POST",
-    "BLOG_LISTING"
-  ],
+  "host_template_types": ["PAGE", "BLOG_POST", "BLOG_LISTING"],
   "css_assets": [],
   "js_assets": [],
   "other_assets": [],
