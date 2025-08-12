@@ -57,10 +57,10 @@ html {
 button,
 .button,
 *[role='button'] {
-  @apply from-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red border-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-medium text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow,ring] duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+  @apply from-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red border-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-medium text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow,ring,scale] duration-200 hover:shadow-md hover:shadow-zinc-200 hover:scale-[1.01] focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 
   &.outlined {
-    @apply border text-imperial-red bg-white inset-shadow-none;
+    @apply border text-imperial-red from-white to-zinc-50 inset-shadow-none;
   }
 }
 

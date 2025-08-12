@@ -157,6 +157,8 @@
           align-items: center;
           height: 100%;
           font-size: 0.95rem;
+          font-weight: 500;
+          color: inherit;
           padding-inline: var(--spacing-sm);
           padding-bottom: var(--spacing-sm);
           text-align: center;
