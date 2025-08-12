@@ -2,7 +2,8 @@
   import { fade } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
 
-  let menu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
+  const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
+
   let activeMenuItem: number | null = $state(null);
   let timeout: ReturnType<typeof setTimeout> | null = $state(null);
 

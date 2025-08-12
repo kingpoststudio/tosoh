@@ -63,8 +63,14 @@ export default defineConfig(({ command, mode }) => {
     mode: 'production',
     publicDir: false,
     build: {
-      minify: false,
+      minify: 'terser',
       outDir: 'dist',
+      terserOptions: {
+        format: {
+          beautify: true,
+          comments: false,
+        },
+      },
       rollupOptions: {
         input: {
           main: resolve(__dirname, 'lib/main.ts'),

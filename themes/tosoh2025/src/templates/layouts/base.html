@@ -13,17 +13,17 @@
     {% if brand_settings.favicon.src %}
       <link rel="shortcut icon" href="{{ brand_settings.favicon.src }}" />
     {% endif %}
-    
-    {{ standard_header_includes }}
+
     <meta name="description" content="{{ page_meta.meta_description }}" />
 
-    {{ require_js(get_asset_url('/TosohTheme2025/build/js/main.js'), { async: false, position: 'head' }) }}
+    {{ require_js(get_asset_url('/TosohTheme2025/build/js/main.js'), { async: false }) }}
     {{ require_css(get_asset_url('/TosohTheme2025/build/css/main.css')) }}
 
     {% if template_css %}
       {{ require_css(get_asset_url(template_css)) }}
     {% endif %}
 
+    {{ standard_header_includes }}
   </head>
 
   <body class="{{ builtin_body_classes }}">

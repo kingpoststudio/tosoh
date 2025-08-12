@@ -4,7 +4,9 @@
 {% require_js position="head" %}
   <script>
     window.Tosoh = window.Tosoh || {};
-    window.Tosoh.mainNavigationMenu = JSON.parse('{{ menu_json }}');
+    window.Tosoh.Header = {
+      mainNavigationMenu: {{ menu_json }}
+    };
   </script>
 {% end_require_js %}
 
