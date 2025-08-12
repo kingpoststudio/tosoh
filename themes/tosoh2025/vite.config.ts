@@ -78,7 +78,7 @@ export default defineConfig(({ command, mode }) => {
           chunkFileNames: 'build/js/[name].js',
         },
       },
-      target: 'baseline-widely-available'
+      target: 'baseline-widely-available',
     },
     plugins,
     resolve: {
