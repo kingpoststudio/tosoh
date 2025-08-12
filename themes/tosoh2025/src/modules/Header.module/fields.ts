@@ -15,12 +15,20 @@ const generateFields = () => {
           ],
         }),
       ],
+      occurrence: {
+        min: null,
+        max: 2,
+      }
     }),
     groupField('aux', 'Auxiliary links', {
       children: [
         textField('linkLabel', 'Link label'),
         linkField('link', 'Link'),
       ],
+      occurrence: {
+        min: null,
+        max: 2,
+      },
     }),
   ];
 };

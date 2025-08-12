@@ -56,7 +56,7 @@
         left: -56rem;
 
         @media (min-width: 48rem) {
-          left: max(-50%, -36rem);
+          left: max(-60%, -40rem);
         }
       }
 
@@ -65,7 +65,7 @@
         right: -56rem;
 
         @media (min-width: 48rem) {
-          right: max(-50%, -36rem);
+          right: max(-60%, -40rem);
         }
       }
     }

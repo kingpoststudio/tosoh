@@ -42,21 +42,20 @@ export default defineConfig(({ command, mode }) => {
         }),
         svelte(),
         tailwindcss(),
-        // viteStaticCopy({
-        //   targets: [
-        //     { src: 'src/modules/*', dest: 'modules' },
-        //     { src: 'src/templates/*', dest: 'templates' },
-        //     { src: 'src/images/*', dest: 'images' },
-        //     { src: 'src/fields.json', dest: '' },
-        //     { src: 'src/theme.json', dest: '' },
-        //   ],
-        // }),
-        // hsFieldkitPlugin(['src/modules/**/fields.ts']),
-        // uploadToHubSpot({
-        //   src: 'dist',
-        //   dest: 'TosohTheme2025',
-        //   account: mode || 'develop',
-        // }),
+        viteStaticCopy({
+          targets: [
+            { src: 'src/modules/*', dest: 'modules' },
+            { src: 'src/templates/*', dest: 'templates' },
+            { src: 'src/fields.json', dest: '' },
+            { src: 'src/theme.json', dest: '' },
+          ],
+        }),
+        hsFieldkitPlugin(['src/modules/**/fields.ts']),
+        uploadToHubSpot({
+          src: 'dist',
+          dest: 'TosohTheme2025',
+          account: mode || 'develop',
+        }),
       ]
     : [tailwindcss(), svelte()];
 
