@@ -1,0 +1,14 @@
+{% require_js position="head" %}
+
+{% set menu = menu(module.menu) %}
+{% set menu_json = menu|tojson %}
+
+<script>
+  window.Tosoh = window.Tosoh || {};
+  window.Tosoh.mainNavigationMenu = {{ menu_json }};
+  window.Tosoh.mainNavigationCTAs = {{ ctas_json }};
+</script>
+{% end_require_js %}
+
+<tosoh-header>
+</tosoh-header>
