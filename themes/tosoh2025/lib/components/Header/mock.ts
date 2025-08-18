@@ -1,5 +1,5 @@
 import type { HubSpotMenu } from '../../../types/hubspot';
-import '../../../types/global';
+// import '../../../types/global';
 
 const mockHeader = {
   mainNavigationMenu: {
