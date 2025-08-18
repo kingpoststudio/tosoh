@@ -9,7 +9,6 @@
   import SupportPortalFilter from './SupportPortalFilter.svelte';
 </script>
 
-<div class="wrapper flex">
+<div class="wrapper mt-lg flex">
   <SupportPortalFilter></SupportPortalFilter>
-  Grid
 </div>
