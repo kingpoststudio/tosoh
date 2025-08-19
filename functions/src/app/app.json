@@ -1,0 +1,7 @@
+{
+  "name": "Tosoh - Serverless functions",
+  "description": "This app runs serverless functions to fetch data from Hubdb using GraphQL.",
+  "scopes": ["collector.graphql_schema.read","collector.graphql_query.execute"],
+  "uid": "tosoh-serverless-function-app",
+  "public": false
+}

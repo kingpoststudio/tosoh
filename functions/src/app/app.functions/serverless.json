@@ -1,0 +1,12 @@
+{
+    "appFunctions": {
+       "get-metadata": {
+        "file": "get-metadata.js",
+        "secrets": ["HUBSPOT_API_KEY"],
+        "endpoint": {
+          "path": "get-metadata",
+          "method": ["GET"]
+         }
+      }
+    }
+  }
