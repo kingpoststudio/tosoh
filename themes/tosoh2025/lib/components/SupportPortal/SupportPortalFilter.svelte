@@ -4,10 +4,87 @@
   }}
 />
 
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
+  import type { SupportPortalRowForFilter } from '../../../types/hubdb';
   let formElement = $state(null);
   let { onFormSubmit } = $props();
+  let isLoading = $state(false);
+  const CACHE_KEY = 'support-portal-filter-options';
+  const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+  let documentType = $state([]);
+  let productFamily = $state([]);
+  let productType = $state([]);
+  let documentCategory = $state([]);
+
+  const parseFilterOptions = (filterOptions: SupportPortalRowForFilter[]) => {
+    let localDocumentCategory = [];
+    let localDocumentType = [];
+    let localProductFamily = [];
+    let localProductType = [];
+
+    if (filterOptions && filterOptions?.length > 0) {
+      console.log(filterOptions, 'filterOptions');
+
+      filterOptions.forEach((option) => {
+        // {}
+        if (
+          option.document_type &&
+          !localDocumentType.some((type) => type.value === option.document_type.value)
+        ) {
+          localDocumentType.push({
+            label: option.document_type.label,
+            value: option.document_type.value,
+          });
+        }
+
+        //[{label:"Example", value:"example"}]
+        if (option.document_category && option.document_category.length > 0) {
+          option.document_category.forEach((cat) => {
+            if (!localDocumentCategory.some((local_cat) => local_cat.value === cat.value)) {
+              localDocumentCategory.push({
+                label: cat.label,
+                value: cat.value,
+              });
+            }
+          });
+        }
+
+        if (option.product_family && option.product_family.length > 0) {
+          option.product_family.forEach((family) => {
+            if (!localProductFamily.some((local_family) => local_family.value === family.value)) {
+              localProductFamily.push({
+                label: family.label,
+                value: family.value,
+              });
+            }
+          });
+        }
+
+        if (option.product_type && option.product_type.length > 0) {
+          option.product_type.forEach((type) => {
+            if (!localProductType.some((local_type) => local_type.value === type.value)) {
+              localProductType.push({
+                label: type.label,
+                value: type.value,
+              });
+            }
+          });
+        }
+      });
+
+      documentCategory = localDocumentCategory;
+      documentType = localDocumentType;
+      productFamily = localProductFamily;
+      productType = localProductType;
+
+      console.log(localDocumentCategory, 'localDocumentCategory');
+      console.log(localDocumentType, 'localDocumentType');
+      console.log(localProductFamily, 'localProductFamily');
+      console.log(localProductType, 'localProductType');
+    }
+  };
 
   const setFormValuesFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
@@ -79,11 +156,44 @@
   };
 
   const getFilterOptions = async () => {
-    const response = await fetch(
-      'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options'
-    );
-    const data = await response.json();
-    console.log(data.data.HUBDB.support_portal_collection.items?.length, 'dataFilter');
+    const now = Date.now();
+
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data, timestamp } = JSON.parse(cached);
+        if (now - timestamp < CACHE_TTL) {
+          console.log('Using cached filter options from localStorage', data);
+
+          return parseFilterOptions(data?.data?.HUBDB?.support_portal_collection?.items);
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to read from cache:', error);
+    }
+
+    isLoading = true;
+
+    try {
+      const response = await fetch(
+        'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options'
+      );
+      const data = await response.json();
+
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({
+          data,
+          timestamp: now,
+        })
+      );
+
+      return parseFilterOptions(data?.data?.HUBDB?.support_portal_collection?.items);
+    } catch (error) {
+      console.warn('Failed to fetch filter options:', error);
+    } finally {
+      isLoading = false;
+    }
   };
 
   const handleFormSubmit = (event) => {
@@ -142,7 +252,7 @@
     </select>
   </div>{/snippet}
 
-<div class="wrapper bg-ghost-white p-md rounded-lg">
+<div class={`wrapper bg-ghost-white p-md rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
   <div class="gap-5xl flex items-center">
     <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
     <div class="max-h-[1.375rem] max-w-[1rem]">
@@ -160,7 +270,7 @@
       </svg>
     </div>
   </div>
-  <form bind:this={formElement} on:submit={handleFormSubmit}>
+  <form bind:this={formElement} onsubmit={handleFormSubmit}>
     {@render searchInput()}
     {@render dropDownSelection(
       'Product Family',
