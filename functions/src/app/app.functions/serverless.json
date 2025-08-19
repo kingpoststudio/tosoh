@@ -15,6 +15,14 @@
             "path": "get-support-portal-collection",
             "method": ["POST"]
           }
+        },
+        "get-support-portal-filter-options": {
+          "file": "get-support-portal-filter-options.js",
+          "secrets": ["HUBSPOT_API_KEY"],
+          "endpoint": {
+            "path": "get-support-portal-filter-options",
+            "method": ["GET"]
+          }
         }
     }
   }
