@@ -10,6 +10,7 @@ exports.main = async (req: any) => {
           HUBDB {
             support_portal_collection(limit: 300, offset: ${offset}) {
               hasMore
+              total
               items {
                 document_category
                 document_type
@@ -33,6 +34,7 @@ exports.main = async (req: any) => {
             HUBDB: {
               support_portal_collection: {
                 hasMore: boolean;
+                total: number;
                 items: any[];
                 limit: number;
                 offset: number;
@@ -60,8 +62,8 @@ exports.main = async (req: any) => {
       return json;
     };
 
-    const checkIfHasMore = (json: any) => {
-      return json?.data?.HUBDB.support_portal_collection?.hasMore;
+    const hasMore = (json: any) => {
+      return json?.data?.HUBDB?.support_portal_collection?.hasMore;
     };
 
     const fetchAllData = async () => {
@@ -71,8 +73,9 @@ exports.main = async (req: any) => {
       while (!hasFinished) {
         const json = (await fetchData(offset)) as any;
         data.push(...json.data.HUBDB.support_portal_collection.items);
-        offset += json.data.HUBDB.support_portal_collection.offset;
-        hasFinished = !checkIfHasMore(json);
+        offset = json.data.HUBDB.support_portal_collection.offset;
+
+        hasFinished = !hasMore(json);
       }
     };
 

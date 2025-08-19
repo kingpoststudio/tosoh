@@ -8,6 +8,7 @@
   import { onMount } from 'svelte';
   let formElement = $state(null);
   let { onFormSubmit } = $props();
+
   const setFormValuesFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
 
@@ -39,17 +40,12 @@
     });
   };
 
-  /**
-   * Synchronizes form values with URL parameters
-   * @param {boolean} resetForm - Whether to reset the form after setting params
-   */
   const setFormValuesToParams = (resetForm = false) => {
     if (!formElement) return;
 
     const formData = new FormData(formElement);
     const url = new URL(window.location.href);
 
-    // Collect form values by name
     const formValues = Array.from(formElement.elements).reduce((acc, element) => {
       const name = element.getAttribute('name');
       if (!name) return acc;
@@ -58,13 +54,11 @@
         acc[name] = Array.from(formData.getAll(name));
       }
 
-      // Filter out empty values
       acc[name] = acc[name]?.filter((value) => value) || [];
 
       return acc;
     }, {});
 
-    // Update URL parameters
     Object.keys(formValues).forEach((name) => {
       const values = formValues[name];
 
@@ -81,8 +75,15 @@
       formElement.reset();
     }
 
-    // Update browser history
     window.history.pushState({ filterGroupId: 'support-portal-filter', params: formValues }, '');
+  };
+
+  const getFilterOptions = async () => {
+    const response = await fetch(
+      'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options'
+    );
+    const data = await response.json();
+    console.log(data.data.HUBDB.support_portal_collection.items?.length, 'dataFilter');
   };
 
   const handleFormSubmit = (event) => {
@@ -94,6 +95,7 @@
 
   onMount(() => {
     setFormValuesFromUrl();
+    getFilterOptions();
   });
 </script>
 
