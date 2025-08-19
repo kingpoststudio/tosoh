@@ -4,7 +4,42 @@
   }}
 />
 
-<script></script>
+<script>
+  import { onMount } from 'svelte';
+  let formElement = $state(null);
+
+  onMount(() => {
+    setFormValuesFromUrl();
+  });
+
+  const setFormValuesFromUrl = () => {
+    const params = new URLSearchParams(window.location.href);
+
+    Array.from(formElement.elements).forEach((element) => {
+      const name = element.getAttribute('name');
+      if (!name) return;
+
+      const values = params.getAll(name).flatMap((value) => value.split(','));
+
+      if (values.length) {
+        if (element.tagName === 'SELECT') {
+          const select = element;
+          Array.from(select.options).forEach((option) => {
+            option.selected = values.includes(option.value);
+          });
+        } else if (element.tagName === 'INPUT' && element.type === 'checkbox') {
+          const checkbox = element;
+          checkbox.checked = values.includes(checkbox.value);
+        } else if (element.tagName === 'INPUT' && element.type === 'radio') {
+          const radio = element;
+          radio.checked = values.includes(radio.value);
+        } else {
+          element.value = values.join(',');
+        }
+      }
+    });
+  };
+</script>
 
 {#snippet searchInput()}
   <div class="mt-md relative w-full rounded-lg border border-slate-200">
@@ -35,7 +70,7 @@
 
 {#snippet dropDownSelection(title, options, name)}
   <div class="mt-md gap-sm flex flex-col">
-    <label for={name} class="font-arial font-black">{title}</label>
+    <label for={name} class="font-arial text-xl font-black">{title}</label>
     <select
       id={name}
       {name}
@@ -44,14 +79,14 @@
     >
       <option value="none" selected disabled hidden>Select</option>
       {#each options as option}
-        <option value={option.value}>{option}</option>
+        <option value={option.value}>{option.label}</option>
       {/each}
     </select>
   </div>{/snippet}
 
 <div class="wrapper bg-ghost-white p-md rounded-lg">
   <div class="gap-5xl flex items-center">
-    <p class="font-sans-narrow text-xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
     <div class="max-h-[1.375rem] max-w-[1rem]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -67,8 +102,15 @@
       </svg>
     </div>
   </div>
-  <form>
+  <form bind:this={formElement}>
     {@render searchInput()}
-    {@render dropDownSelection('Product Family', ['1', '2'], 'product_family')}
+    {@render dropDownSelection(
+      'Product Family',
+      [
+        { value: '1', label: '1' },
+        { value: '2', label: '2' },
+      ],
+      'product_family'
+    )}
   </form>
 </div>

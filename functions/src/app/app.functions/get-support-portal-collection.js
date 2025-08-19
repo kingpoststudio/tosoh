@@ -2,12 +2,40 @@
 exports.main = async (req) => {
     try {
         const GRAPHQL_ENDPOINT = "https://api.hubapi.com/collector/graphql";
-        const { limit = 500, offset = 0 } = typeof req !== "undefined" && req.body ? req.body : {};
-        // GraphQL query
+        const body = req && req.body ? req.body : {};
+        const limit = body.limit ? parseInt(body.limit, 10) : 100;
+        const offset = body.offset ? parseInt(body.offset, 10) : 0;
+        const productFamily = body.product_family || undefined;
+        const productType = body.product_type || undefined;
+        const documentCategory = body.document_category || undefined;
+        const documentType = body.document_type || undefined;
+        console.log(body, "params");
+        const createFilterConditions = () => {
+            const filterConditions = [];
+            if (!productFamily &&
+                !productType &&
+                !documentCategory &&
+                !documentType) {
+                return "";
+            }
+            if (productFamily) {
+                filterConditions.push(`product_family__eq: "${productFamily}"`);
+            }
+            if (productType) {
+                filterConditions.push(`product_type__eq: "${productType}"`);
+            }
+            if (documentCategory) {
+                filterConditions.push(`document_category__eq: "${documentCategory}"`);
+            }
+            if (documentType) {
+                filterConditions.push(`document_type__eq: "${documentType}"`);
+            }
+            return `, filter: {${filterConditions.join(", ")}}`;
+        };
         const query = `
         {
           HUBDB {
-            support_portal_collection(limit: ${limit}, offset: ${offset}) {
+            support_portal_collection(limit: ${limit}, offset: ${offset} ${createFilterConditions()}) {
               hasMore
               items {
                 deactivate
@@ -24,6 +52,7 @@ exports.main = async (req) => {
                 visibility
                 wistia_cached_url
                 wistia_video_url
+                hs_path
               }
               limit
               offset
@@ -43,13 +72,13 @@ exports.main = async (req) => {
             throw new Error(`GraphQL error: ${res.statusText}`);
         }
         const json = await res.json();
-        // Return the JSON response directly
         return {
             statusCode: 200,
             body: JSON.stringify(json),
         };
     }
     catch (err) {
+        console.error("Error in function:", err);
         return {
             statusCode: 500,
             body: JSON.stringify({ error: err.message }),
