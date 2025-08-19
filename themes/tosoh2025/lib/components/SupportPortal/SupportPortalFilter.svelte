@@ -7,14 +7,13 @@
 <script>
   import { onMount } from 'svelte';
   let formElement = $state(null);
-
-  onMount(() => {
-    setFormValuesFromUrl();
-  });
-
+  let { onFormSubmit } = $props();
   const setFormValuesFromUrl = () => {
-    const params = new URLSearchParams(window.location.href);
+    const params = new URLSearchParams(window.location.search);
 
+    for (const [key, value] of params) {
+      console.log(key, value);
+    }
     Array.from(formElement.elements).forEach((element) => {
       const name = element.getAttribute('name');
       if (!name) return;
@@ -39,6 +38,63 @@
       }
     });
   };
+
+  /**
+   * Synchronizes form values with URL parameters
+   * @param {boolean} resetForm - Whether to reset the form after setting params
+   */
+  const setFormValuesToParams = (resetForm = false) => {
+    if (!formElement) return;
+
+    const formData = new FormData(formElement);
+    const url = new URL(window.location.href);
+
+    // Collect form values by name
+    const formValues = Array.from(formElement.elements).reduce((acc, element) => {
+      const name = element.getAttribute('name');
+      if (!name) return acc;
+
+      if (!acc[name]) {
+        acc[name] = Array.from(formData.getAll(name));
+      }
+
+      // Filter out empty values
+      acc[name] = acc[name]?.filter((value) => value) || [];
+
+      return acc;
+    }, {});
+
+    // Update URL parameters
+    Object.keys(formValues).forEach((name) => {
+      const values = formValues[name];
+
+      if (resetForm || !values.length || (values.length === 1 && !values[0])) {
+        url.searchParams.delete(name);
+      } else if (values.length === 1) {
+        url.searchParams.set(name, values[0]);
+      } else {
+        url.searchParams.set(name, values.join(','));
+      }
+    });
+
+    if (resetForm) {
+      formElement.reset();
+    }
+
+    // Update browser history
+    window.history.pushState({ filterGroupId: 'support-portal-filter', params: formValues }, '');
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    setFormValuesToParams(false);
+    const formData = new FormData(formElement);
+    onFormSubmit(formData);
+  };
+
+  onMount(() => {
+    setFormValuesFromUrl();
+  });
 </script>
 
 {#snippet searchInput()}
@@ -102,7 +158,7 @@
       </svg>
     </div>
   </div>
-  <form bind:this={formElement}>
+  <form bind:this={formElement} on:submit={handleFormSubmit}>
     {@render searchInput()}
     {@render dropDownSelection(
       'Product Family',
@@ -112,5 +168,15 @@
       ],
       'product_family'
     )}
+    {@render dropDownSelection(
+      'Product type',
+      [
+        { value: '1', label: '1' },
+        { value: '2', label: '2' },
+      ],
+      'product_type'
+    )}
+
+    <button type="submit" class="bg-imperial-red p-sm rounded-lg text-white"> Submit </button>
   </form>
 </div>

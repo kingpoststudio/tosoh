@@ -29,9 +29,9 @@
     const response = await fetch(
       `https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-collection`,
       {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          method: 'POST',
         },
         body: JSON.stringify(formValues),
       }
@@ -40,13 +40,26 @@
     console.log(data, 'data');
   };
 
+  const onFormSubmit = (filterData) => {
+    formValues.items_per_page = 12;
+    formValues.pagination = 1;
+
+    formValues.product_family = filterData?.get('product_family') || '';
+    formValues.product_type = filterData?.get('product_type') || '';
+    formValues.document_category = filterData?.get('document_category') || '';
+    formValues.document_type = filterData?.get('document_type') || '';
+    formValues.search = filterData?.get('search') || '';
+
+    fetchData();
+  };
+
   onMount(() => {
     fetchData();
   });
 </script>
 
 <div class="wrapper mt-lg flex">
-  <SupportPortalFilter></SupportPortalFilter>
+  <SupportPortalFilter {onFormSubmit}></SupportPortalFilter>
 </div>
 
 <!-- 
