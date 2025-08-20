@@ -1,9 +1,3 @@
-<svelte:options
-  customElement={{
-    shadow: 'none',
-  }}
-/>
-
 <script lang="ts">
   import { onMount } from 'svelte';
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
@@ -19,39 +13,56 @@
   let { onFormSubmit } = $props();
   let isLoading = $state(false);
   const CACHE_KEY = 'support-portal-filter-options';
-  const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+  const CACHE_TTL_5_MINUTES = 5 * 60 * 1000; // 5 minutes
 
-  let document_type: LabelValue[] = $state([]);
-  let product_family: LabelValue[] = $state([]);
-  let product_type: LabelValue[] = $state([]);
-  let document_category: LabelValue[] = $state([]);
+  let allFilterOptions: SupportPortalRowForFilter[] = $state([]);
+  let filteredFilterOptions: SupportPortalRowForFilter[] = $state([]);
+  let document_types: LabelValue[] = $state([]);
+  let product_families: LabelValue[] = $state([]);
+  let product_types: LabelValue[] = $state([]);
+  let document_categories: LabelValue[] = $state([]);
+
+  let active_document_type: string = $state('none');
+  let active_product_family: string = $state('none');
+  let active_product_type: string = $state('none');
+  let active_document_category: string = $state('none');
 
   const parseFilterOptions = (filterOptions: SupportPortalRowForFilter[]) => {
-    let localDocumentCategory: LabelValue[] = [];
-    let localDocumentType: LabelValue[] = [];
-    let localProductFamily: LabelValue[] = [];
-    let localProductType: LabelValue[] = [];
+    let localDocumentCategories: LabelValue[] = [];
+    let localDocumentTypes: LabelValue[] = [];
+    let localProductFamilies: LabelValue[] = [];
+    let localProductTypes: LabelValue[] = [];
 
     if (filterOptions && filterOptions?.length > 0) {
       console.log(filterOptions, 'filterOptions');
 
       filterOptions.forEach((option) => {
-        // {}
-        if (
-          option.document_type &&
-          !localDocumentType.some((type) => type.value === option.document_type.value)
-        ) {
-          localDocumentType.push({
-            label: option.document_type.label,
-            value: option.document_type.value,
+        // if (
+        //   option.document_type &&
+        //   !localDocumentTypes.some((type) => type.value === option.document_type.value)
+        // ) {
+        //   localDocumentTypes.push({
+        //     label: option.document_type.label,
+        //     value: option.document_type.value,
+        //   });
+        // }
+
+        if (option.document_type && option.document_type.length > 0) {
+          option.document_type.forEach((type) => {
+            if (!localDocumentTypes.some((local_type) => local_type.value === type.value)) {
+              localDocumentTypes.push({
+                label: type.label,
+                value: type.value,
+              });
+            }
           });
         }
 
         //[{label:"Example", value:"example"}]
         if (option.document_category && option.document_category.length > 0) {
           option.document_category.forEach((cat) => {
-            if (!localDocumentCategory.some((local_cat) => local_cat.value === cat.value)) {
-              localDocumentCategory.push({
+            if (!localDocumentCategories.some((local_cat) => local_cat.value === cat.value)) {
+              localDocumentCategories.push({
                 label: cat.label,
                 value: cat.value,
               });
@@ -61,8 +72,8 @@
 
         if (option.product_family && option.product_family.length > 0) {
           option.product_family.forEach((family) => {
-            if (!localProductFamily.some((local_family) => local_family.value === family.value)) {
-              localProductFamily.push({
+            if (!localProductFamilies.some((local_family) => local_family.value === family.value)) {
+              localProductFamilies.push({
                 label: family.label,
                 value: family.value,
               });
@@ -72,8 +83,8 @@
 
         if (option.product_type && option.product_type.length > 0) {
           option.product_type.forEach((type) => {
-            if (!localProductType.some((local_type) => local_type.value === type.value)) {
-              localProductType.push({
+            if (!localProductTypes.some((local_type) => local_type.value === type.value)) {
+              localProductTypes.push({
                 label: type.label,
                 value: type.value,
               });
@@ -82,15 +93,15 @@
         }
       });
 
-      document_category = localDocumentCategory;
-      document_type = localDocumentType;
-      product_family = localProductFamily;
-      product_type = localProductType;
+      document_categories = localDocumentCategories;
+      document_types = localDocumentTypes;
+      product_families = localProductFamilies;
+      product_types = localProductTypes;
 
-      console.log(localDocumentCategory, 'localDocumentCategory');
-      console.log(localDocumentType, 'localDocumentType');
-      console.log(localProductFamily, 'localProductFamily');
-      console.log(localProductType, 'localProductType');
+      // console.log(localDocumentCategories, 'localDocumentCategories');
+      // console.log(localDocumentTypes, 'localDocumentTypes');
+      // console.log(localProductFamilies, 'localProductFamilies');
+      // console.log(localProductTypes, 'localProductTypes');
     }
   };
 
@@ -106,24 +117,42 @@
       const values = params.getAll(name).flatMap((value) => value.split(','));
 
       if (values.length) {
-        if (element.tagName === 'SELECT') {
-          const select = element as HTMLSelectElement;
-          Array.from(select.options).forEach((option) => {
-            option.selected = values.includes(option.value);
-          });
-        } else if (
-          element.tagName === 'INPUT' &&
-          (element as HTMLInputElement).type === 'checkbox'
-        ) {
-          const checkbox = element as HTMLInputElement;
-          checkbox.checked = values.includes(checkbox.value);
-        } else if (element.tagName === 'INPUT' && (element as HTMLInputElement).type === 'radio') {
-          const radio = element as HTMLInputElement;
-          radio.checked = values.includes(radio.value);
-        } else {
-          const input = element as HTMLInputElement;
-          input.value = values.join(',');
+        const value = values[0];
+
+        if (name === 'document_type') {
+          active_document_type = value;
         }
+
+        if (name === 'product_family') {
+          active_product_family = value;
+        }
+
+        if (name === 'product_type') {
+          active_product_type = value;
+        }
+
+        if (name === 'document_category') {
+          active_document_category = value;
+        }
+
+        // if (element.tagName === 'SELECT') {
+        //   const select = element as HTMLSelectElement;
+        //   Array.from(select.options).forEach((option) => {
+        //     option.selected = values.includes(option.value);
+        //   });
+        // } else if (
+        //   element.tagName === 'INPUT' &&
+        //   (element as HTMLInputElement).type === 'checkbox'
+        // ) {
+        //   const checkbox = element as HTMLInputElement;
+        //   checkbox.checked = values.includes(checkbox.value);
+        // } else if (element.tagName === 'INPUT' && (element as HTMLInputElement).type === 'radio') {
+        //   const radio = element as HTMLInputElement;
+        //   radio.checked = values.includes(radio.value);
+        // } else {
+        //   const input = element as HTMLInputElement;
+        //   input.value = values.join(',');
+        // }
       }
     });
   };
@@ -136,7 +165,7 @@
 
     const formValues = Array.from(formElement.elements).reduce(
       (accumulator: Accumulator | {}, element: Element) => {
-        console.log(accumulator, 'accum');
+        // console.log(accumulator, 'accum');
 
         const name = element.getAttribute('name') as keyof Accumulator;
         if (!name) return accumulator;
@@ -158,12 +187,12 @@
 
       const values = (formValues as Accumulator)[key];
 
-      console.log(values, 'values');
+      // console.log(values, 'values');
 
       if (resetForm || !values.length || (values.length === 1 && !values[0])) {
         url.searchParams.delete(name);
       } else if (values.length === 1) {
-        console.log('in Here');
+        // console.log('in Here');
         url.searchParams.set(name, values[0]);
       } else {
         url.searchParams.set(name, values.join(','));
@@ -187,10 +216,12 @@
     const cached = localStorage.getItem(CACHE_KEY);
     if (cached) {
       const { data, timestamp } = JSON.parse(cached);
-      if (now - timestamp < CACHE_TTL || !checkTime) {
+      if (now - timestamp < CACHE_TTL_5_MINUTES || !checkTime) {
         console.log('Using cached filter options from localStorage', data);
 
-        return parseFilterOptions(data?.data?.HUBDB?.support_portal_collection?.items);
+        const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
+        allFilterOptions = filterOptions;
+        return parseFilterOptions(filterOptions);
       }
     }
   };
@@ -221,8 +252,17 @@
         'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options'
       );
       const data = await response.json();
-      saveOptionsInLocalStorage(data);
-      return parseFilterOptions(data?.data?.HUBDB?.support_portal_collection?.items);
+
+      if (!data?.error) {
+        saveOptionsInLocalStorage(data);
+        const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
+        allFilterOptions = filterOptions;
+        return parseFilterOptions(filterOptions);
+      }
+
+      if (data?.error) {
+        useCachedOptions(false);
+      }
     } catch (error) {
       useCachedOptions(false);
       console.warn('Failed to fetch filter options:', error);
@@ -240,6 +280,112 @@
     const formData = new FormData(formElement);
     onFormSubmit(formData);
   };
+
+  const onSelectInputChange = (name: keyof Accumulator, value: string) => {
+    // setAvailableFiltersBasedOnCurrentSelection(name, value);
+  };
+
+  const clearActiveFilters = () => {
+    active_document_type = 'none';
+    active_product_family = 'none';
+    active_product_type = 'none';
+    active_document_category = 'none';
+  };
+  // const setAvailableFiltersBasedOnCurrentSelection = (name: keyof Accumulator, value: string) => {
+  //   const options = filteredFilterOptions?.length > 0 ? filteredFilterOptions : allFilterOptions;
+
+  //   const availableOptions = options.filter((hubDbFilterRow: SupportPortalRowForFilter) => {
+  //     if (name === 'document_type') {
+  //       return hubDbFilterRow.document_type?.some((type) => {
+  //         return type.value === value;
+  //       });
+  //     }
+
+  //     if (name === 'document_category') {
+  //       return hubDbFilterRow.document_category?.some((category) => {
+  //         return category.value === value;
+  //       });
+  //     }
+
+  //     if (name === 'product_family') {
+  //       return hubDbFilterRow.product_family?.some((family) => {
+  //         return family.value === value;
+  //       });
+  //     }
+  //     if (name === 'product_type') {
+  //       return hubDbFilterRow.product_type?.some((type) => {
+  //         return type.value === value;
+  //       });
+  //     }
+
+  //     return false;
+  //   });
+
+  const setAvailableFiltersBasedOnCurrentSelection = (
+    active_document_category: string,
+    active_document_type: string,
+    active_product_family: string,
+    active_product_type: string
+  ) => {
+    // If no filters are active, show all options
+    if (
+      !active_document_category &&
+      !active_document_type &&
+      !active_product_family &&
+      !active_product_type
+    ) {
+      parseFilterOptions(allFilterOptions);
+      return;
+    }
+
+    // Filter the options based on current active selections
+    const filteredOptions = allFilterOptions.filter((option) => {
+      let matches = true;
+
+      // Check document category match
+      if (active_document_category && active_document_category !== 'none') {
+        matches =
+          matches &&
+          option.document_category?.some((cat) => cat.value === active_document_category);
+      }
+
+      // Check document type match
+      if (active_document_type && active_document_type !== 'none') {
+        matches =
+          matches && option.document_type?.some((type) => type.value === active_document_type);
+      }
+
+      // Check product family match
+      if (active_product_family && active_product_family !== 'none') {
+        matches =
+          matches &&
+          option.product_family?.some((family) => family.value === active_product_family);
+      }
+
+      // Check product type match
+      if (active_product_type && active_product_type !== 'none') {
+        matches =
+          matches && option.product_type?.some((type) => type.value === active_product_type);
+      }
+
+      return matches;
+    });
+
+    // Update filteredFilterOptions for potential future use
+    filteredFilterOptions = filteredOptions;
+
+    // Parse the filtered options to update available filter choices
+    parseFilterOptions(filteredOptions);
+  };
+
+  $effect(() => {
+    setAvailableFiltersBasedOnCurrentSelection(
+      active_document_category,
+      active_document_type,
+      active_product_family,
+      active_product_type
+    );
+  });
 
   onMount(() => {
     setFormValuesFromUrl();
@@ -274,14 +420,26 @@
   </div>
 {/snippet}
 
-{#snippet dropDownSelection(title: string, options: LabelValue[], name: keyof Accumulator)}
+{#snippet dropDownSelection(
+  title: string,
+  options: LabelValue[],
+  name: keyof Accumulator,
+  value: string,
+  onChange: any
+)}
   <div class="mt-md gap-sm flex flex-col">
     <label for={name} class="font-arial text-xl font-black">{title}</label>
     <select
       id={name}
       {name}
       placeholder="Select"
-      class="p-2xl text-red p-sm rounded-lg border border-slate-200"
+      disabled={options?.length === 0}
+      class="p-2xl text-red p-sm rounded-lg border border-slate-200 disabled:opacity-50"
+      {value}
+      onchange={(e) => {
+        onChange(e.currentTarget.value);
+        onSelectInputChange(name, e.currentTarget.value);
+      }}
     >
       <option value="none" selected disabled hidden>Select</option>
       {#each options as option}
@@ -310,11 +468,57 @@
   </div>
   <form bind:this={formElement} onsubmit={handleFormSubmit}>
     {@render searchInput()}
-    {@render dropDownSelection('Product Family', product_family, 'product_family')}
-    {@render dropDownSelection('Product Type', product_type, 'product_type')}
-    {@render dropDownSelection('Document Category', document_category, 'document_category')}
-    {@render dropDownSelection('Document Type', document_type, 'document_type')}
+    {@render dropDownSelection(
+      'Product Family',
+      product_families,
+      'product_family',
+      active_product_family,
+      (value: any) => {
+        active_product_family = value;
+      }
+    )}
+    {@render dropDownSelection(
+      'Product Type',
+      product_types,
+      'product_type',
+      active_product_type,
+      (value: any) => {
+        active_product_type = value;
+      }
+    )}
+    {@render dropDownSelection(
+      'Document Category',
+      document_categories,
+      'document_category',
+      active_document_category,
+      (value: any) => {
+        active_document_category = value;
+      }
+    )}
+    {@render dropDownSelection(
+      'Document Type',
+      document_types,
+      'document_type',
+      active_document_type,
+      (value: any) => {
+        active_document_type = value;
+      }
+    )}
 
-    <button type="submit" class="bg-imperial-red p-sm rounded-lg text-white"> Submit </button>
+    <div class="gap-sm mt-lg flex">
+      <button
+        type="button"
+        class="border-imperial-red text-default! p-sm outlined font-arial rounded-lg border hover:bg-red-50"
+        onclick={() => {
+          clearActiveFilters();
+          setFormValuesToParams(true);
+        }}
+      >
+        Reset
+      </button>
+      <button type="submit" class="bg-imperial-red p-sm font-arial rounded-lg text-white">
+        Apply
+      </button>
+    </div>
   </form>
 </div>
