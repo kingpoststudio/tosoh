@@ -134,25 +134,6 @@
         if (name === 'document_category') {
           active_document_category = value;
         }
-
-        // if (element.tagName === 'SELECT') {
-        //   const select = element as HTMLSelectElement;
-        //   Array.from(select.options).forEach((option) => {
-        //     option.selected = values.includes(option.value);
-        //   });
-        // } else if (
-        //   element.tagName === 'INPUT' &&
-        //   (element as HTMLInputElement).type === 'checkbox'
-        // ) {
-        //   const checkbox = element as HTMLInputElement;
-        //   checkbox.checked = values.includes(checkbox.value);
-        // } else if (element.tagName === 'INPUT' && (element as HTMLInputElement).type === 'radio') {
-        //   const radio = element as HTMLInputElement;
-        //   radio.checked = values.includes(radio.value);
-        // } else {
-        //   const input = element as HTMLInputElement;
-        //   input.value = values.join(',');
-        // }
       }
     });
   };
@@ -428,24 +409,41 @@
   onChange: any
 )}
   <div class="mt-md gap-sm flex flex-col">
-    <label for={name} class="font-arial text-xl font-black">{title}</label>
-    <select
-      id={name}
-      {name}
-      placeholder="Select"
-      disabled={options?.length === 0}
-      class="p-2xl text-red p-sm rounded-lg border border-slate-200 disabled:opacity-50"
-      {value}
-      onchange={(e) => {
-        onChange(e.currentTarget.value);
-        onSelectInputChange(name, e.currentTarget.value);
-      }}
-    >
-      <option value="none" selected disabled hidden>Select</option>
-      {#each options as option}
-        <option value={option.value}>{option.label}</option>
-      {/each}
-    </select>
+    <div class="mt-md gap-sm flex flex-col">
+      <label for={name} class="font-arial text-xl font-black">{title}</label>
+      <div class="relative">
+        <select
+          id={name}
+          {name}
+          disabled={options?.length === 0}
+          class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+          {value}
+          onchange={(e) => {
+            onChange(e.currentTarget.value);
+            onSelectInputChange(name, e.currentTarget.value);
+          }}
+        >
+          <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
+          {#each options as option}
+            <option value={option.value} class="text-default">{option.label}</option>
+          {/each}
+        </select>
+        <!-- Custom dropdown arrow -->
+        <div
+          class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
+        >
+          <svg
+            class="text-imperial-red h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
+        </div>
+      </div>
+    </div>
   </div>{/snippet}
 
 <div class={`wrapper bg-ghost-white p-md rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
@@ -508,6 +506,7 @@
     <div class="gap-sm mt-lg flex">
       <button
         type="button"
+        disabled={isLoading}
         class="border-imperial-red text-default! p-sm outlined font-arial rounded-lg border hover:bg-red-50"
         onclick={() => {
           clearActiveFilters();
@@ -516,7 +515,11 @@
       >
         Reset
       </button>
-      <button type="submit" class="bg-imperial-red p-sm font-arial rounded-lg text-white">
+      <button
+        type="submit"
+        class="bg-imperial-red p-sm font-arial rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
+        disabled={isLoading}
+      >
         Apply
       </button>
     </div>
