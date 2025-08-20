@@ -16,7 +16,6 @@
   const CACHE_TTL_5_MINUTES = 5 * 60 * 1000; // 5 minutes
 
   let allFilterOptions: SupportPortalRowForFilter[] = $state([]);
-  let filteredFilterOptions: SupportPortalRowForFilter[] = $state([]);
   let document_types: LabelValue[] = $state([]);
   let product_families: LabelValue[] = $state([]);
   let product_types: LabelValue[] = $state([]);
