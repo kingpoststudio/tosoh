@@ -7,12 +7,13 @@
 
 <script>
   import SupportPortalFilter from './SupportPortalFilter.svelte';
+  import SupportPortalControllers from './SupportPortalControllers.svelte';
   import { onMount } from 'svelte';
 
   const params = new URLSearchParams(window.location.href);
 
   const formValues = {
-    items_per_page: parseInt(params?.get('items_per_page')) || 10,
+    limit: parseInt(params?.get('limit')) || 12,
     pagination: parseInt(params?.get('pagination')) || 1,
     product_family: params?.get('product_family') || '',
     product_type: params?.get('product_type') || '',
@@ -37,9 +38,8 @@
   };
 
   const onFormSubmit = (filterData) => {
-    formValues.items_per_page = 12;
+    formValues.limit = 12;
     formValues.pagination = 1;
-
     formValues.product_family = filterData?.get('product_family') || '';
     formValues.product_type = filterData?.get('product_type') || '';
     formValues.document_category = filterData?.get('document_category') || '';
@@ -54,8 +54,11 @@
   });
 </script>
 
-<div class="wrapper mt-lg flex">
+<div class="mt-lg p-md flex w-full justify-around">
   <SupportPortalFilter {onFormSubmit}></SupportPortalFilter>
+  <div class="w-full">
+    <SupportPortalControllers></SupportPortalControllers>
+  </div>
 </div>
 
 <!-- 

@@ -443,7 +443,8 @@
         </div>
       </div>
     </div>
-  </div>{/snippet}
+  </div>
+{/snippet}
 
 <div class={`wrapper bg-ghost-white p-md rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
   <div class="gap-5xl flex items-center">
