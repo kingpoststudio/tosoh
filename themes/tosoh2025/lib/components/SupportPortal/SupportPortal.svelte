@@ -21,10 +21,6 @@
     search: params?.get('search') || '',
   };
 
-  const createQueryString = (formValues) => {
-    return new URLSearchParams(formValues).toString();
-  };
-
   const fetchData = async () => {
     const response = await fetch(
       `https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-collection`,

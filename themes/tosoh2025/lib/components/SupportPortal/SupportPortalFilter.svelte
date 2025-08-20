@@ -6,23 +6,31 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { SupportPortalRowForFilter } from '../../../types/hubdb';
-  let formElement = $state(null);
+  import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
+
+  type Accumulator = {
+    product_family: string[];
+    product_type: string[];
+    document_category: string[];
+    document_type: string[];
+  };
+
+  let formElement: HTMLFormElement | null = $state(null);
   let { onFormSubmit } = $props();
   let isLoading = $state(false);
   const CACHE_KEY = 'support-portal-filter-options';
   const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
-  let documentType = $state([]);
-  let productFamily = $state([]);
-  let productType = $state([]);
-  let documentCategory = $state([]);
+  let document_type: LabelValue[] = $state([]);
+  let product_family: LabelValue[] = $state([]);
+  let product_type: LabelValue[] = $state([]);
+  let document_category: LabelValue[] = $state([]);
 
   const parseFilterOptions = (filterOptions: SupportPortalRowForFilter[]) => {
-    let localDocumentCategory = [];
-    let localDocumentType = [];
-    let localProductFamily = [];
-    let localProductType = [];
+    let localDocumentCategory: LabelValue[] = [];
+    let localDocumentType: LabelValue[] = [];
+    let localProductFamily: LabelValue[] = [];
+    let localProductType: LabelValue[] = [];
 
     if (filterOptions && filterOptions?.length > 0) {
       console.log(filterOptions, 'filterOptions');
@@ -74,10 +82,10 @@
         }
       });
 
-      documentCategory = localDocumentCategory;
-      documentType = localDocumentType;
-      productFamily = localProductFamily;
-      productType = localProductType;
+      document_category = localDocumentCategory;
+      document_type = localDocumentType;
+      product_family = localProductFamily;
+      product_type = localProductType;
 
       console.log(localDocumentCategory, 'localDocumentCategory');
       console.log(localDocumentType, 'localDocumentType');
@@ -89,9 +97,8 @@
   const setFormValuesFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
 
-    for (const [key, value] of params) {
-      console.log(key, value);
-    }
+    if (!formElement) return;
+
     Array.from(formElement.elements).forEach((element) => {
       const name = element.getAttribute('name');
       if (!name) return;
@@ -100,18 +107,22 @@
 
       if (values.length) {
         if (element.tagName === 'SELECT') {
-          const select = element;
+          const select = element as HTMLSelectElement;
           Array.from(select.options).forEach((option) => {
             option.selected = values.includes(option.value);
           });
-        } else if (element.tagName === 'INPUT' && element.type === 'checkbox') {
-          const checkbox = element;
+        } else if (
+          element.tagName === 'INPUT' &&
+          (element as HTMLInputElement).type === 'checkbox'
+        ) {
+          const checkbox = element as HTMLInputElement;
           checkbox.checked = values.includes(checkbox.value);
-        } else if (element.tagName === 'INPUT' && element.type === 'radio') {
-          const radio = element;
+        } else if (element.tagName === 'INPUT' && (element as HTMLInputElement).type === 'radio') {
+          const radio = element as HTMLInputElement;
           radio.checked = values.includes(radio.value);
         } else {
-          element.value = values.join(',');
+          const input = element as HTMLInputElement;
+          input.value = values.join(',');
         }
       }
     });
@@ -123,25 +134,36 @@
     const formData = new FormData(formElement);
     const url = new URL(window.location.href);
 
-    const formValues = Array.from(formElement.elements).reduce((acc, element) => {
-      const name = element.getAttribute('name');
-      if (!name) return acc;
+    const formValues = Array.from(formElement.elements).reduce(
+      (accumulator: Accumulator | {}, element: Element) => {
+        console.log(accumulator, 'accum');
 
-      if (!acc[name]) {
-        acc[name] = Array.from(formData.getAll(name));
-      }
+        const name = element.getAttribute('name') as keyof Accumulator;
+        if (!name) return accumulator;
 
-      acc[name] = acc[name]?.filter((value) => value) || [];
+        if (!(name in accumulator)) {
+          (accumulator as any)[name] = Array.from(formData.getAll(name)) as string[];
+        }
 
-      return acc;
-    }, {});
+        (accumulator as Accumulator)[name] =
+          (accumulator as Accumulator)[name]?.filter((value) => value) || [];
+
+        return accumulator;
+      },
+      {}
+    );
 
     Object.keys(formValues).forEach((name) => {
-      const values = formValues[name];
+      const key = name as keyof Accumulator;
+
+      const values = (formValues as Accumulator)[key];
+
+      console.log(values, 'values');
 
       if (resetForm || !values.length || (values.length === 1 && !values[0])) {
         url.searchParams.delete(name);
       } else if (values.length === 1) {
+        console.log('in Here');
         url.searchParams.set(name, values[0]);
       } else {
         url.searchParams.set(name, values.join(','));
@@ -152,22 +174,42 @@
       formElement.reset();
     }
 
-    window.history.pushState({ filterGroupId: 'support-portal-filter', params: formValues }, '');
+    window.history.pushState(
+      { filterGroupId: 'support-portal-filter', params: formValues },
+      '',
+      url.toString()
+    );
+  };
+
+  const useCachedOptions = (checkTime: boolean) => {
+    const now = Date.now();
+
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      const { data, timestamp } = JSON.parse(cached);
+      if (now - timestamp < CACHE_TTL || !checkTime) {
+        console.log('Using cached filter options from localStorage', data);
+
+        return parseFilterOptions(data?.data?.HUBDB?.support_portal_collection?.items);
+      }
+    }
+  };
+
+  const saveOptionsInLocalStorage = (data: any) => {
+    const now = Date.now();
+
+    localStorage.setItem(
+      CACHE_KEY,
+      JSON.stringify({
+        data,
+        timestamp: now,
+      })
+    );
   };
 
   const getFilterOptions = async () => {
-    const now = Date.now();
-
     try {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) {
-        const { data, timestamp } = JSON.parse(cached);
-        if (now - timestamp < CACHE_TTL) {
-          console.log('Using cached filter options from localStorage', data);
-
-          return parseFilterOptions(data?.data?.HUBDB?.support_portal_collection?.items);
-        }
-      }
+      useCachedOptions(true);
     } catch (error) {
       console.warn('Failed to read from cache:', error);
     }
@@ -179,26 +221,22 @@
         'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options'
       );
       const data = await response.json();
-
-      localStorage.setItem(
-        CACHE_KEY,
-        JSON.stringify({
-          data,
-          timestamp: now,
-        })
-      );
-
+      saveOptionsInLocalStorage(data);
       return parseFilterOptions(data?.data?.HUBDB?.support_portal_collection?.items);
     } catch (error) {
+      useCachedOptions(false);
       console.warn('Failed to fetch filter options:', error);
     } finally {
       isLoading = false;
     }
   };
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = (event: Event) => {
     event.preventDefault();
     setFormValuesToParams(false);
+
+    if (!formElement) return;
+
     const formData = new FormData(formElement);
     onFormSubmit(formData);
   };
@@ -236,7 +274,7 @@
   </div>
 {/snippet}
 
-{#snippet dropDownSelection(title, options, name)}
+{#snippet dropDownSelection(title: string, options: LabelValue[], name: keyof Accumulator)}
   <div class="mt-md gap-sm flex flex-col">
     <label for={name} class="font-arial text-xl font-black">{title}</label>
     <select
@@ -272,22 +310,10 @@
   </div>
   <form bind:this={formElement} onsubmit={handleFormSubmit}>
     {@render searchInput()}
-    {@render dropDownSelection(
-      'Product Family',
-      [
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-      ],
-      'product_family'
-    )}
-    {@render dropDownSelection(
-      'Product type',
-      [
-        { value: '1', label: '1' },
-        { value: '2', label: '2' },
-      ],
-      'product_type'
-    )}
+    {@render dropDownSelection('Product Family', product_family, 'product_family')}
+    {@render dropDownSelection('Product Type', product_type, 'product_type')}
+    {@render dropDownSelection('Document Category', document_category, 'document_category')}
+    {@render dropDownSelection('Document Type', document_type, 'document_type')}
 
     <button type="submit" class="bg-imperial-red p-sm rounded-lg text-white"> Submit </button>
   </form>
