@@ -1,15 +1,10 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
-
-  type Accumulator = {
-    product_family: string[];
-    product_type: string[];
-    document_category: string[];
-    document_type: string[];
-  };
+  import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
 
   let formElement: HTMLFormElement | null = $state(null);
+  let formManager: FormManagerInstance | null = $state(null);
   let { onFormSubmit } = $props();
   let isLoading = $state(false);
   const CACHE_KEY = 'support-portal-filter-options';
@@ -36,16 +31,6 @@
       console.log(filterOptions, 'filterOptions');
 
       filterOptions.forEach((option) => {
-        // if (
-        //   option.document_type &&
-        //   !localDocumentTypes.some((type) => type.value === option.document_type.value)
-        // ) {
-        //   localDocumentTypes.push({
-        //     label: option.document_type.label,
-        //     value: option.document_type.value,
-        //   });
-        // }
-
         if (option.document_type && option.document_type.length > 0) {
           option.document_type.forEach((type) => {
             if (!localDocumentTypes.some((local_type) => local_type.value === type.value)) {
@@ -57,7 +42,6 @@
           });
         }
 
-        //[{label:"Example", value:"example"}]
         if (option.document_category && option.document_category.length > 0) {
           option.document_category.forEach((cat) => {
             if (!localDocumentCategories.some((local_cat) => local_cat.value === cat.value)) {
@@ -96,98 +80,7 @@
       document_types = localDocumentTypes;
       product_families = localProductFamilies;
       product_types = localProductTypes;
-
-      // console.log(localDocumentCategories, 'localDocumentCategories');
-      // console.log(localDocumentTypes, 'localDocumentTypes');
-      // console.log(localProductFamilies, 'localProductFamilies');
-      // console.log(localProductTypes, 'localProductTypes');
     }
-  };
-
-  const setFormValuesFromUrl = () => {
-    const params = new URLSearchParams(window.location.search);
-
-    if (!formElement) return;
-
-    Array.from(formElement.elements).forEach((element) => {
-      const name = element.getAttribute('name');
-      if (!name) return;
-
-      const values = params.getAll(name).flatMap((value) => value.split(','));
-
-      if (values.length) {
-        const value = values[0];
-
-        if (name === 'document_type') {
-          active_document_type = value;
-        }
-
-        if (name === 'product_family') {
-          active_product_family = value;
-        }
-
-        if (name === 'product_type') {
-          active_product_type = value;
-        }
-
-        if (name === 'document_category') {
-          active_document_category = value;
-        }
-      }
-    });
-  };
-
-  const setFormValuesToParams = (resetForm = false) => {
-    if (!formElement) return;
-
-    const formData = new FormData(formElement);
-    const url = new URL(window.location.href);
-
-    const formValues = Array.from(formElement.elements).reduce(
-      (accumulator: Accumulator | {}, element: Element) => {
-        // console.log(accumulator, 'accum');
-
-        const name = element.getAttribute('name') as keyof Accumulator;
-        if (!name) return accumulator;
-
-        if (!(name in accumulator)) {
-          (accumulator as any)[name] = Array.from(formData.getAll(name)) as string[];
-        }
-
-        (accumulator as Accumulator)[name] =
-          (accumulator as Accumulator)[name]?.filter((value) => value) || [];
-
-        return accumulator;
-      },
-      {}
-    );
-
-    Object.keys(formValues).forEach((name) => {
-      const key = name as keyof Accumulator;
-
-      const values = (formValues as Accumulator)[key];
-
-      // console.log(values, 'values');
-
-      if (resetForm || !values.length || (values.length === 1 && !values[0])) {
-        url.searchParams.delete(name);
-      } else if (values.length === 1) {
-        // console.log('in Here');
-        url.searchParams.set(name, values[0]);
-      } else {
-        url.searchParams.set(name, values.join(','));
-      }
-    });
-
-    if (resetForm) {
-      formElement.reset();
-    }
-
-    window.history.pushState(
-      { filterGroupId: 'support-portal-filter', params: formValues },
-      '',
-      url.toString()
-    );
   };
 
   const useCachedOptions = (checkTime: boolean) => {
@@ -253,16 +146,15 @@
 
   const handleFormSubmit = (event: Event) => {
     event.preventDefault();
-    setFormValuesToParams(false);
+
+    if (formManager) {
+      formManager.setFormValuesToParams(false);
+    }
 
     if (!formElement) return;
 
     const formData = new FormData(formElement);
     onFormSubmit(formData);
-  };
-
-  const onSelectInputChange = (name: keyof Accumulator, value: string) => {
-    // setAvailableFiltersBasedOnCurrentSelection(name, value);
   };
 
   const clearActiveFilters = () => {
@@ -271,35 +163,6 @@
     active_product_type = 'none';
     active_document_category = 'none';
   };
-  // const setAvailableFiltersBasedOnCurrentSelection = (name: keyof Accumulator, value: string) => {
-  //   const options = filteredFilterOptions?.length > 0 ? filteredFilterOptions : allFilterOptions;
-
-  //   const availableOptions = options.filter((hubDbFilterRow: SupportPortalRowForFilter) => {
-  //     if (name === 'document_type') {
-  //       return hubDbFilterRow.document_type?.some((type) => {
-  //         return type.value === value;
-  //       });
-  //     }
-
-  //     if (name === 'document_category') {
-  //       return hubDbFilterRow.document_category?.some((category) => {
-  //         return category.value === value;
-  //       });
-  //     }
-
-  //     if (name === 'product_family') {
-  //       return hubDbFilterRow.product_family?.some((family) => {
-  //         return family.value === value;
-  //       });
-  //     }
-  //     if (name === 'product_type') {
-  //       return hubDbFilterRow.product_type?.some((type) => {
-  //         return type.value === value;
-  //       });
-  //     }
-
-  //     return false;
-  //   });
 
   const setAvailableFiltersBasedOnCurrentSelection = (
     active_document_category: string,
@@ -307,7 +170,6 @@
     active_product_family: string,
     active_product_type: string
   ) => {
-    // If no filters are active, show all options
     if (
       !active_document_category &&
       !active_document_type &&
@@ -318,31 +180,26 @@
       return;
     }
 
-    // Filter the options based on current active selections
     const filteredOptions = allFilterOptions.filter((option) => {
       let matches = true;
 
-      // Check document category match
       if (active_document_category && active_document_category !== 'none') {
         matches =
           matches &&
           option.document_category?.some((cat) => cat.value === active_document_category);
       }
 
-      // Check document type match
       if (active_document_type && active_document_type !== 'none') {
         matches =
           matches && option.document_type?.some((type) => type.value === active_document_type);
       }
 
-      // Check product family match
       if (active_product_family && active_product_family !== 'none') {
         matches =
           matches &&
           option.product_family?.some((family) => family.value === active_product_family);
       }
 
-      // Check product type match
       if (active_product_type && active_product_type !== 'none') {
         matches =
           matches && option.product_type?.some((type) => type.value === active_product_type);
@@ -351,11 +208,22 @@
       return matches;
     });
 
-    // Update filteredFilterOptions for potential future use
-    filteredFilterOptions = filteredOptions;
-
-    // Parse the filtered options to update available filter choices
     parseFilterOptions(filteredOptions);
+  };
+
+  const initiateFormManager = () => {
+    if (formElement && !formManager) {
+      formManager = createFormManager(formElement, {
+        onSubmit: (e) => {
+          if (formElement) {
+            handleFormSubmit(e);
+          }
+        },
+        onReset: () => {
+          clearActiveFilters();
+        },
+      });
+    }
   };
 
   $effect(() => {
@@ -367,9 +235,20 @@
     );
   });
 
+  $effect(() => {
+    if (allFilterOptions && allFilterOptions?.length > 0) {
+      initiateFormManager();
+    }
+  });
+
   onMount(() => {
-    setFormValuesFromUrl();
     getFilterOptions();
+  });
+
+  onDestroy(() => {
+    if (formManager) {
+      formManager.destroy();
+    }
   });
 </script>
 
@@ -400,52 +279,6 @@
   </div>
 {/snippet}
 
-{#snippet dropDownSelection(
-  title: string,
-  options: LabelValue[],
-  name: keyof Accumulator,
-  value: string,
-  onChange: any
-)}
-  <div class="mt-md gap-sm flex flex-col">
-    <div class="mt-md gap-sm flex flex-col">
-      <label for={name} class="font-arial text-xl font-black">{title}</label>
-      <div class="relative">
-        <select
-          id={name}
-          {name}
-          disabled={options?.length === 0}
-          class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-          {value}
-          onchange={(e) => {
-            onChange(e.currentTarget.value);
-            onSelectInputChange(name, e.currentTarget.value);
-          }}
-        >
-          <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
-          {#each options as option}
-            <option value={option.value} class="text-default">{option.label}</option>
-          {/each}
-        </select>
-        <!-- Custom dropdown arrow -->
-        <div
-          class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
-        >
-          <svg
-            class="text-imperial-red h-4 w-4"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 9l-7 7-7-7"
-            ></path>
-          </svg>
-        </div>
-      </div>
-    </div>
-  </div>
-{/snippet}
-
 <div class={`wrapper bg-ghost-white p-md rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
   <div class="gap-5xl flex items-center">
     <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
@@ -464,60 +297,172 @@
       </svg>
     </div>
   </div>
-  <form bind:this={formElement} onsubmit={handleFormSubmit}>
+
+  <form bind:this={formElement}>
     {@render searchInput()}
-    {@render dropDownSelection(
-      'Product Family',
-      product_families,
-      'product_family',
-      active_product_family,
-      (value: any) => {
-        active_product_family = value;
-      }
-    )}
-    {@render dropDownSelection(
-      'Product Type',
-      product_types,
-      'product_type',
-      active_product_type,
-      (value: any) => {
-        active_product_type = value;
-      }
-    )}
-    {@render dropDownSelection(
-      'Document Category',
-      document_categories,
-      'document_category',
-      active_document_category,
-      (value: any) => {
-        active_document_category = value;
-      }
-    )}
-    {@render dropDownSelection(
-      'Document Type',
-      document_types,
-      'document_type',
-      active_document_type,
-      (value: any) => {
-        active_document_type = value;
-      }
-    )}
+
+    <div class="mt-md gap-sm flex flex-col">
+      <div class="mt-md gap-sm flex flex-col">
+        <label for={'product_family'} class=" text-xl font-black">Product Family</label>
+        <div class="relative">
+          <select
+            id={'product_family'}
+            name="product_family"
+            disabled={product_families?.length === 0}
+            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+            bind:value={active_product_family}
+          >
+            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
+            {#each product_families as option}
+              <option value={option.value} class="text-default">{option.label}</option>
+            {/each}
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
+          >
+            <svg
+              class="text-imperial-red h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-md gap-sm flex flex-col">
+      <div class="mt-md gap-sm flex flex-col">
+        <label for={'product_family'} class=" text-xl font-black">Product Type</label>
+        <div class="relative">
+          <select
+            id={'product_type'}
+            name="product_type"
+            disabled={product_types?.length === 0}
+            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+            bind:value={active_product_type}
+          >
+            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
+            {#each product_types as option}
+              <option value={option.value} class="text-default">{option.label}</option>
+            {/each}
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
+          >
+            <svg
+              class="text-imperial-red h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-md gap-sm flex flex-col">
+      <div class="mt-md gap-sm flex flex-col">
+        <label for={'document_category'} class=" text-xl font-black">Document Category</label>
+        <div class="relative">
+          <select
+            id={'document_category'}
+            name="document_category"
+            disabled={document_categories?.length === 0}
+            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+            bind:value={active_document_category}
+          >
+            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
+            {#each document_categories as option}
+              <option value={option.value} class="text-default">{option.label}</option>
+            {/each}
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
+          >
+            <svg
+              class="text-imperial-red h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-md gap-sm flex flex-col">
+      <div class="mt-md gap-sm flex flex-col">
+        <label for={'document_type'} class=" text-xl font-black">Document Type</label>
+        <div class="relative">
+          <select
+            id={'document_type'}
+            name="document_type"
+            disabled={document_types?.length === 0}
+            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+            bind:value={active_document_type}
+          >
+            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
+            {#each document_types as option}
+              <option value={option.value} class="text-default">{option.label}</option>
+            {/each}
+          </select>
+          <div
+            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
+          >
+            <svg
+              class="text-imperial-red h-4 w-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="4"
+                d="M19 9l-7 7-7-7"
+              ></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <div class="gap-sm mt-lg flex">
       <button
         type="button"
         disabled={isLoading}
-        class="border-imperial-red text-default! p-sm outlined font-arial rounded-lg border hover:bg-red-50"
+        class="border-imperial-red text-default! p-sm outlined rounded-lg border hover:bg-red-50"
         onclick={() => {
-          clearActiveFilters();
-          setFormValuesToParams(true);
+          if (formManager) {
+            formManager.resetAction();
+          }
         }}
       >
         Reset
       </button>
       <button
         type="submit"
-        class="bg-imperial-red p-sm font-arial rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
+        class="bg-imperial-red p-sm rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
         disabled={isLoading}
       >
         Apply

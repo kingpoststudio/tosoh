@@ -2,17 +2,24 @@
   const options = [6, 12, 18];
   let pagination = $state(1);
   let cardsPerPage = $state(6);
-  let { totalItems = 100 } = $props();
+  let { totalItems = 100, onFormSubmit } = $props();
+
   let numberOfPages = $derived(Math.ceil(totalItems / cardsPerPage));
 
   let pagesArray = $derived(Array.from({ length: numberOfPages }, (_, i) => i + 1));
 
-  //1. create the items per page selector
-  //2. create the pagination selector
+  //2. create utility to set form fields based on name when parsed frmo url
+  //3. set url when values change
+
+  const handleFormSubmit = (event: Event) => {
+    event.preventDefault();
+
+    // setFormVa;
+  };
 </script>
 
 {#snippet itemsPerPage()}
-  <div class="gap-sm font-arial flex items-center text-[#4E4F54]">
+  <div class="gap-sm flex items-center text-[#4E4F54]">
     <p>Items per page:</p>
     <select name="items_per_page" class="bg-ghost-white p-xs rounded border border-slate-200">
       {#each options as option}
@@ -26,7 +33,7 @@
 {/snippet}
 
 {#snippet paginationSelectors()}
-  <div class="gap-sm font-arial flex items-center text-[#4E4F54]">
+  <div class="gap-sm flex items-center text-[#4E4F54]">
     <select name="pagination" class="bg-ghost-white p-xs rounded border border-slate-200">
       {#each pagesArray as page}
         <option value={page}>{page}</option>
@@ -40,8 +47,10 @@
 {/snippet}
 
 <div class="p-sm flex w-full justify-between">
-  {@render itemsPerPage()}
-  {@render paginationSelectors()}
+  <form onsubmit={onFormSubmit}>
+    {@render itemsPerPage()}
+    {@render paginationSelectors()}
+  </form>
 </div>
 
 <!-- 

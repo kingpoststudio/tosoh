@@ -67,17 +67,26 @@ export const populateFormFromUrl = (
     if (values.length) {
       if (el.tagName === 'SELECT') {
         const select = el as HTMLSelectElement;
-        Array.from(select.options).forEach((option) => {
-          option.selected = values.includes(option.value);
-        });
+        const matchingValue = values.find((v) => v && v !== 'none');
+
+        if (matchingValue && (select.value === 'none' || select.value === '')) {
+          select.value = matchingValue;
+          select.dispatchEvent(new Event('change', { bubbles: true }));
+        }
       } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'checkbox') {
         const input = el as HTMLInputElement;
         input.checked = values.includes(input.value);
+        input.dispatchEvent(new Event('change', { bubbles: true }));
       } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'radio') {
         const input = el as HTMLInputElement;
         input.checked = values.includes(input.value);
+        input.dispatchEvent(new Event('change', { bubbles: true }));
       } else {
-        (el as HTMLInputElement).value = values.join(',');
+        const input = el as HTMLInputElement;
+        if (!input.value || input.value === '') {
+          input.value = values.join(',');
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
       }
     }
   });
