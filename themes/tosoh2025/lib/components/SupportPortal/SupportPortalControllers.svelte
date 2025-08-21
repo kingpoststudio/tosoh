@@ -1,10 +1,14 @@
 <script lang="ts">
   import { onMount } from 'svelte';
+  import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
 
   const options = [6, 12, 18];
   let pagination = $state(0);
   let cardsPerPage = $state(12);
   let totalItems = $state(0);
+  let formElement: HTMLFormElement | null = $state(null);
+  let formManager: FormManagerInstance | null = $state(null);
+
   let { onFormSubmit } = $props();
 
   const getTotalItems = async () => {
@@ -31,10 +35,37 @@
 
   const handleFormSubmit = (event: Event) => {
     event.preventDefault();
+
+    if (formManager) {
+      formManager.setFormValuesToParams(false);
+    }
+
+    if (!formElement) return;
+
+    const formData = new FormData(formElement);
+    onFormSubmit(formData);
+  };
+
+  const initiateFormManager = () => {
+    if (formElement && !formManager) {
+      formManager = createFormManager(
+        formElement,
+        {
+          onSubmit: (e) => {
+            if (formElement) {
+              handleFormSubmit(e);
+            }
+          },
+          onReset: () => {},
+        },
+        'valueChange'
+      );
+    }
   };
 
   onMount(() => {
     getTotalItems();
+    initiateFormManager();
   });
 </script>
 
@@ -66,12 +97,10 @@
   </div>
 {/snippet}
 
-<div class="p-sm flex w-full justify-between">
-  <form onsubmit={onFormSubmit} class="p-sm flex w-full justify-between">
-    {@render itemsPerPage()}
-    {@render paginationSelectors()}
-  </form>
-</div>
+<form onsubmit={onFormSubmit} bind:this={formElement} class="p-sm flex w-full justify-between">
+  {@render itemsPerPage()}
+  {@render paginationSelectors()}
+</form>
 
 <!-- 
 Support Portal should handle throufh URL params the following: 

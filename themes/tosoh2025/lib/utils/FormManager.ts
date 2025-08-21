@@ -94,7 +94,8 @@ export const populateFormFromUrl = (
 
 export function createFormManager(
   form: HTMLFormElement,
-  options: FormManagerOptions = {}
+  options: FormManagerOptions = {},
+  triggerType: 'submit' | 'valueChange' = 'submit'
 ): FormManagerInstance {
   const { onSubmit, onReset } = options;
 
@@ -107,16 +108,54 @@ export function createFormManager(
     }
   };
 
-  const setupForm = () => {
-    form.onsubmit = (e) => {
-      console.log('onSubmit');
-      e.preventDefault();
-      setFormValuesToParams();
+  let debounceTimeouts: Map<Element, Timer> = new Map();
+  const debounceInput = (element: Element, delay: number, callback: () => void) => {
+    if (debounceTimeouts.has(element)) {
+      clearTimeout(debounceTimeouts.get(element));
+    }
 
-      if (onSubmit) {
-        onSubmit(e);
-      }
-    };
+    const timeoutId = setTimeout(() => {
+      callback();
+      debounceTimeouts.delete(element);
+    }, delay);
+
+    debounceTimeouts.set(element, timeoutId);
+  };
+
+  const setupForm = () => {
+    if (triggerType === 'valueChange') {
+      Array.from(form.elements).forEach((element) => {
+        const debounceAttr = element.getAttribute('debounce');
+        const hasDebounce = debounceAttr !== null && !isNaN(parseInt(debounceAttr, 10));
+        const debounceDelay = hasDebounce ? parseInt(debounceAttr, 10) : 0;
+
+        if (element.tagName === 'SELECT') {
+          (element as HTMLSelectElement).onchange = (e) => {
+            e.stopPropagation();
+            return setFormValuesToParams();
+          };
+        }
+
+        element.addEventListener('input', (event) => {
+          event.stopPropagation();
+          setFormValuesToParams();
+
+          if (hasDebounce) debounceInput(element, debounceDelay, setFormValuesToParams);
+          else setFormValuesToParams;
+        });
+      });
+    }
+
+    if (triggerType === 'submit') {
+      form.onsubmit = (e) => {
+        e.preventDefault();
+        setFormValuesToParams();
+
+        if (onSubmit) {
+          onSubmit(e);
+        }
+      };
+    }
   };
 
   const setupResetElements = () => {
@@ -148,12 +187,10 @@ export function createFormManager(
     });
   };
 
-  // Initialize the form manager
   setupForm();
   setupResetElements();
   selectActiveFormValues();
 
-  // Return the public API
   return {
     resetAction,
     destroy,
