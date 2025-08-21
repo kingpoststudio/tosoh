@@ -303,7 +303,7 @@
     {@render searchInput()}
 
     <div class="mt-md gap-sm flex flex-col">
-      <div class="mt-md gap-sm flex flex-col">
+      <div class=" gap-sm flex flex-col">
         <label for={'product_family'} class=" text-xl font-black">Product Family</label>
         <div class="relative">
           <select
@@ -339,7 +339,7 @@
       </div>
     </div>
     <div class="mt-md gap-sm flex flex-col">
-      <div class="mt-md gap-sm flex flex-col">
+      <div class=" gap-sm flex flex-col">
         <label for={'product_family'} class=" text-xl font-black">Product Type</label>
         <div class="relative">
           <select
@@ -376,7 +376,7 @@
     </div>
 
     <div class="mt-md gap-sm flex flex-col">
-      <div class="mt-md gap-sm flex flex-col">
+      <div class=" gap-sm flex flex-col">
         <label for={'document_category'} class=" text-xl font-black">Document Category</label>
         <div class="relative">
           <select
@@ -412,7 +412,7 @@
       </div>
     </div>
     <div class="mt-md gap-sm flex flex-col">
-      <div class="mt-md gap-sm flex flex-col">
+      <div class=" gap-sm flex flex-col">
         <label for={'document_type'} class=" text-xl font-black">Document Type</label>
         <div class="relative">
           <select
