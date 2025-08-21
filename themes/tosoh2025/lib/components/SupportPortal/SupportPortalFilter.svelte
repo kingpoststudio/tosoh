@@ -2,7 +2,7 @@
   import { onMount, onDestroy } from 'svelte';
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
-  import { cacheResponse, useCachedOptions } from '../../utils/CacheManager';
+  import { cacheResponse, useCachedData } from '../../utils/CacheManager';
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
@@ -84,7 +84,7 @@
   };
 
   const useFiltersFromCache = (checkTime: boolean) => {
-    const data = useCachedOptions(CACHE_KEY, checkTime) as any;
+    const data = useCachedData(CACHE_KEY, checkTime) as any;
 
     if (data) {
       const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;

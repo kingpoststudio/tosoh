@@ -3,9 +3,9 @@ const CACHE_TTL_5_MINUTES = 5 * 60 * 1000; // 5 minutes
 //Cache key should be passed by the caller
 //Cache time should be passed opionally by the caller, default is 5 minutes
 
-export const useCachedOptions = (
+export const useCachedData = (
   cacheKey: string,
-  checkTime: boolean = false,
+  checkTime: boolean = true,
   expirationTimeInMs?: number
 ) => {
   const now = Date.now();
