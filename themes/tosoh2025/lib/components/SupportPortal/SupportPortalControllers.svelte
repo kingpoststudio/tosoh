@@ -3,7 +3,7 @@
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
 
   const options = [6, 12, 18];
-  let pagination = $state(0);
+  let pagination = $state(1);
   let cardsPerPage = $state(12);
   let totalItems = $state(0);
   let formElement: HTMLFormElement | null = $state(null);
@@ -72,7 +72,11 @@
 {#snippet itemsPerPage()}
   <div class="gap-sm flex items-center text-[#4E4F54]">
     <p>Items per page:</p>
-    <select name="items_per_page" class="bg-ghost-white p-xs rounded border border-slate-200">
+    <select
+      bind:value={itemsPerPage}
+      name="items_per_page"
+      class="bg-ghost-white p-xs rounded border border-slate-200"
+    >
       {#each options as option}
         <option selected={option === cardsPerPage} value={option}>{option}</option>
       {/each}
@@ -85,7 +89,11 @@
 
 {#snippet paginationSelectors()}
   <div class="gap-sm flex items-center text-[#4E4F54]">
-    <select name="pagination" class="bg-ghost-white p-xs rounded border border-slate-200">
+    <select
+      bind:value={pagination}
+      name="pagination"
+      class="bg-ghost-white p-xs rounded border border-slate-200"
+    >
       {#each pagesArray as page}
         <option value={page}>{page}</option>
       {/each}

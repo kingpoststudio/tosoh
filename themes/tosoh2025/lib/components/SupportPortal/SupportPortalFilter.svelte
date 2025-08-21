@@ -2,13 +2,13 @@
   import { onMount, onDestroy } from 'svelte';
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
+  import { cacheResponse, useCachedOptions } from '../../utils/CacheManager';
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
   let { onFormSubmit, onFormReset } = $props();
   let isLoading = $state(false);
   const CACHE_KEY = 'support-portal-filter-options';
-  const CACHE_TTL_5_MINUTES = 5 * 60 * 1000; // 5 minutes
 
   let allFilterOptions: SupportPortalRowForFilter[] = $state([]);
   let document_types: LabelValue[] = $state([]);
@@ -83,37 +83,19 @@
     }
   };
 
-  const useCachedOptions = (checkTime: boolean) => {
-    const now = Date.now();
+  const useFiltersFromCache = (checkTime: boolean) => {
+    const data = useCachedOptions(CACHE_KEY, checkTime) as any;
 
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      const { data, timestamp } = JSON.parse(cached);
-      if (now - timestamp < CACHE_TTL_5_MINUTES || !checkTime) {
-        console.log('Using cached filter options from localStorage', data);
-
-        const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
-        allFilterOptions = filterOptions;
-        return parseFilterOptions(filterOptions);
-      }
+    if (data) {
+      const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
+      allFilterOptions = filterOptions;
+      return parseFilterOptions(filterOptions);
     }
-  };
-
-  const saveOptionsInLocalStorage = (data: any) => {
-    const now = Date.now();
-
-    localStorage.setItem(
-      CACHE_KEY,
-      JSON.stringify({
-        data,
-        timestamp: now,
-      })
-    );
   };
 
   const getFilterOptions = async () => {
     try {
-      useCachedOptions(true);
+      useFiltersFromCache(true);
     } catch (error) {
       console.warn('Failed to read from cache:', error);
     }
@@ -127,17 +109,17 @@
       const data = await response.json();
 
       if (!data?.error) {
-        saveOptionsInLocalStorage(data);
+        cacheResponse(CACHE_KEY, data);
         const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
         allFilterOptions = filterOptions;
         return parseFilterOptions(filterOptions);
       }
 
       if (data?.error) {
-        useCachedOptions(false);
+        useFiltersFromCache(false);
       }
     } catch (error) {
-      useCachedOptions(false);
+      useFiltersFromCache(false);
       console.warn('Failed to fetch filter options:', error);
     } finally {
       isLoading = false;

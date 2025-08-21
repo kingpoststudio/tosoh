@@ -60,21 +60,3 @@
     <SupportPortalControllers></SupportPortalControllers>
   </div>
 </div>
-
-<!-- 
-Support Portal should handle throufh URL params the following: 
-- Items per page 
-- Pagination
-- FIltering (product family, product type, document category,document type) 
-- Search - not yet 
-
-
-These values should be derived from the URL params. If not provided, use default values.
-
-
-
-
-
-
-
--->
