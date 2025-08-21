@@ -5,7 +5,7 @@
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
-  let { onFormSubmit } = $props();
+  let { onFormSubmit, onFormReset } = $props();
   let isLoading = $state(false);
   const CACHE_KEY = 'support-portal-filter-options';
   const CACHE_TTL_5_MINUTES = 5 * 60 * 1000; // 5 minutes
@@ -221,6 +221,7 @@
         },
         onReset: () => {
           clearActiveFilters();
+          onFormReset();
         },
       });
     }

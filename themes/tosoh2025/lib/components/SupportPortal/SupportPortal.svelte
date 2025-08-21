@@ -55,7 +55,7 @@
 </script>
 
 <div class="mt-lg p-md flex w-full justify-around">
-  <SupportPortalFilter {onFormSubmit}></SupportPortalFilter>
+  <SupportPortalFilter {onFormSubmit} onFormReset={onFormSubmit}></SupportPortalFilter>
   <div class="w-full">
     <SupportPortalControllers></SupportPortalControllers>
   </div>

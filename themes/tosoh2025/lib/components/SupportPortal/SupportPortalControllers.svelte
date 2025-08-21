@@ -1,21 +1,41 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   const options = [6, 12, 18];
-  let pagination = $state(1);
-  let cardsPerPage = $state(6);
-  let { totalItems = 100, onFormSubmit } = $props();
+  let pagination = $state(0);
+  let cardsPerPage = $state(12);
+  let totalItems = $state(0);
+  let { onFormSubmit } = $props();
+
+  const getTotalItems = async () => {
+    try {
+    } catch (error) {}
+
+    try {
+      const response = await fetch(
+        'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-metadata'
+      );
+      const data = await response.json();
+      totalItems = data?.data?.HUBDB?.support_portal_collection?.total;
+      if (!data?.error) {
+      }
+
+      if (data?.error) {
+      }
+    } catch (error) {}
+  };
 
   let numberOfPages = $derived(Math.ceil(totalItems / cardsPerPage));
 
   let pagesArray = $derived(Array.from({ length: numberOfPages }, (_, i) => i + 1));
 
-  //2. create utility to set form fields based on name when parsed frmo url
-  //3. set url when values change
-
   const handleFormSubmit = (event: Event) => {
     event.preventDefault();
-
-    // setFormVa;
   };
+
+  onMount(() => {
+    getTotalItems();
+  });
 </script>
 
 {#snippet itemsPerPage()}
@@ -23,7 +43,7 @@
     <p>Items per page:</p>
     <select name="items_per_page" class="bg-ghost-white p-xs rounded border border-slate-200">
       {#each options as option}
-        <option value={option}>{option}</option>
+        <option selected={option === cardsPerPage} value={option}>{option}</option>
       {/each}
     </select>
     <p>
@@ -47,7 +67,7 @@
 {/snippet}
 
 <div class="p-sm flex w-full justify-between">
-  <form onsubmit={onFormSubmit}>
+  <form onsubmit={onFormSubmit} class="p-sm flex w-full justify-between">
     {@render itemsPerPage()}
     {@render paginationSelectors()}
   </form>
