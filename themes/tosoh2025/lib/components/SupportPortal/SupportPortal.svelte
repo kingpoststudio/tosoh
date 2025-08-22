@@ -106,7 +106,11 @@
 </script>
 
 <div class="mt-lg p-md m-auto flex w-full max-w-[var(--container-8xl)] justify-around">
-  <SupportPortalFilter {onFilterSubmit} isParentLoading={isLoading} onFormReset={onFilterSubmit}
+  <SupportPortalFilter
+    {onFilterSubmit}
+    isParentLoading={isLoading}
+    hasParentError={hasError}
+    onFormReset={onFilterSubmit}
   ></SupportPortalFilter>
   <div class="flex w-full flex-col">
     {#if hasError}

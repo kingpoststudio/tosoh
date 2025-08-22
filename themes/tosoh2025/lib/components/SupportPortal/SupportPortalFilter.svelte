@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  let { onFilterSubmit, onFormReset, isParentLoading } = $props();
+  let { onFilterSubmit, onFormReset, isParentLoading, hasParentError } = $props();
 
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
@@ -455,7 +455,7 @@
     <div class="gap-sm mt-lg flex w-full">
       <button
         type="button"
-        disabled={isLoading || hasError || isParentLoading}
+        disabled={isLoading || hasError || isParentLoading || hasParentError}
         class="border-imperial-red text-default! p-sm outlined w-full rounded-lg border hover:bg-red-50"
         onclick={() => {
           if (formManager) {
@@ -468,7 +468,7 @@
       <button
         type="submit"
         class="bg-imperial-red p-sm w-full rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
-        disabled={isLoading || hasError || isParentLoading}
+        disabled={isLoading || hasError || isParentLoading || hasParentError}
       >
         Apply
       </button>

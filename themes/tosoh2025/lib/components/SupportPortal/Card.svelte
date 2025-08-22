@@ -14,7 +14,7 @@
         }
         params.push(disposition ? '&video_still_time=10' : '?video_still_time=10');
 
-        return baseUrl + params.join('&');
+        return baseUrl + params.join('');
       }
     ) as string;
   };
@@ -45,7 +45,13 @@
   }`}
 >
   {#if imgSrc}
-    <img alt={item.name} src={imgSrc} loading="lazy" class="max-h-[12rem] object-contain" />
+    <img
+      alt={item.name}
+      src={imgSrc}
+      loading="lazy"
+      class="max-h-[12rem] min-h-[6rem] rounded-lg object-contain"
+      onerror={handleImageError}
+    />
   {:else}
     <div class="h-[4rem] rounded-lg bg-slate-200 md:h-[12rem]"></div>
   {/if}
