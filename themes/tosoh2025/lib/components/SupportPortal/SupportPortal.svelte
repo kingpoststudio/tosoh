@@ -9,12 +9,16 @@
   import SupportPortalFilter from './SupportPortalFilter.svelte';
   import SupportPortalControllers from './SupportPortalControllers.svelte';
   import { onMount } from 'svelte';
+  import SupportPortalGrid from './SupportPortalGrid.svelte';
 
-  const params = new URLSearchParams(window.location.href);
+  const params = new URLSearchParams(window.location.search);
+
+  let portalItems = $state([]);
 
   const formValues = {
     limit: parseInt(params?.get('limit')) || 12,
     pagination: parseInt(params?.get('pagination')) || 1,
+    offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1 || 1) || 0,
     product_family: params?.get('product_family') || '',
     product_type: params?.get('product_type') || '',
     document_category: params?.get('document_category') || '',
@@ -35,28 +39,31 @@
     );
     const data = await response.json();
     console.log(data, 'data');
+
+    if (!data?.error) {
+      const { offset, items } = data?.data?.HUBDB?.support_portal_collection;
+      portalItems = items;
+      formValues.offset = offset;
+    }
   };
 
-  const onFormSubmit = (filterData) => {
-    formValues.limit = 12;
-    formValues.pagination = 1;
-    formValues.product_family = filterData?.get('product_family') || '';
-    formValues.product_type = filterData?.get('product_type') || '';
-    formValues.document_category = filterData?.get('document_category') || '';
-    formValues.document_type = filterData?.get('document_type') || '';
-    formValues.search = filterData?.get('search') || '';
-
+  const onFormSubmit = () => {
     fetchData();
   };
 
   onMount(() => {
     fetchData();
   });
+
+  $effect(() => {
+    console.log(portalItems, 'portalItems');
+  });
 </script>
 
 <div class="mt-lg p-md flex w-full justify-around">
   <SupportPortalFilter {onFormSubmit} onFormReset={onFormSubmit}></SupportPortalFilter>
-  <div class="w-full">
-    <SupportPortalControllers></SupportPortalControllers>
+  <div class="flex w-full flex-col">
+    <SupportPortalGrid {portalItems}></SupportPortalGrid>
+    <SupportPortalControllers {onFormSubmit}></SupportPortalControllers>
   </div>
 </div>

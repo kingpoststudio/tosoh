@@ -1,4 +1,4 @@
-const CACHE_TTL_5_MINUTES = 5 * 60 * 1000; // 5 minutes
+const CACHE_TTL_60_MINUTES = 60 * 60 * 1000; // 60 minutes
 
 //Cache key should be passed by the caller
 //Cache time should be passed opionally by the caller, default is 5 minutes
@@ -13,7 +13,7 @@ export const useCachedData = (
   const cached = localStorage.getItem(cacheKey);
   if (cached) {
     const { data, timestamp } = JSON.parse(cached);
-    if (now - timestamp < (expirationTimeInMs || CACHE_TTL_5_MINUTES) || !checkTime) {
+    if (now - timestamp < (expirationTimeInMs || CACHE_TTL_60_MINUTES) || !checkTime) {
       return data;
     }
   }

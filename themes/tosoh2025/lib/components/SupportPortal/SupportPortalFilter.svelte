@@ -89,13 +89,19 @@
     if (data) {
       const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
       allFilterOptions = filterOptions;
-      return parseFilterOptions(filterOptions);
+      parseFilterOptions(filterOptions);
+      return true;
     }
   };
 
   const getFilterOptions = async () => {
     try {
-      useFiltersFromCache(true);
+      let cachedData = useFiltersFromCache(true);
+
+      if (cachedData) {
+        console.log('cachedData', cachedData);
+        return;
+      }
     } catch (error) {
       console.warn('Failed to read from cache:', error);
     }
@@ -135,8 +141,7 @@
 
     if (!formElement) return;
 
-    const formData = new FormData(formElement);
-    onFormSubmit(formData);
+    onFormSubmit();
   };
 
   const clearActiveFilters = () => {

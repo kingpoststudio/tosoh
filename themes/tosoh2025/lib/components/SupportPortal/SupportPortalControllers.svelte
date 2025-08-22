@@ -5,11 +5,16 @@
   const CACHE_KEY = 'support_portal_total_items';
 
   let options = [6, 12, 18];
-  let pagination = $state(1);
-  let cardsPerPage = $state(12);
   let totalItems = $state(0);
+
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
+
+  const params = new URLSearchParams(window.location.search);
+
+  let limit = $state(parseInt(params.get('limit') || '12'));
+  let pagination = $state(parseInt(params.get('pagination') || '1'));
+
   let { onFormSubmit } = $props();
 
   const useTotalItemsFromCache = (checkTime: boolean) => {
@@ -50,7 +55,7 @@
     }
   };
 
-  let numberOfPages = $derived(Math.ceil(totalItems / cardsPerPage));
+  let numberOfPages = $derived(Math.ceil(totalItems / limit));
 
   let pagesArray = $derived(Array.from({ length: numberOfPages }, (_, i) => i + 1));
 
@@ -63,8 +68,7 @@
 
     if (!formElement) return;
 
-    const formData = new FormData(formElement);
-    onFormSubmit(formData);
+    onFormSubmit();
   };
 
   const initiateFormManager = () => {
@@ -72,12 +76,11 @@
       formManager = createFormManager(
         formElement,
         {
-          onSubmit: (e) => {
+          onValueChange: (e: Event) => {
             if (formElement) {
               handleFormSubmit(e);
             }
           },
-          onReset: () => {},
         },
         'valueChange'
       );
@@ -88,26 +91,23 @@
     getTotalItems();
     initiateFormManager();
   });
-
-  $effect(() => {
-    console.log(cardsPerPage);
-  });
 </script>
 
-<form onsubmit={onFormSubmit} bind:this={formElement} class="p-sm flex w-full justify-between">
+<form bind:this={formElement} class="p-sm flex w-full justify-between">
   <div class="gap-sm flex items-center text-[#4E4F54]">
     <p>Items per page:</p>
     <select
-      bind:value={cardsPerPage}
-      name="items_per_page"
+      bind:value={limit}
+      name="limit"
       class="bg-ghost-white p-xs rounded border border-slate-200"
     >
       {#each options as option}
-        <option selected={option === cardsPerPage} value={option}>{option}</option>
+        <option selected={option === limit} value={option}>{option}</option>
       {/each}
     </select>
     <p>
-      {pagination * cardsPerPage || 1} - {pagination * cardsPerPage + cardsPerPage} of {totalItems} items
+      {pagination * limit || 1} - {pagination * limit + limit} of {totalItems}
+      items
     </p>
   </div>
   <div class="gap-sm flex items-center text-[#4E4F54]">
@@ -117,7 +117,9 @@
       class="bg-ghost-white p-xs rounded border border-slate-200"
     >
       {#each pagesArray as page}
-        <option value={page}>{page}</option>
+        <option selected={page === pagination} value={page}>
+          {page}
+        </option>
       {/each}
     </select>
     <p>
@@ -129,18 +131,5 @@
 
 <!-- 
 Support Portal should handle throufh URL params the following: 
-- Items per page 
-- Pagination
-- FIltering (product family, product type, document category,document type) 
-- Search - not yet 
-
-
-These values should be derived from the URL params. If not provided, use default values.
-
-
-
-
-
-
-
+- Search - not yet implemented
 -->

@@ -4,7 +4,7 @@ exports.main = async (req: any) => {
 
     const body = req && req.body ? req.body : {};
 
-    const limit = body.limit ? parseInt(body.limit, 10) : 100;
+    const limit = body.limit ? parseInt(body.limit, 10) : 12;
     const offset = body.offset ? parseInt(body.offset, 10) : 0;
     const productFamily = body.product_family || undefined;
     const productType = body.product_type || undefined;

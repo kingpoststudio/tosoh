@@ -1,5 +1,6 @@
 export interface FormManagerOptions {
   onSubmit?: (e: Event) => void;
+  onValueChange?: (e: Event) => void;
   onReset?: () => void;
 }
 
@@ -21,6 +22,9 @@ export const updateUrlWithFormData = (
 ) => {
   const { reset, input } = options;
   const url = new URL(window.location.href);
+
+  console.log(formData.getAll('limit'), formData.getAll('pagination'), 'formData');
+  console.log(Array.from(form.elements), 'params');
 
   const params = Array.from(form.elements).reduce(
     (acc: any, el: any) => {
@@ -60,6 +64,7 @@ export const populateFormFromUrl = (
 
   Array.from(form.elements).forEach((el) => {
     const elName = el.getAttribute('name') as string;
+
     if (!elName) return;
 
     const values = params.getAll(elName).flatMap((v) => v.split(','));
@@ -69,7 +74,7 @@ export const populateFormFromUrl = (
         const select = el as HTMLSelectElement;
         const matchingValue = values.find((v) => v && v !== 'none');
 
-        if (matchingValue && (select.value === 'none' || select.value === '')) {
+        if (matchingValue && !(select.value === 'none' || select.value === '')) {
           select.value = matchingValue;
           select.dispatchEvent(new Event('change', { bubbles: true }));
         }
@@ -97,7 +102,7 @@ export function createFormManager(
   options: FormManagerOptions = {},
   triggerType: 'submit' | 'valueChange' = 'submit'
 ): FormManagerInstance {
-  const { onSubmit, onReset } = options;
+  const { onSubmit, onReset, onValueChange } = options;
 
   const setFormValuesToParams = (reset?: boolean, input?: string) => {
     const formData = new FormData(form);
@@ -130,16 +135,18 @@ export function createFormManager(
         const debounceDelay = hasDebounce ? parseInt(debounceAttr, 10) : 0;
 
         if (element.tagName === 'SELECT') {
-          (element as HTMLSelectElement).onchange = (e) => {
+          (element as HTMLSelectElement).onchange = (e: Event) => {
             e.stopPropagation();
-            return setFormValuesToParams();
+            setFormValuesToParams();
+            if (onValueChange) onValueChange(e);
           };
         }
 
-        element.addEventListener('input', (event) => {
-          event.stopPropagation();
-          setFormValuesToParams();
+        element.addEventListener('input', (e: Event) => {
+          e.stopPropagation();
 
+          setFormValuesToParams();
+          if (onValueChange) onValueChange(e);
           if (hasDebounce) debounceInput(element, debounceDelay, setFormValuesToParams);
           else setFormValuesToParams;
         });
@@ -187,9 +194,9 @@ export function createFormManager(
     });
   };
 
-  setupForm();
-  setupResetElements();
   selectActiveFormValues();
+  setupResetElements();
+  setupForm();
 
   return {
     resetAction,
