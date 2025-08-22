@@ -39,7 +39,7 @@ exports.main = async (req) => {
             const json = await res.json();
             return json;
         };
-        const checkIfHasMore = (json) => {
+        const hasMore = (json) => {
             return json?.data?.HUBDB?.support_portal_collection?.hasMore;
         };
         const fetchAllData = async () => {
@@ -49,9 +49,7 @@ exports.main = async (req) => {
                 const json = (await fetchData(offset));
                 data.push(...json.data.HUBDB.support_portal_collection.items);
                 offset = json.data.HUBDB.support_portal_collection.offset;
-                console.log(json.data.HUBDB.support_portal_collection?.total, "length & hasFinished");
-                hasFinished =
-                    data.length === json.data.HUBDB.support_portal_collection?.total;
+                hasFinished = !hasMore(json);
             }
         };
         await fetchAllData();

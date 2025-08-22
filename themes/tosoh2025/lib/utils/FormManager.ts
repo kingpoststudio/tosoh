@@ -23,9 +23,6 @@ export const updateUrlWithFormData = (
   const { reset, input } = options;
   const url = new URL(window.location.href);
 
-  console.log(formData.getAll('limit'), formData.getAll('pagination'), 'formData');
-  console.log(Array.from(form.elements), 'params');
-
   const params = Array.from(form.elements).reduce(
     (acc: any, el: any) => {
       const elName = el.getAttribute('name') as string;

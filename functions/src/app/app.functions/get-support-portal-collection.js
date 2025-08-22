@@ -3,13 +3,12 @@ exports.main = async (req) => {
     try {
         const GRAPHQL_ENDPOINT = "https://api.hubapi.com/collector/graphql";
         const body = req && req.body ? req.body : {};
-        const limit = body.limit ? parseInt(body.limit, 10) : 100;
+        const limit = body.limit ? parseInt(body.limit, 10) : 12;
         const offset = body.offset ? parseInt(body.offset, 10) : 0;
         const productFamily = body.product_family || undefined;
         const productType = body.product_type || undefined;
         const documentCategory = body.document_category || undefined;
         const documentType = body.document_type || undefined;
-        console.log(body, "params");
         const createFilterConditions = () => {
             const filterConditions = [];
             if (!productFamily &&
@@ -56,6 +55,7 @@ exports.main = async (req) => {
               }
               limit
               offset
+              total
             }
           }
         }

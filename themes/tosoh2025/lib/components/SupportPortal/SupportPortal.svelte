@@ -14,13 +14,14 @@
 
   let portalItems = $state([]);
   let filterSubmitted = $state(0);
+  let totalItems = $state(0);
 
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
     return {
       limit: parseInt(params?.get('limit')) || 12,
       pagination: parseInt(params?.get('pagination')) || 1,
-      offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1 || 1) || 0,
+      offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1) || 0,
       product_family: params?.get('product_family') || '',
       product_type: params?.get('product_type') || '',
       document_category: params?.get('document_category') || '',
@@ -44,8 +45,9 @@
     console.log(data, 'data');
 
     if (!data?.error) {
-      const { items } = data?.data?.HUBDB?.support_portal_collection;
+      const { items, total } = data?.data?.HUBDB?.support_portal_collection;
       portalItems = items;
+      totalItems = total;
     }
   };
 
@@ -54,6 +56,7 @@
       pagination: 1,
       limit: 12,
     });
+    filterSubmitted++;
     fetchData();
   };
 
@@ -74,6 +77,8 @@
   <SupportPortalFilter {onFilterSubmit} onFormReset={onFilterSubmit}></SupportPortalFilter>
   <div class="flex w-full flex-col">
     <SupportPortalGrid {portalItems}></SupportPortalGrid>
-    <SupportPortalControllers {filterSubmitted} {onControllerSubmit}></SupportPortalControllers>
+    {#key filterSubmitted}
+      <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
+    {/key}
   </div>
 </div>

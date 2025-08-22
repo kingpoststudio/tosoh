@@ -61,6 +61,7 @@ exports.main = async (req: any) => {
               }
               limit
               offset
+              total
             }
           }
         }

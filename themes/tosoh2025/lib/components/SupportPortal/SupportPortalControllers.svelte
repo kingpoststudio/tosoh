@@ -1,11 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
-  import { cacheResponse, useCachedData } from '../../utils/CacheManager';
-  const CACHE_KEY = 'support_portal_total_items';
 
   let options = [6, 12, 18];
-  let totalItems = $state(0);
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
@@ -15,45 +12,7 @@
   let limit = $state(parseInt(params.get('limit') || '12'));
   let pagination = $state(parseInt(params.get('pagination') || '1'));
 
-  let { filterSubmitted, onControllerSubmit } = $props();
-
-  const useTotalItemsFromCache = (checkTime: boolean) => {
-    try {
-      const data = useCachedData(CACHE_KEY, checkTime) as any;
-
-      if (data) {
-        console.log('used cache');
-        const totalItemsFromCache = data?.data?.HUBDB?.support_portal_collection?.total;
-        totalItems = totalItemsFromCache;
-        return data;
-      }
-    } catch (e) {
-      console.log('Error while trying to parse cache for portal controllers');
-    }
-  };
-
-  const getTotalItems = async () => {
-    const wasCacheValid = useTotalItemsFromCache(true);
-
-    if (wasCacheValid) return;
-
-    try {
-      const response = await fetch(
-        'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-metadata'
-      );
-      const data = await response.json();
-      if (!data?.error) {
-        cacheResponse(CACHE_KEY, data);
-        totalItems = data?.data?.HUBDB?.support_portal_collection?.total;
-      }
-
-      if (data?.error) {
-        useTotalItemsFromCache(false);
-      }
-    } catch (error) {
-      useTotalItemsFromCache(false);
-    }
-  };
+  let { filterSubmitted, onControllerSubmit, totalItems } = $props();
 
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
 
@@ -89,12 +48,11 @@
 
   $effect(() => {
     if (filterSubmitted > 0) {
-      formManager?.resetAction();
+      formManager?.setFormValuesToParams(true);
     }
   });
 
   onMount(() => {
-    getTotalItems();
     initiateFormManager();
   });
 </script>

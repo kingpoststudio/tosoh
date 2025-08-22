@@ -1,13 +1,5 @@
 {
-    "appFunctions": {
-        "get-support-portal-metadata": {
-          "file": "get-support-portal-metadata.js",
-          "secrets": ["HUBSPOT_API_KEY"],
-          "endpoint": {
-            "path": "get-support-portal-metadata",
-            "method": ["GET"]
-          }
-        },
+    "appFunctions": {       
         "get-support-portal-collection": {
           "file": "get-support-portal-collection.js",
           "secrets": ["HUBSPOT_API_KEY"],
