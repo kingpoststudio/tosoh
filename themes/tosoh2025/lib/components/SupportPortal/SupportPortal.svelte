@@ -11,8 +11,10 @@
   import { onMount } from 'svelte';
   import SupportPortalGrid from './SupportPortalGrid.svelte';
   import { setSearchParams } from '../../utils/UrlUtils';
+  import { mockPortalItems } from './mock';
 
-  let portalItems = $state([]);
+  //TODO: Remove mock data !IMPORTANT
+  let portalItems = $state(mockPortalItems.data.HUBDB.support_portal_collection.items);
   let filterSubmitted = $state(0);
   let totalItems = $state(0);
 

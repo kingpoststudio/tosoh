@@ -265,7 +265,7 @@
   </div>
 {/snippet}
 
-<div class={`wrapper bg-ghost-white p-md rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
+<div class={`wrapper bg-ghost-white p-md h-fit rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
   <div class="gap-5xl flex items-center">
     <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
     <div class="max-h-[1.375rem] max-w-[1rem]">
@@ -433,11 +433,11 @@
       </div>
     </div>
 
-    <div class="gap-sm mt-lg flex">
+    <div class="gap-sm mt-lg flex w-full">
       <button
         type="button"
         disabled={isLoading}
-        class="border-imperial-red text-default! p-sm outlined rounded-lg border hover:bg-red-50"
+        class="border-imperial-red text-default! p-sm outlined w-full rounded-lg border hover:bg-red-50"
         onclick={() => {
           if (formManager) {
             formManager.resetAction();
@@ -448,7 +448,7 @@
       </button>
       <button
         type="submit"
-        class="bg-imperial-red p-sm rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
+        class="bg-imperial-red p-sm w-full rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
         disabled={isLoading}
       >
         Apply
