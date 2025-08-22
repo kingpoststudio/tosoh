@@ -28,8 +28,6 @@
     let localProductTypes: LabelValue[] = [];
 
     if (filterOptions && filterOptions?.length > 0) {
-      console.log(filterOptions, 'filterOptions');
-
       filterOptions.forEach((option) => {
         if (option.document_type && option.document_type.length > 0) {
           option.document_type.forEach((type) => {

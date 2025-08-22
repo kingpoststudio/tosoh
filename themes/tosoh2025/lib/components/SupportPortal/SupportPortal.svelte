@@ -67,13 +67,9 @@
   onMount(() => {
     fetchData();
   });
-
-  $effect(() => {
-    console.log(portalItems, 'portalItems');
-  });
 </script>
 
-<div class="mt-lg p-md flex w-full justify-around">
+<div class="mt-lg p-md m-auto flex w-full max-w-[var(--container-8xl)] justify-around">
   <SupportPortalFilter {onFilterSubmit} onFormReset={onFilterSubmit}></SupportPortalFilter>
   <div class="flex w-full flex-col">
     <SupportPortalGrid {portalItems}></SupportPortalGrid>

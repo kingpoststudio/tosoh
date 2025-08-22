@@ -71,7 +71,7 @@ export const populateFormFromUrl = (
         const select = el as HTMLSelectElement;
         const matchingValue = values.find((v) => v && v !== 'none');
 
-        if (matchingValue && !(select.value === 'none' || select.value === '')) {
+        if (matchingValue && select?.value) {
           select.value = matchingValue;
           select.dispatchEvent(new Event('change', { bubbles: true }));
         }

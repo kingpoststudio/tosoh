@@ -12,7 +12,7 @@
   let limit = $state(parseInt(params.get('limit') || '12'));
   let pagination = $state(parseInt(params.get('pagination') || '1'));
 
-  let { filterSubmitted, onControllerSubmit, totalItems } = $props();
+  let { onControllerSubmit, totalItems } = $props();
 
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
 
@@ -46,13 +46,8 @@
     }
   };
 
-  $effect(() => {
-    if (filterSubmitted > 0) {
-      formManager?.setFormValuesToParams(true);
-    }
-  });
-
   onMount(() => {
+    console.log(pagination, 'pagination');
     initiateFormManager();
   });
 </script>
@@ -66,7 +61,7 @@
       class="bg-ghost-white p-xs rounded border border-slate-200"
     >
       {#each options as option}
-        <option selected={option === limit} value={option}>{option}</option>
+        <option value={option}>{option}</option>
       {/each}
     </select>
     <p>
@@ -81,7 +76,7 @@
       class="bg-ghost-white p-xs rounded border border-slate-200"
     >
       {#each pagesArray as page}
-        <option selected={page === pagination} value={page}>
+        <option value={page}>
           {page}
         </option>
       {/each}
