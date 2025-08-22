@@ -6,7 +6,7 @@
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
-  let { onFormSubmit, onFormReset } = $props();
+  let { onFilterSubmit, onFormReset } = $props();
   let isLoading = $state(false);
   const CACHE_KEY = 'support-portal-filter-options';
 
@@ -141,7 +141,7 @@
 
     if (!formElement) return;
 
-    onFormSubmit();
+    onFilterSubmit();
   };
 
   const clearActiveFilters = () => {

@@ -15,7 +15,7 @@
   let limit = $state(parseInt(params.get('limit') || '12'));
   let pagination = $state(parseInt(params.get('pagination') || '1'));
 
-  let { onFormSubmit } = $props();
+  let { filterSubmitted, onControllerSubmit } = $props();
 
   const useTotalItemsFromCache = (checkTime: boolean) => {
     try {
@@ -68,7 +68,7 @@
 
     if (!formElement) return;
 
-    onFormSubmit();
+    onControllerSubmit();
   };
 
   const initiateFormManager = () => {
@@ -86,6 +86,12 @@
       );
     }
   };
+
+  $effect(() => {
+    if (filterSubmitted > 0) {
+      formManager?.resetAction();
+    }
+  });
 
   onMount(() => {
     getTotalItems();

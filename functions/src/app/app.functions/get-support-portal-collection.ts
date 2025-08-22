@@ -11,8 +11,6 @@ exports.main = async (req: any) => {
     const documentCategory = body.document_category || undefined;
     const documentType = body.document_type || undefined;
 
-    console.log(body, "params");
-
     const createFilterConditions = () => {
       const filterConditions = [];
 
