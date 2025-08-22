@@ -65,7 +65,7 @@
       {/each}
     </select>
     <p>
-      {pagination * limit || 1} - {pagination * limit + limit} of {totalItems}
+      {(pagination - 1) * limit || 1} - {Math.min((pagination - 1) * limit + limit, totalItems)} of {totalItems}
       items
     </p>
   </div>

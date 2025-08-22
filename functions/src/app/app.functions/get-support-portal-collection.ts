@@ -23,16 +23,18 @@ exports.main = async (req: any) => {
         return "";
       }
       if (productFamily) {
-        filterConditions.push(`product_family__eq: "${productFamily}"`);
+        filterConditions.push(`product_family__contains: "${productFamily}"`);
       }
       if (productType) {
-        filterConditions.push(`product_type__eq: "${productType}"`);
+        filterConditions.push(`product_type__contains: "${productType}"`);
       }
       if (documentCategory) {
-        filterConditions.push(`document_category__eq: "${documentCategory}"`);
+        filterConditions.push(
+          `document_category__contains: "${documentCategory}"`
+        );
       }
       if (documentType) {
-        filterConditions.push(`document_type__eq: "${documentType}"`);
+        filterConditions.push(`document_type__contains: "${documentType}"`);
       }
       return `, filter: {${filterConditions.join(", ")}}`;
     };
