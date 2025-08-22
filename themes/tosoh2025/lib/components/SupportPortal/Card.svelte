@@ -16,13 +16,9 @@
   let name = $derived(item.name);
   let downloadUrl = $derived(item.document_url || item.wistia_video_url);
 
-  //   const handleImageError = () => {
-  //     imgSrc = '';
-  //   };
-
-  onMount(() => {
-    console.log(setupWistiaThumbnail(item.wistia_video_url as string));
-  });
+  const handleImageError = () => {
+    imgSrc = '';
+  };
 </script>
 
 <div
@@ -32,9 +28,8 @@
   {#if imgSrc}
     <img
       alt={item.name}
-      src={setupWistiaThumbnail(item.wistia_video_url as string, 5)}
-      srcset={`${setupWistiaThumbnail(item.wistia_video_url as string, 5)},
-            ${setupWistiaThumbnail(item.wistia_video_url as string)}`}
+      onerror={handleImageError}
+      src={imgSrc}
       loading="lazy"
       class="h-[12rem] object-contain"
     />
