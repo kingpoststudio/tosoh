@@ -9,7 +9,7 @@
 
   const params = new URLSearchParams(window.location.search);
 
-  let limit = $state(parseInt(params.get('limit') || '12'));
+  let limit = $state(parseInt(params.get('limit') || '6'));
   let pagination = $state(parseInt(params.get('pagination') || '1'));
 
   let { onControllerSubmit, totalItems } = $props();

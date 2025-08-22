@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { fade } from 'svelte/transition';
   import Card from './Card.svelte';
   const { portalItems } = $props();
 
@@ -7,7 +8,7 @@
   );
 </script>
 
-<div class="p-sm grid h-full grid-cols-2 gap-4 lg:grid-cols-3">
+<div transition:fade={{ duration: 100 }} class="p-sm grid h-full grid-cols-2 gap-4 lg:grid-cols-3">
   {#each portalItems as item}
     <Card hasSiblings={portalItems.length > 1} {item}></Card>
   {/each}

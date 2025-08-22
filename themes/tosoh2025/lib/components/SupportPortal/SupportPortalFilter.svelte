@@ -1,16 +1,20 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
+  let { onFilterSubmit, onFormReset, isParentLoading } = $props();
+
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
   import { cacheResponse, useCachedData } from '../../utils/CacheManager';
+  import ErrorCard from '../ErrorCard/ErrorCard.svelte';
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
-  let { onFilterSubmit, onFormReset } = $props();
-  let isLoading = $state(false);
   const CACHE_KEY = 'support-portal-filter-options';
 
   let allFilterOptions: SupportPortalRowForFilter[] = $state([]);
+  let isLoading = $state(false);
+  let hasError = $state(false);
+
   let document_types: LabelValue[] = $state([]);
   let product_families: LabelValue[] = $state([]);
   let product_types: LabelValue[] = $state([]);
@@ -236,10 +240,21 @@
       formManager.destroy();
     }
   });
+
+  const reloadFilterOptions = () => {
+    hasError = false;
+    getFilterOptions();
+  };
+
+  $effect(() => {
+    if (!isLoading && !allFilterOptions?.length) {
+      hasError = true;
+    }
+  });
 </script>
 
 {#snippet searchInput()}
-  <div class="mt-md relative w-full rounded-lg border border-slate-200">
+  <div class="mt-sm relative w-full rounded-lg border border-slate-200">
     <input
       name="search"
       class=" p-sm placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md"
@@ -266,6 +281,10 @@
 {/snippet}
 
 <div class={`wrapper bg-ghost-white p-md h-fit rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
+  {#if hasError}
+    <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />
+    <div class="pb-sm"></div>
+  {/if}
   <div class="gap-5xl flex items-center">
     <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
     <div class="max-h-[1.375rem] max-w-[1rem]">
@@ -436,7 +455,7 @@
     <div class="gap-sm mt-lg flex w-full">
       <button
         type="button"
-        disabled={isLoading}
+        disabled={isLoading || hasError || isParentLoading}
         class="border-imperial-red text-default! p-sm outlined w-full rounded-lg border hover:bg-red-50"
         onclick={() => {
           if (formManager) {
@@ -449,7 +468,7 @@
       <button
         type="submit"
         class="bg-imperial-red p-sm w-full rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
-        disabled={isLoading}
+        disabled={isLoading || hasError || isParentLoading}
       >
         Apply
       </button>

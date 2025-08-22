@@ -12,11 +12,21 @@
   import SupportPortalGrid from './SupportPortalGrid.svelte';
   import { setSearchParams } from '../../utils/UrlUtils';
   import { mockPortalItems } from './mock';
-
+  import ErrorCard from '../ErrorCard/ErrorCard.svelte';
+  import SupportPortalSkeletonGrid from './SupportPortalSkeletonGrid.svelte';
   //TODO: Remove mock data !IMPORTANT
-  let portalItems = $state(mockPortalItems.data.HUBDB.support_portal_collection.items);
+  // let portalItems = $state(mockPortalItems.data.HUBDB.support_portal_collection.items);
+  let portalItems = $state([]);
   let filterSubmitted = $state(0);
   let totalItems = $state(0);
+  let hasError = $state(false);
+  let isLoading = $state(false);
+  let skeletonItems = $state(
+    Array.from(
+      { length: new URLSearchParams(window.location.search)?.get('limit') || 6 },
+      (_, i) => i + 1
+    )
+  );
 
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
@@ -33,23 +43,33 @@
   };
 
   const fetchData = async () => {
-    const response = await fetch(
-      `https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-collection`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(constructFormValues()),
-      }
-    );
-    const data = await response.json();
-    console.log(data, 'data');
+    try {
+      isLoading = true;
+      const response = await fetch(
+        `https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-collection`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(constructFormValues()),
+        }
+      );
+      const data = await response.json();
 
-    if (!data?.error) {
-      const { items, total } = data?.data?.HUBDB?.support_portal_collection;
-      portalItems = items;
-      totalItems = total;
+      if (!data?.error) {
+        const { items, total } = data?.data?.HUBDB?.support_portal_collection;
+        portalItems = items;
+        totalItems = total;
+      }
+
+      if (data?.error) {
+        hasError = true;
+      }
+    } catch (error) {
+      hasError = true;
+    } finally {
+      isLoading = false;
     }
   };
 
@@ -66,17 +86,44 @@
     fetchData();
   };
 
+  const reloadData = () => {
+    hasError = false;
+    fetchData();
+  };
+
+  $effect(() => {
+    if (isLoading) {
+      skeletonItems = Array.from(
+        { length: new URLSearchParams(window.location.search)?.get('limit') || 6 },
+        (_, i) => i + 1
+      );
+    }
+  });
+
   onMount(() => {
     fetchData();
   });
 </script>
 
 <div class="mt-lg p-md m-auto flex w-full max-w-[var(--container-8xl)] justify-around">
-  <SupportPortalFilter {onFilterSubmit} onFormReset={onFilterSubmit}></SupportPortalFilter>
+  <SupportPortalFilter {onFilterSubmit} isParentLoading={isLoading} onFormReset={onFilterSubmit}
+  ></SupportPortalFilter>
   <div class="flex w-full flex-col">
-    <SupportPortalGrid {portalItems}></SupportPortalGrid>
-    {#key filterSubmitted}
-      <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
-    {/key}
+    {#if hasError}
+      <div class="p-sm">
+        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <div class="pb-sm"></div>
+      </div>
+    {:else}
+      {#if isLoading}
+        <SupportPortalSkeletonGrid {skeletonItems}></SupportPortalSkeletonGrid>
+      {:else}
+        <SupportPortalGrid {portalItems}></SupportPortalGrid>
+      {/if}
+
+      {#key filterSubmitted}
+        <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
+      {/key}
+    {/if}
   </div>
 </div>
