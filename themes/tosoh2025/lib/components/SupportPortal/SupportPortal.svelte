@@ -112,7 +112,7 @@
     hasParentError={hasError}
     onFormReset={onFilterSubmit}
   ></SupportPortalFilter>
-  <div class="flex w-full flex-col">
+  <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
         <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />

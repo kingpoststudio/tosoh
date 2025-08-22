@@ -2,11 +2,11 @@
   import { fade } from 'svelte/transition';
 </script>
 
-<div transition:fade class="p-sm h-[18rem] w-full animate-pulse rounded-lg bg-slate-50">
+<div transition:fade class="p-sm h-[22rem] w-full animate-pulse rounded-lg bg-slate-50">
   <div class="gap-sm flex h-full flex-col items-center justify-between">
     <div class="h-32 w-full rounded-lg bg-slate-200"></div>
-    <div class="h-4 w-full rounded-lg bg-slate-200"></div>
     <div class="h-8 w-full rounded-lg bg-slate-200"></div>
+    <div class="h-12 w-full rounded-lg bg-slate-200"></div>
     <button
       disabled
       class="text-thin gap-sm flex w-full items-center justify-center rounded-lg bg-red-100 text-center text-sm"
