@@ -55,3 +55,78 @@ export type SupportPortalItem = {
   wistia_video_url?: string;
   hs_path: string;
 };
+
+export type SupportPortalSearchItem = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  path: string;
+  name: string;
+  values: {
+    search_terms: string;
+    product_family: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    }[];
+
+    product_type: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    }[];
+    internal_name: string;
+    visibility: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    };
+    document_category: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    };
+    name: string;
+    wistia_cached_url: string;
+    wistia_video_url: string;
+    document_type: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    }[];
+    deactivate: boolean;
+  };
+  childTableId: string;
+  isSoftEditable: boolean;
+};

@@ -3,6 +3,7 @@ export interface FormManagerOptions {
   onValueChange?: (e: Event) => void;
   onReset?: () => void;
   triggerType?: 'submit' | 'valueChange';
+  updateUrl?: boolean;
 }
 
 export interface FormManagerInstance {
@@ -99,11 +100,13 @@ export function createFormManager(
   form: HTMLFormElement,
   options: FormManagerOptions = {}
 ): FormManagerInstance {
-  const { onSubmit, onReset, onValueChange, triggerType = 'submit' } = options;
+  const { onSubmit, onReset, onValueChange, triggerType = 'submit', updateUrl = true } = options;
 
   const setFormValuesToParams = (reset?: boolean, input?: string) => {
     const formData = new FormData(form);
-    updateUrlWithFormData(formData, form, { reset, input });
+    if (updateUrl) {
+      updateUrlWithFormData(formData, form, { reset, input });
+    }
 
     if (reset && onReset) {
       onReset();
@@ -127,7 +130,7 @@ export function createFormManager(
   const setupForm = () => {
     if (triggerType === 'valueChange') {
       Array.from(form.elements).forEach((element) => {
-        const debounceAttr = element.getAttribute('debounce');
+        const debounceAttr = element.getAttribute('data-debounce');
         const hasDebounce = debounceAttr !== null && !isNaN(parseInt(debounceAttr, 10));
         const debounceDelay = hasDebounce ? parseInt(debounceAttr, 10) : 0;
 
@@ -142,10 +145,15 @@ export function createFormManager(
         element.addEventListener('input', (e: Event) => {
           e.stopPropagation();
 
-          setFormValuesToParams();
-          if (onValueChange) onValueChange(e);
-          if (hasDebounce) debounceInput(element, debounceDelay, setFormValuesToParams);
-          else setFormValuesToParams;
+          if (hasDebounce) {
+            debounceInput(element, debounceDelay, () => {
+              setFormValuesToParams();
+              if (onValueChange) onValueChange(e);
+            });
+          } else {
+            setFormValuesToParams();
+            if (onValueChange) onValueChange(e);
+          }
         });
       });
     }

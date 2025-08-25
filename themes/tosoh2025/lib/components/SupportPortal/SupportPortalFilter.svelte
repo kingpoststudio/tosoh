@@ -255,7 +255,9 @@
   });
 </script>
 
-<div class={`wrapper bg-ghost-white p-md h-fit rounded-lg ${isLoading ? 'animate-pulse' : ''}`}>
+<div
+  class={`bg-ghost-white p-md sticky top-[6rem] z-10 h-fit rounded-lg ${isLoading ? 'animate-pulse' : ''}`}
+>
   {#if hasError}
     <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />
     <div class="pb-sm"></div>
@@ -279,7 +281,7 @@
   </div>
 
   <form bind:this={formElement}>
-    <SearchInput {onFilterSubmit} />
+    <SearchInput />
     <div class="mt-md gap-sm flex flex-col">
       <div class=" gap-sm flex flex-col">
         <label for={'product_family'} class=" text-xl font-black">Product Family</label>

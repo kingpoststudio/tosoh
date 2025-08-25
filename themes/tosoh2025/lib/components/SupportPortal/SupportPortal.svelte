@@ -104,7 +104,7 @@
   });
 </script>
 
-<div class="mt-lg p-md m-auto flex w-full max-w-[var(--container-8xl)] justify-around">
+<div class="mt-lg p-md relative m-auto flex w-full max-w-[var(--container-8xl)] justify-around">
   <SupportPortalFilter
     {onFilterSubmit}
     isParentLoading={isLoading}
