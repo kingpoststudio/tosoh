@@ -79,7 +79,7 @@
     }
 
     // Reset dropdown if search term is too short
-    if (!search_term || search_term.length <= 2) {
+    if (!search_term || search_term.length <= 1) {
       showDropdown = false;
       matches = [];
       return;
