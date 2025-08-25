@@ -203,7 +203,7 @@
   const initiateFormManager = () => {
     if (formElement && !formManager) {
       formManager = createFormManager(formElement, {
-        onSubmit: (e) => {
+        onValueChange: (e) => {
           if (formElement) {
             handleFormSubmit(e);
           }
@@ -212,6 +212,7 @@
           clearActiveFilters();
           onFormReset();
         },
+        triggerType: 'valueChange',
       });
     }
   };
@@ -464,13 +465,6 @@
         }}
       >
         Reset
-      </button>
-      <button
-        type="submit"
-        class="bg-imperial-red p-sm w-full rounded-lg text-white disabled:cursor-not-allowed disabled:opacity-50"
-        disabled={isLoading || hasError || isParentLoading || hasParentError}
-      >
-        Apply
       </button>
     </div>
   </form>

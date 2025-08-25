@@ -14,7 +14,6 @@
   import { mockPortalItems } from './mock';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SupportPortalSkeletonGrid from './SupportPortalSkeletonGrid.svelte';
-  //TODO: Remove mock data !IMPORTANT
   // let portalItems = $state(mockPortalItems.data.HUBDB.support_portal_collection.items);
   let portalItems = $state([]);
   let filterSubmitted = $state(0);

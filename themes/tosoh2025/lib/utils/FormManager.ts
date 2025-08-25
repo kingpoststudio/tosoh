@@ -2,6 +2,7 @@ export interface FormManagerOptions {
   onSubmit?: (e: Event) => void;
   onValueChange?: (e: Event) => void;
   onReset?: () => void;
+  triggerType?: 'submit' | 'valueChange';
 }
 
 export interface FormManagerInstance {
@@ -96,10 +97,9 @@ export const populateFormFromUrl = (
 
 export function createFormManager(
   form: HTMLFormElement,
-  options: FormManagerOptions = {},
-  triggerType: 'submit' | 'valueChange' = 'submit'
+  options: FormManagerOptions = {}
 ): FormManagerInstance {
-  const { onSubmit, onReset, onValueChange } = options;
+  const { onSubmit, onReset, onValueChange, triggerType = 'submit' } = options;
 
   const setFormValuesToParams = (reset?: boolean, input?: string) => {
     const formData = new FormData(form);
