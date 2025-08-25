@@ -1,25 +1,26 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
+  let { onControllerSubmit, totalItems } = $props();
 
+  const params = new URLSearchParams(window.location.search);
   let options = [6, 12, 18];
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
 
-  const params = new URLSearchParams(window.location.search);
-
   let limit = $state(parseInt(params.get('limit') || '6'));
-  let pagination = $state(parseInt(params.get('pagination') || '1'));
-
-  let { onControllerSubmit, totalItems } = $props();
-
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
-
   let pagesArray = $derived(Array.from({ length: numberOfPages }, (_, i) => i + 1));
 
-  const handleFormSubmit = (event: Event) => {
-    event.preventDefault();
+  let pagination = $state(parseInt(params.get('pagination') || '1'));
+  let canGoBackward = $derived(pagination - 1 > 0);
+  let canGoForward = $derived(pagination + 1 <= numberOfPages);
+
+  const handleFormSubmit = (event?: Event) => {
+    if (event) {
+      event.preventDefault();
+    }
 
     if (formManager) {
       formManager.setFormValuesToParams(false);
@@ -30,21 +31,41 @@
     onControllerSubmit();
   };
 
-  const initiateFormManager = () => {
-    if (formElement && !formManager) {
-      formManager = createFormManager(formElement, {
-        onValueChange: (e: Event) => {
-          if (formElement) {
-            handleFormSubmit(e);
-          }
-        },
-        triggerType: 'valueChange',
-      });
+  const moveBackward = (e: Event) => {
+    if (pagination - 1 > 0) {
+      pagination = pagination && pagination - 1;
     }
   };
 
+  const moveForward = (e: Event) => {
+    if (pagination + 1 <= numberOfPages) {
+      pagination = pagination + 1;
+    }
+  };
+
+  const initiateFormManager = () => {
+    if (formElement && !formManager) {
+      formManager = createFormManager(formElement, {});
+    }
+  };
+
+  $effect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    if (typeof params?.get('pagination') === 'string' && pagination) {
+      if (pagination !== parseInt(params?.get('pagination') as string)) {
+        handleFormSubmit();
+      }
+    }
+  });
+
+  $effect(() => {
+    if (limit) {
+      pagination = 1;
+    }
+  });
+
   onMount(() => {
-    console.log(pagination, 'pagination');
     initiateFormManager();
   });
 </script>
@@ -66,22 +87,76 @@
       items
     </p>
   </div>
-  <div class="gap-sm flex items-center text-[#4E4F54]">
-    <select
-      bind:value={pagination}
-      name="pagination"
-      class="bg-ghost-white p-xs rounded border border-slate-200"
-    >
-      {#each pagesArray as page}
-        <option value={page}>
-          {page}
-        </option>
-      {/each}
-    </select>
-    <p>
-      of {numberOfPages}
-      {numberOfPages === 1 ? 'page' : 'pages'}
-    </p>
+  <div class="gap-sm flex">
+    <div class="gap-sm flex items-center text-[#4E4F54]">
+      <select
+        bind:value={pagination}
+        name="pagination"
+        class="bg-ghost-white p-xs rounded border border-slate-200"
+      >
+        {#each pagesArray as page}
+          <option value={page}>
+            {page}
+          </option>
+        {/each}
+      </select>
+      <p>
+        of {numberOfPages}
+        {numberOfPages === 1 ? 'page' : 'pages'}
+      </p>
+    </div>
+    <div class="gap-sm flex">
+      <button
+        type="button"
+        class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] items-center justify-center rounded-xl border"
+        aria-label="go one page back"
+        onclick={moveBackward}
+        disabled={!canGoBackward}
+      >
+        <div class="h-[0.95rem]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            viewBox="0 0 10 18"
+            fill="none"
+          >
+            <path
+              d="M8.39266 16.0549L1.38184 9.04403L8.39266 2.0332"
+              stroke="#4E4F54"
+              stroke-width="2.54939"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </button>
+      <button
+        type="button"
+        class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] items-center justify-center rounded-xl border"
+        aria-label="go one page after"
+        onclick={moveForward}
+        disabled={!canGoForward}
+      >
+        <div class="h-[0.95rem]">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            viewBox="0 0 10 18"
+            fill="none"
+          >
+            <path
+              d="M1.64258 16.0549L8.6534 9.04403L1.64258 2.0332"
+              stroke="#4E4F54"
+              stroke-width="2.54939"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
   </div>
 </form>
 
