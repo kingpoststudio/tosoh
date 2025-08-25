@@ -144,6 +144,8 @@
 
     if (!formElement) return;
 
+    console.log('formElement', formElement);
+
     onFilterSubmit();
   };
 
@@ -253,6 +255,12 @@
       hasError = true;
     }
   });
+
+  const handleReset = () => {
+    if (formManager) {
+      formManager.resetAction();
+    }
+  };
 </script>
 
 <div
@@ -281,7 +289,7 @@
   </div>
 
   <form bind:this={formElement}>
-    <SearchInput />
+    <SearchInput onFormSubmit={handleFormSubmit} />
     <div class="mt-md gap-sm flex flex-col">
       <div class=" gap-sm flex flex-col">
         <label for={'product_family'} class=" text-xl font-black">Product Family</label>
@@ -433,11 +441,7 @@
         type="button"
         disabled={isLoading || hasError || isParentLoading || hasParentError}
         class="border-imperial-red text-default! p-sm outlined w-full rounded-lg border hover:bg-red-50"
-        onclick={() => {
-          if (formManager) {
-            formManager.resetAction();
-          }
-        }}
+        onclick={handleReset}
       >
         Reset
       </button>

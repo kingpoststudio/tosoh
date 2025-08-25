@@ -10,6 +10,7 @@ exports.main = async (req: any) => {
     const productType = body.product_type || undefined;
     const documentCategory = body.document_category || undefined;
     const documentType = body.document_type || undefined;
+    const searchTerm = body.search_term || undefined;
 
     const createFilterConditions = () => {
       const filterConditions = [];
@@ -18,7 +19,8 @@ exports.main = async (req: any) => {
         !productFamily &&
         !productType &&
         !documentCategory &&
-        !documentType
+        !documentType &&
+        !searchTerm
       ) {
         return "";
       }
@@ -36,9 +38,13 @@ exports.main = async (req: any) => {
       if (documentType) {
         filterConditions.push(`document_type__contains: "${documentType}"`);
       }
+      if (searchTerm) {
+        filterConditions.push(`search_terms__contains: "${searchTerm}"`);
+      }
       return `, filter: {${filterConditions.join(", ")}}`;
     };
 
+    console.log(createFilterConditions());
     const query = `
         {
           HUBDB {

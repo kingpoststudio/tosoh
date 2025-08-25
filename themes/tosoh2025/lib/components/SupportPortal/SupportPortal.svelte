@@ -37,7 +37,7 @@
       product_type: params?.get('product_type') || '',
       document_category: params?.get('document_category') || '',
       document_type: params?.get('document_type') || '',
-      search: params?.get('search') || '',
+      search_term: params?.get('search_term') || '',
     };
   };
 

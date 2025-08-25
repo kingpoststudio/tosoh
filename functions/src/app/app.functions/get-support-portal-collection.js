@@ -9,12 +9,14 @@ exports.main = async (req) => {
         const productType = body.product_type || undefined;
         const documentCategory = body.document_category || undefined;
         const documentType = body.document_type || undefined;
+        const searchTerm = body.search_term || undefined;
         const createFilterConditions = () => {
             const filterConditions = [];
             if (!productFamily &&
                 !productType &&
                 !documentCategory &&
-                !documentType) {
+                !documentType &&
+                !searchTerm) {
                 return "";
             }
             if (productFamily) {
@@ -29,8 +31,12 @@ exports.main = async (req) => {
             if (documentType) {
                 filterConditions.push(`document_type__contains: "${documentType}"`);
             }
+            if (searchTerm) {
+                filterConditions.push(`search_terms__contains: "${searchTerm}"`);
+            }
             return `, filter: {${filterConditions.join(", ")}}`;
         };
+        console.log(createFilterConditions());
         const query = `
         {
           HUBDB {

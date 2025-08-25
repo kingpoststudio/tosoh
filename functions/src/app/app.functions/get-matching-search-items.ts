@@ -8,20 +8,11 @@ function findMatchesInRows(
   const matches: string[] = [];
 
   rows.forEach((row) => {
-    const rowValue =
-      row.values?.[columnId as string] || row[columnId as string];
+    if (!row.values[columnId as string]) return;
 
-    if (!rowValue) {
-      return;
-    }
-
-    // Handle both string and object types that might be returned
-    const valueToProcess =
-      typeof rowValue === "string" ? rowValue : String(rowValue);
-
-    valueToProcess.split(",").forEach((value: string) => {
+    row.values[columnId as string].split(",").forEach((value: string) => {
       if (value.toLowerCase().includes((term as string).toLowerCase())) {
-        matches.push(row);
+        matches.push(value.trim());
       }
     });
   });
@@ -66,10 +57,10 @@ async function fetchPartialMatchesByTerm(req: any) {
 
 exports.main = async (req: any) => {
   try {
-    const matchingItems = await fetchPartialMatchesByTerm(req);
+    const matchingTerms = await fetchPartialMatchesByTerm(req);
     return {
       statusCode: 200,
-      body: JSON.stringify({ matchingItems }),
+      body: JSON.stringify({ matchingTerms }),
     };
   } catch (err: any) {
     return {

@@ -1,20 +1,19 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import type { SupportPortalSearchItem } from '../../../types/hubdb';
   import { fade } from 'svelte/transition';
-  const params = new URLSearchParams(window.location.search);
 
-  let search_term: string | null = $state(params?.get('search_term') || '');
-  let matches: SupportPortalSearchItem[] = $state([]);
+  const params = new URLSearchParams(window.location.search);
+  let searchTerm: string | null = $state(params?.get('search_term') || '');
+  let matches: string[] = $state([]);
   let isLoading = $state(false);
-  let hasError = $state(false);
   let showDropdown = $state(false);
-  let formElement: HTMLFormElement | null = $state(null);
   let debounceTimer: ReturnType<typeof setTimeout> | null = null;
+  let searchInputContainer: HTMLDivElement | null = $state(null);
+  let { onFormSubmit } = $props();
 
   const fetchMatches = async () => {
     try {
-      if (!search_term) return;
+      if (!searchTerm) return;
 
       isLoading = true;
       const response = await fetch(
@@ -25,7 +24,7 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            term: search_term,
+            term: searchTerm,
             tableId: '651452658',
           }),
         }
@@ -33,17 +32,15 @@
       const data = await response.json();
 
       if (!data?.error) {
-        const { matchingItems } = data;
-        matches = [...matchingItems];
-        showDropdown = matchingItems.length > 0;
+        const { matchingTerms } = data;
+        matches = [...matchingTerms];
+        showDropdown = matchingTerms.length > 0;
       }
 
       if (data?.error) {
-        hasError = true;
         showDropdown = false;
       }
     } catch (error) {
-      hasError = true;
       showDropdown = false;
     } finally {
       isLoading = false;
@@ -51,9 +48,9 @@
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (!formElement) return;
+    if (!(event.target instanceof HTMLElement)) return;
 
-    if (!formElement.contains(event.target as Node)) {
+    if (!searchInputContainer?.contains(event.target)) {
       resetDropdown();
     }
   };
@@ -61,7 +58,7 @@
   const resetDropdown = () => {
     showDropdown = false;
     matches = [];
-    search_term = '';
+    searchTerm = '';
   };
 
   onMount(() => {
@@ -73,30 +70,33 @@
   });
 
   $effect(() => {
-    // Clear existing timer
     if (debounceTimer) {
       clearTimeout(debounceTimer);
     }
 
-    // Reset dropdown if search term is too short
-    if (!search_term || search_term.length <= 1) {
+    if (!searchTerm || searchTerm.length <= 1) {
       showDropdown = false;
       matches = [];
       return;
     }
 
-    // Set new debounced timer (300ms delay)
     debounceTimer = setTimeout(() => {
       fetchMatches();
     }, 300);
 
-    // Cleanup function to clear timer if effect runs again
     return () => {
       if (debounceTimer) {
         clearTimeout(debounceTimer);
       }
     };
   });
+
+  const handleClickItem = (item: string) => {
+    searchTerm = item;
+    showDropdown = false;
+
+    onFormSubmit();
+  };
 </script>
 
 {#snippet loader()}
@@ -129,11 +129,10 @@
   </svg>
 {/snippet}
 
-<form bind:this={formElement} class="relative">
+<div class="relative" bind:this={searchInputContainer}>
   <div class="mt-sm relative w-full rounded-lg border border-slate-200">
     <input
-      disabled={hasError}
-      bind:value={search_term}
+      bind:value={searchTerm}
       name="search_term"
       data-debounce="100"
       class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md"
@@ -153,14 +152,20 @@
       class="p-sm absolute left-0 top-full z-10 max-h-[24rem] w-full max-w-[18.75rem] overflow-y-auto rounded-md bg-white shadow-md"
     >
       {#each matches as match}
-        {#if match.name}
-          <div class="p-sm">
-            <div class="break-all text-sm font-bold">
-              {match.name}
-            </div>
+        {#if match}
+          <div>
+            <button
+              type="button"
+              class="plain break-all text-sm font-bold"
+              onclick={() => {
+                handleClickItem(match);
+              }}
+            >
+              {match}
+            </button>
           </div>
         {/if}
       {/each}
     </div>
   {/if}
-</form>
+</div>
