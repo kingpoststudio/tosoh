@@ -108,7 +108,7 @@
     <div class="gap-sm flex">
       <button
         type="button"
-        class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] items-center justify-center rounded-xl border disabled:opacity-50"
+        class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:opacity-50"
         aria-label="go one page back"
         onclick={moveBackward}
         disabled={!canGoBackward}
@@ -133,7 +133,7 @@
       </button>
       <button
         type="button"
-        class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] items-center justify-center rounded-xl border disabled:opacity-50"
+        class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:opacity-50"
         aria-label="go one page after"
         onclick={moveForward}
         disabled={!canGoForward}

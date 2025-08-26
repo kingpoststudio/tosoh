@@ -57,7 +57,7 @@
 {/snippet}
 
 <div
-  class={`p-sm gap-sm relative flex w-full flex-col content-around rounded-lg border border-[#DAD8D8] ${
+  class={`gap-base relative flex w-full flex-col content-around rounded-lg border border-[#DAD8D8] p-[1.25rem] ${
     hasSiblings ? 'h-full' : 'h-fit'
   }`}
 >
@@ -79,7 +79,7 @@
 
   <div class="gap-xs flex h-full w-full flex-col justify-between">
     <div>
-      <span class=" text-imperial-red text-md break-all">{family}</span>
+      <span class=" text-imperial-red break-all">{family}</span>
       <h3 class="text-raisin-black break-all text-lg font-bold">
         {name}
       </h3>
