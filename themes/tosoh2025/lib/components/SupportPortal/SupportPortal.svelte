@@ -22,7 +22,7 @@
   let isLoading = $state(false);
   let skeletonItems = $state(
     Array.from(
-      { length: new URLSearchParams(window.location.search)?.get('limit') || 6 },
+      { length: new URLSearchParams(window.location.search)?.get('limit') || 12 },
       (_, i) => i + 1
     )
   );
