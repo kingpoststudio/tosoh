@@ -309,7 +309,7 @@
 
     <Select
       bind:value={active_product_family}
-      disabled={hasError}
+      disabled={hasError || isLoading || hasParentError || isParentLoading}
       options={product_families}
       label="Product Family"
       name="product_family"
@@ -317,7 +317,7 @@
 
     <Select
       bind:value={active_product_type}
-      disabled={hasError}
+      disabled={hasError || isLoading || hasParentError || isParentLoading}
       options={product_types}
       label="Product Type"
       name="product_type"
@@ -325,7 +325,7 @@
 
     <Select
       bind:value={active_document_category}
-      disabled={hasError}
+      disabled={hasError || isLoading || hasParentError || isParentLoading}
       options={document_categories}
       label="Document Category"
       name="document_category"
@@ -333,7 +333,7 @@
 
     <Select
       bind:value={active_document_type}
-      disabled={hasError}
+      disabled={hasError || isLoading || hasParentError || isParentLoading}
       options={document_types}
       label="Document Type"
       name="document_type"

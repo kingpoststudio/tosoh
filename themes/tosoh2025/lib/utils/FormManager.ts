@@ -71,7 +71,7 @@ export const populateFormFromUrl = (
     if (values.length) {
       if (el.tagName === 'SELECT') {
         const select = el as HTMLSelectElement;
-        const matchingValue = values.find((v) => v && v !== 'none');
+        const matchingValue = values.find((v) => v);
 
         if (matchingValue && select?.value) {
           select.value = matchingValue;
