@@ -12,7 +12,6 @@ export interface FormManagerInstance {
   setFormValuesToParams: (reset?: boolean, input?: string) => void;
 }
 
-// Utility functions that can be used independently
 export const getFormParamsFromUrl = (url: URL = new URL(window.location.href)) => {
   return url.searchParams;
 };
@@ -138,22 +137,24 @@ export function createFormManager(
           };
         }
 
-        element.addEventListener('input', (e: Event) => {
-          e.stopPropagation();
-          const debounceAttr = element.getAttribute('data-debounce');
-          const hasDebounce = debounceAttr !== null && !isNaN(parseInt(debounceAttr, 10));
-          const debounceDelay = hasDebounce ? parseInt(debounceAttr, 10) : 0;
+        if (element.tagName === 'INPUT') {
+          element.addEventListener('input', (e: Event) => {
+            e.stopPropagation();
+            const debounceAttr = element.getAttribute('data-debounce');
+            const hasDebounce = debounceAttr !== null && !isNaN(parseInt(debounceAttr, 10));
+            const debounceDelay = hasDebounce ? parseInt(debounceAttr, 10) : 0;
 
-          if (hasDebounce) {
-            debounceInput(element, debounceDelay, () => {
+            if (hasDebounce) {
+              debounceInput(element, debounceDelay, () => {
+                setFormValuesToParams();
+                if (onValueChange) onValueChange(e);
+              });
+            } else {
               setFormValuesToParams();
               if (onValueChange) onValueChange(e);
-            });
-          } else {
-            setFormValuesToParams();
-            if (onValueChange) onValueChange(e);
-          }
-        });
+            }
+          });
+        }
       });
     }
 

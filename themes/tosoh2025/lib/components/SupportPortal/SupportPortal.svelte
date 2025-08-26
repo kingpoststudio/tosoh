@@ -102,7 +102,9 @@
   });
 </script>
 
-<div class="mt-lg p-md relative m-auto flex w-full max-w-[var(--container-8xl)] justify-around">
+<div
+  class="mt-lg p-md gap-base relative m-auto flex w-full max-w-[var(--container-8xl)] flex-col justify-around lg:flex-row"
+>
   <SupportPortalFilter
     {onFilterSubmit}
     isParentLoading={isLoading}

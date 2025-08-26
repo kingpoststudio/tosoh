@@ -126,7 +126,9 @@
 {/snippet}
 
 <div class="relative" bind:this={searchInputContainer}>
-  <div class="mt-sm relative w-full rounded-lg border border-slate-200">
+  <div
+    class={`mt-md relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
+  >
     <input
       bind:this={inputElement}
       bind:value={searchTerm}
@@ -146,7 +148,7 @@
   {#if showDropdown && matches.length > 0}
     <div
       transition:fade={{ duration: 100 }}
-      class="absolute left-0 top-full z-10 max-h-[24rem] w-full max-w-[19.75rem] overflow-y-auto rounded-md bg-white shadow-md"
+      class="border-imperial-red absolute left-0 top-[90%] z-10 max-h-[24rem] w-full overflow-y-auto rounded-b-lg border-2 border-t-0 bg-white shadow-md lg:max-w-[19.75rem]"
     >
       <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
       {#each matches as match}

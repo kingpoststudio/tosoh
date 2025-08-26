@@ -21,6 +21,7 @@
       {#if value !== 'none' && value}
         <button
           type="button"
+          {disabled}
           transition:fade={{ duration: 200 }}
           class="fill-imperial-red plain h-4 w-4 cursor-pointer"
           onclick={handleClear}
@@ -39,7 +40,7 @@
         id={name}
         {name}
         disabled={disabled || activeOptions?.length === 0}
-        class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+        class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
         bind:value
         bind:this={selectElement}
       >
@@ -67,37 +68,29 @@
 
 <style>
   select {
-    outline: 0;
-
     &,
     &::picker(select) {
       appearance: base-select;
     }
+    transition: border-color 0.2s ease-in-out;
 
     &:open {
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-      border-bottom: 0;
-      transition-delay: 0s;
+      border-color: var(--color-imperial-red);
+      border-width: 2px;
     }
-    &::picker(select) {
-      border-top: 0;
-      transform-origin: top;
-      border-color: var(--color-slate-200);
-      max-height: 16rem;
 
-      transition:
-        clip-path var(--time),
-        display var(--time) allow-discrete,
-        overlay var(--time) allow-discrete;
+    &::picker(select) {
+      border-color: var(--color-imperial-red);
+      border-width: 2px;
+      max-height: 16rem;
     }
 
     &::picker-icon {
       display: none !important;
     }
+
     &:open::picker(select) {
-      border-bottom-right-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
+      border-radius: 0.5rem;
     }
   }
   option {
@@ -106,9 +99,7 @@
       background-color: var(--color-red-50);
     }
   }
-  option:focus-visible {
-    background-color: var(--color);
-  }
+
   option::checkmark {
     display: none;
   }
