@@ -2,14 +2,14 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
 
-  let { onFormSubmit, onDebouncedSearch } = $props();
+  let { onDebouncedSearch } = $props();
   const params = new URLSearchParams(window.location.search);
   let searchTerm: string | null = $state(params?.get('search_term') || '');
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
   let searchInputContainer: HTMLDivElement | null = $state(null);
-  let inputElement: HTMLInputElement;
+  let inputElement: HTMLInputElement | null = $state(null);
 
   const fetchMatches = async () => {
     try {
@@ -58,7 +58,6 @@
   const resetDropdown = () => {
     showDropdown = false;
     matches = [];
-    searchTerm = '';
   };
 
   onMount(() => {
@@ -72,7 +71,6 @@
   const handleClickItem = (item: string) => {
     searchTerm = item;
     showDropdown = false;
-    onFormSubmit();
   };
 
   const handleDebouncedSearch = () => {
@@ -91,7 +89,7 @@
   });
 
   $effect(() => {
-    if (inputElement?.value && searchTerm) {
+    if (inputElement && searchTerm) {
       inputElement.dispatchEvent(new Event('input', { bubbles: true }));
     }
   });
@@ -155,7 +153,7 @@
           <div>
             <button
               type="button"
-              class="plain break-all text-sm font-bold"
+              class="plain cursor-pointer break-all text-sm font-bold"
               onclick={() => {
                 handleClickItem(match);
               }}

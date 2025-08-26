@@ -296,7 +296,6 @@
 
   <form bind:this={formElement}>
     <SearchInput
-      onFormSubmit={handleFormSubmit}
       onDebouncedSearch={(handler: () => void) => {
         searchInputHandler = handler;
       }}
