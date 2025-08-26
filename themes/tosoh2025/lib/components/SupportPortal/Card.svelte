@@ -19,7 +19,24 @@
     ) as string;
   };
 
-  let imgSrc = $derived(item.image?.url || setupWistiaThumbnail(item?.wistia_video_url as string));
+  function parseAfterHubfsRegex(url: string): string | null {
+    const match = url?.match(/hubfs\/(.*)$/);
+    return match ? match[1] : null;
+  }
+
+  function costructCDNUrl(url: string): string {
+    if (url) {
+      return `https://19644636.fs1.hubspotusercontent-na1.net/hub/19644636/hubfs/${parseAfterHubfsRegex(
+        url
+      )}?width=330`;
+    }
+    return '';
+  }
+
+  let imgSrc = $derived(
+    costructCDNUrl(item?.image?.url as string) ||
+      setupWistiaThumbnail(item?.wistia_video_url as string)
+  );
   let family = $derived(item.product_family?.map((family) => `${family.value}`).join(', '));
   let name = $derived(item.name);
   let downloadUrl = $derived(item.document_url || item.wistia_video_url);
@@ -49,21 +66,27 @@
       alt={item.name}
       src={imgSrc}
       loading="lazy"
-      class="max-h-[12rem] min-h-[6rem] rounded-lg object-contain"
+      class="aspect-video w-full
+ rounded-lg object-contain"
       onerror={handleImageError}
     />
   {:else}
-    <div class="h-[4rem] rounded-lg bg-slate-200 md:h-[12rem]"></div>
+    <div
+      class="aspect-video
+       rounded-lg bg-slate-200 md:h-[12rem]"
+    ></div>
   {/if}
 
-  <div class="gap-xs flex w-full flex-col">
-    <span class=" text-imperial-red text-md break-all">{family}</span>
-    <h3 class="text-raisin-black break-all text-lg font-bold">
-      {name}
-    </h3>
+  <div class="gap-xs flex h-full w-full flex-col justify-between">
+    <div>
+      <span class=" text-imperial-red text-md break-all">{family}</span>
+      <h3 class="text-raisin-black break-all text-lg font-bold">
+        {name}
+      </h3>
+    </div>
     <a
       href={downloadUrl}
-      class="button gap-sm flex w-full items-center justify-center self-end text-center"
+      class="button gap-sm flex w-full items-center justify-center text-center"
       target="_blank"
     >
       Download

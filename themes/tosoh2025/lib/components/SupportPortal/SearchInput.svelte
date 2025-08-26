@@ -131,7 +131,7 @@
       bind:this={inputElement}
       bind:value={searchTerm}
       name="search_term"
-      data-debounce="300"
+      data-debounce="500"
       class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md"
       placeholder="Search here..."
     />
