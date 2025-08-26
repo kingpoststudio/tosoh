@@ -146,14 +146,15 @@
   {#if showDropdown && matches.length > 0}
     <div
       transition:fade={{ duration: 100 }}
-      class="p-sm absolute left-0 top-full z-10 max-h-[24rem] w-full max-w-[18.75rem] overflow-y-auto rounded-md bg-white shadow-md"
+      class="absolute left-0 top-full z-10 max-h-[24rem] w-full max-w-[19.75rem] overflow-y-auto rounded-md bg-white shadow-md"
     >
+      <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
       {#each matches as match}
         {#if match}
-          <div>
+          <div class="p-sm hover:bg-red-50">
             <button
               type="button"
-              class="plain cursor-pointer break-all text-sm font-bold"
+              class="plain text-left! cursor-pointer break-all text-sm font-bold"
               onclick={() => {
                 handleClickItem(match);
               }}
