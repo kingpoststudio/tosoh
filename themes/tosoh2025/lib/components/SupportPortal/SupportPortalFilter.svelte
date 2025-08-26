@@ -144,7 +144,7 @@
 
     if (!formElement) return;
 
-    console.log('formElement', formElement);
+    console.log('formElement', formElement.search_term.value);
 
     onFilterSubmit();
   };
@@ -229,14 +229,9 @@
     );
   });
 
-  $effect(() => {
-    if (allFilterOptions && allFilterOptions?.length > 0) {
-      initiateFormManager();
-    }
-  });
-
   onMount(() => {
     getFilterOptions();
+    initiateFormManager();
   });
 
   onDestroy(() => {
@@ -289,7 +284,7 @@
   </div>
 
   <form bind:this={formElement}>
-    <SearchInput onFormSubmit={handleFormSubmit} />
+    <SearchInput />
     <div class="mt-md gap-sm flex flex-col">
       <div class=" gap-sm flex flex-col">
         <label for={'product_family'} class=" text-xl font-black">Product Family</label>

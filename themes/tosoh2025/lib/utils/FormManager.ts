@@ -130,10 +130,6 @@ export function createFormManager(
   const setupForm = () => {
     if (triggerType === 'valueChange') {
       Array.from(form.elements).forEach((element) => {
-        const debounceAttr = element.getAttribute('data-debounce');
-        const hasDebounce = debounceAttr !== null && !isNaN(parseInt(debounceAttr, 10));
-        const debounceDelay = hasDebounce ? parseInt(debounceAttr, 10) : 0;
-
         if (element.tagName === 'SELECT') {
           (element as HTMLSelectElement).onchange = (e: Event) => {
             e.stopPropagation();
@@ -144,6 +140,9 @@ export function createFormManager(
 
         element.addEventListener('input', (e: Event) => {
           e.stopPropagation();
+          const debounceAttr = element.getAttribute('data-debounce');
+          const hasDebounce = debounceAttr !== null && !isNaN(parseInt(debounceAttr, 10));
+          const debounceDelay = hasDebounce ? parseInt(debounceAttr, 10) : 0;
 
           if (hasDebounce) {
             debounceInput(element, debounceDelay, () => {

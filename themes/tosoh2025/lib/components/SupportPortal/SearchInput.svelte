@@ -7,9 +7,8 @@
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
-  let debounceTimer: ReturnType<typeof setTimeout> | null = null;
   let searchInputContainer: HTMLDivElement | null = $state(null);
-  let { onFormSubmit } = $props();
+  let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
 
   const fetchMatches = async () => {
     try {
@@ -69,34 +68,25 @@
     };
   });
 
-  $effect(() => {
-    if (debounceTimer) {
-      clearTimeout(debounceTimer);
-    }
-
-    if (!searchTerm || searchTerm.length <= 1) {
-      showDropdown = false;
-      matches = [];
-      return;
-    }
-
-    debounceTimer = setTimeout(() => {
-      fetchMatches();
-    }, 300);
-
-    return () => {
-      if (debounceTimer) {
-        clearTimeout(debounceTimer);
-      }
-    };
-  });
-
   const handleClickItem = (item: string) => {
     searchTerm = item;
     showDropdown = false;
-
-    onFormSubmit();
   };
+
+  $effect(() => {
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    if (searchTerm && searchTerm.length > 1) {
+      debounceTimeout = setTimeout(() => {
+        fetchMatches();
+      }, 300);
+    } else {
+      showDropdown = false;
+      matches = [];
+    }
+  });
 </script>
 
 {#snippet loader()}
@@ -134,7 +124,7 @@
     <input
       bind:value={searchTerm}
       name="search_term"
-      data-debounce="100"
+      data-debounce="300"
       class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md"
       placeholder="Search here..."
     />
