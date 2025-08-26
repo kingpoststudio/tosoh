@@ -64,3 +64,52 @@
     </div>
   </div>
 </div>
+
+<style>
+  select {
+    outline: 0;
+
+    &,
+    &::picker(select) {
+      appearance: base-select;
+    }
+
+    &:open {
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+      border-bottom: 0;
+      transition-delay: 0s;
+    }
+    &::picker(select) {
+      border-top: 0;
+      transform-origin: top;
+      border-color: var(--color-slate-200);
+      max-height: 16rem;
+
+      transition:
+        clip-path var(--time),
+        display var(--time) allow-discrete,
+        overlay var(--time) allow-discrete;
+    }
+
+    &::picker-icon {
+      display: none !important;
+    }
+    &:open::picker(select) {
+      border-bottom-right-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+    }
+  }
+  option {
+    padding: 0.5rem;
+    &:hover {
+      background-color: var(--color-red-50);
+    }
+  }
+  option:focus-visible {
+    background-color: var(--color);
+  }
+  option::checkmark {
+    display: none;
+  }
+</style>
