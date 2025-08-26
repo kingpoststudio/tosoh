@@ -40,7 +40,7 @@
         id={name}
         {name}
         disabled={disabled || activeOptions?.length === 0}
-        class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+        class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
         bind:value
         bind:this={selectElement}
       >
@@ -76,12 +76,12 @@
 
     &:open {
       border-color: var(--color-imperial-red);
-      border-width: 2px;
+      border-width: 1px;
     }
 
     &::picker(select) {
       border-color: var(--color-imperial-red);
-      border-width: 2px;
+      border-width: 1px;
       max-height: 16rem;
     }
 
@@ -90,11 +90,14 @@
     }
 
     &:open::picker(select) {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
       border-radius: 0.5rem;
     }
   }
   option {
     padding: 0.5rem;
+
     &:hover {
       background-color: var(--color-red-50);
     }

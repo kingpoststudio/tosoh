@@ -148,7 +148,7 @@
   {#if showDropdown && matches.length > 0}
     <div
       transition:fade={{ duration: 100 }}
-      class="border-imperial-red absolute left-0 top-[90%] z-10 max-h-[24rem] w-full overflow-y-auto rounded-b-lg border-2 border-t-0 bg-white shadow-md lg:max-w-[19.75rem]"
+      class="border-imperial-red border-1 absolute left-0 z-10 mt-[0.5rem] max-h-[24rem] w-full overflow-y-auto rounded-lg bg-white shadow-md lg:max-w-[19.75rem]"
     >
       <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
       {#each matches as match}

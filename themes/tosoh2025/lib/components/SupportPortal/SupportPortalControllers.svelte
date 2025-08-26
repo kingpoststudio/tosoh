@@ -79,8 +79,11 @@
   });
 </script>
 
-<form bind:this={formElement} class="p-sm flex w-full justify-between">
-  <div class="gap-sm flex items-center text-[#4E4F54]">
+<form
+  bind:this={formElement}
+  class="lg:p-sm gap-sm mt-base flex w-full flex-col-reverse justify-center lg:flex-row lg:justify-between"
+>
+  <div class="gap-sm flex items-center justify-center text-[#4E4F54]">
     <p>Items per page:</p>
     <select
       bind:value={limit}
@@ -96,7 +99,7 @@
       items
     </p>
   </div>
-  <div class="gap-sm flex">
+  <div class="gap-sm flex justify-center">
     <div class="gap-sm flex items-center text-[#4E4F54]">
       <select
         bind:value={pagination}
