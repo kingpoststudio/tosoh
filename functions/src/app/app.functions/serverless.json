@@ -13,7 +13,7 @@
           "secrets": ["HUBSPOT_API_KEY"],
           "endpoint": {
             "path": "get-support-portal-filter-options",
-            "method": ["GET"]
+            "method": ["POST"]
           }
         },
           "get-matching-search-items": {

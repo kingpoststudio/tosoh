@@ -1,8 +1,15 @@
 exports.main = async (req: any) => {
   try {
     const GRAPHQL_ENDPOINT = "https://api.hubapi.com/collector/graphql";
+    const body = req && req.body ? req.body : {};
+
+    const filters = body.filters || [];
 
     const data: any[] = [];
+
+    const constructFilterConditions = () => {
+      return filters.map((filter: string) => filter).join(" ");
+    };
 
     const queryConstructor = (offset: number) => {
       return `
@@ -12,11 +19,7 @@ exports.main = async (req: any) => {
               hasMore
               total
               items {
-                document_category
-                document_type
-                product_family
-                product_type
-                search_terms
+                ${constructFilterConditions()}
               }
               limit 
               offset

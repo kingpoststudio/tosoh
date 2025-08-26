@@ -9,6 +9,10 @@
   import SearchInput from './SearchInput.svelte';
   import Select from './Select.svelte';
 
+  let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
+    ? window?.Tosoh?.SupportPortalContent?.filters.split(',') || []
+    : ['product_family', 'product_type', 'document_category', 'document_type'];
+
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
   const CACHE_KEY = 'support-portal-filter-options';
@@ -114,8 +118,18 @@
 
     try {
       const response = await fetch(
-        'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options'
+        'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            filters: availableFilters,
+          }),
+        }
       );
+
       const data = await response.json();
 
       if (!data?.error) {

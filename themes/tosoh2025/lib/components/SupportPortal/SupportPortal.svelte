@@ -13,6 +13,11 @@
   import { setSearchParams } from '../../utils/UrlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SupportPortalSkeletonGrid from './SupportPortalSkeletonGrid.svelte';
+
+  let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
+    ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
+    : ['product_family', 'product_type', 'document_category', 'document_type'];
+
   let portalItems = $state([]);
   let filterSubmitted = $state(0);
   let totalItems = $state(0);
@@ -25,17 +30,23 @@
     )
   );
 
+  const constructFilterParams = () => {
+    const params = new URLSearchParams(window.location.search);
+    let objWithFilters = {};
+
+    //product_family, product-type, document_category, document_type
+    availableFilters?.map((filter) => (objWithFilters[filter] = params?.get(filter) || ''));
+    return { ...objWithFilters };
+  };
+
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
     return {
       limit: parseInt(params?.get('limit')) || 12,
       pagination: parseInt(params?.get('pagination')) || 1,
       offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1) || 0,
-      product_family: params?.get('product_family') || '',
-      product_type: params?.get('product_type') || '',
-      document_category: params?.get('document_category') || '',
-      document_type: params?.get('document_type') || '',
       search_term: params?.get('search_term') || '',
+      ...constructFilterParams(),
     };
   };
 
