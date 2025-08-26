@@ -7,6 +7,7 @@
   import { cacheResponse, useCachedData } from '../../utils/CacheManager';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from './SearchInput.svelte';
+  import Select from './Select.svelte';
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
@@ -146,8 +147,6 @@
 
     if (!formElement) return;
 
-    console.log('formElement', formElement.search_term.value);
-
     onFilterSubmit();
   };
 
@@ -232,6 +231,8 @@
   };
 
   $effect(() => {
+    console.log('active ones');
+
     setAvailableFiltersBasedOnCurrentSelection(
       active_document_category,
       active_document_type,
@@ -283,7 +284,7 @@
   {/if}
   <div class="gap-5xl flex items-center">
     <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
-    <div class="max-h-[1.375rem] max-w-[1rem]">
+    <div class="h-[1.375rem] w-[1rem]">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="100%"
@@ -305,151 +306,38 @@
         searchInputHandler = handler;
       }}
     />
-    <div class="mt-md gap-sm flex flex-col">
-      <div class=" gap-sm flex flex-col">
-        <label for={'product_family'} class=" text-xl font-black">Product Family</label>
-        <div class="relative">
-          <select
-            id={'product_family'}
-            name="product_family"
-            disabled={product_families?.length === 0}
-            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-            bind:value={active_product_family}
-          >
-            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
-            {#each product_families as option}
-              <option value={option.value} class="text-default">{option.label}</option>
-            {/each}
-          </select>
-          <div
-            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
-          >
-            <svg
-              class="text-imperial-red h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="4"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mt-md gap-sm flex flex-col">
-      <div class=" gap-sm flex flex-col">
-        <label for={'product_family'} class=" text-xl font-black">Product Type</label>
-        <div class="relative">
-          <select
-            id={'product_type'}
-            name="product_type"
-            disabled={product_types?.length === 0}
-            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-            bind:value={active_product_type}
-          >
-            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
-            {#each product_types as option}
-              <option value={option.value} class="text-default">{option.label}</option>
-            {/each}
-          </select>
-          <div
-            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
-          >
-            <svg
-              class="text-imperial-red h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="4"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="mt-md gap-sm flex flex-col">
-      <div class=" gap-sm flex flex-col">
-        <label for={'document_category'} class=" text-xl font-black">Document Category</label>
-        <div class="relative">
-          <select
-            id={'document_category'}
-            name="document_category"
-            disabled={document_categories?.length === 0}
-            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-            bind:value={active_document_category}
-          >
-            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
-            {#each document_categories as option}
-              <option value={option.value} class="text-default">{option.label}</option>
-            {/each}
-          </select>
-          <div
-            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
-          >
-            <svg
-              class="text-imperial-red h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="4"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="mt-md gap-sm flex flex-col">
-      <div class=" gap-sm flex flex-col">
-        <label for={'document_type'} class=" text-xl font-black">Document Type</label>
-        <div class="relative">
-          <select
-            id={'document_type'}
-            name="document_type"
-            disabled={document_types?.length === 0}
-            class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-            bind:value={active_document_type}
-          >
-            <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
-            {#each document_types as option}
-              <option value={option.value} class="text-default">{option.label}</option>
-            {/each}
-          </select>
-          <div
-            class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
-          >
-            <svg
-              class="text-imperial-red h-4 w-4"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="4"
-                d="M19 9l-7 7-7-7"
-              ></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Select
+      bind:value={active_product_family}
+      disabled={hasError}
+      options={product_families}
+      label="Product Family"
+      name="product_family"
+    />
+
+    <Select
+      bind:value={active_product_type}
+      disabled={hasError}
+      options={product_types}
+      label="Product Type"
+      name="product_type"
+    />
+
+    <Select
+      bind:value={active_document_category}
+      disabled={hasError}
+      options={document_categories}
+      label="Document Category"
+      name="document_category"
+    />
+
+    <Select
+      bind:value={active_document_type}
+      disabled={hasError}
+      options={document_types}
+      label="Document Type"
+      name="document_type"
+    />
 
     <div class="gap-sm mt-lg flex w-full">
       <button
