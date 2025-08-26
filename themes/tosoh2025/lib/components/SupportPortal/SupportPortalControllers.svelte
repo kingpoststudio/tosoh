@@ -49,6 +49,8 @@
     }
   };
 
+  const isAlreadyOnFirstPage = $derived(pagination === 1);
+
   $effect(() => {
     const params = new URLSearchParams(window.location.search);
 
@@ -60,8 +62,15 @@
   });
 
   $effect(() => {
-    if (limit) {
-      pagination = 1;
+    const params = new URLSearchParams(window.location.search);
+
+    if (typeof params?.get('limit') === 'string' && limit) {
+      if (limit !== parseInt(params?.get('limit') as string)) {
+        if (isAlreadyOnFirstPage) {
+          handleFormSubmit();
+        }
+        pagination = 1;
+      }
     }
   });
 

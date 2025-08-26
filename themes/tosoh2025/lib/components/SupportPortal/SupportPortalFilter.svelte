@@ -242,7 +242,12 @@
 
   onMount(() => {
     getFilterOptions();
-    initiateFormManager();
+  });
+
+  $effect(() => {
+    if (allFilterOptions && allFilterOptions?.length > 0) {
+      initiateFormManager();
+    }
   });
 
   onDestroy(() => {
