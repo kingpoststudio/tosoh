@@ -2,13 +2,14 @@
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
 
+  let { onFormSubmit, onDebouncedSearch } = $props();
   const params = new URLSearchParams(window.location.search);
   let searchTerm: string | null = $state(params?.get('search_term') || '');
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
   let searchInputContainer: HTMLDivElement | null = $state(null);
-  let debounceTimeout: ReturnType<typeof setTimeout> | null = null;
+  let inputElement: HTMLInputElement;
 
   const fetchMatches = async () => {
     try {
@@ -49,7 +50,7 @@
   const handleClickOutside = (event: MouseEvent) => {
     if (!(event.target instanceof HTMLElement)) return;
 
-    if (!searchInputContainer?.contains(event.target)) {
+    if (!searchInputContainer?.contains(event.target) && showDropdown) {
       resetDropdown();
     }
   };
@@ -71,20 +72,27 @@
   const handleClickItem = (item: string) => {
     searchTerm = item;
     showDropdown = false;
+    onFormSubmit();
   };
 
-  $effect(() => {
-    if (debounceTimeout) {
-      clearTimeout(debounceTimeout);
-    }
-
+  const handleDebouncedSearch = () => {
     if (searchTerm && searchTerm.length > 1) {
-      debounceTimeout = setTimeout(() => {
-        fetchMatches();
-      }, 300);
+      fetchMatches();
     } else {
       showDropdown = false;
       matches = [];
+    }
+  };
+
+  $effect(() => {
+    if (onDebouncedSearch) {
+      onDebouncedSearch(handleDebouncedSearch);
+    }
+  });
+
+  $effect(() => {
+    if (inputElement?.value && searchTerm) {
+      inputElement.dispatchEvent(new Event('input', { bubbles: true }));
     }
   });
 </script>
@@ -122,6 +130,7 @@
 <div class="relative" bind:this={searchInputContainer}>
   <div class="mt-sm relative w-full rounded-lg border border-slate-200">
     <input
+      bind:this={inputElement}
       bind:value={searchTerm}
       name="search_term"
       data-debounce="300"

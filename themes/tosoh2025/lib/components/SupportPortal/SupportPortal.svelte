@@ -124,9 +124,11 @@
         <SupportPortalGrid {portalItems}></SupportPortalGrid>
       {/if}
 
-      {#key filterSubmitted}
-        <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
-      {/key}
+      {#if portalItems?.length > 0}
+        {#key filterSubmitted}
+          <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
+        {/key}
+      {/if}
     {/if}
   </div>
 </div>

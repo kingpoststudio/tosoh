@@ -136,7 +136,9 @@
   };
 
   const handleFormSubmit = (event: Event) => {
-    event.preventDefault();
+    if (event) {
+      event?.preventDefault();
+    }
 
     if (formManager) {
       formManager.setFormValuesToParams(false);
@@ -203,12 +205,21 @@
     parseFilterOptions(filteredOptions);
   };
 
+  let searchInputHandler: (() => void) | null = null;
+
   const initiateFormManager = () => {
     if (formElement && !formManager) {
       formManager = createFormManager(formElement, {
         onValueChange: (e) => {
           if (formElement) {
             handleFormSubmit(e);
+          }
+          if (
+            e.target &&
+            (e.target as HTMLInputElement).name === 'search_term' &&
+            searchInputHandler
+          ) {
+            searchInputHandler();
           }
         },
         onReset: () => {
@@ -284,7 +295,12 @@
   </div>
 
   <form bind:this={formElement}>
-    <SearchInput />
+    <SearchInput
+      onFormSubmit={handleFormSubmit}
+      onDebouncedSearch={(handler: () => void) => {
+        searchInputHandler = handler;
+      }}
+    />
     <div class="mt-md gap-sm flex flex-col">
       <div class=" gap-sm flex flex-col">
         <label for={'product_family'} class=" text-xl font-black">Product Family</label>
