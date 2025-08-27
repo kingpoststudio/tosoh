@@ -3,11 +3,39 @@ export type LabelValue = {
   value: string;
 };
 export type SupportPortalRowForFilter = {
-  document_category: LabelValue[];
-  document_type: LabelValue[];
-  product_family: LabelValue[];
-  product_type: LabelValue[];
-  search_terms: string;
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  path: string;
+  name: string;
+  values: {
+    search_terms: string;
+    document_category: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    }[];
+    document_type: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    };
+  };
+  isSoftEditable: false;
+  childTableId: string;
 };
 
 export type SupportPortalItem = {
