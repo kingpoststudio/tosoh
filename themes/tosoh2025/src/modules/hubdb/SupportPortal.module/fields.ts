@@ -8,7 +8,7 @@ import {
   hubDbTableField,
   booleanField,
 } from 'hs-fieldkit';
-import { breadCrumbField } from '../../../lib/utils/FieldUtils';
+import { breadCrumbField } from '../../../../lib/utils/FieldUtils';
 
 const generateFields = () => {
   return [
