@@ -4,7 +4,6 @@
 
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
-  import { cacheResponse, useCachedData } from '../../utils/CacheManager';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from './SearchInput.svelte';
   import Select from './Select.svelte';
@@ -12,13 +11,12 @@
 
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',') || []
-    : ['document_category', 'document_type'];
+    : ['document_category', 'document_type', 'product_category', 'product_type'];
 
   let allAvailableColumnIdsWithTheirValues: Record<string, any> = $state({});
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
-  const CACHE_KEY = 'support-portal-filter-options';
 
   let isLoading = $state(false);
   let hasError = $state(false);
@@ -255,13 +253,12 @@
     </div>
   </div>
 
+  <SearchInput
+    onDebouncedSearch={(handler: () => void) => {
+      searchInputHandler = handler;
+    }}
+  />
   <form bind:this={formElement}>
-    <SearchInput
-      onDebouncedSearch={(handler: () => void) => {
-        searchInputHandler = handler;
-      }}
-    />
-
     {#each filtersFromFields as columnId}
       <Select
         options={allAvailableColumnIdsWithTheirValues?.[columnId]}

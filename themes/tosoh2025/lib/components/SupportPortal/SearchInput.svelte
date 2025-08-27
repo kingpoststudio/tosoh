@@ -1,20 +1,34 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
+  import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
 
-  let { onDebouncedSearch } = $props();
-  const params = new URLSearchParams(window.location.search);
-  let searchTerm: string | null = $state(params?.get('search_term') || '');
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
-  let searchInputContainer: HTMLDivElement | null = $state(null);
+  let formElement: HTMLFormElement | null = $state(null);
+  let formManager: FormManagerInstance | null = $state(null);
   let inputElement: HTMLInputElement | null = $state(null);
+  const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
+  const hubdb_table_id = searchFromFields?.hubdb_table_id;
+  const hubdb_column_id = searchFromFields?.hubdb_column_id;
 
-  const fetchMatches = async () => {
+  const activeFilter = new URLSearchParams(window.location.search)?.get(hubdb_column_id as string);
+
+  const handleOnClick = (searchTerm: string) => {
+    showDropdown = false;
+
+    if (hubdb_column_id) {
+      const url = new URL(window.location.href);
+      url.searchParams.set(hubdb_column_id, searchTerm);
+      window.location.href = url.toString();
+    }
+  };
+
+  const fetchMatches = async (e: any) => {
+    let searchString = e?.target?.value;
+    if ((typeof searchString === 'string' && searchString?.length < 2) || activeFilter) return;
     try {
-      if (!searchTerm) return;
-
       isLoading = true;
       const response = await fetch(
         `https://145184808.hs-sites-eu1.com/hs/serverless/get-matching-search-items`,
@@ -24,8 +38,9 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            term: searchTerm,
-            tableId: '651452658',
+            term: searchString,
+            tableId: hubdb_table_id,
+            columnId: hubdb_column_id,
           }),
         }
       );
@@ -50,7 +65,7 @@
   const handleClickOutside = (event: MouseEvent) => {
     if (!(event.target instanceof HTMLElement)) return;
 
-    if (!searchInputContainer?.contains(event.target) && showDropdown) {
+    if (!formElement?.contains(event.target) && showDropdown) {
       resetDropdown();
     }
   };
@@ -58,6 +73,26 @@
   const resetDropdown = () => {
     showDropdown = false;
     matches = [];
+  };
+
+  const initiateFormManager = () => {
+    if (formElement && !formManager) {
+      formManager = createFormManager(formElement, {
+        onSubmit(e) {
+          e.preventDefault();
+          if (inputElement) {
+            handleOnClick(inputElement?.value);
+          }
+        },
+      });
+    }
+  };
+  const clearFilter = () => {
+    if (hubdb_column_id) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete(hubdb_column_id);
+      window.location.href = url.toString();
+    }
   };
 
   onMount(() => {
@@ -68,31 +103,7 @@
     };
   });
 
-  const handleClickItem = (item: string) => {
-    searchTerm = item;
-    showDropdown = false;
-  };
-
-  const handleDebouncedSearch = () => {
-    if (searchTerm && searchTerm.length > 1) {
-      fetchMatches();
-    } else {
-      showDropdown = false;
-      matches = [];
-    }
-  };
-
-  $effect(() => {
-    if (onDebouncedSearch) {
-      onDebouncedSearch(handleDebouncedSearch);
-    }
-  });
-
-  $effect(() => {
-    if (inputElement && searchTerm) {
-      inputElement.dispatchEvent(new Event('input', { bubbles: true }));
-    }
-  });
+  onMount(() => initiateFormManager());
 </script>
 
 {#snippet loader()}
@@ -125,14 +136,30 @@
   </svg>
 {/snippet}
 
-<div class="relative" bind:this={searchInputContainer}>
+{#snippet clearInput()}
+  <button
+    type="button"
+    transition:fade={{ duration: 200 }}
+    class="fill-imperial-red plain h-4 w-4 cursor-pointer"
+    onclick={clearFilter}
+    aria-label="Clear selection"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="fill-imperial-red">
+      <path
+        d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
+      /></svg
+    >
+  </button>
+{/snippet}
+
+<form class="relative" bind:this={formElement}>
   <div
     class={`mt-md relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
   >
     <input
       bind:this={inputElement}
-      bind:value={searchTerm}
-      name="search_term"
+      oninput={fetchMatches}
+      name={hubdb_column_id}
       data-debounce="500"
       class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md"
       placeholder="Search here..."
@@ -140,9 +167,10 @@
     <div class="right-sm absolute top-[50%] max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2">
       {#if isLoading}
         {@render loader()}
+      {:else if activeFilter}
+        {@render clearInput()}
       {:else}
-        {@render magnifier()}
-      {/if}
+        {@render magnifier()}{/if}
     </div>
   </div>
   {#if showDropdown && matches.length > 0}
@@ -158,7 +186,7 @@
               type="button"
               class="plain text-left! cursor-pointer break-all text-sm font-bold"
               onclick={() => {
-                handleClickItem(match);
+                handleOnClick(match);
               }}
             >
               {match}
@@ -168,4 +196,4 @@
       {/each}
     </div>
   {/if}
-</div>
+</form>

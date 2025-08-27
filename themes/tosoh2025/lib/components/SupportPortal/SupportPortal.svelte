@@ -18,6 +18,10 @@
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
     : ['product_family', 'product_type'];
 
+  let searchColumnId = window?.Tosoh?.SupportPortalContent?.search
+    ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id
+    : 'search_terms';
+
   let portalItems = $state([]);
   let filterSubmitted = $state(0);
   let totalItems = $state(0);
@@ -32,11 +36,13 @@
   const constructFilterParams = () => {
     const params = new URLSearchParams(window.location.search);
     let objWithFilters = {};
-
+    const allFilters = [...availableFilters, searchColumnId];
     //product_family, product-type, document_category, document_type
-    availableFilters?.map((filter) => (objWithFilters[filter] = params?.get(filter) || ''));
+    allFilters?.map((filter) => (objWithFilters[filter] = params?.get(filter) || ''));
     return { ...objWithFilters };
   };
+
+  console.log(constructFilterParams(), '      filters');
 
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
@@ -44,8 +50,7 @@
       limit: parseInt(params?.get('limit')) || 12,
       pagination: parseInt(params?.get('pagination')) || 1,
       offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1) || 0,
-      search_term: params?.get('search_term') || '',
-      ...constructFilterParams(),
+      filters: constructFilterParams(),
     };
   };
 

@@ -6,45 +6,28 @@ exports.main = async (req: any) => {
 
     const limit = body.limit ? parseInt(body.limit, 10) : 12;
     const offset = body.offset ? parseInt(body.offset, 10) : 0;
-    const productFamily = body.product_family || undefined;
-    const productType = body.product_type || undefined;
-    const documentCategory = body.document_category || undefined;
-    const documentType = body.document_type || undefined;
-    const searchTerm = body.search_term || undefined;
+    const filters = body?.filters || {};
 
     const createFilterConditions = () => {
-      const filterConditions = [];
+      const filterConditions: any[] = [];
 
-      if (
-        !productFamily &&
-        !productType &&
-        !documentCategory &&
-        !documentType &&
-        !searchTerm
-      ) {
+      if (typeof filters === "object" && Object?.keys(filters)?.length) {
+        Object?.keys(filters)?.map((filterKey) => {
+          if (filters?.[filterKey]) {
+            filterConditions.push(
+              `${filterKey}__contains: "${filters[filterKey]}"`
+            );
+          }
+        });
+      }
+
+      if (typeof filters === "object" && !Object?.keys(filters)?.length) {
         return "";
       }
-      if (productFamily) {
-        filterConditions.push(`product_family__contains: "${productFamily}"`);
-      }
-      if (productType) {
-        filterConditions.push(`product_type__contains: "${productType}"`);
-      }
-      if (documentCategory) {
-        filterConditions.push(
-          `document_category__contains: "${documentCategory}"`
-        );
-      }
-      if (documentType) {
-        filterConditions.push(`document_type__contains: "${documentType}"`);
-      }
-      if (searchTerm) {
-        filterConditions.push(`search_terms__contains: "${searchTerm}"`);
-      }
+
       return `, filter: {${filterConditions.join(", ")}}`;
     };
 
-    console.log(createFilterConditions());
     const query = `
         {
           HUBDB {
@@ -74,6 +57,8 @@ exports.main = async (req: any) => {
           }
         }
       `;
+
+    console.log(query, "query");
 
     const res = await fetch(GRAPHQL_ENDPOINT, {
       method: "POST",

@@ -15,13 +15,9 @@ function findMatchesInRows(rows, term, columnId) {
 }
 async function fetchPartialMatchesByTerm(req) {
     const body = req && req.body ? req.body : {};
-    const { term, tableId } = body;
-    const columnId = "search_terms";
-    const portalId = "145184808";
+    const { term, tableId, columnId } = body;
     if (!term || !tableId)
         throw new Error("Make sure to include term and tableId in request body");
-    if (!portalId)
-        throw new Error("A HubSpot account ID is required.");
     const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows`;
     const res = await fetch(apiUrl, {
         method: "GET",
@@ -37,6 +33,7 @@ async function fetchPartialMatchesByTerm(req) {
     if (!Array.isArray(rows)) {
         return [];
     }
+    console.log(data, "data");
     const matches = findMatchesInRows(rows, term, columnId);
     return matches;
 }
