@@ -8,97 +8,65 @@
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from './SearchInput.svelte';
   import Select from './Select.svelte';
+  import { mockPortalFilters } from './mock';
 
-  let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
+  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',') || []
-    : ['product_family', 'product_type', 'document_category', 'document_type'];
+    : ['document_category', 'document_type'];
+
+  let allAvailableColumnIdsWithTheirValues: Record<string, any> = $state({});
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
   const CACHE_KEY = 'support-portal-filter-options';
 
-  let allFilterOptions: SupportPortalRowForFilter[] = $state([]);
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  let document_types: LabelValue[] = $state([]);
-  let product_families: LabelValue[] = $state([]);
-  let product_types: LabelValue[] = $state([]);
-  let document_categories: LabelValue[] = $state([]);
+  const parseFilterOptions = (rows: SupportPortalRowForFilter[]) => {
+    let columnsIdsWithAllTheirAvailableValues: Record<string, any> = {};
 
-  let active_document_type: string = $state('none');
-  let active_product_family: string = $state('none');
-  let active_product_type: string = $state('none');
-  let active_document_category: string = $state('none');
-
-  const parseFilterOptions = (filterOptions: SupportPortalRowForFilter[]) => {
-    let localDocumentCategories: LabelValue[] = [];
-    let localDocumentTypes: LabelValue[] = [];
-    let localProductFamilies: LabelValue[] = [];
-    let localProductTypes: LabelValue[] = [];
-
-    if (filterOptions && filterOptions?.length > 0) {
-      filterOptions.forEach((option) => {
-        if (option.document_type && option.document_type.length > 0) {
-          option.document_type.forEach((type) => {
-            if (!localDocumentTypes.some((local_type) => local_type.value === type.value)) {
-              localDocumentTypes.push({
-                label: type.label,
-                value: type.value,
-              });
-            }
-          });
-        }
-
-        if (option.document_category && option.document_category.length > 0) {
-          option.document_category.forEach((cat) => {
-            if (!localDocumentCategories.some((local_cat) => local_cat.value === cat.value)) {
-              localDocumentCategories.push({
-                label: cat.label,
-                value: cat.value,
-              });
-            }
-          });
-        }
-
-        if (option.product_family && option.product_family.length > 0) {
-          option.product_family.forEach((family) => {
-            if (!localProductFamilies.some((local_family) => local_family.value === family.value)) {
-              localProductFamilies.push({
-                label: family.label,
-                value: family.value,
-              });
-            }
-          });
-        }
-
-        if (option.product_type && option.product_type.length > 0) {
-          option.product_type.forEach((type) => {
-            if (!localProductTypes.some((local_type) => local_type.value === type.value)) {
-              localProductTypes.push({
-                label: type.label,
-                value: type.value,
-              });
-            }
-          });
-        }
+    if (rows && rows?.length > 0) {
+      rows.forEach((row) => {
+        Object.keys(row)?.map((colummnId) => {
+          if (
+            (row as any)[colummnId] &&
+            typeof row[colummnId as keyof SupportPortalRowForFilter] !== 'string'
+          ) {
+            columnsIdsWithAllTheirAvailableValues[colummnId] = [];
+          }
+        });
       });
 
-      document_categories = localDocumentCategories;
-      document_types = localDocumentTypes;
-      product_families = localProductFamilies;
-      product_types = localProductTypes;
+      rows.forEach((row) => {
+        Object.keys(row)?.map((colummnId) => {
+          if (typeof row[colummnId as keyof SupportPortalRowForFilter] !== 'string') {
+            const arrayWithOptions = (row as any)[colummnId] as LabelValue[];
+
+            if (arrayWithOptions && arrayWithOptions.length > 0) {
+              arrayWithOptions?.map((option) => {
+                const doesValueInColumnIdExists = columnsIdsWithAllTheirAvailableValues[
+                  colummnId
+                ]?.some((existingValue: LabelValue) => existingValue.value === option?.value);
+
+                if (!doesValueInColumnIdExists) {
+                  columnsIdsWithAllTheirAvailableValues[colummnId].push(option);
+                }
+              });
+            }
+          }
+        });
+      });
     }
+
+    allAvailableColumnIdsWithTheirValues = columnsIdsWithAllTheirAvailableValues;
   };
 
   const useFiltersFromCache = (checkTime: boolean) => {
     const data = useCachedData(CACHE_KEY, checkTime) as any;
 
     if (data) {
-      const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
-      allFilterOptions = filterOptions;
-      parseFilterOptions(filterOptions);
-      return true;
+      return data;
     }
   };
 
@@ -107,8 +75,13 @@
       let cachedData = useFiltersFromCache(true);
 
       if (cachedData) {
-        console.log('cachedData', cachedData);
-        return;
+        const filterOptions = cachedData?.data?.HUBDB?.support_portal_collection?.items;
+
+        if (filterOptions?.length > 0) {
+          initiateFormManager(filterOptions);
+          setAvailableFiltersBasedOnUrl(filterOptions);
+          return;
+        }
       }
     } catch (error) {
       console.warn('Failed to read from cache:', error);
@@ -125,18 +98,24 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            filters: availableFilters,
+            filters: filtersFromFields,
           }),
         }
       );
-
-      const data = await response.json();
+      // IMPORTANT REMOVE
+      // const data = mockPortalFilters;
+      const data = await response?.json();
 
       if (!data?.error) {
         cacheResponse(CACHE_KEY, data);
         const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
-        allFilterOptions = filterOptions;
-        return parseFilterOptions(filterOptions);
+
+        console.log(filterOptions, 'filterOptions');
+
+        if (filterOptions?.length > 0) {
+          initiateFormManager(filterOptions);
+          setAvailableFiltersBasedOnUrl(filterOptions);
+        }
       }
 
       if (data?.error) {
@@ -151,71 +130,96 @@
   };
 
   const handleFormSubmit = (event: Event) => {
-    if (event) {
-      event?.preventDefault();
-    }
     if (!formElement) return;
 
-    onFilterSubmit();
+    onFilterSubmit(event);
   };
 
-  const clearActiveFilters = () => {
-    active_document_type = 'none';
-    active_product_family = 'none';
-    active_product_type = 'none';
-    active_document_category = 'none';
-  };
-
-  const setAvailableFiltersBasedOnCurrentSelection = (
-    active_document_category: string,
-    active_document_type: string,
-    active_product_family: string,
-    active_product_type: string
-  ) => {
-    if (
-      !active_document_category &&
-      !active_document_type &&
-      !active_product_family &&
-      !active_product_type
-    ) {
-      parseFilterOptions(allFilterOptions);
+  const setAvailableFiltersBasedOnUrl = (filterRows: any) => {
+    if (!filterRows || filterRows.length === 0) {
       return;
     }
 
-    const filteredOptions = allFilterOptions.filter((option) => {
-      let matches = true;
+    const doesColumnIdContainValueFromUrl = (
+      row: SupportPortalRowForFilter,
+      columnId: keyof SupportPortalRowForFilter
+    ) => {
+      const params = new URLSearchParams(window.location.search);
+      let paramValueWithColumnId = params?.get(columnId);
+      let doesContain = false;
 
-      if (active_document_category && active_document_category !== 'none') {
-        matches =
-          matches &&
-          option.document_category?.some((cat) => cat.value === active_document_category);
+      if (!row || !columnId) {
+        return doesContain;
       }
 
-      if (active_document_type && active_document_type !== 'none') {
-        matches =
-          matches && option.document_type?.some((type) => type.value === active_document_type);
+      if (!paramValueWithColumnId) {
+        return doesContain;
       }
 
-      if (active_product_family && active_product_family !== 'none') {
-        matches =
-          matches &&
-          option.product_family?.some((family) => family.value === active_product_family);
+      if (row[columnId] && row[columnId]?.length > 0 && Array.isArray(row[columnId])) {
+        row[columnId]?.map((selectionObjects: LabelValue) => {
+          if (!doesContain) {
+            doesContain = selectionObjects?.value === paramValueWithColumnId;
+          }
+        });
       }
 
-      if (active_product_type && active_product_type !== 'none') {
-        matches =
-          matches && option.product_type?.some((type) => type.value === active_product_type);
-      }
+      return doesContain;
+    };
 
-      return matches;
+    const doesMatchAllColumnIds = (matches: {} | any) => {
+      let matchesAll = true;
+      if (matches && Object?.keys(matches)) {
+        Object?.keys(matches)?.map((columnId) => {
+          if (!matches[columnId]) {
+            matchesAll = false;
+          }
+        });
+      }
+      return matchesAll;
+    };
+
+    const filteredOptions = filterRows.filter((row) => {
+      // {
+      //   "document_type": [
+      //   {
+      //     "value": "Video",
+      //     "label": "Video"
+      //   }
+      // ],
+      //         "document_category": [
+      //   {
+      //     "value": "Application Training Document",
+      //     "label": "Application Training Document"
+      //   }
+      // ]
+      // }
+
+      let matches = {};
+
+      Object.keys(row)?.map((columnId: any) => {
+        const params = new URLSearchParams(window.location.search);
+        let paramValueWithColumnId = params?.get(columnId);
+        if (paramValueWithColumnId) {
+          (matches as any)[columnId] = false;
+
+          if (!(matches as any)[columnId]) {
+            (matches as any)[columnId] = doesColumnIdContainValueFromUrl(row, columnId);
+          }
+        }
+      });
+
+      return doesMatchAllColumnIds(matches);
     });
+
+    console.log(filteredOptions);
 
     parseFilterOptions(filteredOptions);
   };
 
   let searchInputHandler: (() => void) | null = null;
 
-  const initiateFormManager = () => {
+  const initiateFormManager = (allFilterRows: SupportPortalRowForFilter[]) => {
     if (formElement && !formManager) {
       formManager = createFormManager(formElement, {
         onValueChange: (e) => {
@@ -231,7 +235,7 @@
           }
         },
         onReset: () => {
-          clearActiveFilters();
+          clearParams(filtersFromFields);
           onFormReset();
         },
         triggerType: 'valueChange',
@@ -239,25 +243,29 @@
     }
   };
 
-  $effect(() => {
-    console.log('active ones');
+  const clearParams = (filters: string[]) => {
+    const params = new URLSearchParams(window.location.search);
 
-    setAvailableFiltersBasedOnCurrentSelection(
-      active_document_category,
-      active_document_type,
-      active_product_family,
-      active_product_type
-    );
-  });
+    filters?.map((column) => {
+      params.delete(column);
+    });
+
+    window.location.search = params?.toString();
+  };
+
+  const reloadFilterOptions = () => {
+    hasError = false;
+    getFilterOptions();
+  };
+
+  const handleReset = () => {
+    if (formManager) {
+      formManager.resetAction();
+    }
+  };
 
   onMount(() => {
     getFilterOptions();
-  });
-
-  $effect(() => {
-    if (allFilterOptions && allFilterOptions?.length > 0) {
-      initiateFormManager();
-    }
   });
 
   onDestroy(() => {
@@ -265,23 +273,6 @@
       formManager.destroy();
     }
   });
-
-  const reloadFilterOptions = () => {
-    hasError = false;
-    getFilterOptions();
-  };
-
-  $effect(() => {
-    if (!isLoading && !allFilterOptions?.length) {
-      hasError = true;
-    }
-  });
-
-  const handleReset = () => {
-    if (formManager) {
-      formManager.resetAction();
-    }
-  };
 </script>
 
 <div
@@ -316,42 +307,17 @@
       }}
     />
 
-    <Select
-      bind:value={active_product_family}
-      disabled={hasError || isLoading || hasParentError || isParentLoading}
-      options={product_families}
-      label="Product Family"
-      name="product_family"
-    />
-
-    <Select
-      bind:value={active_product_type}
-      disabled={hasError || isLoading || hasParentError || isParentLoading}
-      options={product_types}
-      label="Product Type"
-      name="product_type"
-    />
-
-    <Select
-      bind:value={active_document_category}
-      disabled={hasError || isLoading || hasParentError || isParentLoading}
-      options={document_categories}
-      label="Document Category"
-      name="document_category"
-    />
-
-    <Select
-      bind:value={active_document_type}
-      disabled={hasError || isLoading || hasParentError || isParentLoading}
-      options={document_types}
-      label="Document Type"
-      name="document_type"
-    />
+    {#each filtersFromFields as columnId}
+      <Select
+        options={allAvailableColumnIdsWithTheirValues?.[columnId]}
+        name={columnId}
+        disabled={false}
+      />
+    {/each}
 
     <div class="gap-sm mt-lg flex w-full">
       <button
         type="button"
-        disabled={isLoading || hasError || isParentLoading || hasParentError}
         class="border-imperial-red text-default! p-sm outlined w-full cursor-pointer rounded-lg border hover:bg-red-50"
         onclick={handleReset}
       >

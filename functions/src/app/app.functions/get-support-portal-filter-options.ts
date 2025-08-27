@@ -5,6 +5,8 @@ exports.main = async (req: any) => {
 
     const filters = body.filters || [];
 
+    console.log(filters, "filters");
+
     const data: any[] = [];
 
     const constructFilterConditions = () => {
@@ -28,6 +30,8 @@ exports.main = async (req: any) => {
         }
 `;
     };
+
+    console.log("query", queryConstructor(0));
 
     const fetchData = async (
       offset: number
@@ -75,10 +79,14 @@ exports.main = async (req: any) => {
 
       while (!hasFinished) {
         const json = (await fetchData(offset)) as any;
-        data.push(...json.data.HUBDB.support_portal_collection.items);
-        offset = json.data.HUBDB.support_portal_collection.offset;
-
-        hasFinished = !hasMore(json);
+        console.log(json, "response");
+        if (json?.data?.HUBDB?.support_portal_collection?.items) {
+          data.push(...json.data.HUBDB.support_portal_collection.items);
+          offset = json.data.HUBDB.support_portal_collection.offset;
+          hasFinished = !hasMore(json);
+        } else {
+          hasFinished = true;
+        }
       }
     };
 

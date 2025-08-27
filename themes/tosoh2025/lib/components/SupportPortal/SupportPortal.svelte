@@ -5,7 +5,7 @@
   }}
 />
 
-<script>
+<script lang="ts">
   import SupportPortalFilter from './SupportPortalFilter.svelte';
   import SupportPortalControllers from './SupportPortalControllers.svelte';
   import { onMount } from 'svelte';
@@ -16,7 +16,7 @@
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
-    : ['product_family', 'product_type', 'document_category', 'document_type'];
+    : ['product_family', 'product_type'];
 
   let portalItems = $state([]);
   let filterSubmitted = $state(0);
@@ -29,7 +29,6 @@
       (_, i) => i + 1
     )
   );
-
   const constructFilterParams = () => {
     const params = new URLSearchParams(window.location.search);
     let objWithFilters = {};
@@ -81,13 +80,24 @@
     }
   };
 
-  const onFilterSubmit = () => {
+  const updateUrl = (e: Event) => {
+    if (e) {
+      const { name, value } = e?.target as HTMLSelectElement;
+      const url = new URL(window.location.href);
+      url.searchParams.set(name, value);
+      window.location.href = url.toString();
+    }
+  };
+
+  const onFilterSubmit = (event: Event) => {
     setSearchParams({
-      pagination: 1,
-      limit: 12,
+      pagination: '1',
+      limit: '12',
     });
+
+    updateUrl(event);
+
     filterSubmitted++;
-    fetchData();
   };
 
   const onControllerSubmit = () => {

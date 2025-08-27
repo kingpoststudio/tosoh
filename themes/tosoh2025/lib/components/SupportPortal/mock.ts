@@ -671,3 +671,23895 @@ export const mockPortalItems = {
     },
   },
 };
+
+export const mockPortalFilters = {
+  data: {
+    HUBDB: {
+      support_portal_collection: {
+        items: [
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Troubleshooting',
+                label: 'Application Troubleshooting',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Troubleshooting',
+                label: 'Application Troubleshooting',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Troubleshooting',
+                label: 'Application Troubleshooting',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Test Files',
+                label: 'Test Files',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+              {
+                value: 'QC Doc',
+                label: 'QC Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+              {
+                value: 'QC Doc',
+                label: 'QC Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Test Files',
+                label: 'Test Files',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Troubleshooting',
+                label: 'Application Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: null,
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: null,
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Video',
+                label: 'Video',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Bulletins',
+                label: 'Application Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Certificates',
+                label: 'Certificates',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Operator Manual',
+                label: 'Operator Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Product Bulletins',
+                label: 'Product Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Installation Guideline',
+                label: 'Installation Guideline',
+              },
+              {
+                value: 'QC Doc',
+                label: 'QC Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Maintenance Document',
+                label: 'Maintenance Document',
+              },
+              {
+                value: 'QC Doc',
+                label: 'QC Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Guide Book',
+                label: 'Guide Book',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: null,
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'DEF',
+                label: 'DEF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LAS',
+                label: 'Communication Spec LAS',
+              },
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Communication Spec LIS',
+                label: 'Communication Spec LIS',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Manual',
+                label: 'Service Manual',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'TXT',
+                label: 'TXT',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'TXT',
+                label: 'TXT',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'TXT',
+                label: 'TXT',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'TXT',
+                label: 'TXT',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Software',
+                label: 'Software',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'CCF',
+                value: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PowerPoint',
+                value: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                label: 'General Service Document',
+                value: 'General Service Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                label: 'PDF',
+                value: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                label: 'Technical Bulletins',
+                value: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Test Files',
+                label: 'Test Files',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Test Files',
+                label: 'Test Files',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Test Files',
+                label: 'Test Files',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Test Files',
+                label: 'Test Files',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Test Files',
+                label: 'Test Files',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Application Training Document',
+                label: 'Application Training Document',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Service Document',
+                label: 'General Service Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Word Document',
+                label: 'Word Document',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'IMAGE',
+                label: 'IMAGE',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'ZIP',
+                label: 'ZIP',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'Excel Sheet',
+                label: 'Excel Sheet',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Training Document',
+                label: 'Service Training Document',
+              },
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PowerPoint',
+                label: 'PowerPoint',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Service Troubleshooting',
+                label: 'Service Troubleshooting',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Quick User Guide',
+                label: 'Quick User Guide',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'General Application Doc',
+                label: 'General Application Doc',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'Technical Bulletins',
+                label: 'Technical Bulletins',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+          {
+            document_type: [
+              {
+                value: 'PDF',
+                label: 'PDF',
+              },
+            ],
+            document_category: [
+              {
+                value: 'CCF',
+                label: 'CCF',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
+};

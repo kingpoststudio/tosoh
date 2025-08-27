@@ -1,30 +1,33 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
 
-  let { value = $bindable(), options, label, name, disabled } = $props();
-  let selectElement: HTMLSelectElement | null = $state(null);
+  let { options, name, disabled } = $props();
+
+  const activeFilter = new URLSearchParams(window.location.search).get(name);
 
   let activeOptions = $derived(options);
 
-  const handleClear = () => {
-    if (selectElement) {
-      selectElement.value = 'none';
-      selectElement.dispatchEvent(new Event('change', { bubbles: true }));
-    }
+  const clearFilter = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.delete(name);
+    window.location.href = url.toString();
   };
+
+  const setupFilterTitle = (column: string) =>
+    column.replace('_', ' ').replace(/^\w/, (c) => c.toUpperCase());
 </script>
 
 <div class="mt-md gap-sm flex flex-col">
   <div class=" gap-sm flex flex-col">
     <div class="gap-sm flex items-center">
-      <label for={name} class=" text-xl font-black">{label}</label>
-      {#if value !== 'none' && value}
+      <label for={name} class=" text-xl font-black">{setupFilterTitle(name)}</label>
+      {#if activeFilter}
         <button
           type="button"
           {disabled}
           transition:fade={{ duration: 200 }}
           class="fill-imperial-red plain h-4 w-4 cursor-pointer"
-          onclick={handleClear}
+          onclick={clearFilter}
           aria-label="Clear selection"
         >
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="fill-imperial-red">
@@ -41,12 +44,12 @@
         {name}
         disabled={disabled || activeOptions?.length === 0}
         class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
-        bind:value
-        bind:this={selectElement}
       >
         <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
         {#each activeOptions as option}
-          <option value={option.value} class="text-default">{option.label}</option>
+          <option value={option.value} class="text-default" selected={option.value === activeFilter}
+            >{option.label}</option
+          >
         {/each}
       </select>
       <div

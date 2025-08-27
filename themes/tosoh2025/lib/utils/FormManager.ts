@@ -131,7 +131,6 @@ export function createFormManager(
       Array.from(form.elements).forEach((element) => {
         if (element.tagName === 'SELECT') {
           (element as HTMLSelectElement).onchange = (e: Event) => {
-            e.stopPropagation();
             setFormValuesToParams();
             if (onValueChange) onValueChange(e);
           };

@@ -4,6 +4,7 @@ exports.main = async (req) => {
         const GRAPHQL_ENDPOINT = "https://api.hubapi.com/collector/graphql";
         const body = req && req.body ? req.body : {};
         const filters = body.filters || [];
+        console.log(filters, "filters");
         const data = [];
         const constructFilterConditions = () => {
             return filters.map((filter) => filter).join(" ");
@@ -25,6 +26,7 @@ exports.main = async (req) => {
         }
 `;
         };
+        console.log("query", queryConstructor(0));
         const fetchData = async (offset) => {
             const res = await fetch(GRAPHQL_ENDPOINT, {
                 method: "POST",
@@ -48,9 +50,15 @@ exports.main = async (req) => {
             let hasFinished = false;
             while (!hasFinished) {
                 const json = (await fetchData(offset));
-                data.push(...json.data.HUBDB.support_portal_collection.items);
-                offset = json.data.HUBDB.support_portal_collection.offset;
-                hasFinished = !hasMore(json);
+                console.log(json, "response");
+                if (json?.data?.HUBDB?.support_portal_collection?.items) {
+                    data.push(...json.data.HUBDB.support_portal_collection.items);
+                    offset = json.data.HUBDB.support_portal_collection.offset;
+                    hasFinished = !hasMore(json);
+                }
+                else {
+                    hasFinished = true;
+                }
             }
         };
         await fetchAllData();
