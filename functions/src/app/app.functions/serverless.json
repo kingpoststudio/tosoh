@@ -1,7 +1,7 @@
 {
     "appFunctions": {       
         "get-support-portal-collection": {
-          "file": "get-support-portal-collection.js",
+          "file": "getSupportPortalCollection.js",
           "secrets": ["HUBSPOT_API_KEY"],
           "endpoint": {
             "path": "get-support-portal-collection",
@@ -9,7 +9,7 @@
           }
         },
         "get-support-portal-filter-options": {
-          "file": "get-support-portal-filter-options.js",
+          "file": "getSupportPortalFilterOptions.js",
           "secrets": ["HUBSPOT_API_KEY"],
           "endpoint": {
             "path": "get-support-portal-filter-options",
@@ -17,7 +17,7 @@
           }
         },
           "get-matching-search-items": {
-          "file": "get-matching-search-items.js",
+          "file": "getMatcingSearchItems.js",
           "secrets": ["HUBSPOT_API_KEY"],
           "endpoint": {
             "path": "get-matching-search-items",
