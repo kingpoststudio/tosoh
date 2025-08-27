@@ -13,6 +13,7 @@
   import { setSearchParams } from '../../utils/UrlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SupportPortalSkeletonGrid from './SupportPortalSkeletonGrid.svelte';
+  import { mockPortalItems } from './mock';
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
@@ -22,7 +23,7 @@
     ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id
     : 'search_terms';
 
-  let portalItems = $state([]);
+  let portalItems: any = $state([]);
   let filterSubmitted = $state(0);
   let totalItems = $state(0);
   let hasError = $state(false);
@@ -69,9 +70,12 @@
       );
       const data = await response.json();
 
+      // const data = mockPortalItems;
+      console.log(data);
+
       if (!data?.error) {
-        const { items, total } = data?.data?.HUBDB?.support_portal_collection;
-        portalItems = items;
+        const { results, total } = data;
+        portalItems = results;
         totalItems = total;
       }
 
@@ -117,7 +121,7 @@
   $effect(() => {
     if (isLoading) {
       skeletonItems = Array.from(
-        { length: new URLSearchParams(window.location.search)?.get('limit') || 6 },
+        { length: new URLSearchParams(window.location.search)?.get('limit') || 12 },
         (_, i) => i + 1
       );
     }

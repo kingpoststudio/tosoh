@@ -37,7 +37,7 @@
     costructCDNUrl(item?.image?.url as string) ||
       setupWistiaThumbnail(item?.wistia_video_url as string)
   );
-  let family = $derived(item.product_family?.map((family) => `${family.value}`).join(', '));
+  let family = $derived(item.product_family?.map((family) => `${family.label}`).join(', '));
   let name = $derived(item.name);
   let downloadUrl = $derived(item.document_url || item.wistia_video_url);
   let type = $derived(item.document_type?.label);
