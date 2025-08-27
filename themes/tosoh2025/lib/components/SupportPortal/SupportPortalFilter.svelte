@@ -67,7 +67,7 @@
           if ((rowValues as any)[colummnId]?.label) {
             const doesValueInColumnIdExists = columnsIdsWithAllTheirAvailableValues[
               colummnId
-            ]?.some((option: any) => option === (rowValues as any)[colummnId]?.label);
+            ]?.some((option: any) => option.label === (rowValues as any)[colummnId]?.label);
 
             if (!doesValueInColumnIdExists) {
               columnsIdsWithAllTheirAvailableValues[colummnId].push((rowValues as any)[colummnId]);
@@ -76,8 +76,6 @@
         });
       });
     }
-
-    console.log(columnsIdsWithAllTheirAvailableValues, 'all');
 
     allAvailableColumnIdsWithTheirValues = columnsIdsWithAllTheirAvailableValues;
   };
@@ -102,7 +100,6 @@
       // const data = mockPortalFilters;
       const data = await response?.json();
 
-      console.log(data);
       if (!data?.error) {
         const filterOptions = data.results;
 
@@ -186,7 +183,6 @@
     if (!filterRows || filterRows.length === 0) {
       return;
     }
-    console.log(filterRows);
 
     const filteredOptions = filterRows.filter((row: SupportPortalRowForFilter) => {
       let matches = {};

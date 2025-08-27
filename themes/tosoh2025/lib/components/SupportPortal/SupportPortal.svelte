@@ -43,8 +43,6 @@
     return { ...objWithFilters };
   };
 
-  console.log(constructFilterParams(), '      filters');
-
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
     return {
@@ -71,7 +69,6 @@
       const data = await response.json();
 
       // const data = mockPortalItems;
-      console.log(data);
 
       if (!data?.error) {
         const { results, total } = data;
