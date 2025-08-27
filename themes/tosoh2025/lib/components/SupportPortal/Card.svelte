@@ -40,7 +40,7 @@
   let family = $derived(item.product_family?.map((family) => `${family.value}`).join(', '));
   let name = $derived(item.name);
   let downloadUrl = $derived(item.document_url || item.wistia_video_url);
-  let type = $derived(item.document_type?.map((type) => `${type.value}`)?.[0]);
+  let type = $derived(item.document_type?.label);
 
   const handleImageError = () => {
     imgSrc = '';
