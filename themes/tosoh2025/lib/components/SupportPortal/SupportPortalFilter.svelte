@@ -9,8 +9,11 @@
   import Select from './Select.svelte';
   import { mockPortalFilters } from './mock';
 
+  const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
+  const hubdb_column_id = searchFromFields?.hubdb_column_id;
+
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
-    ? window?.Tosoh?.SupportPortalContent?.filters.split(',') || []
+    ? [...window.Tosoh.SupportPortalContent.filters.split(','), hubdb_column_id]
     : ['document_category', 'document_type', 'product_category', 'product_type'];
 
   let allAvailableColumnIdsWithTheirValues: Record<string, any> = $state({});
@@ -134,6 +137,15 @@
         });
       }
 
+      if (row[columnId] && row[columnId]?.length > 0 && typeof row[columnId] === 'string') {
+        const stringToSearchAgainst = row[columnId]?.toLowerCase();
+        const searchString = paramValueWithColumnId?.toLowerCase();
+
+        if (!doesContain) {
+          doesContain = stringToSearchAgainst?.includes(searchString);
+        }
+      }
+
       return doesContain;
     };
 
@@ -149,7 +161,7 @@
       return matchesAll;
     };
 
-    const filteredOptions = filterRows.filter((row) => {
+    const filteredOptions = filterRows.filter((row: SupportPortalRowForFilter) => {
       let matches = {};
 
       Object.keys(row)?.map((columnId: any) => {
@@ -170,21 +182,12 @@
     parseFilterOptions(filteredOptions);
   };
 
-  let searchInputHandler: (() => void) | null = null;
-
   const initiateFormManager = () => {
     if (formElement && !formManager) {
       formManager = createFormManager(formElement, {
         onValueChange: (e) => {
           if (formElement) {
             handleFormSubmit(e);
-          }
-          if (
-            e.target &&
-            (e.target as HTMLInputElement).name === 'search_term' &&
-            searchInputHandler
-          ) {
-            searchInputHandler();
           }
         },
         onReset: () => {
@@ -253,18 +256,16 @@
     </div>
   </div>
 
-  <SearchInput
-    onDebouncedSearch={(handler: () => void) => {
-      searchInputHandler = handler;
-    }}
-  />
+  <SearchInput />
   <form bind:this={formElement}>
     {#each filtersFromFields as columnId}
-      <Select
-        options={allAvailableColumnIdsWithTheirValues?.[columnId]}
-        name={columnId}
-        disabled={false}
-      />
+      {#if hubdb_column_id !== columnId}
+        <Select
+          options={allAvailableColumnIdsWithTheirValues?.[columnId]}
+          name={columnId}
+          disabled={false}
+        />
+      {/if}
     {/each}
 
     <div class="gap-sm mt-lg flex w-full">
