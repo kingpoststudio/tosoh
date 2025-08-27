@@ -62,31 +62,7 @@
     allAvailableColumnIdsWithTheirValues = columnsIdsWithAllTheirAvailableValues;
   };
 
-  const useFiltersFromCache = (checkTime: boolean) => {
-    const data = useCachedData(CACHE_KEY, checkTime) as any;
-
-    if (data) {
-      return data;
-    }
-  };
-
   const getFilterOptions = async () => {
-    try {
-      let cachedData = useFiltersFromCache(true);
-
-      if (cachedData) {
-        const filterOptions = cachedData?.data?.HUBDB?.support_portal_collection?.items;
-
-        if (filterOptions?.length > 0) {
-          initiateFormManager(filterOptions);
-          setAvailableFiltersBasedOnUrl(filterOptions);
-          return;
-        }
-      }
-    } catch (error) {
-      console.warn('Failed to read from cache:', error);
-    }
-
     isLoading = true;
 
     try {
@@ -102,27 +78,23 @@
           }),
         }
       );
-      // IMPORTANT REMOVE
+      //TODO: IMPORTANT REMOVE
       // const data = mockPortalFilters;
       const data = await response?.json();
 
       if (!data?.error) {
-        cacheResponse(CACHE_KEY, data);
         const filterOptions = data?.data?.HUBDB?.support_portal_collection?.items;
 
-        console.log(filterOptions, 'filterOptions');
-
         if (filterOptions?.length > 0) {
-          initiateFormManager(filterOptions);
+          initiateFormManager();
           setAvailableFiltersBasedOnUrl(filterOptions);
         }
       }
 
       if (data?.error) {
-        useFiltersFromCache(false);
+        hasError = false;
       }
     } catch (error) {
-      useFiltersFromCache(false);
       console.warn('Failed to fetch filter options:', error);
     } finally {
       isLoading = false;
@@ -180,21 +152,6 @@
     };
 
     const filteredOptions = filterRows.filter((row) => {
-      // {
-      //   "document_type": [
-      //   {
-      //     "value": "Video",
-      //     "label": "Video"
-      //   }
-      // ],
-      //         "document_category": [
-      //   {
-      //     "value": "Application Training Document",
-      //     "label": "Application Training Document"
-      //   }
-      // ]
-      // }
-
       let matches = {};
 
       Object.keys(row)?.map((columnId: any) => {
@@ -212,14 +169,12 @@
       return doesMatchAllColumnIds(matches);
     });
 
-    console.log(filteredOptions);
-
     parseFilterOptions(filteredOptions);
   };
 
   let searchInputHandler: (() => void) | null = null;
 
-  const initiateFormManager = (allFilterRows: SupportPortalRowForFilter[]) => {
+  const initiateFormManager = () => {
     if (formElement && !formManager) {
       formManager = createFormManager(formElement, {
         onValueChange: (e) => {

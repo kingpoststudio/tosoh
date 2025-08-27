@@ -45,7 +45,9 @@
         disabled={disabled || activeOptions?.length === 0}
         class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        <option value="none" selected disabled hidden class="text-imperial-red">Select</option>
+        <option value="none" selected disabled hidden class="text-imperial-red"
+          >{activeFilter || 'Select'}</option
+        >
         {#each activeOptions as option}
           <option value={option.value} class="text-default" selected={option.value === activeFilter}
             >{option.label}</option
