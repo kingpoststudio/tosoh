@@ -1,23 +1,62 @@
+type TableData = {
+  columns: {
+    name: string;
+    label: string;
+    id: string;
+    type: "TEXT" | "MULTISELECT" | "SELECT";
+  }[];
+};
+
 exports.main = async (req: any) => {
   try {
-    const GRAPHQL_ENDPOINT = "https://api.hubapi.com/collector/graphql";
+    const HUBDB_ENDPOINT =
+      "https://api.hubapi.com/cms/v3/hubdb/tables/support_portal";
 
     const body = req && req.body ? req.body : {};
+
+    let tableCols = [];
+
+    const properties =
+      "name,image,hs_path,product_family,product_type,,document_type,wistia_video_url,document_url";
 
     const limit = body.limit ? parseInt(body.limit, 10) : 12;
     const offset = body.offset ? parseInt(body.offset, 10) : 0;
     const filters = body?.filters || {};
+
+    ///Get the table
+
+    const tableRes = await fetch(HUBDB_ENDPOINT, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!tableRes.ok) {
+      throw new Error(`HubDB error: ${tableRes.statusText}`);
+    }
+
+    const tableData = await tableRes.json();
+    tableCols = (tableData as TableData)?.columns;
 
     const createFilterConditions = () => {
       const filterConditions: any[] = [];
 
       if (typeof filters === "object" && Object?.keys(filters)?.length) {
         Object?.keys(filters)?.map((filterKey) => {
-          if (filters?.[filterKey]) {
-            filterConditions.push(
-              `${filterKey}__contains: "${filters[filterKey]}"`
-            );
-          }
+          tableCols?.map((column) => {
+            if (column.name === filterKey && filters?.[filterKey]) {
+              if (column.type === "MULTISELECT" || column.type === "TEXT") {
+                filterConditions.push(
+                  `${filterKey}__contains=${filters[filterKey]}`
+                );
+              }
+              if (column.type === "SELECT") {
+                `${filterKey}__in=${filters[filterKey]}`;
+              }
+            }
+          });
         });
       }
 
@@ -25,55 +64,31 @@ exports.main = async (req: any) => {
         return "";
       }
 
-      return `, filter: {${filterConditions.join(", ")}}`;
+      return `&${filterConditions.join("&")}`;
     };
 
-    const query = `
-        {
-          HUBDB {
-            support_portal_collection(limit: ${limit}, offset: ${offset} ${createFilterConditions()}) {
-              hasMore
-              items {
-                deactivate
-                document_category
-                document_type
-                document_url
-                duration
-                image
-                internal_name
-                name
-                product_family
-                product_type
-                search_terms
-                visibility
-                wistia_cached_url
-                wistia_video_url
-                hs_path
-              }
-              limit
-              offset
-              total
-            }
-          }
-        }
-      `;
+    console.log(
+      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}`
+    );
 
-    console.log(query, "query");
+    const portalItemsRes = await fetch(
+      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    const res = await fetch(GRAPHQL_ENDPOINT, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ query }),
-    });
-
-    if (!res.ok) {
-      throw new Error(`GraphQL error: ${res.statusText}`);
+    if (!portalItemsRes.ok) {
+      throw new Error(
+        `Portal Items - HubDB Error: ${portalItemsRes.statusText}`
+      );
     }
 
-    const json = await res.json();
+    const json = await portalItemsRes.json();
 
     return {
       statusCode: 200,

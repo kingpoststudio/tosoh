@@ -86,21 +86,21 @@
     isLoading = true;
 
     try {
-      // const response = await fetch(
-      //   'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options',
-      //   {
-      //     method: 'POST',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //     body: JSON.stringify({
-      //       filters: filtersFromFields,
-      //     }),
-      //   }
-      // );
+      const response = await fetch(
+        'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            filters: filtersFromFields,
+          }),
+        }
+      );
       //TODO: IMPORTANT REMOVE
-      const data = mockPortalFilters;
-      // const data = await response?.json();
+      // const data = mockPortalFilters;
+      const data = await response?.json();
 
       console.log(data);
       if (!data?.error) {
