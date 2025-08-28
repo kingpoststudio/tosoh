@@ -1,4 +1,4 @@
-import { groupField, textField, hubDbTableField } from 'hs-fieldkit';
+import { groupField, textField, hubDbTableField, booleanField } from 'hs-fieldkit';
 import { breadCrumbField } from '../../../../lib/utils/FieldUtils';
 
 const generateFields = () => {
@@ -33,6 +33,11 @@ const generateFields = () => {
         min: 1,
         max: 4,
       },
+    }),
+    booleanField('display_video_download', 'Display video download?', {
+      inline_help_text:
+        'If enabled, a button will be displayed on the video player that allows the user to download the video.',
+      default: false,
     }),
   ];
 };

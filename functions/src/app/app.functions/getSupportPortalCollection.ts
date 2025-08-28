@@ -23,8 +23,6 @@ exports.main = async (req: any) => {
     const offset = body.offset ? parseInt(body.offset, 10) : 0;
     const filters = body?.filters || {};
 
-    ///Get the table
-
     const tableRes = await fetch(HUBDB_ENDPOINT, {
       method: "GET",
       headers: {
