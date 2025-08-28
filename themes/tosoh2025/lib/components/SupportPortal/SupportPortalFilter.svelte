@@ -113,6 +113,7 @@
         hasError = false;
       }
     } catch (error) {
+      hasError = true;
       console.warn('Failed to fetch filter options:', error);
     } finally {
       isLoading = false;
@@ -288,7 +289,7 @@
         <Select
           options={allAvailableColumnIdsWithTheirValues?.[columnId]}
           name={columnId}
-          disabled={isParentLoading || isLoading}
+          disabled={isParentLoading || isLoading || hasError}
         />
       {/if}
     {/each}

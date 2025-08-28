@@ -1,13 +1,4 @@
-import {
-  choiceField,
-  imageField,
-  groupField,
-  linkField,
-  menuField,
-  textField,
-  hubDbTableField,
-  booleanField,
-} from 'hs-fieldkit';
+import { groupField, textField, hubDbTableField } from 'hs-fieldkit';
 import { breadCrumbField } from '../../../../lib/utils/FieldUtils';
 
 const generateFields = () => {
@@ -34,16 +25,8 @@ const generateFields = () => {
       ],
       occurrence: {
         min: 1,
-        max: null,
+        max: 4,
       },
-    }),
-    booleanField('display_video_download', 'Display video download', {
-      inline_help_text:
-        'If enabled, a button will be displayed on the video player that allows the user to download the video.',
-    }),
-    booleanField('all_document_types_enabled', 'Enable all document types?', {
-      inline_help_text:
-        'If enabled, all document types will be displayed in the document type filter. Disabled will only display videos.',
     }),
   ];
 };

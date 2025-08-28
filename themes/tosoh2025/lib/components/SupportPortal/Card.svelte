@@ -91,6 +91,7 @@
 
     {#if type === 'Video'}
       <a
+        target="_blank"
         class="button gap-sm flex w-full items-center justify-center text-center"
         href={`support-portal/${item.path}`}
         role="button">View</a
