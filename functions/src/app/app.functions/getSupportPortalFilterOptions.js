@@ -1,7 +1,7 @@
 "use strict";
 exports.main = async (req) => {
     try {
-        const HUBDB_API = "https://api.hubapi.com/cms/v3/hubdb/tables/support_portal/rows?limit=10000";
+        const HUBDB_API = "https://api.hubapi.com/cms/v3/hubdb/tables/support_portal/rows?limit=10000&deactivate__eq=false";
         const body = req && req.body ? req.body : {};
         const filters = body.filters || [];
         console.log(filters, "filters");

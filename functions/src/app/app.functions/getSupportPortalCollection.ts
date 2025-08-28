@@ -65,12 +65,8 @@ exports.main = async (req: any) => {
       return `&${filterConditions.join("&")}`;
     };
 
-    console.log(
-      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}`
-    );
-
     const portalItemsRes = await fetch(
-      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}`,
+      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false`,
       {
         method: "GET",
         headers: {

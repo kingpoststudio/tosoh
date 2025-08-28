@@ -8,7 +8,6 @@ exports.main = async (req) => {
         const limit = body.limit ? parseInt(body.limit, 10) : 12;
         const offset = body.offset ? parseInt(body.offset, 10) : 0;
         const filters = body?.filters || {};
-        ///Get the table
         const tableRes = await fetch(HUBDB_ENDPOINT, {
             method: "GET",
             headers: {
@@ -42,8 +41,7 @@ exports.main = async (req) => {
             }
             return `&${filterConditions.join("&")}`;
         };
-        console.log(`${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}`);
-        const portalItemsRes = await fetch(`${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}`, {
+        const portalItemsRes = await fetch(`${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,

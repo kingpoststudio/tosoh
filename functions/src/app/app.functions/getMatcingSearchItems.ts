@@ -24,10 +24,12 @@ async function fetchPartialMatchesByTerm(req: any) {
   const body = req && req.body ? req.body : {};
   const { term, tableId, columnId } = body;
 
-  if (!term || !tableId)
-    throw new Error("Make sure to include term and tableId in request body");
+  if (!term || !tableId || !columnId)
+    throw new Error(
+      "Make sure to include term, tableId, columnId in request body"
+    );
 
-  const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows`;
+  const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows?properties=${columnId}&deactivate__eq=false`;
 
   const res = await fetch(apiUrl, {
     method: "GET",
