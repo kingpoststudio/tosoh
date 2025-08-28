@@ -9,11 +9,11 @@
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
 
-  let limit = $state(parseInt(params.get('limit') || '6'));
+  let limit = $state(parseInt(params?.get('limit') || '6'));
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
   let pagesArray = $derived(Array.from({ length: numberOfPages }, (_, i) => i + 1));
 
-  let pagination = $state(parseInt(params.get('pagination') || '1'));
+  let pagination = $state(parseInt(params?.get('pagination') || '1'));
   let canGoBackward = $derived(pagination - 1 > 0);
   let canGoForward = $derived(pagination + 1 <= numberOfPages);
 
@@ -74,8 +74,22 @@
     }
   });
 
+  const initControllers = () => {
+    const url = new URL(window.location.href);
+
+    if (!url.searchParams.get('pagination')) {
+      url.searchParams.set('pagination', '1');
+    }
+    if (!url.searchParams.get('limit')) {
+      url.searchParams.set('limit', '6');
+    }
+
+    window.history.pushState({}, '', url.toString().replace(/%2C/g, ','));
+  };
+
   onMount(() => {
     initiateFormManager();
+    initControllers();
   });
 </script>
 
