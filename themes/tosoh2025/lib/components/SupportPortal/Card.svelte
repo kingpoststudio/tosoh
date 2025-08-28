@@ -1,6 +1,8 @@
 <script lang="ts">
   import type { SupportPortalItem } from '../../../types/hubdb';
-  let { item, hasSiblings }: { item: SupportPortalItem; hasSiblings: boolean } = $props();
+  let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
+
+  console.log(item);
 
   const setupWistiaThumbnail = (url: string): string => {
     return url?.replace(
@@ -34,13 +36,15 @@
   }
 
   let imgSrc = $derived(
-    costructCDNUrl(item?.image?.url as string) ||
-      setupWistiaThumbnail(item?.wistia_video_url as string)
+    costructCDNUrl(item?.values?.image?.url as string) ||
+      setupWistiaThumbnail(item?.values?.wistia_video_url as string)
   );
-  let family = $derived(item.product_family?.map((family) => `${family.label}`).join(', '));
-  let name = $derived(item.name);
-  let downloadUrl = $derived(item.document_url || item.wistia_video_url);
-  let type = $derived(item.document_type?.label);
+  let family = $derived(
+    item?.values?.product_family?.map((family) => `${family.label}`).join(', ')
+  );
+  let name = $derived(item?.values?.name);
+  let downloadUrl = $derived(item?.values?.document_url || item.wistia_video_url);
+  let type = $derived(item?.values?.document_type?.label);
 
   const handleImageError = () => {
     imgSrc = '';
@@ -88,7 +92,7 @@
     {#if type === 'Video'}
       <a
         class="button gap-sm flex w-full items-center justify-center text-center"
-        href="support-portal/{item.hs_path}"
+        href={`support-portal/${item.path}`}
         role="button">View</a
       >
     {:else}

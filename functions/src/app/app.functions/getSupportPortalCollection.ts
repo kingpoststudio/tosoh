@@ -17,7 +17,7 @@ exports.main = async (req: any) => {
     let tableCols = [];
 
     const properties =
-      "name,image,hs_path,product_family,product_type,,document_type,wistia_video_url,document_url";
+      "name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url";
 
     const limit = body.limit ? parseInt(body.limit, 10) : 12;
     const offset = body.offset ? parseInt(body.offset, 10) : 0;
@@ -53,7 +53,7 @@ exports.main = async (req: any) => {
                 );
               }
               if (column.type === "SELECT") {
-                `${filterKey}__in=${filters[filterKey]}`;
+                filterConditions.push(`${filterKey}__in=${filters[filterKey]}`);
               }
             }
           });

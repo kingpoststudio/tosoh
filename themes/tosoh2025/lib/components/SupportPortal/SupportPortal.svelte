@@ -6,9 +6,10 @@
 />
 
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import SupportPortalFilter from './SupportPortalFilter.svelte';
   import SupportPortalControllers from './SupportPortalControllers.svelte';
-  import { onMount } from 'svelte';
   import SupportPortalGrid from './SupportPortalGrid.svelte';
   import { setSearchParams } from '../../utils/UrlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';

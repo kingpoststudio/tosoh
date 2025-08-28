@@ -4,7 +4,7 @@ exports.main = async (req) => {
         const HUBDB_ENDPOINT = "https://api.hubapi.com/cms/v3/hubdb/tables/support_portal";
         const body = req && req.body ? req.body : {};
         let tableCols = [];
-        const properties = "name,image,hs_path,product_family,product_type,,document_type,wistia_video_url,document_url";
+        const properties = "name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url";
         const limit = body.limit ? parseInt(body.limit, 10) : 12;
         const offset = body.offset ? parseInt(body.offset, 10) : 0;
         const filters = body?.filters || {};
@@ -31,7 +31,7 @@ exports.main = async (req) => {
                                 filterConditions.push(`${filterKey}__contains=${filters[filterKey]}`);
                             }
                             if (column.type === "SELECT") {
-                                `${filterKey}__in=${filters[filterKey]}`;
+                                filterConditions.push(`${filterKey}__in=${filters[filterKey]}`);
                             }
                         }
                     });

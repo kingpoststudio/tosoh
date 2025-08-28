@@ -2,10 +2,9 @@
   import { fade } from 'svelte/transition';
 
   let { options, name, disabled } = $props();
+  let activeOptions = $derived(options);
 
   const activeFilter = new URLSearchParams(window.location.search).get(name);
-
-  let activeOptions = $derived(options);
 
   const clearFilter = () => {
     const url = new URL(window.location.href);
@@ -49,7 +48,7 @@
           >{activeFilter || 'Select'}</option
         >
         {#each activeOptions as option}
-          <option value={option.value} class="text-default" selected={option.value === activeFilter}
+          <option value={option.name} class="text-default" selected={option.name === activeFilter}
             >{option.label}</option
           >
         {/each}

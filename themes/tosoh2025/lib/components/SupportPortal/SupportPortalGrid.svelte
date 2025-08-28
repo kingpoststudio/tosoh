@@ -7,7 +7,7 @@
 {#if portalItems.length > 0}
   <div transition:fade={{ duration: 100 }} class="lg:p-sm grid grid-cols-2 gap-4 lg:grid-cols-3">
     {#each portalItems as item}
-      <Card hasSiblings={portalItems.length > 1} item={item.values}></Card>
+      <Card hasSiblings={portalItems.length > 1} {item}></Card>
     {/each}
   </div>
 {:else}

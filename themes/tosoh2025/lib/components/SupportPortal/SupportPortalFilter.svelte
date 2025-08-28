@@ -126,7 +126,7 @@
   };
 
   const doesColumnIdContainValueFromUrl = (
-    row: SupportPortalRowForFilter,
+    row: SupportPortalRowForFilter['values'],
     columnId: keyof SupportPortalRowForFilter
   ) => {
     const params = new URLSearchParams(window.location.search);
@@ -158,7 +158,7 @@
       }
     }
 
-    if (row[columnId] && typeof row?.[columnId] === 'object') {
+    if (row[columnId] && typeof row?.[columnId]?.label) {
       if (!doesContain) {
         doesContain = row[columnId]?.label === paramValueWithColumnId;
       }
@@ -197,7 +197,7 @@
 
           //if is not matching
           if (!(matches as any)[columnId]) {
-            (matches as any)[columnId] = doesColumnIdContainValueFromUrl(row, columnId);
+            (matches as any)[columnId] = doesColumnIdContainValueFromUrl(rowValues, columnId);
           }
         }
       });
@@ -288,7 +288,7 @@
         <Select
           options={allAvailableColumnIdsWithTheirValues?.[columnId]}
           name={columnId}
-          disabled={false}
+          disabled={isParentLoading || isLoading}
         />
       {/if}
     {/each}

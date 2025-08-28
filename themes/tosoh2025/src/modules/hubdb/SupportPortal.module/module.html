@@ -20,7 +20,39 @@ window.Tosoh.SupportPortalContent = { filters, search };
 
 
 {% if dynamic_page_hubdb_row %}
-Hi
+    {% set wistia_video_id = row.wistia_cached_url|split('/')|reverse|first %}
+
+        {% require_js %}
+        <script>
+          window._wq = window._wq || [];
+          _wq.push({
+            id: "{{ wistia_video_id }}",
+            options: {
+              playerColor: "ed1a3b",
+              backgroundOpacity: 1,
+            }
+          });
+        </script>
+        <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+        {% end_require_js %}
+      
+        <div class="w-full flex flex-col gap-md">
+          <div class="well divider-x">
+            <a href="/support-portal">Support Portal</a>
+            <span class="ml-2xs">{{ row.name }}</span>
+          </div>
+          <div class="flex flex-col gap-md w-wide mx-auto">
+            <h1 class="as-h3">{{ row.name }}</h1>
+            <div class="aspect-video w-full wistia_responsive_padding wistia_embed wistia_async_{{ wistia_video_id }}">
+              &nbsp;</div>
+            <div class="flex flex-col gap mb-lg">
+              <div class="px-lg">{{ row.description }}</div>
+              {% if module.display_video_download %}
+              <button class="mx-auto">Download</button>
+              {% endif %}
+            </div>
+          </div>
+        </div>
 {% else %}
 <tosoh-support-portal></tosoh-support-portal>
 
