@@ -10,7 +10,8 @@
   let formManager: FormManagerInstance | null = $state(null);
   let inputElement: HTMLInputElement | null = $state(null);
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
-  const hubdb_table_id = searchFromFields?.hubdb_table_id || 'support_portal';
+  const hubdb_table_id = 'support_portal';
+  // searchFromFields?.hubdb_table_id ||
   const hubdb_column_id = searchFromFields?.hubdb_column_id || 'search_terms';
   const title = searchFromFields?.title || '';
 

@@ -19,7 +19,7 @@
 <div class="mt-md gap-sm flex flex-col">
   <div class=" gap-sm flex flex-col">
     <div class="gap-sm flex items-center">
-      <label for={name} class=" text-xl font-black">{setupFilterTitle(name)}</label>
+      <label for={name} class=" text-xl font-bold">{setupFilterTitle(name)}</label>
       {#if activeFilter}
         <button
           type="button"

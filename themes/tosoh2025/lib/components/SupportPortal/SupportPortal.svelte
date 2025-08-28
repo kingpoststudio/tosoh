@@ -32,6 +32,9 @@
   let hasError = $state(false);
   let isLoading = $state(false);
 
+  const params = new URLSearchParams(window.location.search);
+  let viewAs: 'grid' | 'list' = $state((params.get('view') as 'grid' | 'list') || 'grid');
+
   const constructFilterParams = () => {
     const params = new URLSearchParams(window.location.search);
     let objWithFilters = {};
@@ -113,6 +116,13 @@
     fetchData();
   };
 
+  const handleChangeView = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('view', viewAs === 'grid' ? 'list' : 'grid');
+    window.history.pushState({}, '', url.toString().replace(/%2C/g, ','));
+    viewAs = viewAs === 'grid' ? 'list' : 'grid';
+  };
+
   onMount(() => {
     fetchData();
   });
@@ -138,6 +148,8 @@
     isParentLoading={isLoading}
     hasParentError={hasError}
     onFormReset={onFilterSubmit}
+    {viewAs}
+    {handleChangeView}
   ></SupportPortalFilter>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
@@ -146,7 +158,7 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <SupportPortalGrid {portalItems} {isLoading}></SupportPortalGrid>
+      <SupportPortalGrid {portalItems} {isLoading} {viewAs}></SupportPortalGrid>
 
       {#if portalItems?.length > 0}
         {#key filterSubmitted}

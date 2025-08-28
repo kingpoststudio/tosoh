@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SupportPortalItem } from '../../../types/hubdb';
-  let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
+  let { item, hasSiblings, viewAs }: { item: any; hasSiblings: boolean; viewAs: 'grid' | 'list' } =
+    $props();
 
   const setupWistiaThumbnail = (url: string): string => {
     return url?.replace(
@@ -63,19 +64,21 @@
     hasSiblings ? 'h-full' : 'h-fit'
   }`}
 >
-  {#if imgSrc}
-    <img
-      alt={item.name}
-      src={imgSrc}
-      loading="lazy"
-      class="aspect-video w-full rounded-lg object-contain"
-      onerror={handleImageError}
-    />
-  {:else}
-    <div
-      class="aspect-video
+  {#if viewAs === 'grid'}
+    {#if imgSrc}
+      <img
+        alt={item.name}
+        src={imgSrc}
+        loading="lazy"
+        class="aspect-video w-full rounded-lg object-contain"
+        onerror={handleImageError}
+      />
+    {:else}
+      <div
+        class="aspect-video
        rounded-lg bg-slate-200 md:h-[12rem]"
-    ></div>
+      ></div>
+    {/if}
   {/if}
 
   <div class="gap-xs flex h-full w-full flex-col justify-between">
@@ -89,14 +92,18 @@
     {#if type === 'Video'}
       <a
         target="_blank"
-        class="button gap-sm flex w-full items-center justify-center text-center"
+        class="button gap-sm flex items-center justify-center text-center {viewAs === 'list'
+          ? 'w-fit!'
+          : 'w-full!'}"
         href={`support-portal/${item.path}`}
         role="button">View</a
       >
     {:else}
       <a
         href={downloadUrl}
-        class="button gap-sm flex w-full items-center justify-center text-center"
+        class="button gap-sm flex items-center justify-center text-center {viewAs === 'list'
+          ? 'w-fit!'
+          : 'w-full!'}"
         target="_blank"
       >
         Download

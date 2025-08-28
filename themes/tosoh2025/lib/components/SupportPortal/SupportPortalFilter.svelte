@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  let { onFilterSubmit, onFormReset, isParentLoading, hasParentError } = $props();
+  let { onFilterSubmit, onFormReset, isParentLoading, hasParentError, viewAs, handleChangeView } =
+    $props();
 
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
@@ -339,6 +340,13 @@
         onclick={handleReset}
       >
         Reset
+      </button>
+      <button
+        type="button"
+        class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
+        onclick={handleChangeView}
+      >
+        {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
       </button>
     </div>
   </form>

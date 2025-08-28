@@ -9,7 +9,7 @@
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
 
-  let limit = $state(parseInt(params?.get('limit') || '6'));
+  let limit = $state(parseInt(params?.get('limit') || '12'));
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
   let pagesArray = $derived(Array.from({ length: numberOfPages }, (_, i) => i + 1));
 
@@ -49,7 +49,18 @@
     }
   };
 
-  const isAlreadyOnFirstPage = $derived(pagination === 1);
+  const initControllers = () => {
+    const url = new URL(window.location.href);
+
+    if (!url.searchParams.get('pagination')) {
+      url.searchParams.set('pagination', '1');
+    }
+    if (!url.searchParams.get('limit')) {
+      url.searchParams.set('limit', '12');
+    }
+
+    window.history.pushState({}, '', url.toString().replace(/%2C/g, ','));
+  };
 
   $effect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -62,30 +73,11 @@
   });
 
   $effect(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    if (typeof params?.get('limit') === 'string' && limit) {
-      if (limit !== parseInt(params?.get('limit') as string)) {
-        if (isAlreadyOnFirstPage) {
-          handleFormSubmit();
-        }
-        pagination = 1;
-      }
+    if (limit) {
+      handleFormSubmit();
+      pagination = 1;
     }
   });
-
-  const initControllers = () => {
-    const url = new URL(window.location.href);
-
-    if (!url.searchParams.get('pagination')) {
-      url.searchParams.set('pagination', '1');
-    }
-    if (!url.searchParams.get('limit')) {
-      url.searchParams.set('limit', '6');
-    }
-
-    window.history.pushState({}, '', url.toString().replace(/%2C/g, ','));
-  };
 
   onMount(() => {
     initiateFormManager();

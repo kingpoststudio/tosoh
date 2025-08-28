@@ -1,5 +1,6 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
+  const { viewAs } = $props();
 </script>
 
 <div
@@ -7,13 +8,25 @@
   class="relative w-full animate-pulse rounded-lg border border-[#DAD8D8] p-[1.25rem]"
 >
   <div class=" flex h-full flex-col items-center justify-between">
-    <div class="aspect-video w-full rounded-lg bg-slate-200"></div>
+    {#if viewAs === 'grid'}
+      <div class="aspect-video w-full rounded-lg bg-slate-200"></div>
+    {/if}
+
     <div class="gap-sm mt-base flex w-full flex-col">
-      <div class=" h-[1rem] w-full rounded-lg bg-slate-200"></div>
-      <div class="h-[3.5rem] w-full rounded-lg bg-slate-200"></div>
+      <div
+        class=" h-[1rem] w-full {viewAs === 'list' ? 'max-w-48' : ''} rounded-lg bg-slate-200"
+      ></div>
+      <div
+        class="{viewAs === 'list' ? 'h-[1.5rem]' : 'h-[3.5rem]'} w-full {viewAs === 'list'
+          ? 'max-w-72'
+          : ''} rounded-lg bg-slate-200"
+      ></div>
       <button
         disabled
-        class="text-thin gap-sm bg-slate-200! flex w-full items-center justify-center rounded-lg text-center text-sm"
+        class="text-thin gap-sm bg-slate-200! flex items-center justify-center rounded-lg text-center text-sm {viewAs ===
+        'list'
+          ? 'w-fit'
+          : 'w-full'}"
         >Download
         <svg
           xmlns="http://www.w3.org/2000/svg"
