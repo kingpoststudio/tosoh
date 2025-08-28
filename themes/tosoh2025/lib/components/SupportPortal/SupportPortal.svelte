@@ -161,9 +161,9 @@
       <SupportPortalGrid {portalItems} {isLoading} {viewAs}></SupportPortalGrid>
 
       {#if portalItems?.length > 0}
-        {#key filterSubmitted}
-          <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
-        {/key}
+        <!-- {#key filterSubmitted} -->
+        <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
+        <!-- {/key} -->
       {/if}
     {/if}
   </div>
