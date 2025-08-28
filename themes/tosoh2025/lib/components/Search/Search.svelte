@@ -12,6 +12,7 @@
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const hubdb_table_id = searchFromFields?.hubdb_table_id || 'support_portal';
   const hubdb_column_id = searchFromFields?.hubdb_column_id || 'search_terms';
+  const title = searchFromFields?.title || '';
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(hubdb_column_id as string);
 
@@ -169,28 +170,34 @@
 {/snippet}
 
 <form class="relative" bind:this={formElement}>
-  <div
-    class={`mt-md relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
-  >
-    <input
-      bind:this={inputElement}
-      oninput={fetchMatches}
-      name={hubdb_column_id}
-      data-debounce="500"
-      class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
-      placeholder="Search here..."
-    />
+  <div class="mt-md gap-sm flex flex-col">
+    {#if title}
+      <label for={hubdb_column_id} class=" text-xl font-black">{title}</label>
+    {/if}
     <div
-      class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"
+      class={` relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
     >
-      {#if isLoading}
-        {@render loader()}
-      {:else if activeFilter}
-        {@render clearInput()}
-      {:else}
-        {@render magnifier()}{/if}
+      <input
+        bind:this={inputElement}
+        oninput={fetchMatches}
+        name={hubdb_column_id}
+        data-debounce="500"
+        class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
+        placeholder="Search here..."
+      />
+      <div
+        class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"
+      >
+        {#if isLoading}
+          {@render loader()}
+        {:else if activeFilter}
+          {@render clearInput()}
+        {:else}
+          {@render magnifier()}{/if}
+      </div>
     </div>
   </div>
+
   {#if showDropdown && matches.length > 0}
     <div
       transition:fade={{ duration: 100 }}
