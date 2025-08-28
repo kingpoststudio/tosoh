@@ -27,7 +27,6 @@
   let description = window?.Tosoh?.SupportPortalContent?.description;
 
   let portalItems: any = $state([]);
-  let filterSubmitted = $state(0);
   let totalItems = $state(0);
   let hasError = $state(false);
   let isLoading = $state(false);
@@ -103,12 +102,16 @@
     });
 
     updateUrl(event);
-
-    filterSubmitted++;
   };
 
-  const onControllerSubmit = () => {
-    fetchData();
+  const onControllerSubmit = (event: Event) => {
+    if ((event.target as HTMLSelectElement)?.name === 'limit') {
+      setSearchParams({
+        pagination: '1',
+      });
+    }
+
+    updateUrl(event);
   };
 
   const reloadData = () => {
@@ -141,7 +144,7 @@
 {/if}
 
 <div
-  class={`p-md gap-base max-w-8xl relative m-auto flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
+  class={`p-md gap-base max-w-8xl relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
   <SupportPortalFilter
     {onFilterSubmit}
@@ -161,9 +164,7 @@
       <SupportPortalGrid {portalItems} {isLoading} {viewAs}></SupportPortalGrid>
 
       {#if portalItems?.length > 0}
-        <!-- {#key filterSubmitted} -->
         <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
-        <!-- {/key} -->
       {/if}
     {/if}
   </div>

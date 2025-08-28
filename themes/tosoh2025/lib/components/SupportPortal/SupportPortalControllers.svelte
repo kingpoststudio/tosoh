@@ -17,18 +17,10 @@
   let canGoBackward = $derived(pagination - 1 > 0);
   let canGoForward = $derived(pagination + 1 <= numberOfPages);
 
-  const handleFormSubmit = (event?: Event) => {
-    if (event) {
-      event.preventDefault();
-    }
-
-    if (formManager) {
-      formManager.setFormValuesToParams(false);
-    }
-
+  const handleFormSubmit = (event: Event) => {
     if (!formElement) return;
 
-    onControllerSubmit();
+    onControllerSubmit(event);
   };
 
   const moveBackward = (e: Event) => {
@@ -45,7 +37,12 @@
 
   const initiateFormManager = () => {
     if (formElement && !formManager) {
-      formManager = createFormManager(formElement, {});
+      formManager = createFormManager(formElement, {
+        onValueChange: (e) => {
+          handleFormSubmit(e);
+        },
+        triggerType: 'valueChange',
+      });
     }
   };
 
@@ -61,23 +58,6 @@
 
     window.history.pushState({}, '', url.toString().replace(/%2C/g, ','));
   };
-
-  $effect(() => {
-    const params = new URLSearchParams(window.location.search);
-
-    if (typeof params?.get('pagination') === 'string' && pagination) {
-      if (pagination !== parseInt(params?.get('pagination') as string)) {
-        handleFormSubmit();
-      }
-    }
-  });
-
-  $effect(() => {
-    if (limit) {
-      handleFormSubmit();
-      pagination = 1;
-    }
-  });
 
   onMount(() => {
     initiateFormManager();

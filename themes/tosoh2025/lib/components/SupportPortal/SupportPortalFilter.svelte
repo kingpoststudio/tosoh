@@ -192,15 +192,8 @@
     let hasAllTheNeccessaryFilters = true;
     let rowMatches = Object?.keys(matches)?.map((columnId) => columnId) || [];
 
-    if (Object?.keys(matches)?.length === 0) {
-      console.log(matches, 'empty matches');
-    }
-
     requiredFilters?.forEach((requiredColumnId) => {
-      // console.log(requiredColumnId, rowMatches, 'hi');
-
       if (!rowMatches?.some((v) => v === requiredColumnId)) {
-        // console.log(requiredColumnId, v, 'hi');
         hasAllTheNeccessaryFilters = false;
       }
     });
