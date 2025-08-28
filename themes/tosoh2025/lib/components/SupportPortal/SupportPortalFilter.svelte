@@ -8,6 +8,7 @@
   import SearchInput from './SearchInput.svelte';
   import Select from './Select.svelte';
   import { mockPortalFilters } from './mock';
+  import { clearParams } from '../../utils/UrlUtils';
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const hubdb_column_id = searchFromFields?.hubdb_column_id;
@@ -138,6 +139,10 @@
       return doesContain;
     }
 
+    if (!row?.[columnId]) {
+      return doesContain;
+    }
+
     if (!paramValueWithColumnId) {
       return doesContain;
     }
@@ -145,7 +150,7 @@
     if (row[columnId] && row[columnId]?.length > 0 && Array.isArray(row[columnId])) {
       row[columnId]?.map((selectionObjects: LabelValue) => {
         if (!doesContain) {
-          doesContain = selectionObjects?.label === paramValueWithColumnId;
+          return (doesContain = selectionObjects?.label === paramValueWithColumnId);
         }
       });
     }
@@ -154,29 +159,68 @@
       const stringToSearchAgainst = row[columnId]?.toLowerCase();
       const searchString = paramValueWithColumnId?.toLowerCase();
 
+      if (stringToSearchAgainst?.includes(searchString)) {
+        console.log(searchString, 'searchString');
+        console.log(stringToSearchAgainst, 'against');
+      }
+
       if (!doesContain) {
-        doesContain = stringToSearchAgainst?.includes(searchString);
+        return (doesContain = stringToSearchAgainst?.includes(searchString));
       }
     }
 
     if (row[columnId] && typeof row?.[columnId]?.label) {
       if (!doesContain) {
-        doesContain = row[columnId]?.label === paramValueWithColumnId;
+        return (doesContain = row[columnId]?.label === paramValueWithColumnId);
       }
     }
 
     return doesContain;
   };
 
+  const doesMatchContainAllTheRequiredFilters = (matches: any) => {
+    const params = new URLSearchParams(window.location.search);
+
+    const requiredFilters = filtersFromFields?.filter((columnId) => {
+      if (params.get(columnId as any)) {
+        return true;
+      }
+      return false;
+    });
+
+    let hasAllTheNeccessaryFilters = true;
+    let rowMatches = Object?.keys(matches)?.map((columnId) => columnId) || [];
+
+    if (Object?.keys(matches)?.length === 0) {
+      console.log(matches, 'empty matches');
+    }
+
+    requiredFilters?.forEach((requiredColumnId) => {
+      // console.log(requiredColumnId, rowMatches, 'hi');
+
+      if (!rowMatches?.some((v) => v === requiredColumnId)) {
+        // console.log(requiredColumnId, v, 'hi');
+        hasAllTheNeccessaryFilters = false;
+      }
+    });
+
+    return hasAllTheNeccessaryFilters;
+  };
+
   const doesMatchAllColumnIds = (matches: {} | any) => {
     let matchesAll = true;
     if (matches && Object?.keys(matches)) {
+      if (!doesMatchContainAllTheRequiredFilters(matches)) {
+        matchesAll = false;
+      }
+
       Object?.keys(matches)?.map((columnId) => {
         if (!matches[columnId]) {
           matchesAll = false;
         }
       });
     }
+
     return matchesAll;
   };
 
@@ -190,6 +234,7 @@
       const rowValues = row.values;
       Object.keys(rowValues)?.map((columnId: any) => {
         const params = new URLSearchParams(window.location.search);
+
         let paramValueWithColumnId = params?.get(columnId);
 
         if (paramValueWithColumnId) {
@@ -202,6 +247,9 @@
           }
         }
       });
+      if (doesMatchAllColumnIds(matches)) {
+      }
+
       return doesMatchAllColumnIds(matches);
     });
 
@@ -223,16 +271,6 @@
         triggerType: 'valueChange',
       });
     }
-  };
-
-  const clearParams = (filters: string[]) => {
-    const params = new URLSearchParams(window.location.search);
-
-    filters?.map((column) => {
-      params.delete(column);
-    });
-
-    window.location.search = params?.toString();
   };
 
   const reloadFilterOptions = () => {

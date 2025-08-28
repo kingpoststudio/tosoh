@@ -2,8 +2,6 @@
   import type { SupportPortalItem } from '../../../types/hubdb';
   let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
 
-  console.log(item);
-
   const setupWistiaThumbnail = (url: string): string => {
     return url?.replace(
       /\.bin(\?disposition=attachment)?(?:\?video_still_time=\d+)?$/,

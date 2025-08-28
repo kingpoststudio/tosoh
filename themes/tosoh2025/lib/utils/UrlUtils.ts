@@ -13,3 +13,13 @@ export const setSearchParams = (params: Record<string, string>) => {
   });
   window.history.replaceState({}, '', url.toString());
 };
+
+export const clearParams = (filters: string[]) => {
+  const params = new URLSearchParams(window.location.search);
+
+  filters?.map((column) => {
+    params.delete(column);
+  });
+
+  window.location.search = params?.toString();
+};

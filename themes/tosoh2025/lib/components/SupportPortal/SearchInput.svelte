@@ -10,18 +10,34 @@
   let formManager: FormManagerInstance | null = $state(null);
   let inputElement: HTMLInputElement | null = $state(null);
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
-  const hubdb_table_id = searchFromFields?.hubdb_table_id;
-  const hubdb_column_id = searchFromFields?.hubdb_column_id;
+  const hubdb_table_id = searchFromFields?.hubdb_table_id || 'support_portal';
+  const hubdb_column_id = searchFromFields?.hubdb_column_id || 'search_terms';
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(hubdb_column_id as string);
+
+  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
+    ? [...window.Tosoh.SupportPortalContent.filters.split(','), 'pagination', 'limit']
+    : [
+        'document_category',
+        'document_type',
+        'product_family',
+        'product_type',
+        'pagination',
+        'limit',
+      ];
 
   const handleOnClick = (searchTerm: string) => {
     showDropdown = false;
 
     if (hubdb_column_id) {
-      const url = new URL(window.location.href);
-      url.searchParams.set(hubdb_column_id, searchTerm);
-      window.location.href = url.toString();
+      const params = new URLSearchParams(window.location.search);
+
+      filtersFromFields?.map((column) => {
+        params.delete(column);
+      });
+
+      params.set(hubdb_column_id, searchTerm);
+      window.location.search = params.toString();
     }
   };
 
@@ -140,15 +156,15 @@
   <button
     type="button"
     transition:fade={{ duration: 200 }}
-    class="fill-imperial-red plain h-4 w-4 cursor-pointer"
+    class="fill-imperial-red plain bg-ghost-white h-4 w-4 cursor-pointer"
     onclick={clearFilter}
     aria-label="Clear selection"
   >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="fill-imperial-red">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" height="100%" width="100%">
       <path
-        d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
-      /></svg
-    >
+        d="M55.1 73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L147.2 256 9.9 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192.5 301.3 329.9 438.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.8 256 375.1 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192.5 210.7 55.1 73.4z"
+      />
+    </svg>
   </button>
 {/snippet}
 
@@ -161,10 +177,12 @@
       oninput={fetchMatches}
       name={hubdb_column_id}
       data-debounce="500"
-      class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md"
+      class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
       placeholder="Search here..."
     />
-    <div class="right-sm absolute top-[50%] max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2">
+    <div
+      class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"
+    >
       {#if isLoading}
         {@render loader()}
       {:else if activeFilter}
