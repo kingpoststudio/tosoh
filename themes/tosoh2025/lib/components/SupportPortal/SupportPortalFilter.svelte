@@ -5,8 +5,8 @@
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
-  import SearchInput from './SearchInput.svelte';
-  import Select from './Select.svelte';
+  import SearchInput from '../Search/Search.svelte';
+  import Select from '../Select/Select.svelte';
   import { mockPortalFilters } from './mock';
   import { clearParams } from '../../utils/UrlUtils';
 

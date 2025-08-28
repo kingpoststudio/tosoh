@@ -13,7 +13,6 @@
   import SupportPortalGrid from './SupportPortalGrid.svelte';
   import { setSearchParams } from '../../utils/UrlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
-  import SupportPortalSkeletonGrid from './SupportPortalSkeletonGrid.svelte';
   import { mockPortalItems } from './mock';
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
@@ -29,12 +28,7 @@
   let totalItems = $state(0);
   let hasError = $state(false);
   let isLoading = $state(false);
-  let skeletonItems = $state(
-    Array.from(
-      { length: new URLSearchParams(window.location.search)?.get('limit') || 12 },
-      (_, i) => i + 1
-    )
-  );
+
   const constructFilterParams = () => {
     const params = new URLSearchParams(window.location.search);
     let objWithFilters = {};
@@ -116,15 +110,6 @@
     fetchData();
   };
 
-  $effect(() => {
-    if (isLoading) {
-      skeletonItems = Array.from(
-        { length: new URLSearchParams(window.location.search)?.get('limit') || 12 },
-        (_, i) => i + 1
-      );
-    }
-  });
-
   onMount(() => {
     fetchData();
   });
@@ -146,11 +131,7 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      {#if isLoading}
-        <SupportPortalSkeletonGrid {skeletonItems}></SupportPortalSkeletonGrid>
-      {:else}
-        <SupportPortalGrid {portalItems}></SupportPortalGrid>
-      {/if}
+      <SupportPortalGrid {portalItems} {isLoading}></SupportPortalGrid>
 
       {#if portalItems?.length > 0}
         {#key filterSubmitted}
