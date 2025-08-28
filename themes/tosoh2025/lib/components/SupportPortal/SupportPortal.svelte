@@ -23,6 +23,9 @@
     ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id
     : 'search_terms';
 
+  let title = window?.Tosoh?.SupportPortalContent?.title;
+  let description = window?.Tosoh?.SupportPortalContent?.description;
+
   let portalItems: any = $state([]);
   let filterSubmitted = $state(0);
   let totalItems = $state(0);
@@ -115,8 +118,20 @@
   });
 </script>
 
+{#if title || description}
+  <div class="max-w-8xl gap-sm p-md m-auto mt-32 flex flex-col">
+    {#if title}
+      <h1 class="text-6xl font-bold">{title}</h1>
+    {/if}
+
+    {#if description}
+      <p class="text-nickel text-lg">{description}</p>
+    {/if}
+  </div>
+{/if}
+
 <div
-  class="mt-lg p-md gap-base relative m-auto flex w-full max-w-[var(--container-8xl)] flex-col justify-around lg:flex-row"
+  class={`p-md gap-base max-w-8xl relative m-auto flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
   <SupportPortalFilter
     {onFilterSubmit}

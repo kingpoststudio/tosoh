@@ -4,7 +4,13 @@ import { breadCrumbField } from '../../../../lib/utils/FieldUtils';
 const generateFields = () => {
   return [
     breadCrumbField(),
-    textField('title', 'Title'),
+    textField('title', 'Title', {
+      default: 'Tosoh Support Portal',
+    }),
+    textField('description', 'Description', {
+      default:
+        'Your centralized hub for technical assistance, product resources, and expert guidance across Tosoh diagnostic systems.',
+    }),
     groupField('search', 'Search', {
       children: [
         textField('title', 'Title'),

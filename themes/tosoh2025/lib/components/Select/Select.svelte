@@ -84,7 +84,7 @@
     }
 
     &::picker(select) {
-      border-color: var(--color-imperial-red);
+      border-color: var(--color-slate-200);
       border-width: 1px;
       max-height: 16rem;
     }
@@ -108,6 +108,6 @@
   }
 
   option::checkmark {
-    display: none;
+    display: block;
   }
 </style>

@@ -4,17 +4,22 @@
 {% set search_hubdb_table = module.search.hubdb_table_id %}
 {% set search_hubdb_column = module.search.hubdb_column_id %}
 
+{%set title = module.title %}
+{%set description = module.description %}
+
 {% set row = dynamic_page_hubdb_row %}
 
 {% require_js position="head" %}
 <script>
 const filters = '{{ filter_columns }}';
+const title = '{{title}}'
+const description = '{{description}}'
 const search = {
     title: "{{ search_title  || ""}}",
     hubdb_table_id: "{{ search_hubdb_table || ""}}",
     hubdb_column_id: "{{ search_hubdb_column || ""}}",
 };
-window.Tosoh.SupportPortalContent = { filters, search };
+window.Tosoh.SupportPortalContent = { filters, search, title, description };
 </script>
 {% end_require_js %}
 

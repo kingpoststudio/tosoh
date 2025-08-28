@@ -13,6 +13,8 @@ declare global {
           hubdb_table_id?: string;
           hubdb_column_id?: string;
         };
+        title: string;
+        description: string;
       };
     };
     hsVideoApi?: any;
