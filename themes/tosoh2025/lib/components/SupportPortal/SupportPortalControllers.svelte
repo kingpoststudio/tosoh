@@ -24,14 +24,24 @@
   };
 
   const moveBackward = (e: Event) => {
-    if (pagination - 1 > 0) {
-      pagination = pagination && pagination - 1;
+    const url = new URL(window.location.href);
+    let pagination = url.searchParams.get('pagination');
+
+    if (pagination && parseInt?.(pagination) - 1 > 0) {
+      pagination = (parseInt?.(pagination) - 1) as any;
+      url.searchParams?.set('pagination', (pagination as any)?.toString());
+      window.location.href = url?.toString();
     }
   };
 
   const moveForward = (e: Event) => {
-    if (pagination + 1 <= numberOfPages) {
-      pagination = pagination + 1;
+    const url = new URL(window.location.href);
+    let pagination = url.searchParams.get('pagination');
+
+    if (pagination && parseInt?.(pagination) + 1 <= numberOfPages) {
+      pagination = (parseInt?.(pagination) + 1) as any;
+      url.searchParams?.set('pagination', (pagination as any)?.toString());
+      window.location.href = url?.toString();
     }
   };
 
