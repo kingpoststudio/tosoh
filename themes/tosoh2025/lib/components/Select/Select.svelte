@@ -13,7 +13,7 @@
   };
 
   const setupFilterTitle = (column: string) =>
-    column.replace('_', ' ').replace(/^\w/, (c) => c.toUpperCase());
+    column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
 </script>
 
 <div class="mt-md gap-sm flex flex-col">
