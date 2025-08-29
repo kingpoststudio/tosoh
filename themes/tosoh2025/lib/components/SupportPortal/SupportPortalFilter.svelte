@@ -322,13 +322,7 @@
     {/each}
 
     <div class="gap-sm mt-lg flex w-full">
-      <button
-        type="button"
-        class="border-imperial-red text-default! p-sm outlined w-full cursor-pointer rounded-lg border hover:bg-red-50"
-        onclick={handleReset}
-      >
-        Reset
-      </button>
+      <button type="button" class="outlined hover:bg-red-50" onclick={handleReset}> Reset </button>
       <button
         type="button"
         class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"

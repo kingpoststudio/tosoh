@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
 @import 'tailwindcss';
+@import './_forms.css';
 
 @theme {
   --color-default: #212121;
@@ -61,13 +62,15 @@ html {
 button,
 .button,
 *[role='button'] {
+  @apply px-md py-xs cursor-pointer rounded-lg border-2 font-normal transition-all duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+
   &:not(.outlined):not(.plain) {
     @apply from-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red border-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-normal text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow] duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
     box-shadow: 0px -3.08px 11.54px 0px #00000026 inset;
   }
 
   &.outlined {
-    @apply border from-white to-zinc-50 inset-shadow-none;
+    @apply border-imperial-red border from-white to-zinc-50 inset-shadow-none;
   }
 
   &.plain {
