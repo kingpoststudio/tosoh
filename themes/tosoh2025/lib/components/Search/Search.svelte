@@ -49,7 +49,7 @@
     try {
       isLoading = true;
       const response = await fetch(
-        `https://145184808.hs-sites-eu1.com/hs/serverless/get-matching-search-items`,
+        `https://${window.location.hostname}/hs/serverless/get-matching-search-items`,
         {
           method: 'POST',
           headers: {

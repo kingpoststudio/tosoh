@@ -87,7 +87,7 @@
 
     try {
       const response = await fetch(
-        'https://145184808.hs-sites-eu1.com/hs/serverless/get-support-portal-filter-options',
+        `https://${window.location.hostname}/hs/serverless/get-support-portal-filter-options`,
         {
           method: 'POST',
           headers: {
@@ -159,11 +159,6 @@
     if (row[columnId] && typeof row[columnId] === 'string' && row[columnId]?.length > 0) {
       const stringToSearchAgainst = row[columnId]?.toLowerCase();
       const searchString = paramValueWithColumnId?.toLowerCase();
-
-      if (stringToSearchAgainst?.includes(searchString)) {
-        console.log(searchString, 'searchString');
-        console.log(stringToSearchAgainst, 'against');
-      }
 
       if (!doesContain) {
         return (doesContain = stringToSearchAgainst?.includes(searchString));
