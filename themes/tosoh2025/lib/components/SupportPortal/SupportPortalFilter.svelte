@@ -321,7 +321,7 @@
       {/if}
     {/each}
 
-    <div class="gap-sm mt-lg flex w-full">
+    <div class="gap-sm mt-lg flex w-full flex-row lg:flex-col">
       <button type="button" class="outlined w-full hover:bg-red-50" onclick={handleReset}>
         Reset
       </button>
