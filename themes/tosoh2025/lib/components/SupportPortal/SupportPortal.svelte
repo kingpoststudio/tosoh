@@ -17,7 +17,7 @@
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
-    : ['product_family', 'product_type'];
+    : ['product_family', 'product_type', 'document_type', 'document_category'];
 
   let searchColumnId = window?.Tosoh?.SupportPortalContent?.search
     ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id

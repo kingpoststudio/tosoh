@@ -20,10 +20,10 @@
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
     ? [...window.Tosoh.SupportPortalContent.filters.split(','), 'pagination', 'limit']
     : [
-        'document_category',
-        'document_type',
         'product_family',
         'product_type',
+        'document_type',
+        'document_category',
         'pagination',
         'limit',
       ];

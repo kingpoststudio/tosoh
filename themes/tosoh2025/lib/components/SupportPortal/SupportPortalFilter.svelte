@@ -16,7 +16,7 @@
 
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
     ? [...window.Tosoh.SupportPortalContent.filters.split(','), hubdb_column_id]
-    : ['document_category', 'document_type', 'product_family', 'product_type'];
+    : ['product_family', 'product_type', 'document_type', 'document_category'];
 
   let allAvailableColumnIdsWithTheirValues: Record<string, any> = $state({});
 
