@@ -11,7 +11,7 @@
   import SupportPortalFilter from './SupportPortalFilter.svelte';
   import SupportPortalControllers from './SupportPortalControllers.svelte';
   import SupportPortalGrid from './SupportPortalGrid.svelte';
-  import { setSearchParams } from '../../utils/urlUtils';
+  import { setSearchParams, updateUrl } from '../../utils/urlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
   import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
@@ -87,30 +87,11 @@
     }
   };
 
-  const updateUrl = (e: Event) => {
-    if (e) {
-      const { name, value } = e?.target as HTMLSelectElement;
-      const url = new URL(window.location.href);
-      url.searchParams.set(name, value);
-      window.location.href = url.toString();
-    }
-  };
-
   const onFilterSubmit = (event: Event) => {
     setSearchParams({
       pagination: `${defaultPagination}`,
       limit: `${defaultItemsLimit}`,
     });
-
-    updateUrl(event);
-  };
-
-  const onControllerSubmit = (event: Event) => {
-    if ((event.target as HTMLSelectElement)?.name === 'limit') {
-      setSearchParams({
-        pagination: `${defaultPagination}`,
-      });
-    }
 
     updateUrl(event);
   };
@@ -165,7 +146,7 @@
       <SupportPortalGrid {portalItems} {isLoading} {viewAs}></SupportPortalGrid>
 
       {#if portalItems?.length > 0}
-        <SupportPortalControllers {totalItems} {onControllerSubmit}></SupportPortalControllers>
+        <SupportPortalControllers {totalItems}></SupportPortalControllers>
       {/if}
     {/if}
   </div>

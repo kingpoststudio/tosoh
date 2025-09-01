@@ -23,3 +23,12 @@ export const clearParams = (filters: string[]) => {
 
   window.location.search = params?.toString();
 };
+
+export const updateUrl = (e: Event) => {
+  if (e) {
+    const { name, value } = e?.target as HTMLSelectElement;
+    const url = new URL(window.location.href);
+    url.searchParams.set(name, value);
+    window.location.href = url.toString();
+  }
+};
