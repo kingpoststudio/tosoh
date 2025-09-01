@@ -1,10 +1,5 @@
 <script lang="ts">
-  type Matches = { [id in keyof SupportPortalRowForFilter['values']]: boolean };
-  type ColumnId = keyof SupportPortalRowForFilter['values'];
-  type FilterWithOptions = Record<ColumnId, ColumnItem[]>;
-
   import { onMount } from 'svelte';
-  import type { ColumnItem, LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
   import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
   import { mockPortalFilters } from './mock';
   import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
@@ -13,6 +8,8 @@
   import SearchInput from '../Search/Search.svelte';
   import Select from '../Select/Select.svelte';
   import FilterForm from '../FilterForm/FilterForm.svelte';
+  import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
+  import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
 
   let { isParentLoading, hasParentError, viewAs, handleChangeView } = $props();
 
@@ -20,7 +17,7 @@
   const searchColumnId = searchFromFields?.hubdb_column_id;
 
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
-    ? [...window.Tosoh.SupportPortalContent.filters.split(','), searchColumnId]
+    ? ([...window.Tosoh.SupportPortalContent.filters.split(','), searchColumnId] as ColumnId[])
     : [];
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
@@ -43,62 +40,6 @@
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
     }
-  };
-
-  const parseFilterOptions = (rows: SupportPortalRowForFilter[]) => {
-    let columnsIdsWithAllTheirAvailableValues: Record<string, any> = {};
-
-    if (rows && rows?.length > 0) {
-      rows.forEach((row) => {
-        const rowValues = row?.values;
-
-        Object.keys(rowValues)?.map((colummnId) => {
-          if ((rowValues as any)[colummnId] && Array.isArray((rowValues as any)[colummnId])) {
-            return (columnsIdsWithAllTheirAvailableValues[colummnId] = []);
-          }
-
-          if ((rowValues as any)[colummnId] && (rowValues as any)[colummnId]?.label) {
-            return (columnsIdsWithAllTheirAvailableValues[colummnId] = []);
-          }
-        });
-      });
-
-      rows.forEach((row) => {
-        const rowValues = row?.values;
-
-        Object.keys(rowValues)?.map((colummnId) => {
-          //array types
-          if (Array.isArray((rowValues as any)[colummnId])) {
-            const arrayWithOptions = (rowValues as any)[colummnId] as LabelValue[];
-
-            if (arrayWithOptions && arrayWithOptions.length > 0) {
-              arrayWithOptions?.map((option) => {
-                const doesValueInColumnIdExists = columnsIdsWithAllTheirAvailableValues[
-                  colummnId
-                ]?.some((existingValue: LabelValue) => existingValue.label === option?.label);
-
-                if (!doesValueInColumnIdExists) {
-                  columnsIdsWithAllTheirAvailableValues[colummnId].push(option);
-                }
-              });
-            }
-          }
-
-          //object types
-          if ((rowValues as any)[colummnId]?.label) {
-            const doesValueInColumnIdExists = columnsIdsWithAllTheirAvailableValues[
-              colummnId
-            ]?.some((option: any) => option.label === (rowValues as any)[colummnId]?.label);
-
-            if (!doesValueInColumnIdExists) {
-              columnsIdsWithAllTheirAvailableValues[colummnId].push((rowValues as any)[colummnId]);
-            }
-          }
-        });
-      });
-    }
-
-    allAvailableFiltersWithTheirOptions = columnsIdsWithAllTheirAvailableValues;
   };
 
   const getFilterOptions = async () => {
@@ -140,141 +81,14 @@
     }
   };
 
-  const doesRowColumnContainValueFromUrl = (
-    row: SupportPortalRowForFilter['values'],
-    columnId: keyof SupportPortalRowForFilter['values']
-  ) => {
-    const params = new URLSearchParams(window.location.search);
-    let paramValueWithColumnId = params?.get(columnId);
-    let doesContain = false;
-
-    if (!row || !columnId) {
-      return doesContain;
-    }
-
-    if (!row?.[columnId]) {
-      return doesContain;
-    }
-
-    if (!paramValueWithColumnId) {
-      return doesContain;
-    }
-
-    const isMultiselectColumn =
-      row?.[columnId] && Array.isArray(row[columnId]) && row[columnId]?.length > 0;
-    const isStringColumn =
-      row[columnId] && typeof row[columnId] === 'string' && row[columnId]?.length > 0;
-    const isSelectColumn =
-      row[columnId] &&
-      typeof row[columnId] !== 'string' &&
-      !Array.isArray(row[columnId]) &&
-      row?.[columnId]?.label;
-
-    if (isMultiselectColumn) {
-      let column = row[columnId] as SupportPortalRowForFilter['values']['multiSelectColumn'];
-
-      column?.map((selection) => {
-        if (!doesContain) {
-          return (doesContain = selection?.label === paramValueWithColumnId);
-        }
-      });
-    }
-
-    if (isStringColumn) {
-      let column = row[columnId] as SupportPortalRowForFilter['values']['stringColumn'];
-      const stringToSearchAgainst = column?.toLowerCase();
-      const urlValueToLowerCase = paramValueWithColumnId?.toLowerCase();
-
-      if (!doesContain) {
-        return (doesContain = stringToSearchAgainst?.includes(urlValueToLowerCase) || false);
-      }
-    }
-
-    if (isSelectColumn) {
-      let column = row[columnId] as SupportPortalRowForFilter['values']['selectColumn'];
-
-      if (!doesContain) {
-        return (doesContain = column?.label === paramValueWithColumnId);
-      }
-    }
-
-    return doesContain;
-  };
-
-  const doesMatchContainAllTheFiltersFromUrl = (matches: Matches) => {
-    const params = new URLSearchParams(window.location.search);
-
-    const activeFiltersBasedOnUrl = filtersFromFields?.filter((columnId) => {
-      if (params.get(columnId as any)) {
-        return true;
-      }
-      return false;
-    });
-
-    let hasAllTheNeccessaryFilters = true;
-
-    let rowMatches = Object?.keys(matches)?.map((columnId) => columnId) || [];
-
-    activeFiltersBasedOnUrl?.forEach((requiredColumnId) => {
-      if (!rowMatches?.some((v) => v === requiredColumnId)) {
-        hasAllTheNeccessaryFilters = false;
-      }
-    });
-
-    return hasAllTheNeccessaryFilters;
-  };
-
-  const doesMatchAllColumnIds = (matches: Matches) => {
-    let matchesAll = true;
-
-    if (matches && Object?.keys(matches)) {
-      if (!doesMatchContainAllTheFiltersFromUrl(matches)) {
-        matchesAll = false;
-      }
-
-      Object?.keys(matches)?.map((columnId) => {
-        const doesRequiredFilterExistInMatches = columnId in matches;
-
-        if (!doesRequiredFilterExistInMatches) {
-          matchesAll = false;
-        }
-      });
-    }
-
-    return matchesAll;
-  };
-
   const filterValuesForSelectsBasedOnUrl = (allRows: any) => {
     if (!allRows || allRows.length === 0) {
       return;
     }
 
-    const filteredRows = allRows.filter((row: SupportPortalRowForFilter) => {
-      let matches: Matches = {};
+    const filteredRows = filterRows(allRows, filtersFromFields);
 
-      const rowValues = row.values;
-      Object.keys(rowValues)?.map((columnKey: any) => {
-        let columnId = columnKey as keyof SupportPortalRowForFilter['values'];
-
-        const params = new URLSearchParams(window.location.search);
-
-        let doesColumnIdExistInUrl = params?.get(columnId);
-
-        if (doesColumnIdExistInUrl) {
-          //init in matches with false as default
-          matches[columnId] = false;
-
-          //if is not matching
-          if (!matches[columnId]) {
-            matches[columnId] = doesRowColumnContainValueFromUrl(rowValues, columnId);
-          }
-        }
-      });
-
-      return doesMatchAllColumnIds(matches);
-    });
-
-    parseFilterOptions(filteredRows);
+    allAvailableFiltersWithTheirOptions = parseFilterOptions(filteredRows);
   };
 
   const reloadFilterOptions = () => {
