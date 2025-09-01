@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
-  import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
+  import { createFormManager, type FormManagerInstance } from '../../utils/formManager';
 
   let matches: string[] = $state([]);
   let isLoading = $state(false);

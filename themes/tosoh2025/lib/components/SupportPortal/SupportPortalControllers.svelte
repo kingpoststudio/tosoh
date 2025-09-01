@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
+  import { createFormManager, type FormManagerInstance } from '../../utils/formManager';
   let { onControllerSubmit, totalItems } = $props();
 
   const params = new URLSearchParams(window.location.search);

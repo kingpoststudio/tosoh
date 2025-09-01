@@ -11,13 +11,14 @@
   import SupportPortalFilter from './SupportPortalFilter.svelte';
   import SupportPortalControllers from './SupportPortalControllers.svelte';
   import SupportPortalGrid from './SupportPortalGrid.svelte';
-  import { setSearchParams } from '../../utils/UrlUtils';
+  import { setSearchParams } from '../../utils/urlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
+  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
-    : ['product_family', 'product_type', 'document_type', 'document_category'];
+    : [];
 
   let searchColumnId = window?.Tosoh?.SupportPortalContent?.search
     ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id
@@ -46,8 +47,8 @@
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
     return {
-      limit: parseInt(params?.get('limit')) || 12,
-      pagination: parseInt(params?.get('pagination')) || 1,
+      limit: parseInt(params?.get('limit')) || defaultItemsLimit,
+      pagination: parseInt(params?.get('pagination')) || defaultPagination,
       offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1) || 0,
       filters: constructFilterParams(),
     };
@@ -97,8 +98,8 @@
 
   const onFilterSubmit = (event: Event) => {
     setSearchParams({
-      pagination: '1',
-      limit: '12',
+      pagination: `${defaultPagination}`,
+      limit: `${defaultItemsLimit}`,
     });
 
     updateUrl(event);
@@ -107,7 +108,7 @@
   const onControllerSubmit = (event: Event) => {
     if ((event.target as HTMLSelectElement)?.name === 'limit') {
       setSearchParams({
-        pagination: '1',
+        pagination: `${defaultPagination}`,
       });
     }
 

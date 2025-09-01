@@ -26,9 +26,9 @@ const generateFields = () => {
         textField('hubdb_column_id', 'HubDB Column ID', {
           inline_help_text:
             'The ID of the column you wish to filter. This is not the label for the column, but the single-string ID (i.e., <code>column_id</code>).',
+          required: true,
         }),
       ],
-      required: true,
       occurrence: {
         min: 1,
         max: 4,

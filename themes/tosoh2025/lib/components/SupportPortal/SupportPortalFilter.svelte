@@ -4,19 +4,19 @@
     $props();
 
   import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
-  import { createFormManager, type FormManagerInstance } from '../../utils/FormManager';
+  import { createFormManager, type FormManagerInstance } from '../../utils/formManager';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from '../Search/Search.svelte';
   import Select from '../Select/Select.svelte';
   import { mockPortalFilters } from './mock';
-  import { clearParams } from '../../utils/UrlUtils';
+  import { clearParams } from '../../utils/urlUtils';
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const hubdb_column_id = searchFromFields?.hubdb_column_id;
 
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
     ? [...window.Tosoh.SupportPortalContent.filters.split(','), hubdb_column_id]
-    : ['product_family', 'product_type', 'document_type', 'document_category'];
+    : [];
 
   let allAvailableColumnIdsWithTheirValues: Record<string, any> = $state({});
 
