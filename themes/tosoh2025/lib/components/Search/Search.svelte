@@ -12,8 +12,9 @@
     : [];
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
-  const hubdb_table_id = 'support_portal';
+  //IMPORTANT: WHEN IN PROD CHANGE THAT. NOW WE USE HARDCODED VALUE, BECAUSE id OF PROD TABLE !== id of STAGING TABLE
   // searchFromFields?.hubdb_table_id ||
+  const hubdb_table_id = 'support_portal';
   const hubdb_column_id = searchFromFields?.hubdb_column_id || 'search_terms';
   const title = searchFromFields?.title || '';
 
