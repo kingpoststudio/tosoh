@@ -3,7 +3,7 @@ export type triggerType = 'submit' | 'change';
 export interface FormManagerOptions {
   onSubmit?: (e: Event) => void;
   onChange?: (e: Event) => void;
-  onReset?: () => void;
+  onReset?: (e?: Event) => void;
   triggerType?: triggerType;
   updateUrl?: boolean;
 }

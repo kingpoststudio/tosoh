@@ -20,7 +20,7 @@
     trigger: triggerType;
     onSubmit?: (e: Event) => void;
     onChange?: (e: Event) => void;
-    onReset?: () => void;
+    onReset?: (e: Event) => void;
     onClickOutside?: (e?: Event) => void;
     children: Snippet;
   } = $props();
@@ -41,9 +41,9 @@
             onSubmit(e);
           }
         },
-        onReset: () => {
+        onReset: (e) => {
           if (formElement && onReset) {
-            onReset();
+            onReset(e as Event);
           }
         },
         triggerType: trigger,

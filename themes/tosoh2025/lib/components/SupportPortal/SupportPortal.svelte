@@ -129,10 +129,8 @@
   class={`p-md gap-base max-w-8xl relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
   <SupportPortalFilter
-    {onFilterSubmit}
     isParentLoading={isLoading}
     hasParentError={hasError}
-    onFormReset={onFilterSubmit}
     {viewAs}
     {handleChangeView}
   ></SupportPortalFilter>
