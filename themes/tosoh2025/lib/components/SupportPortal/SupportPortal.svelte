@@ -9,12 +9,12 @@
   import { onMount } from 'svelte';
 
   import SupportPortalFilter from './SupportPortalFilter.svelte';
-  import SupportPortalControllers from './SupportPortalControllers.svelte';
   import SupportPortalGrid from './SupportPortalGrid.svelte';
   import { setSearchParams, updateUrl } from '../../utils/urlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
   import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
@@ -146,7 +146,7 @@
       <SupportPortalGrid {portalItems} {isLoading} {viewAs}></SupportPortalGrid>
 
       {#if portalItems?.length > 0}
-        <SupportPortalControllers {totalItems}></SupportPortalControllers>
+        <PaginationWithLimit {totalItems}></PaginationWithLimit>
       {/if}
     {/if}
   </div>
