@@ -248,7 +248,7 @@
   const initiateFormManager = () => {
     if (formElement && !formManager) {
       formManager = createFormManager(formElement, {
-        onValueChange: (e) => {
+        onChange: (e) => {
           if (formElement) {
             handleFormSubmit(e);
           }
@@ -257,7 +257,7 @@
           clearParams(filtersFromFields);
           onFormReset();
         },
-        triggerType: 'valueChange',
+        triggerType: 'change',
       });
     }
   };

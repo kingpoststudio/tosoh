@@ -48,10 +48,10 @@
   const initiateFormManager = () => {
     if (formElement && !formManager) {
       formManager = createFormManager(formElement, {
-        onValueChange: (e) => {
+        onChange: (e) => {
           handleFormSubmit(e);
         },
-        triggerType: 'valueChange',
+        triggerType: 'change',
       });
     }
   };

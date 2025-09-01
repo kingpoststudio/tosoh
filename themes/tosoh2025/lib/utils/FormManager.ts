@@ -1,8 +1,10 @@
+export type triggerType = 'submit' | 'change';
+
 export interface FormManagerOptions {
   onSubmit?: (e: Event) => void;
-  onValueChange?: (e: Event) => void;
+  onChange?: (e: Event) => void;
   onReset?: () => void;
-  triggerType?: 'submit' | 'valueChange';
+  triggerType?: triggerType;
   updateUrl?: boolean;
 }
 
@@ -99,7 +101,7 @@ export function createFormManager(
   form: HTMLFormElement,
   options: FormManagerOptions = {}
 ): FormManagerInstance {
-  const { onSubmit, onReset, onValueChange, triggerType = 'submit', updateUrl = true } = options;
+  const { onSubmit, onReset, onChange, triggerType = 'submit', updateUrl = true } = options;
 
   const setFormValuesToParams = (reset?: boolean, input?: string) => {
     const formData = new FormData(form);
@@ -127,12 +129,12 @@ export function createFormManager(
   };
 
   const setupForm = () => {
-    if (triggerType === 'valueChange') {
+    if (triggerType === 'change') {
       Array.from(form.elements).forEach((element) => {
         if (element.tagName === 'SELECT') {
           (element as HTMLSelectElement).onchange = (e: Event) => {
             setFormValuesToParams();
-            if (onValueChange) onValueChange(e);
+            if (onChange) onChange(e);
           };
         }
 
@@ -146,11 +148,11 @@ export function createFormManager(
             if (hasDebounce) {
               debounceInput(element, debounceDelay, () => {
                 setFormValuesToParams();
-                if (onValueChange) onValueChange(e);
+                if (onChange) onChange(e);
               });
             } else {
               setFormValuesToParams();
-              if (onValueChange) onValueChange(e);
+              if (onChange) onChange(e);
             }
           });
         }
