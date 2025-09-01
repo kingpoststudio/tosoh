@@ -11,6 +11,7 @@
   import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import SupportPortal from './SupportPortal.svelte';
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
@@ -23,6 +24,8 @@
 
   let isLoading = $state(false);
   let hasError = $state(false);
+
+  type Matches = { [id in keyof SupportPortalRowForFilter['values']]: boolean };
 
   const onChange = (event: Event) => {
     onReset();
@@ -118,10 +121,10 @@
       const data = await response?.json();
 
       if (!data?.error) {
-        const filterOptions = data.results;
+        const allRows = data.results;
 
-        if (filterOptions?.length > 0) {
-          setAvailableFiltersBasedOnUrl(filterOptions);
+        if (allRows?.length > 0) {
+          filterValuesForSelectsBasedOnUrl(allRows);
         }
       }
 
@@ -136,9 +139,9 @@
     }
   };
 
-  const doesColumnIdContainValueFromUrl = (
+  const doesRowColumnContainValueFromUrl = (
     row: SupportPortalRowForFilter['values'],
-    columnId: keyof SupportPortalRowForFilter
+    columnId: keyof SupportPortalRowForFilter['values']
   ) => {
     const params = new URLSearchParams(window.location.search);
     let paramValueWithColumnId = params?.get(columnId);
@@ -156,36 +159,51 @@
       return doesContain;
     }
 
-    if (row[columnId] && row[columnId]?.length > 0 && Array.isArray(row[columnId])) {
-      row[columnId]?.map((selectionObjects: LabelValue) => {
+    const isMultiselectColumn =
+      row?.[columnId] && Array.isArray(row[columnId]) && row[columnId]?.length > 0;
+    const isStringColumn =
+      row[columnId] && typeof row[columnId] === 'string' && row[columnId]?.length > 0;
+    const isSelectColumn =
+      row[columnId] &&
+      typeof row[columnId] !== 'string' &&
+      !Array.isArray(row[columnId]) &&
+      row?.[columnId]?.label;
+
+    if (isMultiselectColumn) {
+      let column = row[columnId] as SupportPortalRowForFilter['values']['multiSelectColumn'];
+
+      column?.map((selection) => {
         if (!doesContain) {
-          return (doesContain = selectionObjects?.label === paramValueWithColumnId);
+          return (doesContain = selection?.label === paramValueWithColumnId);
         }
       });
     }
 
-    if (row[columnId] && typeof row[columnId] === 'string' && row[columnId]?.length > 0) {
-      const stringToSearchAgainst = row[columnId]?.toLowerCase();
-      const searchString = paramValueWithColumnId?.toLowerCase();
+    if (isStringColumn) {
+      let column = row[columnId] as SupportPortalRowForFilter['values']['stringColumn'];
+      const stringToSearchAgainst = column?.toLowerCase();
+      const urlValueToLowerCase = paramValueWithColumnId?.toLowerCase();
 
       if (!doesContain) {
-        return (doesContain = stringToSearchAgainst?.includes(searchString));
+        return (doesContain = stringToSearchAgainst?.includes(urlValueToLowerCase) || false);
       }
     }
 
-    if (row[columnId] && typeof row?.[columnId]?.label) {
+    if (isSelectColumn) {
+      let column = row[columnId] as SupportPortalRowForFilter['values']['selectColumn'];
+
       if (!doesContain) {
-        return (doesContain = row[columnId]?.label === paramValueWithColumnId);
+        return (doesContain = column?.label === paramValueWithColumnId);
       }
     }
 
     return doesContain;
   };
 
-  const doesMatchContainAllTheRequiredFilters = (matches: any) => {
+  const doesMatchContainAllTheFiltersFromUrl = (matches: Matches) => {
     const params = new URLSearchParams(window.location.search);
 
-    const requiredFilters = filtersFromFields?.filter((columnId) => {
+    const activeFiltersBasedOnUrl = filtersFromFields?.filter((columnId) => {
       if (params.get(columnId as any)) {
         return true;
       }
@@ -193,9 +211,10 @@
     });
 
     let hasAllTheNeccessaryFilters = true;
+
     let rowMatches = Object?.keys(matches)?.map((columnId) => columnId) || [];
 
-    requiredFilters?.forEach((requiredColumnId) => {
+    activeFiltersBasedOnUrl?.forEach((requiredColumnId) => {
       if (!rowMatches?.some((v) => v === requiredColumnId)) {
         hasAllTheNeccessaryFilters = false;
       }
@@ -204,15 +223,18 @@
     return hasAllTheNeccessaryFilters;
   };
 
-  const doesMatchAllColumnIds = (matches: {} | any) => {
+  const doesMatchAllColumnIds = (matches: Matches) => {
     let matchesAll = true;
+
     if (matches && Object?.keys(matches)) {
-      if (!doesMatchContainAllTheRequiredFilters(matches)) {
+      if (!doesMatchContainAllTheFiltersFromUrl(matches)) {
         matchesAll = false;
       }
 
       Object?.keys(matches)?.map((columnId) => {
-        if (!matches[columnId]) {
+        const doesRequiredFilterExistInMatches = columnId in matches;
+
+        if (!doesRequiredFilterExistInMatches) {
           matchesAll = false;
         }
       });
@@ -221,36 +243,37 @@
     return matchesAll;
   };
 
-  const setAvailableFiltersBasedOnUrl = (filterRows: any) => {
-    if (!filterRows || filterRows.length === 0) {
+  const filterValuesForSelectsBasedOnUrl = (allRows: any) => {
+    if (!allRows || allRows.length === 0) {
       return;
     }
 
-    const filteredOptions = filterRows.filter((row: SupportPortalRowForFilter) => {
-      let matches = {};
+    const filteredRows = allRows.filter((row: SupportPortalRowForFilter) => {
+      let matches: Matches = {};
+
       const rowValues = row.values;
-      Object.keys(rowValues)?.map((columnId: any) => {
+      Object.keys(rowValues)?.map((columnKey: any) => {
+        let columnId = columnKey as keyof SupportPortalRowForFilter['values'];
+
         const params = new URLSearchParams(window.location.search);
 
-        let paramValueWithColumnId = params?.get(columnId);
+        let doesColumnIdExistInUrl = params?.get(columnId);
 
-        if (paramValueWithColumnId) {
+        if (doesColumnIdExistInUrl) {
           //init in matches with false as default
-          (matches as any)[columnId] = false;
+          matches[columnId] = false;
 
           //if is not matching
-          if (!(matches as any)[columnId]) {
-            (matches as any)[columnId] = doesColumnIdContainValueFromUrl(rowValues, columnId);
+          if (!matches[columnId]) {
+            matches[columnId] = doesRowColumnContainValueFromUrl(rowValues, columnId);
           }
         }
       });
-      if (doesMatchAllColumnIds(matches)) {
-      }
 
       return doesMatchAllColumnIds(matches);
     });
 
-    parseFilterOptions(filteredOptions);
+    parseFilterOptions(filteredRows);
   };
 
   const reloadFilterOptions = () => {
