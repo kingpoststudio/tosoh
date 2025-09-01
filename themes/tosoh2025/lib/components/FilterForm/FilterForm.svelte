@@ -52,7 +52,7 @@
   };
 
   $effect(() => {
-    if (formElement && !formManager) {
+    if (formElement && !formManager && formElement.elements.length > 0) {
       initiateFormManager();
     }
   });

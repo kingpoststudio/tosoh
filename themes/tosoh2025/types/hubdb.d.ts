@@ -2,6 +2,19 @@ export type LabelValue = {
   label: string;
   value: string;
 };
+
+export type ColumnItem = {
+  id: string;
+  name: string;
+  label: string;
+  type: string;
+  createdAt: string;
+  createdByUserId: number;
+  updatedAt: string;
+  updatedByUserId: number;
+  order: number;
+};
+
 export type SupportPortalRowForFilter = {
   id: string;
   createdAt: string;
@@ -10,29 +23,9 @@ export type SupportPortalRowForFilter = {
   path: string;
   name: string;
   values: {
-    search_terms: string;
-    document_category: {
-      id: string;
-      name: string;
-      label: string;
-      type: string;
-      createdAt: string;
-      createdByUserId: number;
-      updatedAt: string;
-      updatedByUserId: number;
-      order: number;
-    }[];
-    document_type: {
-      id: string;
-      name: string;
-      label: string;
-      type: string;
-      createdAt: string;
-      createdByUserId: number;
-      updatedAt: string;
-      updatedByUserId: number;
-      order: number;
-    };
+    stringColumn?: string;
+    multiSelectColumn?: ColumnItem[];
+    selectColumn?: ColumnItem;
   };
   isSoftEditable: false;
   childTableId: string;

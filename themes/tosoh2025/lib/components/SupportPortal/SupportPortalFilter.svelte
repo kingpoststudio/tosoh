@@ -1,17 +1,20 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
-  let { isParentLoading, hasParentError, viewAs, handleChangeView } = $props();
+  type Matches = { [id in keyof SupportPortalRowForFilter['values']]: boolean };
+  type ColumnId = keyof SupportPortalRowForFilter['values'];
+  type FilterWithOptions = Record<ColumnId, ColumnItem[]>;
 
-  import type { LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
+  import { onMount } from 'svelte';
+  import type { ColumnItem, LabelValue, SupportPortalRowForFilter } from '../../../types/hubdb';
+  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import { mockPortalFilters } from './mock';
+  import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
 
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from '../Search/Search.svelte';
   import Select from '../Select/Select.svelte';
-  import { mockPortalFilters } from './mock';
-  import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
   import FilterForm from '../FilterForm/FilterForm.svelte';
-  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
-  import SupportPortal from './SupportPortal.svelte';
+
+  let { isParentLoading, hasParentError, viewAs, handleChangeView } = $props();
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
@@ -20,12 +23,10 @@
     ? [...window.Tosoh.SupportPortalContent.filters.split(','), searchColumnId]
     : [];
 
-  let allAvailableColumnIdsWithTheirValues: Record<string, any> = $state({});
+  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
 
   let isLoading = $state(false);
   let hasError = $state(false);
-
-  type Matches = { [id in keyof SupportPortalRowForFilter['values']]: boolean };
 
   const onChange = (event: Event) => {
     onReset();
@@ -97,7 +98,7 @@
       });
     }
 
-    allAvailableColumnIdsWithTheirValues = columnsIdsWithAllTheirAvailableValues;
+    allAvailableFiltersWithTheirOptions = columnsIdsWithAllTheirAvailableValues;
   };
 
   const getFilterOptions = async () => {
@@ -320,7 +321,7 @@
     {#each filtersFromFields as columnId}
       {#if searchColumnId !== columnId}
         <Select
-          options={allAvailableColumnIdsWithTheirValues[columnId as string]}
+          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
         />
