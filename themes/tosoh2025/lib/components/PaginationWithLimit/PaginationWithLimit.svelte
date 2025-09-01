@@ -13,7 +13,7 @@
   let limit = $state(parseInt(params?.get('limit') || `${defaultItemsLimit}`));
   let pagination = $state(parseInt(params?.get('pagination') || `${defaultPagination}`));
 
-  const onControllerChange = (event: Event) => {
+  const onFormChange = (event: Event) => {
     if ((event.target as HTMLSelectElement)?.name === 'limit') {
       setSearchParams({
         pagination: `${defaultPagination}`,
@@ -41,7 +41,7 @@
   });
 </script>
 
-<FilterForm onChange={onControllerChange} trigger="change">
+<FilterForm onChange={onFormChange} trigger="change">
   <div
     class="lg:p-sm gap-sm mt-base flex w-full flex-col-reverse justify-center lg:flex-row lg:justify-between"
   >
