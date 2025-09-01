@@ -1,14 +1,16 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
-  import { createFormManager, type FormManagerInstance } from '../../utils/formManager';
+
+  import FilterForm from '../FilterForm/FilterForm.svelte';
 
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
-  let formElement: HTMLFormElement | null = $state(null);
-  let formManager: FormManagerInstance | null = $state(null);
-  let inputElement: HTMLInputElement | null = $state(null);
+
+  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
+    ? [...window.Tosoh.SupportPortalContent.filters.split(','), 'pagination', 'limit']
+    : [];
+
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const hubdb_table_id = 'support_portal';
   // searchFromFields?.hubdb_table_id ||
@@ -17,29 +19,33 @@
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(hubdb_column_id as string);
 
-  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
-    ? [...window.Tosoh.SupportPortalContent.filters.split(','), 'pagination', 'limit']
-    : [
-        'product_family',
-        'product_type',
-        'document_type',
-        'document_category',
-        'pagination',
-        'limit',
-      ];
-
-  const handleOnClick = (searchTerm: string) => {
+  const handleFetch = (searchTerm: string) => {
     showDropdown = false;
 
-    if (hubdb_column_id) {
-      const params = new URLSearchParams(window.location.search);
+    const params = new URLSearchParams(window.location.search);
 
-      filtersFromFields?.map((column) => {
-        params.delete(column);
-      });
+    filtersFromFields?.map((column) => {
+      params.delete(column);
+    });
 
-      params.set(hubdb_column_id, searchTerm);
-      window.location.search = params.toString();
+    params.set(hubdb_column_id, searchTerm);
+    window.location.search = params.toString();
+  };
+
+  const onSubmit = (e: Event) => {
+    if (e?.target && hubdb_column_id) {
+      const formElement = e.target as HTMLFormElement;
+      const searchTerm = new FormData(formElement).get(hubdb_column_id) as string;
+
+      if (searchTerm) {
+        handleFetch(searchTerm);
+      }
+    }
+  };
+
+  const onClick = (searchTerm: string) => {
+    if (searchTerm) {
+      handleFetch(searchTerm);
     }
   };
 
@@ -80,31 +86,13 @@
     }
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (!(event.target instanceof HTMLElement)) return;
-
-    if (!formElement?.contains(event.target) && showDropdown) {
-      resetDropdown();
-    }
-  };
-
   const resetDropdown = () => {
-    showDropdown = false;
-    matches = [];
-  };
-
-  const initiateFormManager = () => {
-    if (formElement && !formManager) {
-      formManager = createFormManager(formElement, {
-        onSubmit(e) {
-          e.preventDefault();
-          if (inputElement) {
-            handleOnClick(inputElement?.value);
-          }
-        },
-      });
+    if (showDropdown) {
+      showDropdown = false;
+      matches = [];
     }
   };
+
   const clearFilter = () => {
     if (hubdb_column_id) {
       const url = new URL(window.location.href);
@@ -112,16 +100,6 @@
       window.location.href = url.toString();
     }
   };
-
-  onMount(() => {
-    document.addEventListener('click', handleClickOutside);
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  });
-
-  onMount(() => initiateFormManager());
 </script>
 
 {#snippet loader()}
@@ -154,7 +132,7 @@
   </svg>
 {/snippet}
 
-{#snippet clearInput()}
+{#snippet xIcon()}
   <button
     type="button"
     transition:fade={{ duration: 200 }}
@@ -170,61 +148,62 @@
   </button>
 {/snippet}
 
-<form class="relative" bind:this={formElement}>
-  <div class="mt-md gap-sm flex flex-col">
-    {#if title}
-      <div class="gap-sm flex items-center">
-        <label for={hubdb_column_id} class=" text-xl font-black">{title}</label>
-        {#if activeFilter && title}
-          {@render clearInput()}
-        {/if}
+<FilterForm {onSubmit} trigger="submit" onClickOutside={resetDropdown}>
+  <div class="relative">
+    <div class="mt-md gap-sm flex flex-col">
+      {#if title}
+        <div class="gap-sm flex items-center">
+          <label for={hubdb_column_id} class=" text-xl font-black">{title}</label>
+          {#if activeFilter && title}
+            {@render xIcon()}
+          {/if}
+        </div>
+      {/if}
+      <div
+        class={` relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
+      >
+        <input
+          oninput={fetchMatches}
+          name={hubdb_column_id}
+          data-debounce="500"
+          class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
+          placeholder="Search here..."
+        />
+        <div
+          class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"
+        >
+          {#if isLoading}
+            {@render loader()}
+          {:else if activeFilter && !title}
+            {@render xIcon()}
+          {:else}
+            {@render magnifier()}{/if}
+        </div>
+      </div>
+    </div>
+
+    {#if showDropdown && matches.length > 0}
+      <div
+        transition:fade={{ duration: 100 }}
+        class="border-imperial-red border-1 absolute left-0 z-10 mt-[0.5rem] max-h-[24rem] w-full overflow-y-auto rounded-lg bg-white shadow-md lg:max-w-[19.75rem]"
+      >
+        <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
+        {#each matches as match}
+          {#if match}
+            <div class="p-sm hover:bg-red-50">
+              <button
+                type="button"
+                class="plain text-left! cursor-pointer break-all text-sm font-bold"
+                onclick={() => {
+                  onClick(match);
+                }}
+              >
+                {match}
+              </button>
+            </div>
+          {/if}
+        {/each}
       </div>
     {/if}
-    <div
-      class={` relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
-    >
-      <input
-        bind:this={inputElement}
-        oninput={fetchMatches}
-        name={hubdb_column_id}
-        data-debounce="500"
-        class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
-        placeholder="Search here..."
-      />
-      <div
-        class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"
-      >
-        {#if isLoading}
-          {@render loader()}
-        {:else if activeFilter && !title}
-          {@render clearInput()}
-        {:else}
-          {@render magnifier()}{/if}
-      </div>
-    </div>
   </div>
-
-  {#if showDropdown && matches.length > 0}
-    <div
-      transition:fade={{ duration: 100 }}
-      class="border-imperial-red border-1 absolute left-0 z-10 mt-[0.5rem] max-h-[24rem] w-full overflow-y-auto rounded-lg bg-white shadow-md lg:max-w-[19.75rem]"
-    >
-      <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
-      {#each matches as match}
-        {#if match}
-          <div class="p-sm hover:bg-red-50">
-            <button
-              type="button"
-              class="plain text-left! cursor-pointer break-all text-sm font-bold"
-              onclick={() => {
-                handleOnClick(match);
-              }}
-            >
-              {match}
-            </button>
-          </div>
-        {/if}
-      {/each}
-    </div>
-  {/if}
-</form>
+</FilterForm>

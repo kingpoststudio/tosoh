@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { onDestroy } from 'svelte';
+  import { on } from 'svelte/events';
 
   import {
     createFormManager,
@@ -13,12 +14,14 @@
     onChange,
     onSubmit,
     onReset,
+    onClickOutside,
     children,
   }: {
     trigger: triggerType;
     onSubmit?: (e: Event) => void;
     onChange?: (e: Event) => void;
     onReset?: () => void;
+    onClickOutside?: (e?: Event) => void;
     children: Snippet;
   } = $props();
 
@@ -54,10 +57,21 @@
     }
   });
 
+  const clickOutside = on(document, 'click', (event: MouseEvent) => {
+    if (onClickOutside) {
+      if (!(event.target instanceof HTMLElement)) return;
+
+      if (formElement && !formElement?.contains(event.target)) {
+        onClickOutside();
+      }
+    }
+  });
+
   onDestroy(() => {
     if (formManager) {
       formManager.destroy();
     }
+    clickOutside();
   });
 </script>
 
