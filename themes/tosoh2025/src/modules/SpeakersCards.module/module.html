@@ -1,0 +1,29 @@
+{% set title = module.speakers|length > 1 ? "Speakers": "Speaker" %}
+
+<div class="max-w-8xl p-md gap-lg m-auto flex flex-col">
+  <h3 class="text-4xl font-semibold">{{ title }}</h3>
+
+  <div class="gap-md grid w-full grid-cols-1 md:grid-cols-3">
+    {% for speaker in module.speakers %}
+      {% set speaker_name = speaker.speaker_name %}
+      {% set workplace = speaker.workplace %}
+      {% set img = speaker.img.src %}
+      <div
+        class="bg-ghost-white p-lg md:p-xl gap-lg m-auto flex min-h-[30rem] w-full max-w-[32rem] flex-col items-center justify-center rounded-xl">
+        {% if img %}
+          <img src="{{ img }}" class="border-imperial-red aspect-square w-32 rounded-full border-4 object-cover" />
+        {% endif %}
+
+        <div class="gap-sm flex flex-col text-center">
+          {% if speaker_name %}
+            <span class="text-3xl font-semibold">{{ speaker_name }}</span>
+          {% endif %}
+
+          {% if workplace %}
+            <p class="text-nickel text-2xl">{{ workplace }}</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
