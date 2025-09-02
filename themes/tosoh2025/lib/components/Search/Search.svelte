@@ -191,17 +191,15 @@
         <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
         {#each matches as match}
           {#if match}
-            <div class="p-sm hover:bg-red-50">
-              <button
-                type="button"
-                class="plain text-left! cursor-pointer break-all text-sm font-bold"
-                onclick={() => {
-                  onClick(match);
-                }}
-              >
-                {match}
-              </button>
-            </div>
+            <button
+              type="button"
+              class="plain text-left! p-sm! w-full cursor-pointer break-all text-sm font-bold hover:bg-red-50"
+              onclick={() => {
+                onClick(match);
+              }}
+            >
+              {match}
+            </button>
           {/if}
         {/each}
       </div>
