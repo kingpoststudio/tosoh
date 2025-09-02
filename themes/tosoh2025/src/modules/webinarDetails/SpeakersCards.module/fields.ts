@@ -2,6 +2,7 @@ import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
 
 const generateFields = () => {
   return [
+    textField('title', 'Title'),
     groupField('speakers', 'Speakers', {
       children: [
         imageField('img', 'Image'),
