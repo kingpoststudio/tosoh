@@ -2,11 +2,6 @@ export type Matches = { [id in keyof SupportPortalRowForFilter['values']]: boole
 export type ColumnId = keyof SupportPortalRowForFilter['values'];
 export type FilterWithOptions = Record<ColumnId, ColumnItem[]>;
 
-export type LabelValue = {
-  label: string;
-  value: string;
-};
-
 export type ColumnItem = {
   id: string;
   name: string;

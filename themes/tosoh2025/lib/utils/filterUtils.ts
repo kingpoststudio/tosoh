@@ -1,4 +1,4 @@
-import type { ColumnId, LabelValue, Matches, SupportPortalRowForFilter } from '../../types/hubdb';
+import type { ColumnId, ColumnItem, Matches, SupportPortalRowForFilter } from '../../types/hubdb';
 
 export const doesRowColumnContainValueFromUrl = (
   row: SupportPortalRowForFilter['values'],
@@ -61,57 +61,82 @@ export const doesRowColumnContainValueFromUrl = (
   return doesContain;
 };
 
+const getAllAvailalbeFiltersFromAllRows = (rows: SupportPortalRowForFilter[]) => {
+  let allFilters: Record<ColumnId, SupportPortalRowForFilter['values'][]> | {} = {};
+
+  rows.forEach((row) => {
+    const rowValues = row?.values;
+
+    Object.keys(rowValues)?.forEach((columnName) => {
+      let columnId = columnName as ColumnId;
+
+      if (!(columnId in allFilters)) {
+        (allFilters as any)[columnId] = [];
+      }
+    });
+  });
+
+  return allFilters;
+};
+
+const matchValuesWithColumnNames = (
+  rows: SupportPortalRowForFilter[],
+  allEmptyAvailableFilters: Record<ColumnId, any[]>
+): Record<ColumnId, SupportPortalRowForFilter['values'][]> => {
+  const allFilters = { ...allEmptyAvailableFilters };
+
+  rows.forEach((row) => {
+    const rowValues = row?.values;
+
+    Object.keys(rowValues)?.map((colummnName) => {
+      const columnId = colummnName as ColumnId;
+      const isMultiselectColumn = Array.isArray((rowValues as any)[columnId]);
+      const isSelectColumn = (rowValues as any)[columnId]?.label;
+
+      if (isMultiselectColumn) {
+        const arrayWithOptions = (rowValues as any)[columnId];
+
+        if (arrayWithOptions && arrayWithOptions.length > 0) {
+          arrayWithOptions?.map((multiSelectOption: ColumnItem) => {
+            const doesValueInColumnIdExists = allFilters[columnId]?.some(
+              (existingValue: any) => existingValue.label === multiSelectOption?.label
+            );
+
+            if (!doesValueInColumnIdExists) {
+              allFilters[columnId].push(multiSelectOption);
+            }
+          });
+        }
+      }
+
+      //object types
+      if (isSelectColumn) {
+        const doesValueInColumnIdExists = allFilters[columnId]?.some(
+          (option: any) => option.label === (rowValues as any)[columnId]?.label
+        );
+
+        if (!doesValueInColumnIdExists) {
+          allFilters[columnId].push((rowValues as any)[columnId]);
+        }
+      }
+    });
+  });
+
+  return allFilters;
+};
+
 export const parseFilterOptions = (rows: SupportPortalRowForFilter[]) => {
-  let columnsIdsWithAllTheirAvailableValues: Record<string, any> = {};
+  let columnsIdsWithAllTheirAvailableValues:
+    | Record<ColumnId, SupportPortalRowForFilter['values'][]>
+    | {} = {};
 
   if (rows && rows?.length > 0) {
-    rows.forEach((row) => {
-      const rowValues = row?.values;
+    const emptyFilters = getAllAvailalbeFiltersFromAllRows(rows);
 
-      Object.keys(rowValues)?.map((colummnId) => {
-        if ((rowValues as any)[colummnId] && Array.isArray((rowValues as any)[colummnId])) {
-          return (columnsIdsWithAllTheirAvailableValues[colummnId] = []);
-        }
-
-        if ((rowValues as any)[colummnId] && (rowValues as any)[colummnId]?.label) {
-          return (columnsIdsWithAllTheirAvailableValues[colummnId] = []);
-        }
-      });
-    });
-
-    rows.forEach((row) => {
-      const rowValues = row?.values;
-
-      Object.keys(rowValues)?.map((colummnId) => {
-        //array types
-        if (Array.isArray((rowValues as any)[colummnId])) {
-          const arrayWithOptions = (rowValues as any)[colummnId] as LabelValue[];
-
-          if (arrayWithOptions && arrayWithOptions.length > 0) {
-            arrayWithOptions?.map((option) => {
-              const doesValueInColumnIdExists = columnsIdsWithAllTheirAvailableValues[
-                colummnId
-              ]?.some((existingValue: LabelValue) => existingValue.label === option?.label);
-
-              if (!doesValueInColumnIdExists) {
-                columnsIdsWithAllTheirAvailableValues[colummnId].push(option);
-              }
-            });
-          }
-        }
-
-        //object types
-        if ((rowValues as any)[colummnId]?.label) {
-          const doesValueInColumnIdExists = columnsIdsWithAllTheirAvailableValues[colummnId]?.some(
-            (option: any) => option.label === (rowValues as any)[colummnId]?.label
-          );
-
-          if (!doesValueInColumnIdExists) {
-            columnsIdsWithAllTheirAvailableValues[colummnId].push((rowValues as any)[colummnId]);
-          }
-        }
-      });
-    });
+    if (Object?.keys?.(emptyFilters)?.length > 0) {
+      const allEmptyFilters = emptyFilters as Record<ColumnId, []>;
+      columnsIdsWithAllTheirAvailableValues = matchValuesWithColumnNames(rows, allEmptyFilters);
+    }
   }
 
   return columnsIdsWithAllTheirAvailableValues;
