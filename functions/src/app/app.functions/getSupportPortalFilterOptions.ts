@@ -5,6 +5,7 @@ exports.main = async (req: any) => {
     const body = req && req.body ? req.body : {};
 
     const filters = body.filters || [];
+    const accessLevel = body.accessLevel || "Customer";
 
     console.log(filters, "filters");
 
@@ -15,7 +16,7 @@ exports.main = async (req: any) => {
     };
 
     const constructProperties = () => {
-      return `&properties=${constructFilterConditions()}`;
+      return `&properties=${constructFilterConditions()}&visibility__in=${accessLevel}`;
     };
 
     const res = await fetch(`${HUBDB_API}${constructProperties()}`, {

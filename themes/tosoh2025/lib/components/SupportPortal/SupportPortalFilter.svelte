@@ -11,10 +11,12 @@
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
 
-  let { isParentLoading, hasParentError, viewAs, handleChangeView } = $props();
+  let { isParentLoading, viewAs, handleChangeView } = $props();
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
+
+  let accessLevel = window?.Tosoh?.SupportPortalContent?.accessLevel || 'Customer';
 
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
     ? ([...window.Tosoh.SupportPortalContent.filters.split(','), searchColumnId] as ColumnId[])
@@ -55,6 +57,7 @@
           },
           body: JSON.stringify({
             filters: filtersFromFields,
+            accessLevel: accessLevel,
           }),
         }
       );

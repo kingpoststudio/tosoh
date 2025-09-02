@@ -19,6 +19,7 @@ exports.main = async (req: any) => {
     const properties =
       "name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url";
 
+    const accessLevel = body.accessLevel || "Customer";
     const limit = body.limit ? parseInt(body.limit, 10) : 12;
     const offset = body.offset ? parseInt(body.offset, 10) : 0;
     const filters = body?.filters || {};
@@ -66,7 +67,7 @@ exports.main = async (req: any) => {
     };
 
     const portalItemsRes = await fetch(
-      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false`,
+      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false&visibility__in=${accessLevel}`,
       {
         method: "GET",
         headers: {

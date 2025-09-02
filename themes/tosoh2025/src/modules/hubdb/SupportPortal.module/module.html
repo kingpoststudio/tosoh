@@ -1,4 +1,6 @@
 {% set filter_columns = module.filters|map('hubdb_column_id')|join(',') %}
+{% set access_level = module.access_level or "customer" %}
+
 
 {% set search_title = module.search.title %}
 {% set search_hubdb_table = module.search.hubdb_table_id %}
@@ -11,6 +13,7 @@
 
 {% require_js position="head" %}
 <script>
+const accessLevel = '{{ access_level }}'
 const filters = '{{ filter_columns }}';
 const title = '{{title}}'
 const description = '{{description}}'
@@ -19,7 +22,7 @@ const search = {
     hubdb_table_id: "{{ search_hubdb_table || ""}}",
     hubdb_column_id: "{{ search_hubdb_column || ""}}",
 };
-window.Tosoh.SupportPortalContent = { filters, search, title, description };
+window.Tosoh.SupportPortalContent = { filters, search, title, description, accessLevel };
 </script>
 {% end_require_js %}
 

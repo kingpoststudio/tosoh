@@ -20,6 +20,8 @@
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
     : [];
 
+  let accessLevel = window?.Tosoh?.SupportPortalContent?.accessLevel || 'Customer';
+
   let searchColumnId = window?.Tosoh?.SupportPortalContent?.search
     ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id
     : 'search_terms';
@@ -47,6 +49,7 @@
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
     return {
+      accessLevel: accessLevel,
       limit: parseInt(params?.get('limit')) || defaultItemsLimit,
       pagination: parseInt(params?.get('pagination')) || defaultPagination,
       offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1) || 0,
@@ -128,11 +131,7 @@
 <div
   class={`p-md gap-base max-w-8xl relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <SupportPortalFilter
-    isParentLoading={isLoading}
-    hasParentError={hasError}
-    {viewAs}
-    {handleChangeView}
+  <SupportPortalFilter isParentLoading={isLoading} {viewAs} {handleChangeView}
   ></SupportPortalFilter>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}

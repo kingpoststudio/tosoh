@@ -15,6 +15,7 @@ declare global {
         };
         title: string;
         description: string;
+        accessLevel: 'Distributor' | 'Customer' | 'Internal';
       };
     };
     hsVideoApi?: any;

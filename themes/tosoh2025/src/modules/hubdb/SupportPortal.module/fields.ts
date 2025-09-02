@@ -1,7 +1,14 @@
-import { groupField, textField, hubDbTableField, booleanField } from 'hs-fieldkit';
+import { groupField, textField, hubDbTableField, booleanField, choiceField } from 'hs-fieldkit';
 
 const generateFields = () => {
   return [
+    choiceField('access_level', 'Access Level', {
+      choices: [
+        ['Customer', 'Customer'],
+        ['Distributor', 'Distributor'],
+        ['Internal', 'Internal'],
+      ],
+    }),
     textField('title', 'Title', {
       default: 'Tosoh Support Portal',
     }),
