@@ -41,7 +41,7 @@
 {# Macro for content blocks with conditional slots #}
 {%- macro render_content_block(content) -%}
   {% set text_align = content.text_align or "text-left" %}
-  <div class="{{ text_align }}">
+  <div class="{{ text_align }} gap-md flex flex-col">
     {%- if content.eyebrow %}
       <div class="text-imperial-red text-2xl font-light">{{ content.eyebrow }}</div>
     {%- endif %}
@@ -106,7 +106,7 @@
     {%- set column_size = column.column_settings.column_size -%}
     {%-
       set flex_factor = column.column_settings.flex_factor > 0
-      ? "flex-" ~ (column.column_settings.flex_factor or 1) : "flex-none " ~ column_size
+      ? "flex-" ~ (column.column_settings.flex_factor or 1) : column_size
     -%}
 
     {# Border Color #}
@@ -141,7 +141,7 @@
 
     {# Form #}
   {%- elif column.type == "form" -%}
-    <div class="gap-md flex flex-col">
+    <div class="gap-md fc-form flex flex-col">
       {{ render_content_block(column.form) }}
       {% if column.form.form %}
         {%
@@ -162,7 +162,7 @@
 {% endmacro -%}
 
 {# Module Container #}
-<div class="max-w-max-page m-auto" {# {{ macros.render_(module.module_settings) }} #}>
+<div class="max-w-max-page {{ macros.classes(module.module_settings) }} m-auto">
   {# Tab Groups #}
   {%- if module.tab_group_settings.is_enabled %}
     <div class="flex w-full flex-col">

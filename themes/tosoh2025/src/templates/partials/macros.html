@@ -4,7 +4,7 @@
   label: Macros
 -->
 
-{%- macro padding_classes(settings) -%}
+{%- macro classes(settings) -%}
   {{-
     [settings.pt_mobile,
     settings.pt_desktop,
@@ -13,6 +13,12 @@
     settings.pb_mobile,
     settings.pb_desktop,
     settings.pl_mobile,
-    settings.pl_desktop]|join(' ')
+    settings.pl_desktop,
+    settings.bg_color,
+    settings.text_color,
+    settings.gap,
+    settings.justify,
+    settings.justify
+    ]|join(' ')
   -}}
 {%- endmacro -%}
