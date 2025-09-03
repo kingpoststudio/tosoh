@@ -5,5 +5,14 @@
 -->
 
 {%- macro padding_classes(settings) -%}
-  {{- [settings.pt_mobile, settings.pt_desktop, settings.pr_mobile, settings.pr_desktop, settings.pb_mobile, settings.pb_desktop, settings.pl_mobile, settings.pl_desktop]|join(' ') -}}
+  {{-
+    [settings.pt_mobile,
+    settings.pt_desktop,
+    settings.pr_mobile,
+    settings.pr_desktop,
+    settings.pb_mobile,
+    settings.pb_desktop,
+    settings.pl_mobile,
+    settings.pl_desktop]|join(' ')
+  -}}
 {%- endmacro -%}

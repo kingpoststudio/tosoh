@@ -43,6 +43,7 @@ export const sizeChoices = [
   ['6xl', '6X-large'],
   ['7xl', '7X-large'],
   ['8xl', '8X-large'],
+  ['max-page', 'Max Page'],
 ];
 
 export const constructFieldValues = (tailwindIdentifier: string, choices: string[][]) => {
@@ -178,6 +179,7 @@ export const themeColorChoices = [
   ['nickel', 'Nickel'],
   ['ghost-white', 'Ghost White'],
   ['navy-blue', 'Navy Blue'],
+  ['transparent', 'Transparent'],
 ];
 
 export const offsetFields = [
@@ -250,5 +252,24 @@ export const animationSettingsGroup = groupField('animation_settings', 'Animatio
       choices: animationTravelChoices,
       default: '0',
     }),
+  ],
+});
+
+export const revealSettingsGroup = groupField('reveal_settings', 'Reveal Settings', {
+  children: [
+    booleanField('is_concealed', 'Enable reveal functionality?', {
+      default: false,
+      inline_help_text:
+        'When enabled, the column content will be collapsed and can be expanded by the user.',
+    }),
+    numberField('max_height', 'Maximum height (rem)', {
+      default: 32,
+      min: 8,
+      max: 64,
+      step: 1,
+      suffix: 'rem',
+      inline_help_text: 'The maximum height in rem units before the content is concealed.',
+    }),
+    textField('reveal_label', 'Reveal label', { default: 'Show more' }),
   ],
 });

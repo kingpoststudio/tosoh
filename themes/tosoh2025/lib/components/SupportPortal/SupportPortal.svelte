@@ -10,7 +10,6 @@
 
   import SupportPortalFilter from './SupportPortalFilter.svelte';
   import SupportPortalGrid from './SupportPortalGrid.svelte';
-  import { setSearchParams, updateUrl } from '../../utils/urlUtils';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
   import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
@@ -92,15 +91,6 @@
     }
   };
 
-  const onFilterSubmit = (event: Event) => {
-    setSearchParams({
-      pagination: `${defaultPagination}`,
-      limit: `${defaultItemsLimit}`,
-    });
-
-    updateUrl(event);
-  };
-
   const reloadData = () => {
     hasError = false;
     fetchData();
@@ -119,7 +109,7 @@
 </script>
 
 {#if title || description}
-  <div class="max-w-8xl gap-sm p-md m-auto mt-32 flex flex-col">
+  <div class="max-w-max-page gap-sm p-md m-auto mt-32 flex flex-col">
     {#if title}
       <h1 class="text-6xl font-bold">{title}</h1>
     {/if}
@@ -131,7 +121,7 @@
 {/if}
 
 <div
-  class={`p-md gap-base max-w-8xl relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
+  class={`p-md gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
   <SupportPortalFilter isParentLoading={isLoading} {viewAs} {handleChangeView}
   ></SupportPortalFilter>

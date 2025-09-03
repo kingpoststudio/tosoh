@@ -121,7 +121,7 @@
     align-items: flex-end;
     gap: var(--spacing-md);
     width: 100%;
-    max-width: var(--container-8xl);
+    max-width: var(--container-max-page);
     padding: var(--spacing-base) var(--spacing-md);
     margin: 0 auto;
     box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);

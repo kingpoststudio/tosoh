@@ -1,19 +1,202 @@
 {% import "../../templates/partials/macros.html" as macros %}
 
-{% set eyebrow = module.eyebrow %}
-{% set title = module.title %}
-{% set description = module.description %}
+{# Macro for wrapping content with conditional animation #}
+{%- macro column_wrapper(column) -%}
+  {%- set size = "w-full h-full" -%}
+  {%- set alignment =  column.column_settings.align or "self-start" -%}
+  {%- set justify = column.column_settings.justify or "justify-self-start" -%}
 
-<div class="max-w-8xl {{ macros.padding_classes(module.padding_settings) }} gap-md m-auto flex w-full flex-col">
-  {% if eyebrow %}
-    <div class="text-imperial-red text-2xl font-light">{{ eyebrow }}</div>
-  {% endif %}
+  {%- if column.animation_settings.is_animated %}
+    <tosoh-in-view
+      class="{{ size }} {{ alignment }} {{ justify }} block"
+      x="{{ column.animation_settings.x_travel }}"
+      y="{{ column.animation_settings.y_travel }}"
+      delay="{{ column.animation_settings.delay }}"
+      duration="{{ column.animation_settings.duration }}">
+      {% if column.reveal_settings.is_concealed %}
+        {% set max_height = (column.reveal_settings.max_height or 32) ~ "rem" %}
+        <tosoh-reveal-below maxHeight="{{ max_height }}">
+          {{ caller() }}
+          <span slot="label">{{ column.reveal_settings.reveal_label }}</span>
+        </tosoh-reveal-below>
+      {% else %}
+        {{ caller() }}
+      {% endif %}
+    </tosoh-in-view>
+  {%- else %}
+    <div class="{{ size }} {{ alignment }} {{ justify }}">
+      {% if column.reveal_settings.is_concealed %}
+        {% set max_height = (column.reveal_settings.max_height or 24) ~ "rem" %}
+        <tosoh-reveal-below maxHeight="{{ max_height }}">
+          {{ caller() }}
+          <span slot="label">{{ column.reveal_settings.reveal_label }}</span>
+        </tosoh-reveal-below>
+      {% else %}
+        {{ caller() }}
+      {% endif %}
+    </div>
+  {%- endif %}
+{%- endmacro -%}
 
-  {% if title %}
-    <div class="text-5xl font-semibold">{{ title }}</div>
-  {% endif %}
+{# Macro for content blocks with conditional slots #}
+{%- macro render_content_block(content) -%}
+  {% set text_align = content.text_align or "text-left" %}
+  <div class="{{ text_align }}">
+    {%- if content.eyebrow %}
+      <div class="text-imperial-red text-2xl font-light">{{ content.eyebrow }}</div>
+    {%- endif %}
+    {%- if content.title %}
+      <div class="text-5xl font-semibold">{{ content.title }}</div>
+    {%- endif %}
+    {%- if content.description %}
+      <div class="text-nickel text-lg">{{ content.description }}</div>
+    {%- endif %}
+    {%- if content.is_cta and content.cta %}
+      <div>{% cta "flex_cta" guid="{{ content.cta }}" %}</div>
+    {%- elif not content.is_cta and content.link.url.href %}
+      <a class="{{ content.link_variant }}" href="{{ content.link.url.href }}">{{ content.link_label }}</a>
+    {%- endif %}
+  </div>
+{%- endmacro -%}
 
-  {% if description %}
-    <div class="text-nickel text-lg">{{ description }}</div>
-  {% endif %}
+{# Macro for media rendering #}
+{%- macro render_media(media) -%}
+  {%- if media.type == "image" -%}
+    {%- set object_fit = media.is_image_contained ? "object-contain" : "object-cover" -%}
+    <img
+      src="{{ media.image.src }}"
+      alt="{{ media.image.alt }}"
+      width="720"
+      class="{{ object_fit }} relative block h-full w-full" />
+  {%- elif media.type == "stacked_images" -%}
+    <img src="{{ media.image.src }}" alt="{{ media.image.alt }}" width="720" class="relative block h-full w-full" />
+  {%- elif media.type == "hs_video" %}
+    {%
+      video_player "content_video" player_id="{{ media.hs_video.player_id }}" extra_classes="{{
+      media.media_shape }}" play_button_color="transparent"
+    %}
+  {%- elif media.type == "video" %}
+    <video class="h-full w-full" controls>
+      <source src="{{ media.video }}" />
+      Your browser does not support the video tag.
+    </video>
+  {%- endif %}
+{%- endmacro -%}
+
+{# Macro for flex layout wrapper #}
+{%- macro flex_layout(settings) -%}
+  {%- set gap = settings.gap -%}
+
+  {%- if settings.overflow_scroll_x %}
+    <tosoh-scroll-x showNavButtons="true">
+      <div class="{{ gap }} flex w-full flex-row">{{ caller() }}</div>
+    </tosoh-scroll-x>
+  {%- else %}
+    {%- set dir = settings.is_reversed_mobile ? "flex-col-reverse md:flex-row" : "flex-col md:flex-row" -%}
+    <div class="{{ dir }} {{ gap }} {{ settings.justify }} flex w-full">{{ caller() }}</div>
+  {%- endif %}
+{%- endmacro -%}
+
+{# Render Columns #}
+{%- macro render_columns(columns, parent_settings) -%}
+
+  {%- for column in columns %}
+
+    {# Flex Factor/Column Size #}
+    {%- set column_size = column.column_settings.column_size -%}
+    {%-
+      set flex_factor = column.column_settings.flex_factor > 0
+      ? "flex-" ~ (column.column_settings.flex_factor or 1) : "flex-none " ~ column_size
+    -%}
+
+    {# Border Color #}
+    {%-
+      set border_color = column.column_settings.border_color ?
+      "border " ~ column.column_settings.border_color : "border-transparent"
+    -%}
+
+    <div
+      {# {{ macros.container_attrs(column.column_settings) }} #}
+      class="{{ flex_factor }} {{ border_color }} flex"
+      w="100%"
+      h="100%"
+      mdW="100%"
+      mdH="100%">
+      {% call column_wrapper(column) %}
+        {{ render_column_type(column) }}
+      {% endcall %}
+    </div>
+  {% endfor -%}
+{%- endmacro -%}
+
+{# Render Column Type #}
+{%- macro render_column_type(column) -%}
+  {# Content Block #}
+  {%- if column.type == "content" %}
+    {{ render_content_block(column.content) }}
+
+    {# Media #}
+  {%- elif column.type == "media" %}
+    {{ render_media(column.media) }}
+
+    {# Form #}
+  {%- elif column.type == "form" -%}
+    <div class="gap-md flex flex-col">
+      {{ render_content_block(column.form) }}
+      {% if column.form.form %}
+        {%
+          form "flex_form"
+          form_to_use="{{ column.form.form.form_id }}"
+          response_response_type="{{ column.form.form.response_type }}"
+          response_message="{{ column.form.form.message }}"
+          response_redirect_id="{{ column.form.form.redirect_id }}"
+          response_redirect_url="{{ column.form.form.redirect_url }}"
+          gotowebinar_webinar_key="{{ column.form.form.gotowebinar_webinar_key }}"
+        %}
+      {% endif %}
+    </div>
+    {# Richtext #}
+  {%- elif column.type == "rtf" %}
+    {{ column.richtext.content }}
+  {%- endif %}
+{% endmacro -%}
+
+{# Module Container #}
+<div class="max-w-max-page m-auto" {# {{ macros.render_(module.module_settings) }} #}>
+  {# Tab Groups #}
+  {%- if module.tab_group_settings.is_enabled %}
+    <div class="flex w-full flex-col">
+      {# Tab Actions #}
+      <tosoh-scroll-x scrollbarHeight="1px">
+        <div class="gap-sm px-md mx-auto flex w-full justify-center">
+          {%- for tab_group in module.tab_group_settings.tab_groups -%}
+            {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+            <tosoh-tab-group variant="action" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+              {{ tab_group.group_label }}
+            </tosoh-tab-group>
+          {%- endfor %}
+        </div>
+      </tosoh-scroll-x>
+
+      {# Tab Content #}
+      {%- for tab_group in module.tab_group_settings.tab_groups -%}
+        {%- set columns = module.columns|selectattr('tab_group_id', 'equalto', tab_group.group_id) -%}
+        {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+
+        <tosoh-tab-group variant="tab" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+          <div {# {{ macros.container_attrs(tab_group.tab_settings) }} #}>
+            {% call flex_layout(tab_group.tab_settings) %}
+              {{ render_columns(columns, tab_group.tab_settings) }}
+            {% endcall %}
+          </div>
+        </tosoh-tab-group>
+      {%- endfor %}
+    </div>
+
+    {# Standard Columns #}
+  {%- else %}
+    {% call flex_layout(module.module_settings) %}
+      {{ render_columns(module.columns, module.module_settings) }}
+    {% endcall %}
+  {%- endif %}
 </div>

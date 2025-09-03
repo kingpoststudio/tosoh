@@ -30,8 +30,8 @@
   --spacing-5xl: 16rem;
 
   --container-8xl: 96rem;
-
-  --max-width-page: 90rem;
+  --container-12xl: 120rem;
+  --container-max-page: min(100vw, var(--container-12xl));
 
   --font-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
   --font-sans-narrow: 'PT Sans Narrow', sans-serif;
@@ -57,6 +57,11 @@
 
 html {
   @apply text-default text-scale-mobile md:text-scale-desktop font-sans font-normal md:text-base;
+}
+
+p,
+span {
+  @apply break-all;
 }
 
 button,

@@ -21,10 +21,91 @@ import {
   offsetFields,
   paddingFields,
   presetPaddingFields,
+  revealSettingsGroup,
   sizeChoices,
   textAlignmentChoices,
   themeColorChoices,
 } from '../../../lib/utils/fieldUtils';
+
+const generateContainerSettings = (presetPadding = false, visibilityPath = '') => [
+  choiceField('bg_color', 'Background color', {
+    choices: constructFieldValues('bg', themeColorChoices),
+    inline_help_text: 'Sets the background color for the entire module.',
+  }),
+  choiceField('text_color', 'Text color', {
+    choices: constructFieldValues('text', themeColorChoices),
+    default: 'text-default',
+    inline_help_text: 'Sets the text color for the entire module.',
+  }),
+  choiceField('gap', 'Gap between columns', {
+    choices: constructFieldValues('gap', sizeChoices),
+    default: 'gap-md',
+    inline_help_text: 'Controls the spacing between columns.',
+  }),
+  choiceField('justify', 'Justification (horizontal)', {
+    choices: [
+      ['justify-start', 'Start'],
+      ['justify-center', 'Center'],
+      ['justify-end', 'End'],
+      ['justify-between', 'Between'],
+      ['justify-around', 'Around'],
+      ['justify-evenly', 'Evenly'],
+    ],
+    default: 'justify-center',
+    inline_help_text: 'Controls the x-axis justification of all content within the module or tab.',
+    visibility: {
+      controlling_field_path: `${visibilityPath}.overflow_scroll_x`,
+      controlling_value_regex: 'false',
+      operator: 'EQUAL',
+    },
+  }),
+  booleanField('overflow_scroll_x', 'Enable horizontal scrolling?', {
+    default: false,
+    inline_help_text:
+      'When enabled, columns will scroll horizontally on mobile devices instead of stacking vertically.',
+  }),
+  booleanField('is_reversed_mobile', 'Reverse columns on mobile?', {
+    inline_help_text: 'Reverses the order of columns on mobile devices.',
+    visibility: {
+      controlling_field_path: `${visibilityPath}.overflow_scroll_x`,
+      controlling_value_regex: 'false',
+      operator: 'EQUAL',
+    },
+  }),
+  ...(presetPadding ? presetPaddingFields : paddingFields),
+];
+
+const tabGroupSettingsGroup = groupField('tab_group_settings', 'Tab Group Settings', {
+  children: [
+    booleanField('is_enabled', 'Enable tab groups?', {
+      default: false,
+      inline_help_text:
+        'If enabled, the columns will be grouped into tabs. This is useful for when you want to organize content into different sections.',
+    }),
+    groupField('tab_groups', 'Tab groups', {
+      occurrence: {},
+      children: [
+        textField('group_id', 'Group ID', {
+          inline_help_text:
+            'Provide a unique ID for the tab group. This will be used to determine which columns will be placed within the tab groups.',
+        }),
+        textField('group_label', 'Group label'),
+        groupField('tab_settings', 'Tab Settings', {
+          children: generateContainerSettings(false, 'tab_group_settings.tab_groups.tab_settings'),
+        }),
+      ],
+      visibility: {
+        controlling_field_path: 'tab_group_settings.is_enabled',
+        controlling_value_regex: 'true',
+        operator: 'EQUAL',
+      },
+    }),
+  ],
+});
+
+const moduleSettingsGroup = groupField('module_settings', 'Module Settings', {
+  children: generateContainerSettings(true, 'module_settings'),
+});
 
 /* Column Settings */
 const columnSettingsGroup = groupField('column_settings', 'Column Settings', {
@@ -47,13 +128,13 @@ const columnSettingsGroup = groupField('column_settings', 'Column Settings', {
       },
     }),
     choiceField('align', 'Alignment (vertical)', {
-      choices: constructFieldValues('items', alignmentChoices),
-      default: 'items-start',
+      choices: constructFieldValues('self', alignmentChoices),
+      default: 'self-center',
       inline_help_text: 'Controls the y-axis alignment of content within the column.',
     }),
     choiceField('justify', 'Justification (horizontal)', {
-      choices: constructFieldValues('justify', alignmentChoices),
-      default: 'justify-start',
+      choices: constructFieldValues('justify-self', alignmentChoices),
+      default: 'justify-self-start',
       inline_help_text: 'Controls the x-axis justification of content within the column.',
     }),
     choiceField('bg_color', 'Background color', {
@@ -79,6 +160,16 @@ const generateFields = () => {
   return [
     groupField('columns', 'Columns', {
       children: [
+        /* Tab Group ID: required if tab groups are enabled. */
+        textField('tab_group_id', 'Tab group ID', {
+          inline_help_text:
+            'This field value must match the "Group ID" value in the "Tabs" section. This will determine where the column will be placed within the tab groups; if the value doesn\'t match any group ID, the column content will not appear.',
+          visibility: {
+            controlling_field_path: 'tab_group_settings.is_enabled',
+            controlling_value_regex: 'true',
+            operator: 'EQUAL',
+          },
+        }),
         choiceField('type', 'Column type', {
           choices: [
             ['content', 'Content'],
@@ -97,7 +188,7 @@ const generateFields = () => {
           children: [
             choiceField('text_align', 'Text Alignment', {
               choices: constructFieldValues('text', textAlignmentChoices),
-              default: 'text-start',
+              default: 'text-left',
               inline_help_text: 'Controls the alignment of content within this column.',
             }),
             richTextField('eyebrow', 'Eyebrow', {
@@ -170,6 +261,7 @@ const generateFields = () => {
                 ['image', 'Image'],
                 ['stacked_images', 'Stacked Images'],
                 ['hs_video', 'Video (HubSpot)'],
+                ['video', 'Video (External)'],
               ],
               default: 'image',
               inline_help_text:
@@ -193,6 +285,20 @@ const generateFields = () => {
                 operator: 'EQUAL',
               },
             }),
+            groupField('stacked_images', 'Stacked Images', {
+              children: [imageField('image', 'Image')],
+              visibility: {
+                controlling_field_path: 'columns.media.type',
+                controlling_value_regex: 'stacked_images',
+                operator: 'EQUAL',
+              },
+              occurrence: {
+                default: 2,
+                min: 2,
+                max: 2,
+              },
+              inline_help_text: 'Upload or select an 2 images to display.',
+            }),
             videoField('hs_video', 'Video (HubSpot)', {
               visibility: {
                 controlling_field_path: 'columns.media.type',
@@ -200,19 +306,13 @@ const generateFields = () => {
                 operator: 'EQUAL',
               },
             }),
-
-            groupField('stacked_images', 'Stacked Images', {
+            textField('video', 'Video (External)', {
               visibility: {
-                children: [imageField('image', 'Image')],
                 controlling_field_path: 'columns.media.type',
-                controlling_value_regex: 'stacked_images',
+                controlling_value_regex: 'video',
                 operator: 'EQUAL',
               },
-              occurrence: {
-                min: 1,
-                max: 2,
-              },
-              inline_help_text: 'Upload or select an 2 images to display.',
+              inline_help_text: 'Enter the URL of the external video to display.',
             }),
           ],
           visibility: {
@@ -271,62 +371,15 @@ const generateFields = () => {
         }),
         columnSettingsGroup,
         animationSettingsGroup,
+        revealSettingsGroup,
       ],
       occurrence: {
         sorting_label_field: 'columns.type',
       },
     }),
-    groupField('module_settings', 'Module Settings', {
-      children: [
-        choiceField('bg_color', 'Background color', {
-          choices: themeColorChoices,
-          default: 'transparent',
-          inline_help_text: 'Sets the background color for the entire module.',
-        }),
-        choiceField('text_color', 'Text color', {
-          choices: themeColorChoices,
-          default: 'petrol',
-          inline_help_text: 'Sets the text color for the entire module.',
-        }),
-        choiceField('gap', 'Gap between columns', {
-          choices: sizeChoices,
-          default: 'md',
-          inline_help_text: 'Controls the spacing between columns.',
-        }),
-        choiceField('justify', 'Justification (horizontal)', {
-          choices: [
-            ['justify-start', 'Start'],
-            ['justify-center', 'Center'],
-            ['justify-end', 'End'],
-            ['justify-between', 'Between'],
-            ['justify-around', 'Around'],
-            ['justify-evenly', 'Evenly'],
-          ],
-          default: 'justify-center',
-          inline_help_text:
-            'Controls the x-axis justification of all content within the module or tab.',
-          visibility: {
-            controlling_field_path: `module_settings.overflow_scroll_x`,
-            controlling_value_regex: 'false',
-            operator: 'EQUAL',
-          },
-        }),
-        booleanField('overflow_scroll_x', 'Enable horizontal scrolling?', {
-          default: false,
-          inline_help_text:
-            'When enabled, columns will scroll horizontally on mobile devices instead of stacking vertically.',
-        }),
-        booleanField('is_reversed_mobile', 'Reverse columns on mobile?', {
-          inline_help_text: 'Reverses the order of columns on mobile devices.',
-          visibility: {
-            controlling_field_path: `module_settings.overflow_scroll_x`,
-            controlling_value_regex: 'false',
-            operator: 'EQUAL',
-          },
-        }),
-        ...presetPaddingFields,
-      ],
-    }),
+
+    moduleSettingsGroup,
+    tabGroupSettingsGroup,
   ];
 };
 
