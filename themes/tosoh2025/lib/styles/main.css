@@ -4,7 +4,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-default: #212121;
+  --color-black-charcoal: #212121;
+  --color-default: var(--color-black-charcoal);
   --color-imperial-red: #ed1a3b;
   --color-aztec-gold: #c19e4f;
   --color-spanish-green: #009552;

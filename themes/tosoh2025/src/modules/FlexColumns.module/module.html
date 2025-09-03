@@ -1,0 +1,19 @@
+{% import "../../templates/partials/macros.html" as macros %}
+
+{% set eyebrow = module.eyebrow %}
+{% set title = module.title %}
+{% set description = module.description %}
+
+<div class="max-w-8xl {{ macros.padding_classes(module.padding_settings) }} gap-md m-auto flex w-full flex-col">
+  {% if eyebrow %}
+    <div class="text-imperial-red text-2xl font-light">{{ eyebrow }}</div>
+  {% endif %}
+
+  {% if title %}
+    <div class="text-5xl font-semibold">{{ title }}</div>
+  {% endif %}
+
+  {% if description %}
+    <div class="text-nickel text-lg">{{ description }}</div>
+  {% endif %}
+</div>
