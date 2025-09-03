@@ -41,7 +41,7 @@
 {# Macro for content blocks with conditional slots #}
 {%- macro render_content_block(content) -%}
   {% set text_align = content.text_align or "text-left" %}
-  <div class="{{ text_align }} gap-md flex flex-col">
+  <div class="{{ text_align }} gap-base flex flex-col">
     {%- if content.eyebrow %}
       <div class="text-imperial-red text-2xl font-light">{{ content.eyebrow }}</div>
     {%- endif %}
@@ -161,42 +161,53 @@
   {%- endif %}
 {% endmacro -%}
 
+{% macro wrap_with_grid_accent() %}
+  {% if module.module_settings.has_grid_accent %}
+    <tosoh-grid-accent>{{ caller() }}</tosoh-grid-accent>
+  {% elif %}
+    {{ caller() }}
+  {% endif %}
+{% endmacro %}
+
 {# Module Container #}
-<div class="max-w-max-page {{ macros.classes(module.module_settings) }} m-auto">
-  {# Tab Groups #}
-  {%- if module.tab_group_settings.is_enabled %}
-    <div class="flex w-full flex-col">
-      {# Tab Actions #}
-      <tosoh-scroll-x scrollbarHeight="1px">
-        <div class="gap-sm px-md mx-auto flex w-full justify-center">
-          {%- for tab_group in module.tab_group_settings.tab_groups -%}
-            {%- set is_active = loop.first ? "active=\"true\"" : null -%}
-            <tosoh-tab-group variant="action" groupId="{{ tab_group.group_id }}" {{ is_active }}>
-              {{ tab_group.group_label }}
-            </tosoh-tab-group>
-          {%- endfor %}
-        </div>
-      </tosoh-scroll-x>
 
-      {# Tab Content #}
-      {%- for tab_group in module.tab_group_settings.tab_groups -%}
-        {%- set columns = module.columns|selectattr('tab_group_id', 'equalto', tab_group.group_id) -%}
-        {%- set is_active = loop.first ? "active=\"true\"" : null -%}
-
-        <tosoh-tab-group variant="tab" groupId="{{ tab_group.group_id }}" {{ is_active }}>
-          <div {# {{ macros.container_attrs(tab_group.tab_settings) }} #}>
-            {% call flex_layout(tab_group.tab_settings) %}
-              {{ render_columns(columns, tab_group.tab_settings) }}
-            {% endcall %}
+{% call wrap_with_grid_accent() %}
+  <div class="max-w-max-page {{ macros.classes(module.module_settings) }} m-auto">
+    {# Tab Groups #}
+    {%- if module.tab_group_settings.is_enabled %}
+      <div class="flex w-full flex-col">
+        {# Tab Actions #}
+        <tosoh-scroll-x scrollbarHeight="1px">
+          <div class="gap-sm px-md mx-auto flex w-full justify-center">
+            {%- for tab_group in module.tab_group_settings.tab_groups -%}
+              {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+              <tosoh-tab-group variant="action" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+                {{ tab_group.group_label }}
+              </tosoh-tab-group>
+            {%- endfor %}
           </div>
-        </tosoh-tab-group>
-      {%- endfor %}
-    </div>
+        </tosoh-scroll-x>
 
-    {# Standard Columns #}
-  {%- else %}
-    {% call flex_layout(module.module_settings) %}
-      {{ render_columns(module.columns, module.module_settings) }}
-    {% endcall %}
-  {%- endif %}
-</div>
+        {# Tab Content #}
+        {%- for tab_group in module.tab_group_settings.tab_groups -%}
+          {%- set columns = module.columns|selectattr('tab_group_id', 'equalto', tab_group.group_id) -%}
+          {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+
+          <tosoh-tab-group variant="tab" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+            <div {# {{ macros.container_attrs(tab_group.tab_settings) }} #}>
+              {% call flex_layout(tab_group.tab_settings) %}
+                {{ render_columns(columns, tab_group.tab_settings) }}
+              {% endcall %}
+            </div>
+          </tosoh-tab-group>
+        {%- endfor %}
+      </div>
+
+      {# Standard Columns #}
+    {%- else %}
+      {% call flex_layout(module.module_settings) %}
+        {{ render_columns(module.columns, module.module_settings) }}
+      {% endcall %}
+    {%- endif %}
+  </div>
+{% endcall %}

@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');
 
 @import 'tailwindcss';
+@import './_forms.css';
 
 @theme {
   --color-black-charcoal: #212121;
@@ -57,11 +58,6 @@
 
 html {
   @apply text-default text-scale-mobile md:text-scale-desktop font-sans font-normal md:text-base;
-}
-
-p,
-span {
-  @apply break-all;
 }
 
 button,

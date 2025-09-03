@@ -1,0 +1,144 @@
+.fc-form {
+  form {
+    @apply gap-md flex w-full max-w-6xl flex-col;
+
+    margin: 0 auto;
+    padding: 0 0.125rem; /* For animations on inputs */
+
+    div#hs-membership-password-requirements {
+      margin-top: var(--space-xs);
+    }
+
+    .hs_submit {
+      .actions {
+        input[type='submit'] {
+          @apply from-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red border-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-normal text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow] duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+          box-shadow: 0px -3.08px 11.54px 0px #00000026 inset;
+        }
+      }
+    }
+
+    div.legal-consent-container {
+      @apply mt-md mb-md gap-md flex flex-col text-[#B1B1B1];
+    }
+
+    input#hs-login-widget-remember {
+      width: fit-content;
+    }
+
+    input#hs-pwd-widget-password {
+      width: 100%;
+      height: 2.75rem !important;
+    }
+
+    fieldset {
+      @apply gap-md flex max-w-full! flex-col md:flex-row;
+    }
+
+    div.hs-form-field,
+    div.form-field,
+    filter {
+      position: relative;
+      width: 100% !important;
+      float: none !important;
+
+      &.inline {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+
+      label {
+        &.error-msg,
+        &.hs-error-msg {
+          @apply mt-xs -ml-base text-imperial-red inline-flex text-xs;
+        }
+      }
+
+      > label {
+        > span {
+          @apply text-lg font-semibold;
+        }
+
+        > span.form-required,
+        > span.hs-form-required {
+          color: var(--color-imperial-red);
+        }
+      }
+
+      &.hs-fieldtype-radio,
+      &.hs-fieldtype-checkbox,
+      &.hs-form-booleancheckbox {
+        > label {
+          position: inherit;
+          top: auto;
+          left: auto;
+          padding: 0;
+          background: transparent;
+          font-size: var(--font-size-sm);
+        }
+      }
+
+      legend {
+        display: none !important;
+      }
+
+      div.input {
+        @apply w-full ring-0;
+
+        input:not([id^='LEGAL_CONSENT']),
+        select,
+        textarea {
+          @apply mt-base p-base outline-imperial-red mr-0! w-full rounded-xl border border-[#E9E9E938] focus-visible:border-0;
+        }
+
+        input[type='checkbox'] {
+          @apply mr-2 h-6 w-6 appearance-none rounded-lg border-1 border-white bg-transparent text-white focus:ring-0 focus:outline-none;
+        }
+
+        input[type='checkbox']:checked {
+          @apply bg-imperial-red;
+          background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708.708z'/%3e%3c/svg%3e");
+        }
+
+        select {
+          @apply appearance-none bg-no-repeat pr-8;
+          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          background-position: right 0.75rem center;
+          background-size: 1.5rem 1.5rem;
+        }
+
+        /* Textarea competes with inline styles associated w/ form-id. This ensures style priority. */
+        > textarea.hs-input {
+          width: 100%;
+        }
+      }
+
+      ul.inputs-list {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--space-2xs);
+        margin: 0 0 0 var(--space);
+        padding: 0;
+        list-style: none;
+
+        li.hs-form-radio,
+        li.hs-form-checkbox,
+        li.hs-form-booleancheckbox {
+          display: inline-flex;
+          flex-direction: row;
+          margin-bottom: 0;
+
+          > label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: var(--font-size-sm);
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

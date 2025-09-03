@@ -104,7 +104,13 @@ const tabGroupSettingsGroup = groupField('tab_group_settings', 'Tab Group Settin
 });
 
 const moduleSettingsGroup = groupField('module_settings', 'Module Settings', {
-  children: generateContainerSettings(true, 'module_settings'),
+  children: [
+    booleanField('has_grid_accent', 'Has grid accent?', {
+      inline_help_text:
+        'If enabled, a grid accent will appear in the background, like the one shown in the footer.',
+    }),
+    ...generateContainerSettings(true, 'module_settings'),
+  ],
 });
 
 /* Column Settings */
@@ -327,10 +333,6 @@ const generateFields = () => {
           inline_help_text:
             'A form block that allows you to add a form with a title and description.',
           children: [
-            urlField('meeting_url', 'Meeting Url', {
-              inline_help_text:
-                'Meeting link to which the user will be redirected after form submission.',
-            }),
             richTextField('eyebrow', 'Eyebrow', {
               enabled_features: contentBlockRtfFeatures,
               inline_help_text: 'Optional short text above the form title.',
