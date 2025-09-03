@@ -30,15 +30,16 @@
   const onChange = (event: Event) => {
     onReset();
 
+    updateUrl(event);
+  };
+
+  const onReset = () => {
+    console.log('reset');
     setSearchParams({
       pagination: `${defaultPagination}`,
       limit: `${defaultItemsLimit}`,
     });
 
-    updateUrl(event);
-  };
-
-  const onReset = () => {
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
     }

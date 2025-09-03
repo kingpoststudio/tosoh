@@ -39,7 +39,7 @@
 
   const constructFilterParams = () => {
     const params = new URLSearchParams(window.location.search);
-    let objWithFilters = {};
+    let objWithFilters: any = {};
     const allFilters = [...availableFilters, searchColumnId];
     //product_family, product-type, document_category, document_type
     allFilters?.map((filter) => (objWithFilters[filter] = params?.get(filter) || ''));
@@ -50,9 +50,11 @@
     const params = new URLSearchParams(window.location.search);
     return {
       accessLevel: accessLevel,
-      limit: parseInt(params?.get('limit')) || defaultItemsLimit,
-      pagination: parseInt(params?.get('pagination')) || defaultPagination,
-      offset: parseInt(params?.get('limit')) * (parseInt(params?.get('pagination')) - 1) || 0,
+      limit: parseInt(params?.get('limit') || defaultItemsLimit),
+      pagination: parseInt(params?.get('pagination') || defaultPagination),
+      offset:
+        parseInt(params?.get('limit') || defaultItemsLimit) *
+          (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
       filters: constructFilterParams(),
     };
   };

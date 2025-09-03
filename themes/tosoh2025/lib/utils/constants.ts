@@ -1,2 +1,2 @@
-export const defaultItemsLimit = 12;
-export const defaultPagination = 1;
+export const defaultItemsLimit = '12';
+export const defaultPagination = '1';
