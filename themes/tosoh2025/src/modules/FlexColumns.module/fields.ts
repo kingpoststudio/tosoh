@@ -27,6 +27,63 @@ import {
   widthChoices,
 } from '../../../lib/utils/fieldUtils';
 
+const generateVideoFields = () => [
+  groupField('video', 'Video', {
+    children: [
+      choiceField('video_host', 'Video Host', {
+        choices: [
+          ['hubspot', 'HubSpot'],
+          ['wistia', 'Wistia'],
+        ],
+        default: 'hubspot',
+        visibility: {
+          controlling_field: 'columns.type',
+          controlling_value_regex: 'video',
+          operator: 'EQUAL',
+        },
+      }),
+
+      videoField('video', 'Video', {
+        show_advanced_options: false,
+        visibility_rules: 'ADVANCED',
+        advanced_visibility: {
+          boolean_operator: 'AND',
+          criteria: [
+            {
+              controlling_field: 'columns.type',
+              controlling_value_regex: 'video',
+              operator: 'EQUAL',
+            },
+            {
+              controlling_field: 'columns.video.video_host',
+              controlling_value_regex: 'hubspot',
+              operator: 'EQUAL',
+            },
+          ],
+        },
+      }),
+      textField('wistia_cached_url', 'Wistia cached URL', {
+        visibility_rules: 'ADVANCED',
+        advanced_visibility: {
+          boolean_operator: 'AND',
+          criteria: [
+            {
+              controlling_field: 'columns.type',
+              controlling_value_regex: 'video',
+              operator: 'EQUAL',
+            },
+            {
+              controlling_field: 'columns.video.video_host',
+              controlling_value_regex: 'wistia',
+              operator: 'EQUAL',
+            },
+          ],
+        },
+      }),
+    ],
+  }),
+];
+
 const generateContainerSettings = (presetPadding = false, visibilityPath = '') => [
   choiceField('bg_color', 'Background color', {
     choices: constructFieldValues('bg', themeColorChoices),
@@ -174,7 +231,8 @@ const generateFields = () => {
         choiceField('type', 'Column type', {
           choices: [
             ['content', 'Content'],
-            ['media', 'Media'],
+            ['image', 'Image'],
+            ['video', 'Video'],
             ['form', 'Form'],
             ['spacer', 'Spacer'],
             ['rtf', 'Richtext'],
@@ -252,26 +310,23 @@ const generateFields = () => {
           },
         }),
 
-        /* Media */
-        groupField('media', 'Media', {
-          inline_help_text:
-            'A media block that allows you to add a shaped image or video with a caption.',
+        /* Image */
+        groupField('image', 'Image', {
+          inline_help_text: 'Allows you to add an image.',
           children: [
-            choiceField('type', 'Media type', {
+            choiceField('type', 'Image Type', {
               choices: [
-                ['image', 'Image'],
+                ['single', 'Single'],
                 ['stacked_images', 'Stacked Images'],
-                ['hs_video', 'Video (HubSpot)'],
-                ['video', 'Video (External)'],
               ],
-              default: 'image',
+              default: 'single',
               inline_help_text:
                 'Choose whether to display an image, a HiArc pattern, a HubSpot video hosted locally, or an external video URL.',
             }),
             imageField('image', 'Image', {
               visibility: {
-                controlling_field_path: 'columns.media.type',
-                controlling_value_regex: 'image',
+                controlling_field_path: 'columns.image.type',
+                controlling_value_regex: 'single',
                 operator: 'EQUAL',
               },
               inline_help_text: 'Upload or select an image to display.',
@@ -281,7 +336,7 @@ const generateFields = () => {
               inline_help_text:
                 'If enabled, the image will be contained within the column, otherwise it will fill the column width.',
               visibility: {
-                controlling_field_path: 'columns.media.type',
+                controlling_field_path: 'columns.type',
                 controlling_value_regex: 'image',
                 operator: 'EQUAL',
               },
@@ -289,7 +344,7 @@ const generateFields = () => {
             groupField('stacked_images', 'Stacked Images', {
               children: [imageField('image', 'Image')],
               visibility: {
-                controlling_field_path: 'columns.media.type',
+                controlling_field_path: 'columns.image.type',
                 controlling_value_regex: 'stacked_images',
                 operator: 'EQUAL',
               },
@@ -300,28 +355,16 @@ const generateFields = () => {
               },
               inline_help_text: 'Upload or select an 2 images to display.',
             }),
-            videoField('hs_video', 'Video (HubSpot)', {
-              visibility: {
-                controlling_field_path: 'columns.media.type',
-                controlling_value_regex: 'hs_video',
-                operator: 'EQUAL',
-              },
-            }),
-            textField('video', 'Video (External)', {
-              visibility: {
-                controlling_field_path: 'columns.media.type',
-                controlling_value_regex: 'video',
-                operator: 'EQUAL',
-              },
-              inline_help_text: 'Enter the URL of the external video to display.',
-            }),
           ],
           visibility: {
             controlling_field_path: 'columns.type',
-            controlling_value_regex: 'media',
+            controlling_value_regex: 'image',
             operator: 'EQUAL',
           },
         }),
+
+        /* Video Fields */
+        ...generateVideoFields(),
 
         /* Form */
         groupField('form', 'Form', {

@@ -84,6 +84,11 @@ h6 {
   @apply text-xl;
 }
 
+img,
+.wistia_responsive_padding {
+  @apply overflow-hidden rounded-lg;
+}
+
 button,
 .button,
 *[role='button'] {

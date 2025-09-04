@@ -61,28 +61,47 @@
   </div>
 {%- endmacro -%}
 
-{# Macro for media rendering #}
-{%- macro render_media(media) -%}
-  {%- if media.type == "image" -%}
-    {%- set object_fit = media.is_image_contained ? "object-contain" : "object-cover" -%}
+{# Macro for image rendering #}
+{%- macro render_image(image) -%}
+  {%- if image.type == "single" -%}
+    {%- set object_fit = image.is_image_contained ? "object-contain" : "object-cover" -%}
     <img
-      src="{{ media.image.src }}"
-      alt="{{ media.image.alt }}"
+      src="{{ image.image.src }}"
+      alt="{{ image.image.alt }}"
       width="720"
       class="{{ object_fit }} relative block h-full w-full" />
-  {%- elif media.type == "stacked_images" -%}
-    <img src="{{ media.image.src }}" alt="{{ media.image.alt }}" width="720" class="relative block h-full w-full" />
-  {%- elif media.type == "hs_video" %}
-    {%
-      video_player "content_video" player_id="{{ media.hs_video.player_id }}" extra_classes="{{
-      media.media_shape }}" play_button_color="transparent"
-    %}
-  {%- elif media.type == "video" %}
-    <video class="h-full w-full" controls>
-      <source src="{{ media.video }}" />
-      Your browser does not support the video tag.
-    </video>
+  {%- elif image.type == "stacked_images" -%}
+    <img src="{{ image.image.src }}" alt="{{ image.image.alt }}" width="720" class="relative block h-full w-full" />
   {%- endif %}
+{%- endmacro -%}
+
+{# Macro for video rendering #}
+{%- macro render_video() -%}
+  {% set video = column.video %}
+
+  {% if video.video_host == "hubspot" and video.video.player_id %}
+    {% video_player 'content_video' player_id="{{ video.video.player_id }}" %}
+  {% elif video.video_host == "wistia" and video.wistia_cached_url %}
+    {% set wistia_video_id = video.wistia_cached_url|split('/')|reverse|first %}
+
+    {% require_js %}
+      <script>
+        window._wq = window._wq || [];
+        _wq.push({
+          id: '{{ wistia_video_id }}',
+          options: {
+            playerColor: 'ed1a3b',
+            backgroundOpacity: 1,
+          },
+        });
+      </script>
+      <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    {% end_require_js %}
+
+    <div class="wistia_responsive_padding wistia_embed wistia_async_{{ wistia_video_id }} aspect-video w-full">
+      &nbsp;
+    </div>
+  {% endif %}
 {%- endmacro -%}
 
 {# Macro for flex layout wrapper #}
@@ -118,8 +137,9 @@
     -%}
 
     {% set column_settings = column.column_settings ? macros.classes(column.column_settings) : '' %}
+    {% set video_width= column.type == 'video' ? 'w-full h-full' : '' %}
 
-    <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} flex">
+    <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ video_width }} flex">
       {% call column_wrapper(column) %}
         {{ render_column_type(column) }}
       {% endcall %}
@@ -134,8 +154,12 @@
     {{ render_content_block(column.content) }}
 
     {# Media #}
-  {%- elif column.type == "media" %}
-    {{ render_media(column.media) }}
+  {%- elif column.type == "image" %}
+    {{ render_image(column.image) }}
+
+    {# Video #}
+  {%- elif column.type == "video" %}
+    {{ render_video(column.video) }}
 
     {# Form #}
   {%- elif column.type == "form" -%}
