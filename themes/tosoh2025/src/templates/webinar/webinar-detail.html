@@ -1,0 +1,99 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: Webinar Detail Page
+-->
+
+{% extends "../layouts/base.html" %}
+
+{% block body %}
+  <main>
+    {%
+      module 'hero_banner'
+      path="../../modules/webinarDetails/HeroBanner",
+      bg={
+      src:'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/971742371c0b4bb7f341af60e98f3399b98a2f67.jpg'
+      },
+      eyebrow='3:00 PM – 4:30 PM BST',
+      title="Potential clinical applications of KL-6 in interstitial and rare lung diseases",
+      speakers=[
+        {
+        img:{src:"https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/c50aecc3d639d993708863451867f2935a00537d.jpg"},
+        speaker_name:"Lorem Ipsum",
+        workplace:"Lorem Ipsum"
+        }
+      ],
+      cta={
+            cta_label:"Register Now",
+            form_id:{url:{ href:"#form"}},
+            below_cta:"Limited Seats Available"
+        }
+    %}
+    {%
+      module "about_webinar"
+      path="../../modules/FlexColumns",
+      columns=[
+        {
+          type: "content",
+          content: {
+            title: "<h3>About this Webinar</h3>",
+            description:'<p>Tosoh Europe cordially invites you to the next edition of the TOSOH DIAGNOSTICS FORUM, webinars on various topics from experts for physicians, MFAs and MTAs.</p>'
+          },
+          animation_settings: {
+            is_animated: true,
+            delay: 300,
+            duration: 800,
+            x_travel: "0",
+            y_travel: "1rem"
+          }
+        }
+      ],
+      module_settings={
+        pt_mobile: "pt-md",
+        pt_desktop: "md:pt-md"
+      }
+    %}
+    {%
+      module "speaker_cards"
+      path="../../modules/webinarDetails/SpeakersCards",
+      title="Will Speak",
+      speakers=[
+      {
+      img:{src:"https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/c50aecc3d639d993708863451867f2935a00537d.jpg"},
+      speaker_name:"Lorem Ipsum",
+      workplace:"Lorem Ipsum"},
+      {
+      img:{src:"https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/c50aecc3d639d993708863451867f2935a00537d.jpg"},
+      speaker_name:"Lorem Ipsum",
+      workplace:"Lorem Ipsum"
+      }
+      ]
+    %}
+    {%
+      module "form"
+      path="../../modules/FlexColumns",
+      columns=[
+        {
+          type: "form",
+          form:{
+          title: "<h3 class='text-center'>Don't Miss Out! Register Now for the Webinar</h3>",
+          description:"<p class='text-center text-ghost-white'>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum.</p>"},
+          animation_settings: {
+            is_animated: true,
+            delay: 300,
+            duration: 800,
+            x_travel: "0",
+            y_travel: "1rem"
+          }
+        }
+      ],
+      module_settings={
+        bg_color:'bg-prussian-blue',
+        text_color:'text-white',
+        has_grid_accent:true,
+        pt_mobile: "pt-md",
+        pt_desktop: "md:pt-md"
+      }
+    %}
+  </main>
+{% endblock body %}

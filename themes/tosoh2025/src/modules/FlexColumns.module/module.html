@@ -1,4 +1,5 @@
 {% import "../../templates/partials/macros.html" as macros %}
+
 {% set module_id = module.module_settings.custom_id ? 'id="{{module.module_settings.custom_id}}"' :'' %}
 
 {# Macro for wrapping content with conditional animation #}
@@ -116,7 +117,9 @@
       "border " ~ column.column_settings.border_color : "border-transparent"
     -%}
 
-    <div class="{{ flex_factor }} {{ border_color }} hi {{ macros.classes(column.column_settings) }} flex">
+    {% set column_settings = column.column_settings ? macros.classes(column.column_settings) : '' %}
+
+    <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} flex">
       {% call column_wrapper(column) %}
         {{ render_column_type(column) }}
       {% endcall %}
