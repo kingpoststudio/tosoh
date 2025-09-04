@@ -201,7 +201,7 @@ export const themeColorChoices = [
   ['imperial-red', 'Imperial Red'],
   ['nickel', 'Nickel'],
   ['ghost-white', 'Ghost White'],
-  ['navy-blue', 'Navy Blue'],
+  ['prussian-blue', 'Prussian Blue'],
   ['transparent', 'Transparent'],
 ];
 
