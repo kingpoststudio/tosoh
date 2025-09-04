@@ -104,6 +104,41 @@
   {% endif %}
 {%- endmacro -%}
 
+{%- macro render_form() -%}
+  {% if column.form.is_dialog_form %}
+    {% set modal_id = 'gated_form_' ~ loop.index %}
+    <div>
+      <tosoh-modal variant="modal" modalId="{{ modal_id }}">
+        <h4 slot="title" class="p-sm font-semibold">{{ column.form.form_dialog_title }}</h4>
+        <div slot="content" class="p-lg">
+          {%
+            form "flex_form"
+            form_to_use="{{ column.form.form.form_id }}"
+            response_response_type="{{ column.form.form.response_type }}"
+            response_message="{{ column.form.form.message }}"
+            response_redirect_id="{{ column.form.form.redirect_id }}"
+            response_redirect_url="{{ column.form.form.redirect_url }}"
+            gotowebinar_webinar_key="{{ column.form.form.gotowebinar_webinar_key }}"
+          %}
+        </div>
+      </tosoh-modal>
+      <tosoh-modal slot="cta" variant="action" modalId="{{ modal_id }}">
+        <button>{{ column.form.form_dialog_button_label }}</button>
+      </tosoh-modal>
+    </div>
+  {% else %}
+    {%
+      form "flex_form"
+      form_to_use="{{ column.form.form.form_id }}"
+      response_response_type="{{ column.form.form.response_type }}"
+      response_message="{{ column.form.form.message }}"
+      response_redirect_id="{{ column.form.form.redirect_id }}"
+      response_redirect_url="{{ column.form.form.redirect_url }}"
+      gotowebinar_webinar_key="{{ column.form.form.gotowebinar_webinar_key }}"
+    %}
+  {% endif %}
+{%- endmacro -%}
+
 {# Macro for flex layout wrapper #}
 {%- macro flex_layout(settings) -%}
   {%- set gap = settings.gap -%}
@@ -166,15 +201,7 @@
     <div class="gap-md fc-form flex flex-col">
       {{ render_content_block(column.form) }}
       {% if column.form.form %}
-        {%
-          form "flex_form"
-          form_to_use="{{ column.form.form.form_id }}"
-          response_response_type="{{ column.form.form.response_type }}"
-          response_message="{{ column.form.form.message }}"
-          response_redirect_id="{{ column.form.form.redirect_id }}"
-          response_redirect_url="{{ column.form.form.redirect_url }}"
-          gotowebinar_webinar_key="{{ column.form.form.gotowebinar_webinar_key }}"
-        %}
+        {{ render_form() }}
       {% endif %}
     </div>
     {# Richtext #}

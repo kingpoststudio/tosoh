@@ -27,6 +27,30 @@ import {
   widthChoices,
 } from '../../../lib/utils/fieldUtils';
 
+const generateFormDialogFields = () => [
+  booleanField('is_dialog_form', 'Contain form within a dialog?', {
+    inline_help_text:
+      "If checked, the form will be contained within a dialog. The dialog can be opened with a button that appears just below the form's title.",
+  }),
+  textField('form_dialog_title', 'Form Dialog Title', {
+    default: 'Form Dialog Title',
+    visibility: {
+      controlling_field: 'columns.form.is_dialog_form',
+      controlling_value_regex: true,
+      operator: 'EQUAL',
+    },
+  }),
+
+  textField('form_dialog_button_label', 'Form dialog button label', {
+    default: 'Click to open dialog',
+    visibility: {
+      controlling_field: 'columns.form.is_dialog_form',
+      controlling_value_regex: true,
+      operator: 'EQUAL',
+    },
+  }),
+];
+
 const generateVideoFields = () => [
   groupField('video', 'Video', {
     children: [
@@ -371,6 +395,7 @@ const generateFields = () => {
           inline_help_text:
             'A form block that allows you to add a form with a title and description.',
           children: [
+            ...generateFormDialogFields(),
             richTextField('eyebrow', 'Eyebrow', {
               enabled_features: contentBlockRtfFeatures,
               inline_help_text: 'Optional short text above the form title.',
