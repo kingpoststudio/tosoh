@@ -19,7 +19,10 @@ const generateFields = () => {
     groupField('cta', 'CTA', {
       children: [
         textField('cta_label', 'Label'),
-        linkField('cta_link', 'Link'),
+        linkField('form_id', 'Form Id', {
+          inline_help_text:
+            'This should match the ID of the Flex Column containing the form. When the button is clicked, the page will scroll down to the form with the matching ID.',
+        }),
         textField('below_cta', 'Text Below CTA'),
       ],
     }),

@@ -9,7 +9,6 @@ import {
   numberField,
   richTextField,
   textField,
-  urlField,
   videoField,
 } from 'hs-fieldkit';
 import {
@@ -17,14 +16,15 @@ import {
   animationSettingsGroup,
   constructFieldValues,
   contentBlockRtfFeatures,
+  justifyChoices,
   linkVariantChoices,
-  offsetFields,
   paddingFields,
   presetPaddingFields,
   revealSettingsGroup,
   sizeChoices,
   textAlignmentChoices,
   themeColorChoices,
+  widthChoices,
 } from '../../../lib/utils/fieldUtils';
 
 const generateContainerSettings = (presetPadding = false, visibilityPath = '') => [
@@ -43,14 +43,7 @@ const generateContainerSettings = (presetPadding = false, visibilityPath = '') =
     inline_help_text: 'Controls the spacing between columns.',
   }),
   choiceField('justify', 'Justification (horizontal)', {
-    choices: [
-      ['justify-start', 'Start'],
-      ['justify-center', 'Center'],
-      ['justify-end', 'End'],
-      ['justify-between', 'Between'],
-      ['justify-around', 'Around'],
-      ['justify-evenly', 'Evenly'],
-    ],
+    choices: constructFieldValues('justify', justifyChoices),
     default: 'justify-center',
     inline_help_text: 'Controls the x-axis justification of all content within the module or tab.',
     visibility: {
@@ -109,6 +102,10 @@ const moduleSettingsGroup = groupField('module_settings', 'Module Settings', {
       inline_help_text:
         'If enabled, a grid accent will appear in the background, like the one shown in the footer.',
     }),
+    textField('custom_id', 'Module Id', {
+      inline_help_text:
+        'Optionally provide a unique ID for this module. This can be used for anchor link navigation (e.g., scrolling to this section when a link is clicked elsewhere on the page).',
+    }),
     ...generateContainerSettings(true, 'module_settings'),
   ],
 });
@@ -126,7 +123,7 @@ const columnSettingsGroup = groupField('column_settings', 'Column Settings', {
     }),
 
     choiceField('column_size', 'Column size', {
-      choices: constructFieldValues('w', sizeChoices),
+      choices: constructFieldValues('w', widthChoices),
       visibility: {
         controlling_field_path: 'columns.column_settings.flex_factor',
         controlling_value_regex: 0,
@@ -158,7 +155,6 @@ const columnSettingsGroup = groupField('column_settings', 'Column Settings', {
     }),
 
     ...paddingFields,
-    ...offsetFields,
   ],
 });
 

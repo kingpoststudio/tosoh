@@ -1,4 +1,5 @@
 {% import "../../templates/partials/macros.html" as macros %}
+{% set module_id = module.module_settings.custom_id ? 'id="{{module.module_settings.custom_id}}"' :'' %}
 
 {# Macro for wrapping content with conditional animation #}
 {%- macro column_wrapper(column) -%}
@@ -163,7 +164,7 @@
 
 {% macro wrap_with_grid_accent() %}
   {% if module.module_settings.has_grid_accent %}
-    <tosoh-grid-accent>{{ caller() }}</tosoh-grid-accent>
+    <tosoh-grid-accent class="max-w-max-page m-auto">{{ caller() }}</tosoh-grid-accent>
   {% elif %}
     {{ caller() }}
   {% endif %}
@@ -172,7 +173,7 @@
 {# Module Container #}
 
 {% call wrap_with_grid_accent() %}
-  <div class="max-w-max-page {{ macros.classes(module.module_settings) }} m-auto">
+  <div {{ module_id }} class="max-w-max-page {{ macros.classes(module.module_settings) }} scroll-mt-5xl m-auto">
     {# Tab Groups #}
     {%- if module.tab_group_settings.is_enabled %}
       <div class="flex w-full flex-col">

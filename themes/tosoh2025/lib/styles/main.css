@@ -57,7 +57,7 @@
 }
 
 html {
-  @apply text-default text-scale-mobile md:text-scale-desktop font-sans font-normal md:text-base;
+  @apply text-default text-scale-mobile md:text-scale-desktop scroll-smooth font-sans font-normal;
 }
 
 button,

@@ -40,6 +40,10 @@ export const sizeChoices = [
   ['3xl', '3X-large'],
   ['4xl', '4X-large'],
   ['5xl', '5X-large'],
+];
+
+export const widthChoices = [
+  ...sizeChoices,
   ['6xl', '6X-large'],
   ['7xl', '7X-large'],
   ['8xl', '8X-large'],
@@ -54,6 +58,16 @@ export const constructFieldValues = (tailwindIdentifier: string, choices: string
   });
 
   return choicesWithPrefixes;
+};
+
+export const constructClasses = (tailwindIdentifier: string, choices: string[][]) => {
+  let twClasses: any = [];
+
+  choices.map((value) => {
+    twClasses.push(`${tailwindIdentifier}-${value[0]}`);
+  });
+
+  return twClasses;
 };
 
 export const paddingFields = [
@@ -89,6 +103,15 @@ export const paddingFields = [
     choices: constructFieldValues('md:pl', sizeChoices),
     display_width: 'half_width',
   }),
+];
+
+export const justifyChoices = [
+  ['start', 'Start'],
+  ['center', 'Center'],
+  ['end', 'End'],
+  ['between', 'Between'],
+  ['around', 'Around'],
+  ['evenly', 'Evenly'],
 ];
 
 export const alignmentChoices = [

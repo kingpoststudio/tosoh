@@ -92,6 +92,12 @@
           @apply mt-base p-base outline-imperial-red mr-0! w-full rounded-xl border border-[#E9E9E938] focus-visible:border-0;
         }
 
+        :has(input[id^='LEGAL_CONSENT']) {
+          span {
+            @apply text-white;
+          }
+        }
+
         input[type='checkbox'] {
           @apply mr-2 h-6 w-6 appearance-none rounded-lg border-1 border-white bg-transparent text-white focus:ring-0 focus:outline-none;
         }
