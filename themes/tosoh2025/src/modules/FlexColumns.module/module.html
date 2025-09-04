@@ -116,13 +116,7 @@
       "border " ~ column.column_settings.border_color : "border-transparent"
     -%}
 
-    <div
-      {# {{ macros.container_attrs(column.column_settings) }} #}
-      class="{{ flex_factor }} {{ border_color }} flex"
-      w="100%"
-      h="100%"
-      mdW="100%"
-      mdH="100%">
+    <div class="{{ flex_factor }} {{ border_color }} hi {{ macros.classes(column.column_settings) }} flex">
       {% call column_wrapper(column) %}
         {{ render_column_type(column) }}
       {% endcall %}
@@ -165,7 +159,7 @@
 {% macro wrap_with_grid_accent() %}
   {% if module.module_settings.has_grid_accent %}
     <tosoh-grid-accent class="max-w-max-page m-auto">{{ caller() }}</tosoh-grid-accent>
-  {% elif %}
+  {% else %}
     {{ caller() }}
   {% endif %}
 {% endmacro %}

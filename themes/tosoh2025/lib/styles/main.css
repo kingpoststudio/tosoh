@@ -8,13 +8,7 @@
   --color-black-charcoal: #212121;
   --color-default: var(--color-black-charcoal);
   --color-imperial-red: #ed1a3b;
-  --color-aztec-gold: #c19e4f;
-  --color-spanish-green: #009552;
-  --color-myrtle-green: #2a7278;
-  --color-metallic-seaweed: #0e759a;
-  --color-pewter-blue: #87b2b2;
   --color-prussian-blue: #013a55;
-  --color-max-purple: #7f317e;
   --color-nickel: #747273;
   --color-ghost-white: #f9f9f9;
 
@@ -35,6 +29,8 @@
   --container-max-page: min(100vw, var(--container-12xl));
 
   --font-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
+
+  --font-arial: Arial, ui-sans-serif, system-ui, sans-serif;
   --font-sans-narrow: 'PT Sans Narrow', sans-serif;
 
   --text-scale-mobile: min(16px, 3.5vw);
@@ -57,7 +53,35 @@
 }
 
 html {
-  @apply text-default text-scale-mobile md:text-scale-desktop scroll-smooth font-sans font-normal;
+  @apply text-default text-scale-mobile md:text-scale-desktop font-arial scroll-smooth font-normal;
+}
+
+h1,
+h2,
+h3 {
+  @apply font-sans-narrow;
+}
+
+h1 {
+  @apply text-6xl;
+}
+
+h2 {
+  @apply text-5xl;
+}
+
+h3 {
+  @apply text-4xl;
+}
+h4 {
+  @apply text-3xl;
+}
+h5 {
+  @apply text-2xl;
+}
+
+h6 {
+  @apply text-xl;
 }
 
 button,

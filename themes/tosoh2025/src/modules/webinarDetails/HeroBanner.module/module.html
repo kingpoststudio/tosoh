@@ -6,20 +6,20 @@
 {% set text_below_cta = module.cta.below_cta %}
 
 <div
-  class="p-lg max-w-max-page gap-xl relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full flex-col items-center justify-between overflow-hidden lg:min-h-[40rem] lg:flex-row">
+  class="p-md md:p-2xl max-w-max-page gap-2xl relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full flex-col items-center justify-between overflow-hidden lg:min-h-[40rem] lg:flex-row">
   {% if bg.src %}
     <img src="{{ bg.src }}" class="absolute top-0 left-0 h-full w-full object-cover" />
   {% endif %}
 
   <div class="absolute top-0 left-0 h-full w-full bg-[#01151EA8] object-cover"></div>
 
-  <div class="gap-md relative flex flex-grow flex-col">
+  <div class="gap-base relative flex flex-grow flex-col">
     {% if eyebrow %}
       <p class="text-xl font-semibold text-white md:text-2xl">{{ eyebrow }}</p>
     {% endif %}
 
     {% if title %}
-      <h1 class="text-3xl font-semibold text-white md:text-6xl">{{ title }}</h1>
+      <h1 class="font-semibold text-white">{{ title }}</h1>
     {% endif %}
 
     {% if module.speakers|length %}

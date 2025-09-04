@@ -44,7 +44,6 @@ const generateContainerSettings = (presetPadding = false, visibilityPath = '') =
   }),
   choiceField('justify', 'Justification (horizontal)', {
     choices: constructFieldValues('justify', justifyChoices),
-    default: 'justify-center',
     inline_help_text: 'Controls the x-axis justification of all content within the module or tab.',
     visibility: {
       controlling_field_path: `${visibilityPath}.overflow_scroll_x`,
