@@ -51,7 +51,7 @@
       label {
         &.error-msg,
         &.hs-error-msg {
-          @apply mt-xs -ml-base text-imperial-red inline-flex text-xs;
+          @apply mt-xs text-imperial-red inline-flex;
         }
       }
 
