@@ -85,7 +85,8 @@ h6 {
 }
 
 img,
-.wistia_responsive_padding {
+.wistia_responsive_padding,
+.hs-video-widget {
   @apply overflow-hidden rounded-lg;
 }
 
