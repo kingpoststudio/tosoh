@@ -150,3 +150,38 @@ export type SupportPortalSearchItem = {
   childTableId: string;
   isSoftEditable: boolean;
 };
+
+export type WebinarListingsItem = {
+  id: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  path: null;
+  name: null;
+  values: {
+    webinar_subtext: string;
+    priority: string;
+    presenter_1_name: string;
+    presenter_1_title: string;
+    webinar_title: string;
+    presenter_1_image: {
+      url: string;
+      width: number;
+      height: number;
+      altText: string;
+      type: string;
+    };
+    presenter_2_name: string;
+    presenter_2_title: string;
+    webinar_title: string;
+    presenter_2_image: {
+      url: string;
+      width: number;
+      height: number;
+      altText: string;
+      type: string;
+    };
+  };
+  isSoftEditable: boolean;
+  childTableId: string;
+};

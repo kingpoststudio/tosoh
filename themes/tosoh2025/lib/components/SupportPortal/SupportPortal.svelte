@@ -48,7 +48,7 @@
     return { ...objWithFilters };
   };
 
-  const constructFormValues = () => {
+  const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     return {
       tableId: 'support_portal',
@@ -67,7 +67,7 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      const data = await fetchTableRows(constructFormValues());
+      const data = await fetchTableRows(constructBody());
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;

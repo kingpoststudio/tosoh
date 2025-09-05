@@ -1,0 +1,20 @@
+{% set filter_columns = module.filters|map('hubdb_column_id')|join(',') %}
+
+{%- set eyebrow = module.eyebrow -%}
+{%- set title = module.title -%}
+{%- set table_id = module.hubdb_table_id -%}
+
+{%- set filter_by_topic = module.advanced.filter_by_topic -%}
+
+{% require_js position="head" %}
+  <script>
+    const filters = '{{ filter_columns }}';
+    const eyebrow = '{{eyebrow}}';
+    const title = '{{title}}';
+    const filterByTopic = '{{filter_by_topic}}';
+
+    window.Tosoh.WebinarListings = { filters, eyebrow, title, filterByTopic };
+  </script>
+{% end_require_js %}
+
+<tosoh-webinar-listings></tosoh-webinar-listings>
