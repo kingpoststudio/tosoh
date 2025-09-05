@@ -15,6 +15,8 @@
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
+  const isSearchAccessLevelFilterEnabled =
+    window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
 
   let accessLevel = window?.Tosoh?.SupportPortalContent?.accessLevel || 'Customer';
 
@@ -134,7 +136,7 @@
     {@render filterIcon()}
   </div>
 
-  <SearchInput />
+  <SearchInput accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined} />
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {#if searchColumnId !== columnId}

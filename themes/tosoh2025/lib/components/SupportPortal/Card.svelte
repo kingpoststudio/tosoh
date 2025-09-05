@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { SupportPortalItem } from '../../../types/hubdb';
   let { item, hasSiblings, viewAs }: { item: any; hasSiblings: boolean; viewAs: 'grid' | 'list' } =
     $props();
 
@@ -84,9 +83,9 @@
   <div class="gap-xs flex h-full w-full flex-col justify-between">
     <div>
       <span class=" text-imperial-red break-all">{family}</span>
-      <h3 class="text-raisin-black break-all text-lg font-bold">
+      <h5 class="text-raisin-black break-all font-bold">
         {name}
-      </h3>
+      </h5>
     </div>
 
     {#if type === 'Video'}

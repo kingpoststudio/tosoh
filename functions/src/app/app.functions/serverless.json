@@ -17,7 +17,7 @@
           }
         },
           "get-matching-search-items": {
-          "file": "getMatcingSearchItems.js",
+          "file": "getMatchingSearchItems.js",
           "secrets": ["HUBSPOT_API_KEY"],
           "endpoint": {
             "path": "get-matching-search-items",

@@ -12,6 +12,7 @@ declare global {
           title?: string;
           hubdb_table_id: string;
           hubdb_column_id: string;
+          is_access_level_filter_enabled: boolean;
         };
         title: string;
         description: string;

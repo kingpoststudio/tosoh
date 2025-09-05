@@ -5,16 +5,16 @@ const search = {
   hubdb_column_id: 'search_terms',
 };
 
-window.Tosoh = window.Tosoh || {};
-window.Tosoh.SupportPortalContent = {
-  filters: filters,
-  search: {
-    ...search,
-  },
-  title: 'Tosoh Support Portal',
-  description:
-    'Your centralized hub for technical assistance, product resources, and expert guidance across Tosoh diagnostic systems.',
-};
+// window.Tosoh = window.Tosoh || {};
+// window.Tosoh.SupportPortalContent = {
+//   filters: filters,
+//   search: {
+//     ...search,
+//   },
+//   title: 'Tosoh Support Portal',
+//   description:
+//     'Your centralized hub for technical assistance, product resources, and expert guidance across Tosoh diagnostic systems.',
+// };
 
 export const mockPortalItems = {
   total: 358,

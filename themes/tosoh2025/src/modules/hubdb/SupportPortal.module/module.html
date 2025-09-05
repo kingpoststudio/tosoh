@@ -5,6 +5,7 @@
 {% set search_title = module.search.title %}
 {% set search_hubdb_table = module.search.hubdb_table_id %}
 {% set search_hubdb_column = module.search.hubdb_column_id %}
+{% set search_is_access_level_filter_enabled = module.search.is_access_level_filter_enabled %}
 
 {%set title = module.title %}
 {%set description = module.description %}
@@ -20,6 +21,7 @@ const description = '{{description}}'
 const search = {
     title: "{{ search_title  || ""}}",
     hubdb_table_id: "{{ search_hubdb_table || ""}}",
+    is_access_level_filter_enabled: {{search_is_access_level_filter_enabled}},
     hubdb_column_id: "{{ search_hubdb_column || ""}}",
 };
 window.Tosoh.SupportPortalContent = { filters, search, title, description, accessLevel };
@@ -62,6 +64,7 @@ window.Tosoh.SupportPortalContent = { filters, search, title, description, acces
         </div>
         </div>
 {% else %}
+
 <tosoh-support-portal></tosoh-support-portal>
 
 {% endif %}

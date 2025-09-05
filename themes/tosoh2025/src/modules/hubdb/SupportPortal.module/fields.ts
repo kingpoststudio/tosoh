@@ -8,6 +8,8 @@ const generateFields = () => {
         ['Distributor', 'Distributor'],
         ['Internal', 'Internal'],
       ],
+      required: true,
+      default: 'Customer',
     }),
     textField('title', 'Title', {
       default: 'Tosoh Support Portal',
@@ -18,8 +20,12 @@ const generateFields = () => {
     }),
     groupField('search', 'Search', {
       children: [
+        booleanField('is_access_level_filter_enabled', 'Is acess level filter enabled?', {
+          inline_help_text:
+            "Enable this only if the HubDB table you are searching against matches the module's access levels and the column name is 'visibility'.",
+        }),
         textField('title', 'Title'),
-        hubDbTableField('hubdb_table_id', 'HubDB Table'),
+        hubDbTableField('hubdb_table_id', 'HubDB Table', { required: true }),
         textField('hubdb_column_id', 'HubDB Column ID', {
           inline_help_text:
             'Enter the column ID of the HubDB table that contains the search terms.',
@@ -38,7 +44,7 @@ const generateFields = () => {
       ],
       occurrence: {
         min: 1,
-        max: 4,
+        max: null,
       },
     }),
     booleanField('display_video_download', 'Display video download?', {

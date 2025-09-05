@@ -22,14 +22,26 @@ function findMatchesInRows(
 
 async function fetchPartialMatchesByTerm(req: any) {
   const body = req && req.body ? req.body : {};
-  const { term, tableId, columnId } = body;
+  const { term, tableId, columnId, accessLevel } = body;
 
   if (!term || !tableId || !columnId)
     throw new Error(
       "Make sure to include term, tableId, columnId in request body"
     );
 
-  const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows?properties=${columnId}&deactivate__eq=false`;
+  const renderAccessLevel = () => {
+    if (accessLevel && typeof accessLevel === "string") {
+      return `&visibility__in=${accessLevel}`;
+    } else {
+      return "";
+    }
+  };
+
+  console.log(accessLevel, "accessLevel");
+
+  const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows?properties=${columnId}&deactivate__eq=false${renderAccessLevel()}`;
+
+  console.log(apiUrl, "apiUrl");
 
   const res = await fetch(apiUrl, {
     method: "GET",

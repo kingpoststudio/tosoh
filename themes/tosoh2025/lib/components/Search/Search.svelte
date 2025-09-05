@@ -3,6 +3,8 @@
 
   import FilterForm from '../FilterForm/FilterForm.svelte';
 
+  const { accessLevel }: { accessLevel?: string } = $props();
+
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
@@ -14,7 +16,7 @@
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   //IMPORTANT: WHEN IN PROD CHANGE THAT. NOW WE USE HARDCODED VALUE, BECAUSE id OF PROD TABLE !== id of STAGING TABLE
   // searchFromFields?.hubdb_table_id ||
-  const hubdb_table_id = 'support_portal';
+  const hubdb_table_id = searchFromFields?.hubdb_table_id;
   const hubdb_column_id = searchFromFields?.hubdb_column_id || 'search_terms';
   const title = searchFromFields?.title || '';
 
@@ -63,6 +65,7 @@
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            accessLevel: accessLevel,
             term: searchString,
             tableId: hubdb_table_id,
             columnId: hubdb_column_id,
