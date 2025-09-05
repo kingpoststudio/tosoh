@@ -18,6 +18,12 @@ declare global {
         description: string;
         accessLevel: 'Distributor' | 'Customer' | 'Internal';
       };
+      WebinarListings: {
+        filters: string;
+        eyebrow: string;
+        title: string;
+        filterByTopic: string;
+      };
     };
     hsVideoApi?: any;
   }

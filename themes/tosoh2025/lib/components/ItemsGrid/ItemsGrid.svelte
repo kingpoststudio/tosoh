@@ -1,7 +1,20 @@
 <script lang="ts">
+  import type { Component } from 'svelte';
   import { fade } from 'svelte/transition';
 
-  const { tableRows, isLoading, viewAs, Card, SkeletonCard } = $props();
+  const {
+    tableRows,
+    isLoading,
+    viewAs = 'grid',
+    Card,
+    SkeletonCard,
+  }: {
+    tableRows: any[];
+    isLoading: boolean;
+    viewAs?: string;
+    Card: Component;
+    SkeletonCard: Component;
+  } = $props();
 
   const constructLengthForSkeletons = () => {
     return parseInt(new URLSearchParams(window.location.search)?.get('limit') || '12');
@@ -27,9 +40,9 @@
     {#each skeletonItems as item}
       <SkeletonCard {viewAs}></SkeletonCard>
     {/each}
-  {:else if tableRows.length > 0 && !isLoading}
+  {:else if tableRows?.length > 0 && !isLoading}
     {#each tableRows as item}
-      <Card {viewAs} hasSiblings={tableRows.length > 1} {item}></Card>
+      <Card {viewAs} hasSiblings={tableRows?.length > 1} {item}></Card>
     {/each}
   {:else}
     <div class="p-sm">

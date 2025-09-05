@@ -10,6 +10,7 @@
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
+  import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
 
   let { isParentLoading, viewAs, handleChangeView } = $props();
 
@@ -36,7 +37,6 @@
   };
 
   const onReset = () => {
-    console.log('reset');
     setSearchParams({
       pagination: `${defaultPagination}`,
       limit: `${defaultItemsLimit}`,
@@ -51,29 +51,16 @@
     isLoading = true;
 
     try {
-      const response = await fetch(
-        `https://${window.location.hostname}/hs/serverless/get-table-filter-options`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            filters: filtersFromFields,
-            accessLevel: accessLevel,
-            tableId: 'support_portal',
-          }),
-        }
-      );
-      //TODO: IMPORTANT REMOVE
+      const data = await getTableFilterOptions({
+        filters: filtersFromFields,
+        accessLevel: accessLevel,
+        tableId: 'support_portal',
+      });
       // const data = mockPortalFilters;
-      const data = await response?.json();
 
       if (!data?.error) {
-        const allRows = data.results;
-
-        if (allRows?.length > 0) {
-          filterValuesForSelectsBasedOnUrl(allRows);
+        if (data?.length > 0) {
+          filterValuesForSelectsBasedOnUrl(data);
         }
       }
 
