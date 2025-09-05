@@ -18,8 +18,7 @@
 
   const filtersFromFields = window?.Tosoh?.WebinarListings?.filters
     ? ([...window.Tosoh.WebinarListings.filters.split(',')] as ColumnId[])
-    : //remove hardcoded
-      ['language'];
+    : [];
 
   const tableId = window?.Tosoh?.WebinarListings?.tableId;
 
@@ -44,11 +43,11 @@
     isLoading = true;
 
     try {
-      //   const data = await getTableFilterOptions({
-      //     filters: filtersFromFields,
-      //     tableId: tableId,
-      //   });
-      const data = mockWebinarListingsFilterOptions?.results;
+      const data = await getTableFilterOptions({
+        filters: filtersFromFields,
+        tableId: tableId,
+      });
+      // const data = mockWebinarListingsFilterOptions?.results;
 
       if (!data?.error) {
         if (data?.length > 0) {

@@ -58,8 +58,8 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      // const data = await fetchTableRows(constructBody());
-      const data = mockWebinarCollectionRes;
+      const data = await fetchTableRows(constructBody());
+      // const data = mockWebinarCollectionRes;
 
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;

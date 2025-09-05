@@ -36,6 +36,19 @@
   const title = item.webinar_title;
 
   const registration_page_url = item?.registration_page_url;
+
+  const calculateBadge = () => {
+    // Calculate the label based on actual date comparison
+    const now = new Date();
+    const start = date ? new Date(date) : null;
+    const end = date ? new Date(date) : null;
+
+    if (start && end) {
+      if (now < start) return 'Upcoming';
+      if (now >= start && now <= end) return 'Live';
+      return 'Past';
+    }
+  };
 </script>
 
 {#snippet shapesBg()}
@@ -92,72 +105,79 @@
   </div>
 {/snippet}
 
+{#snippet speaker(speaker: any)}
+  <div class="flex items-center">
+    <!-- Speaker Avatars -->
+    <div class="mr-3 flex -space-x-6">
+      {#if speaker?.image_src}
+        {@render avatar(speaker?.image_src)}
+      {/if}
+    </div>
+
+    <!-- Speaker Names -->
+    <div class="flex-1">
+      <div class="text-lg font-semibold text-gray-900">
+        {speaker.name}
+      </div>
+      <div class="text-nickel text-sm font-semibold">
+        {speaker?.location}
+      </div>
+    </div>
+  </div>
+{/snippet}
+
 <div
   class="border-border mx-auto flex max-w-[32rem] flex-col overflow-hidden rounded-2xl border bg-white"
 >
-  <div class="bg-prussian-blue relative min-h-[18rem] overflow-hidden p-6 text-white">
+  <div
+    class={`bg-prussian-blue relative flex min-h-[18rem] flex-col ${date ? 'justify-between' : 'justify-end'} overflow-hidden p-6 text-white`}
+  >
     {@render shapesBg()}
 
-    <div class="relative z-10">
-      <span
-        class="text-ghost-white mb-4 inline-block rounded-3xl bg-[#FFFFFF4F] px-3 py-2 text-sm font-thin"
-      >
-        {status === 'upcoming' ? 'Upcoming' : status === 'live' ? 'Live' : 'Past'}
-      </span>
-    </div>
+    {#if date}
+      <div class="relative z-10">
+        <span
+          class="mb-4 inline-block rounded-3xl bg-[#FFFFFF4F] px-3 py-2 text-sm font-thin text-[#FFFFFF]"
+        >
+          {calculateBadge()}
+        </span>
+      </div>
+    {/if}
 
     <!-- Date Banner -->
     {#if date}
       {@render dateBanner()}
     {/if}
 
-    <!-- Time and Timezone -->
-    <div class=" mt-xl relative z-10 mb-4">
-      <!-- <div class="text-lg font-bold">{time}</div>
-      <div class="text-sm font-bold">{timezone}</div> -->
-    </div>
+    <div class="self-end">
+      {#if start_time || stop_time}
+        <div class=" mt-md relative mb-2">
+          <div class="text-lg font-semibold">{start_time} - {stop_time}</div>
+        </div>
+      {/if}
 
-    <!-- Title -->
-    <h3 class=" relative z-10 line-clamp-3 break-all text-xl font-medium">
-      {title}
-    </h3>
+      <!-- Title -->
+      <h4 class="relative z-10 line-clamp-3 break-all font-semibold">
+        {title}
+      </h4>
+    </div>
   </div>
 
   <!-- Bottom Section with White Background -->
-  <div class="flex h-full flex-col justify-between p-6">
+  <div class="p-base gap-md flex h-full flex-col justify-between">
     <!-- Speakers Section -->
-    <div class="mb-4 flex items-center">
-      <!-- Speaker Avatars -->
-      <div class="mr-3 flex -space-x-6">
-        {#if speaker1?.image_src}
-          {@render avatar(speaker1?.image_src)}
-        {/if}
-        {#if speaker2?.image_src}
-          {@render avatar(speaker2?.image_src)}
-        {/if}
-      </div>
-
-      <!-- Speaker Names -->
-      <div class="flex-1">
-        <div class="text-lg font-semibold text-gray-900">
-          {speaker1.name && speaker2?.name ? `${speaker1.name},` : speaker1.name}
-          {#if speaker2?.name}
-            {speaker2?.name}
-          {/if}
-        </div>
-        <div class="text-nickel text-sm font-semibold">
-          {speaker1?.location}
-          {#if speaker2?.location}
-            & {speaker2?.location}
-          {/if}
-        </div>
-      </div>
+    <div class="gap-sm flex h-full flex-col justify-center">
+      {@render speaker(speaker1)}
+      {#if speaker2?.name}
+        {@render speaker(speaker2)}
+      {/if}
     </div>
 
     <!-- Register Button -->
     <a
       href={registration_page_url}
-      class="button bg-imperial-red mt-base w-full self-end rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
+      target="_blank"
+      class="button bg-imperial-red w-full self-end rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
     >
       Register
     </a>
