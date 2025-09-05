@@ -48,6 +48,9 @@
   const constructFormValues = () => {
     const params = new URLSearchParams(window.location.search);
     return {
+      tableId: 'support_portal',
+      properties:
+        'name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url',
       accessLevel: accessLevel,
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
       pagination: parseInt(params?.get('pagination') || defaultPagination),

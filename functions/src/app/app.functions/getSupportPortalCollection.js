@@ -1,14 +1,15 @@
 "use strict";
 exports.main = async (req) => {
     try {
-        const HUBDB_ENDPOINT = "https://api.hubapi.com/cms/v3/hubdb/tables/support_portal";
         const body = req && req.body ? req.body : {};
         let tableCols = [];
-        const properties = "name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url";
-        const accessLevel = body.accessLevel || "Customer";
-        const limit = body.limit ? parseInt(body.limit, 10) : 12;
-        const offset = body.offset ? parseInt(body.offset, 10) : 0;
+        const tableId = body?.tableId;
+        const properties = body?.properties;
+        const accessLevel = body?.accessLevel;
+        const limit = body?.limit ? parseInt(body.limit, 10) : 12;
+        const offset = body?.offset ? parseInt(body.offset, 10) : 0;
         const filters = body?.filters || {};
+        const HUBDB_ENDPOINT = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}`;
         const tableRes = await fetch(HUBDB_ENDPOINT, {
             method: "GET",
             headers: {
@@ -42,7 +43,15 @@ exports.main = async (req) => {
             }
             return `&${filterConditions.join("&")}`;
         };
-        const portalItemsRes = await fetch(`${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false&visibility__in=${accessLevel}`, {
+        const createAccessLevelQuery = () => {
+            if (accessLevel && typeof accessLevel === "string") {
+                return `&visibility__in=${accessLevel}`;
+            }
+            else {
+                return "";
+            }
+        };
+        const portalItemsRes = await fetch(`${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false${createAccessLevelQuery()}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
