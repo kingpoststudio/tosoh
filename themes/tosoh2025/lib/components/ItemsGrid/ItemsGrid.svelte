@@ -6,12 +6,14 @@
     tableRows,
     isLoading,
     viewAs = 'grid',
+    hasLargeElements = false,
     Card,
     SkeletonCard,
   }: {
     tableRows: any[];
     isLoading: boolean;
     viewAs?: string;
+    hasLargeElements: boolean;
     Card: Component;
     SkeletonCard: Component;
   } = $props();
@@ -31,7 +33,9 @@
   });
 
   const gridClass = $derived(
-    viewAs === 'grid' ? 'grid grid-cols-2 gap-4 lg:grid-cols-3' : 'flex flex-col gap-sm'
+    viewAs === 'grid'
+      ? `grid  ${hasLargeElements ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2'} gap-4 lg:grid-cols-3`
+      : 'flex flex-col gap-sm'
   );
 </script>
 
@@ -42,7 +46,7 @@
     {/each}
   {:else if tableRows?.length > 0 && !isLoading}
     {#each tableRows as item}
-      <Card {viewAs} hasSiblings={tableRows?.length > 1} {item}></Card>
+      <Card {viewAs} hasSiblings={tableRows?.length > 1} item={item?.values}></Card>
     {/each}
   {:else}
     <div class="p-sm">

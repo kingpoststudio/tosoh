@@ -1,7 +1,21 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
 
-  let { options, name, disabled } = $props();
+  let {
+    options,
+    name,
+    disabled,
+    displayLabel = true,
+    labelPosition = 'top',
+    placeholder,
+  }: {
+    options: any[];
+    name: string;
+    disabled: boolean;
+    displayLabel?: boolean;
+    labelPosition?: 'top' | 'left';
+    placeholder?: string;
+  } = $props();
   let activeOptions = $derived(options);
 
   const activeFilter = new URLSearchParams(window.location.search).get(name);
@@ -16,10 +30,12 @@
     column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
 </script>
 
-<div class="mt-md gap-sm flex flex-col">
-  <div class=" gap-sm flex flex-col">
+<div class="gap-sm flex flex-col">
+  <div class={`gap-sm flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     <div class="gap-sm flex items-center">
-      <label for={name} class=" text-xl font-bold">{setupFilterTitle(name)}</label>
+      {#if displayLabel}
+        <label for={name} class=" text-xl font-bold">{setupFilterTitle(name)}</label>
+      {/if}
       {#if activeFilter}
         <button
           type="button"
@@ -37,14 +53,16 @@
         </button>
       {/if}
     </div>
-    <div class="relative">
+    <div class="relative w-full">
       <select
         id={name}
         {name}
         disabled={disabled || activeOptions?.length === 0}
         class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        <option value="none" selected disabled hidden class="text-imperial-red">{'Select'}</option>
+        <option value="none" selected disabled hidden class="text-imperial-red"
+          >{placeholder ? placeholder : 'Select'}</option
+        >
 
         {#if !activeOptions && activeFilter}
           <option value={activeFilter} selected disabled hidden class="text-imperial-red"

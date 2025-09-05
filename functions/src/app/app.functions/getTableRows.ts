@@ -15,6 +15,7 @@ exports.main = async (req: any) => {
 
     const tableId = body?.tableId;
     const properties = body?.properties;
+    const sort = body?.sort;
     const accessLevel = body?.accessLevel;
     const limit = body?.limit ? parseInt(body.limit, 10) : 12;
     const offset = body?.offset ? parseInt(body.offset, 10) : 0;
@@ -77,9 +78,16 @@ exports.main = async (req: any) => {
         return "";
       }
     };
+    const createSortQuery = () => {
+      if (sort && typeof sort === "string") {
+        return `&sort=${sort}`;
+      } else {
+        return "";
+      }
+    };
 
     const portalItemsRes = await fetch(
-      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false${createAccessLevelQuery()}`,
+      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false${createAccessLevelQuery()}${createSortQuery()}`,
       {
         method: "GET",
         headers: {

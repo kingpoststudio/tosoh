@@ -4,14 +4,14 @@ exports.main = async (req) => {
         const body = req && req.body ? req.body : {};
         const tableId = body?.tableId;
         const filters = body.filters || [];
-        const accessLevel = body.accessLevel || "Customer";
+        const accessLevel = body?.accessLevel;
         if (!tableId) {
             throw new Error("Make sure to include tableId in request body");
         }
         const HUBDB_API = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}/rows?limit=10000&deactivate__eq=false`;
         console.log(filters, "filters");
         const constructFilterConditions = () => {
-            return filters.map((filter) => filter).join(",");
+            return filters?.map((filter) => filter).join(",");
         };
         const constructProperties = () => {
             if (filters) {

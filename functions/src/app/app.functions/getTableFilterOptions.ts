@@ -4,7 +4,7 @@ exports.main = async (req: any) => {
 
     const tableId = body?.tableId;
     const filters = body.filters || [];
-    const accessLevel = body.accessLevel || "Customer";
+    const accessLevel = body?.accessLevel;
 
     if (!tableId) {
       throw new Error("Make sure to include tableId in request body");
@@ -15,7 +15,7 @@ exports.main = async (req: any) => {
     console.log(filters, "filters");
 
     const constructFilterConditions = () => {
-      return filters.map((filter: string) => filter).join(",");
+      return filters?.map((filter: string) => filter).join(",");
     };
 
     const constructProperties = () => {

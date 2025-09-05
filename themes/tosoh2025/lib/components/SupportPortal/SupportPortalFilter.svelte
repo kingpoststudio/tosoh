@@ -128,11 +128,15 @@
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {#if searchColumnId !== columnId}
-        <Select
-          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
-          name={columnId}
-          disabled={isParentLoading || isLoading || hasError}
-        />
+        <div class="mt-md">
+          <Select
+            options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
+              columnId as ColumnId
+            ]}
+            name={columnId}
+            disabled={isParentLoading || isLoading || hasError}
+          />
+        </div>
       {/if}
     {/each}
 

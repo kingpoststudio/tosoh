@@ -23,6 +23,7 @@ declare global {
         eyebrow: string;
         title: string;
         filterByTopic: string;
+        tableId: string;
       };
     };
     hsVideoApi?: any;
