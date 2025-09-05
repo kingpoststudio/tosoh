@@ -5,7 +5,7 @@
 
 <div
   transition:fade
-  class="relative w-full animate-pulse rounded-lg border border-[#DAD8D8] p-[1.25rem]"
+  class="border-border relative w-full animate-pulse rounded-lg border p-[1.25rem]"
 >
   <div class=" flex h-full flex-col items-center justify-between">
     {#if viewAs === 'grid'}

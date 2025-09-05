@@ -6,11 +6,13 @@
 
 @theme {
   --color-black-charcoal: #212121;
-  --color-default: var(--color-black-charcoal);
   --color-imperial-red: #ed1a3b;
   --color-prussian-blue: #013a55;
   --color-nickel: #747273;
   --color-ghost-white: #f9f9f9;
+  --color-light-silver: #dad8d8;
+  --color-border: var(--color-light-silver);
+  --color-default: var(--color-black-charcoal);
 
   --spacing-2xs: 0.25rem;
   --spacing-xs: 0.5rem;

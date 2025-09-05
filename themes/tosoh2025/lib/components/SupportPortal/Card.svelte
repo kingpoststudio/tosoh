@@ -59,7 +59,7 @@
 {/snippet}
 
 <div
-  class={`gap-base relative flex w-full flex-col content-around rounded-lg border border-[#DAD8D8] p-[1.25rem] ${
+  class={`gap-base border-border relative flex w-full flex-col content-around rounded-lg border p-[1.25rem] ${
     hasSiblings ? 'h-full' : 'h-fit'
   }`}
 >

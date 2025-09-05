@@ -9,11 +9,14 @@
   import { onMount } from 'svelte';
 
   import SupportPortalFilter from './SupportPortalFilter.svelte';
-  import SupportPortalGrid from './SupportPortalGrid.svelte';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
   import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
   import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
+  import Card from './Card.svelte';
+  import SkeletonCard from './SkeletonCard.svelte';
+  import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
+  import { fetchTableRows } from '../../services/fetchTableRows';
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
@@ -28,7 +31,7 @@
   let title = window?.Tosoh?.SupportPortalContent?.title;
   let description = window?.Tosoh?.SupportPortalContent?.description;
 
-  let portalItems: any = $state([]);
+  let tableRows: any = $state([]);
   let totalItems = $state(0);
   let hasError = $state(false);
   let isLoading = $state(false);
@@ -64,29 +67,10 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      const response = await fetch(
-        `https://${window.location.hostname}/hs/serverless/get-table-rows`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(constructFormValues()),
-        }
-      );
-      const data = await response.json();
-
-      // const data = mockPortalItems;
-
-      if (!data?.error) {
-        const { results, total } = data;
-        portalItems = results;
-        totalItems = total;
-      }
-
-      if (data?.error) {
-        hasError = true;
-      }
+      const data = await fetchTableRows(constructFormValues());
+      const { results, total } = data ?? { results: [], total: 0 };
+      tableRows = results;
+      totalItems = total;
     } catch (error) {
       hasError = true;
     } finally {
@@ -135,9 +119,9 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <SupportPortalGrid {portalItems} {isLoading} {viewAs}></SupportPortalGrid>
+      <ItemsGrid {tableRows} {isLoading} {viewAs} {Card} {SkeletonCard}></ItemsGrid>
 
-      {#if portalItems?.length > 0}
+      {#if tableRows?.length > 0}
         <PaginationWithLimit {totalItems}></PaginationWithLimit>
       {/if}
     {/if}
