@@ -10,6 +10,9 @@ exports.main = async (req) => {
         const offset = body?.offset ? parseInt(body.offset, 10) : 0;
         const filters = body?.filters || {};
         const HUBDB_ENDPOINT = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}`;
+        if (!tableId) {
+            throw new Error("Make sure to include tableId in request body");
+        }
         const tableRes = await fetch(HUBDB_ENDPOINT, {
             method: "GET",
             headers: {

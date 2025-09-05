@@ -1,19 +1,31 @@
 "use strict";
 exports.main = async (req) => {
     try {
-        const HUBDB_API = "https://api.hubapi.com/cms/v3/hubdb/tables/support_portal/rows?limit=10000&deactivate__eq=false";
         const body = req && req.body ? req.body : {};
+        const tableId = body?.tableId;
         const filters = body.filters || [];
         const accessLevel = body.accessLevel || "Customer";
+        if (!tableId) {
+            throw new Error("Make sure to include tableId in request body");
+        }
+        const HUBDB_API = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}/rows?limit=10000&deactivate__eq=false`;
         console.log(filters, "filters");
-        const data = [];
         const constructFilterConditions = () => {
             return filters.map((filter) => filter).join(",");
         };
         const constructProperties = () => {
-            return `&properties=${constructFilterConditions()}&visibility__in=${accessLevel}`;
+            if (filters) {
+                return `&properties=${constructFilterConditions()}`;
+            }
+            return "";
         };
-        const res = await fetch(`${HUBDB_API}${constructProperties()}`, {
+        const constructAccessLevelQuery = () => {
+            if (accessLevel && typeof accessLevel == "string") {
+                return `&visibility__in=${accessLevel}`;
+            }
+            return "";
+        };
+        const res = await fetch(`${HUBDB_API}${constructProperties()}${constructAccessLevelQuery()}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,

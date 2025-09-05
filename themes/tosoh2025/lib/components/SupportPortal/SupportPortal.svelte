@@ -65,7 +65,7 @@
     try {
       isLoading = true;
       const response = await fetch(
-        `https://${window.location.hostname}/hs/serverless/get-support-portal-collection`,
+        `https://${window.location.hostname}/hs/serverless/get-table-rows`,
         {
           method: 'POST',
           headers: {

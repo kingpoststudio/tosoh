@@ -1,18 +1,18 @@
 {
     "appFunctions": {       
-        "get-support-portal-collection": {
-          "file": "getSupportPortalCollection.js",
+        "get-table-rows": {
+          "file": "getTableRows.js",
           "secrets": ["HUBSPOT_API_KEY"],
           "endpoint": {
-            "path": "get-support-portal-collection",
+            "path": "get-table-rows",
             "method": ["POST"]
           }
         },
-        "get-support-portal-filter-options": {
-          "file": "getSupportPortalFilterOptions.js",
+        "get-table-filter-options": {
+          "file": "getTableFilterOptions.js",
           "secrets": ["HUBSPOT_API_KEY"],
           "endpoint": {
-            "path": "get-support-portal-filter-options",
+            "path": "get-table-filter-options",
             "method": ["POST"]
           }
         },

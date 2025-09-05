@@ -52,7 +52,7 @@
 
     try {
       const response = await fetch(
-        `https://${window.location.hostname}/hs/serverless/get-support-portal-filter-options`,
+        `https://${window.location.hostname}/hs/serverless/get-table-filter-options`,
         {
           method: 'POST',
           headers: {
@@ -61,6 +61,7 @@
           body: JSON.stringify({
             filters: filtersFromFields,
             accessLevel: accessLevel,
+            tableId: 'support_portal',
           }),
         }
       );
