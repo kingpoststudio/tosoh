@@ -8,7 +8,11 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
-  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import {
+    defaultItemsLimit,
+    defaultPagination,
+    PROD_TOSOH_WEBINARS_TABLE_ID,
+  } from '../../utils/constants';
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
   import Card from './Card.svelte';
@@ -43,7 +47,8 @@
     const params = new URLSearchParams(window.location.search);
     return {
       sort: '-priority',
-      tableId: tableId,
+      // tableId: tableId,
+      tableId: PROD_TOSOH_WEBINARS_TABLE_ID,
       properties:
         'webinar_title,priority,webinar_subtext,presenter_1_image,presenter_1_name,presenter_1_title,presenter_1_location,presenter_2_image,presenter_2_name,presenter_2_title,presenter_2_location,cta_label,date,start_time,stop_time,registration_page_url',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),

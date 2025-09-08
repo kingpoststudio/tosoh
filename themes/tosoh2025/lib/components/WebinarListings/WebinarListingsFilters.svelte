@@ -5,7 +5,11 @@
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import { parseFilterOptions } from '../../utils/filterUtils';
   import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
-  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import {
+    defaultItemsLimit,
+    defaultPagination,
+    PROD_TOSOH_WEBINARS_TABLE_ID,
+  } from '../../utils/constants';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import Select from '../Select/Select.svelte';
   import { mockWebinarListingsFilterOptions } from './mock';
@@ -45,7 +49,8 @@
     try {
       const data = await getTableFilterOptions({
         filters: filtersFromFields,
-        tableId: tableId,
+        // tableId: tableId,
+        tableId: PROD_TOSOH_WEBINARS_TABLE_ID,
       });
       // const data = mockWebinarListingsFilterOptions?.results;
 

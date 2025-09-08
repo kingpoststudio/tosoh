@@ -1,22 +1,37 @@
 <script lang="ts">
   import type { WebinarListingsItem } from '../../../types/hubdb';
 
-  let { item }: { item: WebinarListingsItem['values'] } = $props();
+  let { item }: { item: WebinarListingsItem } = $props();
+
+  const {
+    presenter_1_image,
+    presenter_1_location,
+    presenter_1_name,
+    presenter_1_title,
+    presenter_2_image,
+    presenter_2_location,
+    presenter_2_name,
+    presenter_2_title,
+    webinar_title,
+    cta_label,
+    date,
+    start_time,
+    stop_time,
+    registration_page_url,
+  } = item?.values;
 
   const speaker1 = {
-    image_src: item?.presenter_1_image?.url,
-    name: item?.presenter_1_name,
-    title: item?.presenter_1_title,
-    location: item?.presenter_1_location,
+    image_src: presenter_1_image?.url,
+    name: presenter_1_name,
+    title: presenter_1_title,
+    location: presenter_1_location,
   };
   const speaker2 = {
-    image_src: item?.presenter_2_image?.url,
-    name: item?.presenter_2_name,
-    title: item?.presenter_2_title,
-    location: item?.presenter_2_location,
+    image_src: presenter_2_image?.url,
+    name: presenter_2_name,
+    title: presenter_2_title,
+    location: presenter_2_location,
   };
-
-  const date = item?.date;
 
   function getDateParts(milliseconds: number) {
     const dateObj = new Date(milliseconds);
@@ -30,23 +45,14 @@
   }
 
   const dateParts = date ? getDateParts(date) : null;
-  const start_time = item?.start_time;
-  const stop_time = item?.stop_time;
 
-  const title = item.webinar_title;
-
-  const registration_page_url = item?.registration_page_url;
-
-  const calculateBadge = () => {
-    // Calculate the label based on actual date comparison
+  const isUpcoming = () => {
     const now = new Date();
     const start = date ? new Date(date) : null;
     const end = date ? new Date(date) : null;
 
     if (start && end) {
-      if (now < start) return 'Upcoming';
-      if (now >= start && now <= end) return 'Live';
-      return 'Past';
+      if (now < start) return true;
     }
   };
 </script>
@@ -130,16 +136,16 @@
   class="border-border mx-auto flex max-w-[32rem] flex-col overflow-hidden rounded-2xl border bg-white"
 >
   <div
-    class={`bg-prussian-blue relative flex min-h-[18rem] flex-col ${date ? 'justify-between' : 'justify-end'} overflow-hidden p-6 text-white`}
+    class={`bg-prussian-blue relative flex min-h-[18rem] flex-col ${date && isUpcoming() ? 'justify-between' : 'justify-end'} overflow-hidden p-6 text-white`}
   >
     {@render shapesBg()}
 
-    {#if date}
+    {#if date && isUpcoming()}
       <div class="relative z-10">
         <span
           class="mb-4 inline-block rounded-3xl bg-[#FFFFFF4F] px-3 py-2 text-sm font-thin text-[#FFFFFF]"
         >
-          {calculateBadge()}
+          Upcoming
         </span>
       </div>
     {/if}
@@ -158,7 +164,7 @@
 
       <!-- Title -->
       <h4 class="relative z-10 line-clamp-3 break-all font-semibold">
-        {title}
+        {webinar_title}
       </h4>
     </div>
   </div>
@@ -179,7 +185,7 @@
       target="_blank"
       class="button bg-imperial-red w-full self-end rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
     >
-      Register
+      {cta_label}
     </a>
   </div>
 </div>
