@@ -96,7 +96,7 @@
 </script>
 
 <div
-  class="md:pl-2xl md:pr-2xl p-md h-fit-content max-w-max-page gap-lg m-auto flex w-full flex-col"
+  class="md:pl-2xl md:pr-2xl md:pt-lg md:pb-lg p-md h-fit-content max-w-max-page gap-lg m-auto flex w-full flex-col"
 >
   <div class="gap-md flex w-full flex-col items-center justify-between md:flex-row">
     <div>
