@@ -28,7 +28,7 @@
     {#each skeletonItems as item}
       <SkeletonCard {viewAs}></SkeletonCard>
     {/each}
-  {:else if portalItems.length > 0 && !isLoading}
+  {:else if portalItems?.length > 0 && !isLoading}
     {#each portalItems as item}
       <Card {viewAs} hasSiblings={portalItems.length > 1} {item}></Card>
     {/each}
