@@ -50,9 +50,7 @@ const generateFields = () => {
               required: true,
             }),
 
-            textField('dropdown_filter_placeholder', 'Dropdown Filter Placeholder', {
-              required: true,
-            }),
+            textField('dropdown_filter_placeholder', 'Dropdown Filter Placeholder'),
           ],
           occurrence: {
             min: 0,
