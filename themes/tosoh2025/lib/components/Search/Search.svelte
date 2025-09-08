@@ -2,20 +2,21 @@
   import { fade } from 'svelte/transition';
 
   import FilterForm from '../FilterForm/FilterForm.svelte';
+  import { onMount } from 'svelte';
 
   const { accessLevel }: { accessLevel?: string } = $props();
 
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
+  let mounted = $state(false);
 
   let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
     ? [...window.Tosoh.SupportPortalContent.filters.split(','), 'pagination', 'limit']
     : [];
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
-  //IMPORTANT: WHEN IN PROD CHANGE THAT. NOW WE USE HARDCODED VALUE, BECAUSE id OF PROD TABLE !== id of STAGING TABLE
-  // searchFromFields?.hubdb_table_id ||
+
   const hubdb_table_id = searchFromFields?.hubdb_table_id;
   const hubdb_column_id = searchFromFields?.hubdb_column_id || 'search_terms';
   const title = searchFromFields?.title || '';
@@ -54,7 +55,7 @@
 
   const fetchMatches = async (e: any) => {
     let searchString = e?.target?.value;
-    if ((typeof searchString === 'string' && searchString?.length < 2) || activeFilter) return;
+    if ((typeof searchString === 'string' && searchString?.length < 2) || !mounted) return;
     try {
       isLoading = true;
       const response = await fetch(
@@ -104,6 +105,10 @@
       window.location.href = url.toString();
     }
   };
+
+  onMount(() => {
+    mounted = true;
+  });
 </script>
 
 {#snippet loader()}

@@ -46,7 +46,7 @@
     {/each}
   {:else if tableRows?.length > 0 && !isLoading}
     {#each tableRows as item}
-      <Card {viewAs} hasSiblings={tableRows?.length > 1} item={item?.values}></Card>
+      <Card {viewAs} hasSiblings={tableRows?.length > 1} {item}></Card>
     {/each}
   {:else}
     <div class="p-sm">
