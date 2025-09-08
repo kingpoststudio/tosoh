@@ -136,7 +136,7 @@
   class="border-border mx-auto flex max-w-[32rem] flex-col overflow-hidden rounded-2xl border bg-white"
 >
   <div
-    class={`bg-prussian-blue relative flex min-h-[18rem] flex-col ${date && isUpcoming() ? 'justify-between' : 'justify-end'} overflow-hidden p-6 text-white`}
+    class={`bg-prussian-blue relative flex min-h-[18rem] flex-col ${date && isUpcoming() ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
   >
     {@render shapesBg()}
 
@@ -170,7 +170,7 @@
   </div>
 
   <!-- Bottom Section with White Background -->
-  <div class="p-base gap-md flex h-full flex-col justify-between">
+  <div class="p-md gap-md flex h-full flex-col justify-between">
     <!-- Speakers Section -->
     <div class="gap-sm flex h-full flex-col justify-center">
       {@render speaker(speaker1)}

@@ -20,6 +20,7 @@
   import { mockWebinarCollectionRes } from './mock';
   import WebinarListingsFilters from './WebinarListingsFilters.svelte';
   import type { ColumnId } from '../../../types/hubdb';
+  import SkeletonCard from './SkeletonCard.svelte';
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
@@ -109,7 +110,7 @@
       <div class="pb-sm"></div>
     </div>
   {:else}
-    <ItemsGrid {tableRows} {isLoading} {Card} hasLargeElements={true}></ItemsGrid>
+    <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
 
     {#if tableRows?.length > 0}
       <PaginationWithLimit {totalItems}></PaginationWithLimit>

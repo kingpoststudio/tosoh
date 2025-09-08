@@ -7,5 +7,8 @@
 {% extends "../layouts/base.html" %}
 
 {% block body %}
-  <main>{% module 'support_portal' path="../../modules/hubdb/WebinarListings" %}</main>
+  <main>
+    {% module 'hero_banner' path="../../modules/HeroBanner" %}
+    {% module 'webinar_listings' path="../../modules/hubdb/WebinarListings" %}
+  </main>
 {% endblock body %}

@@ -1,0 +1,21 @@
+{% set bg = module.bg %}
+{% set title = module.title %}
+{% set description = module.description %}
+
+<div
+  class="p-2xl max-w-max-page relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full items-center justify-center overflow-hidden lg:min-h-[40rem]">
+  {% if bg.src %}
+    <img src="{{ bg.src }}" class="absolute top-0 left-0 h-full w-full object-cover" />
+  {% endif %}
+
+  <div class="absolute top-0 left-0 h-full w-full bg-[#01151EA8] object-cover"></div>
+
+  <div class="gap-md relative flex w-full flex-col text-center">
+    {% if title %}
+      <div class="font-sans text-3xl font-semibold text-white md:text-6xl">{{ title }}</div>
+    {% endif %}
+    {% if description %}
+      <div class="text-3xl font-thin text-white">{{ description }}</div>
+    {% endif %}
+  </div>
+</div>

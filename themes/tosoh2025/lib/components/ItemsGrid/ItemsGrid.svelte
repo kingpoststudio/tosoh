@@ -14,7 +14,7 @@
     isLoading: boolean;
     viewAs?: string;
     hasLargeElements: boolean;
-    Card: Component;
+    Card: Component | any;
     SkeletonCard: Component;
   } = $props();
 
