@@ -26,14 +26,23 @@
   let hasError = $state(false);
   let isLoading = $state(false);
 
-  const availableFilters = window?.Tosoh?.WebinarListings?.filters
-    ? ([...window.Tosoh.WebinarListings.filters.split(',')] as ColumnId[])
-    : [];
-
   const eyebrow = window?.Tosoh?.WebinarListings?.eyebrow;
   const title = window?.Tosoh?.WebinarListings?.title;
   const filterByTopic = window?.Tosoh?.WebinarListings?.filterByTopic;
-  const tableId = window?.Tosoh?.WebinarListings?.tableId;
+  const searchGroup = window?.Tosoh?.WebinarListings?.search;
+  const searchColumnId = searchGroup?.searchHubdbColumnId;
+
+  // const tableId = window?.Tosoh?.WebinarListings?.tableId;
+  const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
+
+  const availableFilters = window?.Tosoh?.WebinarListings?.filters
+    ? ([
+        ...window.Tosoh.WebinarListings.filters.dropdownFilters.map(
+          (filter) => filter.hubdb_column_id
+        ),
+        searchColumnId,
+      ] as ColumnId[])
+    : [];
 
   const constructFilterParams = () => {
     const params = new URLSearchParams(window.location.search);
@@ -47,8 +56,7 @@
     const params = new URLSearchParams(window.location.search);
     return {
       sort: '-priority',
-      // tableId: tableId,
-      tableId: PROD_TOSOH_WEBINARS_TABLE_ID,
+      tableId: tableId,
       properties:
         'webinar_title,priority,webinar_subtext,presenter_1_image,presenter_1_name,presenter_1_title,presenter_1_location,presenter_2_image,presenter_2_name,presenter_2_title,presenter_2_location,cta_label,date,start_time,stop_time,registration_page_url',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
@@ -87,14 +95,12 @@
 </script>
 
 <div class="md:p-lg p-md h-fit-content max-w-max-page gap-md m-auto flex w-full flex-col">
-  <div class="gap-md flex w-full flex-col justify-between md:flex-row">
+  <div class="gap-md flex w-full flex-col items-center justify-between md:flex-row">
     <div>
       <span class="text-imperial-red text-lg font-thin">{eyebrow || 'Event Highlights'}</span>
       <h3 class="font-semibold">{title || 'Webinars'}</h3>
     </div>
-    <div>
-      <WebinarListingsFilters isParentLoading={isLoading} />
-    </div>
+    <WebinarListingsFilters isParentLoading={isLoading} />
   </div>
 
   {#if hasError}

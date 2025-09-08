@@ -19,11 +19,22 @@ declare global {
         accessLevel: 'Distributor' | 'Customer' | 'Internal';
       };
       WebinarListings: {
-        filters: string;
+        tableId: string;
         eyebrow: string;
         title: string;
+        search: {
+          isSearchEnabled: boolean;
+          searchInputPlaceholder: string;
+          searchHubdbColumnId: string;
+        };
+        filters: {
+          areFiltersEnabled: boolean;
+          dropdownFilters: {
+            hubdb_column_id: string;
+            dropdown_filter_placeholder: string;
+          }[];
+        };
         filterByTopic: string;
-        tableId: string;
       };
     };
     hsVideoApi?: any;

@@ -10,12 +10,16 @@
     filtersFromFields,
     searchColumnId,
     title,
+    placeholder,
+    customClasses,
   }: {
     accessLevel?: string;
     searchTableId: string;
     filtersFromFields: string[];
     searchColumnId: string;
-    title: string;
+    title?: string;
+    placeholder?: string;
+    customClasses?: string;
   } = $props();
 
   let matches: string[] = $state([]);
@@ -160,8 +164,8 @@
 {/snippet}
 
 <FilterForm {onSubmit} trigger="submit" onClickOutside={resetDropdown}>
-  <div class="relative">
-    <div class="mt-md gap-sm flex flex-col">
+  <div class={`relative ${customClasses}`}>
+    <div class="gap-sm flex flex-col">
       {#if title}
         <div class="gap-sm flex items-center">
           <label for={searchColumnId} class=" text-xl font-black">{title}</label>
@@ -178,7 +182,7 @@
           name={searchColumnId}
           data-debounce="500"
           class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
-          placeholder="Search here..."
+          placeholder={placeholder || 'Search here...'}
         />
         <div
           class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"

@@ -13,6 +13,7 @@
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import Select from '../Select/Select.svelte';
   import { mockWebinarListingsFilterOptions } from './mock';
+  import Search from '../Search/Search.svelte';
 
   let { isParentLoading } = $props();
 
@@ -20,11 +21,20 @@
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  const filtersFromFields = window?.Tosoh?.WebinarListings?.filters
-    ? ([...window.Tosoh.WebinarListings.filters.split(',')] as ColumnId[])
+  const areFiltersEnabled = window?.Tosoh?.WebinarListings?.filters?.areFiltersEnabled;
+  const searchGroup = window?.Tosoh?.WebinarListings?.search;
+  const searchColumnId = searchGroup?.searchHubdbColumnId;
+  const isSearchEnabled = searchGroup?.isSearchEnabled;
+  const searchInputPlaceholder = searchGroup?.searchInputPlaceholder;
+
+  const filtersArray = window?.Tosoh?.WebinarListings?.filters
+    ? [...window.Tosoh.WebinarListings.filters.dropdownFilters]
     : [];
 
-  const tableId = window?.Tosoh?.WebinarListings?.tableId;
+  const filtersFromFields = [...filtersArray?.map((filter) => filter?.hubdb_column_id)];
+
+  // const tableId = window?.Tosoh?.WebinarListings?.tableId;
+  const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
 
   const onChange = (event: Event) => {
     onReset();
@@ -49,8 +59,7 @@
     try {
       const data = await getTableFilterOptions({
         filters: filtersFromFields,
-        // tableId: tableId,
-        tableId: PROD_TOSOH_WEBINARS_TABLE_ID,
+        tableId: tableId,
       });
       // const data = mockWebinarListingsFilterOptions?.results;
 
@@ -84,24 +93,48 @@
     getFilterOptions();
   };
 
+  const getLabelForSelect = (columnId: any) => {
+    return (
+      filtersArray?.filter((filterObj) => filterObj?.hubdb_column_id === columnId)?.[0]
+        ?.dropdown_filter_placeholder || ''
+    );
+  };
+
   onMount(() => {
     getFilterOptions();
   });
 </script>
 
-<FilterForm trigger="change" {onChange} {onReset}>
-  <div class="gap-md flex w-full">
-    {#each filtersFromFields as columnId}
-      <div class="min-w-[16rem]">
-        <Select
-          placeholder={'Select Language'}
-          labelPosition="left"
-          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
-          name={columnId}
-          displayLabel={false}
-          disabled={isParentLoading || isLoading || hasError}
-        />
+<div class="gap-md align-center flex h-full flex-col md:flex-row">
+  {#if isSearchEnabled}
+    <Search
+      searchTableId={tableId}
+      filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
+      {searchColumnId}
+      placeholder={searchInputPlaceholder}
+    />
+  {/if}
+  {#if areFiltersEnabled}
+    <FilterForm trigger="change" {onChange} {onReset}>
+      <div class="gap-md flex w-full">
+        {#each filtersFromFields as columnId}
+          <div class="min-w-[16rem]">
+            <Select
+              placeholder={getLabelForSelect(columnId)}
+              labelPosition="left"
+              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
+                columnId as ColumnId
+              ]}
+              name={columnId}
+              displayLabel={false}
+              disabled={isParentLoading || isLoading || hasError}
+            />
+          </div>
+        {/each}
+        <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">
+          Clear Filters
+        </button>
       </div>
-    {/each}
-  </div>
-</FilterForm>
+    </FilterForm>
+  {/if}
+</div>

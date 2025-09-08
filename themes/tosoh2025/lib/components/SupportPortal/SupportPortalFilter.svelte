@@ -133,6 +133,7 @@
   </div>
 
   <SearchInput
+    customClasses="mt-md"
     accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
     {searchTableId}
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
