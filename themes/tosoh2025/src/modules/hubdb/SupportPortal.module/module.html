@@ -71,7 +71,7 @@ window.Tosoh.SupportPortalContent = { filters, search, title, description, acces
       {%- for breadcrumb in breadcrumbs %}
   
         {% if !loop.last %}
-          <a href="{{ breadcrumb.url.href }}" class="text-md text-nickel cursor-pointer md:text-2xl">
+          <a href="{{ breadcrumb.url.href }}" class="text-nickel cursor-pointer text-2xl">
             {{ breadcrumb.title }}
           </a>
           <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
@@ -88,7 +88,7 @@ window.Tosoh.SupportPortalContent = { filters, search, title, description, acces
         {% endif %}
   
         {% if loop.last %}
-          <a href="{{ breadcrumb.url.href }}" class="text-md cursor-pointer text-raisin-black font-bold md:text-2xl">
+          <a href="{{ breadcrumb.url.href }}" class=" cursor-pointer text-raisin-black font-bold text-2xl">
             {{ breadcrumb.title }}
           </a>
         {% endif %}
