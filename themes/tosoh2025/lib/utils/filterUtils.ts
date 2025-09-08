@@ -28,14 +28,14 @@ export const doesRowColumnContainValueFromUrl = (
     row[columnId] &&
     typeof row[columnId] !== 'string' &&
     !Array.isArray(row[columnId]) &&
-    row?.[columnId]?.label;
+    row?.[columnId]?.name;
 
   if (isMultiselectColumn) {
     let column = row[columnId] as SupportPortalRowForFilter['values']['multiSelectColumn'];
 
     column?.map((selection) => {
       if (!doesContain) {
-        return (doesContain = selection?.label === paramValueWithColumnId);
+        return (doesContain = selection?.name === paramValueWithColumnId);
       }
     });
   }
@@ -54,7 +54,7 @@ export const doesRowColumnContainValueFromUrl = (
     let column = row[columnId] as SupportPortalRowForFilter['values']['selectColumn'];
 
     if (!doesContain) {
-      return (doesContain = column?.label === paramValueWithColumnId);
+      return (doesContain = column?.name === paramValueWithColumnId);
     }
   }
 
@@ -91,7 +91,7 @@ const matchValuesWithColumnNames = (
     Object.keys(rowValues)?.map((colummnName) => {
       const columnId = colummnName as ColumnId;
       const isMultiselectColumn = Array.isArray((rowValues as any)[columnId]);
-      const isSelectColumn = (rowValues as any)[columnId]?.label;
+      const isSelectColumn = (rowValues as any)[columnId]?.name;
 
       if (isMultiselectColumn) {
         const arrayWithOptions = (rowValues as any)[columnId];
@@ -99,7 +99,7 @@ const matchValuesWithColumnNames = (
         if (arrayWithOptions && arrayWithOptions.length > 0) {
           arrayWithOptions?.map((multiSelectOption: ColumnItem) => {
             const doesValueInColumnIdExists = allFilters[columnId]?.some(
-              (existingValue: any) => existingValue.label === multiSelectOption?.label
+              (existingValue: any) => existingValue?.name === multiSelectOption?.name
             );
 
             if (!doesValueInColumnIdExists) {
@@ -112,7 +112,7 @@ const matchValuesWithColumnNames = (
       //object types
       if (isSelectColumn) {
         const doesValueInColumnIdExists = allFilters[columnId]?.some(
-          (option: any) => option.label === (rowValues as any)[columnId]?.label
+          (option: any) => option?.name === (rowValues as any)[columnId]?.name
         );
 
         if (!doesValueInColumnIdExists) {
@@ -202,10 +202,8 @@ export const filterRows = (allRows: SupportPortalRowForFilter[], filtersFromFiel
       let doesColumnIdExistInUrl = params?.get(columnId);
 
       if (doesColumnIdExistInUrl) {
-        //init in matches with false as default
         areActiveFiltersMatchingRow[columnId] = false;
 
-        //if is not matching
         if (!areActiveFiltersMatchingRow[columnId]) {
           areActiveFiltersMatchingRow[columnId] = doesRowColumnContainValueFromUrl(
             rowValues,

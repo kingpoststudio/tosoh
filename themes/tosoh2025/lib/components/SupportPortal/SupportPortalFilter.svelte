@@ -1,6 +1,10 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import {
+    defaultItemsLimit,
+    defaultPagination,
+    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+  } from '../../utils/constants';
   import { mockPortalFilters } from './mock';
   import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
 
@@ -54,7 +58,7 @@
       const data = await getTableFilterOptions({
         filters: filtersFromFields,
         accessLevel: accessLevel,
-        tableId: 'support_portal',
+        tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
       });
       // const data = mockPortalFilters;
 

@@ -3,6 +3,7 @@
 
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import { onMount } from 'svelte';
+  import { PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID } from '../../utils/constants';
 
   const { accessLevel }: { accessLevel?: string } = $props();
 
@@ -68,7 +69,8 @@
           body: JSON.stringify({
             accessLevel: accessLevel,
             term: searchString,
-            tableId: hubdb_table_id,
+            // tableId: hubdb_table_id,
+            tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
             columnId: hubdb_column_id,
           }),
         }

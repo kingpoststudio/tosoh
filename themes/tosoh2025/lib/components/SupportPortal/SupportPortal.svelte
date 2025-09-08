@@ -11,7 +11,11 @@
   import SupportPortalFilter from './SupportPortalFilter.svelte';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
-  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import {
+    defaultItemsLimit,
+    defaultPagination,
+    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+  } from '../../utils/constants';
   import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
   import Card from './Card.svelte';
   import SkeletonCard from './SkeletonCard.svelte';
@@ -51,7 +55,7 @@
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     return {
-      tableId: 'support_portal',
+      tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
       properties:
         'name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url',
       accessLevel: accessLevel,
