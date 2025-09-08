@@ -141,7 +141,7 @@
     {@render shapesBg()}
 
     {#if date && isUpcoming()}
-      <div class="relative z-10">
+      <div class="relative">
         <span
           class="mb-4 inline-block rounded-3xl bg-[#FFFFFF4F] px-3 py-2 text-sm font-thin text-[#FFFFFF]"
         >
@@ -163,7 +163,7 @@
       {/if}
 
       <!-- Title -->
-      <h4 class="relative z-10 line-clamp-3 break-all font-semibold">
+      <h4 class="relative line-clamp-3 break-all font-semibold">
         {webinar_title}
       </h4>
     </div>

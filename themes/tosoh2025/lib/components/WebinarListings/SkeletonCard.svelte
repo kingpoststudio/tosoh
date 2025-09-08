@@ -11,7 +11,7 @@
     class="bg-prussian-blue p-md relative flex min-h-[18rem] flex-col justify-between overflow-hidden"
   >
     <!-- Time and Title Section -->
-    <div class="relative z-10 flex h-full flex-col justify-end">
+    <div class=" flex h-full flex-col justify-end">
       <!-- Title Skeleton -->
       <div class="space-y-2">
         <div class="h-6 w-3/5 rounded bg-white/30"></div>

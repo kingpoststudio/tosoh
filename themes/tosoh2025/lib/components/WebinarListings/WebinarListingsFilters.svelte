@@ -46,6 +46,7 @@
     setSearchParams({
       pagination: `${defaultPagination}`,
       limit: `${defaultItemsLimit}`,
+      [searchColumnId]: '',
     });
 
     if (filtersFromFields?.length > 0) {
