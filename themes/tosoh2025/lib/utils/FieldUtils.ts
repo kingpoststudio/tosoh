@@ -7,24 +7,22 @@ import {
   urlField,
 } from 'hs-fieldkit';
 
-export const breadCrumbField = () => {
-  return [
-    groupField('breadcrumbs', 'Breadcrumbs', {
-      children: [
-        textField('title', 'Title', {
-          required: true,
-        }),
-        urlField('url', 'URL', {
-          required: true,
-        }),
-      ],
-      occurrence: {
-        min: 1,
-        max: null,
-      },
-    }),
-  ];
-};
+export const breadCrumbField = [
+  groupField('breadcrumbs', 'Breadcrumbs', {
+    children: [
+      textField('title', 'Title', {
+        required: true,
+      }),
+      urlField('url', 'URL', {
+        required: true,
+      }),
+    ],
+    occurrence: {
+      min: 0,
+      max: null,
+    },
+  }),
+];
 
 export const sizeChoices = [
   ['auto', 'Auto'],

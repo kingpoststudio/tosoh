@@ -1,4 +1,5 @@
 import { groupField, textField, hubDbTableField, booleanField, choiceField } from 'hs-fieldkit';
+import { breadCrumbField } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -11,6 +12,8 @@ const generateFields = () => {
       required: true,
       default: 'Customer',
     }),
+
+    ...breadCrumbField,
     textField('title', 'Title', {
       default: 'Tosoh Support Portal',
     }),

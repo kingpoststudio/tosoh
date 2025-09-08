@@ -96,13 +96,13 @@
 </script>
 
 {#if title || description}
-  <div class="max-w-max-page gap-sm p-md m-auto mt-32 flex flex-col">
+  <div class="max-w-max-page gap-md p-md m-auto flex flex-col">
     {#if title}
       <h1 class="text-6xl font-bold">{title}</h1>
     {/if}
 
     {#if description}
-      <p class="text-nickel text-lg">{description}</p>
+      <h5 class="text-nickel">{description}</h5>
     {/if}
   </div>
 {/if}

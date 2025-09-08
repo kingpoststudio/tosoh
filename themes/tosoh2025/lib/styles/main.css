@@ -112,7 +112,7 @@ button,
 
 .link,
 a[href]:not(.button) {
-  @apply text-imperial-red hover:text-imperial-red hover:decoration-imperial-red font-medium underline decoration-transparent underline-offset-2 transition-[color,text-decoration-color] duration-200;
+  @apply hover:text-imperial-red hover:decoration-imperial-red no-underline decoration-transparent transition-[color,text-decoration-color] duration-200;
 
   &.text-white {
     @apply text-white hover:text-white hover:decoration-white;
