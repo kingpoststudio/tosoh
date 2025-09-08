@@ -95,11 +95,13 @@
   });
 </script>
 
-<div class="md:p-lg p-md h-fit-content max-w-max-page gap-md m-auto flex w-full flex-col">
+<div
+  class="md:pl-2xl md:pr-2xl p-md h-fit-content max-w-max-page gap-lg m-auto flex w-full flex-col"
+>
   <div class="gap-md flex w-full flex-col items-center justify-between md:flex-row">
     <div>
-      <span class="text-imperial-red text-lg font-thin">{eyebrow || 'Event Highlights'}</span>
-      <h3 class="font-semibold">{title || 'Webinars'}</h3>
+      <span class="text-imperial-red text-lg font-thin">{eyebrow || 'EVENT HIGHLIGHTS'}</span>
+      <h1 class="mt-md font-semibold">{title || 'Webinars'}</h1>
     </div>
     <WebinarListingsFilters isParentLoading={isLoading} />
   </div>
