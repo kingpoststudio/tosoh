@@ -20,6 +20,10 @@
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
+  const searchColumnTitle = searchFromFields?.title;
+  //  const searchTableId = searchFromFields?.hubdb_table_id; // CHANGE TO THAT IN PROD
+  const searchTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
+
   const isSearchAccessLevelFilterEnabled =
     window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
 
@@ -128,7 +132,13 @@
     {@render filterIcon()}
   </div>
 
-  <SearchInput accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined} />
+  <SearchInput
+    accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
+    {searchTableId}
+    filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
+    {searchColumnId}
+    title={searchColumnTitle || ''}
+  />
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {#if searchColumnId !== columnId}

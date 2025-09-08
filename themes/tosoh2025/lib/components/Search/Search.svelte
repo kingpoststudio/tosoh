@@ -3,26 +3,27 @@
 
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import { onMount } from 'svelte';
-  import { PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID } from '../../utils/constants';
 
-  const { accessLevel }: { accessLevel?: string } = $props();
+  const {
+    accessLevel,
+    searchTableId,
+    filtersFromFields,
+    searchColumnId,
+    title,
+  }: {
+    accessLevel?: string;
+    searchTableId: string;
+    filtersFromFields: string[];
+    searchColumnId: string;
+    title: string;
+  } = $props();
 
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
   let mounted = $state(false);
 
-  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
-    ? [...window.Tosoh.SupportPortalContent.filters.split(','), 'pagination', 'limit']
-    : [];
-
-  const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
-
-  const hubdb_table_id = searchFromFields?.hubdb_table_id;
-  const hubdb_column_id = searchFromFields?.hubdb_column_id || 'search_terms';
-  const title = searchFromFields?.title || '';
-
-  const activeFilter = new URLSearchParams(window.location.search)?.get(hubdb_column_id as string);
+  const activeFilter = new URLSearchParams(window.location.search)?.get(searchColumnId as string);
 
   const handleFetch = (searchTerm: string) => {
     showDropdown = false;
@@ -33,14 +34,14 @@
       params.delete(column);
     });
 
-    params.set(hubdb_column_id, searchTerm);
+    params.set(searchColumnId, searchTerm);
     window.location.search = params.toString();
   };
 
   const onSubmit = (e: Event) => {
-    if (e?.target && hubdb_column_id) {
+    if (e?.target && searchColumnId) {
       const formElement = e.target as HTMLFormElement;
-      const searchTerm = new FormData(formElement).get(hubdb_column_id) as string;
+      const searchTerm = new FormData(formElement).get(searchColumnId) as string;
 
       if (searchTerm) {
         handleFetch(searchTerm);
@@ -69,9 +70,8 @@
           body: JSON.stringify({
             accessLevel: accessLevel,
             term: searchString,
-            // tableId: hubdb_table_id,
-            tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
-            columnId: hubdb_column_id,
+            tableId: searchTableId,
+            columnId: searchColumnId,
           }),
         }
       );
@@ -101,9 +101,9 @@
   };
 
   const clearFilter = () => {
-    if (hubdb_column_id) {
+    if (searchColumnId) {
       const url = new URL(window.location.href);
-      url.searchParams.delete(hubdb_column_id);
+      url.searchParams.delete(searchColumnId);
       window.location.href = url.toString();
     }
   };
@@ -164,7 +164,7 @@
     <div class="mt-md gap-sm flex flex-col">
       {#if title}
         <div class="gap-sm flex items-center">
-          <label for={hubdb_column_id} class=" text-xl font-black">{title}</label>
+          <label for={searchColumnId} class=" text-xl font-black">{title}</label>
           {#if activeFilter && title}
             {@render xIcon()}
           {/if}
@@ -175,7 +175,7 @@
       >
         <input
           oninput={fetchMatches}
-          name={hubdb_column_id}
+          name={searchColumnId}
           data-debounce="500"
           class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
           placeholder="Search here..."
