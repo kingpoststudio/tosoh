@@ -96,7 +96,7 @@
 </script>
 
 {#if title || description}
-  <div class="max-w-max-page gap-md p-md m-auto flex flex-col">
+  <div class="max-w-max-page gap-md p-md md:pl-2xl md:pr-2xl m-auto flex flex-col">
     {#if title}
       <h1 class="text-6xl font-bold">{title}</h1>
     {/if}
@@ -108,7 +108,7 @@
 {/if}
 
 <div
-  class={`p-md gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
+  class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
   <SupportPortalFilter isParentLoading={isLoading} {viewAs} {handleChangeView}
   ></SupportPortalFilter>
