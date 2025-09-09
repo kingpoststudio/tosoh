@@ -130,7 +130,7 @@
   <div class="gap-md flex w-full flex-col items-center justify-between md:flex-row">
     <div>
       <span class="text-imperial-red text-lg font-thin">{eyebrow}</span>
-      <h1 class="mt-md font-semibold">{title}</h1>
+      <h1 class="mt-sm font-semibold">{title}</h1>
     </div>
 
     {#if hasFilter}
@@ -146,7 +146,7 @@
   >
     <div>
       <div class=" h-8 min-w-[8rem] rounded-lg bg-red-50"></div>
-      <div class="mt-md h-16 min-w-[16rem] rounded-lg bg-gray-200"></div>
+      <div class="mt-sm h-16 min-w-[16rem] rounded-lg bg-gray-200"></div>
     </div>
 
     <WebinarListingsFilters isParentLoading={isLoading} />
