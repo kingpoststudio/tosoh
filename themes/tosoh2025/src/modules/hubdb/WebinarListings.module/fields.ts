@@ -27,7 +27,7 @@ const generateFields = () => {
       default: 'Event Highlights',
     }),
     textField('past_section_title', 'Past Section Title', {
-      default: 'Upcoming Webinars',
+      default: 'Recorded',
     }),
 
     groupField('search', 'Search', {
