@@ -8,6 +8,7 @@
     displayLabel = true,
     labelPosition = 'top',
     placeholder,
+    disableReset,
   }: {
     options: any[];
     name: string;
@@ -15,6 +16,7 @@
     displayLabel?: boolean;
     labelPosition?: 'top' | 'left';
     placeholder?: string;
+    disableReset?: boolean;
   } = $props();
   let activeOptions = $derived(options);
 
@@ -36,7 +38,7 @@
       {#if displayLabel}
         <label for={name} class=" text-xl font-bold">{setupFilterTitle(name)}</label>
       {/if}
-      {#if activeFilter}
+      {#if activeFilter && !disableReset}
         <button
           type="button"
           {disabled}

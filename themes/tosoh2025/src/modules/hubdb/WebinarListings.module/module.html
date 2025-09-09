@@ -1,4 +1,5 @@
 {%- set table_id = module.hubdb_table_id -%}
+{%- set preselected_language = module.preselected_language -%}
 {%- set eyebrow = module.eyebrow -%}
 {%- set title = module.title -%}
 
@@ -19,7 +20,7 @@
     const tableId = '{{table_id}}';
     const eyebrow = '{{eyebrow}}';
     const title = '{{title}}';
-
+    const preselectedLanguage="{{preselected_language}}"
     const search = { 
     isSearchEnabled:{{ is_search_enabled }},
     searchInputPlaceholder:"{{ search_input_placeholder }}",
@@ -33,7 +34,7 @@
  
     const filterByTopic = '{{filter_by_topic}}';
 
-    window.Tosoh.WebinarListings = {tableId, eyebrow, title, search ,filters, filterByTopic };
+    window.Tosoh.WebinarListings = {tableId, preselectedLanguage, eyebrow, title, search ,filters, filterByTopic };
   </script>
 {% end_require_js %}
 

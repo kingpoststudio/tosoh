@@ -175,11 +175,22 @@ export type WebinarListingsItem = {
     start_time: string;
     cta_label: string;
     presenter_2_name: string;
+    webinar_title: string;
     presenter_1_name: string;
     presenter_1_location: string;
     presenter_1_title: string;
-    webinar_title: string;
     presenter_1_image: {
+      url: string;
+      width: number;
+      height: number;
+      altText: string;
+      fileId: number;
+      type: string;
+    };
+    presenter_3_name: string;
+    presenter_3_location: string;
+    presenter_3_title: string;
+    presenter_3_image: {
       url: string;
       width: number;
       height: number;

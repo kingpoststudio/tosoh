@@ -21,26 +21,26 @@
   import WebinarListingsFilters from './WebinarListingsFilters.svelte';
   import type { ColumnId } from '../../../types/hubdb';
   import SkeletonCard from './SkeletonCard.svelte';
+  import { setSearchParams } from '../../utils/urlUtils';
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
   let hasError = $state(false);
   let isLoading = $state(false);
 
-  const eyebrow = window?.Tosoh?.WebinarListings?.eyebrow;
-  const title = window?.Tosoh?.WebinarListings?.title;
-  const filterByTopic = window?.Tosoh?.WebinarListings?.filterByTopic;
-  const searchGroup = window?.Tosoh?.WebinarListings?.search;
-  const searchColumnId = searchGroup?.searchHubdbColumnId;
-
+  const webinarListingsWindow = window.Tosoh?.WebinarListings;
   // const tableId = window?.Tosoh?.WebinarListings?.tableId;
   const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
+  const preselectedLanguage = webinarListingsWindow?.preselectedLanguage;
+  const eyebrow = webinarListingsWindow?.eyebrow;
+  const title = webinarListingsWindow?.title;
+  const filterByTopic = webinarListingsWindow?.filterByTopic;
+  const searchGroup = webinarListingsWindow?.search;
+  const searchColumnId = searchGroup?.searchHubdbColumnId;
 
-  const availableFilters = window?.Tosoh?.WebinarListings?.filters
+  const availableFilters = webinarListingsWindow?.filters
     ? ([
-        ...window.Tosoh.WebinarListings.filters.dropdownFilters.map(
-          (filter) => filter.hubdb_column_id
-        ),
+        ...webinarListingsWindow.filters.dropdownFilters.map((filter) => filter.hubdb_column_id),
         searchColumnId,
       ] as ColumnId[])
     : [];
@@ -72,6 +72,9 @@
   const fetchData = async () => {
     try {
       isLoading = true;
+
+      console.log(constructBody());
+
       const data = await fetchTableRows(constructBody());
       // const data = mockWebinarCollectionRes;
 
@@ -89,6 +92,19 @@
     hasError = false;
     fetchData();
   };
+
+  const setDefaultLanguage = () => {
+    if (preselectedLanguage) {
+      const params = new URLSearchParams(window.location.search);
+      if (!params.has('language')) {
+        setSearchParams({
+          language: preselectedLanguage,
+        });
+      }
+    }
+  };
+
+  setDefaultLanguage();
 
   onMount(() => {
     fetchData();

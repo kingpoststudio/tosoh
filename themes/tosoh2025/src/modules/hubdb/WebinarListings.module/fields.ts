@@ -11,11 +11,11 @@ const searchEnabledVisibilityRules = {
 const generateFields = () => {
   return [
     hubDbTableField('hubdb_table_id', 'HubDB Table', { required: true }),
+    textField('preselected_language', 'Preselected Language'),
 
     textField('eyebrow', 'Eyebrow', {
       default: 'Event Highlights',
     }),
-    ,
     textField('title', 'Title', {
       default: 'Upcoming Webinars',
     }),

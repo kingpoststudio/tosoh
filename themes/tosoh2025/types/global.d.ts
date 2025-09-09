@@ -20,6 +20,7 @@ declare global {
       };
       WebinarListings: {
         tableId: string;
+        preselectedLanguage: string;
         eyebrow: string;
         title: string;
         search: {

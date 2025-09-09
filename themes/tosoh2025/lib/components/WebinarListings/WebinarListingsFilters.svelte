@@ -121,6 +121,7 @@
         {#each filtersFromFields as columnId}
           <div class="min-w-[16rem]">
             <Select
+              disableReset={true}
               placeholder={getLabelForSelect(columnId)}
               labelPosition="left"
               options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
@@ -133,7 +134,7 @@
           </div>
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">
-          Clear Filters
+          Reset Filters
         </button>
       </div>
     </FilterForm>

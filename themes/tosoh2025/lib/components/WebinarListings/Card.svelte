@@ -12,6 +12,10 @@
     presenter_2_location,
     presenter_2_name,
     presenter_2_title,
+    presenter_3_image,
+    presenter_3_location,
+    presenter_3_name,
+    presenter_3_title,
     webinar_title,
     cta_label,
     date,
@@ -31,6 +35,13 @@
     name: presenter_2_name,
     title: presenter_2_title,
     location: presenter_2_location,
+  };
+
+  const speaker3 = {
+    image_src: presenter_3_image?.url,
+    name: presenter_3_name,
+    title: presenter_3_title,
+    location: presenter_3_location,
   };
 
   function getDateParts(milliseconds: number) {
@@ -113,17 +124,15 @@
 
 {#snippet speaker(speaker: any)}
   <div class="flex items-center">
-    <!-- Speaker Avatars -->
     <div class="mr-3 flex -space-x-6">
       {#if speaker?.image_src}
         {@render avatar(speaker?.image_src)}
       {/if}
     </div>
 
-    <!-- Speaker Names -->
     <div class="flex-1">
       <div class="text-lg font-semibold text-gray-900">
-        {speaker.name}
+        {speaker?.name}
       </div>
       <div class="text-nickel text-sm font-semibold">
         {speaker?.location}
@@ -136,7 +145,7 @@
   class="border-border mx-auto flex max-w-[32rem] flex-col overflow-hidden rounded-2xl border bg-white"
 >
   <div
-    class={`bg-prussian-blue relative flex min-h-[18rem] flex-col ${date && isUpcoming() ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
+    class={`bg-prussian-blue relative flex h-full min-h-[18rem] flex-col ${date && isUpcoming() ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
   >
     {@render shapesBg()}
 
@@ -163,9 +172,9 @@
       {/if}
 
       <!-- Title -->
-      <h4 class="relative line-clamp-3 break-all font-semibold">
+      <h5 class="relative break-all font-semibold">
         {webinar_title}
-      </h4>
+      </h5>
     </div>
   </div>
 
@@ -176,6 +185,9 @@
       {@render speaker(speaker1)}
       {#if speaker2?.name}
         {@render speaker(speaker2)}
+      {/if}
+      {#if speaker3?.name}
+        {@render speaker(speaker3)}
       {/if}
     </div>
 
