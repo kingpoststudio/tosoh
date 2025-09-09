@@ -50,10 +50,11 @@
     });
 
     if (filtersFromFields?.length > 0) {
-      clearParams(filtersFromFields as string[]);
+      clearParams([...filtersFromFields, 'language'] as string[]);
+    } else {
+      clearParams(['language']);
     }
   };
-
   const getFilterOptions = async () => {
     isLoading = true;
 

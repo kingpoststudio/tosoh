@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { WebinarListingsItem } from '../../../types/hubdb';
+  import { isUpcoming } from '../../utils/utils';
 
   let { item }: { item: WebinarListingsItem } = $props();
 
@@ -56,16 +57,6 @@
   }
 
   const dateParts = date ? getDateParts(date) : null;
-
-  const isUpcoming = () => {
-    const now = new Date();
-    const start = date ? new Date(date) : null;
-    const end = date ? new Date(date) : null;
-
-    if (start && end) {
-      if (now < start) return true;
-    }
-  };
 </script>
 
 {#snippet shapesBg()}
@@ -145,11 +136,11 @@
   class="border-border mx-auto flex max-w-[32rem] flex-col overflow-hidden rounded-2xl border bg-white"
 >
   <div
-    class={`bg-prussian-blue relative flex h-full min-h-[18rem] flex-col ${date && isUpcoming() ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
+    class={`bg-prussian-blue relative flex h-full min-h-[18rem] flex-col ${date && isUpcoming(date) ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
   >
     {@render shapesBg()}
 
-    {#if date && isUpcoming()}
+    {#if date && isUpcoming(date)}
       <div class="relative">
         <span
           class="mb-4 inline-block rounded-3xl bg-[#FFFFFF4F] px-3 py-2 text-sm font-thin text-[#FFFFFF]"
@@ -159,13 +150,12 @@
       </div>
     {/if}
 
-    <!-- Date Banner -->
-    {#if date}
+    {#if date && isUpcoming(date)}
       {@render dateBanner()}
     {/if}
 
     <div class="self-end">
-      {#if start_time || stop_time}
+      {#if (start_time || stop_time) && isUpcoming(date)}
         <div class=" mt-md relative mb-2">
           <div class="text-lg font-semibold">{start_time} - {stop_time}</div>
         </div>

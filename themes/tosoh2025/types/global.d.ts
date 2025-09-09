@@ -21,8 +21,10 @@ declare global {
       WebinarListings: {
         tableId: string;
         preselectedLanguage: string;
-        eyebrow: string;
-        title: string;
+        upcomingSectionEyebrow: string;
+        upcomingSectionTitle: string;
+        pastSectionEyebrow: string;
+        pastSectionTitle: string;
         search: {
           isSearchEnabled: boolean;
           searchInputPlaceholder: string;

@@ -13,10 +13,17 @@ const generateFields = () => {
     hubDbTableField('hubdb_table_id', 'HubDB Table', { required: true }),
     textField('preselected_language', 'Preselected Language'),
 
-    textField('eyebrow', 'Eyebrow', {
+    textField('upcoming_section_eyebrow', 'Upcoming Section Eyebrow', {
       default: 'Event Highlights',
     }),
-    textField('title', 'Title', {
+    textField('upcoming_section_title', 'Upcoming Section Title', {
+      default: 'Upcoming Webinars',
+    }),
+
+    textField('past_section_eyebrow', 'Past Section Eyebrow', {
+      default: 'Event Highlights',
+    }),
+    textField('past_section_title', 'Past Section Title', {
       default: 'Upcoming Webinars',
     }),
 

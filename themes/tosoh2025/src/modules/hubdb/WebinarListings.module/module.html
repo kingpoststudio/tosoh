@@ -1,7 +1,9 @@
 {%- set table_id = module.hubdb_table_id -%}
 {%- set preselected_language = module.preselected_language -%}
-{%- set eyebrow = module.eyebrow -%}
-{%- set title = module.title -%}
+{%- set upcoming_section_eyebrow = module.upcoming_section_eyebrow -%}
+{%- set upcoming_section_title = module.upcoming_section_title -%}
+{%- set past_section_eyebrow = module.past_section_eyebrow -%}
+{%- set past_section_title = module.past_section_title -%}
 
 {# Search  #}
 {%- set is_search_enabled = module.search.enable_search || false -%}
@@ -18,8 +20,10 @@
 {% require_js position="head" %}
   <script>
     const tableId = '{{table_id}}';
-    const eyebrow = '{{eyebrow}}';
-    const title = '{{title}}';
+    const upcomingSectionEyebrow = '{{upcoming_section_eyebrow}}';
+    const upcomingSectionTitle = '{{upcoming_section_title}}';
+    const pastSectionEyebrow = '{{past_section_eyebrow}}';
+    const pastSectionTitle = '{{past_section_title}}';
     const preselectedLanguage="{{preselected_language}}"
     const search = { 
     isSearchEnabled:{{ is_search_enabled }},
@@ -34,7 +38,7 @@
  
     const filterByTopic = '{{filter_by_topic}}';
 
-    window.Tosoh.WebinarListings = {tableId, preselectedLanguage, eyebrow, title, search ,filters, filterByTopic };
+    window.Tosoh.WebinarListings = {tableId, preselectedLanguage, upcomingSectionEyebrow, upcomingSectionTitle, pastSectionEyebrow, pastSectionTitle, search ,filters, filterByTopic };
   </script>
 {% end_require_js %}
 

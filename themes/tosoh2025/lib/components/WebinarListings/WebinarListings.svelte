@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, Component } from 'svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
   import {
     defaultItemsLimit,
@@ -19,9 +19,11 @@
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockWebinarCollectionRes } from './mock';
   import WebinarListingsFilters from './WebinarListingsFilters.svelte';
-  import type { ColumnId } from '../../../types/hubdb';
+  import type { ColumnId, WebinarListingsItem } from '../../../types/hubdb';
   import SkeletonCard from './SkeletonCard.svelte';
   import { setSearchParams } from '../../utils/urlUtils';
+  import { isPast, isUpcoming } from '../../utils/utils';
+  import { fade } from 'svelte/transition';
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
@@ -32,8 +34,10 @@
   // const tableId = window?.Tosoh?.WebinarListings?.tableId;
   const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
   const preselectedLanguage = webinarListingsWindow?.preselectedLanguage;
-  const eyebrow = webinarListingsWindow?.eyebrow;
-  const title = webinarListingsWindow?.title;
+  const upcomingSectionEyebrow = webinarListingsWindow?.upcomingSectionEyebrow;
+  const upcomingSectionTitle = webinarListingsWindow?.upcomingSectionTitle;
+  const pastSectionEyebrow = webinarListingsWindow?.pastSectionEyebrow;
+  const pastSectionTitle = webinarListingsWindow?.pastSectionTitle;
   const filterByTopic = webinarListingsWindow?.filterByTopic;
   const searchGroup = webinarListingsWindow?.search;
   const searchColumnId = searchGroup?.searchHubdbColumnId;
@@ -73,8 +77,6 @@
     try {
       isLoading = true;
 
-      console.log(constructBody());
-
       const data = await fetchTableRows(constructBody());
       // const data = mockWebinarCollectionRes;
 
@@ -93,9 +95,22 @@
     fetchData();
   };
 
+  const getUpcoming = (allRows: WebinarListingsItem[]) => {
+    const upcomingWebinars = allRows?.filter((row) => isUpcoming(row?.values?.date)) || [];
+    return upcomingWebinars;
+  };
+
+  const getPastEvents = (allRows: WebinarListingsItem[]) => {
+    const pastWebinars =
+      allRows?.filter((row) => isPast(row?.values?.date) || !row?.values?.date) || [];
+
+    return pastWebinars;
+  };
+
   const setDefaultLanguage = () => {
     if (preselectedLanguage) {
       const params = new URLSearchParams(window.location.search);
+
       if (!params.has('language')) {
         setSearchParams({
           language: preselectedLanguage,
@@ -111,27 +126,61 @@
   });
 </script>
 
-<div
-  class="md:pl-2xl md:pr-2xl md:pt-lg md:pb-lg p-md h-fit-content max-w-max-page gap-lg m-auto flex w-full flex-col"
->
+{#snippet header(eyebrow: string, title: string, hasFilter: boolean)}
   <div class="gap-md flex w-full flex-col items-center justify-between md:flex-row">
     <div>
-      <span class="text-imperial-red text-lg font-thin">{eyebrow || 'EVENT HIGHLIGHTS'}</span>
-      <h1 class="mt-md font-semibold">{title || 'Webinars'}</h1>
+      <span class="text-imperial-red text-lg font-thin">{eyebrow}</span>
+      <h1 class="mt-md font-semibold">{title}</h1>
     </div>
-    <WebinarListingsFilters isParentLoading={isLoading} />
+
+    {#if hasFilter}
+      <WebinarListingsFilters isParentLoading={isLoading} />
+    {/if}
   </div>
+{/snippet}
 
-  {#if hasError}
-    <div class="p-sm">
-      <ErrorCard message="Failed to load webinars" retryCallback={reloadData} />
-      <div class="pb-sm"></div>
-    </div>
-  {:else}
-    <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
+{#snippet grid(rows: WebinarListingsItem[], displayOnLoad: boolean, displayPagination: boolean)}
+  {#if (isLoading && displayOnLoad) || !isLoading}
+    {#if hasError}
+      <div class="p-sm">
+        <ErrorCard message="Failed to load webinars" retryCallback={reloadData} />
+        <div class="pb-sm"></div>
+      </div>
+    {:else}
+      <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
+      ></ItemsGrid>
 
-    {#if tableRows?.length > 0}
-      <PaginationWithLimit {totalItems}></PaginationWithLimit>
+      {#if tableRows?.length > 0 && displayPagination}
+        <PaginationWithLimit {totalItems}></PaginationWithLimit>
+      {/if}
+    {/if}
+  {/if}
+{/snippet}
+
+<div
+  transition:fade={{ duration: 100 }}
+  class="md:pl-2xl md:pr-2xl md:pt-lg md:pb-lg p-md h-fit-content max-w-max-page gap-lg m-auto flex w-full flex-col"
+>
+  {#if isLoading}
+    {@render header(upcomingSectionEyebrow, upcomingSectionTitle, true)}
+    {@render grid([], true, false)}
+  {/if}
+
+  {#if !isLoading}
+    {@const hasUpcomingEvents = getUpcoming(tableRows)?.length > 0}
+    {@const upcomingEvents = getUpcoming(tableRows)}
+
+    {@const hasPastEvents = getPastEvents(tableRows)?.length > 0}
+    {@const pastEvents = getPastEvents(tableRows)}
+
+    {#if hasUpcomingEvents}
+      {@render header(upcomingSectionEyebrow, upcomingSectionTitle, true)}
+      {@render grid(upcomingEvents, true, hasPastEvents ? false : true)}
+    {/if}
+
+    {#if hasPastEvents}
+      {@render header(pastSectionEyebrow, pastSectionTitle, hasUpcomingEvents ? false : true)}
+      {@render grid(pastEvents, false, true)}
     {/if}
   {/if}
 </div>
