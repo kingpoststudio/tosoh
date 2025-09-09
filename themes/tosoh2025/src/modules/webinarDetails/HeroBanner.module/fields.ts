@@ -1,10 +1,14 @@
-import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
+import { groupField, imageField, linkField, richTextField, textField } from 'hs-fieldkit';
+import { contentBlockRtfFeatures } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
     imageField('bg', 'Background Image'),
-    textField('eyebrow', 'Eyebrow'),
-    textField('title', 'Title'),
+    textField('webinar_date', 'Webinar Date'),
+    textField('webinar_time', 'Webinar Time'),
+    richTextField('title', 'Title', {
+      enabled_features: contentBlockRtfFeatures,
+    }),
     groupField('speakers', 'Speakers', {
       children: [
         imageField('img', 'Image'),
@@ -13,7 +17,7 @@ const generateFields = () => {
       ],
       occurrence: {
         min: null,
-        max: 2,
+        max: 3,
       },
     }),
     groupField('cta', 'CTA', {

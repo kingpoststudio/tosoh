@@ -187,6 +187,8 @@ export const contentBlockRtfFeatures = [
   'lists',
   'alignment',
   'lineheight',
+  'subscript',
+  'superscript',
 ];
 
 export const linkVariantChoices = [
