@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import { onMount, Component } from 'svelte';
+  import { onMount } from 'svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
   import {
     defaultItemsLimit,
@@ -111,7 +111,7 @@
     if (preselectedLanguage) {
       const params = new URLSearchParams(window.location.search);
 
-      if (!params.has('language')) {
+      if (!params.has('language') && !params?.has(searchColumnId)) {
         setSearchParams({
           language: preselectedLanguage,
         });
@@ -139,6 +139,20 @@
   </div>
 {/snippet}
 
+{#snippet headerSkeleton()}
+  <div
+    transition:fade={{ duration: 100 }}
+    class="gap-md flex w-full flex-col items-center justify-between md:flex-row"
+  >
+    <div>
+      <div class=" h-8 min-w-[8rem] rounded-lg bg-red-50"></div>
+      <div class="mt-md h-16 min-w-[16rem] rounded-lg bg-gray-200"></div>
+    </div>
+
+    <WebinarListingsFilters isParentLoading={isLoading} />
+  </div>
+{/snippet}
+
 {#snippet grid(rows: WebinarListingsItem[], displayOnLoad: boolean, displayPagination: boolean)}
   {#if (isLoading && displayOnLoad) || !isLoading}
     {#if hasError}
@@ -162,7 +176,7 @@
   class="md:pl-2xl md:pr-2xl md:pt-lg md:pb-lg p-md h-fit-content max-w-max-page gap-lg m-auto flex w-full flex-col"
 >
   {#if isLoading}
-    {@render header(upcomingSectionEyebrow, upcomingSectionTitle, true)}
+    {@render headerSkeleton()}
     {@render grid([], true, false)}
   {/if}
 

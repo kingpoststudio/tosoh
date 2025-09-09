@@ -14,6 +14,7 @@
   import Select from '../Select/Select.svelte';
   import { mockWebinarListingsFilterOptions } from './mock';
   import Search from '../Search/Search.svelte';
+  import { fade } from 'svelte/transition';
 
   let { isParentLoading } = $props();
 
@@ -90,11 +91,6 @@
     allAvailableFiltersWithTheirOptions = parseFilterOptions(allRows);
   };
 
-  const reloadFilterOptions = () => {
-    hasError = false;
-    getFilterOptions();
-  };
-
   const getLabelForSelect = (columnId: any) => {
     return (
       filtersArray?.filter((filterObj) => filterObj?.hubdb_column_id === columnId)?.[0]
@@ -107,7 +103,10 @@
   });
 </script>
 
-<div class="gap-md align-center flex h-full flex-col md:flex-row">
+<div
+  class="gap-md align-center flex h-full flex-col md:flex-row"
+  transition:fade={{ duration: 100 }}
+>
   {#if isSearchEnabled}
     <Search
       searchTableId={tableId}
