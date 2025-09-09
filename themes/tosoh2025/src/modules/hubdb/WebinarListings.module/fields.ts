@@ -11,7 +11,10 @@ const searchEnabledVisibilityRules = {
 const generateFields = () => {
   return [
     hubDbTableField('hubdb_table_id', 'HubDB Table', { required: true }),
-    textField('preselected_language', 'Preselected Language'),
+    textField('preselected_language', 'Preselected Language', {
+      inline_help_text:
+        'Should match the value of a language option in the language column in the HubDB table.',
+    }),
 
     textField('upcoming_section_eyebrow', 'Upcoming Section Eyebrow', {
       default: 'Event Highlights',
