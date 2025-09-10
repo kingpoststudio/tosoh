@@ -142,7 +142,7 @@ export const presetPaddingFields = [
   }),
   choiceField('pr_desktop', 'Right padding (desktop)', {
     choices: constructFieldValues('md:pr', sizeChoices),
-    default: 'md:pr-xl',
+    default: 'md:pr-2xl',
     display_width: 'half_width',
   }),
   choiceField('pb_mobile', 'Bottom padding (mobile)', {
@@ -162,7 +162,7 @@ export const presetPaddingFields = [
   }),
   choiceField('pl_desktop', 'Left padding (desktop)', {
     choices: constructFieldValues('md:pl', sizeChoices),
-    default: 'md:pl-xl',
+    default: 'md:pl-2xl',
     display_width: 'half_width',
   }),
 ];

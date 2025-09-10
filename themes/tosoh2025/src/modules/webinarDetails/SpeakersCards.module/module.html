@@ -1,6 +1,7 @@
+{% import "../../../templates/partials/macros.html" as macros %}
 {% set title = module.title %}
 
-<div class="max-w-max-page p-md md:pr-xl md:pl-xl gap-md m-auto flex flex-col">
+<div class="max-w-max-page {{ macros.classes(module.module_settings) }} gap-md m-auto flex flex-col">
   <h2 class="text-4xl font-semibold">{{ title }}</h2>
 
   <div class="gap-md grid w-full grid-cols-1 md:grid-cols-3">
@@ -9,7 +10,7 @@
       {% set workplace = speaker.workplace %}
       {% set img = speaker.img.src %}
       <div
-        class="bg-ghost-white p-lg md:p-xl gap-lg m-auto flex min-h-[30rem] w-full max-w-[32rem] flex-col items-center justify-center rounded-2xl">
+        class="bg-ghost-white {{ macros.classes(module.card_settings) }} gap-lg m-auto flex min-h-[30rem] w-full max-w-[32rem] flex-col items-center justify-center rounded-2xl">
         {% if img %}
           <img src="{{ img }}" class="border-imperial-red aspect-square w-32 rounded-full border-4 object-cover" />
         {% endif %}
