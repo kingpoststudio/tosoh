@@ -22,6 +22,7 @@
     date,
     start_time,
     stop_time,
+    language,
     registration_page_url,
   } = item?.values;
 
@@ -57,6 +58,9 @@
   }
 
   const dateParts = date ? getDateParts(date) : null;
+  const isGerman = language?.name === 'German';
+  const isFrench = language?.name === 'French';
+  const isEnglish = language?.name === 'English';
 </script>
 
 {#snippet shapesBg()}
@@ -89,18 +93,33 @@
   </svg>
 {/snippet}
 
+{#snippet dateTemplate(first: any, second: any)}
+  <div class="pt-md absolute left-0 flex h-full w-full flex-col items-center">
+    <div class="font-sans-narrow text-center text-4xl font-bold leading-none">
+      {first}
+    </div>
+    <div class="font-sans-narrow text-xl font-medium">
+      {second}
+    </div>
+  </div>
+{/snippet}
+
 {#snippet dateBanner()}
   <div class="absolute -top-2 right-4 items-center justify-center text-black">
     <div class="relative h-[9rem] w-[7.5rem]">
       {@render rectangleBg()}
-      <div class="pt-md absolute left-0 flex h-full w-full flex-col items-center">
-        <div class="font-sans-narrow text-center text-4xl font-bold leading-none">
-          {dateParts?.day}
-        </div>
-        <div class="font-sans-narrow text-xl font-medium">
-          {dateParts?.monthName?.slice(0, 3)}, {dateParts?.year?.toString()?.slice(-2)}
-        </div>
-      </div>
+
+      {#if isGerman}
+        {@render dateTemplate(`${dateParts?.day}.`, dateParts?.monthName?.slice(0, 3))}
+      {/if}
+
+      {#if isFrench}
+        {@render dateTemplate(`${dateParts?.day}`, dateParts?.monthName?.slice(0, 3))}
+      {/if}
+
+      {#if isEnglish}
+        {@render dateTemplate(`${dateParts?.day}`, dateParts?.monthName?.slice(0, 3))}
+      {/if}
     </div>
   </div>
 {/snippet}
@@ -160,7 +179,7 @@
       {/if}
 
       <!-- Title -->
-      <h5 class="break-all font-semibold">
+      <h5 class="font-semibold">
         {webinar_title}
       </h5>
     </div>

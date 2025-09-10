@@ -198,6 +198,18 @@ export type WebinarListingsItem = {
       fileId: number;
       type: string;
     };
+    language: {
+      id: string;
+      name: string;
+      label: string;
+      type: string;
+      createdAt: string;
+      createdByUserId: number;
+      updatedAt: string;
+      updatedByUserId: number;
+      order: number;
+    };
+
     registration_page_url: string;
     presenter_2_title: string;
   };

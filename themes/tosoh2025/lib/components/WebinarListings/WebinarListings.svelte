@@ -63,7 +63,7 @@
       sort: '-priority',
       tableId: tableId,
       properties:
-        'webinar_title,priority,webinar_subtext,presenter_1_image,presenter_1_name,presenter_1_title,presenter_1_location,presenter_2_image,presenter_2_name,presenter_2_title,presenter_2_location,cta_label,date,start_time,stop_time,registration_page_url',
+        'webinar_title,priority,webinar_subtext,presenter_1_image,presenter_1_name,presenter_1_title,presenter_1_location,presenter_2_image,presenter_2_name,presenter_2_title,presenter_2_location,cta_label,date,start_time,stop_time,registration_page_url,language',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
       pagination: parseInt(params?.get('pagination') || defaultPagination),
       offset:
