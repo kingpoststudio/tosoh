@@ -32,7 +32,7 @@
         @apply mb-8 flex items-center gap-3;
 
         label {
-          @apply mb-0 text-sm leading-relaxed font-normal text-gray-700;
+          @apply mb-0 text-lg leading-relaxed font-normal text-gray-700;
         }
       }
 
@@ -41,7 +41,7 @@
         @apply mb-8;
 
         p {
-          @apply mb-3 text-sm leading-relaxed text-gray-700;
+          @apply mb-3 text-lg leading-relaxed text-gray-700;
         }
       }
 
@@ -78,7 +78,7 @@
     /* Password show/hide buttons */
     .hs-register-widget-show-password,
     .hs-login-widget-show-password {
-      @apply absolute top-12 right-4 text-sm text-gray-400 hover:text-gray-600;
+      @apply absolute top-12 right-4 text-lg text-gray-400 hover:text-gray-600;
       text-indent: -9999px;
       width: 2.125rem;
       height: 2.125rem;
@@ -90,12 +90,12 @@
 
     /* Submit button */
     .hs-button.primary.large {
-      @apply bg-imperial-red focus:ring-imperial-red/20 w-full rounded-xl border-none px-4 py-2 text-lg font-semibold text-white transition-all duration-200 hover:bg-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+      @apply bg-imperial-red focus:ring-imperial-red/20 w-full rounded-xl border-none px-6 py-4 text-lg font-semibold text-white transition-all duration-200 hover:bg-red-700 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
     }
 
     /* Forgot password link */
     #hs_login_reset {
-      @apply text-imperial-red float-right mb-6 text-sm font-semibold hover:text-red-700;
+      @apply text-imperial-red float-right mb-6 text-lg font-semibold hover:text-red-700 md:-mt-10;
     }
 
     /* Password requirements styling */
@@ -107,7 +107,7 @@
       }
 
       label {
-        @apply text-imperial-red mb-0 text-sm font-normal;
+        @apply text-imperial-red mb-0 text-lg font-normal;
       }
     }
 
@@ -135,7 +135,7 @@
     #hs-login-self-registration-link,
     #hs_cos_wrapper_membership_admin_content {
       p {
-        @apply mb-sm text-center text-sm font-semibold text-gray-700;
+        @apply mb-sm text-center text-lg font-semibold text-gray-700;
       }
 
       a {
@@ -149,7 +149,7 @@
     }
 
     .hs-error-msg {
-      @apply text-imperial-red text-sm;
+      @apply text-imperial-red text-lg;
     }
 
     /* Hide passwordless form for cleaner look */
