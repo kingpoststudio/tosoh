@@ -3,6 +3,7 @@
 
 @import 'tailwindcss';
 @import './_forms.css';
+@import './_auth-form.css';
 
 @theme {
   --color-black-charcoal: #212121;
@@ -110,7 +111,8 @@ button,
 }
 
 .link,
-a[href]:not(.button) {
+a[href]:not(.button),
+&:not(.auth-form a) {
   @apply hover:text-imperial-red hover:decoration-imperial-red no-underline decoration-transparent transition-[color,text-decoration-color] duration-200;
 
   &.text-white {
