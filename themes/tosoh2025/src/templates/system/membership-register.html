@@ -1,20 +1,16 @@
 <!--
-  templateType: membership_login_page
+  templateType: membership_register_page
   isAvailableForNewContent: true
-  label: Membership login
+  label: Membership - Register
 -->
-{% extends "../layouts/base-no-globals.html" %}
-{# pageTitle is used on system templates for setting a value for the title tag #}
-{% set pageTitle = "Tosoh | Login" %}
 
-{% block header %}
-{% endblock %}
+{% extends "../layouts/base-no-globals.html" %}
 
 {% block body %}
   <div class="max-w-max-page relative m-auto flex flex-col-reverse lg:flex-row">
     <img
       src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/image%202.png"
-      class="right-md top-md md:top-lg md:right-lg absolute max-h-[7rem]" />
+      class="right-md top-md md:top-sm md:right-lg absolute max-h-[4rem] md:max-h-[5rem]" />
     <div
       class="p-md md:p-2xl relative flex min-h-[32rem] w-full flex-col items-center justify-center overflow-hidden text-white md:min-h-[32rem] lg:min-h-[68rem] lg:max-w-[48rem]">
       <img
@@ -34,35 +30,35 @@
     <div class="p-md md:p-lg auth-form flex w-full items-center lg:min-h-[68rem]">
       <div class="systems-page m-auto w-full">
         {%
-          module "content"
-          path="@hubspot/rich_text",
-          html="<h1 class='text-default'>Sign In</h1><p class='mt-sm text-nickel text-xl'>This page is only available to people who have been given access."
+          module 'content'
+          path='@hubspot/rich_text',
+          html='<h2>Sign Up</h2>
+          <p class="text-lg mt-sm text-nickel">Tosoh Bioscience - Diagnostics EMEA Support portal registration</p>
+          <br />'
         %}
-        <div class="form-container">
-          {%
-            member_login "my_login"
-            email_label= "Email",
-            password_label= "Password",
-            remember_me_label= "Remember Me",
-            reset_password_text= "Forgot Password?",
-            submit_button_text= "Sign In"
-          %}
-        </div>
-        <div>
-          {%
-            module_block module "membership_admin_content"
-            label="Contact admin",
-            path="@hubspot/rich_text"
-          %}
-            {% module_attribute "html" %}
-              <p>
-                Having trouble?
-                <a href="{{ ("mailto:" ~ site_settings.membershipWebsiteAdmin)|escape_url }}">Contact the admin</a>
-                .
-              </p>
-            {% end_module_attribute %}
-          {% end_module_block %}
-        </div>
+        {%
+          member_register 'my_register'
+          email_label='Email',
+          password_confirm_label='Confirm Password',
+          password_label='Password',
+          submit_button_text='Register'
+        %}
+
+        {%
+          module_block module 'membership_admin_content'
+          label='Contact admin',
+          path='@hubspot/rich_text'
+        %}
+
+          {% module_attribute 'html' %}
+            <br />
+            <p>
+              Having trouble?
+              <a href="{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}">Contact the admin</a>
+              .
+            </p>
+          {% end_module_attribute %}
+        {% end_module_block %}
       </div>
     </div>
   </div>
