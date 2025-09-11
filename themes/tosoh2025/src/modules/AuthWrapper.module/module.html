@@ -1,0 +1,23 @@
+{% import "../../templates/partials/macros.html" as macros %}
+
+{% set title = module.title %}
+{% set description = module.description %}
+{% set form = module.form %}
+
+{% call macros.left_part_auth() %}
+  <div class="form-container">
+    <h1>{{ title }}</h1>
+    <div class="mt-sm text-nickel text-xl">{{ description }}</div>
+
+    {% if form.form_id %}
+      {%
+        form "flex_form"
+        form_to_use="{{ form.form_id }}"
+        response_response_type="{{ form.response_type }}"
+        response_message="{{ form.message }}"
+        response_redirect_id="{{ form.redirect_id }}"
+        response_redirect_url="{{ form.redirect_url }}"
+      %}
+    {% endif %}
+  </div>
+{% endcall %}
