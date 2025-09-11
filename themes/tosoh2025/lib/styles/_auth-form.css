@@ -25,7 +25,7 @@
   }
 
   .hs-form-field {
-    @apply mb-6 flex-wrap;
+    @apply relative mb-6 flex-wrap;
 
     label {
       @apply mb-3 block text-2xl font-semibold;
@@ -94,6 +94,7 @@
 
   /* Password show/hide buttons */
   .hs-register-widget-show-password,
+  .hs-reset-widget-show-password,
   .hs-login-widget-show-password {
     @apply absolute top-12 right-4 text-lg text-gray-400 hover:text-gray-600;
     text-indent: -9999px;
