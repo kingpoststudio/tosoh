@@ -1,51 +1,45 @@
 .fc-form {
   form {
-    @apply gap-md flex w-full max-w-6xl flex-col;
-
-    margin: 0 auto;
-    padding: 0 0.125rem; /* For animations on inputs */
+    @apply gap-md mx-auto flex w-full max-w-6xl flex-col;
+    @apply p-xs;
 
     div#hs-membership-password-requirements {
-      margin-top: var(--space-xs);
+      @apply mt-xs;
     }
 
     .hs_submit {
       .actions {
         input[type='submit'] {
-          @apply from-imperial-red focus:ring-imperial-red px-md py-xs hover:bg-imperial-red border-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-normal text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow] duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+          @apply border-imperial-red from-imperial-red px-md py-xs hover:bg-imperial-red focus:ring-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-normal text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow] duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
           box-shadow: 0px -3.08px 11.54px 0px #00000026 inset;
         }
       }
     }
 
     div.legal-consent-container {
-      @apply mt-md mb-md gap-md flex flex-col text-[#B1B1B1];
+      @apply mb-md mt-md gap-md flex flex-col text-[#B1B1B1];
     }
 
     input#hs-login-widget-remember {
-      width: fit-content;
+      @apply w-fit;
     }
 
     input#hs-pwd-widget-password {
-      width: 100%;
-      height: 2.75rem !important;
+      @apply h-[2.75rem]! w-full;
     }
 
     fieldset {
-      @apply gap-md flex max-w-full! flex-col md:flex-row;
+      @apply gap-md flex max-w-full flex-col md:flex-row;
     }
 
     div.hs-form-field,
     div.form-field,
     filter {
-      position: relative;
-      width: 100% !important;
+      @apply relative w-full!;
       float: none !important;
 
       &.inline {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+        @apply flex flex-row items-center;
       }
 
       label {
@@ -62,7 +56,7 @@
 
         > span.form-required,
         > span.hs-form-required {
-          color: var(--color-imperial-red);
+          @apply text-imperial-red ml-xs;
         }
       }
 
@@ -70,17 +64,12 @@
       &.hs-fieldtype-checkbox,
       &.hs-form-booleancheckbox {
         > label {
-          position: inherit;
-          top: auto;
-          left: auto;
-          padding: 0;
-          background: transparent;
-          font-size: var(--font-size-sm);
+          @apply static top-auto left-auto bg-transparent p-0 text-sm;
         }
       }
 
       legend {
-        display: none !important;
+        @apply hidden;
       }
 
       div.input {
@@ -89,17 +78,17 @@
         input:not([id^='LEGAL_CONSENT']),
         select,
         textarea {
-          @apply mt-base p-base outline-imperial-red mr-0! w-full rounded-xl border border-[#E9E9E938] focus-visible:border-0;
+          @apply mt-base p-base outline-imperial-red focus-visible:ring-imperial-red focus-visible:border-imperial-red mr-0 w-full rounded-xl border border-[#E9E9E938] focus-visible:ring-0 focus-visible:outline-0;
         }
 
         :has(input[id^='LEGAL_CONSENT']) {
           span {
-            @apply text-white;
+            @apply ml-0! text-white;
           }
         }
 
         input[type='checkbox'] {
-          @apply mr-2 h-6 w-6 appearance-none rounded-lg border-1 border-white bg-transparent text-white focus:ring-0 focus:outline-none;
+          @apply mr-2 h-6 w-6 appearance-none rounded-lg border border-white bg-transparent text-white focus:ring-0 focus:outline-none;
         }
 
         input[type='checkbox']:checked {
@@ -108,40 +97,64 @@
         }
 
         select {
-          @apply appearance-none bg-no-repeat pr-8;
-          background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='white' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
-          background-position: right 0.75rem center;
-          background-size: 1.5rem 1.5rem;
+          @apply relative appearance-none transition-[border-color] duration-200 ease-in-out;
+
+          &,
+          &::picker(select) {
+            @apply max-h-[12rem]! rounded-lg! fill-white stroke-white text-white transition-all duration-100;
+            appearance: base-select;
+
+            &:open {
+              @apply bg-ghost-white! text-default;
+            }
+          }
+
+          &::after {
+            @apply absolute right-3 h-6 w-6;
+            content: '';
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          }
+
+          &:open::after {
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          }
+
+          &:open {
+            @apply border-imperial-red border;
+          }
+
+          &::picker() {
+            @apply border border-slate-200;
+          }
+
+          &::picker-icon {
+            @apply hidden;
+          }
+        }
+        option {
+          @apply p-2 text-black hover:bg-red-50! hover:text-black!;
+
+          &::checkmark {
+            @apply block;
+          }
         }
 
         /* Textarea competes with inline styles associated w/ form-id. This ensures style priority. */
         > textarea.hs-input {
-          width: 100%;
+          @apply w-full;
         }
       }
 
       ul.inputs-list {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--space-2xs);
-        margin: 0 0 0 var(--space);
-        padding: 0;
-        list-style: none;
+        @apply ml-base gap-2xs m-0 flex list-none flex-col items-start p-0;
 
         li.hs-form-radio,
         li.hs-form-checkbox,
         li.hs-form-booleancheckbox {
-          display: inline-flex;
-          flex-direction: row;
-          margin-bottom: 0;
+          @apply mb-0 inline-flex flex-row;
 
           > label {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            font-size: var(--font-size-sm);
-            cursor: pointer;
+            @apply gap-xs flex cursor-pointer items-center text-sm;
           }
         }
       }

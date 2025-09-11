@@ -83,7 +83,7 @@
   <div class="gap-xs flex h-full w-full flex-col justify-between">
     <div>
       <span class=" text-imperial-red break-all">{family}</span>
-      <h5 class="text-raisin-black break-all font-bold">
+      <h5 class="text-default break-all font-bold">
         {name}
       </h5>
     </div>
