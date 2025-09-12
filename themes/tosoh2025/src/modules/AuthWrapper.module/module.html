@@ -4,7 +4,7 @@
 {% set description = module.description %}
 {% set form = module.form %}
 
-{% call macros.left_part_auth() %}
+{% call macros.auth_wrapper() %}
   <div class="form-container">
     <h2 class="font-semibold">{{ title }}</h2>
     <div class="mt-sm text-nickel text-xl">{{ description }}</div>
