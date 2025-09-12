@@ -12,7 +12,7 @@
       <div class="aspect-video w-full rounded-lg bg-slate-200"></div>
     {/if}
 
-    <div class="gap-base mt-base flex w-full flex-col">
+    <div class="mt-base flex w-full flex-col gap-[1.25rem]">
       <div
         class=" h-[1rem] w-full {viewAs === 'list' ? 'max-w-48' : ''} rounded-lg bg-slate-200"
       ></div>
@@ -23,7 +23,7 @@
       ></div>
       <button
         disabled
-        class="text-thin gap-base bg-slate-200! flex items-center justify-center rounded-lg text-center text-sm {viewAs ===
+        class="text-thin bg-slate-200! flex items-center justify-center gap-[1.25rem] rounded-lg text-center text-sm {viewAs ===
         'list'
           ? 'w-fit'
           : 'w-full'}"
