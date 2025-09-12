@@ -27,7 +27,7 @@
   .hs-form-field {
     @apply relative mb-6 flex-wrap;
 
-    label {
+    label:not(.hs-error-msg) {
       @apply mb-3 block text-2xl font-semibold;
     }
 
