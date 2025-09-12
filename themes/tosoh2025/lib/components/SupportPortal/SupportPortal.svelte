@@ -106,7 +106,7 @@
     {/if}
 
     {#if description}
-      <h5 class="text-nickel">{description}</h5>
+      <h6 class="text-nickel">{description}</h6>
     {/if}
   </div>
 {/if}

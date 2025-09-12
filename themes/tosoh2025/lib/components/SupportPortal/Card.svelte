@@ -59,7 +59,7 @@
 {/snippet}
 
 <div
-  class={`gap-base border-border relative flex w-full flex-col content-around rounded-2xl border p-[1.25rem] ${
+  class={`border-border relative flex w-full flex-col content-around gap-[1.25rem] rounded-2xl border p-[1.25rem] ${
     hasSiblings ? 'h-full' : 'h-fit'
   }`}
 >
@@ -80,7 +80,7 @@
     {/if}
   {/if}
 
-  <div class="gap-base flex h-full w-full flex-col justify-between">
+  <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
       <span class=" text-imperial-red text-xl">{productType}</span>
       <h5 class="name text-raisin-black mt-base font-sans-narrow font-semibold">
@@ -91,7 +91,7 @@
     {#if documentType === 'Video'}
       <a
         target="_blank"
-        class="button gap-sm flex items-center justify-center text-center {viewAs === 'list'
+        class="button flex items-center justify-center gap-[1.25rem] text-center {viewAs === 'list'
           ? 'w-fit!'
           : 'w-full!'}"
         href={`support-portal/${item.path}`}
