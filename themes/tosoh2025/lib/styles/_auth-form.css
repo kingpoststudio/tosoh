@@ -36,18 +36,18 @@
     }
 
     &:has(input#hs-register-widget-explicit-consent[type='checkbox']) {
-      @apply grid! grid-cols-10 grid-rows-2 gap-4;
+      @apply flex flex-wrap gap-4;
 
       p {
-        @apply col-span-10 row-span-1;
+        @apply order-1 w-full;
       }
 
       input {
-        @apply col-span-1 row-span-1;
+        @apply order-2 h-4 w-4 flex-shrink-0;
       }
 
       label {
-        @apply col-span-9 row-span-1;
+        @apply order-3 flex-1;
       }
     }
 
