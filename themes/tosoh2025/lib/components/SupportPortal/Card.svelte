@@ -37,12 +37,12 @@
     costructCDNUrl(item?.values?.image?.url as string) ||
       setupWistiaThumbnail(item?.values?.wistia_video_url as string)
   );
-  let family = $derived(
-    item?.values?.product_family?.map((family) => `${family.label}`).join(', ')
-  );
   let name = $derived(item?.values?.name);
   let downloadUrl = $derived(item?.values?.document_url || item.wistia_video_url);
-  let type = $derived(item?.values?.document_type?.label);
+  let documentType = $derived(item?.values?.document_type?.label);
+  let productType = $derived(
+    item?.values?.product_type?.map((type: any) => `${type.label}`).join(', ')
+  );
 
   const handleImageError = () => {
     imgSrc = '';
@@ -59,7 +59,7 @@
 {/snippet}
 
 <div
-  class={`gap-base border-border relative flex w-full flex-col content-around rounded-lg border p-[1.25rem] ${
+  class={`gap-base border-border relative flex w-full flex-col content-around rounded-2xl border p-[1.25rem] ${
     hasSiblings ? 'h-full' : 'h-fit'
   }`}
 >
@@ -80,15 +80,15 @@
     {/if}
   {/if}
 
-  <div class="gap-xs flex h-full w-full flex-col justify-between">
+  <div class="gap-base flex h-full w-full flex-col justify-between">
     <div>
-      <span class=" text-imperial-red break-all">{family}</span>
-      <h5 class="text-default break-all font-bold">
+      <span class=" text-imperial-red text-xl">{productType}</span>
+      <h5 class="name text-raisin-black mt-base font-sans-narrow font-semibold">
         {name}
       </h5>
     </div>
 
-    {#if type === 'Video'}
+    {#if documentType === 'Video'}
       <a
         target="_blank"
         class="button gap-sm flex items-center justify-center text-center {viewAs === 'list'
@@ -127,12 +127,18 @@
   </div>
 
   <span
-    class="p-xs text-md text-imperial-red top-sm right-sm absolute break-all rounded-lg bg-red-100 text-xs font-bold"
+    class="p-xs text-md text-imperial-red absolute right-[1.25rem] top-[1.25rem] break-all rounded-lg bg-red-100 text-xs font-bold"
   >
-    {#if type === 'PDF'}
+    {#if documentType === 'PDF'}
       {@render pdfIcon()}
     {:else}
-      {type}
+      {documentType}
     {/if}
   </span>
 </div>
+
+<style>
+  h5.name {
+    word-wrap: break-word;
+  }
+</style>

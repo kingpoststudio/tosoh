@@ -12,6 +12,7 @@
   --color-nickel: #747273;
   --color-ghost-white: #f9f9f9;
   --color-light-silver: #dad8d8;
+  --color-raisin-black: #231f20;
   --color-border: var(--color-light-silver);
   --color-default: var(--color-black-charcoal);
 
@@ -29,7 +30,7 @@
 
   --container-8xl: 96rem;
   --container-12xl: 120rem;
-  --container-max-page: min(100vw, var(--container-12xl));
+  --container-max-page: 96rem;
 
   --font-sans: 'Work Sans', ui-sans-serif, system-ui, sans-serif;
 

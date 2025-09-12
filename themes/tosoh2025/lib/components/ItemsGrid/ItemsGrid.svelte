@@ -13,9 +13,9 @@
     tableRows: any[];
     isLoading: boolean;
     viewAs?: string;
-    hasLargeElements: boolean;
+    hasLargeElements?: boolean;
     Card: Component | any;
-    SkeletonCard: Component;
+    SkeletonCard: Component | any;
   } = $props();
 
   const constructLengthForSkeletons = () => {

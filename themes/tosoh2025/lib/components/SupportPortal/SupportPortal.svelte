@@ -102,7 +102,7 @@
 {#if title || description}
   <div class="max-w-max-page gap-md p-md md:pl-2xl md:pr-2xl m-auto flex flex-col">
     {#if title}
-      <h1 class="text-6xl font-bold">{title}</h1>
+      <h2 class="font-bold">{title}</h2>
     {/if}
 
     {#if description}

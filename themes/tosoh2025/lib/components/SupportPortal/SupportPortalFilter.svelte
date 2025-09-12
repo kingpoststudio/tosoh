@@ -133,7 +133,7 @@
   </div>
 
   <SearchInput
-    customClasses="mt-md"
+    customClasses="mt-base"
     accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
     {searchTableId}
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
@@ -143,7 +143,7 @@
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {#if searchColumnId !== columnId}
-        <div class="mt-md">
+        <div class="mt-base">
           <Select
             options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
               columnId as ColumnId

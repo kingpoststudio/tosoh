@@ -1,7 +1,7 @@
 <script lang="ts">
   let { totalItems, limit, pagination } = $props();
 
-  let options = [6, 12, 18];
+  let options = [12, 24, 48];
 </script>
 
 <div class="gap-sm flex items-center justify-center text-[#4E4F54]">
