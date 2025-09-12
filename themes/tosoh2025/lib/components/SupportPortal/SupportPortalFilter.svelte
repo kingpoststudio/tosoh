@@ -155,7 +155,7 @@
       {/if}
     {/each}
 
-    <div class="gap-sm mt-lg flex w-full flex-row lg:flex-col">
+    <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
         Reset
       </button>
