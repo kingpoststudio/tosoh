@@ -24,27 +24,26 @@
 {%- endmacro -%}
 
 {%- macro left_part_auth() -%}
-  <div class="max-w-max-page relative m-auto flex flex-col-reverse lg:flex-row">
+  <div class="max-w-max-page relative m-auto flex min-h-[100vh] flex-col-reverse lg:flex-row">
     <img
       src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/image%202.png"
       class="top-sm right-sm absolute max-h-[5rem] lg:max-h-[7rem]" />
-    <div
-      class="p-md md:p-2xl relative flex min-h-[32rem] w-full flex-col items-center justify-center overflow-hidden text-white md:min-h-[32rem] lg:min-h-[68rem] lg:max-w-[48rem]">
+    <div class="px-md md:px-2xl relative flex w-full flex-col items-center justify-between text-white lg:max-w-[48rem]">
       <img
         src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/761c5869ba5f1c0356006068cdb3adcfe5d37865%20(2).jpg"
         class="absolute top-0 left-0 h-full w-full object-cover" />
       <div class="absolute top-0 left-0 h-full w-full bg-[#013B57E3]"></div>
-      <p class="text-thin relative w-full text-lg tracking-widest md:-mt-[20%] lg:-mt-[60%]">
-        CONNECTING SCIENCE WITH CARE
-      </p>
-      <h2 class="mt-sm relative leading-12 font-semibold">
-        At Tosoh, we enable precision and reliability for better patient outcomes.
-      </h2>
+      <div class="pt-md md:pt-2xl lg:pt-3xl gap-sm relative flex w-full flex-col">
+        <p class="text-thin text-lg tracking-widest">CONNECTING SCIENCE WITH CARE</p>
+        <h2 class="leading-12 font-semibold">
+          At Tosoh, we enable precision and reliability for better patient outcomes.
+        </h2>
+      </div>
       <img
         src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/close-up-portrait-focused-young-male-doctor%202.png"
-        class="absolute right-0 bottom-0 max-h-[12rem] object-contain sm:max-h-[16rem] md:left-1/2 md:-translate-x-1/2 lg:max-h-[34rem]" />
+        class="relative max-h-[16rem] object-contain lg:max-h-[36rem]" />
     </div>
-    <div class="p-md md:p-lg flex w-full items-center lg:min-h-[68rem]">
+    <div class="p-md md:p-lg flex w-full items-center">
       <div class="systems-page m-auto w-full">{{ caller() }}</div>
     </div>
   </div>

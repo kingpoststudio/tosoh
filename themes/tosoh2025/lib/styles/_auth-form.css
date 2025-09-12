@@ -1,7 +1,7 @@
 /* Auth Form Styles */
 
 .systems-page {
-  @apply bg-ghost-white p-lg w-full overflow-hidden rounded-2xl;
+  @apply bg-ghost-white p-lg w-full rounded-2xl;
 
   h2 {
     @apply mb-2 text-4xl font-bold;
@@ -14,7 +14,7 @@
   /* Form Field Styling */
 
   form {
-    @apply mt-lg;
+    @apply mt-sm;
     > fieldset {
       @apply w-full! max-w-full!;
     }
@@ -127,7 +127,7 @@
 
   /* Forgot password link */
   #hs_login_reset {
-    @apply text-imperial-red float-right mb-6 text-lg font-semibold hover:text-red-700 md:-mt-10;
+    @apply text-imperial-red float-right mb-6 text-lg font-semibold hover:text-red-700 xl:-mt-10;
   }
 
   /* Password requirements styling */

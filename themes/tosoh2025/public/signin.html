@@ -8,28 +8,34 @@
     <script type="module" src="../lib/main.ts"></script>
     <link rel="stylesheet" href="../lib/styles/main.css" />
   </head>
-  <body>
-    <div class="max-w-max-page m-auto flex flex-col-reverse lg:flex-row">
+  <body class="hs-content-id-1 hs-landing-page hs-page">
+    <div class="max-w-max-page relative m-auto flex min-h-[100vh] flex-col-reverse lg:flex-row">
+      <img
+        src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/image%202.png"
+        class="top-sm right-sm absolute max-h-[5rem] lg:max-h-[7rem]"
+      />
       <div
-        class="p-md md:p-2xl relative flex min-h-[32rem] w-full flex-col items-center justify-center overflow-hidden text-white md:min-h-[32rem] lg:min-h-[68rem] lg:max-w-[48rem]"
+        class="px-md md:px-2xl relative flex w-full flex-col items-center justify-between text-white lg:max-w-[48rem]"
       >
         <img
           src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/761c5869ba5f1c0356006068cdb3adcfe5d37865%20(2).jpg"
           class="absolute top-0 left-0 h-full w-full object-cover"
         />
         <div class="absolute top-0 left-0 h-full w-full bg-[#013B57E3]"></div>
-        <p class="text-thin relative w-full text-lg tracking-widest md:-mt-[20%] lg:-mt-[60%]">
-          CONNECTING SCIENCE WITH CARE
-        </p>
-        <h1 class="mt-sm relative leading-18 font-semibold">
-          At Tosoh, we enable precision and reliability for better patient outcomes.
-        </h1>
+        <div>
+          <p class="text-thin pt-2xl relative w-full text-lg tracking-widest">
+            CONNECTING SCIENCE WITH CARE
+          </p>
+          <h2 class="mt-sm relative leading-12 font-semibold">
+            At Tosoh, we enable precision and reliability for better patient outcomes.
+          </h2>
+        </div>
         <img
           src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/close-up-portrait-focused-young-male-doctor%202.png"
-          class="absolute right-0 bottom-0 max-h-[12rem] object-contain sm:max-h-[16rem] md:left-1/2 md:-translate-x-1/2 lg:max-h-[34rem]"
+          class="relative max-h-[12rem] object-contain sm:max-h-[16rem] lg:max-h-[28rem]"
         />
       </div>
-      <div class="p-md md:p-lg auth-form flex w-full items-center lg:min-h-[68rem]">
+      <div class="p-md md:p-lg flex w-full items-center">
         <div class="systems-page m-auto w-full">
           <div
             id="hs_cos_wrapper_content"
@@ -44,13 +50,9 @@
               style=""
               data-hs-cos-general-type="widget"
               data-hs-cos-type="rich_text"
-              ><h3>Sign In</h3>
-              <p>
-                This Page Is Only Available To People Who Have Been Given Access.<br />
-                To Register,
-                <a href="//145184808.hs-sites-eu1.com/_hcms/mem/register?redirect_url=/"
-                  >Click Here</a
-                >
+              ><h2 class="font-semibold">Sign In</h2>
+              <p class="mt-sm text-nickel text-xl">
+                This page is only available to people who have been given access.
               </p></span
             >
           </div>
@@ -70,14 +72,19 @@
               </div>
               <form
                 method="post"
-                action="/_hcms/mem/login?businessUnitId=0&amp;domain=undefined&amp;hs_preview_key=gGXsB1VCKFt_weJBM1gdFw&amp;portalId=145184808&amp;tc_deviceCategory=undefined&amp;template_file_path=TosohTheme2025%2Ftemplates%2Fsystem%2Fmembership-login.html&amp;updated=1757418886996&amp;hs_static_app=DesignManagerIde&amp;hs_static_app_version=2.74872&amp;redirect_url=/"
+                action="/_hcms/mem/login?businessUnitId=0&amp;domain=default&amp;hsPreviewerApp=template&amp;hs_preview_key=gGXsB1VCKFt_weJBM1gdFw&amp;portalId=145184808&amp;tc_deviceCategory=desktop&amp;template_file_path=TosohTheme2025%2Ftemplates%2Fsystem%2Fmembership-login.html&amp;updated=1757661773349&amp;redirect_url=/"
                 id="hs-membership-form"
                 onsubmit="onFormSubmit()"
                 data-hs-do-not-collect=""
               >
                 <input name="csrf_token" type="hidden" value="" />
                 <input name="redirect_url" type="hidden" value="/" />
-                <input id="hs-membership-form-hubspotutk" name="hubspotutk" type="hidden" />
+                <input
+                  id="hs-membership-form-hubspotutk"
+                  name="hubspotutk"
+                  type="hidden"
+                  value=""
+                />
 
                 <div class="hs-form-field">
                   <label class="hs-login-widget-email-label" for="hs-login-widget-email"
@@ -118,19 +125,19 @@
                     type="checkbox"
                     id="hs-login-widget-remember"
                     value="true"
-                    checked
+                    checked=""
                   />
                   <label for="hs-login-widget-remember">Remember Me</label>
                 </div>
                 <div>
                   <a id="hs_login_reset" href="//145184808.hs-sites-eu1.com/_hcms/mem/reset/request"
-                    >Forgot your password?</a
+                    >Forgot Password?</a
                   >
                 </div>
 
                 <div class="hs-membership-loader hs_submit hs-submit">
                   <div class="actions">
-                    <input type="submit" class="hs-button primary large" value="Login" />
+                    <input type="submit" class="hs-button primary large" value="Sign In" />
                   </div>
                 </div>
               </form>
@@ -184,6 +191,7 @@
                       type="submit"
                       class="hs-button primary large"
                       value="Email link"
+                      disabled=""
                     />
                   </div>
                 </div>
@@ -318,5 +326,52 @@
         </div>
       </div>
     </div>
+
+    <script src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/hub_generated/template_assets/1/267007484102/1757661259941/template_main.min.js"></script>
+    <script>
+      var hsVars = hsVars || {};
+      hsVars['language'] = 'en';
+    </script>
+
+    <script src="https://static.hsappstatic.net/cos-i18n/static-1.53/bundles/project.js"></script>
+    <script src="https://static.hsappstatic.net/MembershipSupport/static-1.1/js/login_asset.js"></script>
+
+    <!-- Start of HubSpot Analytics Code Not Loaded -->
+    <script>
+      (function () {
+        const timeoutEvent = document.createEvent('CustomEvent');
+        timeoutEvent.initCustomEvent('content-analytics-code-not-loaded', true, true, {
+          detail: 'Not loaded in preview mode',
+        });
+        window.dispatchEvent(timeoutEvent);
+      })();
+    </script>
+    <!-- End of HubSpot Analytics Code Not Loaded -->
+
+    <script type="text/javascript">
+      var hsVars = {
+        render_id: '2d4ec8aa-fbb3-4a33-9366-0f29dee533ac',
+        ticks: 1757670603085,
+        page_id: 1,
+
+        content_group_id: 0,
+        portal_id: 145184808,
+        app_hs_base_url: 'https://app-eu1.hubspot.com',
+        cp_hs_base_url: 'https://cp-eu1.hubspot.com',
+        language: 'en',
+        analytics_page_type: 'landing-page',
+        scp_content_type: '',
+
+        analytics_page_id: 'null',
+        category_id: 1,
+        folder_id: 0,
+        is_hubspot_user: false,
+      };
+    </script>
+
+    <script
+      defer=""
+      src="https://static.hsappstatic.net/HubspotToolsMenu/static-1.432/js/index.js"
+    ></script>
   </body>
 </html>
