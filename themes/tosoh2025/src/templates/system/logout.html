@@ -1,0 +1,24 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Logout
+-->
+
+{% extends "../layouts/base-no-globals.html" %}
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
+{% block header %}
+{% endblock %}
+
+{% block body %}
+  {% call macros.auth_wrapper() %}
+    <div class="gap-base flex flex-col">
+      {%
+        module "content"
+        path="@hubspot/rich_text",
+        html="<h2 class='font-semibold'>Your are signed out</h2>"
+      %}
+      <a href="/_hcms/mem/login" class="button w-fit">Sign Back In</a>
+    </div>
+  {% endcall %}
+{% endblock %}
