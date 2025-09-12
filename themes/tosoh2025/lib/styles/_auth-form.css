@@ -29,6 +29,10 @@
 
     label:not(.hs-error-msg) {
       @apply mb-3 block text-2xl font-semibold;
+
+      span {
+        @apply text-lg;
+      }
     }
 
     /* Checkbox form fields */
@@ -91,6 +95,11 @@
 
   #hs-pwd-widget-password {
     @apply mb-md p-md;
+  }
+
+  .hs-form-booleancheckbox-display,
+  .hs-form-radio-display {
+    @apply flex!;
   }
 
   li.hs-form-radio label {
