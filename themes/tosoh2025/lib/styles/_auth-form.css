@@ -28,7 +28,7 @@
     @apply relative mb-6 flex-wrap;
 
     label:not(.hs-error-msg) {
-      @apply mb-3 block text-2xl font-semibold;
+      @apply mb-3 block text-xl font-semibold;
 
       span {
         @apply text-lg;
@@ -72,10 +72,10 @@
   /* Input field styling */
   .hs-input,
   #hs-pwd-widget-password {
-    @apply focus:border-imperial-red focus:ring-imperial-red/20 w-full! rounded-2xl border border-slate-200 px-4 py-4 text-lg placeholder-gray-400 transition-all duration-200 focus:ring-2 focus:outline-none;
+    @apply focus:border-imperial-red focus:ring-imperial-red/20 border-border w-full! rounded-2xl border px-4 py-4 text-lg placeholder-gray-400 transition-all duration-200 focus:ring-2 focus:outline-none;
 
     &[type='checkbox'] {
-      @apply focus:ring-imperial-red/20 max-h-5 min-h-5 w-5 max-w-5 min-w-5 flex-shrink-0 appearance-none rounded-xl border border-slate-200 bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
+      @apply focus:ring-imperial-red/20 border-border max-h-4 min-h-4 w-4 max-w-4 min-w-4 flex-shrink-0 appearance-none rounded-xl border bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
 
       &:checked {
         @apply bg-imperial-red border-imperial-red;
@@ -84,7 +84,7 @@
     }
 
     &[type='radio'] {
-      @apply focus:ring-imperial-red/20 max-h-3 min-h-3 w-3 max-w-3 min-w-3 flex-shrink-0 appearance-none rounded-full border border-slate-200 bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
+      @apply focus:ring-imperial-red/20 border-border max-h-3 min-h-3 w-3 max-w-3 min-w-3 flex-shrink-0 appearance-none rounded-full border bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
 
       &:checked {
         @apply bg-imperial-red border-imperial-red;
