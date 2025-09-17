@@ -83,7 +83,7 @@
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
       <span class=" text-imperial-red text-xl">{productType}</span>
-      <h5 class="name text-raisin-black mt-base font-sans-narrow font-semibold">
+      <h5 class="break-word text-raisin-black mt-base font-sans-narrow font-semibold">
         {name}
       </h5>
     </div>
@@ -136,9 +136,3 @@
     {/if}
   </span>
 </div>
-
-<style>
-  h5.name {
-    word-wrap: break-word;
-  }
-</style>

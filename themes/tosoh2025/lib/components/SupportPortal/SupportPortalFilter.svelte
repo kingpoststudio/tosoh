@@ -121,7 +121,7 @@
 {/snippet}
 
 <div
-  class={`bg-ghost-white p-md h-fit rounded-lg lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[20rem]  ${isLoading ? 'animate-pulse' : ''}`}
+  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
 >
   {#if hasError}
     <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />

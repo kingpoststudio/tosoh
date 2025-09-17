@@ -88,6 +88,10 @@ h6 {
   @apply text-xl;
 }
 
+.break-word {
+  word-wrap: break-word;
+}
+
 .wistia_responsive_padding,
 .hs-video-widget {
   @apply overflow-hidden rounded-lg;

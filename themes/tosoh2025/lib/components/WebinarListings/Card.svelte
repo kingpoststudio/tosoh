@@ -179,7 +179,7 @@
       {/if}
 
       <!-- Title -->
-      <h5 class="font-semibold">
+      <h5 class="break-word">
         {webinar_title}
       </h5>
     </div>

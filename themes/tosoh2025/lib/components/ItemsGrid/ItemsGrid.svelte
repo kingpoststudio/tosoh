@@ -34,7 +34,7 @@
 
   const gridClass = $derived(
     viewAs === 'grid'
-      ? `grid  ${hasLargeElements ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2'} gap-4 lg:grid-cols-3`
+      ? `grid  ${hasLargeElements ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-2'} gap-4 xl:grid-cols-3`
       : 'flex flex-col gap-sm'
   );
 </script>
