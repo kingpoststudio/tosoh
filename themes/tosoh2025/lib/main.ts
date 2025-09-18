@@ -7,3 +7,4 @@ import './components/TwClasses/TwClasses.svelte';
 import './components/Modal/Modal.svelte';
 import './components/WebinarListings/WebinarListings.svelte';
 import './components/CCT/CCTFilters.svelte';
+import './components/TabGroup/TabGroup.svelte';

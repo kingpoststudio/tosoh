@@ -1,6 +1,5 @@
 <svelte:options
   customElement={{
-    // @ts-ignore
     tag: 'tosoh-tab-group',
     props: {
       groupId: { type: 'String' },
@@ -21,31 +20,34 @@
     active = false,
   }: { groupId: string; variant: 'action' | 'tab'; active: boolean } = $props();
 
+  let isActive = $state(active);
+
   function setTabActive() {
-    active = true;
+    isActive = true;
 
     $host().dispatchEvent(
-      new CustomEvent('HiarcTabGroupActive', {
+      new CustomEvent('TosohTabGroupActive', {
         detail: { groupId },
         bubbles: true,
       })
     );
   }
 
-  const handler = on(window, 'HiarcTabGroupActive', (e: Event) => {
+  const handler = on(window, 'TosohTabGroupActive', (e: Event) => {
     const { detail } = e as CustomEvent;
-    active = detail?.groupId === groupId;
+
+    isActive = detail?.groupId === groupId;
   });
 
   onDestroy(() => handler());
 </script>
 
 {#if variant === 'action'}
-  <button class:active onclick={setTabActive} aria-label="tab-button">
+  <button class:active={isActive} onclick={setTabActive} aria-label="tab-button">
     <svelte:element this={'slot'} />
   </button>
-{:else if active}
-  <div in:fade>
+{:else if isActive}
+  <div class="tab-wrapper" in:fade>
     <svelte:element this={'slot'} />
   </div>
 {/if}
@@ -64,9 +66,8 @@
     width: 100%;
     min-width: 8rem;
     max-width: 16rem;
-    padding: 1.5rem var(--space);
+    padding: var(--space);
     font-weight: 450;
-    text-align: center;
     cursor: pointer;
     transition: text-shadow 0.2s ease-in-out;
 
@@ -82,11 +83,14 @@
     }
 
     &.active {
-      text-shadow: 0 0 1px var(--color-petrol);
-
+      font-weight: 600;
       &:after {
-        background: var(--color-petrol);
+        background: var(--color-deep-blue);
       }
     }
+  }
+
+  .tab-wrapper {
+    margin-top: var(--space-xl);
   }
 </style>
