@@ -1,27 +1,11 @@
 {% set title = module.title || 'Competitor Comparison Tool (CCT)' %}
 {% set description = module.description || 'Your centralized hub for technical assistance, product resources, and expert guidance across Tosoh Comparison Tool.' %}
-{% set tosoh_instrument_id = request.query_dict.tosoh_instrument_id  or "" %}
-{% set competitor_instrument_id = request.query_dict.competitor_instrument_id  or "" %}
+{% set tosoh_instrument_name = request.query_dict.tosoh_instrument_name  or "" %}
+{% set competitor_instrument_name = request.query_dict.competitor_instrument_name  or "" %}
 
-
-
-  {% set allInstruments = hubdb_table_rows("cct_instruments") %}
-  {% set all_comparisons = hubdb_table_rows("cct_comparison") %}
+{% set all_instruments = hubdb_table_rows("cct_instruments") %}
+{% set all_comparisons = hubdb_table_rows("cct_comparison") %}
   
-  {# 2. We fetch all the rows with the ids from the comparison table #}
-
-  {% for row in all_comparisons %}
-    the name for row {{ row.hs_id }} is {{ row.product_name }}
-    {% for foreign_row in row.competitor_instrument_id %}
-      the name for foreign row {{ foreign_row.hs_id }} is {{ foreign_row.product_name }}
-    {% endfor %}
-     {% for foreign_row in row.tosoh_instrument_id %}
-      the name for foreign row {{ foreign_row.hs_id }} is {{ foreign_row.product_name }}
-    {% endfor %}
-
-    <br/>
-  {% endfor %}
-
 {% require_js position="head" %}
   <script>
   const allInstruments = {{ all_instruments|tojson }};
@@ -31,7 +15,6 @@
   </script>
 {% end_require_js %}
 
-{# CCT UI #}
 
 <div class="gap-base p-md md:pl-2xl md:pr-2xl mt-[6rem] flex flex-col">
   {% if title || description %}

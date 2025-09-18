@@ -1,3 +1,4 @@
+import type { CCTComparisons, CCTInstruments } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
 declare global {
@@ -40,7 +41,7 @@ declare global {
         filterByTopic: string;
       };
       CCT: {
-        allComparisons: CCTComparisonForFilter;
+        allComparisons: CCTComparisons;
         allInstruments: CCTInstruments;
       };
     };

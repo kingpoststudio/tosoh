@@ -298,7 +298,7 @@ export type CCTForeignId = {
 export type CCTComparison = {
   category: CCTOption;
   clinician: string;
-  competitor_instrument_id: CCTForeignId[];
+  competitor_instrument_name: CCTForeignId[];
   hs_child_table_id: number;
   hs_created_at: number;
   hs_created_by_user_id: number;
@@ -314,7 +314,7 @@ export type CCTComparison = {
   lab_technician: string;
   procurement_manager: string;
   status: CCTOption;
-  tosoh_instrument_id: CCTForeignId[];
+  tosoh_instrument_name: CCTForeignId[];
 };
 
 export type CCTComparisons = {
@@ -326,4 +326,5 @@ export type CCTComparisons = {
   totalCount: number;
 };
 
+export type CCTComparisonColumnId = keyof CCTComparison;
 export type CCTComparisonFilterWithOptions = Record<CCTComparisonColumnId, CCTOption[]>;

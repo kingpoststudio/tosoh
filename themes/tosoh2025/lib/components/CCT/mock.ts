@@ -110,7 +110,7 @@ export const mockCCT = {
           '<span>To keep his different stakeholders (Clinicians, Laboratory employees and Procurement Manager) satisfied with the laboratory production and running costs.<br>To work with reliable and robust instruments that make the daily life of the laboratory staff smooth and easy.<br>To provide accurate and fast results for the Clinicians allowing them to take care of the patients efficiently.<br>To pass accreditation and EQA schemes.</span>',
         procurement_managers_benefits:
           '<span>To keep his different stakeholders (Clinicians, Laboratory employees and Procurement Manager) satisfied with the laboratory production and running costs.<br>To work with reliable and robust instruments that make the daily life of the laboratory staff smooth and easy.<br>To provide accurate and fast results for the Clinicians allowing them to take care of the patients efficiently.<br>To pass accreditation and EQA schemes.</span>',
-        product_name: 'BIORAD 100',
+        product_name: 'D 100',
       },
       {
         clinicians:
@@ -202,7 +202,7 @@ export const mockCCT = {
           {
             id: 277209724134,
             isPublished: true,
-            name: 'BIORAD 100',
+            name: 'D 100',
             type: 'foreignid',
           },
         ],
@@ -265,7 +265,7 @@ export const mockCCT = {
           {
             id: 277209724134,
             isPublished: true,
-            name: 'BIORAD 100',
+            name: 'D 100',
             type: 'foreignid',
           },
         ],
@@ -328,7 +328,7 @@ export const mockCCT = {
           {
             id: 277209724134,
             isPublished: true,
-            name: 'BIORAD 100',
+            name: 'D 100',
             type: 'foreignid',
           },
         ],

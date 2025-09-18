@@ -9,31 +9,24 @@
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Checkbox from '../Checkbox/Checkbox.svelte';
   import Select from '../Select/Select.svelte';
-  import type {
-    CCTComparison,
-    CCTComparisons,
-    CCTInstrument,
-    FilterWithOptions,
-  } from '../../../types/hubdb';
-  import type { ColumnId } from '../../../types/hubdb';
+  import type { CCTComparisons, CCTComparisonColumnId } from '../../../types/hubdb';
   import { onMount } from 'svelte';
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
+  import { addCompanyNameToCompetitorInstrumentName } from '../../utils/cctFilterUtils';
+  import { updateUrl } from '../../utils/urlUtils';
 
   const allInstruments = window?.Tosoh?.CCT?.allInstruments;
   const allComparisons = window?.Tosoh?.CCT?.allComparisons;
-  const filters = ['tosoh_instrument_name', 'competitor_instrument_name'];
-  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
-
-  // Create a function which unifies the data from allComparisons into allInstruments
-
-  const onChange = (event: Event) => {};
+  const filters: CCTComparisonColumnId[] = ['tosoh_instrument_name', 'competitor_instrument_name'];
+  let allAvailableFiltersWithTheirOptions: any = $state({});
+  const onChange = (event: Event) => {
+    // onReset();
+    // updateUrl(event);
+  };
 
   const onReset = () => {};
 
-  const populateIdWithLabel = (id: string) => {
-    //Find all the instruments in allInstruments that have the id
-    //Take the name of the instrument
-  };
+  //name of competitor_instrument_name should have the name of the company at the front.
 
   const onSubmit = (event: Event) => {
     event.preventDefault();
@@ -50,18 +43,19 @@
 
   const parseOptions = () => {
     if (allComparisons?.objects?.length > 0) {
-      filterValuesForSelectsBasedOnUrl(allComparisons?.objects);
+      filterValuesForSelectsBasedOnUrl(allComparisons);
     }
   };
 
-  const filterValuesForSelectsBasedOnUrl = (allRows: any) => {
-    if (!allRows || allRows.length === 0) {
+  const filterValuesForSelectsBasedOnUrl = (allRows: CCTComparisons) => {
+    if (!allRows?.objects || allRows.objects.length === 0) {
       return;
     }
 
-    const filteredRows = filterRows(allRows, filters as ColumnId[]);
+    // Add company names to competitor instrument names
+    const processedRows = addCompanyNameToCompetitorInstrumentName(allRows, allInstruments);
+    const filteredRows = filterRows(processedRows?.objects as any, filters as any[]);
 
-    console.log(filteredRows, 'filteredRows');
     allAvailableFiltersWithTheirOptions = parseFilterOptions(filteredRows);
   };
 
@@ -79,9 +73,7 @@
   <FilterForm trigger="change" {onChange} {onReset}>
     <div class="mt-base">
       <Select
-        options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-          filters[0] as ColumnId
-        ] as any[]}
+        options={allAvailableFiltersWithTheirOptions[filters[0]] as any[]}
         name={filters[0]}
         disabled={false}
         label="Tosoh Instrument"
@@ -89,9 +81,7 @@
     </div>
     <div class="mt-base">
       <Select
-        options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-          filters[1] as ColumnId
-        ] as any[]}
+        options={allAvailableFiltersWithTheirOptions[filters[1]] as any[]}
         name={filters[1]}
         label="Competitor Instrument"
         disabled={false}
