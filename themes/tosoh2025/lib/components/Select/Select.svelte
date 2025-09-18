@@ -36,7 +36,7 @@
   <div class={`gap-sm flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     <div class="gap-sm flex items-center">
       {#if displayLabel}
-        <label for={name} class=" text-xl font-bold">{setupFilterTitle(name)}</label>
+        <label for={name} class=" text-lg font-bold">{setupFilterTitle(name)}</label>
       {/if}
       {#if activeFilter && !disableReset}
         <button
@@ -75,7 +75,7 @@
         {#if activeOptions?.length > 0}
           {#each activeOptions as option}
             <option value={option.name} class="text-default" selected={option.name === activeFilter}
-              >{option.label}</option
+              >{option.label || option.name}</option
             >
           {/each}
         {/if}

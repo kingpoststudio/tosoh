@@ -39,6 +39,10 @@ declare global {
         };
         filterByTopic: string;
       };
+      CCT: {
+        allComparisons: CCTComparisonForFilter;
+        allInstruments: CCTInstruments;
+      };
     };
     hsVideoApi?: any;
   }

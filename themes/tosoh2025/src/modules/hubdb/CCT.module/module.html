@@ -3,57 +3,31 @@
 {% set tosoh_instrument_id = request.query_dict.tosoh_instrument_id  or "" %}
 {% set competitor_instrument_id = request.query_dict.competitor_instrument_id  or "" %}
 
-{# Comparison Table Rows Query #}
-{% set comparison_db_query = { query:  '' } %}
-
-{% if tosoh_instrument_id %}
-  {% set tmp = comparison_db_query.update({ query: '&tosoh_instrument_id__eq=' ~ tosoh_instrument_id }) %}
-{% endif %}
-
-{% if competitor_instrument_id %}
-  {% set tmp = comparison_db_query.update({ query: comparison_db_query.query ~ '&competitor_instrument_id__eq=' ~ competitor_instrument_id }) %}
-{% endif %}
-
-{% set comparison_rows = hubdb_table_rows("cct_comparison", comparison_db_query.query) %}
-
-{# Instrument Table Rows Query #}
-{% set tosoh_rows_query = { query: '&company__eq=Tosoh&deactivate__eq=false' } %}
-{% set competitor_rows_query = { query: '&company__ne=Tosoh&deactivate__eq=false' } %}
-
-{% if tosoh_instrument_id %}
-  {% set tmp = tosoh_rows_query.update({ query: '&hs_id=' ~ tosoh_instrument_id }) %}
-{% endif %}
-
-{% if competitor_instrument_id %}
-  {% set tmp = competitor_rows_query.update({ query: '&hs_id=' ~ competitor_instrument_id }) %}
-{% endif %}
 
 
-{# Product Line #}
-{% set product_line = request.query_dict.product_line  or "" %}
-  {% set product_line_query = { query: '' } %}
-  {% if product_line %}  
-    {% set tmp = tosoh_rows_query.update({ query: tosoh_rows_query.query ~ '&product_line__eq=' ~ product_line }) %}
-  {% endif %}
+  {% set allInstruments = hubdb_table_rows("cct_instruments") %}
+  {% set all_comparisons = hubdb_table_rows("cct_comparison") %}
   
+  {# 2. We fetch all the rows with the ids from the comparison table #}
 
-{# fetch rows #}
-{% set tosoh_rows = hubdb_table_rows("cct_instruments", tosoh_rows_query.query) %}
-{% set competitor_rows = hubdb_table_rows("cct_instruments", competitor_rows_query.query) %}
-  
+  {% for row in all_comparisons %}
+    the name for row {{ row.hs_id }} is {{ row.product_name }}
+    {% for foreign_row in row.competitor_instrument_id %}
+      the name for foreign row {{ foreign_row.hs_id }} is {{ foreign_row.product_name }}
+    {% endfor %}
+     {% for foreign_row in row.tosoh_instrument_id %}
+      the name for foreign row {{ foreign_row.hs_id }} is {{ foreign_row.product_name }}
+    {% endfor %}
 
-{{tosoh_rows|tojson}}
-{{competitor_rows|tojson}}
-
-
+    <br/>
+  {% endfor %}
 
 {% require_js position="head" %}
   <script>
-    const productLineRows = {{ product_line_rows|tojson }};
-    const tosohRows = {{ tosoh_rows|tojson }};
-    const competitorRows = {{ competitor_rows|tojson }};
+  const allInstruments = {{ all_instruments|tojson }};
+  const allComparisons = {{ all_comparisons|tojson }};
 
-    window.Tosoh.CCT = { productLineRows, tosohRows, competitorRows};
+  window.Tosoh.CCT = { allInstruments, allComparisons};
   </script>
 {% end_require_js %}
 
