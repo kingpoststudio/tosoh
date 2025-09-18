@@ -77,15 +77,26 @@
     <p class="font-sans-narrow text-2xl font-semibold">Select</p>
   </div>
   <FilterForm trigger="change" {onChange} {onReset}>
-    {#each filters as columnId}
-      <div class="mt-base">
-        <Select
-          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
-          name={columnId}
-          disabled={false}
-        />
-      </div>
-    {/each}
+    <div class="mt-base">
+      <Select
+        options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
+          filters[0] as ColumnId
+        ] as any[]}
+        name={filters[0]}
+        disabled={false}
+        label="Tosoh Instrument"
+      />
+    </div>
+    <div class="mt-base">
+      <Select
+        options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
+          filters[1] as ColumnId
+        ] as any[]}
+        name={filters[1]}
+        label="Competitor Instrument"
+        disabled={false}
+      />
+    </div>
   </FilterForm>
 
   <!-- <FilterForm trigger="submit" {onSubmit} {onReset}>

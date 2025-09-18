@@ -9,6 +9,7 @@
     labelPosition = 'top',
     placeholder,
     disableReset,
+    label,
   }: {
     options: any[];
     name: string;
@@ -17,6 +18,7 @@
     labelPosition?: 'top' | 'left';
     placeholder?: string;
     disableReset?: boolean;
+    label?: string;
   } = $props();
   let activeOptions = $derived(options);
 
@@ -36,7 +38,8 @@
   <div class={`gap-sm flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     <div class="gap-sm flex items-center">
       {#if displayLabel}
-        <label for={name} class=" text-lg font-bold">{setupFilterTitle(name)}</label>
+        <label for={name} class=" text-lg font-bold">{label ? label : setupFilterTitle(name)}</label
+        >
       {/if}
       {#if activeFilter && !disableReset}
         <button
