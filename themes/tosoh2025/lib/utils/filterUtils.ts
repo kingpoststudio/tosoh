@@ -65,7 +65,7 @@ const getAllAvailalbeFiltersFromAllRows = (rows: SupportPortalRowForFilter[]) =>
   let allFilters: Record<ColumnId, SupportPortalRowForFilter['values'][]> | {} = {};
 
   rows.forEach((row) => {
-    const rowValues = row?.values;
+    const rowValues = row?.values || row;
 
     Object.keys(rowValues)?.forEach((columnName) => {
       let columnId = columnName as ColumnId;
@@ -86,7 +86,7 @@ const matchValuesWithColumnNames = (
   const allFilters = { ...allEmptyAvailableFilters };
 
   rows.forEach((row) => {
-    const rowValues = row?.values;
+    const rowValues = row?.values || row;
 
     Object.keys(rowValues)?.map((colummnName) => {
       const columnId = colummnName as ColumnId;
@@ -193,7 +193,8 @@ export const filterRows = (allRows: SupportPortalRowForFilter[], filtersFromFiel
   const filteredRows = allRows.filter((row: SupportPortalRowForFilter) => {
     let areActiveFiltersMatchingRow: Matches = {};
 
-    const rowValues = row.values;
+    const rowValues = row?.values || row;
+
     Object.keys(rowValues)?.map((columnKey: any) => {
       let columnId = columnKey as keyof SupportPortalRowForFilter['values'];
 
