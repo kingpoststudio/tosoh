@@ -23,11 +23,11 @@
 {% end_require_js %}
 
 
-<div class="gap-base max-w-max-page m-auto p-md md:pl-2xl md:pr-2xl mt-[6rem] flex flex-col">
+<div class="gap-md max-w-max-page m-auto p-md md:pl-2xl md:pr-2xl mt-[6rem] flex flex-col">
   {% if title || description %}
-    <div class="gap-md flex flex-col">
+    <div class="gap-base flex flex-col">
       {% if title %}
-        <h2 class="font-bold">{{ title }}</h2>
+        <h3 class="font-bold">{{ title }}</h3>
       {% endif %}
 
       {% if description %}
@@ -40,7 +40,7 @@
   <tosoh-cct-filters></tosoh-cct-filters>
   <div class="border-border flex w-full flex-col rounded-2xl border">
     <div class="p-md gap-sm flex w-full items-center justify-center">
-      <h6 class="font-semibold">TOSOH : {{tosoh_instrument_name}} <span class="text-imperial-red font-semibold">versus</span> {{competitor_instrument_name}}</h6>
+      <h6 class="font-semibold">TOSOH : {{tosoh_instrument_name}} <span class="text-imperial-red font-semibold">versus</span> {{competitor_instrument.company.label}} : {{competitor_instrument.product_name}}</h6>
     </div>
     <div>
       <tosoh-scroll-x scrollbarHeight="1px">
