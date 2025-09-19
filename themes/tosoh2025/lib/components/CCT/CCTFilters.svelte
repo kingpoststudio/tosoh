@@ -21,7 +21,7 @@
   let allAvailableFiltersWithTheirOptions: any = $state({});
   const onChange = (event: Event) => {
     // onReset();
-    // updateUrl(event);
+    updateUrl(event);
   };
 
   const onReset = () => {};
