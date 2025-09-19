@@ -25,7 +25,7 @@
       const targetId = event.target.value;
 
       if (tableFilterManager) {
-        onReset();
+        cctSearchManager.clearHighlights();
         (document.querySelector('input[name="search_term"]') as HTMLInputElement).value = '';
         tableFilterManager.filterById(targetId || null);
       }
@@ -34,6 +34,7 @@
 
   const onReset = () => {
     cctSearchManager.clearHighlights();
+    (document.querySelector('select[name="category"]') as HTMLSelectElement).value = 'none';
 
     matchInfo = { current: 0, total: 0 };
 
@@ -80,7 +81,8 @@
         navigateToNext();
       }
     } else if (event.key === 'Escape') {
-      onReset();
+      cctSearchManager.clearHighlights();
+      matchInfo = { current: 0, total: 0 };
     }
   };
 
