@@ -12,11 +12,11 @@
   </head>
 
   <body class="min-h-[100vh] bg-gray-50">
-    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
+    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-[6rem] flex flex-col">
       <!-- Header Section -->
       <div class="mb-lg">
         <button
-          class="plain text-nickel mb-md flex items-center transition-colors hover:text-gray-800"
+          class="plain text-nickel! mb-md flex items-center transition-colors hover:text-gray-800"
         >
           <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
@@ -29,276 +29,213 @@
           Return to main screen
         </button>
 
-        <h1 class="mb-sm text-3xl font-bold text-gray-900">
+        <h3 class="mb-sm text-3xl font-bold text-gray-900">
           Details for TOSOH G11 versus BIORAD D100
-        </h1>
+        </h3>
         <p class="text-gray-600">
           Your centralized hub for technical assistance, product resources, and expert guidance
           across Tosoh Comparison Tool.
         </p>
       </div>
 
-      <!-- Divider -->
-      <div class="mb-lg border-t border-gray-200"></div>
-
-      <!-- Search and Filter Section -->
-      <div class="mb-lg p-md rounded-lg border border-gray-200 bg-white shadow-sm">
-        <div class="gap-md flex items-center justify-between">
-          <div class="gap-md flex flex-1 items-center">
-            <div class="relative">
-              <select
-                class="px-md py-sm pr-lg appearance-none rounded-md border border-gray-300 bg-white text-gray-700 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:outline-none"
-              >
-                <option>Categories</option>
-                <option>Basic Specifications</option>
-                <option>Application Range</option>
-                <option>Measurement Modes</option>
-                <option>Throughput Capacity</option>
-                <option>Sample Range</option>
-                <option>Variant Mode Results</option>
-                <option>Standard Mode Results</option>
-              </select>
-              <svg
-                class="right-sm h-sm pointer-events-none absolute top-1/2 w-sm -translate-y-1/2 transform text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 9l-7 7-7-7"
-                ></path>
-              </svg>
-            </div>
-
-            <div class="relative max-w-md flex-1">
-              <input
-                type="text"
-                placeholder="Search here..."
-                class="py-sm pr-md pl-xl w-full rounded-md border border-gray-300 focus:border-red-500 focus:ring-2 focus:ring-red-500 focus:outline-none"
-              />
-              <svg
-                class="left-base h-sm absolute top-1/2 w-sm -translate-y-1/2 transform text-gray-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </div>
-          </div>
-
-          <button
-            class="px-lg py-sm rounded-md bg-red-600 font-medium text-white transition-colors hover:bg-red-700"
-          >
-            Reset
-          </button>
-        </div>
-      </div>
-
       <!-- Comparison Table -->
-      <div class="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
+      <div class="border-border overflow-hidden rounded-lg border bg-white shadow-sm">
+        <tosoh-cct-details-filters></tosoh-cct-details-filters>
+
         <div class="overflow-x-auto">
           <table class="w-full">
-            <thead class="border-b border-gray-200 bg-gray-50">
-              <tr class="divide-x divide-gray-200">
-                <th class="px-lg py-md text-left text-sm font-semibold text-gray-900">Category</th>
-                <th class="px-lg py-md text-left text-sm font-semibold text-gray-900">Status</th>
-                <th class="px-lg py-md text-left text-sm font-semibold text-gray-900">
+            <thead class="border-border border-t border-b bg-white">
+              <tr class="divide-border divide-x">
+                <th class="px-md py-sm text-left text-sm font-semibold text-gray-900">Category</th>
+                <th class="px-md py-sm text-left text-sm font-semibold text-gray-900">Status</th>
+                <th class="px-md py-sm text-left text-sm font-semibold text-gray-900">
                   Lab Manager
                 </th>
-                <th class="px-lg py-md text-left text-sm font-semibold text-gray-900">
+                <th class="px-md py-sm text-left text-sm font-semibold text-gray-900">
                   Lab Technician
                 </th>
-                <th class="px-lg py-md text-left text-sm font-semibold text-gray-900">
+                <th class="px-md py-sm text-left text-sm font-semibold text-gray-900">
                   Procurement Manager
                 </th>
-                <th class="px-lg py-md text-left text-sm font-semibold text-gray-900">Clinician</th>
+                <th class="px-md py-sm text-left text-sm font-semibold text-gray-900">Clinician</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-border divide-y">
               <!-- Basic Specifications Row -->
-              <tr class="divide-x divide-gray-200 bg-green-50">
-                <td class="px-lg py-md text-sm font-medium text-gray-900">
+              <tr class="divide-border divide-x bg-green-50">
+                <td class="px-md py-sm text-sm font-medium text-gray-900">
                   Basic<br />Specifications
                 </td>
-                <td class="px-lg py-md">
+                <td class="px-md py-sm">
                   <span
                     class="px-base py-xs inline-flex items-center rounded-full bg-green-100 text-xs font-medium text-green-800"
                   >
                     Advantage
                   </span>
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
               </tr>
 
               <!-- Application Range Row -->
-              <tr class="divide-x divide-gray-200 bg-green-50">
-                <td class="px-lg py-md text-sm font-medium text-gray-900">
+              <tr class="divide-border divide-x bg-green-50">
+                <td class="px-md py-sm text-sm font-medium text-gray-900">
                   Application<br />Range
                 </td>
-                <td class="px-lg py-md">
+                <td class="px-md py-sm">
                   <span
                     class="px-base py-xs inline-flex items-center rounded-full bg-green-100 text-xs font-medium text-green-800"
                   >
                     Advantage
                   </span>
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
               </tr>
 
               <!-- Measurement Modes Row -->
-              <tr class="divide-x divide-gray-200 bg-white">
-                <td class="px-lg py-md text-sm font-medium text-gray-900">
+              <tr class="divide-border bg-ghost-white divide-x">
+                <td class="px-md py-sm text-sm font-medium text-gray-900">
                   Measurement<br />Modes
                 </td>
-                <td class="px-lg py-md">
+                <td class="px-md py-sm">
                   <span
-                    class="px-base py-xs inline-flex items-center rounded-full bg-gray-100 text-xs font-medium text-gray-800"
+                    class="px-base py-xs inline-flex items-center rounded-full bg-gray-500 text-xs font-medium text-white"
                   >
                     Neutral
                   </span>
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Smooth and fast transition between HbA1c and β-Thalassemia mode
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Smooth and fast transition between HbA1c and β-Thalassemia mode. Same day on the
                   same instrument
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">Fast and efficient service</td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">Fast and efficient service</td>
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
               </tr>
 
               <!-- Throughput Capacity Row -->
-              <tr class="divide-x divide-gray-200 bg-red-50">
-                <td class="px-lg py-md text-sm font-medium text-gray-900">
+              <tr class="divide-border divide-x bg-red-50">
+                <td class="px-md py-sm text-sm font-medium text-gray-900">
                   Throughput<br />Capacity
                 </td>
-                <td class="px-lg py-md">
+                <td class="px-md py-sm">
                   <span
                     class="px-base py-xs inline-flex items-center rounded-full bg-red-100 text-xs font-medium text-red-800"
                   >
                     Disadvantage
                   </span>
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
               </tr>
 
               <!-- Sample Range Row -->
-              <tr class="divide-x divide-gray-200 bg-red-50">
-                <td class="px-lg py-md text-sm font-medium text-gray-900">Sample Range</td>
-                <td class="px-lg py-md">
+              <tr class="divide-border divide-x bg-red-50">
+                <td class="px-md py-sm text-sm font-medium text-gray-900">Sample Range</td>
+                <td class="px-md py-sm">
                   <span
                     class="px-base py-xs inline-flex items-center rounded-full bg-red-100 text-xs font-medium text-red-800"
                   >
                     Disadvantage
                   </span>
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
-                <td class="px-lg py-md text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
+                <td class="px-md py-sm text-sm text-gray-700"></td>
               </tr>
 
               <!-- Variant Mode Results Row -->
-              <tr class="divide-x divide-gray-200 bg-green-50">
-                <td class="px-lg py-md text-sm font-medium text-gray-900">
+              <tr class="divide-border divide-x bg-green-50">
+                <td class="px-md py-sm text-sm font-medium text-gray-900">
                   Variant Mode<br />Results
                 </td>
-                <td class="px-lg py-md">
+                <td class="px-md py-sm">
                   <span
                     class="px-base py-xs inline-flex items-center rounded-full bg-green-100 text-xs font-medium text-green-800"
                   >
                     Advantage
                   </span>
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Tosoh's G11 Variant mode produces 60 results per hour. Standard mode produces 120
                   results per hour.
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Tosoh's G11 Variant mode produces 60 results per hour. Standard mode produces 120
                   results per hour.
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Tosoh's G11 Variant mode produces 60 results per hour. Standard mode produces 120
                   results per hour.
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Time and cost-efficient use of instrument; low applications can be run on the same
                   instrument
                 </td>
               </tr>
 
               <!-- Standard Mode Results Row -->
-              <tr class="divide-x divide-gray-200 bg-green-50">
-                <td class="px-lg py-md text-sm font-medium text-gray-900">
+              <tr class="divide-border divide-x bg-green-50">
+                <td class="px-md py-sm text-sm font-medium text-gray-900">
                   Standard<br />Mode Results
                 </td>
-                <td class="px-lg py-md">
+                <td class="px-md py-sm">
                   <span
                     class="px-base py-xs inline-flex items-center rounded-full bg-green-100 text-xs font-medium text-green-800"
                   >
                     Advantage
                   </span>
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Tosoh's G11 Variant mode produces 60 results per hour. Standard mode produces 120
                   results per hour.
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Tosoh's G11 Variant mode produces 60 results per hour. Standard mode produces 120
                   results per hour.
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Tosoh's G11 Variant mode produces 60 results per hour. Standard mode produces 120
                   results per hour.
                 </td>
-                <td class="px-lg py-md text-sm text-gray-700">
+                <td class="px-md py-sm text-sm text-gray-700">
                   Tosoh's G11 Variant mode produces 60 results per hour. Standard mode produces 120
                   results per hour.
                 </td>

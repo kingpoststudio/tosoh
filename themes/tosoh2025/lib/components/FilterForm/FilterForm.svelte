@@ -16,6 +16,7 @@
     onReset,
     onClickOutside,
     children,
+    customClasses,
   }: {
     trigger: triggerType;
     onSubmit?: (e: Event) => void;
@@ -23,6 +24,7 @@
     onReset?: (e: Event) => void;
     onClickOutside?: (e?: Event) => void;
     children: Snippet;
+    customClasses?: string;
   } = $props();
 
   let formElement: HTMLFormElement | null = $state(null);
@@ -75,6 +77,6 @@
   });
 </script>
 
-<form bind:this={formElement}>
+<form bind:this={formElement} class={customClasses}>
   {@render children()}
 </form>
