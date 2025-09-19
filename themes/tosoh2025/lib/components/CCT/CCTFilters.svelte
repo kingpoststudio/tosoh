@@ -21,24 +21,13 @@
   let allAvailableFiltersWithTheirOptions: any = $state({});
   const onChange = (event: Event) => {
     // onReset();
-    updateUrl(event);
+    // updateUrl(event);
   };
 
   const onReset = () => {};
 
-  //name of competitor_instrument_name should have the name of the company at the front.
-
-  const onSubmit = (event: Event) => {
-    event.preventDefault();
-    console.log('onSubmit');
-  };
-
   const onDetails = () => {
     console.log('onDetails');
-  };
-
-  const submitSuggestion = () => {
-    console.log('submitSuggestion');
   };
 
   const parseOptions = () => {

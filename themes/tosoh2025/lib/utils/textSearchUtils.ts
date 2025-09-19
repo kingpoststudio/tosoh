@@ -100,12 +100,20 @@ export class TextSearchManager {
   private findAndHighlightMatches(container: Element): void {
     const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT, {
       acceptNode: (node) => {
-        // Skip if parent is already a highlight
         if (
           node.parentElement?.classList.contains('search-highlight') ||
           node.parentElement?.classList.contains('search-highlight-current')
         ) {
           return NodeFilter.FILTER_REJECT;
+        }
+
+        // Skip if any ancestor element has the 'hidden' class
+        let currentElement = node.parentElement;
+        while (currentElement && currentElement !== container) {
+          if (currentElement.classList.contains('hidden!')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          currentElement = currentElement.parentElement;
         }
 
         // Only process text nodes with content

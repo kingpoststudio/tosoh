@@ -11,23 +11,36 @@
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Select from '../Select/Select.svelte';
   import { cctSearchManager } from '../../utils/textSearchUtils';
+  import { TableFilterManager } from '../../utils/tableFilterUtils';
 
   let searchValue = $state('');
   let matchInfo = $state({ current: 0, total: 0 });
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+  let tableFilterManager: TableFilterManager | null = null;
 
   const onChange = (event: Event) => {
-    // onReset();
-
     if (event.target && event.target instanceof HTMLInputElement) {
       handleSearchInput(event);
+    }
+    if (event.target && event.target instanceof HTMLSelectElement) {
+      const targetId = event.target.value;
+
+      if (tableFilterManager) {
+        tableFilterManager.filterById(targetId || null);
+      }
     }
   };
 
   const onReset = () => {
     searchValue = '';
     cctSearchManager.clearHighlights();
+
     matchInfo = { current: 0, total: 0 };
+
+    if (tableFilterManager) {
+      console.log('onReset');
+      tableFilterManager.clearFilters();
+    }
   };
 
   const handleSearchInput = (event: Event) => {
@@ -74,6 +87,11 @@
   };
 
   onMount(() => {
+    const table = document.querySelector('table') as HTMLTableElement;
+    if (table) {
+      tableFilterManager = new TableFilterManager(table);
+    }
+
     // Add keyboard shortcuts for navigation
     const handleGlobalKeyDown = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key === 'f' && searchValue) {
@@ -181,6 +199,6 @@
         </div>
       {/if}
     </div>
-    <button type="reset" data-type="reset" class="w-full md:w-fit"> Reset Filters </button>
+    <button data-type="reset" class="w-full md:w-fit"> Reset Filters </button>
   </div>
 </FilterForm>

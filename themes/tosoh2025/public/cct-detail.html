@@ -15,7 +15,7 @@
   <body class="min-h-[100vh] bg-gray-50">
     <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-[6rem] flex flex-col">
       <!-- Header Section -->
-      <div class="mb-lg">
+      <div>
         <button
           class="plain text-nickel! mb-md flex items-center transition-colors hover:text-gray-800"
         >
@@ -57,7 +57,7 @@
             </thead>
             <tbody class="divide-border divide-y">
               <!-- Basic Specifications Row -->
-              <tr class="table-row bg-green-50">
+              <tr class="table-row bg-green-50" id="Basic Specifications">
                 <td class="table-cell">Basic<br />Specifications</td>
                 <td class="table-cell">
                   <span
@@ -84,9 +84,8 @@
                 </td>
               </tr>
 
-              <!-- Application Range Row -->
-              <tr class="table-row bg-green-50">
-                <td class="table-header-cell">Application<br />Range</td>
+              <tr class="table-row bg-yellow-50" id="Bthal">
+                <td class="table-header-cell">Bthal</td>
                 <td class="table-cell">
                   <span
                     class="px-base py-xs inline-flex items-center rounded-lg bg-green-100 text-xs font-medium text-green-800"
@@ -111,9 +110,8 @@
                   instrument
                 </td>
               </tr>
-
               <!-- Measurement Modes Row -->
-              <tr class="bg-ghost-white table-row">
+              <tr class="bg-ghost-white table-row" id="Measurement Modes">
                 <td class="table-header-cell">Measurement<br />Modes</td>
                 <td class="table-cell">
                   <span
@@ -137,7 +135,7 @@
               </tr>
 
               <!-- Throughput Capacity Row -->
-              <tr class="table-row bg-red-100">
+              <tr class="table-row bg-red-100" id="Capacity">
                 <td class="table-header-cell">Throughput<br />Capacity</td>
                 <td class="table-cell">
                   <span
@@ -153,7 +151,7 @@
               </tr>
 
               <!-- Sample Range Row -->
-              <tr class="table-row bg-[#FFE2E2]">
+              <tr class="table-row bg-[#FFE2E2]" id="Others">
                 <td class="table-header-cell">Sample Range</td>
                 <td class="table-cell">
                   <span
@@ -169,7 +167,7 @@
               </tr>
 
               <!-- Variant Mode Results Row -->
-              <tr class="table-row bg-green-50">
+              <tr class="table-row bg-green-50" id="HbA1c">
                 <td class="table-header-cell">Variant Mode<br />Results</td>
                 <td class="table-cell">
                   <span
@@ -197,7 +195,7 @@
               </tr>
 
               <!-- Standard Mode Results Row -->
-              <tr class="table-row bg-green-50">
+              <tr class="table-row bg-green-50" id="Method">
                 <td class="table-header-cell">Standard<br />Mode Results</td>
                 <td class="table-cell">
                   <span
