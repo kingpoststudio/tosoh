@@ -17,6 +17,7 @@
     onClickOutside,
     children,
     customClasses,
+    updateUrl = true,
   }: {
     trigger: triggerType;
     onSubmit?: (e: Event) => void;
@@ -25,6 +26,7 @@
     onClickOutside?: (e?: Event) => void;
     children: Snippet;
     customClasses?: string;
+    updateUrl?: boolean;
   } = $props();
 
   let formElement: HTMLFormElement | null = $state(null);
@@ -49,6 +51,7 @@
           }
         },
         triggerType: trigger,
+        updateUrl: updateUrl,
       });
     }
   };

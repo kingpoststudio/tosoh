@@ -13,7 +13,6 @@
   import { onMount } from 'svelte';
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
   import { addCompanyNameToCompetitorInstrumentName } from '../../utils/cctFilterUtils';
-  import { updateUrl } from '../../utils/urlUtils';
 
   const allInstruments = window?.Tosoh?.CCT?.allInstruments;
   const allComparisons = window?.Tosoh?.CCT?.allComparisons;

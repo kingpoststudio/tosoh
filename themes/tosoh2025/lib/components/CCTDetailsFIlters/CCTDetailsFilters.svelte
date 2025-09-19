@@ -25,6 +25,8 @@
       const targetId = event.target.value;
 
       if (tableFilterManager) {
+        onReset();
+        (document.querySelector('input[name="search_term"]') as HTMLInputElement).value = '';
         tableFilterManager.filterById(targetId || null);
       }
     }
@@ -128,7 +130,7 @@
   </svg>
 {/snippet}
 
-<FilterForm trigger="change" {onChange} {onReset} customClasses="w-full">
+<FilterForm trigger="change" {onChange} {onReset} customClasses="w-full" updateUrl={false}>
   <div
     transition:fade={{ duration: 100 }}
     class="gap-base p-sm flex w-full flex-col items-center justify-end md:flex-row"
@@ -195,6 +197,6 @@
         disabled={false}
       />
     </div>
-    <button data-type="reset" class="w-full md:w-fit"> Reset Filters </button>
+    <button data-type="reset" class="w-full md:w-fit"> Reset </button>
   </div>
 </FilterForm>
