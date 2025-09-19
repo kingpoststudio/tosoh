@@ -59,34 +59,18 @@
 
   button {
     all: unset;
-    position: relative;
+
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-width: 8rem;
-    max-width: 16rem;
-    padding: var(--space);
-    font-weight: 450;
-    cursor: pointer;
-    transition: text-shadow 0.2s ease-in-out;
-
-    &:after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 0.2rem;
-      background: transparent;
-      transition: background 0.2s ease-in-out;
-    }
+    padding: var(--spacing-sm);
+    text-align: center;
 
     &.active {
       font-weight: 600;
-      &:after {
-        background: var(--color-deep-blue);
-      }
+      background: var(--color-ghost-white);
+      color: var(--color-imperial-red);
     }
   }
 

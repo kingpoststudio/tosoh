@@ -88,6 +88,7 @@
       />
     </div>
   </FilterForm>
+  <button type="button" onclick={onDetails} class="mt-md w-full hover:bg-red-50"> Details</button>
 
   <!-- <FilterForm trigger="submit" {onSubmit} {onReset}>
     <div class="mt-base">
