@@ -2,7 +2,84 @@
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name  or "" %}
 
 {% set all_instruments = hubdb_table_rows("cct_instruments") %}
-{% set all_comparisons = hubdb_table_rows("cct_comparison") %}
 
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %}
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
+
+{% set table_columns = [['category',"Category"], ['status', "Status"], ['lab_manager', "Lab Manager"], ['lab_technician', "Lab Technician"], ['procurement_manager', "Procurement Manager"], ['clinician', "Clinician"]] %}
+
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-[6rem] flex flex-col">
+  {% if tosoh_instrument_name and competitor_instrument_name %}
+    {% set comparison_rows = hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name) %}
+
+      {% require_js position="head" %}
+        <script>
+        const comparisonRows = {{ comparison_rows|tojson }};
+        window.Tosoh.CCTDetails = { comparisonRows};
+        </script>
+      {% end_require_js %}
+
+
+
+
+      <div>
+      <a
+        href="/cct?tosoh_instrument_name={{ tosoh_instrument_name }}&competitor_instrument_name={{ competitor_instrument_name }}"
+        class="button plain text-nickel! mb-md flex items-center transition-colors hover:text-gray-800">
+        <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Return to main screen
+      </a>
+
+      <h3 class="mb-sm text-3xl font-bold text-gray-900">
+        Details for {{ tosoh_instrument.product_name }} versus {{ competitor_instrument.product_name }}
+      </h3>
+      <div class="text-gray-600">{{ module.description }}</div>
+    </div>
+
+    <div class="border-border overflow-hidden rounded-lg border bg-white shadow-sm">
+      <tosoh-cct-details-filters></tosoh-cct-details-filters>
+
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="border-border border-t border-b bg-white">
+            <tr class="divide-border divide-x">
+              {% for column in table_columns %}
+                <th class="table-head">{{ column[1] }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody class="divide-border divide-y">
+            {% for row in comparison_rows %}
+              {% set bg_color = row.status.name == 'Advantage' ? 'bg-green-50' : row.status.name == 'Disadvantage' ? 'bg-red-100' : 'bg-ghost-white' %}
+              {% set status_badge_color = row.status.name == 'Advantage' ? 'bg-[#00C950]' : row.status.name == 'Disadvantage' ? 'bg-imperial-red' : 'bg-[#6A7282]' %}
+
+              <tr class="{{ bg_color }} table-row" id="{{ row.category.name }}">
+                <td class="table-cell">{{ row.category.label }}</td>
+                <td class="table-cell">
+                  <span
+                    class="px-base py-xs {{ status_badge_color }} inline-flex items-center rounded-lg text-xs font-medium text-white">
+                    {{ row.status.name }}
+                  </span>
+                </td>
+                <td class="table-cell">{{ row.lab_manager }}</td>
+                <td class="table-cell">{{ row.lab_technician }}</td>
+                <td class="table-cell">{{ row.procurement_manager }}</td>
+                <td class="table-cell">{{ row.clinician }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% else %}
+    <a href="/cct" class="button plain text-nickel! flex w-fit! items-center transition-colors hover:text-gray-800">
+      <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Return to main screen
+    </a>
+    <h3 class="mb-sm font-bold">No comparison data available - missing instrument parameters</h3>
+  {% endif %}
+</div>

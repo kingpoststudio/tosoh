@@ -1,4 +1,4 @@
-import type { CCTComparisons, CCTInstruments } from './hubdb';
+import type { CCTComparisons, CCTInstruments, CCTComparison } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
 declare global {
@@ -43,6 +43,9 @@ declare global {
       CCT: {
         allComparisons: CCTComparisons;
         allInstruments: CCTInstruments;
+      };
+      CCTDetails: {
+        comparisonRows: CCTComparisons;
       };
     };
     hsVideoApi?: any;

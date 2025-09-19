@@ -7,12 +7,12 @@
 
 <script lang="ts">
   import FilterForm from '../FilterForm/FilterForm.svelte';
-  import Checkbox from '../Checkbox/Checkbox.svelte';
   import Select from '../Select/Select.svelte';
   import type { CCTComparisons, CCTComparisonColumnId } from '../../../types/hubdb';
   import { onMount } from 'svelte';
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
   import { addCompanyNameToCompetitorInstrumentName } from '../../utils/cctFilterUtils';
+  import { updateUrl } from '../../utils/urlUtils';
 
   const allInstruments = window?.Tosoh?.CCT?.allInstruments;
   const allComparisons = window?.Tosoh?.CCT?.allComparisons;
@@ -20,13 +20,20 @@
   let allAvailableFiltersWithTheirOptions: any = $state({});
   const onChange = (event: Event) => {
     // onReset();
-    // updateUrl(event);
+    updateUrl(event);
   };
 
   const onReset = () => {};
 
   const onDetails = () => {
-    console.log('onDetails');
+    const tosohInstrumentName = (
+      document.querySelector('select[name="tosoh_instrument_name"]') as HTMLSelectElement
+    )?.value;
+    const competitorInstrumentName = (
+      document.querySelector('select[name="competitor_instrument_name"]') as HTMLSelectElement
+    )?.value;
+    const url = `/cct-comparison?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
+    window.open(url);
   };
 
   const parseOptions = () => {
@@ -63,7 +70,6 @@
       <Select
         options={allAvailableFiltersWithTheirOptions[filters[0]] as any[]}
         name={filters[0]}
-        disabled={false}
         label="Tosoh Instrument"
       />
     </div>
@@ -72,7 +78,6 @@
         options={allAvailableFiltersWithTheirOptions[filters[1]] as any[]}
         name={filters[1]}
         label="Competitor Instrument"
-        disabled={false}
       />
     </div>
   </FilterForm>

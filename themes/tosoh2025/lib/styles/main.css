@@ -60,6 +60,10 @@ html {
   @apply text-default text-scale-mobile md:text-scale-desktop font-arial scroll-smooth font-normal;
 }
 
+main {
+  @apply min-h-[calc(100vh-25rem)];
+}
+
 h1,
 h2,
 h3 {

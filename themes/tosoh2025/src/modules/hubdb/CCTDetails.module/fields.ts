@@ -3,7 +3,6 @@ import { contentBlockRtfFeatures } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
-    textField('title', 'Title'),
     richTextField('description', 'Description', {
       enabled_features: contentBlockRtfFeatures,
     }),

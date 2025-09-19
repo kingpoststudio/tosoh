@@ -66,6 +66,7 @@
     width: 100%;
     padding: var(--spacing-sm);
     text-align: center;
+    cursor: pointer;
 
     &.active {
       font-weight: 600;

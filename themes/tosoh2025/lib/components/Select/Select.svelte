@@ -8,12 +8,12 @@
     displayLabel = true,
     labelPosition = 'top',
     placeholder,
-    disableReset,
+    disableReset = false,
     label,
   }: {
     options: any[];
     name: string;
-    disabled: boolean;
+    disabled?: boolean;
     displayLabel?: boolean;
     labelPosition?: 'top' | 'left';
     placeholder?: string;
@@ -36,7 +36,7 @@
 
 <div class="gap-sm flex flex-col">
   <div class={`gap-sm flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
-    {#if !displayLabel && !disableReset}
+    {#if displayLabel && !disableReset}
       <div class="gap-sm flex items-center">
         {#if displayLabel}
           <label for={name} class=" text-lg font-bold"

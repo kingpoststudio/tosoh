@@ -16,6 +16,9 @@
   let matchInfo = $state({ current: 0, total: 0 });
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   let tableFilterManager: TableFilterManager | null = null;
+  let categoryOptions = window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map(
+    (row: any) => row.category
+  );
 
   const onChange = (event: Event) => {
     if (event.target && event.target instanceof HTMLInputElement) {
@@ -185,16 +188,7 @@
         disableReset={true}
         placeholder={'Select Category'}
         displayLabel={false}
-        options={[
-          { name: 'Bthal', label: 'Bthal' },
-          { name: 'Capacity', label: 'Capacity' },
-          { name: 'HbA1c', label: 'HbA1c' },
-          { name: 'Method', label: 'Method' },
-          { name: 'Operational Features', label: 'Operational Features' },
-          { name: 'Others', label: 'Others' },
-          { name: 'Overall', label: 'Overall' },
-          { name: 'Physical Specs', label: 'Physical Specs' },
-        ]}
+        options={categoryOptions}
         name={'category'}
         disabled={false}
       />
