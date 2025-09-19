@@ -11,16 +11,17 @@
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Select from '../Select/Select.svelte';
   import { cctSearchManager } from '../../utils/textSearchUtils';
-  import { updateUrl } from '../../utils/urlUtils';
 
   let searchValue = $state('');
   let matchInfo = $state({ current: 0, total: 0 });
-  let searchInput: HTMLInputElement;
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
 
   const onChange = (event: Event) => {
     // onReset();
-    handleSearchInput(event);
+
+    if (event.target && event.target instanceof HTMLInputElement) {
+      handleSearchInput(event);
+    }
   };
 
   const onReset = () => {
@@ -118,8 +119,28 @@
     transition:fade={{ duration: 100 }}
     class="gap-base p-sm flex w-full flex-col items-center justify-end md:flex-row"
   >
-    <div class="gap-sm flex w-full flex-row-reverse md:w-fit">
-      <div class={`relative w-full min-w-[16rem] rounded-lg border border-slate-200`}>
+    <div class="w-full min-w-[16rem] md:w-fit">
+      <Select
+        disableReset={true}
+        placeholder={'Select Category'}
+        displayLabel={false}
+        options={[
+          { name: 'Bthal', label: 'Bthal' },
+          { name: 'Capacity', label: 'Capacity' },
+          { name: 'HbA1c', label: 'HbA1c' },
+          { name: 'Method', label: 'Method' },
+          { name: 'Operational Features', label: 'Operational Features' },
+          { name: 'Others', label: 'Others' },
+          { name: 'Overall', label: 'Overall' },
+          { name: 'Physical Specs', label: 'Physical Specs' },
+        ]}
+        name={'category'}
+        disabled={false}
+      />
+    </div>
+
+    <div class="gap-sm flex w-full flex-col md:w-fit md:flex-row-reverse">
+      <div class={`relative w-full min-w-[16rem] rounded-lg border border-slate-200 md:w-fit`}>
         <input
           onkeydown={handleKeyDown}
           name={'search'}
@@ -160,25 +181,6 @@
         </div>
       {/if}
     </div>
-    <div class="w-full min-w-[16rem] md:w-fit">
-      <Select
-        disableReset={true}
-        placeholder={'Select Category'}
-        displayLabel={false}
-        options={[
-          { name: 'Basic Specifications', label: 'Basic Specifications' },
-          { name: 'Application Range', label: 'Application Range' },
-          { name: 'Measurement Modes', label: 'Measurement Modes' },
-          { name: 'Throughput Capacity', label: 'Throughput Capacity' },
-          { name: 'Sample Range', label: 'Sample Range' },
-          { name: 'Variant Mode Results', label: 'Variant Mode Results' },
-          { name: 'Standard Mode Results', label: 'Standard Mode Results' },
-        ]}
-        name={'category'}
-        disabled={false}
-      />
-    </div>
-
-    <button type="button" data-type="reset" class="w-full md:w-fit"> Reset Filters </button>
+    <button type="reset" data-type="reset" class="w-full md:w-fit"> Reset Filters </button>
   </div>
 </FilterForm>
