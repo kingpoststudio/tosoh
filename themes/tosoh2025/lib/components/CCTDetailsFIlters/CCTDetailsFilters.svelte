@@ -13,7 +13,6 @@
   import { cctSearchManager } from '../../utils/textSearchUtils';
   import { TableFilterManager } from '../../utils/tableFilterUtils';
 
-  let searchValue = $state('');
   let matchInfo = $state({ current: 0, total: 0 });
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   let tableFilterManager: TableFilterManager | null = null;
@@ -32,22 +31,19 @@
   };
 
   const onReset = () => {
-    searchValue = '';
     cctSearchManager.clearHighlights();
 
     matchInfo = { current: 0, total: 0 };
 
     if (tableFilterManager) {
-      console.log('onReset');
       tableFilterManager.clearFilters();
     }
   };
 
   const handleSearchInput = (event: Event) => {
     const target = event.target as HTMLInputElement;
-    searchValue = target.value;
 
-    performSearch(searchValue);
+    performSearch(target.value);
   };
 
   const performSearch = (term: string) => {
@@ -94,7 +90,7 @@
 
     // Add keyboard shortcuts for navigation
     const handleGlobalKeyDown = (event: KeyboardEvent) => {
-      if ((event.ctrlKey || event.metaKey) && event.key === 'f' && searchValue) {
+      if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
         event.preventDefault();
       }
     };
@@ -137,31 +133,11 @@
     transition:fade={{ duration: 100 }}
     class="gap-base p-sm flex w-full flex-col items-center justify-end md:flex-row"
   >
-    <div class="w-full min-w-[16rem] md:w-fit">
-      <Select
-        disableReset={true}
-        placeholder={'Select Category'}
-        displayLabel={false}
-        options={[
-          { name: 'Bthal', label: 'Bthal' },
-          { name: 'Capacity', label: 'Capacity' },
-          { name: 'HbA1c', label: 'HbA1c' },
-          { name: 'Method', label: 'Method' },
-          { name: 'Operational Features', label: 'Operational Features' },
-          { name: 'Others', label: 'Others' },
-          { name: 'Overall', label: 'Overall' },
-          { name: 'Physical Specs', label: 'Physical Specs' },
-        ]}
-        name={'category'}
-        disabled={false}
-      />
-    </div>
-
     <div class="gap-sm flex w-full flex-col md:w-fit md:flex-row-reverse">
       <div class={`relative w-full min-w-[16rem] rounded-lg border border-slate-200 md:w-fit`}>
         <input
           onkeydown={handleKeyDown}
-          name={'search'}
+          name={'search_term'}
           class="p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
           placeholder={'Search in table...'}
           autocomplete="off"
@@ -198,6 +174,26 @@
           </div>
         </div>
       {/if}
+    </div>
+
+    <div class="w-full min-w-[16rem] md:w-fit">
+      <Select
+        disableReset={true}
+        placeholder={'Select Category'}
+        displayLabel={false}
+        options={[
+          { name: 'Bthal', label: 'Bthal' },
+          { name: 'Capacity', label: 'Capacity' },
+          { name: 'HbA1c', label: 'HbA1c' },
+          { name: 'Method', label: 'Method' },
+          { name: 'Operational Features', label: 'Operational Features' },
+          { name: 'Others', label: 'Others' },
+          { name: 'Overall', label: 'Overall' },
+          { name: 'Physical Specs', label: 'Physical Specs' },
+        ]}
+        name={'category'}
+        disabled={false}
+      />
     </div>
     <button data-type="reset" class="w-full md:w-fit"> Reset Filters </button>
   </div>
