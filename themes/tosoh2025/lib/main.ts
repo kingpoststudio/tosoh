@@ -9,3 +9,4 @@ import './components/WebinarListings/WebinarListings.svelte';
 import './components/CCT/CCTFilters.svelte';
 import './components/TabGroup/TabGroup.svelte';
 import './components/CCTDetailsFIlters/CCTDetailsFilters.svelte';
+import './components/ScrollX/ScrollX.svelte';

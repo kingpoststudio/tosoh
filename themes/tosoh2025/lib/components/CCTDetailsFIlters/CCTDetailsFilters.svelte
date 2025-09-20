@@ -20,26 +20,29 @@
     (row: any) => row.category
   );
 
+  const resetSearchInput = () => {
+    cctSearchManager.clearHighlights();
+    (document.querySelector('input[name="search_term"]') as HTMLInputElement).value = '';
+    matchInfo = { current: 0, total: 0 };
+  };
+
   const onChange = (event: Event) => {
     if (event.target && event.target instanceof HTMLInputElement) {
       handleSearchInput(event);
     }
+
     if (event.target && event.target instanceof HTMLSelectElement) {
       const targetId = event.target.value;
 
       if (tableFilterManager) {
-        cctSearchManager.clearHighlights();
-        (document.querySelector('input[name="search_term"]') as HTMLInputElement).value = '';
+        resetSearchInput();
         tableFilterManager.filterById(targetId || null);
       }
     }
   };
 
   const onReset = () => {
-    cctSearchManager.clearHighlights();
-    (document.querySelector('select[name="category"]') as HTMLSelectElement).value = 'none';
-
-    matchInfo = { current: 0, total: 0 };
+    resetSearchInput();
 
     if (tableFilterManager) {
       tableFilterManager.clearFilters();
@@ -182,7 +185,6 @@
         </div>
       {/if}
     </div>
-
     <div class="w-full min-w-[16rem] md:w-fit">
       <Select
         disableReset={true}

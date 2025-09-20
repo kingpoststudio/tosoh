@@ -13,122 +13,131 @@
 
   <body class="min-h-[100vh]">
     <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex">
-      <tosoh-cct-filters></tosoh-cct-filters>
-      <div class="border-border flex w-full flex-col rounded-2xl border">
-        <div class="p-md flex w-full items-center justify-center">
-          <h5 class="font-semibold">TOSOH:</h5>
-          <h5 class="text-imperial-red font-semibold">versus:</h5>
-        </div>
-        <div>
-          <tosoh-scroll-x scrollbarHeight="1px">
-            <div class="border-border mx-auto flex w-full border">
-              <tosoh-tab-group variant="action" groupId="laboratory-managers" active="true"
-                >Laboratory Managers</tosoh-tab-group
-              >
-              <tosoh-tab-group variant="action" groupId="laboratory-staff"
-                >Laboratory Staff</tosoh-tab-group
-              >
-              <tosoh-tab-group variant="action" groupId="clinicians">Clinicians</tosoh-tab-group>
-              <tosoh-tab-group variant="action" groupId="procurement-managers"
-                >Procurement Managers</tosoh-tab-group
-              >
-            </div>
-          </tosoh-scroll-x>
-        </div>
-        <div class="divide-border flex h-full w-full justify-center divide-x">
-          <div class="p-md flex w-full flex-col">
-            <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
+      <div class="gap-md flex flex-col xl:flex-row">
+        <tosoh-cct-filters></tosoh-cct-filters>
 
-            <tosoh-tab-group variant="tab" groupId="laboratory-managers" active="true">
-              <p>
-                Laboratory Managers To keep his different stakeholders (Clinicians, Laboratory
-                employees and Procurement Manager) satisfied with the laboratory production and
-                running costs. To work with reliable and robust instruments that make the daily life
-                of the laboratory staff smooth and easy. To provide accurate and fast results for
-                the Clinicians allowing them to take care of the patients efficiently. To pass
-                accreditation and EQA schemes
-              </p>
-            </tosoh-tab-group>
-
-            <tosoh-tab-group variant="tab" groupId="laboratory-staff">
-              <p>
-                Laboratory Staff To keep his different stakeholders (Clinicians, Laboratory
-                employees and Procurement Manager) satisfied with the laboratory production and
-                running costs. To work with reliable and robust instruments that make the daily life
-                of the laboratory staff smooth and easy. To provide accurate and fast results for
-                the Clinicians allowing them to take care of the patients efficiently. To pass
-                accreditation and EQA schemes
-              </p>
-            </tosoh-tab-group>
-
-            <tosoh-tab-group variant="tab" groupId="clinicians">
-              <p>
-                Clinicians To keep his different stakeholders (Clinicians, Laboratory employees and
-                Procurement Manager) satisfied with the laboratory production and running costs. To
-                work with reliable and robust instruments that make the daily life of the laboratory
-                staff smooth and easy. To provide accurate and fast results for the Clinicians
-                allowing them to take care of the patients efficiently. To pass accreditation and
-                EQA schemes
-              </p>
-            </tosoh-tab-group>
-
-            <tosoh-tab-group variant="tab" groupId="procurement-managers">
-              <p>
-                Procurement Managers To keep his different stakeholders (Clinicians, Laboratory
-                employees and Procurement Manager) satisfied with the laboratory production and
-                running costs. To work with reliable and robust instruments that make the daily life
-                of the laboratory staff smooth and easy. To provide accurate and fast results for
-                the Clinicians allowing them to take care of the patients efficiently. To pass
-                accreditation and EQA schemes
-              </p>
-            </tosoh-tab-group>
+        <div class="border-border flex w-full flex-col rounded-2xl border">
+          <div class="p-base flex w-full items-center justify-center">
+            <h5 class="font-semibold">TOSOH:</h5>
+            <h5 class="text-imperial-red font-semibold">versus:</h5>
           </div>
+          <div class="w-full max-w-[calc(100vw-(var(--spacing-md)*2))]">
+            <tosoh-scroll-x>
+              <div>
+                <div class="mx-auto flex w-full min-w-[56rem] lg:min-w-0">
+                  <tosoh-tab-group variant="action" groupId="laboratory-managers" active="true"
+                    >Laboratory Managers</tosoh-tab-group
+                  >
+                  <tosoh-tab-group variant="action" groupId="laboratory-staff"
+                    >Laboratory Staff</tosoh-tab-group
+                  >
+                  <tosoh-tab-group variant="action" groupId="clinicians"
+                    >Clinicians</tosoh-tab-group
+                  >
+                  <tosoh-tab-group variant="action" groupId="procurement-managers"
+                    >Procurement Managers</tosoh-tab-group
+                  >
+                </div>
+              </div>
+              <div
+                class="divide-border flex h-full w-full min-w-[56rem] justify-center divide-x lg:min-w-0"
+              >
+                <div class="p-md flex w-full flex-col">
+                  <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
 
-          <div class="p-md flex w-full flex-col">
-            <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
-            <tosoh-tab-group variant="tab" groupId="laboratory-managers" active="true">
-              <p>
-                Laboratory Managers To keep his different stakeholders (Clinicians, Laboratory
-                employees and Procurement Manager) satisfied with the laboratory production and
-                running costs. To work with reliable and robust instruments that make the daily life
-                of the laboratory staff smooth and easy. To provide accurate and fast results for
-                the Clinicians allowing them to take care of the patients efficiently. To pass
-                accreditation and EQA schemes
-              </p>
-            </tosoh-tab-group>
+                  <tosoh-tab-group variant="tab" groupId="laboratory-managers" active="true">
+                    <p>
+                      Laboratory Managers To keep his different stakeholders (Clinicians, Laboratory
+                      employees and Procurement Manager) satisfied with the laboratory production
+                      and running costs. To work with reliable and robust instruments that make the
+                      daily life of the laboratory staff smooth and easy. To provide accurate and
+                      fast results for the Clinicians allowing them to take care of the patients
+                      efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
 
-            <tosoh-tab-group variant="tab" groupId="laboratory-staff">
-              <p>
-                Laboratory Staff To keep his different stakeholders (Clinicians, Laboratory
-                employees and Procurement Manager) satisfied with the laboratory production and
-                running costs. To work with reliable and robust instruments that make the daily life
-                of the laboratory staff smooth and easy. To provide accurate and fast results for
-                the Clinicians allowing them to take care of the patients efficiently. To pass
-                accreditation and EQA schemes
-              </p>
-            </tosoh-tab-group>
+                  <tosoh-tab-group variant="tab" groupId="laboratory-staff">
+                    <p>
+                      Laboratory Staff To keep his different stakeholders (Clinicians, Laboratory
+                      employees and Procurement Manager) satisfied with the laboratory production
+                      and running costs. To work with reliable and robust instruments that make the
+                      daily life of the laboratory staff smooth and easy. To provide accurate and
+                      fast results for the Clinicians allowing them to take care of the patients
+                      efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
 
-            <tosoh-tab-group variant="tab" groupId="clinicians">
-              <p>
-                Clinicians To keep his different stakeholders (Clinicians, Laboratory employees and
-                Procurement Manager) satisfied with the laboratory production and running costs. To
-                work with reliable and robust instruments that make the daily life of the laboratory
-                staff smooth and easy. To provide accurate and fast results for the Clinicians
-                allowing them to take care of the patients efficiently. To pass accreditation and
-                EQA schemes
-              </p>
-            </tosoh-tab-group>
+                  <tosoh-tab-group variant="tab" groupId="clinicians">
+                    <p>
+                      Clinicians To keep his different stakeholders (Clinicians, Laboratory
+                      employees and Procurement Manager) satisfied with the laboratory production
+                      and running costs. To work with reliable and robust instruments that make the
+                      daily life of the laboratory staff smooth and easy. To provide accurate and
+                      fast results for the Clinicians allowing them to take care of the patients
+                      efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
 
-            <tosoh-tab-group variant="tab" groupId="procurement-managers">
-              <p>
-                Procurement Managers To keep his different stakeholders (Clinicians, Laboratory
-                employees and Procurement Manager) satisfied with the laboratory production and
-                running costs. To work with reliable and robust instruments that make the daily life
-                of the laboratory staff smooth and easy. To provide accurate and fast results for
-                the Clinicians allowing them to take care of the patients efficiently. To pass
-                accreditation and EQA schemes
-              </p>
-            </tosoh-tab-group>
+                  <tosoh-tab-group variant="tab" groupId="procurement-managers">
+                    <p>
+                      Procurement Managers To keep his different stakeholders (Clinicians,
+                      Laboratory employees and Procurement Manager) satisfied with the laboratory
+                      production and running costs. To work with reliable and robust instruments
+                      that make the daily life of the laboratory staff smooth and easy. To provide
+                      accurate and fast results for the Clinicians allowing them to take care of the
+                      patients efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
+                </div>
+
+                <div class="p-md flex w-full flex-col">
+                  <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
+                  <tosoh-tab-group variant="tab" groupId="laboratory-managers" active="true">
+                    <p>
+                      Laboratory Managers To keep his different stakeholders (Clinicians, Laboratory
+                      employees and Procurement Manager) satisfied with the laboratory production
+                      and running costs. To work with reliable and robust instruments that make the
+                      daily life of the laboratory staff smooth and easy. To provide accurate and
+                      fast results for the Clinicians allowing them to take care of the patients
+                      efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
+
+                  <tosoh-tab-group variant="tab" groupId="laboratory-staff">
+                    <p>
+                      Laboratory Staff To keep his different stakeholders (Clinicians, Laboratory
+                      employees and Procurement Manager) satisfied with the laboratory production
+                      and running costs. To work with reliable and robust instruments that make the
+                      daily life of the laboratory staff smooth and easy. To provide accurate and
+                      fast results for the Clinicians allowing them to take care of the patients
+                      efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
+
+                  <tosoh-tab-group variant="tab" groupId="clinicians">
+                    <p>
+                      Clinicians To keep his different stakeholders (Clinicians, Laboratory
+                      employees and Procurement Manager) satisfied with the laboratory production
+                      and running costs. To work with reliable and robust instruments that make the
+                      daily life of the laboratory staff smooth and easy. To provide accurate and
+                      fast results for the Clinicians allowing them to take care of the patients
+                      efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
+
+                  <tosoh-tab-group variant="tab" groupId="procurement-managers">
+                    <p>
+                      Procurement Managers To keep his different stakeholders (Clinicians,
+                      Laboratory employees and Procurement Manager) satisfied with the laboratory
+                      production and running costs. To work with reliable and robust instruments
+                      that make the daily life of the laboratory staff smooth and easy. To provide
+                      accurate and fast results for the Clinicians allowing them to take care of the
+                      patients efficiently. To pass accreditation and EQA schemes
+                    </p>
+                  </tosoh-tab-group>
+                </div>
+              </div>
+            </tosoh-scroll-x>
           </div>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import type { CCTComparisons } from '../../../types/hubdb';
+
 export const mockCCT = {
   allInstruments: {
     limit: 1000,
@@ -378,3 +380,5 @@ export const mockCCT = {
 };
 
 window.Tosoh.CCT = mockCCT;
+
+window.Tosoh.CCTDetails = { comparisonRows: mockCCT.allComparisons as CCTComparisons };

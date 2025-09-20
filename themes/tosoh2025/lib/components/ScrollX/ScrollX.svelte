@@ -8,9 +8,9 @@
     showScrollbar = true,
     showNavButtons = false,
     scrollPercentage = 25,
-    scrollbarHeight = '0.25rem',
-    scrollbarColor = 'var(--color-petrol)',
-    scrollbarTrackColor = 'var(--color-shadow)',
+    scrollbarHeight = '0.125rem',
+    scrollbarColor = 'var(--color-imperial-red)',
+    scrollbarTrackColor = 'var(--color-ghost-white)',
   } = $props();
 
   let scrollContainer: HTMLDivElement | null = null;
@@ -206,7 +206,7 @@
     </button>
   {/if}
 
-  {#if showScrollbar}
+  {#if showScrollbar && canScroll}
     <div
       class="track"
       bind:this={scrollTrack}
@@ -254,11 +254,13 @@
   :host {
     display: block;
     width: 100%;
+    height: 100%;
   }
 
   .wrapper {
     position: relative;
     width: 100%;
+    height: 100%;
   }
 
   .container {
@@ -308,10 +310,10 @@
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background-color: var(--color-petrol);
+    background-color: var(--color-imperial-red);
     border: none;
     cursor: pointer;
-    color: var(--color-lime);
+    color: var(--color-ghost-white);
     transition: opacity 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 

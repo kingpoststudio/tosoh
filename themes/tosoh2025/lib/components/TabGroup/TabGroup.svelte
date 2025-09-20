@@ -5,6 +5,7 @@
       groupId: { type: 'String' },
       variant: { reflect: true, type: 'String' },
       active: { reflect: true, type: 'Boolean' },
+      isLast: { reflect: true, type: 'Boolean' },
     },
   }}
 />
@@ -18,7 +19,8 @@
     groupId,
     variant = 'tab',
     active = false,
-  }: { groupId: string; variant: 'action' | 'tab'; active: boolean } = $props();
+    isLast = false,
+  }: { groupId: string; variant: 'action' | 'tab'; active: boolean; isLast: boolean } = $props();
 
   let isActive = $state(active);
 
@@ -43,7 +45,7 @@
 </script>
 
 {#if variant === 'action'}
-  <button class:active={isActive} onclick={setTabActive} aria-label="tab-button">
+  <button class:active={isActive} onclick={setTabActive} aria-label="tab-button" class:isLast>
     <svelte:element this={'slot'} />
   </button>
 {:else if isActive}
@@ -67,6 +69,14 @@
     padding: var(--spacing-sm);
     text-align: center;
     cursor: pointer;
+    height: 100% !important;
+    border-right: 1px solid var(--color-border);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+
+    &.isLast {
+      border-right: none;
+    }
 
     &.active {
       font-weight: 600;
