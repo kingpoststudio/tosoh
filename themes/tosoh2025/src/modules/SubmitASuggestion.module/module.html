@@ -1,0 +1,46 @@
+{% set title = module.title %}
+{% set description = module.description %}
+{% set form = module.form %}
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-[6rem] flex flex-col">
+  <div>
+    <button class="plain text-nickel! mb-md flex items-center transition-colors hover:text-gray-800">
+      <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Return to main screen
+    </button>
+
+    <h3 class="mb-sm text-3xl font-bold text-gray-900">{{ title }}</h3>
+    <p class="text-gray-600">{{ description }}</p>
+  </div>
+  <div class="gap-md flex flex-col lg:flex-row">
+    <div class="p-md bg-ghost-white min-h-full min-w-[16rem] rounded-lg">
+      <p class="font-sans-narrow text-lg font-bold">Field Suggestions</p>
+      <button
+        class="plain p-xs! mt-sm gap-sm border-border! text-nickel! flex w-full items-center rounded-2xl border! border-dotted!">
+        <svg xmlns="http://www.w3.org/2000/svg" width="17" height="19" viewBox="0 0 17 19" fill="none">
+          <path
+            d="M12.7956 0.595703H4.27111C2.1737 0.595703 0.467773 2.30163 0.467773 4.39904V14.9224C0.467773 17.0198 2.1737 18.7257 4.27111 18.7257H12.7981C14.8956 18.7257 16.6015 17.0198 16.6015 14.9224V4.39644C16.5989 2.30163 14.893 0.595703 12.7956 0.595703ZM1.76407 14.9198V4.39644C1.76407 3.01459 2.88926 1.88941 4.27111 1.88941H12.7981C14.18 1.88941 15.3052 3.01459 15.3052 4.39644V12.9079H10.4907V17.4242H4.26851C2.88926 17.4268 1.76407 16.3016 1.76407 14.9198ZM12.7956 17.4268H11.787V14.2068H15.3026V14.9224C15.3026 16.3016 14.1774 17.4268 12.7956 17.4268Z"
+            fill="#747273" />
+          <path
+            d="M9.18168 12.1602V9.96424H11.3776V8.66794H9.18168V6.47461H7.88538V8.66794H5.68945V9.96424H7.88538V12.1602H9.18168Z"
+            fill="#747273" />
+        </svg>
+        New Record
+      </button>
+    </div>
+
+    <div
+      class="border-border p-md fc-form light flex w-full flex-col items-center justify-between overflow-hidden rounded-lg border bg-white">
+      {%
+        form "form"
+        form_to_use="{{   form.form_id }}"
+        response_response_type="{{ form.response_type }}"
+        response_message="{{ form.message }}"
+        response_redirect_id="{{ form.redirect_id }}"
+        response_redirect_url="{{ form.redirect_url }}"
+        gotowebinar_webinar_key="{{ form.gotowebinar_webinar_key }}"
+      %}
+    </div>
+  </div>
+</div>
