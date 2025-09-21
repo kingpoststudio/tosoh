@@ -8,45 +8,14 @@
 <script lang="ts">
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Select from '../Select/Select.svelte';
-  import type { CCTComparisons, CCTComparisonColumnId, CCTInstrument } from '../../../types/hubdb';
-  import { onMount } from 'svelte';
-  import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
-  import { addCompanyNameToCompetitorInstrumentName } from '../../utils/cctFilterUtils';
   import { getUrlParam, updateUrl } from '../../utils/urlUtils';
 
-  const parseProductLines = (allProductLines: CCTInstrument[]) => {
-    let productLines = allProductLines.map((productLine) => ({
-      label: productLine.product_line?.label,
-      value: productLine.product_line?.name,
-    }));
-
-    productLines = productLines.filter(
-      (productLine, index, self) => index === self.findIndex((t) => t.value === productLine.value)
-    );
-
-    return productLines;
-  };
-
-  const allProductLines = window?.Tosoh?.CCT?.allProductLines;
-  const allInstruments = window?.Tosoh?.CCT?.allInstruments;
-  const allComparisons = window?.Tosoh?.CCT?.allComparisons;
-  const filters: CCTComparisonColumnId[] = [
-    'product_line',
-    'tosoh_instrument_name',
-    'competitor_instrument_name',
-  ];
+  const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
+  const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
+  const activeCompetitorInstruments = window?.Tosoh?.CCT?.activeCompetitorInstruments || [];
 
   const isProductLineSelected = !!getUrlParam('product_line');
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
-  const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
-
-  console.log(allProductLines);
-
-  // all the product lines
-
-  let allAvailableFiltersWithTheirOptions: any = $state({});
-
-  const productLineOptions = $state('');
 
   const onChange = (event: Event) => {
     // onReset();
@@ -65,28 +34,6 @@
     const url = `/cct-comparison?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
     window.open(url);
   };
-
-  const parseOptions = () => {
-    if (allComparisons?.objects?.length > 0) {
-      filterValuesForSelectsBasedOnUrl(allComparisons);
-    }
-  };
-
-  const filterValuesForSelectsBasedOnUrl = (allRows: CCTComparisons) => {
-    if (!allRows?.objects || allRows.objects.length === 0) {
-      return;
-    }
-
-    // Add company names to competitor instrument names
-    const processedRows = addCompanyNameToCompetitorInstrumentName(allRows, allInstruments);
-    const filteredRows = filterRows(processedRows?.objects as any, filters as any[]);
-
-    allAvailableFiltersWithTheirOptions = parseFilterOptions(filteredRows);
-  };
-
-  onMount(() => {
-    parseOptions();
-  });
 </script>
 
 <div
@@ -97,22 +44,32 @@
   </div>
   <FilterForm trigger="change" {onChange} {onReset}>
     <div class="mt-base">
-      <Select options={parseProductLines(allProductLines)} name={filters[0]} label="Product Line" />
+      <Select options={allProductLines} name="product_line" label="Product Line" />
     </div>
     <div class="mt-base">
       <Select
-        options={allAvailableFiltersWithTheirOptions[filters[1]] as any[]}
-        name={filters[1]}
+        options={instrumentsBasedOnProductLine
+          ? instrumentsBasedOnProductLine?.map((instrument) => ({
+              label: instrument,
+              name: instrument,
+            }))
+          : []}
+        name="tosoh_instrument_name"
         label="Tosoh Instrument"
         disabled={!isProductLineSelected}
       />
     </div>
     <div class="mt-base">
       <Select
-        options={allAvailableFiltersWithTheirOptions[filters[2]] as any[]}
-        name={filters[2]}
+        options={activeCompetitorInstruments
+          ? activeCompetitorInstruments?.map((instrument) => ({
+              label: instrument,
+              name: instrument,
+            }))
+          : []}
+        name="competitor_instrument_name"
         label="Competitor Instrument"
-        disabled={!isProductLineSelected}
+        disabled={!isProductLineSelected || !isTosohInstrumentSelected}
       />
     </div>
   </FilterForm>

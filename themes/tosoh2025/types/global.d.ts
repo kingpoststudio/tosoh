@@ -41,9 +41,10 @@ declare global {
         filterByTopic: string;
       };
       CCT: {
-        allComparisons: CCTComparisons;
+        activeCompetitorInstruments: CCTComparison['objects'][0]['competitor_instrument_name'][];
         allInstruments: CCTInstruments;
-        allProductLines: CCTInstruments['objects'];
+        allProductLines: CCTInstruments['objects'][0]['product_line'][];
+        instrumentsBasedOnProductLine: CCTInstruments['objects'][0]['product_name'][];
       };
       CCTDetails: {
         comparisonRows: CCTComparisons;
