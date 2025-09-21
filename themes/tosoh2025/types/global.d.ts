@@ -43,6 +43,7 @@ declare global {
       CCT: {
         allComparisons: CCTComparisons;
         allInstruments: CCTInstruments;
+        allProductLines: CCTInstruments['objects'];
       };
       CCTDetails: {
         comparisonRows: CCTComparisons;

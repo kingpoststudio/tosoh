@@ -11,11 +11,13 @@
 
 {% set roles = [['Laboratory Manager', 'laboratory_manager_benefits'], ['Laboratory Staff', 'laboratory_staff_benefits'], ['Clinician', 'clinician_benefits'], ['Procurement Manager', 'procurement_manager_benefits']] %}
 
+{% set all_product_lines = all_instruments|selectattr('product_line')|first %}
+
 {% require_js position="head" %}
   <script>
   const allInstruments = {{ all_instruments|tojson }};
   const allComparisons = {{ all_comparisons|tojson }};
-
+  const allProductLines = {{ all_product_lines|tojson }};
   window.Tosoh.CCT = { allInstruments, allComparisons};
   </script>
 {% end_require_js %}

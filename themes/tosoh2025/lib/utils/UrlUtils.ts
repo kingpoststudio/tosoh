@@ -32,3 +32,8 @@ export const updateUrl = (e: Event) => {
     window.location.href = url.toString();
   }
 };
+
+export const getUrlParam = (name: string) => {
+  const url = new URL(window.location.href);
+  return url.searchParams.get(name);
+};

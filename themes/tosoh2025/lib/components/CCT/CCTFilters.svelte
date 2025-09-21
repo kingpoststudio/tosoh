@@ -8,16 +8,46 @@
 <script lang="ts">
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Select from '../Select/Select.svelte';
-  import type { CCTComparisons, CCTComparisonColumnId } from '../../../types/hubdb';
+  import type { CCTComparisons, CCTComparisonColumnId, CCTInstrument } from '../../../types/hubdb';
   import { onMount } from 'svelte';
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
   import { addCompanyNameToCompetitorInstrumentName } from '../../utils/cctFilterUtils';
-  import { updateUrl } from '../../utils/urlUtils';
+  import { getUrlParam, updateUrl } from '../../utils/urlUtils';
 
+  const parseProductLines = (allProductLines: CCTInstrument[]) => {
+    let productLines = allProductLines.map((productLine) => ({
+      label: productLine.product_line?.label,
+      value: productLine.product_line?.name,
+    }));
+
+    productLines = productLines.filter(
+      (productLine, index, self) => index === self.findIndex((t) => t.value === productLine.value)
+    );
+
+    return productLines;
+  };
+
+  const allProductLines = window?.Tosoh?.CCT?.allProductLines;
   const allInstruments = window?.Tosoh?.CCT?.allInstruments;
   const allComparisons = window?.Tosoh?.CCT?.allComparisons;
-  const filters: CCTComparisonColumnId[] = ['tosoh_instrument_name', 'competitor_instrument_name'];
+  const filters: CCTComparisonColumnId[] = [
+    'product_line',
+    'tosoh_instrument_name',
+    'competitor_instrument_name',
+  ];
+
+  const isProductLineSelected = !!getUrlParam('product_line');
+  const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
+  const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
+
+  console.log(allProductLines);
+
+  // all the product lines
+
   let allAvailableFiltersWithTheirOptions: any = $state({});
+
+  const productLineOptions = $state('');
+
   const onChange = (event: Event) => {
     // onReset();
     updateUrl(event);
@@ -67,17 +97,22 @@
   </div>
   <FilterForm trigger="change" {onChange} {onReset}>
     <div class="mt-base">
-      <Select
-        options={allAvailableFiltersWithTheirOptions[filters[0]] as any[]}
-        name={filters[0]}
-        label="Tosoh Instrument"
-      />
+      <Select options={parseProductLines(allProductLines)} name={filters[0]} label="Product Line" />
     </div>
     <div class="mt-base">
       <Select
         options={allAvailableFiltersWithTheirOptions[filters[1]] as any[]}
         name={filters[1]}
+        label="Tosoh Instrument"
+        disabled={!isProductLineSelected}
+      />
+    </div>
+    <div class="mt-base">
+      <Select
+        options={allAvailableFiltersWithTheirOptions[filters[2]] as any[]}
+        name={filters[2]}
         label="Competitor Instrument"
+        disabled={!isProductLineSelected}
       />
     </div>
   </FilterForm>

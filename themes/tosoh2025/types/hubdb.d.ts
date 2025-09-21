@@ -296,6 +296,7 @@ export type CCTForeignId = {
 };
 
 export type CCTComparison = {
+  product_line: CCTOption;
   category: CCTOption;
   clinician: string;
   competitor_instrument_name: CCTForeignId[];
