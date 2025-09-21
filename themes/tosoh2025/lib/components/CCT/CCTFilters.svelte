@@ -17,20 +17,38 @@
   const isProductLineSelected = !!getUrlParam('product_line');
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
 
+  const clearOnProductLineChange = () => {
+    deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
+  };
+  const clearOnTosohInstrumentChange = () => {
+    deleteMultipleSearchParams(['competitor_instrument_name']);
+  };
+
+  const clearOnProductLineReset = () => {
+    deleteMultipleSearchParams([
+      'product_line',
+      'tosoh_instrument_name',
+      'competitor_instrument_name',
+    ]);
+    window.location.search = window.location.search;
+  };
+  const clearOnTosohInstrumentReset = () => {
+    deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
+    window.location.search = window.location.search;
+  };
+
   const onChange = (event: Event) => {
     let name = (event?.target as HTMLSelectElement)?.name;
 
     if (name === 'product_line') {
-      deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
+      clearOnProductLineChange();
     }
     if (name === 'tosoh_instrument_name') {
-      deleteMultipleSearchParams(['competitor_instrument_name']);
+      clearOnTosohInstrumentChange();
     }
 
     updateUrl(event);
   };
-
-  const onReset = () => {};
 
   const onDetails = () => {
     const tosohInstrumentName = (
@@ -50,9 +68,14 @@
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">Select</p>
   </div>
-  <FilterForm trigger="change" {onChange} {onReset}>
+  <FilterForm trigger="change" {onChange}>
     <div class="mt-base">
-      <Select options={allProductLines} name="product_line" label="Product Line" />
+      <Select
+        options={allProductLines}
+        name="product_line"
+        label="Product Line"
+        customClearFilter={clearOnProductLineReset}
+      />
     </div>
     <div class="mt-base">
       <Select
@@ -65,6 +88,7 @@
         name="tosoh_instrument_name"
         label="Tosoh Instrument"
         disabled={!isProductLineSelected}
+        customClearFilter={clearOnTosohInstrumentReset}
       />
     </div>
     <div class="mt-base">

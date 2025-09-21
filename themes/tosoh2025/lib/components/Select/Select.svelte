@@ -10,6 +10,7 @@
     placeholder,
     disableReset = false,
     label,
+    customClearFilter,
   }: {
     options: any[];
     name: string;
@@ -19,15 +20,20 @@
     placeholder?: string;
     disableReset?: boolean;
     label?: string;
+    customClearFilter?: () => void;
   } = $props();
   let activeOptions = $derived(options);
 
   const activeFilter = new URLSearchParams(window.location.search).get(name);
 
   const clearFilter = () => {
-    const url = new URL(window.location.href);
-    url.searchParams.delete(name);
-    window.location.href = url.toString();
+    if (customClearFilter) {
+      customClearFilter();
+    } else {
+      const url = new URL(window.location.href);
+      url.searchParams.delete(name);
+      window.location.href = url.toString();
+    }
   };
 
   const setupFilterTitle = (column: string) =>
