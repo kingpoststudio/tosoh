@@ -8,7 +8,7 @@
 <script lang="ts">
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Select from '../Select/Select.svelte';
-  import { getUrlParam, updateUrl } from '../../utils/urlUtils';
+  import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
 
   const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
@@ -18,7 +18,15 @@
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
 
   const onChange = (event: Event) => {
-    // onReset();
+    let name = (event?.target as HTMLSelectElement)?.name;
+
+    if (name === 'product_line') {
+      deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
+    }
+    if (name === 'tosoh_instrument_name') {
+      deleteMultipleSearchParams(['competitor_instrument_name']);
+    }
+
     updateUrl(event);
   };
 
