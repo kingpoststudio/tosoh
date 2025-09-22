@@ -142,7 +142,7 @@
 
     <div class="flex-1">
       <div class="text-lg font-semibold text-gray-900">
-        {speaker?.name}
+        {@html speaker?.name}
       </div>
       <div class="text-nickel text-sm font-semibold">
         {speaker?.location}
