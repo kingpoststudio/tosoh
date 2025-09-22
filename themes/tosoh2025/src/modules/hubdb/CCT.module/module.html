@@ -4,7 +4,7 @@
 {% set tosoh_instrument_name = request.query_dict.tosoh_instrument_name  or "" %}
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name  or "" %}
 
-{% set all_instruments = hubdb_table_rows("cct_instruments") %}
+{% set all_instruments = hubdb_table_rows("cct_instruments",'&active__eq=true') %}
   
 {% set all_product_lines = all_instruments|selectattr('product_line')|map(attribute='product_line')|unique %}
 {% set instruments_based_on_product_line = all_instruments|selectattr('product_line.name', 'equalto', product_line)|map(attribute='product_name')|unique %}
