@@ -9,6 +9,7 @@
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Select from '../Select/Select.svelte';
   import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
+  import Checkbox from '../Checkbox/Checkbox.svelte';
 
   const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
@@ -61,6 +62,8 @@
     const url = `/cct-comparison?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
     window.open(url);
   };
+
+  const onPrint = () => {};
 </script>
 
 <div
@@ -106,14 +109,37 @@
       />
     </div>
   </FilterForm>
-  <button
-    type="button"
-    onclick={onDetails}
-    disabled={!isTosohInstrumentSelected || !isCompetitorInstrumentSelected}
-    class="mt-md w-full hover:bg-red-50"
-  >
-    Details</button
-  >
+
+  <FilterForm trigger="submit" onSubmit={onPrint}>
+    <div class="mt-base">
+      <Checkbox
+        options={[
+          { label: 'Lab Manager', name: 'lab_manager' },
+          { label: 'Lab Technician', name: 'lab_technician' },
+          { label: 'Procurement Manager', name: 'procurement_manager' },
+          { label: 'Clinician', name: 'clinician' },
+          { label: 'Proof', name: 'proof' },
+          { label: 'Competitor', name: 'competitor' },
+          { label: 'Tosoh Counter Argumentation', name: 'tosoh_counter_argumentation' },
+        ]}
+        name="option_to_print"
+        label="For Who (Option to print)"
+        disabled={false}
+      />
+    </div>
+    <button type="button" onclick={onPrint} class="outlined mt-md w-full hover:bg-red-50">
+      Print</button
+    >
+    <button
+      type="button"
+      onclick={onDetails}
+      disabled={!isTosohInstrumentSelected || !isCompetitorInstrumentSelected}
+      class="mt-sm w-full hover:bg-red-50"
+    >
+      Details</button
+    >
+  </FilterForm>
+
   <a
     href="/cct-submit-a-suggestion"
     target="_blank"
