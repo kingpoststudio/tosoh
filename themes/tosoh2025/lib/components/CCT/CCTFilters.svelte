@@ -78,6 +78,7 @@
     <div class="mt-base">
       <Select
         options={allProductLines}
+        placeholder="All Product Lines"
         name="product_line"
         label="Product Line"
         customClearFilter={clearOnProductLineReset}
