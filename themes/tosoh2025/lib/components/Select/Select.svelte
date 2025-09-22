@@ -45,7 +45,7 @@
     {#if displayLabel && !disableReset}
       <div class="gap-sm flex items-center">
         {#if displayLabel}
-          <label for={name} class=" text-lg font-bold"
+          <label for={name} class="text-lg font-normal"
             >{label ? label : setupFilterTitle(name)}</label
           >
         {/if}
