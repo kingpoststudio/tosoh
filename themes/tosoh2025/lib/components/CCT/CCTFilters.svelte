@@ -102,7 +102,7 @@
         options={activeCompetitorInstruments || []}
         name="competitor_instrument_name"
         label="Competitor Instrument"
-        disabled={!isProductLineSelected || !isTosohInstrumentSelected}
+        disabled={!isTosohInstrumentSelected}
       />
     </div>
   </FilterForm>
