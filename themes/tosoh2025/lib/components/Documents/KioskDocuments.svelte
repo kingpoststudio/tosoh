@@ -8,12 +8,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import DocumentsFilters from './DocumentsFilters.svelte';
+  import DocumentsFilters from './KioskDocumentsFilters.svelte';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
 
   import {
     defaultItemsLimit,
     defaultPagination,
+    PROD_TOSOH_DOCUMENTS_TABLE_ID,
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
   import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
@@ -53,7 +54,7 @@
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     return {
-      tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+      tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
       properties:
         'name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
@@ -84,13 +85,6 @@
     fetchData();
   };
 
-  const handleChangeView = () => {
-    const url = new URL(window.location.href);
-    url.searchParams.set('view', viewAs === 'grid' ? 'list' : 'grid');
-    window.history.pushState({}, '', url.toString().replace(/%2C/g, ','));
-    viewAs = viewAs === 'grid' ? 'list' : 'grid';
-  };
-
   onMount(() => {
     fetchData();
   });
@@ -111,7 +105,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <DocumentsFilters isParentLoading={isLoading} {viewAs} {handleChangeView}></DocumentsFilters>
+  <DocumentsFilters isParentLoading={isLoading}></DocumentsFilters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
