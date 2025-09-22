@@ -255,16 +255,20 @@
     display: block;
     width: 100%;
     height: 100%;
+    min-height: 100%;
   }
 
   .wrapper {
     position: relative;
     width: 100%;
     height: 100%;
+    min-height: 100%;
   }
 
   .container {
     width: 100%;
+    min-height: 100%;
+    height: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     scrollbar-width: none; /* Firefox */
