@@ -155,7 +155,7 @@
   class="border-border mx-auto flex max-w-[32rem] flex-col overflow-hidden rounded-2xl border bg-white"
 >
   <div
-    class={`bg-prussian-blue relative flex min-h-[18rem] flex-col ${date && isUpcoming(date) ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
+    class={`bg-prussian-blue relative flex min-h-[18rem]  flex-col ${date && isUpcoming(date) ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
   >
     {@render shapesBg()}
 
@@ -186,7 +186,7 @@
   </div>
 
   <!-- Bottom Section with White Background -->
-  <div class="p-md gap-md flex flex-col justify-between">
+  <div class="p-md my-auto flex flex-col justify-between pb-0">
     <!-- Speakers Section -->
     <div class="gap-sm flex h-full flex-col justify-center">
       {@render speaker(speaker1)}
@@ -197,11 +197,12 @@
         {@render speaker(speaker3)}
       {/if}
     </div>
-
+  </div>
+  <div class="p-md w-full">
     <a
       href={registration_page_url}
       target="_blank"
-      class="button bg-imperial-red w-full self-end rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
+      class="button bg-imperial-red w-full! block rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
     >
       {cta_label}
     </a>
