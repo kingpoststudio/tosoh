@@ -14,7 +14,7 @@
   {% set active_compariso_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__eq='~tosoh_instrument_name) %}
     {% for row in active_compariso_rows_based_on_tosoh_instrument %}
       {% for foreign_row in row.competitor_instrument_name %}
-        {{ active_competitor_instruments.append(foreign_row.product_name) }}
+        {{ active_competitor_instruments.append({name: foreign_row.product_name, label: foreign_row.company.label ~ ' : ' ~ foreign_row.product_name}) }}
       {% endfor %}
     {% endfor %}
  {% endif %} 

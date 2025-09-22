@@ -180,7 +180,7 @@ export const mockCCT = {
     total: 3,
     totalCount: 3,
   },
-  activeCompetitorInstruments: ['D 100'],
+  activeCompetitorInstruments: [{ name: 'D 100', label: 'Siemens : D 100' }],
   allProductLines: [
     {
       createdAt: 1758182405338,

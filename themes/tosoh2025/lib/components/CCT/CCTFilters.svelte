@@ -15,6 +15,8 @@
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
   const activeCompetitorInstruments = window?.Tosoh?.CCT?.activeCompetitorInstruments || [];
 
+  console.log(activeCompetitorInstruments);
+
   const isProductLineSelected = !!getUrlParam('product_line');
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
   const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
@@ -97,12 +99,7 @@
     </div>
     <div class="mt-base">
       <Select
-        options={activeCompetitorInstruments
-          ? activeCompetitorInstruments?.map((instrument) => ({
-              label: instrument,
-              name: instrument,
-            }))
-          : []}
+        options={activeCompetitorInstruments || []}
         name="competitor_instrument_name"
         label="Competitor Instrument"
         disabled={!isProductLineSelected || !isTosohInstrumentSelected}
