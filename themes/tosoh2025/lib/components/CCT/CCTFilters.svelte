@@ -93,7 +93,6 @@
           : []}
         name="tosoh_instrument_name"
         label="Tosoh Instrument"
-        disabled={!isProductLineSelected}
         customClearFilter={clearOnTosohInstrumentReset}
       />
     </div>
