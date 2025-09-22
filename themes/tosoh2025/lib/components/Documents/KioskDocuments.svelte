@@ -14,8 +14,7 @@
   import {
     defaultItemsLimit,
     defaultPagination,
-    PROD_TOSOH_DOCUMENTS_TABLE_ID,
-    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+    PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
   } from '../../utils/constants';
   import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
   import Card from './Card.svelte';
@@ -46,7 +45,6 @@
     const params = new URLSearchParams(window.location.search);
     let objWithFilters: any = {};
     const allFilters = [...availableFilters, searchColumnId];
-    //product_family, product-type, document_category, document_type
     allFilters?.map((filter) => (objWithFilters[filter] = params?.get(filter) || ''));
     return { ...objWithFilters };
   };
@@ -55,8 +53,7 @@
     const params = new URLSearchParams(window.location.search);
     return {
       tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-      properties:
-        'name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url',
+      properties: 'title,document_type,image,page_path',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
       pagination: parseInt(params?.get('pagination') || defaultPagination),
       offset:
