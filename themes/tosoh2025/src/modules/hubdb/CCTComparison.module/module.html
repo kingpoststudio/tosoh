@@ -52,7 +52,7 @@
           </thead>
           <tbody class="divide-border divide-y">
             {% for row in comparison_rows %}
-              {% set bg_color = row.status.name == 'Advantage' ? 'bg-green-50' : row.status.name == 'Disadvantage' ? 'bg-red-100' : 'bg-ghost-white' %}
+              {% set bg_color = row.status.name == 'Advantage' ? 'bg-green-100' : row.status.name == 'Disadvantage' ? 'bg-red-100' : 'bg-ghost-white' %}
               {% set status_badge_color = row.status.name == 'Advantage' ? 'bg-[#00C950]' : row.status.name == 'Disadvantage' ? 'bg-imperial-red' : 'bg-[#6A7282]' %}
 
               <tr class="{{ bg_color }} table-row" id="{{ row.category.name }}">
