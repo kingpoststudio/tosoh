@@ -8,31 +8,30 @@ import {
   urlField,
 } from 'hs-fieldkit';
 
-export const breadCrumbField = [
-  groupField('breadcrumbs', 'Breadcrumbs', {
-    children: [
-      textField('title', 'Title', {
-        required: true,
-      }),
-      urlField('url', 'URL', {
-        required: true,
-      }),
-    ],
-    occurrence: {
-      min: 0,
-      max: null,
-    },
-  }),
-];
+export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
+  children: [
+    textField('title', 'Title', {
+      required: true,
+    }),
+    urlField('url', 'URL', {
+      required: true,
+    }),
+  ],
+  occurrence: {
+    min: 0,
+    max: null,
+  },
+});
 
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
     hubDbTableField('hubdb_table_id', 'Table', { required: true }),
     groupField('filters', 'Filters', {
       children: [
-        textField('label', 'Label'),
+        textField('filter_label', 'Filter Label'),
         textField('hubdb_column_id', 'HubDB Column ID'),
         choiceField('type', 'Type', {
+          id: 'filters.type',
           choices: [
             ['dropdown', 'Dropdown'],
             ['checkbox', 'Checkbox'],
@@ -45,7 +44,7 @@ export const topicFilters = groupField('topic_filters', 'Topic Filters', {
           type: 'number',
           inline_help_text: 'Determines the minimum value for the range inputs.',
           visibility: {
-            controlling_field: 'topic.type',
+            controlling_field: 'filters.type',
             controlling_value_regex: 'range-pm',
           },
           default: 0,
@@ -56,7 +55,7 @@ export const topicFilters = groupField('topic_filters', 'Topic Filters', {
           type: 'number',
           inline_help_text: 'Determines the maximum value for the range inputs.',
           visibility: {
-            controlling_field: 'topic.type',
+            controlling_field: 'filters.type',
             controlling_value_regex: 'range-pm',
           },
           default: 0,
@@ -68,7 +67,7 @@ export const topicFilters = groupField('topic_filters', 'Topic Filters', {
           inline_help_text:
             "Determines the +/- tolerance. If the tolerance is zero (0), the search will yield results that contain the user's input within an RT min/max range <em>(i.e; RT range is 2.66 and 2.74, if user enters 2.71, it will be displayed)</em>.",
           visibility: {
-            controlling_field: 'topic.type',
+            controlling_field: 'filters.type',
             controlling_value_regex: 'range-pm',
           },
           default: 1,

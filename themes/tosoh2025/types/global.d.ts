@@ -19,6 +19,36 @@ declare global {
         description: string;
         accessLevel: 'Distributor' | 'Customer' | 'Internal';
       };
+
+      KioskDocumentsContent: {
+        description: string;
+        email_form: {
+          form_id: null;
+        };
+        gated_form: {
+          form_id: null;
+        };
+        gated_form_email: {
+          form_id: null;
+        };
+
+        search: {
+          hubdb_column_id: string;
+          title: string;
+        };
+        title: string;
+        topic_filters: {
+          hubdb_table_id: number;
+          filters: {
+            filter_label: string;
+            hubdb_column_id: string;
+            max: number;
+            min: number;
+            tolerance: number;
+            type: 'dropdown' | 'checkbox' | 'range-pm';
+          }[];
+        };
+      };
       WebinarListings: {
         tableId: string;
         preselectedLanguage: string;

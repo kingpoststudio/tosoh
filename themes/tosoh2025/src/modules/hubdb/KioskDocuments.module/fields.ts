@@ -3,7 +3,7 @@ import { breadCrumbField, topicFilters } from '../../../../lib/utils/fieldUtils'
 
 const generateFields = () => {
   return [
-    ...breadCrumbField,
+    breadCrumbField,
     formField('email_form', 'Email Form'),
     formField('gated_form', 'Gated Form (download)'),
     formField('gated_form_email', 'Gated Form (email)'),

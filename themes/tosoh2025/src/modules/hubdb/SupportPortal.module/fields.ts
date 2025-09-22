@@ -13,7 +13,7 @@ const generateFields = () => {
       default: 'Customer',
     }),
 
-    ...breadCrumbField,
+    breadCrumbField,
     textField('title', 'Title', {
       default: 'Tosoh Support Portal',
     }),

@@ -1,0 +1,14 @@
+
+{% set title = module.title %}
+{% set description = module.description %}
+{% set search = module.search %}
+{% set topic_filters = module.topic_filters %}
+
+
+
+
+{% require_js position="head" %}
+    <script>    
+    window.Tosoh.KioskDocumentsContent =  {{ module|tojson }};
+    </script>
+{% end_require_js %}
