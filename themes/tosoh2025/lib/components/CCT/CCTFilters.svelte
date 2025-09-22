@@ -16,6 +16,7 @@
 
   const isProductLineSelected = !!getUrlParam('product_line');
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
+  const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
 
   const clearOnProductLineChange = () => {
     deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
@@ -105,7 +106,21 @@
       />
     </div>
   </FilterForm>
-  <button type="button" onclick={onDetails} class="mt-md w-full hover:bg-red-50"> Details</button>
+  <button
+    type="button"
+    onclick={onDetails}
+    disabled={!isTosohInstrumentSelected || !isCompetitorInstrumentSelected}
+    class="mt-md w-full hover:bg-red-50"
+  >
+    Details</button
+  >
+  <a
+    href="/cct-submit-a-suggestion"
+    target="_blank"
+    class="button mt-md dark block w-full text-center hover:bg-red-50"
+  >
+    Submit a Suggestion
+  </a>
 
   <!-- <FilterForm trigger="submit" {onSubmit} {onReset}>
     <div class="mt-base">

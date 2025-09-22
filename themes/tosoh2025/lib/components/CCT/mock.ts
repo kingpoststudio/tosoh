@@ -568,5 +568,5 @@ window.Tosoh.CCTDetails = {
     offset: 0,
     total: 3,
     totalCount: 3,
-  }, as CCTComparisons,
+  } as CCTComparisons,
 };
