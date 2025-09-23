@@ -50,6 +50,7 @@
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     return {
+      sort: '-start_date',
       tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
       properties: 'title,document_type,image,page_path',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
