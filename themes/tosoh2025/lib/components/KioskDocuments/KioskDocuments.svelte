@@ -47,18 +47,40 @@
     return { ...objWithFilters };
   };
 
+  const constructNumericComparisonFilters = () => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const todayInMilliSeconds = Math.floor(today.getTime());
+    // 1896652800000
+
+    // 1758574800000
+    return [
+      {
+        columnId: 'start_date',
+        comparison: 'lte',
+        value: todayInMilliSeconds,
+      },
+      {
+        columnId: 'end_date',
+        comparison: 'gte',
+        value: todayInMilliSeconds,
+      },
+    ];
+  };
+
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     return {
       sort: '-start_date',
       tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-      properties: 'title,document_type,image,page_path',
+      properties: 'title,document_type,image,page_path,start_date,end_date',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
       pagination: parseInt(params?.get('pagination') || defaultPagination),
       offset:
         parseInt(params?.get('limit') || defaultItemsLimit) *
           (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
       filters: constructFilterParams(),
+      numericComparisonFilters: constructNumericComparisonFilters(),
     };
   };
 

@@ -20,6 +20,7 @@ exports.main = async (req: any) => {
     const limit = body?.limit ? parseInt(body.limit, 10) : 12;
     const offset = body?.offset ? parseInt(body.offset, 10) : 0;
     const filters = body?.filters || {};
+    const numericComparisonFilters = body?.numericComparisonFilters || [];
 
     const HUBDB_ENDPOINT = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}`;
 
@@ -71,6 +72,33 @@ exports.main = async (req: any) => {
       return `&${filterConditions.join("&")}`;
     };
 
+    const createNumericComparisonFilters = () => {
+      const numericComparisonFilterConditions: any[] = [];
+
+      if (
+        Array.isArray(numericComparisonFilters) &&
+        numericComparisonFilters?.length
+      ) {
+        numericComparisonFilters?.map(
+          (filterObj: {
+            columnId: string;
+            comparison: "lt" | "gt" | "lte" | "gte";
+            value: number;
+          }) => {
+            const { columnId, comparison, value } = filterObj;
+
+            numericComparisonFilterConditions.push(
+              `${columnId}__${comparison}=${value}`
+            );
+          }
+        );
+
+        return `&${numericComparisonFilterConditions.join("&")}`;
+      }
+
+      return "";
+    };
+
     const createAccessLevelQuery = () => {
       if (accessLevel && typeof accessLevel === "string") {
         return `&visibility__in=${accessLevel}`;
@@ -87,7 +115,7 @@ exports.main = async (req: any) => {
     };
 
     const portalItemsRes = await fetch(
-      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}&deactivate__eq=false${createAccessLevelQuery()}${createSortQuery()}`,
+      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}${createNumericComparisonFilters()}&deactivate__eq=false${createAccessLevelQuery()}${createSortQuery()}`,
       {
         method: "GET",
         headers: {
