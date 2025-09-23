@@ -22,8 +22,6 @@
   const urlParams = new URLSearchParams(window.location.search);
   const activeFilters = urlParams.getAll(name);
 
-  console.log('activeFilters', activeFilters, name);
-
   const clearFilter = () => {
     const url = new URL(window.location.href);
     url.searchParams.delete(name);

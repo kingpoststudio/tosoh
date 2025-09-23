@@ -64,7 +64,6 @@ export const populateFormFromUrl = (
 
   Array.from(form.elements).forEach((el) => {
     const elName = el.getAttribute('name') as string;
-    console.log('Form element:', el.tagName, (el as HTMLInputElement)?.type, 'name:', elName);
 
     if (!elName) return;
 

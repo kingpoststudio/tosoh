@@ -21,7 +21,7 @@
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
-
+  import { mockKioskDocumentsTableRowsResponse } from './mock';
   let availableFilters =
     window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters?.map(
       (filter) => filter.hubdb_column_id
@@ -64,7 +64,8 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      const data = await fetchTableRows(constructBody());
+      // const data = await fetchTableRows(constructBody());
+      const data = mockKioskDocumentsTableRowsResponse;
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;
