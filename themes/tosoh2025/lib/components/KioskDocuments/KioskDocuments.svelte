@@ -51,9 +51,7 @@
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const todayInMilliSeconds = Math.floor(today.getTime());
-    // 1896652800000
 
-    // 1758574800000
     return [
       {
         columnId: 'start_date',
@@ -110,7 +108,7 @@
 </script>
 
 {#if title || description}
-  <div class="max-w-max-page gap-md p-md md:pl-2xl md:pr-2xl m-auto mt-[6rem] flex flex-col">
+  <div class="max-w-max-page gap-md p-md md:pl-2xl md:pr-2xl m-auto flex flex-col pt-0">
     {#if title}
       <h2 class="font-bold">{title}</h2>
     {/if}

@@ -1,3 +1,5 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
 {% set filter_columns = module.filters|map('hubdb_column_id')|join(',') %}
 {% set access_level = module.access_level or "customer" %}
 {% set breadcrumbs = module.breadcrumbs %}
@@ -65,36 +67,7 @@ window.Tosoh.SupportPortalContent = { filters, search, title, description, acces
         </div>
         </div>
 {% else %}
-  <div class="mt-32"></div>
-  {%- if breadcrumbs|length > 0 -%}
-    <div class="gap-base max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto flex items-center">
-      {%- for breadcrumb in breadcrumbs %}
-  
-        {% if !loop.last %}
-          <a href="{{ breadcrumb.url.href }}" class="text-nickel cursor-pointer text-lg">
-            {{ breadcrumb.title }}
-          </a>
-          <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
-            <svg
-              class="max-h-inherit max-w-inherit"
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              height="100%"
-              viewBox="0 0 11 19"
-              fill="none">
-              <path d="M1.55 0L0 1.55L7.95 9.5L0 17.45L1.55 19L11 9.5L1.55 0Z" fill="currentColor" />
-            </svg>
-          </div>
-        {% endif %}
-  
-        {% if loop.last %}
-          <a href="{{ breadcrumb.url.href }}" class=" cursor-pointer text-default font-bold text-lg">
-            {{ breadcrumb.title }}
-          </a>
-        {% endif %}
-      {%- endfor -%}
-    </div>
-  {%- endif -%}
+  {{macros.breadcrumbs(breadcrumbs)}}
 
 <tosoh-support-portal></tosoh-support-portal>
 

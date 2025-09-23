@@ -10,7 +10,7 @@ exports.main = async (req) => {
         const limit = body?.limit ? parseInt(body.limit, 10) : 12;
         const offset = body?.offset ? parseInt(body.offset, 10) : 0;
         const filters = body?.filters || {};
-        const numericComparisonFilters = body?.numericComparisonFilters || {};
+        const numericComparisonFilters = body?.numericComparisonFilters || [];
         const HUBDB_ENDPOINT = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}`;
         if (!tableId || !properties) {
             throw new Error("Make sure to include tableId and properties in request body");

@@ -23,6 +23,38 @@
   -}}
 {%- endmacro -%}
 
+{%- macro breadcrumbs(breadcrumbs) -%}
+  <div class="mt-[6rem]"></div>
+
+  {%- if breadcrumbs|length > 0 -%}
+    <div class="gap-base max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto flex items-center">
+      {%- for breadcrumb in breadcrumbs %}
+
+        {% if !loop.last %}
+          <a href="{{ breadcrumb.url.href }}" class="text-nickel cursor-pointer text-lg">{{ breadcrumb.title }}</a>
+          <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
+            <svg
+              class="max-h-inherit max-w-inherit"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              viewBox="0 0 11 19"
+              fill="none">
+              <path d="M1.55 0L0 1.55L7.95 9.5L0 17.45L1.55 19L11 9.5L1.55 0Z" fill="currentColor" />
+            </svg>
+          </div>
+        {% endif %}
+
+        {% if loop.last %}
+          <a href="{{ breadcrumb.url.href }}" class="text-default cursor-pointer text-lg font-bold">
+            {{ breadcrumb.title }}
+          </a>
+        {% endif %}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- endmacro -%}
+
 {%- macro auth_wrapper() -%}
   <div class="max-w-max-page relative m-auto flex min-h-[100vh] flex-col-reverse lg:flex-row">
     <img

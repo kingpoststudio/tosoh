@@ -21,7 +21,7 @@ const generateFields = () => {
         textField('title', 'Title'),
         textField('hubdb_column_id', 'HubDB Column ID', {
           inline_help_text:
-            'Defines the URL parameter that will be used to pass the search query to the search engine.',
+            'Defines the hubDB column id that will be used to pass the search query to the search engine.',
           default: 'search_term',
           required: true,
         }),
