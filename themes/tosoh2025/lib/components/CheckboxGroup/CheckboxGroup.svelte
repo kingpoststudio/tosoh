@@ -9,6 +9,7 @@
     labelPosition = 'top',
     disableReset,
     label,
+    customClearFilter,
   }: {
     options: any[];
     name: string;
@@ -17,17 +18,20 @@
     labelPosition?: 'top' | 'left';
     disableReset?: boolean;
     label?: string;
+    customClearFilter?: () => void;
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
   const activeFilters = urlParams.getAll(name);
 
   const clearFilter = () => {
-    const url = new URL(window.location.href);
-    url.searchParams.delete(name);
-    window.history.pushState({}, '', url.toString());
-    // Trigger a custom event to notify form manager of the change
-    window.dispatchEvent(new Event('urlchange'));
+    if (customClearFilter) {
+      customClearFilter();
+    } else {
+      const url = new URL(window.location.href);
+      url.searchParams.delete(name);
+      window.location.href = url.toString();
+    }
   };
 
   const setupFilterTitle = (column: string) =>

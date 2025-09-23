@@ -67,12 +67,12 @@
     isLoading = true;
 
     try {
-      // const data = await getTableFilterOptions({
-      //   filters: filtersFromFields,
-      //   tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-      // });
+      const data = await getTableFilterOptions({
+        filters: filtersFromFields,
+        tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+      });
 
-      const data = mockKioskDocumentsFiltersResponse.results as any;
+      // const data = mockKioskDocumentsFiltersResponse.results as any;
 
       if (!data?.error) {
         if (data?.length > 0) {

@@ -64,8 +64,8 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      // const data = await fetchTableRows(constructBody());
-      const data = mockKioskDocumentsTableRowsResponse;
+      const data = await fetchTableRows(constructBody());
+      // const data = mockKioskDocumentsTableRowsResponse;
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;
