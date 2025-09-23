@@ -19,10 +19,10 @@
     label?: string;
   } = $props();
 
-  let activeOptions = $derived(options);
-
   const urlParams = new URLSearchParams(window.location.search);
   const activeFilters = urlParams.getAll(name);
+
+  console.log('activeFilters', activeFilters, name);
 
   const clearFilter = () => {
     const url = new URL(window.location.href);
@@ -61,9 +61,9 @@
     </div>
 
     <div class="w-full">
-      {#if activeOptions?.length > 0}
+      {#if options?.length > 0}
         <div class="gap-sm flex flex-col">
-          {#each activeOptions as option}
+          {#each options as option}
             <label
               class="gap-sm hover:text-imperial-red flex cursor-pointer items-center transition-colors duration-200"
             >

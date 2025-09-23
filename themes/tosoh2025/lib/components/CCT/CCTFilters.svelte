@@ -9,7 +9,7 @@
   import FilterForm from '../FilterForm/FilterForm.svelte';
   import Select from '../Select/Select.svelte';
   import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
-  import Checkbox from '../Checkbox/Checkbox.svelte';
+  import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
 
   const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];

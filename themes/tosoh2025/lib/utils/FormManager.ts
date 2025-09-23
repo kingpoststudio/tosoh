@@ -64,6 +64,7 @@ export const populateFormFromUrl = (
 
   Array.from(form.elements).forEach((el) => {
     const elName = el.getAttribute('name') as string;
+    console.log('Form element:', el.tagName, (el as HTMLInputElement)?.type, 'name:', elName);
 
     if (!elName) return;
 
@@ -82,17 +83,18 @@ export const populateFormFromUrl = (
         const input = el as HTMLInputElement;
         input.checked = values.includes(input.value);
         input.dispatchEvent(new Event('change', { bubbles: true }));
-      } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'radio') {
-        const input = el as HTMLInputElement;
-        input.checked = values.includes(input.value);
-        input.dispatchEvent(new Event('change', { bubbles: true }));
-      } else {
-        const input = el as HTMLInputElement;
-        if (!input.value || input.value === '') {
-          input.value = values.join(',');
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-        }
       }
+      // else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'radio') {
+      //   const input = el as HTMLInputElement;
+      //   input.checked = values.includes(input.value);
+      //   input.dispatchEvent(new Event('change', { bubbles: true }));
+      // } else {
+      //   const input = el as HTMLInputElement;
+      //   if (!input.value || input.value === '') {
+      //     input.value = values.join(',');
+      //     input.dispatchEvent(new Event('input', { bubbles: true }));
+      //   }
+      // }
     }
   });
 };
@@ -115,6 +117,8 @@ export function createFormManager(
   };
 
   let debounceTimeouts: Map<Element, Timer> = new Map();
+  let eventListeners: Map<Element, { type: string; handler: EventListener }[]> = new Map();
+
   const debounceInput = (element: Element, delay: number, callback: () => void) => {
     if (debounceTimeouts.has(element)) {
       clearTimeout(debounceTimeouts.get(element));
@@ -128,6 +132,14 @@ export function createFormManager(
     debounceTimeouts.set(element, timeoutId);
   };
 
+  const addEventListenerWithTracking = (element: Element, type: string, handler: EventListener) => {
+    element.addEventListener(type, handler);
+    if (!eventListeners.has(element)) {
+      eventListeners.set(element, []);
+    }
+    eventListeners.get(element)?.push({ type, handler });
+  };
+
   const setupForm = () => {
     if (triggerType === 'change') {
       Array.from(form.elements).forEach((element) => {
@@ -138,8 +150,8 @@ export function createFormManager(
           };
         }
 
-        if (element.tagName === 'INPUT') {
-          element.addEventListener('input', (e: Event) => {
+        if (element.tagName === 'INPUT' && (element as HTMLInputElement).type !== 'checkbox') {
+          const inputHandler = (e: Event) => {
             e.stopPropagation();
             const debounceAttr = element.getAttribute('data-debounce');
             const hasDebounce = debounceAttr !== null && !isNaN(parseInt(debounceAttr, 10));
@@ -154,7 +166,16 @@ export function createFormManager(
               setFormValuesToParams();
               if (onChange) onChange(e);
             }
-          });
+          };
+          addEventListenerWithTracking(element, 'input', inputHandler);
+        }
+
+        if (element.tagName === 'INPUT' && (element as HTMLInputElement).type === 'checkbox') {
+          const changeHandler = (e: Event) => {
+            setFormValuesToParams();
+            if (onChange) onChange(e);
+          };
+          addEventListenerWithTracking(element, 'change', changeHandler);
         }
       });
     }
@@ -194,10 +215,30 @@ export function createFormManager(
   const destroy = () => {
     // Clean up event listeners
     form.onsubmit = null;
+
+    // Clean up tracked event listeners
+    eventListeners.forEach((listeners, element) => {
+      listeners.forEach(({ type, handler }) => {
+        element.removeEventListener(type, handler);
+      });
+    });
+    eventListeners.clear();
+
+    // Clean up select element onchange handlers
+    Array.from(form.elements).forEach((element) => {
+      if (element.tagName === 'SELECT') {
+        (element as HTMLSelectElement).onchange = null;
+      }
+    });
+
     const resetButtons = form.querySelectorAll('[data-type="reset"]');
     resetButtons.forEach((button) => {
       (button as HTMLButtonElement).onclick = null;
     });
+
+    // Clear debounce timeouts
+    debounceTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+    debounceTimeouts.clear();
   };
 
   selectActiveFormValues();

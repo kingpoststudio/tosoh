@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: 'tosoh-documents',
+    tag: 'tosoh-kiosk-documents',
     shadow: 'none',
   }}
 />
@@ -22,24 +22,22 @@
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
 
-  let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
-    ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
-    : [];
+  let availableFilters =
+    window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters?.map(
+      (filter) => filter.hubdb_column_id
+    ) || [];
 
-  let searchColumnId = window?.Tosoh?.SupportPortalContent?.search
-    ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id
+  let searchColumnId = window?.Tosoh?.KioskDocumentsContent?.search
+    ? window?.Tosoh?.KioskDocumentsContent?.search?.hubdb_column_id
     : '';
 
-  let title = window?.Tosoh?.SupportPortalContent?.title;
-  let description = window?.Tosoh?.SupportPortalContent?.description;
+  let title = window?.Tosoh?.KioskDocumentsContent?.title;
+  let description = window?.Tosoh?.KioskDocumentsContent?.description;
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
   let hasError = $state(false);
   let isLoading = $state(false);
-
-  const params = new URLSearchParams(window.location.search);
-  let viewAs: 'grid' | 'list' = $state((params.get('view') as 'grid' | 'list') || 'grid');
 
   const constructFilterParams = () => {
     const params = new URLSearchParams(window.location.search);
@@ -88,7 +86,7 @@
 </script>
 
 {#if title || description}
-  <div class="max-w-max-page gap-md p-md md:pl-2xl md:pr-2xl m-auto flex flex-col">
+  <div class="max-w-max-page gap-md p-md md:pl-2xl md:pr-2xl m-auto mt-[6rem] flex flex-col">
     {#if title}
       <h2 class="font-bold">{title}</h2>
     {/if}
@@ -110,7 +108,7 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid {tableRows} {isLoading} {viewAs} {Card} {SkeletonCard}></ItemsGrid>
+      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard}></ItemsGrid>
 
       {#if tableRows?.length > 0}
         <PaginationWithLimit {totalItems}></PaginationWithLimit>
