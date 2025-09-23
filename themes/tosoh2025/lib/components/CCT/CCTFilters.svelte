@@ -66,6 +66,26 @@
   };
 
   const onPrint = () => {};
+
+  const splitCompetitorInstruments = (instruments: any[]) => {
+    let withSufficientData = [];
+    let withoutSufficientData = [];
+
+    withSufficientData =
+      instruments?.filter(
+        (instrument) => instrument?.sufficient_data_status === 'sufficient_data'
+      ) || [];
+    withoutSufficientData =
+      instruments?.filter(
+        (instrument) => instrument?.sufficient_data_status === 'non_sufficient_data'
+      ) || [];
+
+    return [...withSufficientData, ...withoutSufficientData];
+  };
+
+  const customDisabledOption = (option: any) => {
+    return option.sufficient_data_status === 'non_sufficient_data';
+  };
 </script>
 
 <div
@@ -99,10 +119,11 @@
     </div>
     <div class="mt-base">
       <Select
-        options={activeCompetitorInstruments || []}
+        options={splitCompetitorInstruments(activeCompetitorInstruments)}
         name="competitor_instrument_name"
         label="Competitor Instrument"
         disabled={!isTosohInstrumentSelected}
+        {customDisabledOption}
       />
     </div>
   </FilterForm>

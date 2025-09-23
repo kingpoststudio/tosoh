@@ -212,7 +212,7 @@
                 onClick(match);
               }}
             >
-              {match}
+              {@html match}
             </button>
           {/if}
         {/each}

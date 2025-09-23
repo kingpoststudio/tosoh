@@ -15,7 +15,7 @@
   {% set active_compariso_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__eq='~tosoh_instrument_name) %}
     {% for row in active_compariso_rows_based_on_tosoh_instrument %}
       {% for foreign_row in row.competitor_instrument_name %}
-        {{ active_competitor_instruments.append({name: foreign_row.product_name, label: foreign_row.company.label ~ ' : ' ~ foreign_row.product_name}) }}
+        {{ active_competitor_instruments.append({name: foreign_row.product_name, label: foreign_row.company.label ~ ' : ' ~ foreign_row.product_name, sufficient_data_status: foreign_row.sufficient_data_status.name }) }}
       {% endfor %}
     {% endfor %}
  {% endif %} 
@@ -52,50 +52,66 @@
 
   <div class="gap-md flex flex-col xl:flex-row">
     <tosoh-cct-filters></tosoh-cct-filters>
+
+    {% if !tosoh_instrument_name and !competitor_instrument_name %}
+      <div class="text-xl font-semibold">{{ module.no_instrument_selected_message }}</div>
+    {% else %}
     <div class="border-border flex w-full flex-col rounded-2xl border">
       <div class="p-base flex w-full items-center justify-center">
         <h6 class="font-semibold">
-          TOSOH : {{ tosoh_instrument_name }}
-          <span class="text-imperial-red font-semibold">versus</span>
-          {{ competitor_instrument.company.label }} : {{ competitor_instrument.product_name }}
-        </h6>
-      </div>
-      <div class="w-full max-w-[calc(100vw-(var(--spacing-md)*2))] h-full">
-        <tosoh-scroll-x>
-          <div>
-            <div class="mx-auto flex w-full min-w-[56rem] lg:min-w-0">
-              {% for role in roles %}
-                <tosoh-tab-group
-                  {{ loop.last ? 'isLast="true"' : '' }}
-                  variant="action"
-                  groupId="{{ role[1] }}"
-                  {{ loop.first ? 'active="true"' : '' }}>
-                  {{ role[0] }}
-                </tosoh-tab-group>
-              {% endfor %}
-            </div>
-          </div>
-          <div class="divide-border flex h-full w-full min-w-[56rem] justify-center divide-x lg:min-w-0">
-            <div class="p-md flex w-full h-full flex-col">
-              <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
-              {% for role in roles %}
-                <tosoh-tab-group variant="tab" groupId="{{ role[1] }}" {{ loop.first ? 'active="true"' : '' }}>
-                  <div>{{ tosoh_instrument[role[1]] }}</div>
-                </tosoh-tab-group>
-              {% endfor %}
-            </div>
+        {% if tosoh_instrument_name %}
+            TOSOH : {{ tosoh_instrument_name }}
+        {% endif %}
+        {% if competitor_instrument_name %}
+            <span class="text-imperial-red font-semibold">
+            versus</span>
+            {{ competitor_instrument.company.label }} : {{ competitor_instrument.product_name }}
+          {% endif %}
+          </h6>
+        </div>
+        <div class="w-full max-w-[calc(100vw-(var(--spacing-md)*2))] h-full">
+          <tosoh-scroll-x>
+              <div class="mx-auto flex w-full min-w-[56rem] lg:min-w-0 {{ tosoh_instrument_name or competitor_instrument_name ? 'opacity-100' : 'opacity-50 pointer-events-none' }}">
+                {% for role in roles %}
+                  <tosoh-tab-group
+                    {{ loop.last ? 'isLast="true"' : '' }}
+                    variant="action"
+                    groupId="{{ role[1] }}"
+                    {{ loop.first ? 'active="true"' : '' }}>
+                    {{ role[0] }}
+                  </tosoh-tab-group>
+                {% endfor %}
+              </div>
+            <div class="divide-border flex h-full w-full min-w-[56rem] justify-center divide-x lg:min-w-0">
+              <div class="p-md flex w-full h-full flex-col">
+                {% if tosoh_instrument_name %}
+                <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
+                {% for role in roles %}
+                  <tosoh-tab-group variant="tab" groupId="{{ role[1] }}" {{ loop.first ? 'active="true"' : '' }}>
+                    <div>{{ tosoh_instrument[role[1]] }}</div>
+                  </tosoh-tab-group>
+                {% endfor %}
+                {% else %}
+                  <div class="font-semibold">{{ module.no_tosoh_instrument_selected_message }}</div>
+                {% endif %}
+              </div>
 
-            <div class="p-md flex w-full h-full flex-col">
-              <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
-              {% for role in roles %}
-                <tosoh-tab-group variant="tab" groupId="{{ role[1] }}" {{ loop.first ? 'active="true"' : '' }}>
-                  <div>{{ competitor_instrument[role[1]] }}</div>
-                </tosoh-tab-group>
-              {% endfor %}
+              <div class="p-md flex w-full h-full flex-col">
+                {% if competitor_instrument_name %}
+                <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
+                {% for role in roles %}
+                  <tosoh-tab-group variant="tab" groupId="{{ role[1] }}" {{ loop.first ? 'active="true"' : '' }}>
+                    <div>{{ competitor_instrument[role[1]] }}</div>
+                  </tosoh-tab-group>
+                {% endfor %}
+                {% else %}
+                  <div class="font-semibold">{{ module.no_competitor_instrument_selected_message }}</div>
+                {% endif %}
+              </div>
             </div>
-          </div>
-        </tosoh-scroll-x>
+          </tosoh-scroll-x>
+        </div>
       </div>
     </div>
-  </div>
+  {% endif %}
 </div>

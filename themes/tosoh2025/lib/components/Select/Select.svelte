@@ -11,6 +11,7 @@
     disableReset = false,
     label,
     customClearFilter,
+    customDisabledOption,
   }: {
     options: any[];
     name: string;
@@ -21,6 +22,7 @@
     disableReset?: boolean;
     label?: string;
     customClearFilter?: () => void;
+    customDisabledOption?: (option: any) => boolean;
   } = $props();
   let activeOptions = $derived(options);
 
@@ -86,7 +88,11 @@
 
         {#if activeOptions?.length > 0}
           {#each activeOptions as option}
-            <option value={option.name} class="text-default" selected={option.name === activeFilter}
+            <option
+              value={option.name}
+              class="text-default disabled:cursor-not-allowed disabled:opacity-50"
+              selected={option.name === activeFilter}
+              disabled={customDisabledOption ? customDisabledOption(option) : false}
               >{option.label || option.name}</option
             >
           {/each}
