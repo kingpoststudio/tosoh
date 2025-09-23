@@ -11,3 +11,4 @@ import './components/TabGroup/TabGroup.svelte';
 import './components/CCTDetailsFIlters/CCTDetailsFilters.svelte';
 import './components/ScrollX/ScrollX.svelte';
 import './components/KioskDocuments/KioskDocuments.svelte';
+import './components/Modal/Modal.svelte';

@@ -198,8 +198,8 @@
       > .inner {
         display: flex;
         flex-direction: column;
-        color: var(--color-ghost-white);
-        background: var(--color-prussian-blue);
+        color: var(--color-default);
+        background: var(--color-ghost-white);
         min-width: 24rem;
         width: fit-content;
         max-width: calc(100vw - var(--space-xl));
@@ -218,12 +218,12 @@
           display: flex;
           align-items: center;
           justify-content: space-between;
-          padding: var(--space);
-          border-bottom: 1px solid var(--color-ghost-white);
+          padding: var(--spacing-md);
+          border-bottom: 1px solid var(--color-default);
         }
 
         > .content {
-          padding: var(--space-xl);
+          padding: var(--spacing-md);
           overflow-y: auto;
           flex-grow: 1;
           max-height: calc(90vh - 4rem);
