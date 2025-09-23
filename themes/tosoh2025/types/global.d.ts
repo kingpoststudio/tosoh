@@ -35,6 +35,7 @@ declare global {
         search: {
           hubdb_column_id: string;
           title: string;
+          typeahead_enabled: boolean;
         };
         title: string;
         topic_filters: {

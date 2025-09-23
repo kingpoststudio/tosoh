@@ -29,6 +29,7 @@
   const searchColumnId = searchFromFields?.hubdb_column_id;
   const searchTitle = searchFromFields?.title;
   const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
+  const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
   const topic_filters = window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters;
   let filtersFromFields = topic_filters?.map((filter) => filter.hubdb_column_id) || [];
@@ -148,6 +149,7 @@
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
     {searchColumnId}
     title={searchTitle || ''}
+    typeheadEnabled={searchTypeheadEnabled}
   />
 
   <FilterForm trigger="change" {onChange} {onReset}>

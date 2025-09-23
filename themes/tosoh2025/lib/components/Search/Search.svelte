@@ -12,6 +12,7 @@
     title,
     placeholder,
     customClasses,
+    typeaheadEnabled,
   }: {
     accessLevel?: string;
     searchTableId: string;
@@ -20,6 +21,7 @@
     title?: string;
     placeholder?: string;
     customClasses?: string;
+    typeaheadEnabled?: boolean;
   } = $props();
 
   let matches: string[] = $state([]);
@@ -178,8 +180,9 @@
         class={` relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
       >
         <input
-          oninput={fetchMatches}
+          oninput={typeaheadEnabled ? fetchMatches : () => {}}
           name={searchColumnId}
+          defaultValue={activeFilter}
           data-debounce="500"
           class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
           placeholder={placeholder || 'Search here...'}

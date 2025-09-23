@@ -25,6 +25,9 @@ const generateFields = () => {
           default: 'search_term',
           required: true,
         }),
+        booleanField('typeahead_enabled', 'Is typeahead enabled?', {
+          default: false,
+        }),
       ],
     }),
     topicFilters,
