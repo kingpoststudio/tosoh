@@ -17,12 +17,12 @@
   import SearchInput from '../Search/Search.svelte';
   import Select from '../Select/Select.svelte';
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
-  import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
+  import { parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import { mockHemoglobinVariantsLibraryFiltersResponse } from './mock';
-  import InputNumber from '../InputNumber/InputNumber.svelte';
+  import Input from '../Input/Input.svelte';
 
   let { isParentLoading } = $props();
 
@@ -187,8 +187,9 @@
         {/if}
         {#if getFilterTopic(columnId)?.type === 'range-pm'}
           <div class="mt-base">
-            <InputNumber
+            <Input
               name={columnId}
+              type="number"
               disabled={isParentLoading || isLoading || hasError}
               {isLoading}
               label={getFilterTopic(columnId)?.filter_label}

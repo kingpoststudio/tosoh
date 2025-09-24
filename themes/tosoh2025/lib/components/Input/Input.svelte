@@ -3,6 +3,8 @@
 
   let {
     name,
+
+    type = 'text',
     disabled,
     displayLabel = true,
     labelPosition = 'top',
@@ -12,6 +14,7 @@
     isLoading,
   }: {
     name: string;
+    type: string;
     disabled: boolean;
     displayLabel?: boolean;
     labelPosition?: 'top' | 'left';
@@ -47,7 +50,7 @@
       {#if activeFilters.length > 0 && !disableReset}
         <button
           type="button"
-          {disabled}
+          disabled={disabled || isLoading}
           transition:fade={{ duration: 200 }}
           class="fill-imperial-red plain h-4 w-4 cursor-pointer"
           onclick={clearFilter}
@@ -61,13 +64,18 @@
         </button>
       {/if}
     </div>
-    <div class="w-full">
+    <div
+      class={` focus-within:border-imperial-red border-border relative w-full rounded-lg border`}
+    >
       <div class="gap-sm flex flex-col">
-        <input type="number" {name} {disabled} />
+        <input
+          {type}
+          data-debounce="500"
+          {name}
+          disabled={disabled || isLoading}
+          class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
+        />
       </div>
     </div>
   </div>
 </div>
-
-<style>
-</style>
