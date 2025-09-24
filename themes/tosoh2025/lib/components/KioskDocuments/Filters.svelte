@@ -22,6 +22,7 @@
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import { mockKioskDocumentsFiltersResponse } from './mock';
+  import { getFilter } from '../../utils/utils';
 
   let { isParentLoading } = $props();
 
@@ -29,6 +30,7 @@
   const searchColumnId = searchFromFields?.hubdb_column_id;
   const searchTitle = searchFromFields?.title;
   const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
+  // const searchTableId = searchFromFields?.hubdb_table_id;
   const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
   const topic_filters = window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters;
@@ -105,10 +107,6 @@
     getFilterOptions();
   };
 
-  const getFilterTopic = (columnId: string) => {
-    return topic_filters?.find((filter) => filter.hubdb_column_id === columnId);
-  };
-
   onMount(() => {
     getFilterOptions();
   });
@@ -155,8 +153,10 @@
 
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
+      {@const filter = getFilter(topic_filters, columnId)}
+
       {#if searchColumnId !== columnId}
-        {#if getFilterTopic(columnId)?.type === 'dropdown'}
+        {#if filter?.type === 'dropdown'}
           <div class="mt-base">
             <Select
               options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[

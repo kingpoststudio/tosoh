@@ -23,11 +23,12 @@
   import { fetchTableRows } from '../../services/fetchTableRows';
   import Filters from './Filters.svelte';
 
-  let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
-    ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
-    : [];
+  let availableFilters =
+    window?.Tosoh?.SupportPortalContent?.topic_filters?.filters?.map(
+      (filter: any) => filter.hubdb_column_id
+    ) || [];
 
-  let accessLevel = window?.Tosoh?.SupportPortalContent?.accessLevel || 'Customer';
+  let accessLevel = window?.Tosoh?.SupportPortalContent?.access_level || 'Customer';
 
   let searchColumnId = window?.Tosoh?.SupportPortalContent?.search
     ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id

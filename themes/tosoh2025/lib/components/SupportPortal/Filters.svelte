@@ -21,16 +21,22 @@
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
   const searchColumnTitle = searchFromFields?.title;
+  const searchColumnTypeaheadEnabled = searchFromFields?.typeahead_enabled;
   //  const searchTableId = searchFromFields?.hubdb_table_id; // CHANGE TO THAT IN PROD
   const searchTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
 
   const isSearchAccessLevelFilterEnabled =
     window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
 
-  let accessLevel = window?.Tosoh?.SupportPortalContent?.accessLevel || 'Customer';
+  let accessLevel = window?.Tosoh?.SupportPortalContent?.access_level || 'Customer';
 
-  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
-    ? ([...window.Tosoh.SupportPortalContent.filters.split(','), searchColumnId] as ColumnId[])
+  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.topic_filters?.filters
+    ? ([
+        ...window.Tosoh.SupportPortalContent.topic_filters.filters.map(
+          (filter: any) => filter.hubdb_column_id
+        ),
+        searchColumnId,
+      ] as ColumnId[])
     : [];
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
@@ -139,7 +145,7 @@
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
     {searchColumnId}
     title={searchColumnTitle || ''}
-    typeaheadEnabled={true}
+    typeaheadEnabled={searchColumnTypeaheadEnabled}
   />
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}

@@ -24,7 +24,7 @@
   import { mockKioskDocumentsTableRowsResponse } from './mock';
   let availableFilters =
     window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters?.map(
-      (filter) => filter.hubdb_column_id
+      (filter: any) => filter.hubdb_column_id
     ) || [];
 
   let searchColumnId = window?.Tosoh?.KioskDocumentsContent?.search

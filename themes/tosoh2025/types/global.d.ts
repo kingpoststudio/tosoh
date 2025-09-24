@@ -1,6 +1,8 @@
 import type { CCTComparisons, CCTInstruments, CCTComparison } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
+type FilterType = 'dropdown' | 'checkbox' | 'range-pm';
+
 declare global {
   interface Window {
     Tosoh: {
@@ -8,16 +10,30 @@ declare global {
         mainNavigationMenu?: HubSpotMenu;
       };
       SupportPortalContent: {
-        filters: string;
+        access_level: 'Customer' | 'Distributor' | 'Internal';
+        breadcrumbs: {
+          title: string;
+          url: {
+            content_id: string | null;
+            href: string;
+            href_with_scheme: string;
+            type: string;
+          };
+        }[];
+
+        description: string;
+        display_video_download: boolean;
         search: {
-          title?: string;
-          hubdb_table_id: string;
           hubdb_column_id: string;
+          hubdb_table_id: number;
           is_access_level_filter_enabled: boolean;
+          title: string;
+          typeahead_enabled: boolean;
         };
         title: string;
-        description: string;
-        accessLevel: 'Distributor' | 'Customer' | 'Internal';
+        topic_filters: TopicFilters;
+
+        type: 'module';
       };
       HemoglobinVariantsLibraryContent: {
         breadcrumbs: {
@@ -38,17 +54,7 @@ declare global {
           hubdb_table_id: number;
         };
         title: string;
-        topic_filters: {
-          hubdb_table_id: number;
-          filters: {
-            filter_label: string;
-            hubdb_column_id: string;
-            max: number;
-            min: number;
-            tolerance: number;
-            type: 'dropdown' | 'checkbox' | 'range-pm';
-          }[];
-        };
+        topic_filters: TopicFilters;
       };
 
       KioskDocumentsContent: {
@@ -70,17 +76,7 @@ declare global {
           hubdb_table_id: number;
         };
         title: string;
-        topic_filters: {
-          hubdb_table_id: number;
-          filters: {
-            filter_label: string;
-            hubdb_column_id: string;
-            max: number;
-            min: number;
-            tolerance: number;
-            type: 'dropdown' | 'checkbox' | 'range-pm';
-          }[];
-        };
+        topic_filters: TopicFilters;
       };
       WebinarListings: {
         tableId: string;

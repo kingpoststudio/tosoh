@@ -30,8 +30,9 @@
 
   const searchFromFields = hemoglobinVariantsLibraryContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
-  const searchTitle = searchFromFields?.title;
+  // const searchTableId = searchFromFields?.hubdb_table_id;
   const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
+  const searchTitle = searchFromFields?.title;
   const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
   const topic_filters = hemoglobinVariantsLibraryContent?.topic_filters?.filters;

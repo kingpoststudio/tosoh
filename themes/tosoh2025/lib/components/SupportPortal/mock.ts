@@ -5,15 +5,77 @@ const search = {
   hubdb_column_id: 'search_terms',
 };
 
-// window.Tosoh = window.Tosoh || {};
 // window.Tosoh.SupportPortalContent = {
-//   filters: filters,
-//   search: {
-//     ...search,
-//   },
-//   title: 'Tosoh Support Portal',
+//   access_level: 'Customer',
+//   breadcrumbs: [
+//     {
+//       title: 'Home',
+//       url: {
+//         content_id: null,
+//         href: 'home',
+//         href_with_scheme: 'home',
+//         type: 'EXTERNAL',
+//       },
+//     },
+//     {
+//       title: 'Tosoh Support Portal',
+//       url: {
+//         content_id: null,
+//         href: 'Tosoh Support Portal',
+//         href_with_scheme: 'Tosoh Support Portal',
+//         type: 'EXTERNAL',
+//       },
+//     },
+//   ],
 //   description:
 //     'Your centralized hub for technical assistance, product resources, and expert guidance across Tosoh diagnostic systems.',
+//   display_video_download: true,
+//   search: {
+//     hubdb_column_id: 'search_term',
+//     hubdb_table_id: 651452658,
+//     is_access_level_filter_enabled: true,
+//     title: 'Search',
+//     typeahead_enabled: true,
+//   },
+//   title: 'Tosoh Support Portal',
+//   topic_filters: {
+//     filters: [
+//       {
+//         filter_label: 'Product Family',
+//         hubdb_column_id: 'product_family',
+//         max: 0,
+//         min: 0,
+//         tolerance: 1,
+//         type: 'dropdown',
+//       },
+//       {
+//         filter_label: 'Product Type',
+//         hubdb_column_id: 'product_type',
+//         max: 0,
+//         min: 0,
+//         tolerance: 1,
+//         type: 'dropdown',
+//       },
+//       {
+//         filter_label: 'Document Category',
+//         hubdb_column_id: 'document_category',
+//         max: 0,
+//         min: 0,
+//         tolerance: 1,
+//         type: 'dropdown',
+//       },
+//       {
+//         filter_label: 'Document Type',
+//         hubdb_column_id: 'document_type',
+//         max: 0,
+//         min: 0,
+//         tolerance: 1,
+//         type: 'dropdown',
+//       },
+//     ],
+//     hubdb_table_id: 99968194,
+//   },
+//   type: 'module',
 // };
 
 export const mockPortalItems = {

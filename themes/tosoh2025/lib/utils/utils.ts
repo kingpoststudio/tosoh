@@ -17,3 +17,7 @@ export const isPast = (date: number) => {
     if (now > dateEvent) return true;
   }
 };
+
+export const getFilter = (topic_filters: { hubdb_column_id: string }[], columnId: string) => {
+  return topic_filters?.find((filter) => filter?.hubdb_column_id === columnId);
+};
