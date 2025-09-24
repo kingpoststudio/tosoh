@@ -19,6 +19,36 @@ declare global {
         description: string;
         accessLevel: 'Distributor' | 'Customer' | 'Internal';
       };
+      HemoglobinVariantsLibraryContent: {
+        breadcrumbs: {
+          title: string;
+          url: {
+            content_id: string | null;
+            href: string;
+            href_with_scheme: string;
+            type?: string;
+          };
+        }[];
+        eyebrow: string;
+        title: string;
+        search: {
+          hubdb_column_id: string;
+          title: string;
+          typeahead_enabled: boolean;
+        };
+        title: string;
+        topic_filters: {
+          hubdb_table_id: number;
+          filters: {
+            filter_label: string;
+            hubdb_column_id: string;
+            max: number;
+            min: number;
+            tolerance: number;
+            type: 'dropdown' | 'checkbox' | 'range-pm';
+          }[];
+        };
+      };
 
       KioskDocumentsContent: {
         description: string;

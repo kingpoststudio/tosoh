@@ -44,7 +44,7 @@
   <div class={`gap-sm flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     <div class="gap-sm flex items-center">
       {#if displayLabel}
-        <div class="text-lg font-bold">{label || setupFilterTitle(name)}</div>
+        <div class="text-lg font-semibold">{label || setupFilterTitle(name)}</div>
       {/if}
       {#if activeFilters.length > 0 && !disableReset}
         <button

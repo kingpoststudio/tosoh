@@ -1,0 +1,9 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
+{% require_js position="head" %}
+    <script>    
+    window.Tosoh.HemoglobinVariantsLibraryContent =  {{ module|tojson }};
+    </script>
+{% end_require_js %}   
+
+<tosoh-hemoglobin-variants-library></tosoh-hemoglobin-variants-library>

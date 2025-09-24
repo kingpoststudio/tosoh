@@ -12,3 +12,4 @@ import './components/CompetitorComparisonToolComparisonFilters/CompetitorCompari
 import './components/ScrollX/ScrollX.svelte';
 import './components/KioskDocuments/KioskDocuments.svelte';
 import './components/Modal/Modal.svelte';
+import './components/HemoglobinVariantsLibrary/HemoglobinVariantsLibrary.svelte';
