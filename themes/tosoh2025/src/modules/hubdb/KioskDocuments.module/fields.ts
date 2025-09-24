@@ -16,7 +16,7 @@ const generateFields = () => {
       default:
         'Browse technical manuals, user guides, and official documentation to support your Tosoh products and services.',
     }),
-    searchField,
+    searchField(),
     topicFilters,
   ];
 };

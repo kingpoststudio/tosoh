@@ -84,7 +84,7 @@ export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   ],
 });
 
-const searchVisibilityRule = {
+export const searchVisibilityRule = {
   visibility: {
     controlling_field: 'search.enable_search',
     controlling_value_regex: true,
@@ -95,12 +95,12 @@ const searchVisibilityRule = {
 export const searchField = (extraFields: any = []) => {
   return groupField('search', 'Search', {
     children: [
-      ...extraFields,
       booleanField('enable_search', 'Enable search?', { id: 'search.enable_search' }),
       textField('hubdb_column_id', 'HubDB Column ID', {
         inline_help_text: 'Defines the hubDB column id that will be used to search against.',
         default: 'search_term',
         required: true,
+        ...searchVisibilityRule,
       }),
       textField('title', 'Title', { ...searchVisibilityRule }),
       textField('placeholder', 'Placeholder', {
@@ -115,6 +115,7 @@ export const searchField = (extraFields: any = []) => {
         required: true,
         ...searchVisibilityRule,
       }),
+      ...extraFields,
     ],
   });
 };
