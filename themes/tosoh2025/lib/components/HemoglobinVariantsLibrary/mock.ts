@@ -88,6 +88,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           '<p>Embury SH et al., J Clin Invest. 1980 Dec;66(6):1319-25.&nbsp;<br>Baysal E et al., Am J Hematol. 1994 Jul;46(3):208-13.<br>Kazazian HH Jr, Semin Hematol. 1990 Jul;27(3):209-28.</p>',
         ethnicity:
           'The 3.7 kb deletion is the most common type of alpha-thal-2 found in numerous populations often at extremely high frequencies (India, Far Eastern countries; African populations, Mediterranean populations, etc.)',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Homozygous%20alpha%20plus%20thalassaemia%20-%203.7kb%20deletion_Piano.png',
+          width: 1219,
+          height: 607,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'Deletion of 3804 nts from the alpha2 gene to alpha1 gene',
         variant_name: 'Homozygous alpha plus thalassaemia - 3.7kb deletion',
         instrument: {
@@ -119,6 +126,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_laboratory_findings:
           '<p>Hb 11 - 13 g/dL<br>Hb A2 1.8 - 2.5 %<br>MCH 20 - 23 pg<br>MCV 65 - 70 fL</p>',
         homozygote_comments: '-',
+        aka: '3.7 kb (type I) deletion alpha-2',
         area_under_peak: '~3',
         window: {
           id: '9',
@@ -153,6 +161,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           '<strong>Hb Constant Spring</strong><br>Clegg JB et al., Nature. 1971 Dec 10;234(5328):337-40.<br>Efremov GD et al., J Clin Invest. 1971 Aug;50(8):1628-36.<br>Eng LI et al., Am J Hum Genet. 1973 Jul;25(4):382-7.<br>Kan YW et al., Br J Haematol. 1974 Sep;28(1):103-7.&nbsp;<br>Lie-Injo LE et al., Blood. 1974 Feb;43(2):251-9.<br>Xu XM et al.,Hemoglobin. 1994 Jan;18(1):61-4.<br>Smetanina NS et al., Acta Haematol. 1995;94(3):144-7<br>Harteveld CL et al., Haematologica. 2001 Jan;86(1):36-8.<br>Thonglairoam V et al., Am J Hematol. 1991 Dec;38(4):277-80.<br><br><strong>Alpha zero thal</strong><br>Pressley L et al., Proc Natl Acad Sci U S A. 1980 Jun;77(6):3586-9.<br>Bowden DK et al., Br J Haematol. 1992 May;81(1):104-8.<br>Daenen S et al., Acta Haematol. 1987;78(1):23-7.<br>Waye JS et al., Hum Hered. 1994 Mar-Apr;44(2):61-7.&nbsp;',
         ethnicity:
           '<strong>Hb Constant Spring</strong><br>Found in modest frequencies in many SE Asian populations (China, Vietnam, Laos, Cambodia, India, Malaysia, Indonesia, etc.) incidence in Bangkok 1.5%<br>Also found in Arabia, Greece, and Sicilia.<br>&nbsp;<br><strong>Alpha zero thal</strong><br>-SEA/αα is found in various East Asian populations',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Constant%20Spring%20+%20alpha%20zero%20thalassaemia_Piano.png',
+          width: 1218,
+          height: 609,
+          altText: '',
+          type: 'image',
+        },
         mutation_description:
           '<strong>Hb Constant Spring</strong><br>Alpha2 142, Stop&gt;Gln; modified C-terminal sequence: (142)Gln-Ala-Gly-Ala-Ser-Val-Ala-Val-Pro-Pro-Ala- Arg-Trp-Ala-Ser-Gln-Arg-Ala-Leu-Leu-Pro- Ser-Leu-His-Arg-Pro-Phe-Leu-Val-Phe-(172)Glu-COOH&nbsp;<br><br><strong>&nbsp;Alpha zero thalassaemia</strong><br>Deletion of 19301 nts from the alpha2 gene to alpha1 gene',
         variant_name: 'Hb Constant Spring + alpha zero thalassaemia (1)',
@@ -187,6 +202,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_laboratory_findings:
           '<strong>Hb Constant Spring</strong><br>Hb 11 - 12 g/dL<br>Hb A2 1.8 - 2 %<br>MCH 21 - 24 pg<br>MCV 73 - 75 fL',
         homozygote_comments: '-',
+        aka: '<strong>Hb Constant Spring</strong><br>Codon 142 (TAA-&gt;CAA) of the alpha2 gene alpha-Thal-2<br><br><strong>&nbsp;Alpha zero thalassaemia</strong><br>-(SEA); deletion of ~20 kb including both alpha-globin genes alpha-Thal-1',
         area_under_peak: '~9',
         window: {
           id: '9',
@@ -222,6 +238,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           'Ribeiro ML et al., Hum Genet. 1997 May;99(5):669-73.<br>Labie D et al., Biochim Biophys Acta. 1966 Oct 31;127(2):428-37.<br>Fioretti G et al., Am J Hum Genet. 1992 Apr;50(4):781-6.',
         ethnicity:
           'Hb Lepore-BW is the most common Hb Lepore type<br>Found mainly in Italian families; it has also been observed in families from Rumania, Yugoslavia, Turkey, Cyprus, Jamaica, Cuba, Greece, England, Australia, Mexico, etc.',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Lepore_Piano.png',
+          width: 1219,
+          height: 607,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'Delta-beta hybrid (delta through 87; beta from 116)&nbsp;',
         variant_name: 'Hb Lepore - Boston-Washington (1)',
         instrument: {
@@ -253,6 +276,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '2-6',
         window: {
           id: '8',
@@ -287,6 +311,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           'Huisman TH et al., Arch Biochem Biophys. 1972 Dec;153(2):850-3.&nbsp;<br>Kendall AG et al., Am J Hum Genet. 1973 Sep;25(5):548-63.<br>Nute PE et al., Br J Haematol. 1976 Jan;32(1):55-63.<br>Ojwang PJ et al., Hemoglobin. 1983;7(2):115-23.&nbsp;<br>Waye JS et al., Am J Hematol. 1992 Dec;41(4):289-91.&nbsp;<br>Rai DK et al., Hemoglobin. 2002 Feb;26(1):71-5.',
         ethnicity:
           'Found in several families from Kenya, Uganda, and other countries near Lake Victoria in Africa; also in a few African-American families',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Kenya_Piano.png',
+          width: 1218,
+          height: 607,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'Agamma-beta hybrid&nbsp;<br>(Agamma through 80; beta from 87)',
         variant_name: 'Hb Kenya (gamma-beta hybrid, HPFH) (1)',
         instrument: {
@@ -319,6 +350,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: 'HPFH-7; Kenya',
         area_under_peak: '~8',
         window: {
           id: '8',
@@ -351,6 +383,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         references:
           'Huisman TH et al., Proc Natl Acad Sci U S A. 1974 Aug;71(8):3270-3.<br>Huisman TH et al., Am J Hum Genet. 1976 Jul;28(4):363-9.<br>Garel MC et al., Biochim Biophys Acta. 1976 Dec 22;453(2):459-71.<br>Scott AF et al., Am J Hum Genet. 1981 Jan;33(1):129-33.<br>Cleek MP et al., Am J Hum Genet. 1983 Nov;35(6):1314-6',
         ethnicity: 'Found in a few Black families',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Grady_Piano.png',
+          width: 1219,
+          height: 606,
+          altText: '',
+          type: 'image',
+        },
         mutation_description:
           'Glu-Phe-Thr- inserted between codons 118(H1) and 119(H2) of alpha1 or alpha2',
         variant_name: 'Hb Grady',
@@ -382,6 +421,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '~14',
         window: {
           id: '8',
@@ -413,6 +453,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         comments: '-',
         references: '-',
         ethnicity: 'Found in Japanese',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Yanase_Piano.png',
+          width: 1218,
+          height: 609,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'Alpha1 122(H5) His&gt;Tyr',
         variant_name: 'Hb Yanase',
         instrument: {
@@ -443,6 +490,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '4-6',
         window: {
           id: '8',
@@ -477,6 +525,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           'Hb J-Iran<br>Rahbar S et al., Br Med J. 1967 Mar 18;1(5541):674-7.&nbsp;<br>Arcasoy A et al., Hemoglobin. 1986;10(2):209-13.<br>&nbsp;<br><strong>Alpha plus thalassaemia</strong><br>Fei YJ et al., Acta Haematol. 1992;88(2-3):82-5.<br>Adekile AD et al., Acta Haematol. 1994;92(4):176-81.<br>Yuregir GT et al., Br J Haematol. 1992 Apr;80(4):527-32.',
         ethnicity:
           '<strong>Hb J-Iran</strong><br>Found in an Iranian family and in a Turkish family<br>&nbsp;<br><strong>Alpha plus thalassaemia</strong><br>Found in Turkish, Cypriot, and Kuwaiti families',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Piano_not_avail.png',
+          width: 1216,
+          height: 607,
+          altText: '',
+          type: 'image',
+        },
         mutation_description:
           '<strong>Hb J-Iran&nbsp;</strong><br>Beta 77(EF1) His&gt;Asp&nbsp;<br>&nbsp;&nbsp;<br><strong>Alpha plus thalassaemia</strong><br>Alpha2 nt 817 A&gt;G',
         variant_name: 'Hb J-Iran & Alpha plus thalassaemia',
@@ -510,6 +565,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '~40',
         window: {
           id: '3',
@@ -543,6 +599,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         references:
           'Blouquit Y et al., Biochim Biophys Acta. 1980 Aug 21;624(2):473-8.<br>Uchida T et al., Int J Hematol. 2000 Apr;71(3):221-6.',
         ethnicity: 'Found in a French family and Japanese',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Pitie-Salpetriere_Piano.png',
+          width: 1219,
+          height: 606,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'beta 34(B16) Val>Phe',
         variant_name: 'Hb Pitie-Salpetriere (1)',
         instrument: {
@@ -573,6 +636,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '~7',
         window: {
           id: '3',
@@ -606,6 +670,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           'Blouquit Y et al., FEBS Lett. 1984 Dec 10;178(2):315-8.<br>Barwick RC et al., Proc Natl Acad Sci U S A. 1985 Jul;82(14):4602-5.<br>Prchal JT et al., Proc Natl Acad Sci U S A. 1986 Jan;83(1):24-7.<br>Boi S et al., Hemoglobin. 1989;13(5):515-20.',
         ethnicity:
           'Found in a French family, three American families, and an Australian family (two families are known to be of Maltese origin)',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Marseille_Piano.png',
+          width: 1218,
+          height: 607,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'beta 2(NA2) His>Pro',
         variant_name: 'Hb Marseille',
         instrument: {
@@ -636,6 +707,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: 'Hb Long Island-Marseille',
         area_under_peak: '30-50',
         window: {
           id: '3',
@@ -669,6 +741,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           'Moo-Penn WF et al., Biochemistry. 1977 Nov 1;16(22):4872-9.<br>Landin B et al., Hemoglobin. 1993 Aug;17(4):303-18.<br>Chen D et al., Clin Chem. 1998 Jun;44(6 Pt 1):1296-301.',
         ethnicity:
           'Found in several members of a few Caucasian families; a few were also heterozygous for Hb Russ [alpha51(CE9)Gly-&gt;Arg]; also found in two Swedish families, and in another family together with Hb Russ',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Raleigh_Piano.png',
+          width: 1219,
+          height: 609,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'beta 1(NA1) Val>Ala',
         variant_name: 'Hb Raleigh',
         instrument: {
@@ -699,6 +778,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '~47',
         window: {
           id: '3',
@@ -733,6 +813,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           'Hubbard M et al ., Acta Haematol. 1975;54(1):53-8.&nbsp;<br>Moo-Penn W et al., Am J Clin Pathol. 1975 Jan;63(1):87-90.<br>Steinberg MH et al., J Lab Clin Med. 1976 Jul;88(1):125-31.<br>Charache S et al., J Lab Clin Med. 1979 Feb;93(2):316-20.<br>Harano T et al., Hemoglobin. 1983;7(3):263-5.<br>Martinez G et al., Hemoglobin. 1984;8(5):519-22<br>Pillers DM et al., Hemoglobin. 1992;16(1-2):81-4.<br>Rahbar S et al., Hemoglobin. 1992;16(5):421-5.<br>Ingle J et al., Hemoglobin. 2004;28(4):277-85.',
         ethnicity:
           'Found in several Black families, in Japanese, Thai, Laotian, and Cuban families',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Hope_Piano.png',
+          width: 1219,
+          height: 606,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'beta 136(H14) Gly>Asp',
         variant_name: 'Hb Hope',
         instrument: {
@@ -763,6 +850,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '39-44',
         window: {
           id: '3',
@@ -795,6 +883,13 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         references: 'Como PF et al., Hemoglobin. 1991;15(1-2):85-95.',
         ethnicity:
           'Found in a 43-year-old German woman of Polish-Russian descent; family studies were not possible.<br>Also in a young woman of Thai and Tatar ancestry, living in New York City, NY and her family living in Baltimore, MD, USA',
+        variant_image: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/Chromatograms/piano/Hb%20Geelong_Piano.png',
+          width: 813,
+          height: 405,
+          altText: '',
+          type: 'image',
+        },
         mutation_description: 'beta 139(H17) Asn>Asp',
         variant_name: 'Hb Geelong',
         instrument: {
@@ -826,6 +921,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         homozygote_clinical_presentation: '-',
         homozygote_laboratory_findings: '-',
         homozygote_comments: '-',
+        aka: '-',
         area_under_peak: '~47',
         window: {
           id: '3',
@@ -847,7 +943,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
   paging: {
     next: {
       offset: 12,
-      link: 'https://api.hubapi.com/cms/v3/hubdb/tables/5628180/rows?deactivate__eq=false&offset=12&limit=12&sort=-start_date&properties=variant_name%2Chgvs_name%2Cmutation%2Cmutation_description%2Cheterozygote_clinical_presentation%2Cheterozygote_laboratory_findings%2Cheterozygote_comments%2Chomozygote_clinical_presentation%2Chomozygote_laboratory_findings%2Chomozygote_comments%2Cethnicity%2Ccomments%2Cinstrument%2Carea_under_peak%2Crt_min%2Crt_max%2Cwindow%2Creferences',
+      link: 'https://api.hubapi.com/cms/v3/hubdb/tables/5628180/rows?deactivate__eq=false&offset=12&limit=12&sort=-start_date&properties=aka%2Cvariant_image%2Cvariant_name%2Chgvs_name%2Cmutation%2Cmutation_description%2Cheterozygote_clinical_presentation%2Cheterozygote_laboratory_findings%2Cheterozygote_comments%2Chomozygote_clinical_presentation%2Chomozygote_laboratory_findings%2Chomozygote_comments%2Cethnicity%2Ccomments%2Cinstrument%2Carea_under_peak%2Crt_min%2Crt_max%2Cwindow%2Creferences',
     },
   },
   type: 'RANDOM_ACCESS',

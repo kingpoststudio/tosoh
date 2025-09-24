@@ -75,7 +75,7 @@
       sort: '-start_date',
       tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
       properties:
-        'variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
+        'aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
       pagination: parseInt(params?.get('pagination') || defaultPagination),
       offset:
@@ -88,8 +88,10 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      //   const data = await fetchTableRows(constructBody());
+      // const data = await fetchTableRows(constructBody());
       const data = mockHemoglobinVariantsLibraryTableRowsResponse;
+
+      console.log(data);
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;
@@ -111,9 +113,11 @@
 </script>
 
 {#if title || eyebrow}
-  <div class="max-w-max-page gap-md p-md md:pl-2xl md:pr-2xl m-auto flex flex-col pt-0">
+  <div class="max-w-max-page gap-sm p-md md:pl-2xl md:pr-2xl m-auto flex flex-col pt-0">
     {#if eyebrow}
-      <h6 class="text-nickel">{eyebrow}</h6>
+      <h6 class="text-imperial-red tracking-widest">
+        {eyebrow}
+      </h6>
     {/if}
     {#if title}
       <h2 class="font-bold">{title}</h2>
