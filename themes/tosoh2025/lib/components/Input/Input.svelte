@@ -12,6 +12,9 @@
     label,
     customClearFilter,
     isLoading,
+    min,
+    max,
+    step,
   }: {
     name: string;
     type: string;
@@ -22,10 +25,13 @@
     label?: string;
     customClearFilter?: () => void;
     isLoading?: boolean;
+    min?: number;
+    max?: number;
+    step?: number;
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
-  const activeFilters = urlParams.getAll(name);
+  const activeFilter = urlParams.get(name);
 
   const clearFilter = () => {
     if (customClearFilter) {
@@ -47,7 +53,7 @@
       {#if displayLabel}
         <div class="text-lg font-semibold">{label || setupFilterTitle(name)}</div>
       {/if}
-      {#if activeFilters.length > 0 && !disableReset}
+      {#if !!activeFilter && !disableReset}
         <button
           type="button"
           disabled={disabled || isLoading}
@@ -72,6 +78,10 @@
           {type}
           data-debounce="500"
           {name}
+          defaultValue={activeFilter ? activeFilter : ''}
+          {min}
+          {max}
+          {step}
           disabled={disabled || isLoading}
           class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
         />
@@ -79,3 +89,32 @@
     </div>
   </div>
 </div>
+
+<style>
+  /* Use :global() to ensure webkit pseudo-elements work properly */
+  :global(input[type='number']::-webkit-outer-spin-button),
+  :global(input[type='number']::-webkit-inner-spin-button) {
+    opacity: 1;
+    height: 30px;
+    width: 20px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M4 7l6-5 6 5H4z' fill='%23ed1a3b'/%3E%3Cpath d='M4 23l6 5 6-5H4z' fill='%23ed1a3b'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* For Firefox - enable number input controls */
+  :global(input[type='number']) {
+    -moz-appearance: textfield;
+  }
+
+  /* Firefox specific styles */
+  @supports (-moz-appearance: textfield) {
+    :global(input[type='number']) {
+      -moz-appearance: number-input;
+    }
+  }
+</style>

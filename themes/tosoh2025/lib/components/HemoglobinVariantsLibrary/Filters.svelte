@@ -190,6 +190,9 @@
             <Input
               name={columnId}
               type="number"
+              min={getFilterTopic(columnId)?.min || 0}
+              max={getFilterTopic(columnId)?.max || 10}
+              step={0.01}
               disabled={isParentLoading || isLoading || hasError}
               {isLoading}
               label={getFilterTopic(columnId)?.filter_label}
