@@ -149,7 +149,7 @@
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
     {searchColumnId}
     title={searchTitle || ''}
-    typeheadEnabled={searchTypeheadEnabled}
+    typeaheadEnabled={searchTypeheadEnabled}
   />
 
   <FilterForm trigger="change" {onChange} {onReset}>

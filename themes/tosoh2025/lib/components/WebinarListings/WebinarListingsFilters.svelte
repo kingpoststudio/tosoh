@@ -113,6 +113,7 @@
       filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
       {searchColumnId}
       placeholder={searchInputPlaceholder}
+      typeaheadEnabled={true}
     />
   {/if}
   {#if areFiltersEnabled}

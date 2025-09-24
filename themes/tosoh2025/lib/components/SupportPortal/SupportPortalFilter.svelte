@@ -139,6 +139,7 @@
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
     {searchColumnId}
     title={searchColumnTitle || ''}
+    typeaheadEnabled={true}
   />
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
