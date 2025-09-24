@@ -109,15 +109,15 @@
   class="gap-md align-center flex h-full flex-col md:flex-row"
   transition:fade={{ duration: 100 }}
 >
-  {#if isSearchEnabled}
-    <Search
-      searchTableId={tableId}
-      filtersFromFields={[...filtersArray, 'pagination', 'limit']}
-      {searchColumnId}
-      placeholder={searchInputPlaceholder}
-      typeaheadEnabled={true}
-    />
-  {/if}
+  <Search
+    searchTableId={tableId}
+    {isSearchEnabled}
+    filtersFromFields={[...filtersArray, 'pagination', 'limit']}
+    {searchColumnId}
+    placeholder={searchInputPlaceholder}
+    typeaheadEnabled={true}
+  />
+
   {#if areFiltersEnabled}
     <FilterForm trigger="change" {onChange} {onReset}>
       <div class="gap-md flex w-full">

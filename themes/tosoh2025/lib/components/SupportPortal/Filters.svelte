@@ -24,7 +24,7 @@
   const searchColumnTypeaheadEnabled = searchFromFields?.typeahead_enabled;
   //  const searchTableId = searchFromFields?.hubdb_table_id; // CHANGE TO THAT IN PROD
   const searchTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
-
+  const isSearchEnabled = searchFromFields?.enable_search;
   const isSearchAccessLevelFilterEnabled =
     window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
 
@@ -146,6 +146,7 @@
     {searchColumnId}
     title={searchColumnTitle || ''}
     typeaheadEnabled={searchColumnTypeaheadEnabled}
+    {isSearchEnabled}
   />
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}

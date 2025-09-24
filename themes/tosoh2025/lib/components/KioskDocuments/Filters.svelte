@@ -4,7 +4,6 @@
     defaultItemsLimit,
     defaultPagination,
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
   import {
     clearParams,
@@ -28,13 +27,14 @@
 
   const searchFromFields = window?.Tosoh?.KioskDocumentsContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
+  const isSearchEnabled = searchFromFields?.enable_search;
   const searchTitle = searchFromFields?.title;
   const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
   // const searchTableId = searchFromFields?.hubdb_table_id;
   const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
   const topic_filters = window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters;
-  let filtersFromFields = topic_filters?.map((filter) => filter.hubdb_column_id) || [];
+  let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
   filtersFromFields.push(searchColumnId);
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
@@ -149,6 +149,7 @@
     title={searchTitle || ''}
     disabled={isParentLoading || isLoading || hasError}
     typeaheadEnabled={searchTypeheadEnabled}
+    {isSearchEnabled}
   />
 
   <FilterForm trigger="change" {onChange} {onReset}>
@@ -167,7 +168,7 @@
             />
           </div>
         {/if}
-        {#if getFilterTopic(columnId)?.type === 'checkbox'}
+        {#if filter?.type === 'checkbox'}
           <div class="mt-base">
             <Checkbox
               options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[

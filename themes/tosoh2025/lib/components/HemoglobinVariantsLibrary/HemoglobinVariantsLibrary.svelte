@@ -27,7 +27,7 @@
 
   let availableFilters =
     hemoglobinVariantsLibraryContent?.topic_filters?.filters?.map(
-      (filter) => filter.hubdb_column_id
+      (filter: any) => filter.hubdb_column_id
     ) || [];
 
   let searchColumnId = hemoglobinVariantsLibraryContent?.search
@@ -46,7 +46,7 @@
     const params = new URLSearchParams(window.location.search);
     let objWithFilters: any = {};
     const allFilters = [...availableFilters, searchColumnId];
-    allFilters?.map((filter) => (objWithFilters[filter] = params?.get(filter) || ''));
+    allFilters?.map((filter: any) => (objWithFilters[filter] = params?.get(filter) || ''));
     return { ...objWithFilters };
   };
 
@@ -122,7 +122,7 @@
 {/if}
 
 <div
-  class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
+  class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
   <Filters isParentLoading={isLoading}></Filters>
   <div class="flex w-full flex-col justify-between">

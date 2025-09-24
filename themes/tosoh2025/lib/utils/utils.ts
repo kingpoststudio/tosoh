@@ -1,3 +1,5 @@
+import type { TopicFilters } from '../../types/fields';
+
 export const isUpcoming = (date: number) => {
   const now = new Date();
   const dateEvent = date ? new Date(date) : null;
@@ -18,6 +20,6 @@ export const isPast = (date: number) => {
   }
 };
 
-export const getFilter = (topic_filters: { hubdb_column_id: string }[], columnId: string) => {
+export const getFilter = (topic_filters: TopicFilters['filters'], columnId: string) => {
   return topic_filters?.find((filter) => filter?.hubdb_column_id === columnId);
 };

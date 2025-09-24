@@ -23,20 +23,21 @@
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import { mockHemoglobinVariantsLibraryFiltersResponse } from './mock';
   import Input from '../Input/Input.svelte';
-
+  import { getFilter } from '../../utils/utils';
   let { isParentLoading } = $props();
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
 
   const searchFromFields = hemoglobinVariantsLibraryContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
+  const isSearchEnabled = searchFromFields?.enable_search;
   // const searchTableId = searchFromFields?.hubdb_table_id;
   const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
   const searchTitle = searchFromFields?.title;
   const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
   const topic_filters = hemoglobinVariantsLibraryContent?.topic_filters?.filters;
-  let filtersFromFields = topic_filters?.map((filter) => filter.hubdb_column_id) || [];
+  let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
   filtersFromFields.push(searchColumnId);
 
   console.log(topic_filters);
@@ -111,10 +112,6 @@
     getFilterOptions();
   };
 
-  const getFilterTopic = (columnId: string) => {
-    return topic_filters?.find((filter) => filter.hubdb_column_id === columnId);
-  };
-
   onMount(() => {
     getFilterOptions();
   });
@@ -157,24 +154,26 @@
     title={searchTitle || ''}
     disabled={isParentLoading || isLoading || hasError}
     typeaheadEnabled={searchTypeheadEnabled}
+    {isSearchEnabled}
   />
 
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
+      {@const filter = getFilter(topic_filters, columnId)}
       {#if searchColumnId !== columnId}
-        {#if getFilterTopic(columnId)?.type === 'dropdown'}
+        {#if filter?.type === 'dropdown'}
           <div class="mt-base">
             <Select
               options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
                 columnId as ColumnId
               ]}
               name={columnId}
-              label={getFilterTopic(columnId)?.filter_label}
+              label={filter?.filter_label}
               disabled={isParentLoading || isLoading || hasError}
             />
           </div>
         {/if}
-        {#if getFilterTopic(columnId)?.type === 'checkbox'}
+        {#if filter?.type === 'checkbox'}
           <div class="mt-base">
             <Checkbox
               options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
@@ -186,19 +185,18 @@
             />
           </div>
         {/if}
-        {#if getFilterTopic(columnId)?.type === 'range-pm'}
+        {#if filter?.type === 'range-pm'}
           <div class="mt-base">
             <Input
               name={columnId}
               type="number"
-              placeholder={`${getFilterTopic(columnId)?.min} - ${getFilterTopic(columnId)?.max} ` ||
-                ''}
-              min={getFilterTopic(columnId)?.min || 0}
-              max={getFilterTopic(columnId)?.max || 10}
+              placeholder={`${filter?.min} - ${filter?.max} ` || ''}
+              min={filter?.min || 0}
+              max={filter?.max || 10}
               step={0.01}
               disabled={isParentLoading || isLoading || hasError}
               {isLoading}
-              label={getFilterTopic(columnId)?.filter_label}
+              label={filter?.filter_label}
             />
           </div>
         {/if}

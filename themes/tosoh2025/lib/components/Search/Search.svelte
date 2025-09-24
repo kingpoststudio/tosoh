@@ -13,6 +13,7 @@
     placeholder,
     customClasses,
     typeaheadEnabled,
+    isSearchEnabled,
     disabled = false,
   }: {
     accessLevel?: string;
@@ -24,6 +25,7 @@
     customClasses?: string;
     typeaheadEnabled?: boolean;
     disabled?: boolean;
+    isSearchEnabled: boolean;
   } = $props();
 
   let matches: string[] = $state([]);
@@ -167,62 +169,64 @@
   </button>
 {/snippet}
 
-<FilterForm {onSubmit} trigger="submit" onClickOutside={resetDropdown}>
-  <div class={`relative ${customClasses}`}>
-    <div class="gap-sm flex flex-col">
-      {#if title}
-        <div class="gap-sm flex items-center">
-          <label for={searchColumnId} class=" text-xl font-black">{title}</label>
-          {#if activeFilter && title}
-            {@render xIcon()}
-          {/if}
+{#if isSearchEnabled}
+  <FilterForm {onSubmit} trigger="submit" onClickOutside={resetDropdown}>
+    <div class={`relative ${customClasses}`}>
+      <div class="gap-sm flex flex-col">
+        {#if title}
+          <div class="gap-sm flex items-center">
+            <label for={searchColumnId} class=" text-xl font-black">{title}</label>
+            {#if activeFilter && title}
+              {@render xIcon()}
+            {/if}
+          </div>
+        {/if}
+        <div
+          class={` relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
+        >
+          <input
+            oninput={typeaheadEnabled ? fetchMatches : () => {}}
+            name={searchColumnId}
+            defaultValue={activeFilter ? activeFilter : ''}
+            data-debounce="500"
+            class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
+            placeholder={placeholder || 'Search here...'}
+            {disabled}
+          />
+          <div
+            class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"
+          >
+            {#if isLoading}
+              {@render loader()}
+            {:else if activeFilter && !title}
+              {@render xIcon()}
+            {:else}
+              {@render magnifier()}{/if}
+          </div>
+        </div>
+      </div>
+
+      {#if showDropdown && matches.length > 0}
+        <div
+          transition:fade={{ duration: 100 }}
+          class="border-imperial-red border-1 absolute left-0 z-10 mt-[0.5rem] max-h-[24rem] w-full overflow-y-auto rounded-lg bg-white shadow-md lg:max-w-[19.75rem]"
+        >
+          <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
+          {#each matches as match}
+            {#if match}
+              <button
+                type="button"
+                class="plain text-left! p-sm! w-full cursor-pointer break-all text-sm font-semibold hover:bg-red-50"
+                onclick={() => {
+                  onClick(match);
+                }}
+              >
+                {@html match}
+              </button>
+            {/if}
+          {/each}
         </div>
       {/if}
-      <div
-        class={` relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
-      >
-        <input
-          oninput={typeaheadEnabled ? fetchMatches : () => {}}
-          name={searchColumnId}
-          defaultValue={activeFilter ? activeFilter : ''}
-          data-debounce="500"
-          class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
-          placeholder={placeholder || 'Search here...'}
-          {disabled}
-        />
-        <div
-          class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"
-        >
-          {#if isLoading}
-            {@render loader()}
-          {:else if activeFilter && !title}
-            {@render xIcon()}
-          {:else}
-            {@render magnifier()}{/if}
-        </div>
-      </div>
     </div>
-
-    {#if showDropdown && matches.length > 0}
-      <div
-        transition:fade={{ duration: 100 }}
-        class="border-imperial-red border-1 absolute left-0 z-10 mt-[0.5rem] max-h-[24rem] w-full overflow-y-auto rounded-lg bg-white shadow-md lg:max-w-[19.75rem]"
-      >
-        <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
-        {#each matches as match}
-          {#if match}
-            <button
-              type="button"
-              class="plain text-left! p-sm! w-full cursor-pointer break-all text-sm font-semibold hover:bg-red-50"
-              onclick={() => {
-                onClick(match);
-              }}
-            >
-              {@html match}
-            </button>
-          {/if}
-        {/each}
-      </div>
-    {/if}
-  </div>
-</FilterForm>
+  </FilterForm>
+{/if}
