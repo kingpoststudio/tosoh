@@ -8,7 +8,7 @@ import './components/Modal/Modal.svelte';
 import './components/WebinarListings/WebinarListings.svelte';
 import './components/CompetitorComparisonToolFilters/CompetitorComparisonToolFilters.svelte';
 import './components/TabGroup/TabGroup.svelte';
-import './components/CCTDetailsFIlters/CCTDetailsFilters.svelte';
+import './components/CompetitorComparisonToolComparisonFilters/CompetitorComparisonToolComparisonFilters.svelte';
 import './components/ScrollX/ScrollX.svelte';
 import './components/KioskDocuments/KioskDocuments.svelte';
 import './components/Modal/Modal.svelte';
