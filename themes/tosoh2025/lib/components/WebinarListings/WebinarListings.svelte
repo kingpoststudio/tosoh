@@ -33,18 +33,18 @@
   const webinarListingsWindow = window.Tosoh?.WebinarListings;
   // const tableId = window?.Tosoh?.WebinarListings?.tableId;
   const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
-  const preselectedLanguage = webinarListingsWindow?.preselectedLanguage;
-  const upcomingSectionEyebrow = webinarListingsWindow?.upcomingSectionEyebrow;
-  const upcomingSectionTitle = webinarListingsWindow?.upcomingSectionTitle;
-  const pastSectionEyebrow = webinarListingsWindow?.pastSectionEyebrow;
-  const pastSectionTitle = webinarListingsWindow?.pastSectionTitle;
-  const filterByTopic = webinarListingsWindow?.filterByTopic;
+  const preselectedLanguage = webinarListingsWindow?.preselected_language;
+  const upcomingSectionEyebrow = webinarListingsWindow?.upcoming_section_eyebrow;
+  const upcomingSectionTitle = webinarListingsWindow?.upcoming_section_title;
+  const pastSectionEyebrow = webinarListingsWindow?.past_section_eyebrow;
+  const pastSectionTitle = webinarListingsWindow?.past_section_title;
+  const filterByTopic = webinarListingsWindow?.advanced?.filter_by_topic;
   const searchGroup = webinarListingsWindow?.search;
-  const searchColumnId = searchGroup?.searchHubdbColumnId;
+  const searchColumnId = searchGroup?.hubdb_column_id;
 
-  const availableFilters = webinarListingsWindow?.filters
+  const availableFilters = webinarListingsWindow?.topic_filters?.filters
     ? ([
-        ...webinarListingsWindow.filters.dropdownFilters.map((filter) => filter.hubdb_column_id),
+        ...webinarListingsWindow.topic_filters.filters.map((filter: any) => filter.hubdb_column_id),
         searchColumnId,
       ] as ColumnId[])
     : [];
@@ -53,7 +53,7 @@
     const params = new URLSearchParams(window.location.search);
     let objWithFilters: any = {};
     const allFilters = [...availableFilters];
-    allFilters?.map((filter) => (objWithFilters[filter] = params?.get(filter) || ''));
+    allFilters?.map((filter: any) => (objWithFilters[filter] = params?.get(filter) || ''));
     return filterByTopic ? { ...objWithFilters, topic: filterByTopic } : { ...objWithFilters };
   };
 
