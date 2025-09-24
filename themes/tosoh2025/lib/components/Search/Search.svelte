@@ -13,6 +13,7 @@
     placeholder,
     customClasses,
     typeaheadEnabled,
+    disabled = false,
   }: {
     accessLevel?: string;
     searchTableId: string;
@@ -22,6 +23,7 @@
     placeholder?: string;
     customClasses?: string;
     typeaheadEnabled?: boolean;
+    disabled?: boolean;
   } = $props();
 
   let matches: string[] = $state([]);
@@ -182,10 +184,11 @@
         <input
           oninput={typeaheadEnabled ? fetchMatches : () => {}}
           name={searchColumnId}
-          defaultValue={activeFilter}
+          defaultValue={activeFilter ? activeFilter : ''}
           data-debounce="500"
           class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
           placeholder={placeholder || 'Search here...'}
+          {disabled}
         />
         <div
           class="right-sm absolute top-[50%] flex max-h-[1.45rem] max-w-[1.45rem] -translate-y-1/2 items-center"

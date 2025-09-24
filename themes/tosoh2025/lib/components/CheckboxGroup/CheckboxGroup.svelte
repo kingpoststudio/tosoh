@@ -10,6 +10,7 @@
     disableReset,
     label,
     customClearFilter,
+    isLoading,
   }: {
     options: any[];
     name: string;
@@ -19,6 +20,7 @@
     disableReset?: boolean;
     label?: string;
     customClearFilter?: () => void;
+    isLoading?: boolean;
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -81,8 +83,27 @@
             </label>
           {/each}
         </div>
+      {:else if isLoading}
+        <div class="gap-sm flex flex-col">
+          {#each [1, 2, 3] as skeletonOption}
+            <label
+              class="gap-sm hover:text-imperial-red flex cursor-pointer items-center transition-colors duration-200"
+            >
+              <input
+                type="checkbox"
+                {name}
+                value={skeletonOption}
+                disabled={true}
+                class="checkbox-custom focus:ring-imperial-red text-imperial-red h-4 w-4 cursor-pointer rounded border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+              />
+              <span
+                class={`h-6 animate-pulse select-none rounded bg-slate-200 ${skeletonOption === 2 ? 'w-24' : 'w-32'}`}
+              ></span>
+            </label>
+          {/each}
+        </div>
       {:else}
-        <div class="italic text-slate-400">No options available</div>
+        <div>No options available</div>
       {/if}
     </div>
   </div>

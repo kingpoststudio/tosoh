@@ -149,6 +149,7 @@
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
     {searchColumnId}
     title={searchTitle || ''}
+    disabled={isParentLoading || isLoading || hasError}
     typeaheadEnabled={searchTypeheadEnabled}
   />
 
@@ -174,6 +175,7 @@
               ]}
               name={columnId}
               disabled={isParentLoading || isLoading || hasError}
+              {isLoading}
             />
           </div>
         {/if}
