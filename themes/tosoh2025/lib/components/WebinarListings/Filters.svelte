@@ -22,19 +22,21 @@
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  const areFiltersEnabled = window?.Tosoh?.WebinarListings?.filters?.areFiltersEnabled;
+  const areFiltersEnabled = window?.Tosoh?.WebinarListings?.topic_filters?.filters?.length > 0;
   const searchGroup = window?.Tosoh?.WebinarListings?.search;
-  const searchColumnId = searchGroup?.searchHubdbColumnId;
-  const isSearchEnabled = searchGroup?.isSearchEnabled;
-  const searchInputPlaceholder = searchGroup?.searchInputPlaceholder;
+  const searchColumnId = searchGroup?.hubdb_column_id;
+  const isSearchEnabled = searchGroup?.enable_search;
+  const searchInputPlaceholder = searchGroup?.placeholder;
 
-  const filtersArray = window?.Tosoh?.WebinarListings?.filters
-    ? [...window.Tosoh.WebinarListings.filters.dropdownFilters]
+  const filtersArray = window?.Tosoh?.WebinarListings?.topic_filters?.filters
+    ? [
+        ...window.Tosoh.WebinarListings.topic_filters.filters.map(
+          (filter: any) => filter.hubdb_column_id
+        ),
+      ]
     : [];
 
-  const filtersFromFields = [...filtersArray?.map((filter) => filter?.hubdb_column_id)];
-
-  // const tableId = window?.Tosoh?.WebinarListings?.tableId;
+  // const tableId = window?.Tosoh?.WebinarListings?.hubdb_table_id;
   const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
 
   const onChange = (event: Event) => {
@@ -50,8 +52,8 @@
       [searchColumnId]: '',
     });
 
-    if (filtersFromFields?.length > 0) {
-      clearParams([...filtersFromFields, 'language'] as string[]);
+    if (filtersArray?.length > 0) {
+      clearParams([...filtersArray, 'language'] as string[]);
     } else {
       clearParams(['language']);
     }
@@ -61,7 +63,7 @@
 
     try {
       const data = await getTableFilterOptions({
-        filters: filtersFromFields,
+        filters: filtersArray,
         tableId: tableId,
       });
       // const data = mockWebinarListingsFilterOptions?.results;
@@ -110,7 +112,7 @@
   {#if isSearchEnabled}
     <Search
       searchTableId={tableId}
-      filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
+      filtersFromFields={[...filtersArray, 'pagination', 'limit']}
       {searchColumnId}
       placeholder={searchInputPlaceholder}
       typeaheadEnabled={true}
@@ -119,7 +121,7 @@
   {#if areFiltersEnabled}
     <FilterForm trigger="change" {onChange} {onReset}>
       <div class="gap-md flex w-full">
-        {#each filtersFromFields as columnId}
+        {#each filtersArray as columnId}
           <div class="min-w-[16rem]">
             <Select
               disableReset={true}
