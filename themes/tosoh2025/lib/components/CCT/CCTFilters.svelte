@@ -6,7 +6,7 @@
 />
 
 <script lang="ts">
-  import FilterForm from '../FilterForm/FilterForm.svelte';
+  import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import Select from '../Select/Select.svelte';
   import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';

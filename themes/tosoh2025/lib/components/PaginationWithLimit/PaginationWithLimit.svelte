@@ -4,7 +4,7 @@
   import { setSearchParams, updateUrl } from '../../utils/urlUtils';
 
   import Limit from '../Limit/Limit.svelte';
-  import FilterForm from '../FilterForm/FilterForm.svelte';
+  import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import Pagination from '../Pagination/Pagination.svelte';
 
   let { totalItems } = $props();

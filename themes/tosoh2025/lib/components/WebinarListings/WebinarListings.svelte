@@ -18,7 +18,7 @@
   import Card from './Card.svelte';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockWebinarCollectionRes } from './mock';
-  import WebinarListingsFilters from './WebinarListingsFilters.svelte';
+  import WebinarListingsFilters from './Filters.svelte';
   import type { ColumnId, WebinarListingsItem } from '../../../types/hubdb';
   import SkeletonCard from './SkeletonCard.svelte';
   import { setSearchParams } from '../../utils/urlUtils';

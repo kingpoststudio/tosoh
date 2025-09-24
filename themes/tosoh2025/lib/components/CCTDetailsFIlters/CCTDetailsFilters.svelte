@@ -8,7 +8,7 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
   import { onMount, onDestroy } from 'svelte';
-  import FilterForm from '../FilterForm/FilterForm.svelte';
+  import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import Select from '../Select/Select.svelte';
   import { cctSearchManager } from '../../utils/textSearchUtils';
   import { TableFilterManager } from '../../utils/tableFilterUtils';

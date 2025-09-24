@@ -3,52 +3,61 @@
   import {
     defaultItemsLimit,
     defaultPagination,
+    PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
-  import { mockPortalFilters } from './mock';
-  import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
+  import {
+    clearParams,
+    setSearchParams,
+    updateUrl,
+    updateUrlFromCheckbox,
+  } from '../../utils/urlUtils';
 
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from '../Search/Search.svelte';
   import Select from '../Select/Select.svelte';
-  import FilterForm from '../FilterForm/FilterForm.svelte';
+  import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
+  import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
+  import { mockKioskDocumentsFiltersResponse } from './mock';
 
-  let { isParentLoading, viewAs, handleChangeView } = $props();
+  let { isParentLoading } = $props();
 
-  const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
+  const searchFromFields = window?.Tosoh?.KioskDocumentsContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
-  const searchColumnTitle = searchFromFields?.title;
-  //  const searchTableId = searchFromFields?.hubdb_table_id; // CHANGE TO THAT IN PROD
-  const searchTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
+  const searchTitle = searchFromFields?.title;
+  const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
+  const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
-  const isSearchAccessLevelFilterEnabled =
-    window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
-
-  let accessLevel = window?.Tosoh?.SupportPortalContent?.accessLevel || 'Customer';
-
-  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.filters
-    ? ([...window.Tosoh.SupportPortalContent.filters.split(','), searchColumnId] as ColumnId[])
-    : [];
+  const topic_filters = window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters;
+  let filtersFromFields = topic_filters?.map((filter) => filter.hubdb_column_id) || [];
+  filtersFromFields.push(searchColumnId);
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
 
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  const onChange = (event: Event) => {
-    onReset();
-
-    updateUrl(event);
-  };
-
-  const onReset = () => {
+  const resetPaginationAndLimit = () => {
     setSearchParams({
       pagination: `${defaultPagination}`,
       limit: `${defaultItemsLimit}`,
     });
+  };
+
+  const onChange = (event: Event) => {
+    resetPaginationAndLimit();
+    if ((event.target as HTMLInputElement).type === 'checkbox') {
+      updateUrlFromCheckbox(event);
+    } else {
+      updateUrl(event);
+    }
+  };
+
+  const onReset = () => {
+    resetPaginationAndLimit();
 
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
@@ -61,10 +70,10 @@
     try {
       const data = await getTableFilterOptions({
         filters: filtersFromFields,
-        accessLevel: accessLevel,
-        tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+        tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
       });
-      // const data = mockPortalFilters;
+
+      // const data = mockKioskDocumentsFiltersResponse.results as any;
 
       if (!data?.error) {
         if (data?.length > 0) {
@@ -88,14 +97,16 @@
       return;
     }
 
-    const filteredRows = filterRows(allRows, filtersFromFields);
-
-    allAvailableFiltersWithTheirOptions = parseFilterOptions(filteredRows);
+    allAvailableFiltersWithTheirOptions = parseFilterOptions(allRows);
   };
 
   const reloadFilterOptions = () => {
     hasError = false;
     getFilterOptions();
+  };
+
+  const getFilterTopic = (columnId: string) => {
+    return topic_filters?.find((filter) => filter.hubdb_column_id === columnId);
   };
 
   onMount(() => {
@@ -134,38 +145,46 @@
 
   <SearchInput
     customClasses="mt-base"
-    accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
     {searchTableId}
     filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
     {searchColumnId}
-    title={searchColumnTitle || ''}
-    typeaheadEnabled={true}
+    title={searchTitle || ''}
+    disabled={isParentLoading || isLoading || hasError}
+    typeaheadEnabled={searchTypeheadEnabled}
   />
+
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {#if searchColumnId !== columnId}
-        <div class="mt-base">
-          <Select
-            options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-              columnId as ColumnId
-            ]}
-            name={columnId}
-            disabled={isParentLoading || isLoading || hasError}
-          />
-        </div>
+        {#if getFilterTopic(columnId)?.type === 'dropdown'}
+          <div class="mt-base">
+            <Select
+              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
+                columnId as ColumnId
+              ]}
+              name={columnId}
+              disabled={isParentLoading || isLoading || hasError}
+            />
+          </div>
+        {/if}
+        {#if getFilterTopic(columnId)?.type === 'checkbox'}
+          <div class="mt-base">
+            <Checkbox
+              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
+                columnId as ColumnId
+              ]}
+              name={columnId}
+              disabled={isParentLoading || isLoading || hasError}
+              {isLoading}
+            />
+          </div>
+        {/if}
       {/if}
     {/each}
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
         Reset
-      </button>
-      <button
-        type="button"
-        class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
-        onclick={handleChangeView}
-      >
-        {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
       </button>
     </div>
   </FilterForm>

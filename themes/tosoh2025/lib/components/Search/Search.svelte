@@ -1,7 +1,7 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
 
-  import FilterForm from '../FilterForm/FilterForm.svelte';
+  import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import { onMount } from 'svelte';
 
   const {

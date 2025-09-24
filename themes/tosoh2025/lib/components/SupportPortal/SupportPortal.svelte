@@ -8,7 +8,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import SupportPortalFilter from './SupportPortalFilter.svelte';
+  import SupportPortalFilter from './Filters.svelte';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
   import {
@@ -21,6 +21,7 @@
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
+  import Filters from './Filters.svelte';
 
   let availableFilters = window?.Tosoh?.SupportPortalContent?.filters
     ? window?.Tosoh?.SupportPortalContent?.filters.split(',')
@@ -114,8 +115,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <SupportPortalFilter isParentLoading={isLoading} {viewAs} {handleChangeView}
-  ></SupportPortalFilter>
+  <Filters isParentLoading={isLoading} {viewAs} {handleChangeView}></Filters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">

@@ -1,3 +1,6 @@
+<script lang="ts">
+</script>
+
 <div
   class="border-border relative flex w-full animate-pulse flex-col gap-[1.25rem] rounded-2xl border p-[1.25rem]"
 >

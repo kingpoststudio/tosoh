@@ -8,7 +8,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import DocumentsFilters from './KioskDocumentsFilters.svelte';
+  import Filters from './Filters.svelte';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
 
   import {
@@ -122,7 +122,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <DocumentsFilters isParentLoading={isLoading}></DocumentsFilters>
+  <Filters isParentLoading={isLoading}></Filters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
