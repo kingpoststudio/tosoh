@@ -1,0 +1,17 @@
+{
+    "name": "example-serverless-function",
+    "version": "0.1.0",
+    "author": "HubSpot",
+    "license": "MIT",
+    "dependencies": {
+        "@hubspot/api-client": "^7.0.1",
+        "axios": "^0.27.2",
+        "tsc": "^2.0.4"
+    },
+    "scripts": {
+        "hs:upload:develop":"hs project upload --account=develop",
+        "hs:upload:tosoh-sandbox":"hs project upload --account=tosoh-sandbox",
+        "hs:init": "hs init",
+        "hs:auth": "hs auth"
+      }
+}

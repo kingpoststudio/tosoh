@@ -1,0 +1,35 @@
+<!--
+  templateType: none
+-->
+
+<!doctype html>
+<html lang="{{ html_lang }}" {{ html_lang_dir }}>
+  <head>
+    <meta charset="utf-8" />
+    {% if page_meta.html_title %}
+      <title>{{ page_meta.html_title }}</title>
+    {% endif %}
+
+    {% if brand_settings.favicon.src %}
+      <link rel="shortcut icon" href="{{ brand_settings.favicon.src }}" />
+    {% endif %}
+
+    <meta name="description" content="{{ page_meta.meta_description }}" />
+
+    {{ require_js(get_asset_url('/TosohTheme2025/build/js/main.js'), { async: false }) }}
+    {{ require_css(get_asset_url('/TosohTheme2025/build/css/main.css')) }}
+
+    {% if template_css %}
+      {{ require_css(get_asset_url(template_css)) }}
+    {% endif %}
+
+    {{ standard_header_includes }}
+  </head>
+
+  <body class="{{ builtin_body_classes }}">
+    {% block body %}
+    {% endblock body %}
+  </body>
+
+  {{ standard_footer_includes }}
+</html>

@@ -1,0 +1,82 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: false
+  label: Macros
+-->
+
+{%- macro classes(settings) -%}
+  {{-
+    [settings.pt_mobile,
+    settings.pt_desktop,
+    settings.pr_mobile,
+    settings.pr_desktop,
+    settings.pb_mobile,
+    settings.pb_desktop,
+    settings.pl_mobile,
+    settings.pl_desktop,
+    settings.bg_color,
+    settings.text_color,
+    settings.gap,
+    settings.justify,
+    settings.align
+    ]|join(' ')
+  -}}
+{%- endmacro -%}
+
+{%- macro breadcrumbs(breadcrumbs) -%}
+  <div class="mt-[6rem]"></div>
+
+  {%- if breadcrumbs|length > 0 -%}
+    <div class="gap-base max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto flex items-center">
+      {%- for breadcrumb in breadcrumbs %}
+
+        {% if !loop.last %}
+          <a href="{{ breadcrumb.url.href }}" class="text-nickel cursor-pointer text-lg">{{ breadcrumb.title }}</a>
+          <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
+            <svg
+              class="max-h-inherit max-w-inherit"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              viewBox="0 0 11 19"
+              fill="none">
+              <path d="M1.55 0L0 1.55L7.95 9.5L0 17.45L1.55 19L11 9.5L1.55 0Z" fill="currentColor" />
+            </svg>
+          </div>
+        {% endif %}
+
+        {% if loop.last %}
+          <a href="{{ breadcrumb.url.href }}" class="text-default cursor-pointer text-lg font-bold">
+            {{ breadcrumb.title }}
+          </a>
+        {% endif %}
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+{%- endmacro -%}
+
+{%- macro auth_wrapper() -%}
+  <div class="max-w-max-page relative m-auto flex min-h-[100vh] flex-col-reverse lg:flex-row">
+    <img
+      src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/image%202.png"
+      class="top-sm right-sm absolute max-h-[5rem] lg:max-h-[7rem]" />
+    <div class="px-md md:px-2xl relative flex w-full flex-col items-center justify-between text-white lg:max-w-[38rem]">
+      <img
+        src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/761c5869ba5f1c0356006068cdb3adcfe5d37865%20(2).jpg"
+        class="absolute top-0 left-0 h-full w-full object-cover" />
+      <div class="absolute top-0 left-0 h-full w-full bg-[#013B57E3]"></div>
+      <div class="pt-md md:pt-2xl lg:pt-3xl gap-sm relative flex w-full flex-col">
+        <p class="text-thin text-lg tracking-widest">CONNECTING SCIENCE WITH CARE</p>
+        <h2 class="leading-12 font-semibold">
+          At Tosoh, we enable precision and reliability for better patient outcomes.
+        </h2>
+      </div>
+      <img
+        src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/close-up-portrait-focused-young-male-doctor%202.png"
+        class="relative max-h-[16rem] object-contain lg:max-h-[36rem]" />
+    </div>
+    <div class="p-md flex w-full items-center">
+      <div class="systems-page m-auto w-full">{{ caller() }}</div>
+    </div>
+  </div>
+{%- endmacro -%}

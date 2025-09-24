@@ -1,0 +1,262 @@
+{% import "../../templates/partials/macros.html" as macros %}
+
+{% set module_id = module.module_settings.custom_id ? 'id="{{module.module_settings.custom_id}}"' :'' %}
+
+{# Macro for wrapping content with conditional animation #}
+{%- macro column_wrapper(column) -%}
+  {%- set size = "w-full h-full" -%}
+  {%- set alignment =  column.column_settings.align or "self-start" -%}
+  {%- set justify = column.column_settings.justify or "justify-self-start" -%}
+
+  {%- if column.animation_settings.is_animated %}
+    <tosoh-in-view
+      class="{{ size }} {{ alignment }} {{ justify }} block"
+      x="{{ column.animation_settings.x_travel }}"
+      y="{{ column.animation_settings.y_travel }}"
+      delay="{{ column.animation_settings.delay }}"
+      duration="{{ column.animation_settings.duration }}">
+      {% if column.reveal_settings.is_concealed %}
+        {% set max_height = (column.reveal_settings.max_height or 32) ~ "rem" %}
+        <tosoh-reveal-below maxHeight="{{ max_height }}">
+          {{ caller() }}
+          <span slot="label">{{ column.reveal_settings.reveal_label }}</span>
+        </tosoh-reveal-below>
+      {% else %}
+        {{ caller() }}
+      {% endif %}
+    </tosoh-in-view>
+  {%- else %}
+    <div class="{{ size }} {{ alignment }} {{ justify }}">
+      {% if column.reveal_settings.is_concealed %}
+        {% set max_height = (column.reveal_settings.max_height or 24) ~ "rem" %}
+        <tosoh-reveal-below maxHeight="{{ max_height }}">
+          {{ caller() }}
+          <span slot="label">{{ column.reveal_settings.reveal_label }}</span>
+        </tosoh-reveal-below>
+      {% else %}
+        {{ caller() }}
+      {% endif %}
+    </div>
+  {%- endif %}
+{%- endmacro -%}
+
+{# Macro for content blocks with conditional slots #}
+{%- macro render_content_block(content) -%}
+  {% set text_align = content.text_align or "text-left" %}
+  <div class="{{ text_align }} gap-base flex flex-col">
+    {%- if content.eyebrow %}
+      <div class="text-imperial-red text-2xl font-light">{{ content.eyebrow }}</div>
+    {%- endif %}
+    {%- if content.title %}
+      <div class="text-5xl font-semibold">{{ content.title }}</div>
+    {%- endif %}
+    {%- if content.description %}
+      <div class="text-nickel text-lg">{{ content.description }}</div>
+    {%- endif %}
+    {%- if content.is_cta and content.cta %}
+      <div>{% cta "flex_cta" guid="{{ content.cta }}" %}</div>
+    {%- elif not content.is_cta and content.link.url.href %}
+      <a class="{{ content.link_variant }}" href="{{ content.link.url.href }}">{{ content.link_label }}</a>
+    {%- endif %}
+  </div>
+{%- endmacro -%}
+
+{# Macro for image rendering #}
+{%- macro render_image(image) -%}
+  {%- if image.type == "single" -%}
+    {%- set object_fit = image.is_image_contained ? "object-contain" : "object-cover" -%}
+    <img
+      src="{{ image.image.src }}"
+      alt="{{ image.image.alt }}"
+      width="720"
+      class="{{ object_fit }} relative block h-full w-full" />
+  {%- elif image.type == "stacked_images" -%}
+    <img src="{{ image.image.src }}" alt="{{ image.image.alt }}" width="720" class="relative block h-full w-full" />
+  {%- endif %}
+{%- endmacro -%}
+
+{# Macro for video rendering #}
+{%- macro render_video() -%}
+  {% set video = column.video %}
+
+  {% if video.video_host == "hubspot" and video.video.player_id %}
+    {% video_player 'content_video' player_id="{{ video.video.player_id }}" %}
+  {% elif video.video_host == "wistia" and video.wistia_cached_url %}
+    {% set wistia_video_id = video.wistia_cached_url|split('/')|reverse|first %}
+
+    {% require_js %}
+      <script>
+        window._wq = window._wq || [];
+        _wq.push({
+          id: '{{ wistia_video_id }}',
+          options: {
+            playerColor: 'ed1a3b',
+            backgroundOpacity: 1,
+          },
+        });
+      </script>
+      <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    {% end_require_js %}
+
+    <div class="wistia_responsive_padding wistia_embed wistia_async_{{ wistia_video_id }} aspect-video w-full">
+      &nbsp;
+    </div>
+  {% endif %}
+{%- endmacro -%}
+
+{%- macro render_form() -%}
+  {% if column.form.is_dialog_form %}
+    {% set modal_id = 'gated_form_' ~ loop.index %}
+    <div>
+      <tosoh-modal variant="modal" modalId="{{ modal_id }}">
+        <h4 slot="title" class="p-sm font-semibold">{{ column.form.form_dialog_title }}</h4>
+        <div slot="content" class="p-lg">
+          {%
+            form "flex_form"
+            form_to_use="{{ column.form.form.form_id }}"
+            response_response_type="{{ column.form.form.response_type }}"
+            response_message="{{ column.form.form.message }}"
+            response_redirect_id="{{ column.form.form.redirect_id }}"
+            response_redirect_url="{{ column.form.form.redirect_url }}"
+            gotowebinar_webinar_key="{{ column.form.form.gotowebinar_webinar_key }}"
+          %}
+        </div>
+      </tosoh-modal>
+      <tosoh-modal slot="cta" variant="action" modalId="{{ modal_id }}">
+        <button>{{ column.form.form_dialog_button_label }}</button>
+      </tosoh-modal>
+    </div>
+  {% else %}
+    {%
+      form "flex_form"
+      form_to_use="{{ column.form.form.form_id }}"
+      response_response_type="{{ column.form.form.response_type }}"
+      response_message="{{ column.form.form.message }}"
+      response_redirect_id="{{ column.form.form.redirect_id }}"
+      response_redirect_url="{{ column.form.form.redirect_url }}"
+      gotowebinar_webinar_key="{{ column.form.form.gotowebinar_webinar_key }}"
+    %}
+  {% endif %}
+{%- endmacro -%}
+
+{# Macro for flex layout wrapper #}
+{%- macro flex_layout(settings) -%}
+  {%- set gap = settings.gap -%}
+
+  {%- if settings.overflow_scroll_x %}
+    <tosoh-scroll-x showNavButtons="true">
+      <div class="{{ gap }} flex w-full flex-row">{{ caller() }}</div>
+    </tosoh-scroll-x>
+  {%- else %}
+    {%- set dir = settings.is_reversed_mobile ? "flex-col-reverse md:flex-row" : "flex-col md:flex-row" -%}
+    <div class="{{ dir }} {{ gap }} {{ settings.justify }} flex w-full">{{ caller() }}</div>
+  {%- endif %}
+{%- endmacro -%}
+
+{# Render Columns #}
+{%- macro render_columns(columns, parent_settings) -%}
+
+  {%- for column in columns %}
+
+    {# Flex Factor/Column Size #}
+    {%- set column_size = column.column_settings.column_size -%}
+    {%-
+      set flex_factor = column.column_settings.flex_factor > 0
+      ? "flex-" ~ (column.column_settings.flex_factor or 1) : column_size
+    -%}
+
+    {# Border Color #}
+    {%-
+      set border_color = column.column_settings.border_color ?
+      "border " ~ column.column_settings.border_color : "border-transparent"
+    -%}
+
+    {% set column_settings = column.column_settings ? macros.classes(column.column_settings) : '' %}
+    {% set video_width= column.type == 'video' ? 'w-full h-full' : '' %}
+
+    <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ video_width }} flex">
+      {% call column_wrapper(column) %}
+        {{ render_column_type(column) }}
+      {% endcall %}
+    </div>
+  {% endfor -%}
+{%- endmacro -%}
+
+{# Render Column Type #}
+{%- macro render_column_type(column) -%}
+  {# Content Block #}
+  {%- if column.type == "content" %}
+    {{ render_content_block(column.content) }}
+
+    {# Media #}
+  {%- elif column.type == "image" %}
+    {{ render_image(column.image) }}
+
+    {# Video #}
+  {%- elif column.type == "video" %}
+    {{ render_video(column.video) }}
+
+    {# Form #}
+  {%- elif column.type == "form" -%}
+    <div class="gap-md fc-form flex flex-col">
+      {{ render_content_block(column.form) }}
+      {% if column.form.form %}
+        {{ render_form() }}
+      {% endif %}
+    </div>
+    {# Richtext #}
+  {%- elif column.type == "rtf" %}
+    {{ column.richtext.content }}
+  {%- endif %}
+{% endmacro -%}
+
+{% macro wrap_with_grid_accent() %}
+  {% if module.module_settings.has_grid_accent %}
+    <tosoh-grid-accent class="max-w-max-page m-auto">{{ caller() }}</tosoh-grid-accent>
+  {% else %}
+    {{ caller() }}
+  {% endif %}
+{% endmacro %}
+
+{# Module Container #}
+
+{% call wrap_with_grid_accent() %}
+  <div {{ module_id }} class="max-w-max-page {{ macros.classes(module.module_settings) }} scroll-mt-5xl m-auto">
+    {# Tab Groups #}
+    {%- if module.tab_group_settings.is_enabled %}
+      <div class="flex w-full flex-col">
+        {# Tab Actions #}
+        <tosoh-scroll-x scrollbarHeight="1px">
+          <div class="gap-sm px-md mx-auto flex w-full justify-center">
+            {%- for tab_group in module.tab_group_settings.tab_groups -%}
+              {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+              <tosoh-tab-group variant="action" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+                {{ tab_group.group_label }}
+              </tosoh-tab-group>
+            {%- endfor %}
+          </div>
+        </tosoh-scroll-x>
+
+        {# Tab Content #}
+        {%- for tab_group in module.tab_group_settings.tab_groups -%}
+          {%- set columns = module.columns|selectattr('tab_group_id', 'equalto', tab_group.group_id) -%}
+          {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+
+          <tosoh-tab-group variant="tab" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+            <div {# {{ macros.container_attrs(tab_group.tab_settings) }} #}>
+              {% call flex_layout(tab_group.tab_settings) %}
+                {{ render_columns(columns, tab_group.tab_settings) }}
+              {% endcall %}
+            </div>
+          </tosoh-tab-group>
+        {%- endfor %}
+      </div>
+
+      {# Standard Columns #}
+    {%- else %}
+      {% call flex_layout(module.module_settings) %}
+        {{ render_columns(module.columns, module.module_settings) }}
+      {% endcall %}
+    {%- endif %}
+  </div>
+{% endcall %}

@@ -1,0 +1,377 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tosoh Tailwind Configuration Demo</title>
+
+    <script type="module" src="../lib/components/Header/mock.ts"></script>
+    <script type="module" src="../lib/main.ts"></script>
+    <link rel="stylesheet" href="../lib/styles/main.css" />
+  </head>
+  <body class="hs-content-id-1 hs-landing-page hs-page">
+    <div class="max-w-max-page relative m-auto flex min-h-[100vh] flex-col-reverse lg:flex-row">
+      <img
+        src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/image%202.png"
+        class="top-sm right-sm absolute max-h-[5rem] lg:max-h-[7rem]"
+      />
+      <div
+        class="px-md md:px-2xl relative flex w-full flex-col items-center justify-between text-white lg:max-w-[48rem]"
+      >
+        <img
+          src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/761c5869ba5f1c0356006068cdb3adcfe5d37865%20(2).jpg"
+          class="absolute top-0 left-0 h-full w-full object-cover"
+        />
+        <div class="absolute top-0 left-0 h-full w-full bg-[#013B57E3]"></div>
+        <div>
+          <p class="text-thin pt-2xl relative w-full text-lg tracking-widest">
+            CONNECTING SCIENCE WITH CARE
+          </p>
+          <h2 class="mt-sm relative leading-12 font-semibold">
+            At Tosoh, we enable precision and reliability for better patient outcomes.
+          </h2>
+        </div>
+        <img
+          src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/close-up-portrait-focused-young-male-doctor%202.png"
+          class="relative max-h-[12rem] object-contain sm:max-h-[16rem] lg:max-h-[28rem]"
+        />
+      </div>
+      <div class="p-md md:p-lg flex w-full items-center">
+        <div class="systems-page m-auto w-full">
+          <div
+            id="hs_cos_wrapper_content"
+            class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text"
+            style=""
+            data-hs-cos-general-type="widget"
+            data-hs-cos-type="module"
+          >
+            <span
+              id="hs_cos_wrapper_content_"
+              class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text"
+              style=""
+              data-hs-cos-general-type="widget"
+              data-hs-cos-type="rich_text"
+              ><h2 class="font-semibold">Sign In</h2>
+              <p class="mt-sm text-nickel text-xl">
+                This page is only available to people who have been given access.
+              </p></span
+            >
+          </div>
+          <div class="form-container">
+            <span
+              id="hs_cos_wrapper_my_login"
+              class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_member_login"
+              style=""
+              data-hs-cos-general-type="widget"
+              data-hs-cos-type="member_login"
+              ><div class="hs-form-field">
+                <ul class="no-list hs-error-msgs" style="text-align:center">
+                  <li>
+                    <label class="hs-membership-global-error hs-error-msg"></label>
+                  </li>
+                </ul>
+              </div>
+              <form
+                method="post"
+                action="/_hcms/mem/login?businessUnitId=0&amp;domain=default&amp;hsPreviewerApp=template&amp;hs_preview_key=gGXsB1VCKFt_weJBM1gdFw&amp;portalId=145184808&amp;tc_deviceCategory=desktop&amp;template_file_path=TosohTheme2025%2Ftemplates%2Fsystem%2Fmembership-login.html&amp;updated=1757661773349&amp;redirect_url=/"
+                id="hs-membership-form"
+                onsubmit="onFormSubmit()"
+                data-hs-do-not-collect=""
+              >
+                <input name="csrf_token" type="hidden" value="" />
+                <input name="redirect_url" type="hidden" value="/" />
+                <input
+                  id="hs-membership-form-hubspotutk"
+                  name="hubspotutk"
+                  type="hidden"
+                  value=""
+                />
+
+                <div class="hs-form-field">
+                  <label class="hs-login-widget-email-label" for="hs-login-widget-email"
+                    >Email*</label
+                  >
+                  <input
+                    class="hs-input"
+                    name="email"
+                    type="text"
+                    placeholder="Email"
+                    id="hs-login-widget-email"
+                    value=""
+                  />
+                </div>
+
+                <div class="hs-form-field">
+                  <label class="hs-login-widget-password-label" for="hs-login-widget-password"
+                    >Password*</label
+                  >
+                  <a
+                    class="hs-login-widget-show-password"
+                    href="javascript:show_password('hs-login-widget-password');"
+                    >Show password</a
+                  >
+                  <input
+                    class="hs-input"
+                    name="password"
+                    type="password"
+                    placeholder="Password"
+                    id="hs-login-widget-password"
+                  />
+                </div>
+
+                <div class="hs-form-field">
+                  <input
+                    class="hs-input"
+                    name="remember_me"
+                    type="checkbox"
+                    id="hs-login-widget-remember"
+                    value="true"
+                    checked=""
+                  />
+                  <label for="hs-login-widget-remember">Remember Me</label>
+                </div>
+                <div>
+                  <a id="hs_login_reset" href="//145184808.hs-sites-eu1.com/_hcms/mem/reset/request"
+                    >Forgot Password?</a
+                  >
+                </div>
+
+                <div class="hs-membership-loader hs_submit hs-submit">
+                  <div class="actions">
+                    <input type="submit" class="hs-button primary large" value="Sign In" />
+                  </div>
+                </div>
+              </form>
+
+              <span class="form-separator">or</span>
+              <form
+                method="post"
+                action="login/passwordless-auth/request?portalId=145184808"
+                id="hs-membership-passwordless-auth-form"
+                onsubmit="onFormSubmit()"
+                data-hs-do-not-collect=""
+              >
+                <input name="redirect_url" type="hidden" value="/" />
+                <div>
+                  <p>Try going password-less. Get a link sent to your email that'll sign you in.</p>
+                </div>
+                <div class="hs-form-field">
+                  <label class="hs-login-widget-email-label" for="hs-login-widget-email"
+                    >Email*</label
+                  >
+                  <input
+                    class="hs-input"
+                    name="email"
+                    type="text"
+                    placeholder="Email"
+                    id="hs-login-widget-email"
+                    value=""
+                  />
+                </div>
+
+                <div class="hs-form-field">
+                  <input
+                    class="hs-input"
+                    name="explicit_consent"
+                    type="checkbox"
+                    id="hs-passwordless-auth-explicit-consent"
+                    value="true"
+                  />
+                  <label
+                    id="hs-passwordless-auth-checkbox-consent"
+                    for="hs-passwordless-auth-explicit-consent"
+                    >I agree to allow 145184808.hubspotpreview-eu1.com to store and process my
+                    personal data.</label
+                  >
+                </div>
+
+                <div class="hs-membership-loader hs_submit hs-submit">
+                  <div class="actions">
+                    <input
+                      id="hs-passwordless-submit"
+                      type="submit"
+                      class="hs-button primary large"
+                      value="Email link"
+                      disabled=""
+                    />
+                  </div>
+                </div>
+              </form>
+              <script>
+                document.getElementById('hs-passwordless-submit').disabled = true;
+                document
+                  .querySelector('input[name=explicit_consent]')
+                  .addEventListener('change', function () {
+                    if (this.checked) {
+                      document.getElementById('hs-passwordless-submit').disabled = false;
+                    } else {
+                      document.getElementById('hs-passwordless-submit').disabled = true;
+                    }
+                  });
+              </script>
+              <div id="hs-login-self-registration-link">
+                <p>
+                  Don't have an account?
+                  <a href="//145184808.hs-sites-eu1.com/_hcms/mem/register?redirect_url=/"
+                    >Register here.</a
+                  >
+                </p>
+              </div>
+
+              <script type="text/javascript">
+                function onFormSubmit() {
+                  //    document.querySelector('.hs-membership-loader').classList.add('active');
+                }
+
+                document.onkeydown = function (e) {
+                  if (['ArrowUp', 'ArrowDown'].includes(e.code)) {
+                    var children = [].slice.call(
+                      document.querySelectorAll(
+                        '#hs-membership-form input:not([type="hidden"]):not([type="checkbox"]):not([disabled])'
+                      )
+                    );
+                    for (i = 0; i < children.length; i++) {
+                      var input = children[i];
+                      if (input === document.activeElement) {
+                        if (e.code == 'ArrowDown' && children[i + 1] !== undefined) {
+                          children[i + 1].focus();
+                          break;
+                        } else if (e.code == 'ArrowUp' && children[i - 1] !== undefined) {
+                          children[i - 1].focus();
+                          break;
+                        }
+                      } else if (i + 1 === children.length) {
+                        children[0].focus();
+                      }
+                    }
+                  } else if ('Enter' === e.code) {
+                    e.preventDefault();
+                    var children = [].slice.call(
+                      document.querySelectorAll(
+                        '#hs-membership-form input:not([type="hidden"]):not([type="checkbox"]):not([disabled])'
+                      )
+                    );
+                    for (i = 0; i < children.length; i++) {
+                      var input = children[i];
+                      if (input === document.activeElement && children[i + 1] !== undefined) {
+                        children[i + 1].focus();
+                        break;
+                      } else if (input === document.activeElement && i + 1 === children.length) {
+                        //          document.querySelector('.hs-membership-loader').classList.add('active');
+                        document.getElementById('hs-membership-form').submit();
+                      } else if (i + 1 === children.length) {
+                        children[0].focus();
+                      }
+                    }
+                  }
+                };
+              </script>
+
+              <div id="hs-membership-rate-limit-error-text" style="display:none">
+                You've made too many attempts at this request. Please try this action again in a few
+                minutes.
+              </div>
+              <script type="text/javascript">
+                function show_password(id) {
+                  var input = document.getElementById(id);
+                  input.type = input.type === 'password' ? 'text' : 'password';
+                }
+              </script>
+              <script>
+                function getCookie(name) {
+                  var nameEQ = name + '=';
+                  var ca = document.cookie.split(';');
+                  for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                  }
+                  return null;
+                }
+
+                function setTracker() {
+                  var utkInput = document.getElementById('hs-membership-form-hubspotutk');
+                  if (!utkInput.value) {
+                    utkInput.value = getCookie('hubspotutk');
+                  }
+                }
+
+                setInterval(setTracker, 300);
+              </script>
+            </span>
+          </div>
+          <div>
+            <div
+              id="hs_cos_wrapper_membership_admin_content"
+              class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module widget-type-rich_text"
+              style=""
+              data-hs-cos-general-type="widget"
+              data-hs-cos-type="module"
+            >
+              <span
+                id="hs_cos_wrapper_membership_admin_content_"
+                class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_rich_text"
+                style=""
+                data-hs-cos-general-type="widget"
+                data-hs-cos-type="rich_text"
+                ><p>
+                  Having trouble?
+                  <a href="//145184808.hs-sites-eu1.com/7dea362b-3fac-3e00-956a-4952a3d4f474/"
+                    >Contact the admin</a
+                  >
+                  .
+                </p></span
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/hub_generated/template_assets/1/267007484102/1757661259941/template_main.min.js"></script>
+    <script>
+      var hsVars = hsVars || {};
+      hsVars['language'] = 'en';
+    </script>
+
+    <script src="https://static.hsappstatic.net/cos-i18n/static-1.53/bundles/project.js"></script>
+    <script src="https://static.hsappstatic.net/MembershipSupport/static-1.1/js/login_asset.js"></script>
+
+    <!-- Start of HubSpot Analytics Code Not Loaded -->
+    <script>
+      (function () {
+        const timeoutEvent = document.createEvent('CustomEvent');
+        timeoutEvent.initCustomEvent('content-analytics-code-not-loaded', true, true, {
+          detail: 'Not loaded in preview mode',
+        });
+        window.dispatchEvent(timeoutEvent);
+      })();
+    </script>
+    <!-- End of HubSpot Analytics Code Not Loaded -->
+
+    <script type="text/javascript">
+      var hsVars = {
+        render_id: '2d4ec8aa-fbb3-4a33-9366-0f29dee533ac',
+        ticks: 1757670603085,
+        page_id: 1,
+
+        content_group_id: 0,
+        portal_id: 145184808,
+        app_hs_base_url: 'https://app-eu1.hubspot.com',
+        cp_hs_base_url: 'https://cp-eu1.hubspot.com',
+        language: 'en',
+        analytics_page_type: 'landing-page',
+        scp_content_type: '',
+
+        analytics_page_id: 'null',
+        category_id: 1,
+        folder_id: 0,
+        is_hubspot_user: false,
+      };
+    </script>
+
+    <script
+      defer=""
+      src="https://static.hsappstatic.net/HubspotToolsMenu/static-1.432/js/index.js"
+    ></script>
+  </body>
+</html>

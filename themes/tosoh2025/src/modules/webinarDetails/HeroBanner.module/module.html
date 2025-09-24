@@ -1,0 +1,67 @@
+{% set bg = module.bg %}
+{% set date = module.webinar_date %}
+{% set time = module.webinar_time %}
+{% set title = module.title %}
+{% set cta_label = module.cta.cta_label %}
+{% set cta_link = module.cta.form_id.url.href %}
+{% set text_below_cta = module.cta.below_cta %}
+
+<div
+  class="p-md py-lg md:p-2xl max-w-max-page gap-2xl relative m-auto mt-[6rem] flex min-h-[32rem] w-full flex-col items-center justify-between overflow-hidden md:mt-[7rem] lg:min-h-[40rem] lg:flex-row">
+  {% if bg.src %}
+    <img src="{{ bg.src }}" class="absolute top-0 left-0 h-full w-full object-cover" />
+  {% endif %}
+
+  <div class="absolute top-0 left-0 h-full w-full bg-[#01151EA8] object-cover"></div>
+
+  <div class="gap-md relative flex flex-grow flex-col">
+    {% if date || time %}
+      <div class="flex divide-x-2">
+        <span class="px-2 text-xl font-semibold text-white md:text-2xl">{{ date }}</span>
+        <span class="px-2 text-xl font-semibold text-white md:text-2xl">{{ time }}</span>
+      </div>
+    {% endif %}
+
+    {% if title %}
+      <div class="text-6xl font-semibold text-white">{{ title }}</div>
+    {% endif %}
+
+    {% if module.speakers|length %}
+      <div class="gap-md flex flex-col xl:flex-row">
+        {% for speaker in module.speakers %}
+          {% set speaker_name = speaker.speaker_name %}
+          {% set workplace = speaker.workplace %}
+          {% set img = speaker.img %}
+
+          <div class="gap-base flex max-w-[24rem] items-center">
+            {% if img.src %}
+              <img src="{{ img.src }}" alt="" class="aspect-square w-16 rounded-full object-cover lg:w-20" />
+            {% endif %}
+
+            <div class="gap-2xs flex flex-col">
+              {% if speaker_name %}
+                <h5 class="text-xl font-semibold text-white md:text-3xl">{{ speaker_name }}</h5>
+              {% endif %}
+              {% if workplace %}
+                <span class="text-lg font-semibold text-[#C7C7C7] md:text-2xl">{{ workplace }}</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+
+  {% if (cta_label && cta_link) || text_below_cta %}
+    <div
+      class="p-base gap-sm relative flex w-full flex-col items-center justify-center rounded-2xl bg-white sm:max-w-[25rem]">
+      {% if cta_label && cta_link %}
+        <a href="{{ cta_link }}" class="button w-full text-center">{{ cta_label }}</a>
+      {% endif %}
+
+      {% if text_below_cta %}
+        <span class="text-nickel font-semibold">{{ text_below_cta }}</span>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

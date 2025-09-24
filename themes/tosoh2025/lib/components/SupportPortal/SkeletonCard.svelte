@@ -1,0 +1,51 @@
+<script lang="ts">
+  import { fade } from 'svelte/transition';
+  const { viewAs } = $props();
+</script>
+
+<div
+  transition:fade
+  class="border-border relative w-full animate-pulse rounded-2xl border p-[1.25rem]"
+>
+  <div class=" flex h-full flex-col items-center justify-between">
+    {#if viewAs === 'grid'}
+      <div class="aspect-video w-full rounded-lg bg-slate-200"></div>
+    {/if}
+
+    <div class="mt-base flex w-full flex-col gap-[1.25rem]">
+      <div
+        class=" h-[1rem] w-full {viewAs === 'list' ? 'max-w-48' : ''} rounded-lg bg-slate-200"
+      ></div>
+      <div
+        class="{viewAs === 'list' ? 'h-[1.5rem]' : 'h-[3.5rem]'} w-full {viewAs === 'list'
+          ? 'max-w-72'
+          : ''} rounded-lg bg-slate-200"
+      ></div>
+      <button
+        disabled
+        class="text-thin bg-slate-200! flex items-center justify-center gap-[1.25rem] rounded-lg text-center text-sm {viewAs ===
+        'list'
+          ? 'w-fit'
+          : 'w-full'}"
+        >Download
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="19"
+          height="18"
+          viewBox="0 0 19 18"
+          fill="none"
+          class="h-4 w-4"
+        >
+          <path
+            d="M1.34863 13.004V14C1.34863 14.7956 1.6647 15.5587 2.22731 16.1213C2.78992 16.6839 3.55298 17 4.34863 17H14.3486C15.1443 17 15.9073 16.6839 16.47 16.1213C17.0326 15.5587 17.3486 14.7956 17.3486 14V13M9.34863 1.5V12.5M9.34863 12.5L12.8486 9M9.34863 12.5L5.84863 9"
+            stroke="white"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg></button
+      >
+    </div>
+    <div class=" top-base right-base absolute h-[2rem] w-[3.125rem] rounded-lg bg-red-50"></div>
+  </div>
+</div>

@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tosoh Tailwind Configuration Demo</title>
+
+    <script type="module" src="../lib/components/Header/mock.ts"></script>
+    <script type="module" src="../lib/components/CCT/mock.ts"></script>
+    <script type="module" src="../lib/utils/textSearchUtils.ts"></script>
+    <script type="module" src="../lib/main.ts"></script>
+    <link rel="stylesheet" href="../lib/styles/main.css" />
+  </head>
+
+  <body class="min-h-[100vh] bg-gray-50">
+    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-[6rem] flex flex-col">
+      <!-- Header Section -->
+      <div>
+        <button
+          class="plain text-nickel! mb-md flex items-center transition-colors hover:text-gray-800"
+        >
+          <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+          Return to main screen
+        </button>
+
+        <h3 class="mb-sm text-3xl font-bold text-gray-900">
+          Details for TOSOH G11 versus BIORAD D100
+        </h3>
+        <p class="text-gray-600">
+          Your centralized hub for technical assistance, product resources, and expert guidance
+          across Tosoh Comparison Tool.
+        </p>
+      </div>
+
+      <!-- Comparison Table -->
+      <div class="border-border overflow-hidden rounded-lg border bg-white shadow-sm">
+        <tosoh-cct-details-filters></tosoh-cct-details-filters>
+
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead class="border-border border-t border-b bg-white">
+              <tr class="divide-border divide-x">
+                <th class="table-head">Category</th>
+                <th class="table-head">Status</th>
+                <th class="table-head">Lab Manager</th>
+                <th class="table-head">Lab Technician</th>
+                <th class="table-head">Procurement Manager</th>
+                <th class="table-head">Clinician</th>
+              </tr>
+            </thead>
+            <tbody class="divide-border divide-y">
+              <!-- Basic Specifications Row -->
+              <tr class="table-row bg-green-50" id="basic_specification">
+                <td class="table-cell">Basic<br />Specifications</td>
+                <td class="table-cell">
+                  <span
+                    class="px-base py-xs inline-flex items-center rounded-lg bg-green-100 text-xs font-medium text-green-800"
+                  >
+                    Advantage
+                  </span>
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+              </tr>
+              <tr class="table-row bg-red-100" id="application_range">
+                <td class="table-cell">Application<br />Range</td>
+                <td class="table-cell">
+                  <span
+                    class="px-base py-xs bg-imperial-red inline-flex items-center rounded-lg text-xs font-medium text-white"
+                  >
+                    Disadvantage
+                  </span>
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+                <td class="table-cell">
+                  Time and cost-efficient use of instrument; low applications can be run on the same
+                  instrument
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{
+    "appFunctions": {       
+        "get-table-rows": {
+          "file": "getTableRows.js",
+          "secrets": ["HUBSPOT_API_KEY"],
+          "endpoint": {
+            "path": "get-table-rows",
+            "method": ["POST"]
+          }
+        },
+        "get-table-filter-options": {
+          "file": "getTableFilterOptions.js",
+          "secrets": ["HUBSPOT_API_KEY"],
+          "endpoint": {
+            "path": "get-table-filter-options",
+            "method": ["POST"]
+          }
+        },
+          "get-matching-search-items": {
+          "file": "getMatchingSearchItems.js",
+          "secrets": ["HUBSPOT_API_KEY"],
+          "endpoint": {
+            "path": "get-matching-search-items",
+            "method": ["POST"]
+          }
+        }
+    }
+  }

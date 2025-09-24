@@ -1,0 +1,185 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
+{% require_js position="head" %}
+  <script>    
+  window.Tosoh.KioskDocumentsContent =  {{ module|tojson }};
+  </script>
+
+  <script>
+  function getLangValue() {
+    var form = document.getElementById('download-form');
+    return form.elements['lang'].value;
+  }
+
+  function getDocName() {
+    return document.querySelector('h3').innerHTML;
+  }
+
+  function setDocInputValue() {
+    var docUrl = getLangValue();
+    var docName = getDocName();
+    var docUrlInput = document.querySelector('input[name="document_url"]');
+    var docNameInput = document.querySelector('input[name="document_name"]');
+
+    if (docUrl && docUrlInput) docUrlInput.value = docUrl;
+    if (docName && docNameInput) docNameInput.value = docName;
+  }
+
+  function downloadFile(e) {
+    if (e) e.preventDefault();
+    var docUrl = getLangValue();
+    if (docUrl) window.open(docUrl, '_blank');
+  }
+
+  window.addEventListener('message', (event) => {
+    if (event.data.eventName === 'onFormReady') setDocInputValue();
+    else if (event.data.eventName === 'onFormSubmitted' && event.data.id === '{{ gated_form_id }}') {
+      setTimeout(downloadFile, 1000);
+    }
+  });
+
+  document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('download-form');
+    if (form) form.addEventListener('change', setDocInputValue);
+  });
+</script>
+{% end_require_js %}   
+
+{% set breadcrumbs = module.breadcrumbs %}  
+{% set email_form = module.email_form %}
+{% set gated_form = module.gated_form %}
+{% set gated_form_email = module.gated_form_email %}
+{% set internal_version = module.internal_version %}
+
+{% set document = dynamic_page_hubdb_row %}
+
+{% if document && !document.deactivate %}
+
+  {%
+    set lang_options = [
+    { value: document.document_url, label: "English" },
+    { value: document.document_url_gr, label: "German" },
+    { value: document.document_url_it, label: "Italian" },
+    { value: document.document_url_fr, label: "French" },
+    { value: document.document_url_ru, label: "Russian" },
+    { value: document.document_url_sp, label: "Spanish" }
+    ]
+  %}
+
+  <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl mx-auto mt-[6rem]">
+    <div class="gap-base flex items-center">
+      <a class="link" href="{{ request.full_url|cut(request.full_url|split('/')|last) }}">Documents</a>
+      <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
+        <svg
+          class="max-h-inherit max-w-inherit"
+          xmlns="http://www.w3.org/2000/svg"
+          width="100%"
+          height="100%"
+          viewBox="0 0 11 19"
+          fill="none">
+          <path d="M1.55 0L0 1.55L7.95 9.5L0 17.45L1.55 19L11 9.5L1.55 0Z" fill="currentColor" />
+        </svg>
+      </div>
+      <span class="text-default text-lg font-bold">{{ document.title }}</span>
+    </div>
+
+    <div class="mt-12 flex flex-col items-start gap-8 md:flex-row">
+      <img
+        src="{{ document.image.url }}"
+        alt="{{ document.title }}"
+        class="h-48 w-full object-contain sm:h-64 md:h-auto md:w-1/4" />
+
+      <div>
+        <h3>{{ document.title }}</h3>
+        <div>{{ document.description }}</div>
+
+        <div class="bg-ghost-white p-md mt-md gap-md flex flex-col rounded-2xl">
+          <h5 class="flex items-center font-semibold">
+            <svg
+              class="fill-imperial-red! h-6 w-4"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 143 172.2"
+              fill="currentColor">
+              <polygon
+                points="89.72 91.24 89.72 .38 53.28 .38 53.28 91.24 25.06 91.24 71.5 137.69 117.94 91.24 89.72 91.24" />
+              <polygon points="71.5 156.43 142.62 156.43 142.62 171.83 71.5 171.83 .38 171.83 .38 156.43 71.5 156.43" />
+            </svg>
+            <span class="ml-sm font-sans-narrow">Download Options</span>
+          </h5>
+
+          <form id="download-form" class="gap-sm flex flex-col">
+            <span class="font-semibold">Select document language:</span>
+
+            {% for option in lang_options %}
+              {% if option.value %}
+                {% set checked = loop.index == 1 ? 'checked' : '' %}
+
+                <fieldset class="flex space-x-2">
+                  <input
+                    class="tosoh-radio cursor-pointer"
+                    type="radio"
+                    name="lang"
+                    id="{{ option.label }}"
+                    value="{{ option.value }}"
+                    {{ checked }} />
+                  <label class="cursor-pointer" for="{{ option.label }}">{{ option.label }}</label>
+                </fieldset>
+              {% endif %}
+            {% endfor %}
+          </form>
+
+          <div>
+            {% if document.gated %}
+              <tosoh-modal slot="cta" variant="action" modalId="gated-version">
+                <button>Download</button>
+              </tosoh-modal>
+              <tosoh-modal variant="modal" modalId="gated-version">
+                <h4 slot="title">{{ document.title }}</h4>
+                <div slot="content">
+                  <div class="fc-form light">
+                    {%
+                      form "flex_form"
+                      form_to_use="{{ gated_form.form_id }}"
+                      response_response_type="{{ gated_form.response_type }}"
+                      response_message="{{ gated_form.message }}"
+                      response_redirect_id="{{ gated_form.redirect_id }}"
+                      response_redirect_url="{{ gated_form.redirect_url }}"
+                    %}
+                  </div>
+                </div>
+              </tosoh-modal>
+            {% else if internal_version and !document.gated %}
+              <button onclick="downloadFile(event)">Download</button>
+            {% endif %}
+
+            {% if !internal_version %}
+              {% set form = document.gated ? gated_email_form : email_form %}
+
+              <tosoh-modal slot="cta" variant="action" modalId="non-internal-version">
+                <button>E-mail a Copy</button>
+              </tosoh-modal>
+              <tosoh-modal variant="modal" modalId="non-internal-version">
+                <h4 slot="title">{{ document.title }}</h4>
+                <div slot="content">
+                  <div class="fc-form light">
+                    {%
+                      form "flex_form"
+                      form_to_use="{{ form.form_id }}"
+                      response_response_type="{{ form.response_type }}"
+                      response_message="{{ form.message }}"
+                      response_redirect_id="{{ form.redirect_id }}"
+                      response_redirect_url="{{ form.redirect_url }}"
+                    %}
+                  </div>
+                </div>
+              </tosoh-modal>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% else %}
+  {{macros.breadcrumbs(breadcrumbs)}}
+  <tosoh-kiosk-documents></tosoh-kiosk-documents>
+{% endif %}

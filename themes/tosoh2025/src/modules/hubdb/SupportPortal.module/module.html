@@ -1,0 +1,48 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+{% set row = dynamic_page_hubdb_row %}
+
+{% require_js position="head" %}
+<script>
+window.Tosoh.SupportPortalContent =  {{module |tojson}};
+</script>
+{% end_require_js %}
+
+
+{% if dynamic_page_hubdb_row %}
+    {% set wistia_video_id = row.wistia_cached_url|split('/')|reverse|first %}
+    {% set wistia_video_url = row.wistia_video_url %}
+
+        {% require_js %}
+        <script>
+          window._wq = window._wq || [];
+          _wq.push({
+            id: "{{ wistia_video_id }}",
+            options: {
+              playerColor: "ed1a3b",
+              backgroundOpacity: 1,
+            }
+          });
+        </script>
+        <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+        {% end_require_js %}
+      
+        <div class='p-md md:pl-xl md:pr-xl mt-[6rem] mb-[6rem]'>
+         <div class="w-full bg-ghost-white gap-xs p-md max-w-max-page rounded-lg mx-auto divide-x divide-x-default">
+            <a class="whitespace-nowrap" href="/support-portal">Support Portal </a>
+            <span class='break-all ml-2xs'>{{ row.name }}</span>
+          </div>
+          <div class="flex pt-md flex-col gap-md mx-auto max-w-max-page">
+            <h1 class="text-xl font-bold break-all">{{ row.name }}</h1>
+            <div class="w-full max-w-[64rem] m-auto rounded-lg overflow-hidden aspect-video wistia_responsive_padding wistia_embed wistia_async_{{ wistia_video_id }}"></div>    
+            <div class="flex flex-col gap mb-lg">
+              {% if module.display_video_download && wistia_video_url %}
+              <a href="{{wistia_video_url}}" class="button mx-auto">Download</a>
+              {% endif %}
+          </div>      
+          </div>
+        </div>
+        </div>
+{% else %}
+{{macros.breadcrumbs(breadcrumbs)}}
+<tosoh-support-portal></tosoh-support-portal>
+{% endif %}

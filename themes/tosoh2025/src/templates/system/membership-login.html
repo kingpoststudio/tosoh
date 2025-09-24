@@ -1,0 +1,49 @@
+<!--
+  templateType: membership_login_page
+  isAvailableForNewContent: true
+  label: Membership login
+-->
+
+{% extends "../layouts/base-no-globals.html" %}
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
+{# pageTitle is used on system templates for setting a value for the title tag #}
+{% set pageTitle = "Tosoh | Login" %}
+
+{% block header %}
+{% endblock %}
+
+{% block body %}
+  {% call macros.auth_wrapper() %}
+    {%
+      module "content"
+      path="@hubspot/rich_text",
+      html="<h2 class='font-semibold'>Sign In</h2><p class='mt-sm text-nickel text-xl'>This Page Is Only Available To People Who Have Been Given Access.</p>"
+    %}
+    <div class="form-container">
+      {%
+        member_login "my_login"
+        email_label= "Email",
+        password_label= "Password",
+        remember_me_label= "Remember Me",
+        reset_password_text= "Forgot Password?",
+        submit_button_text= "Sign In"
+      %}
+    </div>
+    <div>
+      {%
+        module_block module "membership_admin_content"
+        label="Contact admin",
+        path="@hubspot/rich_text"
+      %}
+        {% module_attribute "html" %}
+          <p>
+            Having trouble?
+            <a href="{{ ("mailto:" ~ site_settings.membershipWebsiteAdmin)|escape_url }}">Contact the admin</a>
+            .
+          </p>
+        {% end_module_attribute %}
+      {% end_module_block %}
+    </div>
+  {% endcall %}
+{% endblock %}

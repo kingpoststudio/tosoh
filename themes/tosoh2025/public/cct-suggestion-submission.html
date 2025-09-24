@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tosoh Tailwind Configuration Demo</title>
+
+    <script type="module" src="../lib/components/Header/mock.ts"></script>
+    <script type="module" src="../lib/components/CCT/mock.ts"></script>
+    <script type="module" src="../lib/utils/textSearchUtils.ts"></script>
+    <script type="module" src="../lib/main.ts"></script>
+    <link rel="stylesheet" href="../lib/styles/main.css" />
+  </head>
+
+  <body class="min-h-[100vh]">
+    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-[6rem] flex flex-col">
+      <div>
+        <button
+          class="plain text-nickel! mb-md flex items-center transition-colors hover:text-gray-800"
+        >
+          <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            ></path>
+          </svg>
+          Return to main screen
+        </button>
+
+        <h3 class="mb-sm text-3xl font-bold text-gray-900">Competitor Comparison Tool (CCT)</h3>
+        <p class="text-gray-600">
+          Your centralized hub for technical assistance, product resources, and expert guidance
+          across Tosoh Comparison Tool.
+        </p>
+      </div>
+      <div class="gap-md flex flex-col lg:flex-row">
+        <div class="p-md bg-ghost-white min-h-full min-w-[16rem] rounded-lg">
+          <p class="font-sans-narrow text-lg font-bold">Field Suggestions</p>
+          <button
+            class="plain p-xs! mt-sm gap-sm border-border! text-nickel! flex w-full items-center rounded-2xl border! border-dotted!"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="17"
+              height="19"
+              viewBox="0 0 17 19"
+              fill="none"
+            >
+              <path
+                d="M12.7956 0.595703H4.27111C2.1737 0.595703 0.467773 2.30163 0.467773 4.39904V14.9224C0.467773 17.0198 2.1737 18.7257 4.27111 18.7257H12.7981C14.8956 18.7257 16.6015 17.0198 16.6015 14.9224V4.39644C16.5989 2.30163 14.893 0.595703 12.7956 0.595703ZM1.76407 14.9198V4.39644C1.76407 3.01459 2.88926 1.88941 4.27111 1.88941H12.7981C14.18 1.88941 15.3052 3.01459 15.3052 4.39644V12.9079H10.4907V17.4242H4.26851C2.88926 17.4268 1.76407 16.3016 1.76407 14.9198ZM12.7956 17.4268H11.787V14.2068H15.3026V14.9224C15.3026 16.3016 14.1774 17.4268 12.7956 17.4268Z"
+                fill="#747273"
+              />
+              <path
+                d="M9.18168 12.1602V9.96424H11.3776V8.66794H9.18168V6.47461H7.88538V8.66794H5.68945V9.96424H7.88538V12.1602H9.18168Z"
+                fill="#747273"
+              />
+            </svg>
+            New Record
+          </button>
+        </div>
+
+        <div
+          class="border-border p-md flex w-full flex-col items-center justify-between overflow-hidden rounded-lg border bg-white"
+        >
+          <div
+            id="hs_cos_wrapper_widget_1756892802821_flex_form"
+            class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form"
+            style=""
+            data-hs-cos-general-type="widget"
+            data-hs-cos-type="form"
+          >
+            <h3
+              id="hs_cos_wrapper_widget_1756892802821_flex_form_title"
+              class="hs_cos_wrapper form-title"
+              data-hs-cos-general-type="widget_field"
+              data-hs-cos-type="text"
+            ></h3>
+
+            <div
+              id="hs_form_target_widget_1756892802821_flex_form"
+              data-hs-forms-root="true"
+              class="fc-form light text-default"
+            >
+              <form
+                id="hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                method="POST"
+                accept-charset="UTF-8"
+                enctype="multipart/form-data"
+                novalidate=""
+                action="https://forms-eu1.hsforms.com/submissions/v3/public/submit/formsnext/multipart/145184808/d9274e8e-660d-4694-b903-53a7ad0aee06"
+                class="hs-form-private hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06 hs-form-d9274e8e-660d-4694-b903-53a7ad0aee06 hs-form-d9274e8e-660d-4694-b903-53a7ad0aee06_695b4b87-fd0b-4934-8ad7-96be870b23b1 hs-form stacked hs-custom-form"
+                target="target_iframe_d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                data-instance-id="695b4b87-fd0b-4934-8ad7-96be870b23b1"
+                data-form-id="d9274e8e-660d-4694-b903-53a7ad0aee06"
+                data-portal-id="145184808"
+                data-test-id="hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+              >
+                <fieldset class="form-columns-2">
+                  <div class="hs_salutation hs-salutation hs-fieldtype-text field hs-form-field">
+                    <label
+                      id="label-salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                      class=""
+                      for="salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                    >
+                      <span>Salutation</span>
+                    </label>
+                    <div class="input">
+                      <input
+                        id="salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                        name="salutation"
+                        placeholder="Salutation"
+                        type="text"
+                        class="hs-input"
+                        inputmode="text"
+                        autocomplete="honorific-prefix"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <div class="hs_email hs-email hs-fieldtype-text field hs-form-field">
+                    <label
+                      id="label-email-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                      class=""
+                      for="email-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                    >
+                      <span>Email</span>
+                      <span class="hs-form-required">*</span>
+                    </label>
+                    <div class="input">
+                      <input
+                        id="email-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                        name="email"
+                        required=""
+                        placeholder=""
+                        type="email"
+                        class="hs-input invalid error"
+                        inputmode="email"
+                        autocomplete="email"
+                        value=""
+                      />
+                    </div>
+                    <ul class="no-list hs-error-msgs inputs-list" role="alert">
+                      <li>
+                        <label class="hs-error-msg hs-main-font-element"
+                          >Please complete this required field.</label
+                        >
+                      </li>
+                    </ul>
+                  </div>
+                </fieldset>
+                <fieldset class="form-columns-2">
+                  <div class="hs_company hs-company hs-fieldtype-text field hs-form-field">
+                    <label
+                      id="label-company-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                      class=""
+                      for="company-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                    >
+                      <span>Company name</span>
+                    </label>
+                    <div class="input">
+                      <input
+                        id="company-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                        name="company"
+                        placeholder=""
+                        type="text"
+                        class="hs-input"
+                        inputmode="text"
+                        autocomplete="organization"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <div class="hs_firstname hs-firstname hs-fieldtype-text field hs-form-field">
+                    <label
+                      id="label-firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                      class=""
+                      for="firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                    >
+                      <span>First name</span>
+                    </label>
+                    <div class="input">
+                      <input
+                        id="firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                        name="firstname"
+                        placeholder=""
+                        type="text"
+                        class="hs-input"
+                        inputmode="text"
+                        autocomplete="given-name"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="form-columns-1">
+                  <div class="hs_hs_role hs-hs_role hs-fieldtype-select field hs-form-field">
+                    <label
+                      id="label-hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                      class=""
+                      for="hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                    >
+                      <span>Employment Role</span>
+                    </label>
+                    <div class="input">
+                      <select
+                        id="hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                        class="hs-input is-placeholder"
+                        name="hs_role"
+                      >
+                        <option disabled="" value="">Please Select</option>
+                        <option value="accounting">Accounting</option>
+                        <option value="administrative">Administrative</option>
+                        <option value="business_development">Business Development</option>
+                        <option value="communications">Communications</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="customer_service">Customer Service</option>
+                        <option value="design">Design</option>
+                        <option value="education">Education</option>
+                        <option value="engineering">Engineering</option>
+                        <option value="entrepreneurship">Entrepreneurship</option>
+                        <option value="finance">Finance</option>
+                        <option value="health_professional">Health Professional</option>
+                        <option value="human_resources">Human Resources</option>
+                        <option value="information_technology">Information Technology</option>
+                        <option value="legal">Legal</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="operations">Operations</option>
+                        <option value="product">Product</option>
+                        <option value="project_management">Project Management</option>
+                        <option value="public_relations">Public Relations</option>
+                        <option value="quality_assurance">Quality Assurance</option>
+                        <option value="real_estate">Real Estate</option>
+                        <option value="recruiting">Recruiting</option>
+                        <option value="research">Research</option>
+                        <option value="sales">Sales</option>
+                        <option value="support">Support</option>
+                        <option value="retired">Retired</option>
+                      </select>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="form-columns-1">
+                  <div class="hs_city hs-city hs-fieldtype-text field hs-form-field">
+                    <label
+                      id="label-city-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                      class=""
+                      for="city-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                    >
+                      <span>City</span>
+                    </label>
+                    <div class="input">
+                      <input
+                        id="city-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                        name="city"
+                        placeholder=""
+                        type="text"
+                        class="hs-input"
+                        inputmode="text"
+                        autocomplete="address-level2"
+                        value=""
+                      />
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="form-columns-1">
+                  <div class="hs_message hs-message hs-fieldtype-textarea field hs-form-field">
+                    <label
+                      id="label-message-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                      class=""
+                      for="message-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                    >
+                      <span>Message</span>
+                    </label>
+                    <div class="input">
+                      <textarea
+                        id="message-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                        class="hs-input hs-fieldtype-textarea"
+                        name="message"
+                        placeholder=""
+                      ></textarea>
+                    </div>
+                  </div>
+                </fieldset>
+                <fieldset class="form-columns-1">
+                  <div class="legal-consent-container">
+                    <div class="hs-richtext">
+                      Kingpost is committed to protecting and respecting your privacy, and we’ll
+                      only use your personal information to administer your account and to provide
+                      the products and services you requested from us. From time to time, we would
+                      like to contact you about our products and services, as well as other content
+                      that may be of interest to you. If you consent to us contacting you for this
+                      purpose, please tick below to say how you would like us to contact you:
+                    </div>
+                    <div>
+                      <div class="hs-dependent-field">
+                        <div
+                          class="hs_LEGAL_CONSENT.subscription_type_411908685 hs-LEGAL_CONSENT.subscription_type_411908685 hs-fieldtype-booleancheckbox field hs-form-field"
+                        >
+                          <div class="input">
+                            <ul class="inputs-list">
+                              <li class="hs-form-booleancheckbox">
+                                <label
+                                  for="LEGAL_CONSENT.subscription_type_411908685-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                                  class="hs-form-booleancheckbox-display"
+                                >
+                                  <input
+                                    id="LEGAL_CONSENT.subscription_type_411908685-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                                    class="hs-input"
+                                    type="checkbox"
+                                    name="LEGAL_CONSENT.subscription_type_411908685"
+                                    value="true"
+                                  />
+                                  <span
+                                    >I agree to receive other communications from Kingpost.</span
+                                  >
+                                </label>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <legend class="hs-field-desc checkbox-desc" style="display: none"></legend>
+                    </div>
+                    <div class="hs-richtext">
+                      You can unsubscribe from these communications at any time. For more
+                      information on how to unsubscribe, our privacy practices, and how we are
+                      committed to protecting and respecting your privacy, please review our Privacy
+                      Policy.
+                    </div>
+                    <div class="hs-richtext">
+                      By clicking submit below, you consent to allow Kingpost to store and process
+                      the personal information submitted above to provide you the content requested.
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="hs_submit hs-submit">
+                  <div class="hs-field-desc" style="display: none"></div>
+                  <div class="actions">
+                    <input type="submit" class="hs-button primary large" value="Submit" />
+                  </div>
+                </div>
+                <input
+                  name="hs_context"
+                  type="hidden"
+                  value='{"embedAtTimestamp":"1756978429904","formDefinitionUpdatedAt":"1756898527923","lang":"en","legalConsentOptions":"{\"communicationConsentCheckboxes\":[{\"communicationTypeId\":411908685,\"label\":\"I agree to receive other communications from Kingpost.\",\"required\":false}],\"legitimateInterestLegalBasis\":\"LEGITIMATE_INTEREST_PQL\",\"communicationConsentText\":\"Kingpost is committed to protecting and respecting your privacy, and we’ll only use your personal information to administer your account and to provide the products and services you requested from us. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you. If you consent to us contacting you for this purpose, please tick below to say how you would like us to contact you:\",\"processingConsentType\":\"IMPLICIT\",\"processingConsentText\":\"By clicking submit below, you consent to allow Kingpost to store and process the personal information submitted above to provide you the content requested.\",\"processingConsentCheckboxLabel\":\"I agree to allow Kingpost to store and process my personal data.\",\"privacyPolicyText\":\"You can unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy Policy.\",\"isLegitimateInterest\":false}","draftState":"DRAFT","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36","pageTitle":"Webinar Detail","pageUrl":"https://145184808.hubspotpreview-eu1.com/_hcms/preview/content/271679871170?_preview=true&amp;benderPackage=InpageEditorUI&amp;cacheBust=1756978428965&amp;cssPath=bundles%2Fapp.css&amp;inpageEditorUI=true&amp;localAssets=false&amp;portalId=145184808&amp;preview_key=NklKAdMS&amp;scriptPath=bundles%2Fapp.js&amp;staticVersion=static-1.81197&amp;preview_theme=true&amp;env=prod&amp;injectedScripts=hubspot-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-2.1406&amp;injectedScripts=react-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-1.54&amp;hsSmartContentDefault=true&amp;hsEditorApp=page&amp;buffer_theme=false","pageId":"271679871170","referrer":"https://app-eu1.hubspot.com/","urlParams":{"_preview":"true","benderPackage":"InpageEditorUI","cacheBust":"1756978428965","cssPath":"bundles/app.css","inpageEditorUI":"true","localAssets":"false","portalId":"145184808","preview_key":"NklKAdMS","scriptPath":"bundles/app.js","staticVersion":"static-1.81197","preview_theme":"true","env":"prod","injectedScripts":"react-dlb,bundle.production.js,false,static-1.54","hsSmartContentDefault":"true","hsEditorApp":"page","buffer_theme":"false"},"isHubSpotCmsGeneratedPage":true,"formTarget":"#hs_form_target_widget_1756892802821_flex_form","formInstanceId":"1966","contentType":"standard-page","pageName":"Webinar Detail","boolCheckBoxFields":"LEGAL_CONSENT.subscription_type_411908685","rumScriptExecuteTime":752.2000000001863,"rumTotalRequestTime":880.5,"rumTotalRenderTime":932.5999999996275,"rumServiceResponseTime":128.29999999981374,"rumFormRenderTime":52.09999999962747,"connectionType":"4g","firstContentfulPaint":0,"largestContentfulPaint":0,"locale":"en","timestamp":1756979110428,"originalEmbedContext":{"portalId":"145184808","formId":"d9274e8e-660d-4694-b903-53a7ad0aee06","region":"eu1","target":"#hs_form_target_widget_1756892802821_flex_form","isBuilder":false,"isTestPage":false,"isPreview":false,"formInstanceId":"1966","formsBaseUrl":"/_hcms/forms","deactivateSmartForm":true,"css":"","redirectUrl":"https://youtube.com","useDraft":true,"isMobileResponsive":true,"pageName":"Webinar Detail","pageId":"271679871170","contentType":"standard-page","formData":{"cssClass":"hs-form stacked hs-custom-form"},"isCMSModuleEmbed":true},"correlationId":"695b4b87-fd0b-4934-8ad7-96be870b23b1","renderedFieldsIds":["salutation","email","company","firstname","hs_role","city","message","LEGAL_CONSENT.subscription_type_411908685"],"captchaStatus":"NOT_APPLICABLE","emailResubscribeStatus":"NOT_APPLICABLE","isInsideCrossOriginFrame":true,"source":"forms-embed-1.9606","sourceName":"forms-embed","sourceVersion":"1.9606","sourceVersionMajor":"1","sourceVersionMinor":"9606","allPageIds":{"embedContextPageId":"271679871170","contentPageId":271679871170,"contentAnalyticsPageId":"271679871170"},"_debug_embedLogLines":[{"clientTimestamp":1756978429844,"level":"INFO","message":"Retrieved customer callbacks used on embed context: [\"getExtraMetaDataBeforeSubmit\"]"},{"clientTimestamp":1756978429844,"level":"INFO","message":"Retrieved pageContext values which may be overriden by the embed context: {\"pageTitle\":\"Webinar Detail\",\"pageUrl\":\"https://145184808.hubspotpreview-eu1.com/_hcms/preview/content/271679871170?_preview=true&amp;benderPackage=InpageEditorUI&amp;cacheBust=1756978428965&amp;cssPath=bundles%2Fapp.css&amp;inpageEditorUI=true&amp;localAssets=false&amp;portalId=145184808&amp;preview_key=NklKAdMS&amp;scriptPath=bundles%2Fapp.js&amp;staticVersion=static-1.81197&amp;preview_theme=true&amp;env=prod&amp;injectedScripts=hubspot-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-2.1406&amp;injectedScripts=react-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-1.54&amp;hsSmartContentDefault=true&amp;hsEditorApp=page&amp;buffer_theme=false\",\"referrer\":\"https://app-eu1.hubspot.com/\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"urlParams\":{\"_preview\":\"true\",\"benderPackage\":\"InpageEditorUI\",\"cacheBust\":\"1756978428965\",\"cssPath\":\"bundles/app.css\",\"inpageEditorUI\":\"true\",\"localAssets\":\"false\",\"portalId\":\"145184808\",\"preview_key\":\"NklKAdMS\",\"scriptPath\":\"bundles/app.js\",\"staticVersion\":\"static-1.81197\",\"preview_theme\":\"true\",\"env\":\"prod\",\"injectedScripts\":\"react-dlb,bundle.production.js,false,static-1.54\",\"hsSmartContentDefault\":\"true\",\"hsEditorApp\":\"page\",\"buffer_theme\":\"false\"},\"pageId\":\"271679871170\",\"contentAnalyticsPageId\":\"271679871170\",\"contentPageId\":271679871170,\"isHubSpotCmsGeneratedPage\":true,\"isCMSEditor\":true}"},{"clientTimestamp":1756978429845,"level":"INFO","message":"Retrieved countryCode property from normalized embed definition response: \"GR\""}]}'
+                />
+                <iframe
+                  name="target_iframe_d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
+                  style="display: none"
+                ></iframe>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

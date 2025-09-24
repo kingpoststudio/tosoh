@@ -1,0 +1,123 @@
+<script lang="ts">
+  import { fade } from 'svelte/transition';
+
+  let {
+    name,
+
+    type = 'text',
+    disabled,
+    displayLabel = true,
+    labelPosition = 'top',
+    disableReset,
+    label,
+    customClearFilter,
+    isLoading,
+    min,
+    max,
+    step,
+    placeholder,
+  }: {
+    name: string;
+    type: string;
+    disabled: boolean;
+    displayLabel?: boolean;
+    labelPosition?: 'top' | 'left';
+    disableReset?: boolean;
+    label?: string;
+    customClearFilter?: () => void;
+    isLoading?: boolean;
+    min?: number;
+    max?: number;
+    step?: number;
+    placeholder?: string;
+  } = $props();
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const activeFilter = urlParams.get(name);
+
+  const clearFilter = () => {
+    if (customClearFilter) {
+      customClearFilter();
+    } else {
+      const url = new URL(window.location.href);
+      url.searchParams.delete(name);
+      window.location.href = url.toString();
+    }
+  };
+
+  const setupFilterTitle = (column: string) =>
+    column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
+</script>
+
+<div class="gap-sm flex flex-col">
+  <div class={`gap-sm flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
+    <div class="gap-sm flex items-center">
+      {#if displayLabel}
+        <div class="text-lg font-semibold">{label || setupFilterTitle(name)}</div>
+      {/if}
+      {#if !!activeFilter && !disableReset}
+        <button
+          type="button"
+          disabled={disabled || isLoading}
+          transition:fade={{ duration: 200 }}
+          class="fill-imperial-red plain h-4 w-4 cursor-pointer"
+          onclick={clearFilter}
+          aria-label="Clear selection"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="fill-imperial-red">
+            <path
+              d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
+            /></svg
+          >
+        </button>
+      {/if}
+    </div>
+    <div
+      class={` focus-within:border-imperial-red border-border relative w-full rounded-lg border`}
+    >
+      <div class="gap-sm flex flex-col">
+        <input
+          {type}
+          data-debounce="500"
+          {name}
+          defaultValue={activeFilter ? activeFilter : ''}
+          {min}
+          {max}
+          {step}
+          {placeholder}
+          disabled={disabled || isLoading}
+          class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Use :global() to ensure webkit pseudo-elements work properly */
+  :global(input[type='number']::-webkit-outer-spin-button),
+  :global(input[type='number']::-webkit-inner-spin-button) {
+    opacity: 1;
+    height: 30px;
+    width: 20px;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 30'%3E%3Cpath d='M4 7l6-5 6 5H4z' fill='%23ed1a3b'/%3E%3Cpath d='M4 23l6 5 6-5H4z' fill='%23ed1a3b'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* For Firefox - enable number input controls */
+  :global(input[type='number']) {
+    -moz-appearance: textfield;
+  }
+
+  /* Firefox specific styles */
+  @supports (-moz-appearance: textfield) {
+    :global(input[type='number']) {
+      -moz-appearance: number-input;
+    }
+  }
+</style>

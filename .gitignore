@@ -42,3 +42,4 @@ hubspot.config.yml
 themes/tosoh2025/bun.lockb
 
 fields.json
+.cursor/*

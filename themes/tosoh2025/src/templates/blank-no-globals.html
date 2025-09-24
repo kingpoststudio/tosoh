@@ -1,0 +1,14 @@
+<!--
+  templateType: page
+  isAvailableForNewContent: true
+  label: Blank - No Globals
+-->
+
+{% extends "./layouts/base-no-globals.html" %}
+
+{% block body %}
+  <main>
+    {% dnd_area 'main_dnd' %}
+    {% end_dnd_area %}
+  </main>
+{% endblock body %}

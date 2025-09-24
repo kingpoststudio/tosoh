@@ -1,0 +1,218 @@
+.fc-form {
+  &.light {
+    form {
+      div.legal-consent-container {
+        @apply text-default!;
+      }
+
+      div.input {
+        @apply w-full ring-0;
+
+        input:not([id^='LEGAL_CONSENT']),
+        select,
+        textarea {
+          @apply border-border!;
+        }
+
+        :has(input[id^='LEGAL_CONSENT']) {
+          span {
+            @apply text-default! ml-0!;
+          }
+        }
+
+        input[type='checkbox'] {
+          @apply border-border!;
+        }
+
+        select {
+          &,
+          &::picker(select) {
+            @apply text-default! border-border!;
+            appearance: base-select;
+
+            &:open {
+              @apply text-default!;
+            }
+          }
+
+          &::after {
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ed1a3b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+          }
+          &:open::after {
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ed1a3b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e") !important;
+          }
+
+          &:open {
+            @apply border-border!;
+          }
+
+          &::picker() {
+            @apply border-border! border;
+          }
+        }
+      }
+    }
+  }
+
+  form {
+    @apply gap-md mx-auto flex w-full max-w-6xl flex-col;
+    @apply p-xs;
+
+    div#hs-membership-password-requirements {
+      @apply mt-xs;
+    }
+
+    .hs_submit {
+      .actions {
+        input[type='submit'] {
+          @apply border-imperial-red from-imperial-red px-md py-xs hover:bg-imperial-red focus:ring-imperial-red cursor-pointer rounded-lg border-2 bg-gradient-to-br to-red-600 font-normal text-white inset-shadow-sm inset-shadow-red-600 transition-[background-color,box-shadow] duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
+          box-shadow: 0px -3.08px 11.54px 0px #00000026 inset;
+        }
+      }
+    }
+
+    div.legal-consent-container {
+      @apply mb-md mt-md gap-md flex flex-col text-[#B1B1B1];
+    }
+
+    input#hs-login-widget-remember {
+      @apply w-fit;
+    }
+
+    input#hs-pwd-widget-password {
+      @apply h-[2.75rem]! w-full;
+    }
+
+    fieldset {
+      @apply gap-md flex max-w-full flex-col md:flex-row;
+    }
+
+    div.hs-form-field,
+    div.form-field,
+    filter {
+      @apply relative w-full!;
+      float: none !important;
+
+      &.inline {
+        @apply flex flex-row items-center;
+      }
+
+      label {
+        &.error-msg,
+        &.hs-error-msg {
+          @apply mt-xs text-imperial-red inline-flex;
+        }
+      }
+
+      > label {
+        > span {
+          @apply text-lg font-semibold;
+        }
+
+        > span.form-required,
+        > span.hs-form-required {
+          @apply text-imperial-red ml-xs;
+        }
+      }
+
+      &.hs-fieldtype-radio,
+      &.hs-fieldtype-checkbox,
+      &.hs-form-booleancheckbox {
+        > label {
+          @apply static top-auto left-auto bg-transparent p-0 text-sm;
+        }
+      }
+
+      legend {
+        @apply hidden;
+      }
+
+      div.input {
+        @apply w-full ring-0;
+
+        input:not([id^='LEGAL_CONSENT']),
+        select,
+        textarea {
+          @apply mt-base p-base outline-imperial-red focus-visible:ring-imperial-red focus-visible:border-imperial-red mr-0 w-full rounded-xl border border-[#E9E9E938] focus-visible:ring-0 focus-visible:outline-0;
+        }
+
+        :has(input[id^='LEGAL_CONSENT']) {
+          span {
+            @apply ml-0! text-white;
+          }
+        }
+
+        input[type='checkbox'] {
+          @apply mr-2 h-6 w-6 appearance-none rounded-lg border border-white bg-transparent text-white focus:ring-0 focus:outline-none;
+        }
+
+        input[type='checkbox']:checked {
+          @apply bg-imperial-red;
+          background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708.708z'/%3e%3c/svg%3e");
+        }
+
+        select {
+          @apply relative appearance-none transition-[border-color] duration-200 ease-in-out;
+
+          &,
+          &::picker(select) {
+            @apply max-h-[12rem]! rounded-lg! fill-white stroke-white text-white transition-all duration-100;
+            appearance: base-select;
+
+            &:open {
+              @apply bg-ghost-white! text-default;
+            }
+          }
+
+          &::after {
+            @apply absolute right-3 h-6 w-6;
+            content: '';
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          }
+
+          &:open::after {
+            background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23000000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+          }
+
+          &:open {
+            @apply border-imperial-red border;
+          }
+
+          &::picker() {
+            @apply border border-slate-200;
+          }
+
+          &::picker-icon {
+            @apply hidden;
+          }
+        }
+        option {
+          @apply p-2 text-black hover:bg-red-50! hover:text-black!;
+
+          &::checkmark {
+            @apply block;
+          }
+        }
+
+        /* Textarea competes with inline styles associated w/ form-id. This ensures style priority. */
+        > textarea.hs-input {
+          @apply w-full;
+        }
+      }
+
+      ul.inputs-list {
+        @apply ml-base gap-2xs m-0 flex list-none flex-col items-start p-0;
+
+        li.hs-form-radio,
+        li.hs-form-checkbox,
+        li.hs-form-booleancheckbox {
+          @apply mb-0 inline-flex flex-row;
+
+          > label {
+            @apply gap-xs flex cursor-pointer items-center text-sm;
+          }
+        }
+      }
+    }
+  }
+}
