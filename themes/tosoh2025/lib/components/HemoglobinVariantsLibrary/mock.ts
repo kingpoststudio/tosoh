@@ -31,7 +31,8 @@ window.Tosoh.HemoglobinVariantsLibraryContent = {
   eyebrow: 'Reference Library for Hb Variants',
   search: {
     hubdb_column_id: 'search_terms',
-    title: 'Search',
+    hubdb_table_id: 99968194,
+    title: 'Title',
     typeahead_enabled: true,
   },
   title: 'Tosoh Hemoglobin Variants Library',
@@ -64,6 +65,7 @@ window.Tosoh.HemoglobinVariantsLibraryContent = {
     ],
     hubdb_table_id: 690033851,
   },
+  type: 'module',
 };
 
 export const mockHemoglobinVariantsLibraryTableRowsResponse = {

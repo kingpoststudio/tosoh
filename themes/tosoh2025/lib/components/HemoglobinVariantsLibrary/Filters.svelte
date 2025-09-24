@@ -190,6 +190,8 @@
             <Input
               name={columnId}
               type="number"
+              placeholder={`${getFilterTopic(columnId)?.min} - ${getFilterTopic(columnId)?.max} ` ||
+                ''}
               min={getFilterTopic(columnId)?.min || 0}
               max={getFilterTopic(columnId)?.max || 10}
               step={0.01}

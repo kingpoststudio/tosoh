@@ -35,6 +35,7 @@ declare global {
           hubdb_column_id: string;
           title: string;
           typeahead_enabled: boolean;
+          hubdb_table_id: number;
         };
         title: string;
         topic_filters: {
@@ -66,6 +67,7 @@ declare global {
           hubdb_column_id: string;
           title: string;
           typeahead_enabled: boolean;
+          hubdb_table_id: number;
         };
         title: string;
         topic_filters: {

@@ -46,6 +46,7 @@ export const topicFilters = groupField('topic_filters', 'Topic Filters', {
           visibility: {
             controlling_field: 'filters.type',
             controlling_value_regex: 'range-pm',
+            operator: 'EQUAL',
           },
           default: 0,
         }),
@@ -57,6 +58,7 @@ export const topicFilters = groupField('topic_filters', 'Topic Filters', {
           visibility: {
             controlling_field: 'filters.type',
             controlling_value_regex: 'range-pm',
+            operator: 'EQUAL',
           },
           default: 0,
         }),
@@ -69,6 +71,7 @@ export const topicFilters = groupField('topic_filters', 'Topic Filters', {
           visibility: {
             controlling_field: 'filters.type',
             controlling_value_regex: 'range-pm',
+            operator: 'EQUAL',
           },
           default: 1,
         }),
@@ -92,6 +95,14 @@ export const searchField = groupField('search', 'Search', {
     }),
     booleanField('typeahead_enabled', 'Is typeahead enabled?', {
       default: false,
+    }),
+    hubDbTableField('hubdb_table_id', 'HubDB Table', {
+      required: true,
+      visibility: {
+        controlling_field: 'search.typeahead_enabled',
+        controlling_value_regex: true,
+        operator: 'EQUAL',
+      },
     }),
   ],
 });

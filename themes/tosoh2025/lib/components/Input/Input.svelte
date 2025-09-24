@@ -15,6 +15,7 @@
     min,
     max,
     step,
+    placeholder,
   }: {
     name: string;
     type: string;
@@ -28,6 +29,7 @@
     min?: number;
     max?: number;
     step?: number;
+    placeholder?: string;
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -82,6 +84,7 @@
           {min}
           {max}
           {step}
+          {placeholder}
           disabled={disabled || isLoading}
           class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
         />
