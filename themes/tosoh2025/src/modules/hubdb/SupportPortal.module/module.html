@@ -1,18 +1,4 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
-
-{% set filter_columns = module.filters|map('hubdb_column_id')|join(',') %}
-{% set access_level = module.access_level or "customer" %}
-{% set breadcrumbs = module.breadcrumbs %}
-
-
-{% set search_title = module.search.title %}
-{% set search_hubdb_table = module.search.hubdb_table_id %}
-{% set search_hubdb_column = module.search.hubdb_column_id %}
-{% set search_is_access_level_filter_enabled = module.search.is_access_level_filter_enabled %}
-
-{%set title = module.title %}
-{%set description = module.description %}
-
 {% set row = dynamic_page_hubdb_row %}
 
 {% require_js position="head" %}

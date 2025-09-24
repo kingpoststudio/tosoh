@@ -23,13 +23,7 @@ declare global {
 
         description: string;
         display_video_download: boolean;
-        search: {
-          hubdb_column_id: string;
-          hubdb_table_id: number;
-          is_access_level_filter_enabled: boolean;
-          title: string;
-          typeahead_enabled: boolean;
-        };
+        search: Search;
         title: string;
         topic_filters: TopicFilters;
 
@@ -47,12 +41,7 @@ declare global {
         }[];
         eyebrow: string;
         title: string;
-        search: {
-          hubdb_column_id: string;
-          title: string;
-          typeahead_enabled: boolean;
-          hubdb_table_id: number;
-        };
+        search: Search;
         title: string;
         topic_filters: TopicFilters;
       };
@@ -69,35 +58,23 @@ declare global {
           form_id: null;
         };
 
-        search: {
-          hubdb_column_id: string;
-          title: string;
-          typeahead_enabled: boolean;
-          hubdb_table_id: number;
-        };
+        search: Search;
         title: string;
         topic_filters: TopicFilters;
       };
       WebinarListings: {
-        tableId: string;
-        preselectedLanguage: string;
-        upcomingSectionEyebrow: string;
-        upcomingSectionTitle: string;
-        pastSectionEyebrow: string;
-        pastSectionTitle: string;
-        search: {
-          isSearchEnabled: boolean;
-          searchInputPlaceholder: string;
-          searchHubdbColumnId: string;
+        advanced: {
+          filter_by_topic: string;
         };
-        filters: {
-          areFiltersEnabled: boolean;
-          dropdownFilters: {
-            hubdb_column_id: string;
-            dropdown_filter_placeholder: string;
-          }[];
-        };
-        filterByTopic: string;
+        hubdb_table_id: number;
+        past_section_eyebrow: string;
+        past_section_title: string;
+        preselected_language: string;
+        search: Search;
+        title: string;
+        topic_filters: TopicFilters;
+        upcoming_section_eyebrow: string;
+        upcoming_section_title: string;
       };
       CCT: {
         activeCompetitorInstruments: {

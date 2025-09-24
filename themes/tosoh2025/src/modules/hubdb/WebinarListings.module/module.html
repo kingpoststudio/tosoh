@@ -1,44 +1,6 @@
-{%- set table_id = module.hubdb_table_id -%}
-{%- set preselected_language = module.preselected_language -%}
-{%- set upcoming_section_eyebrow = module.upcoming_section_eyebrow -%}
-{%- set upcoming_section_title = module.upcoming_section_title -%}
-{%- set past_section_eyebrow = module.past_section_eyebrow -%}
-{%- set past_section_title = module.past_section_title -%}
-
-{# Search  #}
-{%- set is_search_enabled = module.search.enable_search || false -%}
-{%- set search_input_placeholder = module.search.search_input_placeholder -%}
-{%- set search_hubdb_column_id = module.search.hubdb_column_id -%}
-
-{# Dropdown Filters #}
-{% set are_dropdown_filters_enabled = module.filters.enable_dropdown_filters || false %}
-{% set filter_columns = module.filters.dropdown_filters %}
-
-{# Filter By Topic  #}
-{%- set filter_by_topic = module.advanced.filter_by_topic -%}
-
 {% require_js position="head" %}
   <script>
-    const tableId = '{{table_id}}';
-    const upcomingSectionEyebrow = '{{upcoming_section_eyebrow}}';
-    const upcomingSectionTitle = '{{upcoming_section_title}}';
-    const pastSectionEyebrow = '{{past_section_eyebrow}}';
-    const pastSectionTitle = '{{past_section_title}}';
-    const preselectedLanguage="{{preselected_language}}"
-    const search = { 
-    isSearchEnabled:{{ is_search_enabled }},
-    searchInputPlaceholder:"{{ search_input_placeholder }}",
-    searchHubdbColumnId:"{{ search_hubdb_column_id }}",
-     };
-
-    const filters = { 
-    areFiltersEnabled:{{ are_dropdown_filters_enabled }},
-    dropdownFilters:{{ module.filters.dropdown_filters|tojson }}
-     };
- 
-    const filterByTopic = '{{filter_by_topic}}';
-
-    window.Tosoh.WebinarListings = {tableId, preselectedLanguage, upcomingSectionEyebrow, upcomingSectionTitle, pastSectionEyebrow, pastSectionTitle, search ,filters, filterByTopic };
+    window.Tosoh.WebinarListings = {{module |tojson}};
   </script>
 {% end_require_js %}
 
