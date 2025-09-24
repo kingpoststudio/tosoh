@@ -4,7 +4,6 @@
     defaultItemsLimit,
     defaultPagination,
     PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
-    PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
   } from '../../utils/constants';
   import {
     clearParams,
@@ -15,15 +14,14 @@
 
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from '../Search/Search.svelte';
-  import Select from '../Select/Select.svelte';
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import { parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
-  import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import { mockHemoglobinVariantsLibraryFiltersResponse } from './mock';
-  import Input from '../Input/Input.svelte';
   import { getFilter } from '../../utils/utils';
+  import TopicFilter from '../TopicFilter/TopicFilter.svelte';
+  import type { TopicFilters } from '../../../types/fields';
   let { isParentLoading } = $props();
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
@@ -159,47 +157,15 @@
 
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
-      {@const filter = getFilter(topic_filters, columnId)}
+      {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
       {#if searchColumnId !== columnId}
-        {#if filter?.type === 'dropdown'}
-          <div class="mt-base">
-            <Select
-              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-                columnId as ColumnId
-              ]}
-              name={columnId}
-              label={filter?.filter_label}
-              disabled={isParentLoading || isLoading || hasError}
-            />
-          </div>
-        {/if}
-        {#if filter?.type === 'checkbox'}
-          <div class="mt-base">
-            <Checkbox
-              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-                columnId as ColumnId
-              ]}
-              name={columnId}
-              disabled={isParentLoading || isLoading || hasError}
-              {isLoading}
-            />
-          </div>
-        {/if}
-        {#if filter?.type === 'range-pm'}
-          <div class="mt-base">
-            <Input
-              name={columnId}
-              type="number"
-              placeholder={`${filter?.min} - ${filter?.max} ` || ''}
-              min={filter?.min || 0}
-              max={filter?.max || 10}
-              step={0.01}
-              disabled={isParentLoading || isLoading || hasError}
-              {isLoading}
-              label={filter?.filter_label}
-            />
-          </div>
-        {/if}
+        <TopicFilter
+          {filter}
+          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
+          name={columnId}
+          disabled={isParentLoading || isLoading || hasError}
+          {isLoading}
+        />
       {/if}
     {/each}
 

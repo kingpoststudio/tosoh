@@ -22,6 +22,7 @@
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import { mockKioskDocumentsFiltersResponse } from './mock';
   import { getFilter } from '../../utils/utils';
+  import TopicFilter from '../TopicFilter/TopicFilter.svelte';
 
   let { isParentLoading } = $props();
 
@@ -157,29 +158,13 @@
       {@const filter = getFilter(topic_filters, columnId)}
 
       {#if searchColumnId !== columnId}
-        {#if filter?.type === 'dropdown'}
-          <div class="mt-base">
-            <Select
-              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-                columnId as ColumnId
-              ]}
-              name={columnId}
-              disabled={isParentLoading || isLoading || hasError}
-            />
-          </div>
-        {/if}
-        {#if filter?.type === 'checkbox'}
-          <div class="mt-base">
-            <Checkbox
-              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-                columnId as ColumnId
-              ]}
-              name={columnId}
-              disabled={isParentLoading || isLoading || hasError}
-              {isLoading}
-            />
-          </div>
-        {/if}
+        <TopicFilter
+          {filter}
+          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
+          name={columnId}
+          disabled={isParentLoading || isLoading || hasError}
+          {isLoading}
+        />
       {/if}
     {/each}
 

@@ -8,7 +8,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import SupportPortalFilter from './Filters.svelte';
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
   import {

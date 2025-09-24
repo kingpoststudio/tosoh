@@ -1,0 +1,68 @@
+<script lang="ts">
+  import Select from '../Select/Select.svelte';
+  import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
+  import Input from '../Input/Input.svelte';
+  import type { TopicFilters } from '../../../types/fields';
+
+  let {
+    filter,
+    options,
+    name,
+    disabled,
+    isLoading,
+    disableReset,
+    placeholder,
+    labelPosition,
+    displayLabel,
+    customClasses,
+  }: {
+    filter: TopicFilters['filters'][number];
+    options: any[];
+    name: string;
+    disabled: boolean;
+    isLoading: boolean;
+    disableReset?: boolean;
+    placeholder?: string;
+    labelPosition?: 'top' | 'left';
+    displayLabel?: boolean;
+    customClasses?: string;
+  } = $props();
+</script>
+
+<div class={customClasses || 'mt-base'}>
+  {#if filter?.type === 'dropdown'}
+    <Select
+      {options}
+      {name}
+      {disabled}
+      {disableReset}
+      {placeholder}
+      {labelPosition}
+      {displayLabel}
+    />
+  {/if}
+  {#if filter?.type === 'checkbox'}
+    <Checkbox
+      {options}
+      {name}
+      {disabled}
+      {isLoading}
+      {disableReset}
+      {labelPosition}
+      {displayLabel}
+    />
+  {/if}
+  {#if filter?.type === 'range-pm'}
+    <Input
+      {name}
+      type="number"
+      placeholder={`${filter?.min} - ${filter?.max} ` || ''}
+      min={filter?.min || 0}
+      max={filter?.max || 10}
+      step={0.01}
+      {disabled}
+      {isLoading}
+      label={filter?.filter_label}
+    />
+  {/if}
+</div>

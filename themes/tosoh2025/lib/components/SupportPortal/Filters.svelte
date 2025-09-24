@@ -10,12 +10,13 @@
 
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from '../Search/Search.svelte';
-  import Select from '../Select/Select.svelte';
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
-
+  import TopicFilter from '../TopicFilter/TopicFilter.svelte';
+  import { getFilter } from '../../utils/utils';
+  import type { TopicFilters } from '../../../types/fields';
   let { isParentLoading, viewAs, handleChangeView } = $props();
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
@@ -30,11 +31,10 @@
 
   let accessLevel = window?.Tosoh?.SupportPortalContent?.access_level || 'Customer';
 
-  let filtersFromFields = window?.Tosoh?.SupportPortalContent?.topic_filters?.filters
+  const topic_filters = window?.Tosoh?.SupportPortalContent?.topic_filters?.filters;
+  let filtersFromFields = topic_filters
     ? ([
-        ...window.Tosoh.SupportPortalContent.topic_filters.filters.map(
-          (filter: any) => filter.hubdb_column_id
-        ),
+        ...topic_filters.map((filter: any) => filter.hubdb_column_id),
         searchColumnId,
       ] as ColumnId[])
     : [];
@@ -150,16 +150,16 @@
   />
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
+      {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
+
       {#if searchColumnId !== columnId}
-        <div class="mt-base">
-          <Select
-            options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-              columnId as ColumnId
-            ]}
-            name={columnId}
-            disabled={isParentLoading || isLoading || hasError}
-          />
-        </div>
+        <TopicFilter
+          {filter}
+          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
+          name={columnId}
+          disabled={isParentLoading || isLoading || hasError}
+          {isLoading}
+        />
       {/if}
     {/each}
 

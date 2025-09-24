@@ -11,10 +11,12 @@
     PROD_TOSOH_WEBINARS_TABLE_ID,
   } from '../../utils/constants';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
-  import Select from '../Select/Select.svelte';
   import { mockWebinarListingsFilterOptions } from './mock';
   import Search from '../Search/Search.svelte';
   import { fade } from 'svelte/transition';
+  import TopicFilter from '../TopicFilter/TopicFilter.svelte';
+  import { getFilter } from '../../utils/utils';
+  import type { TopicFilters } from '../../../types/fields';
 
   let { isParentLoading } = $props();
 
@@ -22,18 +24,15 @@
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  const areFiltersEnabled = window?.Tosoh?.WebinarListings?.topic_filters?.filters?.length > 0;
+  const topicFilters = window?.Tosoh?.WebinarListings?.topic_filters?.filters;
+  const areFiltersEnabled = topicFilters?.length > 0;
   const searchGroup = window?.Tosoh?.WebinarListings?.search;
   const searchColumnId = searchGroup?.hubdb_column_id;
   const isSearchEnabled = searchGroup?.enable_search;
   const searchInputPlaceholder = searchGroup?.placeholder;
 
   const filtersArray = window?.Tosoh?.WebinarListings?.topic_filters?.filters
-    ? [
-        ...window.Tosoh.WebinarListings.topic_filters.filters.map(
-          (filter: any) => filter.hubdb_column_id
-        ),
-      ]
+    ? [...topicFilters.map((filter: any) => filter.hubdb_column_id)]
     : [];
 
   // const tableId = window?.Tosoh?.WebinarListings?.hubdb_table_id;
@@ -122,19 +121,22 @@
     <FilterForm trigger="change" {onChange} {onReset}>
       <div class="gap-md flex w-full">
         {#each filtersArray as columnId}
-          <div class="min-w-[16rem]">
-            <Select
-              disableReset={true}
-              placeholder={getLabelForSelect(columnId)}
-              labelPosition="left"
-              options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
-                columnId as ColumnId
-              ]}
-              name={columnId}
-              displayLabel={false}
-              disabled={isParentLoading || isLoading || hasError}
-            />
-          </div>
+          {@const filter = getFilter(topicFilters, columnId) as TopicFilters['filters'][number]}
+
+          <TopicFilter
+            {filter}
+            options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
+              columnId as ColumnId
+            ]}
+            name={columnId}
+            disabled={isParentLoading || isLoading || hasError}
+            {isLoading}
+            disableReset={true}
+            placeholder={getLabelForSelect(columnId)}
+            labelPosition="left"
+            displayLabel={false}
+            customClasses="min-w-[16rem]"
+          />
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">
           Reset Filters
