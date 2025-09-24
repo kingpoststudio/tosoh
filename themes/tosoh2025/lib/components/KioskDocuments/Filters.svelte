@@ -14,16 +14,14 @@
 
   import ErrorCard from '../ErrorCard/ErrorCard.svelte';
   import SearchInput from '../Search/Search.svelte';
-  import Select from '../Select/Select.svelte';
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
-  import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
+  import { parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
-  import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import { mockKioskDocumentsFiltersResponse } from './mock';
   import { getFilter } from '../../utils/utils';
   import TopicFilter from '../TopicFilter/TopicFilter.svelte';
-
+  import type { TopicFilters } from '../../../types/fields';
   let { isParentLoading } = $props();
 
   const searchFromFields = window?.Tosoh?.KioskDocumentsContent?.search;
@@ -155,7 +153,7 @@
 
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
-      {@const filter = getFilter(topic_filters, columnId)}
+      {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
 
       {#if searchColumnId !== columnId}
         <TopicFilter

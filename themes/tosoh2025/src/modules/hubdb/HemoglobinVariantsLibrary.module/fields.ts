@@ -12,7 +12,7 @@ const generateFields = () => {
       default: 'Tosoh Hemoglobin Variants Library',
     }),
 
-    searchField,
+    searchField(),
     topicFilters,
   ];
 };

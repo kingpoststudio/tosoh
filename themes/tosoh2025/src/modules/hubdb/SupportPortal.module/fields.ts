@@ -1,5 +1,10 @@
 import { groupField, textField, hubDbTableField, booleanField, choiceField } from 'hs-fieldkit';
-import { breadCrumbField, searchField, topicFilters } from '../../../../lib/utils/fieldUtils';
+import {
+  breadCrumbField,
+  searchField,
+  searchVisibilityRule,
+  topicFilters,
+} from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -25,6 +30,7 @@ const generateFields = () => {
       booleanField('is_access_level_filter_enabled', 'Is acess level filter enabled?', {
         inline_help_text:
           "Enable this only if the HubDB table you are searching against matches the module's access levels and the column name is 'visibility'.",
+        ...searchVisibilityRule,
       }),
     ]),
     topicFilters,
