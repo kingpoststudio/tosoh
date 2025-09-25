@@ -48,10 +48,20 @@
 
   const onChange = (event: Event) => {
     resetPaginationAndLimit();
+
     if ((event.target as HTMLInputElement).type === 'checkbox') {
       updateUrlFromCheckbox(event);
+    } else if ((event.target as HTMLInputElement).type === 'number') {
+      return console.log('number');
     } else {
       updateUrl(event);
+    }
+  };
+
+  const onClickSubmit = () => {
+    const numberInput = document.querySelector('input[type="number"]');
+    if (numberInput) {
+      updateUrl({ target: numberInput } as unknown as Event);
     }
   };
 
@@ -67,12 +77,12 @@
     isLoading = true;
 
     try {
-      const data = await getTableFilterOptions({
-        filters: filtersFromFields,
-        tableId: searchTableId,
-      });
+      // const data = await getTableFilterOptions({
+      //   filters: filtersFromFields,
+      //   tableId: searchTableId,
+      // });
 
-      // const data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
+      const data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
 
       if (!data?.error) {
         if (data?.length > 0) {
@@ -145,7 +155,7 @@
     {searchFromFields}
   />
 
-  <FilterForm trigger="change" {onChange} {onReset}>
+  <FilterForm updateUrl={false} trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
       {#if searchColumnId !== columnId}
@@ -156,6 +166,12 @@
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
         />
+
+        {#if filter?.type === 'range-pm'}
+          <button type="button" onclick={onClickSubmit} class=" mt-sm w-full hover:bg-red-50"
+            >Apply</button
+          >
+        {/if}
       {/if}
     {/each}
 
