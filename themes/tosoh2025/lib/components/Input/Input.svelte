@@ -78,7 +78,7 @@
       <div class="gap-sm flex flex-col">
         <input
           {type}
-          data-debounce="500"
+          data-debounce="600"
           {name}
           defaultValue={activeFilter ? activeFilter : ''}
           {min}

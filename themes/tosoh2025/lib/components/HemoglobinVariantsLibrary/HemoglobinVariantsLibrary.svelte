@@ -53,7 +53,7 @@
       sort: '-start_date',
       tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
       properties:
-        'aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
+        'document_url,heterozygote_comments,aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
       limit: parseInt(params?.get('limit') || defaultItemsLimit),
       pagination: parseInt(params?.get('pagination') || defaultPagination),
       offset:
@@ -67,10 +67,9 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      // const data = await fetchTableRows(constructBody());
-      const data = mockHemoglobinVariantsLibraryTableRowsResponse;
+      const data = await fetchTableRows(constructBody());
+      // const data = mockHemoglobinVariantsLibraryTableRowsResponse;
 
-      console.log(data);
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;

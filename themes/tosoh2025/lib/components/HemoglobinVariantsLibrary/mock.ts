@@ -1,72 +1,72 @@
-window.Tosoh.HemoglobinVariantsLibraryContent = {
-  breadcrumbs: [
-    {
-      title: 'Home',
-      url: {
-        content_id: null,
-        href: '/home',
-        href_with_scheme: '/home',
-        type: 'EXTERNAL',
-      },
-    },
-    {
-      title: 'Tosoh Diagnostics EMEA - Portal',
-      url: {
-        content_id: null,
-        href: '/portal',
-        href_with_scheme: '/portal',
-        type: 'EXTERNAL',
-      },
-    },
-    {
-      title: 'Tosoh Hemoglobin Variants Library',
-      url: {
-        content_id: null,
-        href: '/variants',
-        href_with_scheme: '/variants',
-        type: 'EXTERNAL',
-      },
-    },
-  ],
-  eyebrow: 'Reference Library for Hb Variants',
-  search: {
-    hubdb_column_id: 'search_terms',
-    hubdb_table_id: 99968194,
-    title: 'Title',
-    typeahead_enabled: true,
-  },
-  title: 'Tosoh Hemoglobin Variants Library',
-  topic_filters: {
-    filters: [
-      {
-        filter_label: 'Mutation Type',
-        hubdb_column_id: 'mutation',
-        max: 0,
-        min: 0,
-        tolerance: 1,
-        type: 'dropdown',
-      },
-      {
-        filter_label: 'Migration in window',
-        hubdb_column_id: 'window',
-        max: 0,
-        min: 0,
-        tolerance: 1,
-        type: 'dropdown',
-      },
-      {
-        filter_label: 'Retention time',
-        hubdb_column_id: 'rt_min',
-        max: 3.99,
-        min: 0.01,
-        tolerance: 0,
-        type: 'range-pm',
-      },
-    ],
-    hubdb_table_id: 690033851,
-  },
-  type: 'module',
-};
+// window.Tosoh.HemoglobinVariantsLibraryContent = {
+//   breadcrumbs: [
+//     {
+//       title: 'Home',
+//       url: {
+//         content_id: null,
+//         href: '/home',
+//         href_with_scheme: '/home',
+//         type: 'EXTERNAL',
+//       },
+//     },
+//     {
+//       title: 'Tosoh Diagnostics EMEA - Portal',
+//       url: {
+//         content_id: null,
+//         href: '/portal',
+//         href_with_scheme: '/portal',
+//         type: 'EXTERNAL',
+//       },
+//     },
+//     {
+//       title: 'Tosoh Hemoglobin Variants Library',
+//       url: {
+//         content_id: null,
+//         href: '/variants',
+//         href_with_scheme: '/variants',
+//         type: 'EXTERNAL',
+//       },
+//     },
+//   ],
+//   eyebrow: 'Reference Library for Hb Variants',
+//   search: {
+//     hubdb_column_id: 'search_terms',
+//     hubdb_table_id: 99968194,
+//     title: 'Title',
+//     typeahead_enabled: true,
+//   },
+//   title: 'Tosoh Hemoglobin Variants Library',
+//   topic_filters: {
+//     filters: [
+//       {
+//         filter_label: 'Mutation Type',
+//         hubdb_column_id: 'mutation',
+//         max: 0,
+//         min: 0,
+//         tolerance: 1,
+//         type: 'dropdown',
+//       },
+//       {
+//         filter_label: 'Migration in window',
+//         hubdb_column_id: 'window',
+//         max: 0,
+//         min: 0,
+//         tolerance: 1,
+//         type: 'dropdown',
+//       },
+//       {
+//         filter_label: 'Retention time',
+//         hubdb_column_id: 'rt_min',
+//         max: 3.99,
+//         min: 0.01,
+//         tolerance: 0,
+//         type: 'range-pm',
+//       },
+//     ],
+//     hubdb_table_id: 690033851,
+//   },
+//   type: 'module',
+// };
 
 export const mockHemoglobinVariantsLibraryTableRowsResponse = {
   total: 161,
@@ -140,6 +140,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 0,
         },
         hgvs_name: 'HBA:3.7 kb (type I) deletion',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Homozygous%20alpha%20plus%20thalassaemia%20-%203.7kb%20deletion.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -217,6 +219,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         },
         hgvs_name:
           '<strong>Hb Constant Spring</strong><br>HBA2:c.427T&gt;C&nbsp;<br>&nbsp;<br><strong>Alpha zero thalassaemia</strong><br>&nbsp;-SEA/αα&nbsp;<br>(NG_000006.1:g.26264_45564del19301)',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Constant%20Spring%20%20%20alpha%20zero%20thalassaemia%20(1).pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -290,6 +294,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 1,
         },
         hgvs_name: 'HBD-HBB hybrid',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Lepore%20-%20Boston-Washington%20(1).pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -364,6 +370,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 1,
         },
         hgvs_name: 'HBG-HBB hybrid',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Kenya%20(gamma-beta%20hybrid%2c%20HPFH)%20(1).pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -435,6 +443,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 1,
         },
         hgvs_name: 'HBA1:p.Thr119_Pro120insGluPheThr (or HBA2)',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Grady.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -504,6 +514,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 1,
         },
         hgvs_name: 'HBA2:c.367C>T',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Yanase.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -580,6 +592,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
         },
         hgvs_name:
           '<strong>Hb J-Iran &nbsp;</strong><br>HBB:c.232C&gt;G&nbsp;<br>&nbsp;&nbsp;<br><strong>Alpha plus thalassaemia</strong><br>HBA2: c.*94A&gt;G',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20J-Iran%20&%20Alpha%20plus%20thalassaemia.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -650,6 +664,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 2,
         },
         hgvs_name: 'HBB:c.103G&gt;T',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Pitie-Salpetriere%20(1).pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -721,6 +737,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 2,
         },
         hgvs_name: 'HBB:c.8A>C',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Marseille.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -792,6 +810,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 2,
         },
         hgvs_name: 'HBB:c.5T>C',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Raleigh.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -864,6 +884,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 2,
         },
         hgvs_name: 'HBB:c.410G>A',
+        document_url: 'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Hope.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -935,6 +956,8 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
           order: 2,
         },
         hgvs_name: 'HBB:c.418A>G',
+        document_url:
+          'https://landing.tosoh-diagnostics.com/hubfs/Chrom-library/PDF/Hb%20Geelong.pdf',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -943,7 +966,7 @@ export const mockHemoglobinVariantsLibraryTableRowsResponse = {
   paging: {
     next: {
       offset: 12,
-      link: 'https://api.hubapi.com/cms/v3/hubdb/tables/5628180/rows?deactivate__eq=false&offset=12&limit=12&sort=-start_date&properties=aka%2Cvariant_image%2Cvariant_name%2Chgvs_name%2Cmutation%2Cmutation_description%2Cheterozygote_clinical_presentation%2Cheterozygote_laboratory_findings%2Cheterozygote_comments%2Chomozygote_clinical_presentation%2Chomozygote_laboratory_findings%2Chomozygote_comments%2Cethnicity%2Ccomments%2Cinstrument%2Carea_under_peak%2Crt_min%2Crt_max%2Cwindow%2Creferences',
+      link: 'https://api.hubapi.com/cms/v3/hubdb/tables/5628180/rows?deactivate__eq=false&offset=12&limit=12&sort=-start_date&properties=document_url%2Cheterozygote_comments%2Caka%2Cvariant_image%2Cvariant_name%2Chgvs_name%2Cmutation%2Cmutation_description%2Cheterozygote_clinical_presentation%2Cheterozygote_laboratory_findings%2Cheterozygote_comments%2Chomozygote_clinical_presentation%2Chomozygote_laboratory_findings%2Chomozygote_comments%2Cethnicity%2Ccomments%2Cinstrument%2Carea_under_peak%2Crt_min%2Crt_max%2Cwindow%2Creferences',
     },
   },
   type: 'RANDOM_ACCESS',

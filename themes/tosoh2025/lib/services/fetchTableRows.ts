@@ -20,8 +20,6 @@ export const fetchTableRows = async (body: {
     );
     const data = await response.json();
 
-    // const data = mockPortalItems;
-
     if (!data?.error) {
       const { results, total } = data;
       return { results, total };

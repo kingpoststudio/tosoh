@@ -367,6 +367,8 @@ export type HemoglobinVariantsLibraryItem = {
       updatedByUserId: number;
       order: number;
     };
+    document_url: string;
+    heterozygote_comments: string;
     heterozygote_laboratory_findings: string;
     rt_max: number;
     mutation: {

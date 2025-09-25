@@ -155,7 +155,7 @@
             {% if !internal_version %}
               {% set form = document.gated ? gated_email_form : email_form %}
 
-              <tosoh-modal slot="cta" variant="action" modalId="non-internal-version">
+              <tosoh-modal variant="action" modalId="non-internal-version">
                 <button>E-mail a Copy</button>
               </tosoh-modal>
               <tosoh-modal variant="modal" modalId="non-internal-version">

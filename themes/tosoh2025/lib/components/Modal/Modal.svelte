@@ -149,8 +149,12 @@
     all: unset;
     display: flex;
     cursor: pointer;
+    width: 100%;
   }
 
+  .close-button {
+    width: fit-content;
+  }
   .wrapper {
     display: contents;
 
@@ -162,7 +166,7 @@
       width: 100vw;
       height: 100vh;
       opacity: 0;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.174);
       z-index: 12345;
       pointer-events: none;
       transition: opacity 200ms ease-out;
@@ -207,7 +211,7 @@
         height: fit-content;
         max-height: calc(100vh - 12rem);
         border-radius: 8px;
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
         overflow-y: auto;
 
         @media (min-width: 768px) {
