@@ -100,7 +100,7 @@
   </div>
 
   <span
-    class="p-xs text-default bg-ghost-white absolute right-[1.25rem] top-[1.25rem] break-all rounded-full font-bold"
+    class="px-sm py-xs text-default bg-ghost-white absolute right-[1.25rem] top-[1.25rem] break-all rounded-2xl font-bold uppercase"
   >
     {mutation?.label}
   </span>
