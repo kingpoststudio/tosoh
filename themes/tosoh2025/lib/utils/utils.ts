@@ -23,3 +23,11 @@ export const isPast = (date: number) => {
 export const getFilter = (topic_filters: TopicFilters['filters'], columnId: string) => {
   return topic_filters?.find((filter) => filter?.hubdb_column_id === columnId);
 };
+
+export const constructFilterParams = (availableFilters: string[]) => {
+  const params = new URLSearchParams(window.location.search);
+  let objWithFilters: any = {};
+  const allFilters = [...availableFilters];
+  allFilters?.map((filter: any) => (objWithFilters[filter] = params?.get(filter) || ''));
+  return { ...objWithFilters };
+};

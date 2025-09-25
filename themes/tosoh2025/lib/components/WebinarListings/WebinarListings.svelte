@@ -22,7 +22,7 @@
   import type { ColumnId, WebinarListingsItem } from '../../../types/hubdb';
   import SkeletonCard from './SkeletonCard.svelte';
   import { setSearchParams } from '../../utils/urlUtils';
-  import { isPast, isUpcoming } from '../../utils/utils';
+  import { constructFilterParams, isPast, isUpcoming } from '../../utils/utils';
   import { fade } from 'svelte/transition';
 
   let tableRows: any = $state([]);
@@ -49,14 +49,6 @@
       ] as ColumnId[])
     : [];
 
-  const constructFilterParams = () => {
-    const params = new URLSearchParams(window.location.search);
-    let objWithFilters: any = {};
-    const allFilters = [...availableFilters];
-    allFilters?.map((filter: any) => (objWithFilters[filter] = params?.get(filter) || ''));
-    return filterByTopic ? { ...objWithFilters, topic: filterByTopic } : { ...objWithFilters };
-  };
-
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     return {
@@ -69,7 +61,7 @@
       offset:
         parseInt(params?.get('limit') || defaultItemsLimit) *
           (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
-      filters: constructFilterParams(),
+      filters: constructFilterParams([...availableFilters]),
     };
   };
 

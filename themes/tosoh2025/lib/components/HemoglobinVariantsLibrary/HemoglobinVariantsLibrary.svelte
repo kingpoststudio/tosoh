@@ -22,6 +22,7 @@
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
   import { mockHemoglobinVariantsLibraryTableRowsResponse } from './mock';
+  import { constructFilterParams } from '../../utils/utils';
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
 
@@ -41,14 +42,6 @@
   let totalItems = $state(0);
   let hasError = $state(false);
   let isLoading = $state(false);
-
-  const constructFilterParams = () => {
-    const params = new URLSearchParams(window.location.search);
-    let objWithFilters: any = {};
-    const allFilters = [...availableFilters, searchColumnId];
-    allFilters?.map((filter: any) => (objWithFilters[filter] = params?.get(filter) || ''));
-    return { ...objWithFilters };
-  };
 
   const constructNumericComparisonFilters = () => {
     const today = new Date();
@@ -81,7 +74,7 @@
       offset:
         parseInt(params?.get('limit') || defaultItemsLimit) *
           (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
-      filters: constructFilterParams(),
+      filters: constructFilterParams([...availableFilters, searchColumnId]),
     };
   };
 
