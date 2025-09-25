@@ -22,18 +22,21 @@
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
   import { mockHemoglobinVariantsLibraryTableRowsResponse } from './mock';
-  import { constructFilterParams } from '../../utils/utils';
+  import {
+    constructFilterParams,
+    constructRangePmFilters,
+    getFilterColumnIds,
+  } from '../../utils/utils';
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
-
-  let availableFilters =
-    hemoglobinVariantsLibraryContent?.topic_filters?.filters?.map(
-      (filter: any) => filter.hubdb_column_id
-    ) || [];
+  const topicFilters = hemoglobinVariantsLibraryContent?.topic_filters?.filters || [];
 
   let searchColumnId = hemoglobinVariantsLibraryContent?.search
     ? hemoglobinVariantsLibraryContent?.search?.hubdb_column_id
     : '';
+
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  const rangePmFilters = constructRangePmFilters(topicFilters);
 
   let title = hemoglobinVariantsLibraryContent?.title;
   let eyebrow = hemoglobinVariantsLibraryContent?.eyebrow;
@@ -43,27 +46,9 @@
   let hasError = $state(false);
   let isLoading = $state(false);
 
-  const constructNumericComparisonFilters = () => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const todayInMilliSeconds = Math.floor(today.getTime());
-
-    return [
-      {
-        columnId: 'start_date',
-        comparison: 'lte',
-        value: todayInMilliSeconds,
-      },
-      {
-        columnId: 'end_date',
-        comparison: 'gte',
-        value: todayInMilliSeconds,
-      },
-    ];
-  };
-
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
+
     return {
       sort: '-start_date',
       tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
@@ -74,7 +59,8 @@
       offset:
         parseInt(params?.get('limit') || defaultItemsLimit) *
           (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
-      filters: constructFilterParams([...availableFilters, searchColumnId]),
+      filters: constructFilterParams(nonNumericFilters),
+      numericComparisonFilters: [...rangePmFilters],
     };
   };
 

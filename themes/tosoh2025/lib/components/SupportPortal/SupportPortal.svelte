@@ -21,21 +21,26 @@
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
   import Filters from './Filters.svelte';
-  import { constructFilterParams } from '../../utils/utils';
+  import {
+    constructFilterParams,
+    constructRangePmFilters,
+    getFilterColumnIds,
+  } from '../../utils/utils';
 
-  let availableFilters =
-    window?.Tosoh?.SupportPortalContent?.topic_filters?.filters?.map(
-      (filter: any) => filter.hubdb_column_id
-    ) || [];
+  const supportPortalContent = window?.Tosoh?.SupportPortalContent;
+  const topicFilters = supportPortalContent?.topic_filters?.filters || [];
 
-  let accessLevel = window?.Tosoh?.SupportPortalContent?.access_level || 'Customer';
+  let accessLevel = supportPortalContent?.access_level || 'Customer';
 
-  let searchColumnId = window?.Tosoh?.SupportPortalContent?.search
-    ? window?.Tosoh?.SupportPortalContent?.search?.hubdb_column_id
+  let searchColumnId = supportPortalContent?.search
+    ? supportPortalContent?.search?.hubdb_column_id
     : 'search_terms';
 
-  let title = window?.Tosoh?.SupportPortalContent?.title;
-  let description = window?.Tosoh?.SupportPortalContent?.description;
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  const rangePmFilters = constructRangePmFilters(topicFilters);
+
+  let title = supportPortalContent?.title;
+  let description = supportPortalContent?.description;
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
@@ -47,6 +52,7 @@
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
+
     return {
       tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
       properties:
@@ -57,7 +63,8 @@
       offset:
         parseInt(params?.get('limit') || defaultItemsLimit) *
           (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
-      filters: constructFilterParams([...availableFilters, searchColumnId]),
+      filters: constructFilterParams(nonNumericFilters),
+      numericComparisonFilters: [...rangePmFilters],
     };
   };
 

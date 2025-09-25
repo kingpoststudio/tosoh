@@ -22,7 +22,13 @@
   import type { ColumnId, WebinarListingsItem } from '../../../types/hubdb';
   import SkeletonCard from './SkeletonCard.svelte';
   import { setSearchParams } from '../../utils/urlUtils';
-  import { constructFilterParams, isPast, isUpcoming } from '../../utils/utils';
+  import {
+    constructFilterParams,
+    constructRangePmFilters,
+    getFilterColumnIds,
+    isPast,
+    isUpcoming,
+  } from '../../utils/utils';
   import { fade } from 'svelte/transition';
 
   let tableRows: any = $state([]);
@@ -41,16 +47,14 @@
   const filterByTopic = webinarListingsWindow?.advanced?.filter_by_topic;
   const searchGroup = webinarListingsWindow?.search;
   const searchColumnId = searchGroup?.hubdb_column_id;
+  const topicFilters = webinarListingsWindow?.topic_filters?.filters || [];
 
-  const availableFilters = webinarListingsWindow?.topic_filters?.filters
-    ? ([
-        ...webinarListingsWindow.topic_filters.filters.map((filter: any) => filter.hubdb_column_id),
-        searchColumnId,
-      ] as ColumnId[])
-    : [];
+  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
+    const rangePmFilters = constructRangePmFilters(topicFilters);
+
     return {
       sort: '-priority',
       tableId: tableId,
@@ -61,7 +65,8 @@
       offset:
         parseInt(params?.get('limit') || defaultItemsLimit) *
           (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
-      filters: constructFilterParams([...availableFilters]),
+      filters: constructFilterParams(nonNumericFilters, { topic: filterByTopic }),
+      numericComparisonFilters: rangePmFilters,
     };
   };
 

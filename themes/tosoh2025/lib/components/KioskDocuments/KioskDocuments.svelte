@@ -22,25 +22,29 @@
   import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
   import { mockKioskDocumentsTableRowsResponse } from './mock';
-  import { constructFilterParams } from '../../utils/utils';
-  let availableFilters =
-    window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters?.map(
-      (filter: any) => filter.hubdb_column_id
-    ) || [];
+  import {
+    constructFilterParams,
+    constructRangePmFilters,
+    getFilterColumnIds,
+  } from '../../utils/utils';
+  const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
+  const topicFilters = kioskDocumentsContent?.topic_filters?.filters || [];
 
-  let searchColumnId = window?.Tosoh?.KioskDocumentsContent?.search
-    ? window?.Tosoh?.KioskDocumentsContent?.search?.hubdb_column_id
+  let searchColumnId = kioskDocumentsContent?.search
+    ? kioskDocumentsContent?.search?.hubdb_column_id
     : '';
 
-  let title = window?.Tosoh?.KioskDocumentsContent?.title;
-  let description = window?.Tosoh?.KioskDocumentsContent?.description;
+  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+
+  let title = kioskDocumentsContent?.title;
+  let description = kioskDocumentsContent?.description;
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
   let hasError = $state(false);
   let isLoading = $state(false);
 
-  const constructNumericComparisonFilters = () => {
+  const constructDateComparisonFilters = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     const todayInMilliSeconds = Math.floor(today.getTime());
@@ -61,6 +65,9 @@
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
+    const baseNumericFilters = constructDateComparisonFilters();
+    const rangePmFilters = constructRangePmFilters(topicFilters);
+
     return {
       sort: '-start_date',
       tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
@@ -70,8 +77,8 @@
       offset:
         parseInt(params?.get('limit') || defaultItemsLimit) *
           (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
-      filters: constructFilterParams([...availableFilters, searchColumnId]),
-      numericComparisonFilters: constructNumericComparisonFilters(),
+      filters: constructFilterParams(nonNumericFilters),
+      numericComparisonFilters: [...baseNumericFilters, ...rangePmFilters],
     };
   };
 
