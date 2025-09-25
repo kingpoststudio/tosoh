@@ -57,7 +57,7 @@
       alt={item.name}
       src={variant_image?.url}
       loading="lazy"
-      class="aspect-square max-h-[16rem] w-full rounded-full object-contain"
+      class="max-h-[12rem] w-full object-contain"
     />
   {:else}
     <div
@@ -95,7 +95,7 @@
       {@html aka}
     </div>
 
-    <div class="gap-sm flex flex-col">
+    <div class="flex flex-col">
       <div class="gap-xs align-start flex flex-col md:flex-row">
         <span
           class="p-xs text-md text-default rounded-2xl bg-[#0000000D] text-center font-bold md:text-left"
@@ -110,7 +110,7 @@
       </div>
 
       <tosoh-modal variant="action" modalId={variant_name}>
-        <button class="gap-sm w-full! flex items-center justify-center text-center">
+        <button class="gap-sm w-full! mt-sm flex items-center justify-center text-center">
           View Details
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -127,6 +127,7 @@
           </svg>
         </button>
       </tosoh-modal>
+
       <tosoh-modal variant="modal" modalId={variant_name}>
         <div slot="title" class="w-full">
           <a href={document_url} class="button" target="_blank">DOWNLOAD PDF</a>

@@ -27,7 +27,7 @@
     placeholder,
     typeahead_enabled: typeaheadEnabled,
     enable_search: isSearchEnabled,
-  } = searchFromFields;
+  } = searchFromFields || {};
 
   let matches: string[] = $state([]);
   let isLoading = $state(false);

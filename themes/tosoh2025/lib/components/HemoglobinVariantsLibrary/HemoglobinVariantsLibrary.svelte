@@ -91,7 +91,7 @@
 </script>
 
 {#if title || eyebrow}
-  <div class="max-w-max-page gap-sm p-md md:pl-2xl md:pr-2xl m-auto flex flex-col pt-0">
+  <div class="max-w-max-page gap-sm p-md md:pl-2xl md:pr-2xl m-auto mt-[8rem] flex flex-col pt-0">
     {#if eyebrow}
       <h6 class="text-imperial-red tracking-widest">
         {eyebrow}
