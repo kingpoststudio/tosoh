@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { WebinarListingsItem } from '../../../types/hubdb';
-  import { isUpcoming } from '../../utils/utils';
+  import { constructCDNUrl, isUpcoming } from '../../utils/utils';
 
   let { item }: { item: WebinarListingsItem } = $props();
 
@@ -128,7 +128,7 @@
   <div
     class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-gray-300 text-xs font-medium text-gray-600"
   >
-    <img src={image_src} alt="" class="rounded-full object-contain" />
+    <img src={constructCDNUrl(image_src, 50)} alt="" class="rounded-full object-contain" />
   </div>
 {/snippet}
 

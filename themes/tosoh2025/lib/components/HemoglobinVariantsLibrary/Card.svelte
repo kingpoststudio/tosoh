@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { HemoglobinVariantsLibraryItem } from '../../../types/hubdb';
-
+  import { constructCDNUrl } from '../../utils/utils';
   let { item }: { item: HemoglobinVariantsLibraryItem } = $props();
 
   const {
@@ -55,7 +55,7 @@
   {#if variant_image?.url}
     <img
       alt={item.name}
-      src={variant_image?.url}
+      src={constructCDNUrl(variant_image?.url, 350)}
       loading="lazy"
       class="max-h-[12rem] w-full object-contain"
     />
@@ -143,7 +143,11 @@
             <div
               class="mx-au to w-full overflow-hidden rounded-lg border border-zinc-200 p-2 shadow-lg"
             >
-              <img src={variant_image.url} alt={variant_name} class="w-full object-contain" />
+              <img
+                src={constructCDNUrl(variant_image.url, 1450)}
+                alt={variant_name}
+                class="w-full object-contain"
+              />
             </div>
             <br />
             <div class="italic"><span class="font-bold">Also known as:</span> {@html aka}</div>

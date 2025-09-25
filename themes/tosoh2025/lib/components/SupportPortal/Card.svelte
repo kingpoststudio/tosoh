@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { constructCDNUrl } from '../../utils/utils';
+
   let { item, hasSiblings, viewAs }: { item: any; hasSiblings: boolean; viewAs: 'grid' | 'list' } =
     $props();
 
@@ -19,22 +21,8 @@
     ) as string;
   };
 
-  function parseAfterHubfsRegex(url: string): string | null {
-    const match = url?.match(/hubfs\/(.*)$/);
-    return match ? match[1] : null;
-  }
-
-  function costructCDNUrl(url: string): string {
-    if (url) {
-      return `https://19644636.fs1.hubspotusercontent-na1.net/hub/19644636/hubfs/${parseAfterHubfsRegex(
-        url
-      )}?width=330`;
-    }
-    return '';
-  }
-
   let imgSrc = $derived(
-    costructCDNUrl(item?.values?.image?.url as string) ||
+    constructCDNUrl(item?.values?.image?.url as string) ||
       setupWistiaThumbnail(item?.values?.wistia_video_url as string)
   );
   let name = $derived(item?.values?.name);

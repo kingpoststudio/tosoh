@@ -93,3 +93,17 @@ export const getFilterColumnIds = (
       .map((filter) => filter.hubdb_column_id);
   }
 };
+
+const parseAfterHubfsRegex = (url: string): string | null => {
+  const match = url?.match(/hubfs\/(.*)$/);
+  return match ? match[1] : null;
+};
+
+export const constructCDNUrl = (url: string, width: number = 330): string => {
+  if (url) {
+    return `https://19644636.fs1.hubspotusercontent-na1.net/hub/19644636/hubfs/${parseAfterHubfsRegex(
+      url
+    )}?width=${width}`;
+  }
+  return '';
+};

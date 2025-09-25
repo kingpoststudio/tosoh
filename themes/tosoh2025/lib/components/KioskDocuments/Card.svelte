@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { constructCDNUrl } from '../../utils/utils';
+
   let { item }: { item: any } = $props();
 
   const { path } = item;
@@ -11,7 +13,7 @@
   {#if image?.url}
     <img
       alt={item.name}
-      src={image?.url}
+      src={constructCDNUrl(image?.url)}
       loading="lazy"
       class="aspect-square max-h-[16rem] w-full rounded-lg object-contain"
     />
