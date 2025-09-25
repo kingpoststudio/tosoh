@@ -17,4 +17,5 @@ export type Search = {
   placeholder: string;
   title: string;
   typeahead_enabled: boolean;
+  is_access_level_filter_enabled?: boolean;
 };

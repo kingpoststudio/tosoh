@@ -142,13 +142,10 @@
 
   <SearchInput
     customClasses="mt-base"
-    {searchTableId}
-    filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
-    {searchColumnId}
-    title={searchTitle || ''}
+    manualTableId={searchTableId}
+    filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
+    {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
-    typeaheadEnabled={searchTypeheadEnabled}
-    {isSearchEnabled}
   />
 
   <FilterForm trigger="change" {onChange} {onReset}>

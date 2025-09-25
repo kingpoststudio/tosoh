@@ -21,11 +21,7 @@
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
-  const searchColumnTitle = searchFromFields?.title;
-  const searchColumnTypeaheadEnabled = searchFromFields?.typeahead_enabled;
-  //  const searchTableId = searchFromFields?.hubdb_table_id; // CHANGE TO THAT IN PROD
-  const searchTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
-  const isSearchEnabled = searchFromFields?.enable_search;
+  const prodSupportPortalTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
   const isSearchAccessLevelFilterEnabled =
     window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
 
@@ -68,7 +64,7 @@
       const data = await getTableFilterOptions({
         filters: filtersFromFields,
         accessLevel: accessLevel,
-        tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+        tableId: prodSupportPortalTableId,
       });
       // const data = mockPortalFilters;
 
@@ -141,12 +137,9 @@
   <SearchInput
     customClasses="mt-base"
     accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
-    {searchTableId}
-    filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
-    {searchColumnId}
-    title={searchColumnTitle || ''}
-    typeaheadEnabled={searchColumnTypeaheadEnabled}
-    {isSearchEnabled}
+    manualTableId={prodSupportPortalTableId}
+    filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
+    {searchFromFields}
   />
   <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}

@@ -28,17 +28,11 @@
 
   const searchFromFields = hemoglobinVariantsLibraryContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
-  const isSearchEnabled = searchFromFields?.enable_search;
-  // const searchTableId = searchFromFields?.hubdb_table_id;
-  const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
-  const searchTitle = searchFromFields?.title;
-  const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
+  const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
   const topic_filters = hemoglobinVariantsLibraryContent?.topic_filters?.filters;
   let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
   filtersFromFields.push(searchColumnId);
-
-  console.log(topic_filters);
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
 
@@ -75,7 +69,7 @@
     try {
       //   const data = await getTableFilterOptions({
       //     filters: filtersFromFields,
-      //     tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
+      //     tableId: searchTableId,
       //   });
 
       const data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
@@ -146,13 +140,9 @@
 
   <SearchInput
     customClasses="mt-base"
-    {searchTableId}
-    filtersFromFields={[...filtersFromFields, 'pagination', 'limit']}
-    {searchColumnId}
-    title={searchTitle || ''}
-    disabled={isParentLoading || isLoading || hasError}
-    typeaheadEnabled={searchTypeheadEnabled}
-    {isSearchEnabled}
+    manualTableId={searchTableId}
+    filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
+    {searchFromFields}
   />
 
   <FilterForm trigger="change" {onChange} {onReset}>

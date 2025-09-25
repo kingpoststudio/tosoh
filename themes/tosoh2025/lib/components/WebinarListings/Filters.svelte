@@ -26,17 +26,14 @@
 
   const topicFilters = window?.Tosoh?.WebinarListings?.topic_filters?.filters;
   const areFiltersEnabled = topicFilters?.length > 0;
-  const searchGroup = window?.Tosoh?.WebinarListings?.search;
-  const searchColumnId = searchGroup?.hubdb_column_id;
-  const isSearchEnabled = searchGroup?.enable_search;
-  const searchInputPlaceholder = searchGroup?.placeholder;
+  const searchFromFields = window?.Tosoh?.WebinarListings?.search;
+  const searchColumnId = searchFromFields?.hubdb_column_id;
 
   const filtersArray = window?.Tosoh?.WebinarListings?.topic_filters?.filters
     ? [...topicFilters.map((filter: any) => filter.hubdb_column_id)]
     : [];
 
-  // const tableId = window?.Tosoh?.WebinarListings?.hubdb_table_id;
-  const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
+  const prodWebinarListingsTableId = PROD_TOSOH_WEBINARS_TABLE_ID;
 
   const onChange = (event: Event) => {
     onReset();
@@ -63,7 +60,7 @@
     try {
       const data = await getTableFilterOptions({
         filters: filtersArray,
-        tableId: tableId,
+        tableId: prodWebinarListingsTableId,
       });
       // const data = mockWebinarListingsFilterOptions?.results;
 
@@ -109,12 +106,9 @@
   transition:fade={{ duration: 100 }}
 >
   <Search
-    searchTableId={tableId}
-    {isSearchEnabled}
-    filtersFromFields={[...filtersArray, 'pagination', 'limit']}
-    {searchColumnId}
-    placeholder={searchInputPlaceholder}
-    typeaheadEnabled={true}
+    manualTableId={prodWebinarListingsTableId}
+    filtersToDelete={[...filtersArray, 'pagination', 'limit']}
+    {searchFromFields}
   />
 
   {#if areFiltersEnabled}
@@ -129,7 +123,7 @@
               columnId as ColumnId
             ]}
             name={columnId}
-            disabled={isParentLoading || isLoading || hasError}
+            disabled={isLoading || hasError}
             {isLoading}
             disableReset={true}
             placeholder={getLabelForSelect(columnId)}

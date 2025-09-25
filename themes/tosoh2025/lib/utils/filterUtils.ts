@@ -109,7 +109,6 @@ const matchValuesWithColumnNames = (
         }
       }
 
-      //object types
       if (isSelectColumn) {
         const doesValueInColumnIdExists = allFilters[columnId]?.some(
           (option: any) => option?.name === (rowValues as any)[columnId]?.name
@@ -125,6 +124,21 @@ const matchValuesWithColumnNames = (
   return allFilters;
 };
 
+const sortFilterValuesAlphabetically = (
+  allFilters: Record<ColumnId, SupportPortalRowForFilter['values'][]>
+) => {
+  Object.keys(allFilters)?.forEach((columnId) => {
+    const filterKey = columnId as ColumnId;
+    if (allFilters[filterKey] && Array?.isArray?.(allFilters[filterKey])) {
+      allFilters[filterKey]?.sort((a: any, b: any) => {
+        const aValue = a?.name || a?.toString() || '';
+        const bValue = b?.name || b?.toString() || '';
+        return aValue?.localeCompare(bValue, undefined, { numeric: true, sensitivity: 'base' });
+      });
+    }
+  });
+};
+
 export const parseFilterOptions = (rows: SupportPortalRowForFilter[]) => {
   let columnsIdsWithAllTheirAvailableValues:
     | Record<ColumnId, SupportPortalRowForFilter['values'][]>
@@ -136,6 +150,12 @@ export const parseFilterOptions = (rows: SupportPortalRowForFilter[]) => {
     if (Object?.keys?.(emptyFilters)?.length > 0) {
       const allEmptyFilters = emptyFilters as Record<ColumnId, []>;
       columnsIdsWithAllTheirAvailableValues = matchValuesWithColumnNames(rows, allEmptyFilters);
+      sortFilterValuesAlphabetically(
+        columnsIdsWithAllTheirAvailableValues as Record<
+          ColumnId,
+          SupportPortalRowForFilter['values'][]
+        >
+      );
     }
   }
 

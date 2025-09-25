@@ -3,30 +3,31 @@
 
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import { onMount } from 'svelte';
+  import type { Search } from '../../../types/fields';
+  const {
+    searchFromFields,
+    customClasses,
+    manualTableId,
+    disabled,
+    filtersToDelete,
+    accessLevel,
+  }: {
+    searchFromFields: Search;
+    customClasses?: string;
+    manualTableId?: string;
+    disabled?: boolean;
+    filtersToDelete?: string[];
+    accessLevel?: string;
+  } = $props();
 
   const {
-    accessLevel,
-    searchTableId,
-    filtersFromFields,
-    searchColumnId,
+    hubdb_table_id: searchTableId,
+    hubdb_column_id: searchColumnId,
     title,
     placeholder,
-    customClasses,
-    typeaheadEnabled,
-    isSearchEnabled,
-    disabled = false,
-  }: {
-    accessLevel?: string;
-    searchTableId: string;
-    filtersFromFields: string[];
-    searchColumnId: string;
-    title?: string;
-    placeholder?: string;
-    customClasses?: string;
-    typeaheadEnabled?: boolean;
-    disabled?: boolean;
-    isSearchEnabled: boolean;
-  } = $props();
+    typeahead_enabled: typeaheadEnabled,
+    enable_search: isSearchEnabled,
+  } = searchFromFields;
 
   let matches: string[] = $state([]);
   let isLoading = $state(false);
@@ -40,7 +41,7 @@
 
     const params = new URLSearchParams(window.location.search);
 
-    filtersFromFields?.map((column) => {
+    filtersToDelete?.map((column) => {
       params.delete(column);
     });
 
@@ -80,7 +81,7 @@
           body: JSON.stringify({
             accessLevel: accessLevel,
             term: searchString,
-            tableId: searchTableId,
+            tableId: manualTableId || searchTableId,
             columnId: searchColumnId,
           }),
         }
