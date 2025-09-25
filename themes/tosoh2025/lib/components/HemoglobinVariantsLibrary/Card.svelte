@@ -98,17 +98,22 @@
     <div class="flex flex-col">
       <div class="gap-xs align-start flex flex-col md:flex-row">
         <span
-          class="p-xs text-md text-default rounded-2xl bg-[#0000000D] text-center font-bold md:text-left"
+          class="p-xs text-md text-default rounded-2xl bg-gray-100 text-center font-bold md:text-left"
         >
           {window?.label}
         </span>
         <span
-          class="p-xs text-md text-default rounded-2xl bg-[#0000000D] text-center font-bold md:text-left"
+          class="p-xs text-md text-default rounded-2xl bg-gray-100 text-center font-bold md:text-left"
         >
           {instrument?.label}
         </span>
       </div>
 
+      <span
+        class="px-sm py-xs text-default absolute right-[1.25rem] top-[1.25rem] break-all rounded-2xl bg-gray-100 font-bold uppercase"
+      >
+        {mutation?.label}
+      </span>
       <tosoh-modal variant="action" modalId={variant_name}>
         <button class="gap-sm w-full! mt-sm flex items-center justify-center text-center">
           View Details
@@ -178,10 +183,4 @@
       </tosoh-modal>
     </div>
   </div>
-
-  <span
-    class="px-sm py-xs text-default absolute right-[1.25rem] top-[1.25rem] break-all rounded-2xl bg-[#0000000D] font-bold uppercase"
-  >
-    {mutation?.label}
-  </span>
 </div>
