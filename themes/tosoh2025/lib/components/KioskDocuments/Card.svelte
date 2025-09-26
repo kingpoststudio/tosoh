@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { constructCDNUrl } from '../../utils/utils';
+  import { constructCDNUrl, onTagClick } from '../../utils/utils';
 
   let { item }: { item: any } = $props();
 
@@ -53,9 +53,10 @@
     </a>
   </div>
 
-  <span
-    class="p-xs text-md text-default bg-ghost-white absolute right-[1.25rem] top-[1.25rem] break-all rounded-lg text-xs font-bold"
+  <button
+    onclick={() => onTagClick('document_type', document_type?.name)}
+    class="plain p-xs! text-md text-default bg-ghost-white font-bold! absolute right-[1.25rem] top-[1.25rem] break-all rounded-lg text-xs hover:bg-gray-100"
   >
     {document_type?.label}
-  </span>
+  </button>
 </div>

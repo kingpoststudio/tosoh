@@ -67,8 +67,8 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      // const data = await fetchTableRows(constructBody());
-      const data = mockHemoglobinVariantsLibraryTableRowsResponse;
+      const data = await fetchTableRows(constructBody());
+      // const data = mockHemoglobinVariantsLibraryTableRowsResponse;
 
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;

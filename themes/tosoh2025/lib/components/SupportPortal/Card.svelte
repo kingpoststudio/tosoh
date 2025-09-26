@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { constructCDNUrl } from '../../utils/utils';
+  import { constructCDNUrl, onTagClick } from '../../utils/utils';
 
   let { item, hasSiblings, viewAs }: { item: any; hasSiblings: boolean; viewAs: 'grid' | 'list' } =
     $props();
@@ -28,9 +28,7 @@
   let name = $derived(item?.values?.name);
   let downloadUrl = $derived(item?.values?.document_url || item.wistia_video_url);
   let documentType = $derived(item?.values?.document_type?.label);
-  let productType = $derived(
-    item?.values?.product_type?.map((type: any) => `${type.label}`).join(', ')
-  );
+  let productTypes = $derived(item?.values?.product_type?.map((type: any) => `${type.label}`));
 
   const handleImageError = () => {
     imgSrc = '';
@@ -70,7 +68,15 @@
 
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
-      <span class=" text-imperial-red text-xl">{productType}</span>
+      <div class="gap-2xs flex">
+        {#each productTypes as productType, index}
+          {@const isLast = index === productTypes?.length - 1}
+          <button
+            onclick={() => onTagClick('product_type', productType.name)}
+            class="plain text-imperial-red! text-xl">{productType}{isLast ? '' : ','}</button
+          >
+        {/each}
+      </div>
       <h5 class="break-word text-raisin-black mt-base font-sans-narrow font-semibold">
         {name}
       </h5>

@@ -77,12 +77,12 @@
     isLoading = true;
 
     try {
-      // const data = await getTableFilterOptions({
-      //   filters: filtersFromFields,
-      //   tableId: searchTableId,
-      // });
+      const data = await getTableFilterOptions({
+        filters: filtersFromFields,
+        tableId: searchTableId,
+      });
 
-      const data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
+      // const data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
 
       if (!data?.error) {
         if (data?.length > 0) {

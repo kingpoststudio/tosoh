@@ -13,9 +13,7 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
     textField('title', 'Title', {
       required: true,
     }),
-    urlField('url', 'URL', {
-      required: true,
-    }),
+    urlField('url', 'URL'),
   ],
   occurrence: {
     min: 0,

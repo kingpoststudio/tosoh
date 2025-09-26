@@ -1,4 +1,5 @@
 import type { TopicFilters } from '../../types/fields';
+import { updateUrl } from './urlUtils';
 
 export const isUpcoming = (date: number) => {
   const now = new Date();
@@ -28,7 +29,10 @@ export const constructFilterParams = (availableFilters: string[], customFilter?:
   const params = new URLSearchParams(window.location.search);
   let objWithFilters: any = {};
   const allFilters = [...availableFilters];
-  allFilters?.map((filter: any) => (objWithFilters[filter] = params?.get(filter) || ''));
+  allFilters?.map((filter: any) => {
+    const value = params?.get(filter) || '';
+    objWithFilters[filter] = value ? encodeURIComponent(value) : '';
+  });
   return { ...objWithFilters, ...(customFilter || {}) };
 };
 
@@ -106,4 +110,10 @@ export const constructCDNUrl = (url: string, width: number = 330): string => {
     )}?width=${width}`;
   }
   return '';
+};
+
+export const onTagClick = (name: string, value: string) => {
+  updateUrl({
+    target: { name: name, value: value },
+  } as unknown as Event);
 };

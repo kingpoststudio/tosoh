@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { HemoglobinVariantsLibraryItem } from '../../../types/hubdb';
-  import { constructCDNUrl } from '../../utils/utils';
+  import { constructCDNUrl, onTagClick } from '../../utils/utils';
   let { item }: { item: HemoglobinVariantsLibraryItem } = $props();
 
   const {
@@ -97,23 +97,26 @@
 
     <div class="flex flex-col">
       <div class="gap-xs align-start flex flex-col md:flex-row">
-        <span
-          class="p-xs text-md text-default rounded-2xl bg-gray-100 text-center font-bold md:text-left"
+        <button
+          onclick={() => onTagClick('window', window?.name)}
+          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
         >
           {window?.label}
-        </span>
-        <span
-          class="p-xs text-md text-default rounded-2xl bg-gray-100 text-center font-bold md:text-left"
+        </button>
+        <button
+          onclick={() => onTagClick('instrument', instrument?.name)}
+          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
         >
           {instrument?.label}
-        </span>
+        </button>
       </div>
 
-      <span
-        class="px-sm py-xs text-default absolute right-[1.25rem] top-[1.25rem] break-all rounded-2xl bg-gray-100 font-bold uppercase"
+      <button
+        class="plain px-sm! py-xs! text-default font-bold! rounded-2xl! absolute right-[1.25rem] top-[1.25rem] bg-gray-100 uppercase"
+        onclick={() => onTagClick('mutation', mutation?.name)}
       >
         {mutation?.label}
-      </span>
+      </button>
       <tosoh-modal variant="action" modalId={variant_name}>
         <button class="gap-sm w-full! mt-sm flex items-center justify-center text-center">
           View Details

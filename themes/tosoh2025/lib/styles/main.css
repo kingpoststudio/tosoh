@@ -115,7 +115,7 @@ button:not([class*='ToolbarIconButton__IconButton']),
   }
 
   &.plain {
-    @apply text-default border-none bg-none p-0 shadow-none;
+    @apply text-default border-none bg-none p-0 shadow-none focus:ring-0! active:shadow-none active:ring-0! active:outline-none!;
   }
 
   &.dark {

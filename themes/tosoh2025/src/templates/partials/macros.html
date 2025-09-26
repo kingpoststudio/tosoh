@@ -46,9 +46,7 @@
         {% endif %}
 
         {% if loop.last %}
-          <a href="{{ breadcrumb.url.href }}" class="text-default cursor-pointer text-lg font-bold">
-            {{ breadcrumb.title }}
-          </a>
+          <span class="text-default text-lg font-bold">{{ breadcrumb.title }}</span>
         {% endif %}
       {%- endfor -%}
     </div>
