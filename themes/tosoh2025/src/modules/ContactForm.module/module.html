@@ -1,0 +1,52 @@
+{% set eyebrow = module.eyebrow %}
+{% set title = module.title %}
+{% set description = module.description %}
+{% set form = module.form %}
+{% set icons_section = module.icons_section %}
+
+<div
+  class="max-w-max-page pt-md md:pt-md pr-md md:pr-2xl pb-md md:pb-md pl-md md:pl-2xl text-default gap-md scroll-mt-5xl m-auto">
+  <div class="gap-md flex w-full flex-col md:flex-row">
+    <div class="flex flex-1 self-center justify-self-start border border-transparent">
+      <div class="h-full w-full self-center justify-self-start">
+        <div class="gap-base flex flex-col text-left">
+          <div class="text-imperial-red text-2xl font-light"><span>{{ eyebrow }}</span></div>
+          <div class="text-5xl font-semibold">
+            <h3><span>{{ title }}</span></h3>
+          </div>
+          <div class="text-nickel text-lg">
+            <span>{{ description }}</span>
+          </div>
+
+          <div class="gap-sm flex flex-col">
+            {% for icon in icons_section %}
+              <div class="gap-sm flex items-center justify-start">
+                <img src="{{ icon.icon.src }}" class="max-w-[6rem]" />
+                <div class="gap-2xs flex w-full flex-col text-left">
+                  <span class="font-bold">{{ icon.title }}</span>
+                  <span>{{ icon.value }}</span>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="border-light-silver pt-md md:pt-md pr-md md:pr-md pb-md md:pb-md pl-md md:pl-md flex w-full flex-1 self-center justify-self-start overflow-hidden rounded-2xl border">
+      <div class="h-full w-full self-center justify-self-start">
+        <div class="gap-md fc-form light flex flex-col">
+          {%
+            form "flex_form"
+            form_to_use="{{ form.form_id }}"
+            response_response_type="{{ form.response_type }}"
+            response_message="{{ form.message }}"
+            response_redirect_id="{{ form.redirect_id }}"
+            response_redirect_url="{{ form.redirect_url }}"
+          %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
