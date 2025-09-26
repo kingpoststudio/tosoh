@@ -272,6 +272,7 @@ const generateFields = () => {
             ['form', 'Form'],
             ['spacer', 'Spacer'],
             ['rtf', 'Richtext'],
+            ['navigation_list', 'Navigation List'],
           ],
           inline_help_text: 'Select the type of content to display in this column.',
         }),
@@ -409,6 +410,22 @@ const generateFields = () => {
             controlling_field_path: 'columns.type',
             controlling_value_regex: 'form',
             operator: 'EQUAL',
+          },
+        }),
+
+        /* Navigation List */
+        groupField('navigation_list', 'Navigation List', {
+          inline_help_text:
+            'A navigation list block allows you to add a list of links to display in this column.',
+          children: [textField('title', 'Title'), linkField('link', 'Link')],
+          visibility: {
+            controlling_field_path: 'columns.type',
+            controlling_value_regex: 'navigation_list',
+            operator: 'EQUAL',
+          },
+          occurrence: {
+            min: 0,
+            max: null,
           },
         }),
 
