@@ -28,6 +28,9 @@
   --spacing-4xl: 12rem;
   --spacing-5xl: 16rem;
 
+  --spacing-header-height-mobile: 6rem;
+  --spacing-header-height-desktop: 7rem;
+
   --container-8xl: 96rem;
   --container-12xl: 120rem;
   --container-max-page: 96rem;
@@ -54,6 +57,16 @@
   --z-index-modal: 70;
   --z-index-toast: 80;
   --z-index-tooltip: 90;
+}
+
+:root {
+  --spacing-header-height: var(--spacing-header-height-mobile);
+}
+
+@media (min-width: 768px) {
+  :root {
+    --spacing-header-height: var(--spacing-header-height-desktop);
+  }
 }
 
 html {
@@ -198,4 +211,8 @@ a[href]:not(.button):not(.systems-page a) {
   50% {
     opacity: 0.5;
   }
+}
+
+.mt-header-height {
+  margin-top: var(--spacing-header-height);
 }

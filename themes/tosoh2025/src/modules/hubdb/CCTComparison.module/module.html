@@ -8,7 +8,7 @@
 
 {% set table_columns = [['category',"Category"], ['status', "Status"], ['lab_manager', "Lab Manager"], ['lab_technician', "Lab Technician"], ['procurement_manager', "Procurement Manager"], ['clinician', "Clinician"]] %}
 
-<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-[6rem] flex flex-col">
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-header-height flex flex-col">
   {% if tosoh_instrument_name and competitor_instrument_name %}
     {% set comparison_rows = hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name) %}
 
@@ -18,9 +18,6 @@
         window.Tosoh.CCTDetails = { comparisonRows};
         </script>
       {% end_require_js %}
-
-
-
 
       <div>
       <a
