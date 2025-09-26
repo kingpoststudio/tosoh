@@ -57,7 +57,7 @@
       alt={item.name}
       src={constructCDNUrl(variant_image?.url, 350)}
       loading="lazy"
-      class="max-h-[12rem] w-full object-contain"
+      class="max-h-[12rem] min-h-[12rem] w-full object-contain"
     />
   {:else}
     <div

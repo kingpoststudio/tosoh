@@ -72,6 +72,7 @@
     try {
       isLoading = true;
       const data = await fetchTableRows(constructBody());
+      // const data = mockPortalItems;
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;

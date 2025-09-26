@@ -29,17 +29,17 @@
       <div class="flex items-center">
         <!-- Avatar -->
         <div class="mr-3 flex -space-x-6">
-          <div class="h-12 w-12 rounded-full bg-gray-200"></div>
+          <div class="skeleton skeleton-pulse h-12 w-12 rounded-full"></div>
         </div>
         <!-- Speaker Info -->
         <div class="flex-1 space-y-2">
-          <div class="h-5 w-32 rounded bg-gray-200"></div>
-          <div class="h-4 w-24 rounded bg-gray-200"></div>
+          <div class="skeleton skeleton-pulse h-5 w-32 rounded"></div>
+          <div class="skeleton skeleton-pulse h-4 w-24 rounded"></div>
         </div>
       </div>
     </div>
 
     <!-- Register Button Skeleton -->
-    <div class="h-12 w-full rounded-lg bg-gray-200"></div>
+    <div class="skeleton skeleton-pulse h-12 w-full rounded-lg"></div>
   </div>
 </div>
