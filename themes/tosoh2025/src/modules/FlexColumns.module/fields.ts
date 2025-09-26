@@ -182,6 +182,15 @@ const moduleSettingsGroup = groupField('module_settings', 'Module Settings', {
       inline_help_text:
         'If enabled, a grid accent will appear in the background, like the one shown in the footer.',
     }),
+
+    choiceField('grid_accent_color', 'Grid accent color', {
+      choices: [
+        ['dark', 'Dark'],
+        ['light', 'Light'],
+      ],
+      inline_help_text: 'Sets the color of the grid accent.',
+    }),
+
     textField('custom_id', 'Module Id', {
       inline_help_text:
         'Optionally provide a unique ID for this module. This can be used for anchor link navigation (e.g., scrolling to this section when a link is clicked elsewhere on the page).',
@@ -205,7 +214,6 @@ const columnSettingsGroup = groupField('column_settings', 'Column Settings', {
       default: false,
       inline_help_text: 'If enabled, the column will have rounded corners.',
     }),
-
     choiceField('column_size', 'Column size', {
       choices: constructFieldValues('w', widthChoices),
       visibility: {
@@ -343,13 +351,8 @@ const generateFields = () => {
           inline_help_text: 'Allows you to add an image.',
           children: [
             choiceField('type', 'Image Type', {
-              choices: [
-                ['single', 'Single'],
-                ['stacked_images', 'Stacked Images'],
-              ],
+              choices: [['single', 'Single']],
               default: 'single',
-              inline_help_text:
-                'Choose whether to display an image, a HiArc pattern, a HubSpot video hosted locally, or an external video URL.',
             }),
             imageField('image', 'Image', {
               visibility: {
@@ -368,20 +371,6 @@ const generateFields = () => {
                 controlling_value_regex: 'image',
                 operator: 'EQUAL',
               },
-            }),
-            groupField('stacked_images', 'Stacked Images', {
-              children: [imageField('image', 'Image')],
-              visibility: {
-                controlling_field_path: 'columns.image.type',
-                controlling_value_regex: 'stacked_images',
-                operator: 'EQUAL',
-              },
-              occurrence: {
-                default: 2,
-                min: 2,
-                max: 2,
-              },
-              inline_help_text: 'Upload or select an 2 images to display.',
             }),
           ],
           visibility: {

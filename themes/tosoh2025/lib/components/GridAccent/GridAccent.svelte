@@ -1,9 +1,17 @@
 <svelte:options customElement="tosoh-grid-accent" />
 
+<script lang="ts">
+  let {
+    dark = false,
+  }: {
+    dark: boolean;
+  } = $props();
+</script>
+
 <div class="wrapper">
-  <div class="position-bl grid"></div>
+  <div class="position-bl grid {dark ? 'dark' : ''}"></div>
   <svelte:element this={'slot'} />
-  <div class="position-tr grid"></div>
+  <div class="position-tr grid {dark ? 'dark' : ''}"></div>
 </div>
 
 <style lang="postcss">
@@ -48,6 +56,14 @@
         opacity: 0.1;
         mask: radial-gradient(circle at center, white 40%, transparent 75%);
         -webkit-mask: radial-gradient(circle at center, white 40%, transparent 75%);
+      }
+
+      &.dark {
+        &::before {
+          background-image:
+            linear-gradient(to right, #000000 1px, transparent 1px),
+            linear-gradient(to bottom, #000000 1px, transparent 1px);
+        }
       }
 
       &.position-bl {

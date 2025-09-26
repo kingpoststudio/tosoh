@@ -70,8 +70,6 @@
       alt="{{ image.image.alt }}"
       width="720"
       class="{{ object_fit }} relative block h-full w-full" />
-  {%- elif image.type == "stacked_images" -%}
-    <img src="{{ image.image.src }}" alt="{{ image.image.alt }}" width="720" class="relative block h-full w-full" />
   {%- endif %}
 {%- endmacro -%}
 
@@ -173,7 +171,7 @@
 
     {% set column_settings = column.column_settings ? macros.classes(column.column_settings) : '' %}
     {% set video_width= column.type == 'video' ? 'w-full h-full' : '' %}
-    {%- set rounded = column.column_settings.is_rounded ? "rounded-2xl" : "" -%}
+    {%- set rounded = column.column_settings.is_rounded ? "rounded-2xl overflow-hidden" : "" -%}
 
     <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ video_width }} {{ rounded }} flex">
       {% call column_wrapper(column) %}
@@ -212,8 +210,9 @@
 {% endmacro -%}
 
 {% macro wrap_with_grid_accent() %}
+  {%- set grid_accent_color_dark = module.module_settings.grid_accent_color == 'dark' ? 'dark="true"' : '' -%}
   {% if module.module_settings.has_grid_accent %}
-    <tosoh-grid-accent class="max-w-max-page m-auto">{{ caller() }}</tosoh-grid-accent>
+    <tosoh-grid-accent {{ grid_accent_color_dark }} class="max-w-max-page m-auto">{{ caller() }}</tosoh-grid-accent>
   {% else %}
     {{ caller() }}
   {% endif %}
