@@ -114,7 +114,7 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard}></ItemsGrid>
+      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
 
       {#if tableRows?.length > 0}
         <PaginationWithLimit {totalItems}></PaginationWithLimit>
