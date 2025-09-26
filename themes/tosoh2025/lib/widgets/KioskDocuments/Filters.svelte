@@ -12,15 +12,15 @@
     updateUrlFromCheckbox,
   } from '../../utils/urlUtils';
 
-  import ErrorCard from '../ErrorCard/ErrorCard.svelte';
-  import SearchInput from '../Search/Search.svelte';
-  import FilterForm from '../FiltersForm/FiltersForm.svelte';
+  import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
+  import SearchInput from '../../components/Search/Search.svelte';
+  import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
   import { parseFilterOptions } from '../../utils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockKioskDocumentsFiltersResponse } from './mock';
   import { getFilter } from '../../utils/utils';
-  import TopicFilter from '../TopicFilter/TopicFilter.svelte';
+  import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
   let { isParentLoading } = $props();
 

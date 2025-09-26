@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import type { ColumnId } from '../../../types/hubdb';
   import type { FilterWithOptions } from '../../../types/hubdb';
-  import FilterForm from '../FiltersForm/FiltersForm.svelte';
+  import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
   import { parseFilterOptions } from '../../utils/filterUtils';
   import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
   import {
@@ -12,9 +12,9 @@
   } from '../../utils/constants';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockWebinarListingsFilterOptions } from './mock';
-  import Search from '../Search/Search.svelte';
+  import Search from '../../components/Search/Search.svelte';
   import { fade } from 'svelte/transition';
-  import TopicFilter from '../TopicFilter/TopicFilter.svelte';
+  import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import { getFilter } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
 

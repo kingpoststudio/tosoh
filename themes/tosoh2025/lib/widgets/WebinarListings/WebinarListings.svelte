@@ -13,10 +13,10 @@
     defaultPagination,
     PROD_TOSOH_WEBINARS_TABLE_ID,
   } from '../../utils/constants';
-  import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
-  import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
+  import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
+  import PaginationWithLimit from '../../components/PaginationWithLimit/PaginationWithLimit.svelte';
   import Card from './Card.svelte';
-  import ErrorCard from '../ErrorCard/ErrorCard.svelte';
+  import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import { mockWebinarCollectionRes } from './mock';
   import WebinarListingsFilters from './Filters.svelte';
   import type { ColumnId, WebinarListingsItem } from '../../../types/hubdb';

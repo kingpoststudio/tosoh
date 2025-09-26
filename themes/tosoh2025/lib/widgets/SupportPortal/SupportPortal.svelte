@@ -8,17 +8,17 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import ErrorCard from '../ErrorCard/ErrorCard.svelte';
+  import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import { mockPortalItems } from './mock';
   import {
     defaultItemsLimit,
     defaultPagination,
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
-  import PaginationWithLimit from '../PaginationWithLimit/PaginationWithLimit.svelte';
+  import PaginationWithLimit from '../../components/PaginationWithLimit/PaginationWithLimit.svelte';
   import Card from './Card.svelte';
   import SkeletonCard from './SkeletonCard.svelte';
-  import ItemsGrid from '../ItemsGrid/ItemsGrid.svelte';
+  import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
   import Filters from './Filters.svelte';
   import {
