@@ -148,13 +148,11 @@
                   </div>
                 </div>
               </tosoh-modal>
-            {% else if internal_version and !document.gated %}
+            {% elif internal_version and !document.gated %}
               <button onclick="downloadFile(event)">Download</button>
             {% endif %}
-
             {% if !internal_version %}
               {% set form = document.gated ? gated_email_form : email_form %}
-
               <tosoh-modal variant="action" modalId="non-internal-version">
                 <button>E-mail a Copy</button>
               </tosoh-modal>
