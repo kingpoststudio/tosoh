@@ -173,8 +173,9 @@
 
     {% set column_settings = column.column_settings ? macros.classes(column.column_settings) : '' %}
     {% set video_width= column.type == 'video' ? 'w-full h-full' : '' %}
+    {%- set rounded = column.column_settings.is_rounded ? "rounded-2xl" : "" -%}
 
-    <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ video_width }} flex">
+    <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ video_width }} {{ rounded }} flex">
       {% call column_wrapper(column) %}
         {{ render_column_type(column) }}
       {% endcall %}

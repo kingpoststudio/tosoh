@@ -201,6 +201,10 @@ const columnSettingsGroup = groupField('column_settings', 'Column Settings', {
       inline_help_text:
         'Determines the relative width of the column compared to others. Think of it like dividing a pie - if one column has flex factor 2 and another has flex factor 1, the first column will be twice as wide as the second. <strong>If flex factor is set to 0, you will be able to set a fixed width for the column.</strong>',
     }),
+    booleanField('is_rounded', 'Is rounded?', {
+      default: false,
+      inline_help_text: 'If enabled, the column will have rounded corners.',
+    }),
 
     choiceField('column_size', 'Column size', {
       choices: constructFieldValues('w', widthChoices),

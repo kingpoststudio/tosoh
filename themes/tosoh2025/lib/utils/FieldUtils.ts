@@ -288,10 +288,13 @@ export const contentBlockRtfFeatures = [
 export const linkVariantChoices = [
   ['button', 'Button (standard)'],
   ['button outlined', 'Button (outlined)'],
+  ['button with-arrow w-fit!', 'Button (with arrow) (fit width)'],
+  ['button with-arrow', 'Button (with arrow)'],
 ];
 
 export const themeColorChoices = [
   ['default', 'Black Charcoal'],
+  ['light-silver', 'Light Silver'],
   ['imperial-red', 'Imperial Red'],
   ['nickel', 'Nickel'],
   ['ghost-white', 'Ghost White'],
