@@ -96,7 +96,7 @@
     </div>
 
     <div class="flex flex-col">
-      <div class="gap-xs align-start flex flex-col md:flex-row">
+      <div class="gap-xs align-start flex flex-row flex-wrap">
         <button
           onclick={() => onTagClick('window', window?.name)}
           class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
