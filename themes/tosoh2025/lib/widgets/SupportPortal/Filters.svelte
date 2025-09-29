@@ -11,7 +11,7 @@
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import { filterRows, parseFilterOptions } from '../../utils/filterUtils';
+  import { filterRows, parseFilterOptions } from '../../utils/filterUtils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';

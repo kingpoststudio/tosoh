@@ -68,7 +68,7 @@
 
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
-      <div class="gap-2xs flex">
+      <div class="gap-2xs flex flex-wrap">
         {#each productTypes as productType, index}
           {@const isLast = index === productTypes?.length - 1}
           <button

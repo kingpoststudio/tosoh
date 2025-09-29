@@ -3,7 +3,7 @@
   import type { ColumnId } from '../../../types/hubdb';
   import type { FilterWithOptions } from '../../../types/hubdb';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import { parseFilterOptions } from '../../utils/filterUtils';
+  import { parseFilterOptions } from '../../utils/filterUtils/filterUtils';
   import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
   import {
     defaultItemsLimit,
