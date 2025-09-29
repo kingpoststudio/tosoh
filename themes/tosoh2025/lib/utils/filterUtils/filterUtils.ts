@@ -1,4 +1,9 @@
-import type { ColumnId, ColumnItem, Matches, SupportPortalRowForFilter } from '../../types/hubdb';
+import type {
+  ColumnId,
+  ColumnItem,
+  Matches,
+  SupportPortalRowForFilter,
+} from '../../../types/hubdb';
 
 export const doesRowColumnContainValueFromUrl = (
   row: SupportPortalRowForFilter['values'],
@@ -16,10 +21,6 @@ export const doesRowColumnContainValueFromUrl = (
     return doesContain;
   }
 
-  if (!paramValueWithColumnId) {
-    return doesContain;
-  }
-
   const isMultiselectColumn =
     row?.[columnId] && Array.isArray(row[columnId]) && row[columnId]?.length > 0;
   const isStringColumn =
@@ -33,7 +34,7 @@ export const doesRowColumnContainValueFromUrl = (
   if (isMultiselectColumn) {
     let column = row[columnId] as SupportPortalRowForFilter['values']['multiSelectColumn'];
 
-    column?.map((selection) => {
+    column?.forEach((selection) => {
       if (!doesContain) {
         return (doesContain = selection?.name === paramValueWithColumnId);
       }
@@ -43,7 +44,7 @@ export const doesRowColumnContainValueFromUrl = (
   if (isStringColumn) {
     let column = row[columnId] as SupportPortalRowForFilter['values']['stringColumn'];
     const stringToSearchAgainst = column?.toLowerCase();
-    const urlValueToLowerCase = paramValueWithColumnId?.toLowerCase();
+    const urlValueToLowerCase = paramValueWithColumnId?.toLowerCase() || '';
 
     if (!doesContain) {
       return (doesContain = stringToSearchAgainst?.includes(urlValueToLowerCase) || false);
@@ -61,7 +62,7 @@ export const doesRowColumnContainValueFromUrl = (
   return doesContain;
 };
 
-const getAllAvailalbeFiltersFromAllRows = (rows: SupportPortalRowForFilter[]) => {
+export const getAllAvailalbeFiltersFromAllRows = (rows: SupportPortalRowForFilter[]) => {
   let allFilters: Record<ColumnId, SupportPortalRowForFilter['values'][]> | {} = {};
 
   rows.forEach((row) => {
@@ -79,7 +80,7 @@ const getAllAvailalbeFiltersFromAllRows = (rows: SupportPortalRowForFilter[]) =>
   return allFilters;
 };
 
-const matchValuesWithColumnNames = (
+export const matchValuesWithColumnNames = (
   rows: SupportPortalRowForFilter[],
   allEmptyAvailableFilters: Record<ColumnId, any[]>
 ): Record<ColumnId, SupportPortalRowForFilter['values'][]> => {
@@ -124,7 +125,7 @@ const matchValuesWithColumnNames = (
   return allFilters;
 };
 
-const sortFilterValuesAlphabetically = (
+export const sortFilterValuesAlphabetically = (
   allFilters: Record<ColumnId, SupportPortalRowForFilter['values'][]>
 ) => {
   Object.keys(allFilters)?.forEach((columnId) => {
@@ -210,6 +211,8 @@ const doesMatchAllColumnIds = (matches: Matches, filtersFromFields: ColumnId[]) 
 };
 
 export const filterRows = (allRows: SupportPortalRowForFilter[], filtersFromFields: ColumnId[]) => {
+  const params = new URLSearchParams(window.location.search);
+
   const filteredRows = allRows.filter((row: SupportPortalRowForFilter) => {
     let areActiveFiltersMatchingRow: Matches = {};
 
@@ -217,8 +220,6 @@ export const filterRows = (allRows: SupportPortalRowForFilter[], filtersFromFiel
 
     Object.keys(rowValues)?.map((columnKey: any) => {
       let columnId = columnKey as keyof SupportPortalRowForFilter['values'];
-
-      const params = new URLSearchParams(window.location.search);
 
       let doesColumnIdExistInUrl = params?.get(columnId);
 

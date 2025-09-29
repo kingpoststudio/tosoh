@@ -17,7 +17,8 @@
     "format:templates": "prettier --write \"src/templates/**/*.html\"",
     "type-check": "tsc --noEmit",
     "hs:init": "hs init",
-    "hs:auth": "hs auth"
+    "hs:auth": "hs auth",
+    "test": "vitest --coverage --ui"
   },
   "devDependencies": {
     "@hubspot/cli": "^7.5.4",
@@ -26,6 +27,8 @@
     "@tsconfig/svelte": "^5.0.4",
     "@types/bun": "latest",
     "@types/web": "latest",
+    "@vitest/coverage-v8": "3.2.4",
+    "@vitest/ui": "3.2.4",
     "fast-glob": "^3.3.3",
     "hs-fieldkit": "^0.1.8",
     "prettier": "^3.6.2",
@@ -36,7 +39,8 @@
     "typescript": "^5.9.2",
     "vite": "^7.1.2",
     "vite-plugin-static-copy": "^3.1.1",
-    "vite-plugin-upload-to-hubspot": "^0.0.5"
+    "vite-plugin-upload-to-hubspot": "^0.0.5",
+    "vitest": "^3.2.4"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
