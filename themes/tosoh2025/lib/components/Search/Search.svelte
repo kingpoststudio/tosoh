@@ -4,6 +4,7 @@
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import { onMount } from 'svelte';
   import type { Search } from '../../../types/fields';
+  import { removeHtmlTags } from '../../utils/utils';
   const {
     searchFromFields,
     customClasses,
@@ -188,7 +189,11 @@
           <input
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
             name={searchColumnId}
-            defaultValue={activeFilter ? activeFilter : ''}
+            defaultValue={activeFilter
+              ? typeof activeFilter === 'string'
+                ? removeHtmlTags(activeFilter)
+                : activeFilter
+              : ''}
             data-debounce="500"
             class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
             placeholder={placeholder || 'Search here...'}

@@ -119,3 +119,7 @@ export const onTagClick = (name: string, value: string) => {
     target: { name: name, value: value },
   } as unknown as Event);
 };
+
+export const removeHtmlTags = (value: string) => {
+  return value?.replace(/<[^>]+>/g, ' ');
+};
