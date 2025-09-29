@@ -1,6 +1,9 @@
 import { beforeAll, afterAll, describe, it, expect, vi } from 'vitest';
 import {
+  doesMatchAllColumnIds,
+  doesMatchContainAllTheFiltersFromUrl,
   doesRowColumnContainValueFromUrl,
+  filterRows,
   getAllAvailalbeFiltersFromAllRows,
   matchValuesWithColumnNames,
   parseFilterOptions,
@@ -63,6 +66,10 @@ const videoDocumentType = {
   order: 1,
 };
 
+afterAll(() => {
+  window.location.search = '';
+});
+
 describe('doesRowColumnContainValueFromUrl(rowValues, columnId)', () => {
   const multiselectColumnId = 'product_family' as any;
   const selectColumnId = 'document_type' as any;
@@ -96,14 +103,8 @@ describe('doesRowColumnContainValueFromUrl(rowValues, columnId)', () => {
     title: 'Test Title',
   } as any;
 
-  beforeAll(() => {
-    window.location.search =
-      '?product_family=HPLC%20Applications&document_type=PDF&title=Test%20Title';
-  });
-
-  afterAll(() => {
-    window.location.search = '';
-  });
+  window.location.search =
+    '?product_family=HPLC%20Applications&document_type=PDF&title=Test%20Title';
 
   it('should return true if the row contains the column with the value from the url and the type of column is multiselect', () => {
     const result = doesRowColumnContainValueFromUrl(mockRowValues, multiselectColumnId);
@@ -299,5 +300,95 @@ describe('parseFilterOptions(rows)', () => {
       product_family: [aiaClProductFamily, HplcProductFamily],
       document_type: [pdfDocumentType, videoDocumentType],
     });
+  });
+});
+
+describe('doesMatchContainAllTheFiltersFromUrl(matches, filtersFromFields)', () => {
+  const mockFiltersFromFields = ['product_family', 'document_type'] as any;
+
+  it('should return true if the match contains all the active filters from the fields', () => {
+    window.location.search = '?product_family=HPLC%20Applications&document_type=PDF';
+
+    const mockMatches = {
+      product_family: true,
+      document_type: true,
+    } as any;
+    const result = doesMatchContainAllTheFiltersFromUrl(mockMatches, mockFiltersFromFields);
+    expect(result).toBe(true);
+  });
+
+  it('should return false if the match does not contain all the active filters from the fields', () => {
+    window.location.search = '?product_family=HPLC%20Applications&document_type=PDF';
+
+    const mockMatches = {
+      document_type: true,
+    } as any;
+    const result = doesMatchContainAllTheFiltersFromUrl(mockMatches, mockFiltersFromFields);
+    expect(result).toBe(false);
+  });
+
+  it('should return true if no active filters are present in the URL', () => {
+    window.location.search = '';
+
+    const mockMatches = {} as any;
+    const result = doesMatchContainAllTheFiltersFromUrl(mockMatches, mockFiltersFromFields);
+    expect(result).toBe(true);
+  });
+
+  it('should return true if only one filter is active in URL and present in matches', () => {
+    window.location.search = '?product_family=HPLC%20Applications';
+
+    const mockMatches = {
+      product_family: true,
+    } as any;
+    const result = doesMatchContainAllTheFiltersFromUrl(mockMatches, mockFiltersFromFields);
+    expect(result).toBe(true);
+  });
+});
+
+describe('doesMatchAllColumnIds(matches, filtersFromFields)', () => {
+  const mockFiltersFromFields = ['product_family', 'document_type'] as any;
+
+  it('should return true if the match contains all the active filters from the fields', () => {
+    const mockMatches = {
+      product_family: true,
+      document_type: true,
+    } as any;
+    const result = doesMatchAllColumnIds(mockMatches, mockFiltersFromFields);
+    expect(result).toBe(true);
+  });
+
+  it('should return false if the match does not contain all the active filters from the fields', () => {
+    const mockMatches = {
+      document_type: true,
+    } as any;
+    const result = doesMatchAllColumnIds(mockMatches, mockFiltersFromFields);
+    expect(result).toBe(false);
+  });
+});
+
+describe('filterRows(allRows, filtersFromFields)', () => {
+  const mockRows = [
+    {
+      values: {
+        product_family: [HplcProductFamily],
+        document_type: pdfDocumentType,
+      },
+    },
+
+    {
+      values: {
+        product_family: [aiaClProductFamily],
+        document_type: videoDocumentType,
+      },
+    },
+  ] as any;
+
+  it('should return the filtered rows', () => {
+    window.location.search = '?product_family=HPLC%20Applications';
+
+    const mockFiltersFromFields = ['product_family', 'document_type'] as any;
+    const result = filterRows(mockRows, mockFiltersFromFields);
+    expect(result).toEqual([mockRows[0]]);
   });
 });

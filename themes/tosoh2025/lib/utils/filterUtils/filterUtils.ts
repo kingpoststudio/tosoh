@@ -189,7 +189,7 @@ export const doesMatchContainAllTheFiltersFromUrl = (
   return hasAllTheNeccessaryFilters;
 };
 
-const doesMatchAllColumnIds = (matches: Matches, filtersFromFields: ColumnId[]) => {
+export const doesMatchAllColumnIds = (matches: Matches, filtersFromFields: ColumnId[]) => {
   let matchesAll = true;
 
   if (matches && Object?.keys(matches)) {
