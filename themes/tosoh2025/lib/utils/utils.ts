@@ -86,15 +86,17 @@ export const getFilterColumnIds = (
   extraColumnIds?: string[]
 ) => {
   if (mode === 'all') {
-    return [...topicFilters.map((filter) => filter.hubdb_column_id), ...(extraColumnIds || [])];
+    return [...topicFilters?.map((filter) => filter?.hubdb_column_id), ...(extraColumnIds || [])];
   } else if (mode === 'numeric') {
-    return topicFilters
-      .filter((filter) => filter.type === 'range-pm')
-      .map((filter) => filter.hubdb_column_id);
+    let numericFilters = topicFilters
+      ?.filter((filter) => filter?.type === 'range-pm')
+      ?.map((filter) => filter?.hubdb_column_id);
+    return [...numericFilters, ...(extraColumnIds || [])];
   } else if (mode === 'non-numeric') {
-    return topicFilters
-      .filter((filter) => filter.type !== 'range-pm')
-      .map((filter) => filter.hubdb_column_id);
+    let nonNumericFilters = topicFilters
+      ?.filter((filter) => filter?.type !== 'range-pm')
+      ?.map((filter) => filter?.hubdb_column_id);
+    return [...nonNumericFilters, ...(extraColumnIds || [])];
   }
 };
 
