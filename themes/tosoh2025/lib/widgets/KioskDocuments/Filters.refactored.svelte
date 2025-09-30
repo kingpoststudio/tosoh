@@ -19,16 +19,17 @@
 
   import {
     extractFilterOptions,
-    extractFilterOptionsWithQuantityEnhanced,
     createFilterCache,
     clearFilterCache,
     parseUrlFilters,
+    extractToleranceConfig,
+    extractFilterOptionsWithQuantityWithTolerance,
     type FilterCriteria,
     type FilterOptionsWithQuantity,
     type FilterCache,
   } from '../../utils/filterUtils/filterUtils.refactored';
 
-  import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
+  import type { ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockKioskDocumentsFiltersResponse } from './mock';
   import { getFilter } from '../../utils/utils';
@@ -45,6 +46,9 @@
   const topic_filters = window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters;
   let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
   filtersFromFields.push(searchColumnId);
+
+  // Extract tolerance configuration from filter definitions
+  const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
@@ -160,10 +164,10 @@
       });
 
       // Use enhanced filtering with caching (like product catalog)
-      const options = extractFilterOptionsWithQuantityEnhanced(
+      const options = extractFilterOptionsWithQuantityWithTolerance(
         data,
         currentFilters,
-        filterOptionsCache
+        toleranceConfig
       );
 
       allAvailableFiltersWithTheirOptions = options;

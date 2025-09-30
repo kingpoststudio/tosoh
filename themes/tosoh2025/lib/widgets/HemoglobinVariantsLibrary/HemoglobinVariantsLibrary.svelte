@@ -14,6 +14,7 @@
   import {
     defaultItemsLimit,
     defaultPagination,
+    IS_MOCK,
     PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
   } from '../../utils/constants';
   import PaginationWithLimit from '../../components/PaginationWithLimit/PaginationWithLimit.svelte';
@@ -67,8 +68,13 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      const data = await fetchTableRows(constructBody());
-      // const data = mockHemoglobinVariantsLibraryTableRowsResponse;
+      let data;
+
+      if (!IS_MOCK) {
+        data = await fetchTableRows(constructBody());
+      } else {
+        data = mockHemoglobinVariantsLibraryTableRowsResponse;
+      }
 
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
