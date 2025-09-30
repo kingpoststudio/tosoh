@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import {
     defaultItemsLimit,
     defaultPagination,
+    IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
   import { mockPortalFilters } from './mock';
@@ -11,17 +12,24 @@
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import { filterRows, parseFilterOptions } from '../../utils/filterUtils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import { getFilter } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
+  import {
+    extractFilterOptions,
+    parseUrlFilters,
+    extractToleranceConfig,
+    extractFilterOptionsWithQuantityWithTolerance,
+    type FilterCriteria,
+  } from '../../utils/filterUtils/filterUtils.refactored';
   let { isParentLoading, viewAs, handleChangeView } = $props();
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
   const prodSupportPortalTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
+
   const isSearchAccessLevelFilterEnabled =
     window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
 
@@ -35,22 +43,46 @@
       ] as ColumnId[])
     : [];
 
-  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
+  const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
+  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
+
+  // Store raw data for advanced filtering
+  let rawData: any[] = [];
+
+  // Debounce timeout for filter updates (like product catalog)
+  let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  const resetPaginationAndLimit = () => {
+    setSearchParams({
+      pagination: `${defaultPagination}`,
+      limit: `${defaultItemsLimit}`,
+    });
+  };
+
+  // Debounced filter update (mimics product catalog's debouncedFilterProducts)
+  const debouncedFilterUpdate = () => {
+    clearTimeout(filterDebounceTimeout);
+    filterDebounceTimeout = setTimeout(() => {
+      if (rawData.length > 0) {
+        updateFilterOptionsBasedOnCurrentUrl(rawData);
+      }
+    }, 300); // Same debounce timing as product catalog
+  };
 
   const onChange = (event: Event) => {
     onReset();
 
     updateUrl(event);
+
+    // Debounce filter updates like product catalog
+    debouncedFilterUpdate();
   };
 
   const onReset = () => {
-    setSearchParams({
-      pagination: `${defaultPagination}`,
-      limit: `${defaultItemsLimit}`,
-    });
+    resetPaginationAndLimit();
 
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
@@ -61,16 +93,25 @@
     isLoading = true;
 
     try {
-      const data = await getTableFilterOptions({
-        filters: filtersFromFields,
-        accessLevel: accessLevel,
-        tableId: prodSupportPortalTableId,
-      });
-      // const data = mockPortalFilters;
+      let data;
+
+      if (!IS_MOCK) {
+        data = await getTableFilterOptions({
+          filters: filtersFromFields,
+          accessLevel: accessLevel,
+          tableId: prodSupportPortalTableId,
+        });
+      } else {
+        data = mockPortalFilters?.results;
+      }
 
       if (!data?.error) {
         if (data?.length > 0) {
-          filterValuesForSelectsBasedOnUrl(data);
+          rawData = data;
+
+          updateFilterOptionsBasedOnCurrentUrl(data);
+        } else {
+          rawData = [];
         }
       }
 
@@ -85,14 +126,35 @@
     }
   };
 
-  const filterValuesForSelectsBasedOnUrl = (allRows: any) => {
-    if (!allRows || allRows.length === 0) {
+  const updateFilterOptionsBasedOnCurrentUrl = (data: any) => {
+    if (!data || data.length === 0) {
+      allAvailableFiltersWithTheirOptions = {};
       return;
     }
 
-    const filteredRows = filterRows(allRows, filtersFromFields);
+    try {
+      const allUrlParams = parseUrlFilters();
 
-    allAvailableFiltersWithTheirOptions = parseFilterOptions(filteredRows);
+      const currentFilters: FilterCriteria = {};
+      Object.entries(allUrlParams).forEach(([key, value]) => {
+        if (filtersFromFields?.includes(key as ColumnId)) {
+          currentFilters[key] = value;
+        }
+      });
+
+      // Use enhanced filtering with caching (like product catalog)
+      const options = extractFilterOptionsWithQuantityWithTolerance(
+        data,
+        currentFilters,
+        toleranceConfig
+      );
+
+      allAvailableFiltersWithTheirOptions = options;
+    } catch (error) {
+      console.error('Error updating filter options:', error);
+      // Fallback to basic filter options without quantities
+      allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
+    }
   };
 
   const reloadFilterOptions = () => {
@@ -102,6 +164,12 @@
 
   onMount(() => {
     getFilterOptions();
+  });
+
+  $inspect(allAvailableFiltersWithTheirOptions);
+
+  onDestroy(() => {
+    clearTimeout(filterDebounceTimeout);
   });
 </script>
 
