@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import {
     defaultItemsLimit,
     defaultPagination,
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-    IS_MOCK,
   } from '../../utils/constants';
   import {
     clearParams,
@@ -16,38 +15,64 @@
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import { parseFilterOptions } from '../../utils/filterUtils/filterUtils';
+
+  import {
+    extractFilterOptions,
+    extractFilterOptionsWithQuantityEnhanced,
+    createFilterCache,
+    clearFilterCache,
+    parseUrlFilters,
+    type FilterCriteria,
+    type FilterOptionsWithQuantity,
+    type FilterCache,
+  } from '../../utils/filterUtils/filterUtils.refactored';
+
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockKioskDocumentsFiltersResponse } from './mock';
   import { getFilter } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
-  import { filterRows } from '../../utils/filterUtils/filterUtils.refactored';
+
   let { isParentLoading } = $props();
 
+  // Configuration from HubSpot fields
   const searchFromFields = window?.Tosoh?.KioskDocumentsContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
-  const isSearchEnabled = searchFromFields?.enable_search;
-  const searchTitle = searchFromFields?.title;
   const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
-  // const searchTableId = searchFromFields?.hubdb_table_id;
-  const searchTypeheadEnabled = searchFromFields?.typeahead_enabled;
 
   const topic_filters = window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters;
   let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
   filtersFromFields.push(searchColumnId);
 
-  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
-
+  let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
+
+  // Cache for memoized filter options (like product catalog)
+  let filterOptionsCache: FilterCache = createFilterCache();
+
+  // Store raw data for advanced filtering
+  let rawData: any[] = [];
+
+  // Debounce timeout for filter updates (like product catalog)
+  let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const resetPaginationAndLimit = () => {
     setSearchParams({
       pagination: `${defaultPagination}`,
       limit: `${defaultItemsLimit}`,
     });
+  };
+
+  // Debounced filter update (mimics product catalog's debouncedFilterProducts)
+  const debouncedFilterUpdate = () => {
+    clearTimeout(filterDebounceTimeout);
+    filterDebounceTimeout = setTimeout(() => {
+      if (rawData.length > 0) {
+        updateFilterOptionsBasedOnCurrentUrl(rawData);
+      }
+    }, 300); // Same debounce timing as product catalog
   };
 
   const onChange = (event: Event) => {
@@ -57,6 +82,9 @@
     } else {
       updateUrl(event);
     }
+
+    // Debounce filter updates like product catalog
+    debouncedFilterUpdate();
   };
 
   const onReset = () => {
@@ -65,56 +93,96 @@
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
     }
+
+    // Clear cache when resetting (like product catalog)
+    clearFilterCache(filterOptionsCache);
+
+    // Refresh filter options with no active filters
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
   };
-  const getFilterOptions = async () => {
+
+  const fetchInitialData = async () => {
     isLoading = true;
+    hasError = false;
 
     try {
-      let data;
+      // Uncomment this for production
+      // const data = await getTableFilterOptions({
+      //   filters: filtersFromFields,
+      //   tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+      // });
 
-      if (!IS_MOCK) {
-        data = await getTableFilterOptions({
-          filters: filtersFromFields,
-          tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-        });
-      } else {
-        data = mockKioskDocumentsFiltersResponse.results as any;
-      }
-
-      if (!data?.error) {
-        if (data?.length > 0) {
-          filterValuesForSelectsBasedOnUrl(data);
-        }
-      }
+      const data = mockKioskDocumentsFiltersResponse.results as any;
 
       if (data?.error) {
-        hasError = false;
+        hasError = true;
+        return;
+      }
+
+      if (data?.length > 0) {
+        // Store raw data for advanced filtering
+        rawData = data;
+
+        // Clear cache on new data load
+        clearFilterCache(filterOptionsCache);
+
+        updateFilterOptionsBasedOnCurrentUrl(data);
+      } else {
+        rawData = [];
       }
     } catch (error) {
       hasError = true;
-      console.warn('Failed to fetch filter options:', error);
     } finally {
       isLoading = false;
     }
   };
 
-  const filterValuesForSelectsBasedOnUrl = (allRows: any) => {
-    if (!allRows || allRows.length === 0) {
+  const updateFilterOptionsBasedOnCurrentUrl = (data: any) => {
+    if (!data || data.length === 0) {
+      allAvailableFiltersWithTheirOptions = {};
       return;
     }
 
-    const filteredRows = filterRows(allRows, filtersFromFields);
+    try {
+      const allUrlParams = parseUrlFilters();
 
-    allAvailableFiltersWithTheirOptions = parseFilterOptions(filteredRows);
+      const currentFilters: FilterCriteria = {};
+      Object.entries(allUrlParams).forEach(([key, value]) => {
+        if (filtersFromFields?.includes(key)) {
+          currentFilters[key] = value;
+        }
+      });
+
+      // Use enhanced filtering with caching (like product catalog)
+      const options = extractFilterOptionsWithQuantityEnhanced(
+        data,
+        currentFilters,
+        filterOptionsCache
+      );
+
+      allAvailableFiltersWithTheirOptions = options;
+    } catch (error) {
+      console.error('Error updating filter options:', error);
+      // Fallback to basic filter options without quantities
+      allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
+    }
   };
 
   const reloadFilterOptions = () => {
     hasError = false;
-    getFilterOptions();
+    fetchInitialData();
   };
 
   onMount(() => {
-    getFilterOptions();
+    fetchInitialData();
+  });
+
+  onDestroy(() => {
+    // Clean up debounce timeout and cache (like product catalog)
+    clearTimeout(filterDebounceTimeout);
+    clearFilterCache(filterOptionsCache);
   });
 </script>
 
@@ -142,6 +210,7 @@
     <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />
     <div class="pb-sm"></div>
   {/if}
+
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
     {@render filterIcon()}
@@ -162,7 +231,9 @@
       {#if searchColumnId !== columnId}
         <TopicFilter
           {filter}
-          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
+          options={(allAvailableFiltersWithTheirOptions as FilterOptionsWithQuantity)[
+            columnId as ColumnId
+          ] || []}
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
