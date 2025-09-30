@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import {
     defaultItemsLimit,
     defaultPagination,
+    IS_MOCK,
     PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
   } from '../../utils/constants';
   import {
@@ -15,8 +16,20 @@
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import { parseFilterOptions } from '../../utils/filterUtils/filterUtils';
-  import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
+
+  import {
+    extractFilterOptions,
+    createFilterCache,
+    clearFilterCache,
+    parseUrlFilters,
+    extractToleranceConfig,
+    extractFilterOptionsWithQuantityWithTolerance,
+    type FilterCriteria,
+    type FilterOptionsWithQuantity,
+    type FilterCache,
+  } from '../../utils/filterUtils/filterUtils.refactored';
+
+  import type { ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockHemoglobinVariantsLibraryFiltersResponse } from './mock';
   import { getFilter } from '../../utils/utils';
@@ -24,20 +37,30 @@
   import type { TopicFilters } from '../../../types/fields';
   let { isParentLoading } = $props();
 
-  const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
-
-  const searchFromFields = hemoglobinVariantsLibraryContent?.search;
+  // Configuration from HubSpot fields
+  const searchFromFields = window?.Tosoh?.HemoglobinVariantsLibraryContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
-
   const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
-  const topic_filters = hemoglobinVariantsLibraryContent?.topic_filters?.filters;
+
+  const topic_filters = window?.Tosoh?.HemoglobinVariantsLibraryContent?.topic_filters?.filters;
   let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
   filtersFromFields.push(searchColumnId);
 
-  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
+  // Extract tolerance configuration from filter definitions
+  const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
+  let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
+
+  // Cache for memoized filter options (like product catalog)
+  let filterOptionsCache: FilterCache = createFilterCache();
+
+  // Store raw data for advanced filtering
+  let rawData: any[] = [];
+
+  // Debounce timeout for filter updates (like product catalog)
+  let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const resetPaginationAndLimit = () => {
     setSearchParams({
@@ -46,23 +69,38 @@
     });
   };
 
+  // Debounced filter update (mimics product catalog's debouncedFilterProducts)
+  const debouncedFilterUpdate = () => {
+    clearTimeout(filterDebounceTimeout);
+    filterDebounceTimeout = setTimeout(() => {
+      if (rawData.length > 0) {
+        updateFilterOptionsBasedOnCurrentUrl(rawData);
+      }
+    }, 300); // Same debounce timing as product catalog
+  };
+
   const onChange = (event: Event) => {
     resetPaginationAndLimit();
-
     if ((event.target as HTMLInputElement).type === 'checkbox') {
       updateUrlFromCheckbox(event);
     } else if ((event.target as HTMLInputElement).type === 'number') {
-      return console.log('number');
     } else {
       updateUrl(event);
     }
+
+    // Debounce filter updates like product catalog
+    debouncedFilterUpdate();
   };
 
   const onClickSubmit = () => {
+    resetPaginationAndLimit();
     const numberInput = document.querySelector('input[type="number"]');
     if (numberInput) {
       updateUrl({ target: numberInput } as unknown as Event);
     }
+
+    // Debounce filter updates like other inputs
+    debouncedFilterUpdate();
   };
 
   const onReset = () => {
@@ -71,51 +109,96 @@
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
     }
+
+    // Clear cache when resetting (like product catalog)
+    clearFilterCache(filterOptionsCache);
+
+    // Refresh filter options with no active filters
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
   };
 
-  const getFilterOptions = async () => {
+  const fetchInitialData = async () => {
     isLoading = true;
+    hasError = false;
 
     try {
-      const data = await getTableFilterOptions({
-        filters: filtersFromFields,
-        tableId: searchTableId,
-      });
+      let data;
 
-      // const data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
-
-      if (!data?.error) {
-        if (data?.length > 0) {
-          filterValuesForSelectsBasedOnUrl(data);
-        }
+      if (!IS_MOCK) {
+        data = await getTableFilterOptions({
+          filters: filtersFromFields,
+          tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
+        });
+      } else {
+        data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
       }
 
       if (data?.error) {
-        hasError = false;
+        hasError = true;
+        return;
+      }
+
+      if (data?.length > 0) {
+        // Store raw data for advanced filtering
+        rawData = data;
+
+        updateFilterOptionsBasedOnCurrentUrl(data);
+      } else {
+        rawData = [];
       }
     } catch (error) {
       hasError = true;
-      console.warn('Failed to fetch filter options:', error);
     } finally {
       isLoading = false;
     }
   };
 
-  const filterValuesForSelectsBasedOnUrl = (allRows: any) => {
-    if (!allRows || allRows.length === 0) {
+  const updateFilterOptionsBasedOnCurrentUrl = (data: any) => {
+    if (!data || data.length === 0) {
+      allAvailableFiltersWithTheirOptions = {};
       return;
     }
 
-    allAvailableFiltersWithTheirOptions = parseFilterOptions(allRows);
+    try {
+      const allUrlParams = parseUrlFilters();
+
+      const currentFilters: FilterCriteria = {};
+      Object.entries(allUrlParams).forEach(([key, value]) => {
+        if (filtersFromFields?.includes(key as ColumnId)) {
+          currentFilters[key] = value;
+        }
+      });
+
+      // Use tolerance-aware filtering for calculating quantities
+      const options = extractFilterOptionsWithQuantityWithTolerance(
+        data,
+        currentFilters,
+        toleranceConfig
+      );
+
+      allAvailableFiltersWithTheirOptions = options;
+    } catch (error) {
+      console.error('Error updating filter options:', error);
+      // Fallback to basic filter options without quantities
+      allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
+    }
   };
 
   const reloadFilterOptions = () => {
     hasError = false;
-    getFilterOptions();
+    fetchInitialData();
   };
 
   onMount(() => {
-    getFilterOptions();
+    fetchInitialData();
+  });
+
+  onDestroy(() => {
+    // Clean up debounce timeout and cache (like product catalog)
+    clearTimeout(filterDebounceTimeout);
+    clearFilterCache(filterOptionsCache);
   });
 </script>
 
@@ -153,6 +236,7 @@
     manualTableId={searchTableId}
     filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
     {searchFromFields}
+    disabled={isParentLoading || isLoading || hasError}
   />
 
   <FilterForm updateUrl={false} trigger="change" {onChange} {onReset}>
@@ -161,7 +245,9 @@
       {#if searchColumnId !== columnId}
         <TopicFilter
           {filter}
-          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
+          options={(allAvailableFiltersWithTheirOptions as FilterOptionsWithQuantity)[
+            columnId as ColumnId
+          ] || []}
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
