@@ -5,3 +5,4 @@ export const PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID = '5628180';
 
 export const defaultItemsLimit = '12';
 export const defaultPagination = '1';
+export const IS_MOCK = false;

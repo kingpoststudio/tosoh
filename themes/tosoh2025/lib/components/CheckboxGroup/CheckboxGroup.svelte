@@ -79,7 +79,9 @@
                 checked={activeFilters.includes(option.name)}
                 class="checkbox-custom focus:ring-imperial-red text-imperial-red h-4 w-4 cursor-pointer rounded border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
               />
-              <span class="text-default select-none">{option.label}</span>
+              <span class="text-default select-none"
+                >{option.label}{option.quantity !== undefined ? ` (${option?.quantity})` : ''}</span
+              >
             </label>
           {/each}
         </div>

@@ -52,7 +52,7 @@ export const updateUrlFromCheckbox = (e: Event) => {
     if (!values.length) {
       url.searchParams.delete(name);
     } else {
-      url.searchParams.set(name, values.join(','));
+      url.searchParams.set(name, value);
     }
 
     window.location.href = url.toString();
