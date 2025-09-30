@@ -19,8 +19,6 @@
 
   import {
     extractFilterOptions,
-    createFilterCache,
-    clearFilterCache,
     parseUrlFilters,
     extractToleranceConfig,
     extractFilterOptionsWithQuantityWithTolerance,
@@ -53,9 +51,6 @@
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
-
-  // Cache for memoized filter options (like product catalog)
-  let filterOptionsCache: FilterCache = createFilterCache();
 
   // Store raw data for advanced filtering
   let rawData: any[] = [];
@@ -99,9 +94,6 @@
       clearParams(filtersFromFields as string[]);
     }
 
-    // Clear cache when resetting (like product catalog)
-    clearFilterCache(filterOptionsCache);
-
     // Refresh filter options with no active filters
     if (rawData.length > 0) {
       updateFilterOptionsBasedOnCurrentUrl(rawData);
@@ -132,9 +124,6 @@
       if (data?.length > 0) {
         // Store raw data for advanced filtering
         rawData = data;
-
-        // Clear cache on new data load
-        clearFilterCache(filterOptionsCache);
 
         updateFilterOptionsBasedOnCurrentUrl(data);
       } else {
@@ -190,7 +179,6 @@
   onDestroy(() => {
     // Clean up debounce timeout and cache (like product catalog)
     clearTimeout(filterDebounceTimeout);
-    clearFilterCache(filterOptionsCache);
   });
 </script>
 

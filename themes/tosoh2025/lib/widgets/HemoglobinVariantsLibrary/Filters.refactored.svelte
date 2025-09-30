@@ -144,9 +144,6 @@
         // Store raw data for advanced filtering
         rawData = data;
 
-        // Clear cache on new data load
-        clearFilterCache(filterOptionsCache);
-
         updateFilterOptionsBasedOnCurrentUrl(data);
       } else {
         rawData = [];

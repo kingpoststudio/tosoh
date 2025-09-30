@@ -131,7 +131,7 @@
     </div>
 
     {#if hasFilter}
-      <WebinarListingsFilters isParentLoading={isLoading} />
+      <WebinarListingsFilters />
     {/if}
   </div>
 {/snippet}
@@ -146,7 +146,7 @@
       <div class="mt-sm h-14 min-w-[16rem] rounded-lg bg-gray-200"></div>
     </div>
 
-    <WebinarListingsFilters isParentLoading={isLoading} />
+    <WebinarListingsFilters />
   </div>
 {/snippet}
 
