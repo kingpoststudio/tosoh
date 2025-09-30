@@ -1,53 +1,60 @@
 <script lang="ts">
-  import { onDestroy, onMount } from 'svelte';
+  import { onMount, onDestroy } from 'svelte';
   import {
     defaultItemsLimit,
     defaultPagination,
     IS_MOCK,
-    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+    PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
   } from '../../utils/constants';
-  import { mockPortalFilters } from './mock';
-  import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
+  import {
+    clearParams,
+    setSearchParams,
+    updateUrl,
+    updateUrlFromCheckbox,
+  } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
-  import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
-  import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
-  import { getFilter } from '../../utils/utils';
-  import type { TopicFilters } from '../../../types/fields';
+
   import {
     extractFilterOptions,
+    createFilterCache,
+    clearFilterCache,
     parseUrlFilters,
     extractToleranceConfig,
     extractFilterOptionsWithQuantityWithTolerance,
     type FilterCriteria,
+    type FilterOptionsWithQuantity,
+    type FilterCache,
   } from '../../utils/filterUtils/filterUtils.refactored';
-  let { isParentLoading, viewAs, handleChangeView } = $props();
 
-  const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
+  import type { ColumnId } from '../../../types/hubdb';
+  import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
+  import { mockHemoglobinVariantsLibraryFiltersResponse } from './mock';
+  import { getFilter } from '../../utils/utils';
+  import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
+  import type { TopicFilters } from '../../../types/fields';
+  let { isParentLoading } = $props();
+
+  // Configuration from HubSpot fields
+  const searchFromFields = window?.Tosoh?.HemoglobinVariantsLibraryContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
-  const prodSupportPortalTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
+  const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
 
-  const isSearchAccessLevelFilterEnabled =
-    window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
+  const topic_filters = window?.Tosoh?.HemoglobinVariantsLibraryContent?.topic_filters?.filters;
+  let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
+  filtersFromFields.push(searchColumnId);
 
-  let accessLevel = window?.Tosoh?.SupportPortalContent?.access_level || 'Customer';
-
-  const topic_filters = window?.Tosoh?.SupportPortalContent?.topic_filters?.filters;
-  let filtersFromFields = topic_filters
-    ? ([
-        ...topic_filters.map((filter: any) => filter.hubdb_column_id),
-        searchColumnId,
-      ] as ColumnId[])
-    : [];
-
+  // Extract tolerance configuration from filter definitions
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
-  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
+  let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
+
+  // Cache for memoized filter options (like product catalog)
+  let filterOptionsCache: FilterCache = createFilterCache();
 
   // Store raw data for advanced filtering
   let rawData: any[] = [];
@@ -73,11 +80,26 @@
   };
 
   const onChange = (event: Event) => {
-    onReset();
-
-    updateUrl(event);
+    resetPaginationAndLimit();
+    if ((event.target as HTMLInputElement).type === 'checkbox') {
+      updateUrlFromCheckbox(event);
+    } else if ((event.target as HTMLInputElement).type === 'number') {
+    } else {
+      updateUrl(event);
+    }
 
     // Debounce filter updates like product catalog
+    debouncedFilterUpdate();
+  };
+
+  const onClickSubmit = () => {
+    resetPaginationAndLimit();
+    const numberInput = document.querySelector('input[type="number"]');
+    if (numberInput) {
+      updateUrl({ target: numberInput } as unknown as Event);
+    }
+
+    // Debounce filter updates like other inputs
     debouncedFilterUpdate();
   };
 
@@ -87,10 +109,19 @@
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
     }
+
+    // Clear cache when resetting (like product catalog)
+    clearFilterCache(filterOptionsCache);
+
+    // Refresh filter options with no active filters
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
   };
 
-  const getFilterOptions = async () => {
+  const fetchInitialData = async () => {
     isLoading = true;
+    hasError = false;
 
     try {
       let data;
@@ -98,29 +129,30 @@
       if (!IS_MOCK) {
         data = await getTableFilterOptions({
           filters: filtersFromFields,
-          accessLevel: accessLevel,
-          tableId: prodSupportPortalTableId,
+          tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
         });
       } else {
-        data = mockPortalFilters?.results;
-      }
-
-      if (!data?.error) {
-        if (data?.length > 0) {
-          rawData = data;
-
-          updateFilterOptionsBasedOnCurrentUrl(data);
-        } else {
-          rawData = [];
-        }
+        data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
       }
 
       if (data?.error) {
-        hasError = false;
+        hasError = true;
+        return;
+      }
+
+      if (data?.length > 0) {
+        // Store raw data for advanced filtering
+        rawData = data;
+
+        // Clear cache on new data load
+        clearFilterCache(filterOptionsCache);
+
+        updateFilterOptionsBasedOnCurrentUrl(data);
+      } else {
+        rawData = [];
       }
     } catch (error) {
       hasError = true;
-      console.warn('Failed to fetch filter options:', error);
     } finally {
       isLoading = false;
     }
@@ -142,7 +174,7 @@
         }
       });
 
-      // Use enhanced filtering with caching (like product catalog)
+      // Use tolerance-aware filtering for calculating quantities
       const options = extractFilterOptionsWithQuantityWithTolerance(
         data,
         currentFilters,
@@ -159,17 +191,17 @@
 
   const reloadFilterOptions = () => {
     hasError = false;
-    getFilterOptions();
+    fetchInitialData();
   };
 
   onMount(() => {
-    getFilterOptions();
+    fetchInitialData();
   });
 
-  $inspect(allAvailableFiltersWithTheirOptions);
-
   onDestroy(() => {
+    // Clean up debounce timeout and cache (like product catalog)
     clearTimeout(filterDebounceTimeout);
+    clearFilterCache(filterOptionsCache);
   });
 </script>
 
@@ -204,36 +236,37 @@
 
   <SearchInput
     customClasses="mt-base"
-    accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
-    manualTableId={prodSupportPortalTableId}
+    manualTableId={searchTableId}
     filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
     {searchFromFields}
+    disabled={isParentLoading || isLoading || hasError}
   />
-  <FilterForm trigger="change" {onChange} {onReset}>
+
+  <FilterForm updateUrl={false} trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
-
       {#if searchColumnId !== columnId}
         <TopicFilter
           {filter}
-          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
+          options={(allAvailableFiltersWithTheirOptions as FilterOptionsWithQuantity)[
+            columnId as ColumnId
+          ] || []}
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
         />
+
+        {#if filter?.type === 'range-pm'}
+          <button type="button" onclick={onClickSubmit} class=" mt-sm w-full hover:bg-red-50"
+            >Apply</button
+          >
+        {/if}
       {/if}
     {/each}
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
         Reset
-      </button>
-      <button
-        type="button"
-        class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
-        onclick={handleChangeView}
-      >
-        {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
       </button>
     </div>
   </FilterForm>

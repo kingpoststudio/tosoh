@@ -8,7 +8,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import Filters from './Filters.svelte';
+  import Filters from './Filters.refactored.svelte';
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
 
   import {

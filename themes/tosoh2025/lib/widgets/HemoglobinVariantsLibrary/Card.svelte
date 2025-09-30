@@ -62,7 +62,7 @@
   {:else}
     <div
       class="aspect-square
-         rounded-full bg-slate-200 md:h-[16rem]"
+         h-[12rem] rounded-2xl bg-slate-200"
     ></div>
   {/if}
 
@@ -147,7 +147,7 @@
               class="mx-au to w-full overflow-hidden rounded-lg border border-zinc-200 p-2 shadow-lg"
             >
               <img
-                src={constructCDNUrl(variant_image.url, 1450)}
+                src={constructCDNUrl(variant_image?.url, 1450)}
                 alt={variant_name}
                 class="w-full object-contain"
               />

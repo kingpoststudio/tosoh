@@ -1,7 +1,7 @@
 import type { ColumnId, ColumnItem, SupportPortalRowForFilter } from '../../../types/hubdb';
 
 // Types for better type safety
-type FilterValue = string | ColumnItem | ColumnItem[];
+type FilterValue = string | number | ColumnItem | ColumnItem[];
 export type FilterCriteria = Record<string, string>;
 type FilterOptions = Partial<Record<ColumnId, ColumnItem[]>>;
 
@@ -26,6 +26,19 @@ export const parseUrlFilters = (searchString: string = window.location.search): 
   return filters;
 };
 
+// Extract tolerance configuration from filter definitions
+export const extractToleranceConfig = (filterDefinitions: any[]): Record<string, number> => {
+  const toleranceConfig: Record<string, number> = {};
+
+  filterDefinitions?.forEach((filter) => {
+    if (filter.hubdb_column_id && typeof filter.tolerance === 'number') {
+      toleranceConfig[filter.hubdb_column_id] = filter.tolerance;
+    }
+  });
+
+  return toleranceConfig;
+};
+
 // Column type detection utilities
 const isMultiSelectColumn = (value: FilterValue): value is ColumnItem[] => {
   return Array.isArray(value) && value.length > 0;
@@ -39,16 +52,24 @@ const isStringColumn = (value: FilterValue): value is string => {
   return typeof value === 'string' && value.length > 0;
 };
 
-// Core matching logic (enhanced to support checkbox comma-separated values)
-export const checkColumnValueMatch = (columnValue: FilterValue, filterValue: string): boolean => {
-  if (!columnValue || !filterValue) {
+const isNumericColumn = (value: FilterValue): value is number => {
+  return typeof value === 'number';
+};
+
+// Core matching logic (enhanced to support checkbox comma-separated values and numeric tolerance)
+export const checkColumnValueMatch = (
+  columnValue: FilterValue,
+  filterValue: string,
+  tolerance: number = 0
+): boolean => {
+  if (columnValue === null || columnValue === undefined || !filterValue) {
     return false;
   }
 
   // Handle comma-separated values for checkbox-type filters
   if (filterValue.includes(',')) {
     const filterValues = filterValue.split(',');
-    return filterValues.some((val) => checkColumnValueMatch(columnValue, val.trim()));
+    return filterValues.some((val) => checkColumnValueMatch(columnValue, val.trim(), tolerance));
   }
 
   if (isMultiSelectColumn(columnValue)) {
@@ -63,6 +84,26 @@ export const checkColumnValueMatch = (columnValue: FilterValue, filterValue: str
     return columnValue.toLowerCase().includes(filterValue.toLowerCase());
   }
 
+  if (isNumericColumn(columnValue)) {
+    const filterValueTrimmed = filterValue.trim();
+    const numericValue = parseFloat(columnValue.toString());
+    const filterNumericValue = parseFloat(filterValueTrimmed);
+
+    if (isNaN(numericValue) || isNaN(filterNumericValue)) {
+      return false;
+    }
+
+    if (tolerance > 0) {
+      // Range-based matching with tolerance
+      const lowerBound = filterNumericValue - tolerance;
+      const upperBound = filterNumericValue + tolerance;
+      return numericValue >= lowerBound && numericValue <= upperBound;
+    } else {
+      // Exact matching when tolerance is 0
+      return numericValue === filterNumericValue;
+    }
+  }
+
   return false;
 };
 
@@ -74,6 +115,19 @@ export const checkRowMatchesFilters = (
   return Object.entries(filters).every(([columnId, filterValue]) => {
     const columnValue = rowValues[columnId as ColumnId];
     return columnValue ? checkColumnValueMatch(columnValue, filterValue) : false;
+  });
+};
+
+// Enhanced row matching with tolerance support
+export const checkRowMatchesFiltersWithTolerance = (
+  rowValues: SupportPortalRowForFilter['values'],
+  filters: FilterCriteria,
+  toleranceConfig: Record<string, number> = {}
+): boolean => {
+  return Object.entries(filters).every(([columnId, filterValue]) => {
+    const columnValue = rowValues[columnId as ColumnId];
+    const tolerance = toleranceConfig[columnId] || 0;
+    return columnValue ? checkColumnValueMatch(columnValue, filterValue, tolerance) : false;
   });
 };
 
@@ -250,6 +304,36 @@ export const filterRowsByUrlParams = (
   });
 };
 
+// Enhanced filtering function with tolerance support
+export const filterRowsByUrlParamsWithTolerance = (
+  rows: SupportPortalRowForFilter[],
+  toleranceConfig: Record<string, number> = {},
+  searchString?: string,
+  validFilterColumns?: string[]
+): SupportPortalRowForFilter[] => {
+  const allUrlFilters = parseUrlFilters(searchString);
+
+  // Filter out only the valid column filters, excluding pagination, limit, etc.
+  const filters: Record<string, string> = {};
+  Object.entries(allUrlFilters).forEach(([key, value]) => {
+    if (
+      validFilterColumns?.includes(key) ||
+      (!validFilterColumns && !['pagination', 'limit', 'offset'].includes(key))
+    ) {
+      filters[key] = value;
+    }
+  });
+
+  if (Object.keys(filters).length === 0) {
+    return rows;
+  }
+
+  return rows.filter((row) => {
+    const rowValues = row?.values || row;
+    return checkRowMatchesFiltersWithTolerance(rowValues, filters, toleranceConfig);
+  });
+};
+
 // Get filter options with quantities for a specific column (similar to getMemoizedFilterOptions)
 export const getFilterOptionsWithQuantityForColumn = (
   rows: SupportPortalRowForFilter[],
@@ -277,6 +361,111 @@ export const getAllFilterOptionsWithQuantity = (
   const filters = searchString ? parseUrlFilters(searchString) : currentFilters;
 
   return extractFilterOptionsWithQuantity(rows, filters);
+};
+
+// Enhanced version that uses tolerance-aware matching for calculating quantities
+export const extractFilterOptionsWithQuantityWithTolerance = (
+  rows: SupportPortalRowForFilter[],
+  currentFilters: FilterCriteria = {},
+  toleranceConfig: Record<string, number> = {},
+  excludeColumnId?: ColumnId
+): FilterOptionsWithQuantity => {
+  const filterOptions: FilterOptionsWithQuantity = {};
+
+  // First, collect all unique filter options for each column
+  rows.forEach((row) => {
+    const rowValues = row?.values || row;
+
+    Object.entries(rowValues).forEach(([columnId, columnValue]) => {
+      const typedColumnId = columnId as ColumnId;
+
+      // Skip the column we're currently filtering (like excluding current filter accessor)
+      if (excludeColumnId && typedColumnId === excludeColumnId) {
+        return;
+      }
+
+      if (!filterOptions[typedColumnId]) {
+        filterOptions[typedColumnId] = [];
+      }
+
+      if (isMultiSelectColumn(columnValue)) {
+        columnValue.forEach((item) => {
+          let existingOption = filterOptions[typedColumnId]?.find(
+            (existing) => existing.name === item.name
+          );
+          if (!existingOption) {
+            existingOption = { ...item, quantity: 0 };
+            filterOptions[typedColumnId]?.push(existingOption);
+          }
+        });
+      } else if (isSelectColumn(columnValue)) {
+        let existingOption = filterOptions[typedColumnId]?.find(
+          (existing) => existing.name === columnValue.name
+        );
+        if (!existingOption) {
+          existingOption = { ...columnValue, quantity: 0 };
+          filterOptions[typedColumnId]?.push(existingOption);
+        }
+      }
+    });
+  });
+
+  // Now calculate quantities based on how many rows match other active filters (with tolerance)
+  rows.forEach((row) => {
+    const rowValues = row?.values || row;
+
+    // Check if this row matches all other active filters (excluding the current column) using tolerance
+    const otherFilters = Object.entries(currentFilters).filter(([key]) =>
+      excludeColumnId ? key !== excludeColumnId : true
+    );
+
+    const matchesOtherFilters = otherFilters.every(([columnId, filterValue]) => {
+      const columnValue = rowValues[columnId as ColumnId];
+      const tolerance = toleranceConfig[columnId] || 0;
+      return columnValue ? checkColumnValueMatch(columnValue, filterValue, tolerance) : false;
+    });
+
+    if (matchesOtherFilters) {
+      // Increment quantity for all filter options present in this row
+      Object.entries(rowValues).forEach(([columnId, columnValue]) => {
+        const typedColumnId = columnId as ColumnId;
+
+        if (excludeColumnId && typedColumnId === excludeColumnId) {
+          return;
+        }
+
+        if (isMultiSelectColumn(columnValue)) {
+          columnValue.forEach((item) => {
+            const option = filterOptions[typedColumnId]?.find(
+              (existing) => existing.name === item.name
+            );
+            if (option) {
+              option.quantity += 1;
+            }
+          });
+        } else if (isSelectColumn(columnValue)) {
+          const option = filterOptions[typedColumnId]?.find(
+            (existing) => existing.name === columnValue.name
+          );
+          if (option) {
+            option.quantity += 1;
+          }
+        }
+      });
+    }
+  });
+
+  // Sort all filter options alphabetically (default sorting)
+  Object.values(filterOptions).forEach((options) => {
+    options?.sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, {
+        numeric: true,
+        sensitivity: 'base',
+      })
+    );
+  });
+
+  return filterOptions;
 };
 
 // Legacy function names for backward compatibility (if needed)
@@ -505,4 +694,13 @@ export const clearFilterCache = (cache: FilterCache): void => {
 // For testing - allows dependency injection of search string
 export const createFilterFunction = (searchString: string) => {
   return (rows: SupportPortalRowForFilter[]) => filterRowsByUrlParams(rows, searchString);
+};
+
+// Convenience function to create a filter function with tolerance support
+export const createFilterFunctionWithTolerance = (
+  searchString: string,
+  toleranceConfig: Record<string, number>
+) => {
+  return (rows: SupportPortalRowForFilter[]) =>
+    filterRowsByUrlParamsWithTolerance(rows, toleranceConfig, searchString);
 };

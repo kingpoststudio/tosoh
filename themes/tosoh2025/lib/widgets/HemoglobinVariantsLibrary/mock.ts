@@ -1,72 +1,76 @@
-// window.Tosoh.HemoglobinVariantsLibraryContent = {
-//   breadcrumbs: [
-//     {
-//       title: 'Home',
-//       url: {
-//         content_id: null,
-//         href: '/home',
-//         href_with_scheme: '/home',
-//         type: 'EXTERNAL',
-//       },
-//     },
-//     {
-//       title: 'Tosoh Diagnostics EMEA - Portal',
-//       url: {
-//         content_id: null,
-//         href: '/portal',
-//         href_with_scheme: '/portal',
-//         type: 'EXTERNAL',
-//       },
-//     },
-//     {
-//       title: 'Tosoh Hemoglobin Variants Library',
-//       url: {
-//         content_id: null,
-//         href: '/variants',
-//         href_with_scheme: '/variants',
-//         type: 'EXTERNAL',
-//       },
-//     },
-//   ],
-//   eyebrow: 'Reference Library for Hb Variants',
-//   search: {
-//     hubdb_column_id: 'search_terms',
-//     hubdb_table_id: 99968194,
-//     title: 'Title',
-//     typeahead_enabled: true,
-//   },
-//   title: 'Tosoh Hemoglobin Variants Library',
-//   topic_filters: {
-//     filters: [
-//       {
-//         filter_label: 'Mutation Type',
-//         hubdb_column_id: 'mutation',
-//         max: 0,
-//         min: 0,
-//         tolerance: 1,
-//         type: 'dropdown',
-//       },
-//       {
-//         filter_label: 'Migration in window',
-//         hubdb_column_id: 'window',
-//         max: 0,
-//         min: 0,
-//         tolerance: 1,
-//         type: 'dropdown',
-//       },
-//       {
-//         filter_label: 'Retention time',
-//         hubdb_column_id: 'rt_min',
-//         max: 3.99,
-//         min: 0.01,
-//         tolerance: 0,
-//         type: 'range-pm',
-//       },
-//     ],
-//     hubdb_table_id: 690033851,
-//   },
-//   type: 'module',
-// };
+import { IS_MOCK } from '../../utils/constants';
+
+if (IS_MOCK) {
+  window.Tosoh.HemoglobinVariantsLibraryContent = {
+    breadcrumbs: [
+      {
+        title: 'Home',
+        url: {
+          content_id: null,
+          href: '/home',
+          href_with_scheme: '/home',
+          type: 'EXTERNAL',
+        },
+      },
+      {
+        title: 'Tosoh Diagnostics EMEA - Portal',
+        url: {
+          content_id: null,
+          href: '/portal',
+          href_with_scheme: '/portal',
+          type: 'EXTERNAL',
+        },
+      },
+      {
+        title: 'Tosoh Hemoglobin Variants Library',
+        url: {
+          content_id: null,
+          href: '/variants',
+          href_with_scheme: '/variants',
+          type: 'EXTERNAL',
+        },
+      },
+    ],
+    eyebrow: 'Reference Library for Hb Variants',
+    search: {
+      hubdb_column_id: 'search_terms',
+      hubdb_table_id: 99968194,
+      title: 'Title',
+      typeahead_enabled: true,
+    },
+    title: 'Tosoh Hemoglobin Variants Library',
+    topic_filters: {
+      filters: [
+        {
+          filter_label: 'Mutation Type',
+          hubdb_column_id: 'mutation',
+          max: 0,
+          min: 0,
+          tolerance: 1,
+          type: 'dropdown',
+        },
+        {
+          filter_label: 'Migration in window',
+          hubdb_column_id: 'window',
+          max: 0,
+          min: 0,
+          tolerance: 1,
+          type: 'dropdown',
+        },
+        {
+          filter_label: 'Retention time',
+          hubdb_column_id: 'rt_min',
+          max: 3.99,
+          min: 0.01,
+          tolerance: 0,
+          type: 'range-pm',
+        },
+      ],
+      hubdb_table_id: 690033851,
+    },
+    type: 'module',
+  };
+}
 
 export const mockHemoglobinVariantsLibraryTableRowsResponse = {
   total: 161,

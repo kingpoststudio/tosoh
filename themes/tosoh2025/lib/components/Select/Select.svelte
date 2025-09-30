@@ -24,9 +24,8 @@
     customClearFilter?: () => void;
     customDisabledOption?: (option: any) => boolean;
   } = $props();
-  let activeOptions = $derived(options);
 
-  const activeFilter = new URLSearchParams(window.location.search).get(name);
+  const activeFilter = new URLSearchParams(window.location.search)?.get(name);
 
   const clearFilter = () => {
     if (customClearFilter) {
@@ -73,21 +72,21 @@
       <select
         id={name}
         {name}
-        disabled={disabled || activeOptions?.length === 0 || !activeOptions}
+        disabled={disabled || options?.length === 0 || !options}
         class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
       >
         <option value="none" selected disabled hidden class="text-imperial-red"
           >{placeholder ? placeholder : 'Select'}</option
         >
 
-        {#if !activeOptions && activeFilter}
+        {#if (options?.length === 0 || !options) && activeFilter}
           <option value={activeFilter} selected disabled hidden class="text-imperial-red"
             >{activeFilter}</option
           >
         {/if}
 
-        {#if activeOptions?.length > 0}
-          {#each activeOptions as option}
+        {#if options?.length > 0}
+          {#each options as option}
             <option
               value={option.name}
               class="text-default disabled:cursor-not-allowed disabled:opacity-50"
