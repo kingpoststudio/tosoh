@@ -3,6 +3,7 @@
   import {
     defaultItemsLimit,
     defaultPagination,
+    IS_MOCK,
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
   } from '../../utils/constants';
   import {
@@ -108,13 +109,16 @@
     hasError = false;
 
     try {
-      // Uncomment this for production
-      // const data = await getTableFilterOptions({
-      //   filters: filtersFromFields,
-      //   tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-      // });
+      let data;
 
-      const data = mockKioskDocumentsFiltersResponse.results as any;
+      if (!IS_MOCK) {
+        data = await getTableFilterOptions({
+          filters: filtersFromFields,
+          tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+        });
+      } else {
+        data = mockKioskDocumentsFiltersResponse.results as any;
+      }
 
       if (data?.error) {
         hasError = true;
@@ -150,7 +154,7 @@
 
       const currentFilters: FilterCriteria = {};
       Object.entries(allUrlParams).forEach(([key, value]) => {
-        if (filtersFromFields?.includes(key)) {
+        if (filtersFromFields?.includes(key as ColumnId)) {
           currentFilters[key] = value;
         }
       });

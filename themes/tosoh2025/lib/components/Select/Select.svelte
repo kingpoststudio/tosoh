@@ -92,7 +92,11 @@
               value={option.name}
               class="text-default disabled:cursor-not-allowed disabled:opacity-50"
               selected={option.name === activeFilter}
-              disabled={customDisabledOption ? customDisabledOption(option) : false}
+              disabled={customDisabledOption
+                ? customDisabledOption(option)
+                : option?.quantity === 0
+                  ? true
+                  : false}
             >
               {option.label || option.name}
               {option.quantity !== undefined ? ` (${option?.quantity})` : ''}

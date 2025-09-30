@@ -75,7 +75,7 @@
                 type="checkbox"
                 {name}
                 value={option.name}
-                {disabled}
+                disabled={disabled || option?.quantity === 0 ? true : false}
                 checked={activeFilters.includes(option.name)}
                 class="checkbox-custom focus:ring-imperial-red text-imperial-red h-4 w-4 cursor-pointer rounded border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
               />

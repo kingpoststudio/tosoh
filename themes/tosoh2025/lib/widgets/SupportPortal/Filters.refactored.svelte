@@ -1,43 +1,65 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import {
     defaultItemsLimit,
     defaultPagination,
-    PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
+    IS_MOCK,
+    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
-  import {
-    clearParams,
-    setSearchParams,
-    updateUrl,
-    updateUrlFromCheckbox,
-  } from '../../utils/urlUtils';
+  import { mockPortalFilters } from './mock';
+  import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import { parseFilterOptions } from '../../utils/filterUtils/filterUtils';
+  import { filterRows, parseFilterOptions } from '../../utils/filterUtils/filterUtils';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
-  import { mockHemoglobinVariantsLibraryFiltersResponse } from './mock';
-  import { getFilter } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
+  import { getFilter } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
-  let { isParentLoading } = $props();
+  import {
+    extractFilterOptions,
+    extractFilterOptionsWithQuantityEnhanced,
+    createFilterCache,
+    clearFilterCache,
+    parseUrlFilters,
+    type FilterCriteria,
+    type FilterOptionsWithQuantity,
+    type FilterCache,
+    extractFilterOptionsWithQuantity,
+  } from '../../utils/filterUtils/filterUtils.refactored';
+  let { isParentLoading, viewAs, handleChangeView } = $props();
 
-  const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
-
-  const searchFromFields = hemoglobinVariantsLibraryContent?.search;
+  const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
+  const prodSupportPortalTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
 
-  const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
-  const topic_filters = hemoglobinVariantsLibraryContent?.topic_filters?.filters;
-  let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
-  filtersFromFields.push(searchColumnId);
+  const isSearchAccessLevelFilterEnabled =
+    window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
+
+  let accessLevel = window?.Tosoh?.SupportPortalContent?.access_level || 'Customer';
+
+  const topic_filters = window?.Tosoh?.SupportPortalContent?.topic_filters?.filters;
+  let filtersFromFields = topic_filters
+    ? ([
+        ...topic_filters.map((filter: any) => filter.hubdb_column_id),
+        searchColumnId,
+      ] as ColumnId[])
+    : [];
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
-
   let isLoading = $state(false);
   let hasError = $state(false);
+
+  // Cache for memoized filter options (like product catalog)
+  let filterOptionsCache: FilterCache = createFilterCache();
+
+  // Store raw data for advanced filtering
+  let rawData: any[] = [];
+
+  // Debounce timeout for filter updates (like product catalog)
+  let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const resetPaginationAndLimit = () => {
     setSearchParams({
@@ -46,23 +68,23 @@
     });
   };
 
-  const onChange = (event: Event) => {
-    resetPaginationAndLimit();
-
-    if ((event.target as HTMLInputElement).type === 'checkbox') {
-      updateUrlFromCheckbox(event);
-    } else if ((event.target as HTMLInputElement).type === 'number') {
-      return console.log('number');
-    } else {
-      updateUrl(event);
-    }
+  // Debounced filter update (mimics product catalog's debouncedFilterProducts)
+  const debouncedFilterUpdate = () => {
+    clearTimeout(filterDebounceTimeout);
+    filterDebounceTimeout = setTimeout(() => {
+      if (rawData.length > 0) {
+        updateFilterOptionsBasedOnCurrentUrl(rawData);
+      }
+    }, 300); // Same debounce timing as product catalog
   };
 
-  const onClickSubmit = () => {
-    const numberInput = document.querySelector('input[type="number"]');
-    if (numberInput) {
-      updateUrl({ target: numberInput } as unknown as Event);
-    }
+  const onChange = (event: Event) => {
+    onReset();
+
+    updateUrl(event);
+
+    // Debounce filter updates like product catalog
+    debouncedFilterUpdate();
   };
 
   const onReset = () => {
@@ -71,22 +93,41 @@
     if (filtersFromFields?.length > 0) {
       clearParams(filtersFromFields as string[]);
     }
+
+    // Clear cache when resetting (like product catalog)
+    clearFilterCache(filterOptionsCache);
+
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
   };
 
   const getFilterOptions = async () => {
     isLoading = true;
 
     try {
-      const data = await getTableFilterOptions({
-        filters: filtersFromFields,
-        tableId: searchTableId,
-      });
+      let data;
 
-      // const data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
+      if (!IS_MOCK) {
+        data = await getTableFilterOptions({
+          filters: filtersFromFields,
+          accessLevel: accessLevel,
+          tableId: prodSupportPortalTableId,
+        });
+      } else {
+        data = mockPortalFilters?.results;
+      }
 
       if (!data?.error) {
         if (data?.length > 0) {
-          filterValuesForSelectsBasedOnUrl(data);
+          rawData = data;
+
+          // Clear cache on new data load
+          clearFilterCache(filterOptionsCache);
+
+          updateFilterOptionsBasedOnCurrentUrl(data);
+        } else {
+          rawData = [];
         }
       }
 
@@ -101,12 +142,31 @@
     }
   };
 
-  const filterValuesForSelectsBasedOnUrl = (allRows: any) => {
-    if (!allRows || allRows.length === 0) {
+  const updateFilterOptionsBasedOnCurrentUrl = (data: any) => {
+    if (!data || data.length === 0) {
+      allAvailableFiltersWithTheirOptions = {};
       return;
     }
 
-    allAvailableFiltersWithTheirOptions = parseFilterOptions(allRows);
+    try {
+      const allUrlParams = parseUrlFilters();
+
+      const currentFilters: FilterCriteria = {};
+      Object.entries(allUrlParams).forEach(([key, value]) => {
+        if (filtersFromFields?.includes(key as ColumnId)) {
+          currentFilters[key] = value;
+        }
+      });
+
+      // Use enhanced filtering with caching (like product catalog)
+      const options = extractFilterOptionsWithQuantity(data, currentFilters);
+
+      allAvailableFiltersWithTheirOptions = options;
+    } catch (error) {
+      console.error('Error updating filter options:', error);
+      // Fallback to basic filter options without quantities
+      allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
+    }
   };
 
   const reloadFilterOptions = () => {
@@ -116,6 +176,14 @@
 
   onMount(() => {
     getFilterOptions();
+  });
+
+  $inspect(allAvailableFiltersWithTheirOptions);
+
+  onDestroy(() => {
+    // Clean up debounce timeout and cache (like product catalog)
+    clearTimeout(filterDebounceTimeout);
+    clearFilterCache(filterOptionsCache);
   });
 </script>
 
@@ -150,14 +218,15 @@
 
   <SearchInput
     customClasses="mt-base"
-    manualTableId={searchTableId}
+    accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
+    manualTableId={prodSupportPortalTableId}
     filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
     {searchFromFields}
   />
-
-  <FilterForm updateUrl={false} trigger="change" {onChange} {onReset}>
+  <FilterForm trigger="change" {onChange} {onReset}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
+
       {#if searchColumnId !== columnId}
         <TopicFilter
           {filter}
@@ -166,18 +235,19 @@
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
         />
-
-        {#if filter?.type === 'range-pm'}
-          <button type="button" onclick={onClickSubmit} class=" mt-sm w-full hover:bg-red-50"
-            >Apply</button
-          >
-        {/if}
       {/if}
     {/each}
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
         Reset
+      </button>
+      <button
+        type="button"
+        class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
+        onclick={handleChangeView}
+      >
+        {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
       </button>
     </div>
   </FilterForm>

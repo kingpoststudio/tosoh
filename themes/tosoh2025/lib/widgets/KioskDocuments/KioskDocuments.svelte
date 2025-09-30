@@ -8,12 +8,13 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  import Filters from './Filters.svelte';
+  import Filters from './Filters.refactored.svelte';
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
 
   import {
     defaultItemsLimit,
     defaultPagination,
+    IS_MOCK,
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
   } from '../../utils/constants';
   import PaginationWithLimit from '../../components/PaginationWithLimit/PaginationWithLimit.svelte';
@@ -85,7 +86,12 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      const data = await fetchTableRows(constructBody());
+      let data;
+      if (!IS_MOCK) {
+        data = await fetchTableRows(constructBody());
+      } else {
+        data = mockKioskDocumentsTableRowsResponse;
+      }
       // const data = mockKioskDocumentsTableRowsResponse;
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;

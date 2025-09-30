@@ -20,7 +20,7 @@
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
-  import Filters from './Filters.svelte';
+  import Filters from './Filters.refactored.svelte';
   import {
     constructFilterParams,
     constructRangePmFilters,
