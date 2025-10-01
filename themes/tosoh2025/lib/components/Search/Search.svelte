@@ -4,21 +4,24 @@
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import { onMount } from 'svelte';
   import type { Search } from '../../../types/fields';
-  import { removeHtmlTags } from '../../utils/utils';
+  import { setSearchParams } from '../../utils/urlUtils';
+  import { updateFormEvent } from '../../utils/formManager';
   const {
     searchFromFields,
     customClasses,
     manualTableId,
     disabled,
-    filtersToDelete,
     accessLevel,
+    onReset,
+    formId,
   }: {
     searchFromFields: Search;
     customClasses?: string;
     manualTableId?: string;
     disabled?: boolean;
-    filtersToDelete?: string[];
     accessLevel?: string;
+    onReset?: (searchCb: () => void) => void;
+    formId?: string;
   } = $props();
 
   const {
@@ -34,20 +37,17 @@
   let isLoading = $state(false);
   let showDropdown = $state(false);
   let mounted = $state(false);
-
   const activeFilter = new URLSearchParams(window.location.search)?.get(searchColumnId as string);
+  let searchValue = $state(activeFilter || '');
 
   const handleFetch = (searchTerm: string) => {
     showDropdown = false;
+    searchValue = searchTerm;
 
-    const params = new URLSearchParams(window.location.search);
-
-    filtersToDelete?.map((column) => {
-      params.delete(column);
+    onReset?.(() => {
+      setSearchParams({ [searchColumnId]: searchTerm });
+      updateFormEvent(formId as string);
     });
-
-    params.set(searchColumnId, searchTerm);
-    window.location.search = params.toString();
   };
 
   const onSubmit = (e: Event) => {
@@ -69,7 +69,12 @@
 
   const fetchMatches = async (e: any) => {
     let searchString = e?.target?.value;
-    if ((typeof searchString === 'string' && searchString?.length < 2) || !mounted) return;
+
+    if ((typeof searchString === 'string' && searchString?.length < 2) || !mounted) {
+      matches = [];
+      return;
+    }
+
     try {
       isLoading = true;
       const response = await fetch(
@@ -112,14 +117,6 @@
     }
   };
 
-  const clearFilter = () => {
-    if (searchColumnId) {
-      const url = new URL(window.location.href);
-      url.searchParams.delete(searchColumnId);
-      window.location.href = url.toString();
-    }
-  };
-
   onMount(() => {
     mounted = true;
   });
@@ -155,46 +152,28 @@
   </svg>
 {/snippet}
 
-{#snippet xIcon()}
-  <button
-    type="button"
-    transition:fade={{ duration: 200 }}
-    class="fill-imperial-red plain bg-ghost-white h-4 w-4 cursor-pointer"
-    onclick={clearFilter}
-    aria-label="Clear selection"
-  >
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="fill-imperial-red">
-      <path
-        d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"
-      />
-    </svg>
-  </button>
-{/snippet}
-
 {#if isSearchEnabled}
-  <FilterForm {onSubmit} trigger="submit" onClickOutside={resetDropdown}>
+  <FilterForm
+    {onSubmit}
+    trigger="submit"
+    onClickOutside={resetDropdown}
+    {formId}
+    excludeFromObserver={true}
+  >
     <div class={`relative ${customClasses}`}>
       <div class="gap-sm flex flex-col">
         {#if title}
           <div class="gap-sm flex items-center">
             <label for={searchColumnId} class=" text-xl font-black">{title}</label>
-            {#if activeFilter && title}
-              {@render xIcon()}
-            {/if}
           </div>
         {/if}
         <div
-          class={` relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
+          class={`relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
         >
           <input
+            bind:value={searchValue}
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
             name={searchColumnId}
-            defaultValue={activeFilter
-              ? typeof activeFilter === 'string'
-                ? removeHtmlTags(activeFilter)
-                : activeFilter
-              : ''}
-            data-debounce="500"
             class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
             placeholder={placeholder || 'Search here...'}
             {disabled}
@@ -204,8 +183,6 @@
           >
             {#if isLoading}
               {@render loader()}
-            {:else if activeFilter && !title}
-              {@render xIcon()}
             {:else}
               {@render magnifier()}{/if}
           </div>

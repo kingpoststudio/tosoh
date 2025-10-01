@@ -33,6 +33,8 @@ if (IS_MOCK) {
     ],
     eyebrow: 'Reference Library for Hb Variants',
     search: {
+      enable_search: true,
+      placeholder: 'Search',
       hubdb_column_id: 'search_terms',
       hubdb_table_id: 99968194,
       title: 'Title',
@@ -47,7 +49,7 @@ if (IS_MOCK) {
           max: 0,
           min: 0,
           tolerance: 1,
-          type: 'dropdown',
+          type: 'checkbox',
         },
         {
           filter_label: 'Migration in window',

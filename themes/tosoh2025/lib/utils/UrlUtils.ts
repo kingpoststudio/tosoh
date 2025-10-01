@@ -14,6 +14,14 @@ export const setSearchParams = (params: Record<string, string>) => {
   window.history.replaceState({}, '', url.toString());
 };
 
+export const setClearParams = (params: string[]) => {
+  const url = new URL(window.location.href);
+  params.forEach((key) => {
+    url.searchParams.delete(key);
+  });
+  window.history.replaceState({}, '', url.toString());
+};
+
 export const clearParams = (filters: string[]) => {
   const params = new URLSearchParams(window.location.search);
 
@@ -55,7 +63,9 @@ export const updateUrlFromCheckbox = (e: Event) => {
       url.searchParams.set(name, value);
     }
 
-    window.location.href = url.toString();
+    window.history.replaceState({}, '', url.toString());
+
+    // window.location.href = url.toString();
   }
 };
 

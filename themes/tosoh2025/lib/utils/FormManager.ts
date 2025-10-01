@@ -14,6 +14,22 @@ export interface FormManagerInstance {
   setFormValuesToParams: (reset?: boolean, input?: string) => void;
 }
 
+export const updateFormEvent = (id: string) =>
+  window.dispatchEvent(
+    new CustomEvent('TosohFormValuesChanged', {
+      detail: { id: id },
+      bubbles: true,
+    })
+  );
+
+export const resetFormEvent = (id: string) =>
+  window.dispatchEvent(
+    new CustomEvent('TosohFormReset', {
+      detail: { id: id },
+      bubbles: true,
+    })
+  );
+
 export const getFormParamsFromUrl = (url: URL = new URL(window.location.href)) => {
   return url.searchParams;
 };
@@ -56,11 +72,30 @@ export const updateUrlWithFormData = (
   return url;
 };
 
-export const populateFormFromUrl = (
-  form: HTMLFormElement,
-  url: URL = new URL(window.location.href)
-) => {
-  const params = url.searchParams;
+export const resetForm = (form: HTMLFormElement) => {
+  Array.from(form.elements).forEach((el) => {
+    const elName = el.getAttribute('name') as string;
+
+    if (!elName) return;
+
+    if (el.tagName === 'SELECT') {
+      const select = el as HTMLSelectElement;
+      select.value = 'none';
+    } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'checkbox') {
+      const input = el as HTMLInputElement;
+      input.checked = false;
+    } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'number') {
+      const input = el as HTMLInputElement;
+      input.value = '';
+    } else if (el.tagName === 'INPUT') {
+      const input = el as HTMLInputElement;
+      input.value = '';
+    }
+  });
+};
+
+export const populateFormFromUrl = (form: HTMLFormElement, suppressEvents: boolean = false) => {
+  const params = new URL(window.location.href).searchParams;
 
   Array.from(form.elements).forEach((el) => {
     const elName = el.getAttribute('name') as string;
@@ -74,26 +109,34 @@ export const populateFormFromUrl = (
         const select = el as HTMLSelectElement;
         const matchingValue = values.find((v) => v);
 
-        if (matchingValue && select?.value) {
+        if (matchingValue && select?.value !== matchingValue) {
           select.value = matchingValue;
-          select.dispatchEvent(new Event('change', { bubbles: true }));
+          if (!suppressEvents) {
+            select.dispatchEvent(new Event('change', { bubbles: true }));
+          }
         }
       } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'checkbox') {
         const input = el as HTMLInputElement;
-        input.checked = values.includes(input.value);
-        input.dispatchEvent(new Event('change', { bubbles: true }));
+        const shouldBeChecked = values.includes(input.value);
+        if (input.checked !== shouldBeChecked) {
+          input.checked = shouldBeChecked;
+          if (!suppressEvents) {
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        }
+      } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'number') {
+        const input = el as HTMLInputElement;
+        const matchingValue = values.find((v) => v);
+        if (matchingValue && input.value !== matchingValue) {
+          input.value = matchingValue;
+        }
+      } else if (el.tagName === 'INPUT') {
+        const input = el as HTMLInputElement;
+        const matchingValue = values.find((v) => v);
+        if (matchingValue && input.value !== matchingValue) {
+          input.value = matchingValue;
+        }
       }
-      // else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'radio') {
-      //   const input = el as HTMLInputElement;
-      //   input.checked = values.includes(input.value);
-      //   input.dispatchEvent(new Event('change', { bubbles: true }));
-      // } else {
-      //   const input = el as HTMLInputElement;
-      //   if (!input.value || input.value === '') {
-      //     input.value = values.join(',');
-      //     input.dispatchEvent(new Event('input', { bubbles: true }));
-      //   }
-      // }
     }
   });
 };
@@ -204,7 +247,7 @@ export function createFormManager(
   };
 
   const selectActiveFormValues = () => {
-    populateFormFromUrl(form);
+    populateFormFromUrl(form, true);
   };
 
   const resetAction = () => {

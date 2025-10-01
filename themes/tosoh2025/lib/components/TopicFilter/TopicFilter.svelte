@@ -10,7 +10,6 @@
     name,
     disabled,
     isLoading,
-    disableReset,
     placeholder,
     labelPosition,
     displayLabel,
@@ -21,7 +20,6 @@
     name: string;
     disabled: boolean;
     isLoading: boolean;
-    disableReset?: boolean;
     placeholder?: string;
     labelPosition?: 'top' | 'left';
     displayLabel?: boolean;
@@ -31,26 +29,10 @@
 
 <div class={customClasses || 'mt-base'}>
   {#if filter?.type === 'dropdown'}
-    <Select
-      {options}
-      {name}
-      {disabled}
-      {disableReset}
-      {placeholder}
-      {labelPosition}
-      {displayLabel}
-    />
+    <Select {options} {name} {disabled} {placeholder} {labelPosition} {displayLabel} />
   {/if}
   {#if filter?.type === 'checkbox'}
-    <Checkbox
-      {options}
-      {name}
-      {disabled}
-      {isLoading}
-      {disableReset}
-      {labelPosition}
-      {displayLabel}
-    />
+    <Checkbox {options} {name} {disabled} {isLoading} {labelPosition} {displayLabel} />
   {/if}
   {#if filter?.type === 'range-pm'}
     <Input

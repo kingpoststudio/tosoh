@@ -3,6 +3,6 @@ export const PROD_TOSOH_WEBINARS_TABLE_ID = '5320197';
 export const PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID = '5555095';
 export const PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID = '5628180';
 
-export const defaultItemsLimit = '12';
-export const defaultPagination = '1';
+export const defaultItemsLimit = 12;
+export const defaultPagination = 1;
 export const IS_MOCK = false;
