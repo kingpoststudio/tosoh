@@ -249,7 +249,7 @@
     disabled={isParentLoading || isLoading || hasError}
   />
 
-  <FilterForm trigger="change" {onChange} {onReset}>
+  <FilterForm trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
 
