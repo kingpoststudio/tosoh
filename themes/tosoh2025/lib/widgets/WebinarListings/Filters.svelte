@@ -4,18 +4,17 @@
   import type { FilterWithOptions } from '../../../types/hubdb';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
   import {
+    clearFilterCache,
+    createFilterCache,
+    getMemoizedFilterOptionsForColumnWithTolerance,
     extractFilterOptions,
-    parseUrlFilters,
     extractToleranceConfig,
+    parseUrlFilters,
+    type FilterCache,
     type FilterCriteria,
   } from '../../utils/filterUtils/filterUtils.refactored';
-  import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
-  import {
-    defaultItemsLimit,
-    defaultPagination,
-    IS_MOCK,
-    PROD_TOSOH_WEBINARS_TABLE_ID,
-  } from '../../utils/constants';
+  import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
+  import { IS_MOCK, PROD_TOSOH_WEBINARS_TABLE_ID } from '../../utils/constants';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockWebinarListingsFilterOptions } from './mock';
   import Search from '../../components/Search/Search.svelte';
@@ -23,25 +22,40 @@
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import { getFilter } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
+  import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
+  import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
+
+  let { formId } = $props();
+
+  const prodWebinarListingsTableId = PROD_TOSOH_WEBINARS_TABLE_ID;
+  const topicFilters = window?.Tosoh?.WebinarListings?.topic_filters?.filters;
+  const filtersArray = window?.Tosoh?.WebinarListings?.topic_filters?.filters
+    ? [...topicFilters.map((filter: any) => filter.hubdb_column_id)]
+    : [];
+
+  const areFiltersEnabled = topicFilters?.length > 0;
+  const searchFromFields = window?.Tosoh?.WebinarListings?.search;
+  const searchColumnId = searchFromFields?.hubdb_column_id;
+  filtersArray.push(searchColumnId);
+
+  const toleranceConfig = extractToleranceConfig(topicFilters || []);
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  const topicFilters = window?.Tosoh?.WebinarListings?.topic_filters?.filters;
-  const areFiltersEnabled = topicFilters?.length > 0;
-  const searchFromFields = window?.Tosoh?.WebinarListings?.search;
-  const searchColumnId = searchFromFields?.hubdb_column_id;
+  // Cache for memoized filter options (like product catalog)
+  let filterOptionsCache: FilterCache = createFilterCache();
 
+  // Store raw data for advanced filtering
   let rawData: any[] = [];
 
+  // Debounce timeout for filter updates (like product catalog)
   let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
-  const filtersArray = window?.Tosoh?.WebinarListings?.topic_filters?.filters
-    ? [...topicFilters.map((filter: any) => filter.hubdb_column_id)]
-    : [];
-
-  const prodWebinarListingsTableId = PROD_TOSOH_WEBINARS_TABLE_ID;
+  const resetPaginationAndFetchData = () => {
+    resetPaginationAndFetchDataEvent();
+  };
 
   const debouncedFilterUpdate = () => {
     clearTimeout(filterDebounceTimeout);
@@ -49,35 +63,59 @@
       if (rawData.length > 0) {
         updateFilterOptionsBasedOnCurrentUrl(rawData);
       }
-    }, 300);
+    }, 300); // Same debounce timing as product catalog
   };
 
   const onChange = (event: Event) => {
-    onReset();
-
-    updateUrl(event);
-
+    const target = event.target as HTMLInputElement;
+    if (!target) return;
+    if (target.type === 'checkbox') {
+      updateUrlFromCheckbox(event);
+    } else if (target.name === 'rt_min') {
+      return;
+    } else {
+      setSearchParams({
+        [target.name]: target.value,
+      });
+    }
     debouncedFilterUpdate();
+
+    updateFormEvent(formId);
+    resetPaginationAndFetchData();
   };
 
-  const onReset = () => {
-    setSearchParams({
-      pagination: `${defaultPagination}`,
-      limit: `${defaultItemsLimit}`,
-      [searchColumnId]: '',
-    });
-
+  const clearParams = () => {
     if (filtersArray?.length > 0) {
-      clearParams([...filtersArray, 'language'] as string[]);
-    } else {
-      clearParams(['language']);
+      setClearParams(filtersArray);
     }
+  };
+
+  const onResetForSearch = (searchCb: () => void) => {
+    clearParams();
+    resetFormEvent(formId);
+    searchCb();
 
     if (rawData.length > 0) {
       updateFilterOptionsBasedOnCurrentUrl(rawData);
     }
+
+    resetPaginationAndFetchData();
   };
-  const getFilterOptions = async () => {
+
+  const onReset = () => {
+    clearParams();
+    clearFilterCache(filterOptionsCache);
+
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
+
+    resetFormEvent(formId);
+
+    resetPaginationAndFetchData();
+  };
+
+  const fetchInitialData = async () => {
     isLoading = true;
 
     try {
@@ -129,7 +167,24 @@
         }
       });
 
-      const options = extractFilterOptions(data);
+      // Calculate filter options for each column individually with proper exclusion
+      const options: any = {};
+
+      filtersArray.forEach((columnId: ColumnId) => {
+        // Skip search column as it's handled separately
+        if (columnId === searchColumnId) return;
+
+        // Get filter options for this specific column, with tolerance-aware matching
+        const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
+          data,
+          columnId,
+          currentFilters,
+          toleranceConfig,
+          filterOptionsCache
+        );
+
+        options[columnId] = columnOptions;
+      });
 
       allAvailableFiltersWithTheirOptions = options;
     } catch (error) {
@@ -146,12 +201,12 @@
   };
 
   onMount(() => {
-    getFilterOptions();
+    fetchInitialData();
   });
 
   onDestroy(() => {
-    // Clean up debounce timeout and cache (like product catalog)
     clearTimeout(filterDebounceTimeout);
+    clearFilterCache(filterOptionsCache);
   });
 </script>
 
@@ -161,16 +216,16 @@
 >
   <Search
     manualTableId={prodWebinarListingsTableId}
-    filtersToDelete={[...filtersArray, 'pagination', 'limit']}
     {searchFromFields}
+    {formId}
+    onReset={onResetForSearch}
   />
 
   {#if areFiltersEnabled}
-    <FilterForm trigger="change" {onChange} {onReset}>
+    <FilterForm trigger="change" {onChange} {onReset} {formId}>
       <div class="gap-md flex w-full">
         {#each filtersArray as columnId}
           {@const filter = getFilter(topicFilters, columnId) as TopicFilters['filters'][number]}
-
           <TopicFilter
             {filter}
             options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
@@ -179,7 +234,6 @@
             name={columnId}
             disabled={isLoading || hasError}
             {isLoading}
-            disableReset={true}
             placeholder={getLabelForSelect(columnId)}
             labelPosition="left"
             displayLabel={false}

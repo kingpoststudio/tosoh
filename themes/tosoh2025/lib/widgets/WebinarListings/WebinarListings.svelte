@@ -31,6 +31,7 @@
   } from '../../utils/utils';
   import { fade } from 'svelte/transition';
 
+  const formId = 'webinarListingsForm';
   let tableRows: any = $state([]);
   let totalItems = $state(0);
   let hasError = $state(false);
@@ -60,11 +61,11 @@
       tableId: tableId,
       properties:
         'webinar_title,priority,webinar_subtext,presenter_1_image,presenter_1_name,presenter_1_title,presenter_1_location,presenter_2_image,presenter_2_name,presenter_2_title,presenter_2_location,cta_label,date,start_time,stop_time,registration_page_url,language',
-      limit: parseInt(params?.get('limit') || defaultItemsLimit),
-      pagination: parseInt(params?.get('pagination') || defaultPagination),
+      limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
+      pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
       offset:
-        parseInt(params?.get('limit') || defaultItemsLimit) *
-          (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
+        parseInt(params?.get('limit') || `${defaultItemsLimit}`) *
+          (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
       filters: constructFilterParams(nonNumericFilters, { topic: filterByTopic }),
       numericComparisonFilters: rangePmFilters,
     };
@@ -131,7 +132,7 @@
     </div>
 
     {#if hasFilter}
-      <WebinarListingsFilters />
+      <WebinarListingsFilters {formId} />
     {/if}
   </div>
 {/snippet}
@@ -146,7 +147,7 @@
       <div class="mt-sm h-14 min-w-[16rem] rounded-lg bg-gray-200"></div>
     </div>
 
-    <WebinarListingsFilters />
+    <WebinarListingsFilters {formId} />
   </div>
 {/snippet}
 
@@ -161,9 +162,9 @@
       <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
       ></ItemsGrid>
 
-      {#if tableRows?.length > 0 && displayPagination}
-        <PaginationWithLimit {totalItems}></PaginationWithLimit>
-      {/if}
+      <div class={`${rows?.length > 0 ? 'block' : 'hidden'}`}>
+        <PaginationWithLimit {totalItems} {fetchData}></PaginationWithLimit>
+      </div>
     {/if}
   {/if}
 {/snippet}

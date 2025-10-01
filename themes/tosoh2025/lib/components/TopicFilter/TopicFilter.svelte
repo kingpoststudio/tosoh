@@ -27,24 +27,26 @@
   } = $props();
 </script>
 
-<div class={customClasses || 'mt-base'}>
-  {#if filter?.type === 'dropdown'}
-    <Select {options} {name} {disabled} {placeholder} {labelPosition} {displayLabel} />
-  {/if}
-  {#if filter?.type === 'checkbox'}
-    <Checkbox {options} {name} {disabled} {isLoading} {labelPosition} {displayLabel} />
-  {/if}
-  {#if filter?.type === 'range-pm'}
-    <Input
-      {name}
-      type="number"
-      placeholder={`${filter?.min} - ${filter?.max} ` || ''}
-      min={filter?.min || 0}
-      max={filter?.max || 10}
-      step={0.01}
-      {disabled}
-      {isLoading}
-      label={filter?.filter_label}
-    />
-  {/if}
-</div>
+{#if filter?.type}
+  <div class={customClasses || 'mt-base'}>
+    {#if filter?.type === 'dropdown'}
+      <Select {options} {name} {disabled} {placeholder} {labelPosition} {displayLabel} />
+    {/if}
+    {#if filter?.type === 'checkbox'}
+      <Checkbox {options} {name} {disabled} {isLoading} {labelPosition} {displayLabel} />
+    {/if}
+    {#if filter?.type === 'range-pm'}
+      <Input
+        {name}
+        type="number"
+        placeholder={`${filter?.min} - ${filter?.max} ` || ''}
+        min={filter?.min || 0}
+        max={filter?.max || 10}
+        step={0.01}
+        {disabled}
+        {isLoading}
+        label={filter?.filter_label}
+      />
+    {/if}
+  </div>
+{/if}

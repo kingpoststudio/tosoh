@@ -31,7 +31,7 @@
     children: Snippet;
     customClasses?: string;
     updateUrl?: boolean;
-    formId?: string;
+    formId: string;
     excludeFromObserver?: boolean;
   } = $props();
 
