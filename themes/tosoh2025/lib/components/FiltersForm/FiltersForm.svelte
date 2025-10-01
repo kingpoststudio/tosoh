@@ -5,6 +5,8 @@
 
   import {
     createFormManager,
+    populateFormFromUrl,
+    resetForm,
     type FormManagerInstance,
     type triggerType,
   } from '../../utils/formManager';
@@ -18,6 +20,8 @@
     children,
     customClasses,
     updateUrl = true,
+    formId,
+    excludeFromObserver = false,
   }: {
     trigger: triggerType;
     onSubmit?: (e: Event) => void;
@@ -27,6 +31,8 @@
     children: Snippet;
     customClasses?: string;
     updateUrl?: boolean;
+    formId?: string;
+    excludeFromObserver?: boolean;
   } = $props();
 
   let formElement: HTMLFormElement | null = $state(null);
@@ -34,7 +40,6 @@
 
   const initiateFormManager = () => {
     if (formElement && !formManager) {
-      // Small delay to ensure DOM is fully updated
       setTimeout(() => {
         if (formElement && !formManager) {
           formManager = createFormManager(formElement, {
@@ -83,19 +88,23 @@
       if (formElement.elements.length > 0 && !formManager) {
         debouncedInitiate();
       }
+      let observer: MutationObserver | null = null;
+      if (!excludeFromObserver) {
+        observer = new MutationObserver(() => {
+          debouncedInitiate();
+        });
 
-      // Use MutationObserver to watch for DOM changes
-      const observer = new MutationObserver(() => {
-        debouncedInitiate();
-      });
-
-      observer.observe(formElement, {
-        childList: true,
-        subtree: true,
-      });
-
+        observer.observe(formElement, {
+          childList: true,
+          subtree: true,
+        });
+      }
       return () => {
-        observer.disconnect();
+        if (!excludeFromObserver) {
+          if (observer) {
+            observer.disconnect();
+          }
+        }
         if (debounceTimeout) {
           clearTimeout(debounceTimeout);
         }
@@ -119,8 +128,38 @@
     }
     clickOutside();
   });
+
+  const onResetForm = on(window, 'TosohFormReset', (e: Event) => {
+    const { detail } = e as CustomEvent;
+    if (detail?.id === formId) {
+      if (formElement) {
+        resetForm(formElement);
+      }
+    }
+  });
+
+  const onChangeValues = on(window, 'TosohFormValuesChanged', (e: Event) => {
+    const { detail } = e as CustomEvent;
+
+    if (detail?.id === formId) {
+      if (formManager && formElement) {
+        populateFormFromUrl(formElement, true);
+      }
+    }
+  });
+
+  onDestroy(() => {
+    onChangeValues();
+    onResetForm();
+  });
 </script>
 
-<form bind:this={formElement} class={customClasses}>
+<form
+  onsubmit={(e) => {
+    e.preventDefault();
+  }}
+  bind:this={formElement}
+  class={customClasses}
+>
   {@render children()}
 </form>
