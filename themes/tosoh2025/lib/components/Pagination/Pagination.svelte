@@ -1,6 +1,6 @@
 <script lang="ts">
   import { setSearchParams } from '../../utils/urlUtils';
-
+  import { scrollToTop } from '../../utils/utils';
   let { totalItems, limit, pagination, onPaginationChange, fetchData } = $props();
 
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
@@ -17,6 +17,7 @@
         pagination: newPagination?.toString(),
       });
       fetchData();
+      scrollToTop();
     }
   };
 
@@ -28,6 +29,7 @@
         pagination: newPagination?.toString(),
       });
       fetchData();
+      scrollToTop();
     }
   };
 </script>
@@ -42,6 +44,7 @@
         let target = event.target as HTMLSelectElement;
         onPaginationChange(parseInt(target.value));
         fetchData();
+        scrollToTop();
       }}
     >
       {#each pagesArray as page}

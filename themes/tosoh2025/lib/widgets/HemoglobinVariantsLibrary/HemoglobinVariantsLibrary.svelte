@@ -28,6 +28,7 @@
     constructRangePmFilters,
     getFilterColumnIds,
   } from '../../utils/utils';
+  const formId = 'hemoglobin-variants-library-filters';
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
   const topicFilters = hemoglobinVariantsLibraryContent?.topic_filters?.filters || [];
@@ -37,7 +38,6 @@
     : '';
 
   let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
-  const rangePmFilters = constructRangePmFilters(topicFilters);
 
   let title = hemoglobinVariantsLibraryContent?.title;
   let eyebrow = hemoglobinVariantsLibraryContent?.eyebrow;
@@ -49,17 +49,18 @@
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
+    const rangePmFilters = constructRangePmFilters(topicFilters);
 
     return {
       sort: '-start_date',
       tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
       properties:
         'document_url,heterozygote_comments,aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
-      limit: parseInt(params?.get('limit') || defaultItemsLimit),
-      pagination: parseInt(params?.get('pagination') || defaultPagination),
+      limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
+      pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
       offset:
-        parseInt(params?.get('limit') || defaultItemsLimit) *
-          (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
+        parseInt(params?.get('limit') || `${defaultItemsLimit}`) *
+          (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
       filters: constructFilterParams(nonNumericFilters),
       numericComparisonFilters: [...rangePmFilters],
     };
@@ -73,6 +74,7 @@
       if (!IS_MOCK) {
         data = await fetchTableRows(constructBody());
       } else {
+        console.log(constructBody(), 'body');
         data = mockHemoglobinVariantsLibraryTableRowsResponse;
       }
 
@@ -112,7 +114,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading}></Filters>
+  <Filters isParentLoading={isLoading} {fetchData} {formId}></Filters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
@@ -122,9 +124,9 @@
     {:else}
       <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
 
-      {#if tableRows?.length > 0}
-        <PaginationWithLimit {totalItems}></PaginationWithLimit>
-      {/if}
+      <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
+        <PaginationWithLimit {totalItems} {fetchData}></PaginationWithLimit>
+      </div>
     {/if}
   </div>
 </div>

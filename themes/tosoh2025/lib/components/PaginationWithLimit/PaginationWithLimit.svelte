@@ -6,7 +6,8 @@
   import Limit from '../Limit/Limit.svelte';
   import Pagination from '../Pagination/Pagination.svelte';
   import { on } from 'svelte/events';
-
+  import { RESET_PAGINATION_AND_FETCH_DATA_EVENT } from '../../utils/paginationAndLimitUtils';
+  import { scrollToTop } from '../../utils/utils';
   let { totalItems, fetchData } = $props();
 
   const params = new URLSearchParams(window.location.search);
@@ -45,19 +46,22 @@
     window.history.pushState({}, '', url.toString().replace(/%2C/g, ','));
   };
 
-  const reset = on(window, 'TosohPaginationWithLimitResetAndFetchData', async () => {
-    resetPagination();
-    resetLimit();
-
-    await fetchData();
-  });
+  const resetPaginationAndFetchData = on(
+    window,
+    RESET_PAGINATION_AND_FETCH_DATA_EVENT,
+    async () => {
+      resetPagination();
+      scrollToTop();
+      await fetchData();
+    }
+  );
 
   onMount(() => {
     initControllers();
   });
 
   onDestroy(() => {
-    reset();
+    resetPaginationAndFetchData();
   });
 </script>
 

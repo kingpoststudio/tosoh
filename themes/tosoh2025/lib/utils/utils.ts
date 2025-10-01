@@ -123,3 +123,9 @@ export const onTagClick = (name: string, value: string) => {
 export const removeHtmlTags = (value: string) => {
   return value?.replace(/<[^>]+>/g, ' ');
 };
+
+export const scrollToTop = (behavior: ScrollBehavior = 'smooth') => {
+  if (typeof window !== 'undefined') {
+    window.scrollTo({ top: 0, behavior });
+  }
+};

@@ -1,5 +1,6 @@
 <script lang="ts">
   let { totalItems, limit, pagination, onLimitChange, resetPagination, fetchData } = $props();
+  import { scrollToTop } from '../../utils/utils';
 
   let options = [12, 24, 48];
 </script>
@@ -13,6 +14,7 @@
       onLimitChange(parseInt(target.value));
       resetPagination();
       fetchData();
+      scrollToTop();
     }}
     name="limit"
     class="bg-ghost-white p-xs rounded border border-slate-200"

@@ -1,17 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import {
-    defaultItemsLimit,
-    defaultPagination,
-    IS_MOCK,
-    PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
-  } from '../../utils/constants';
-  import {
-    clearParams,
-    setSearchParams,
-    updateUrl,
-    updateUrlFromCheckbox,
-  } from '../../utils/urlUtils';
+  import { IS_MOCK, PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID } from '../../utils/constants';
+  import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
@@ -23,7 +13,7 @@
     clearFilterCache,
     parseUrlFilters,
     extractToleranceConfig,
-    extractFilterOptionsWithQuantityWithTolerance,
+    getMemoizedFilterOptionsForColumnWithTolerance,
     type FilterCriteria,
     type FilterOptionsWithQuantity,
     type FilterCache,
@@ -35,8 +25,9 @@
   import { getFilter } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
-  let { isParentLoading } = $props();
-
+  import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
+  import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
+  let { isParentLoading, fetchData, formId } = $props();
   // Configuration from HubSpot fields
   const searchFromFields = window?.Tosoh?.HemoglobinVariantsLibraryContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
@@ -62,11 +53,8 @@
   // Debounce timeout for filter updates (like product catalog)
   let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
-  const resetPaginationAndLimit = () => {
-    setSearchParams({
-      pagination: `${defaultPagination}`,
-      limit: `${defaultItemsLimit}`,
-    });
+  const resetPaginationAndFetchData = () => {
+    resetPaginationAndFetchDataEvent();
   };
 
   // Debounced filter update (mimics product catalog's debouncedFilterProducts)
@@ -80,43 +68,64 @@
   };
 
   const onChange = (event: Event) => {
-    resetPaginationAndLimit();
-    if ((event.target as HTMLInputElement).type === 'checkbox') {
+    const target = event.target as HTMLInputElement;
+    if (!target) return;
+    if (target.type === 'checkbox') {
       updateUrlFromCheckbox(event);
-    } else if ((event.target as HTMLInputElement).type === 'number') {
+    } else if (target.name === 'rt_min') {
+      return;
     } else {
-      updateUrl(event);
+      setSearchParams({
+        [target.name]: target.value,
+      });
     }
-
-    // Debounce filter updates like product catalog
     debouncedFilterUpdate();
+
+    updateFormEvent(formId);
+    resetPaginationAndFetchData();
   };
 
   const onClickSubmit = () => {
-    resetPaginationAndLimit();
-    const numberInput = document.querySelector('input[type="number"]');
-    if (numberInput) {
-      updateUrl({ target: numberInput } as unknown as Event);
+    const numberInput = document.querySelector('input[name="rt_min"]') as HTMLInputElement;
+    if (numberInput?.value) {
+      console.log(numberInput.value, 'numberInput');
+      setSearchParams({
+        [numberInput.name]: numberInput.value,
+      });
+      debouncedFilterUpdate();
+      resetPaginationAndFetchData();
     }
-
-    // Debounce filter updates like other inputs
-    debouncedFilterUpdate();
   };
 
-  const onReset = () => {
-    resetPaginationAndLimit();
-
+  const clearParams = () => {
     if (filtersFromFields?.length > 0) {
-      clearParams(filtersFromFields as string[]);
+      setClearParams(filtersFromFields);
     }
+  };
 
-    // Clear cache when resetting (like product catalog)
-    clearFilterCache(filterOptionsCache);
+  const onResetForSearch = (searchCb: () => void) => {
+    clearParams();
+    resetFormEvent(formId);
+    searchCb();
 
-    // Refresh filter options with no active filters
     if (rawData.length > 0) {
       updateFilterOptionsBasedOnCurrentUrl(rawData);
     }
+
+    resetPaginationAndFetchData();
+  };
+
+  const onReset = () => {
+    clearParams();
+    clearFilterCache(filterOptionsCache);
+
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
+
+    resetFormEvent(formId);
+
+    resetPaginationAndFetchData();
   };
 
   const fetchInitialData = async () => {
@@ -171,12 +180,25 @@
         }
       });
 
-      // Use tolerance-aware filtering for calculating quantities
-      const options = extractFilterOptionsWithQuantityWithTolerance(
-        data,
-        currentFilters,
-        toleranceConfig
-      );
+      // Calculate filter options for each column individually with proper exclusion
+      const options: FilterOptionsWithQuantity = {};
+
+      filtersFromFields.forEach((columnId: ColumnId) => {
+        // Skip search column as it's handled separately
+        if (columnId === searchColumnId) return;
+
+        // Get filter options for this specific column, with tolerance-aware matching
+        const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
+          data,
+          columnId,
+          currentFilters,
+          toleranceConfig,
+          filterOptionsCache
+        );
+
+        // Add the options for this column
+        options[columnId] = columnOptions;
+      });
 
       allAvailableFiltersWithTheirOptions = options;
     } catch (error) {
@@ -232,14 +254,15 @@
   </div>
 
   <SearchInput
+    {formId}
     customClasses="mt-base"
     manualTableId={searchTableId}
-    filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
     {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
+    onReset={onResetForSearch}
   />
 
-  <FilterForm updateUrl={false} trigger="change" {onChange} {onReset}>
+  <FilterForm updateUrl={false} trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
       {#if searchColumnId !== columnId}
