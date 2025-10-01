@@ -185,14 +185,12 @@
           filterOptionsCache
         );
 
-        // Add the options for this column
         options[columnId] = columnOptions;
       });
 
       allAvailableFiltersWithTheirOptions = options;
     } catch (error) {
       console.error('Error updating filter options:', error);
-      // Fallback to basic filter options without quantities
       allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
     }
   };
