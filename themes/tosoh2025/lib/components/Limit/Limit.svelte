@@ -1,5 +1,5 @@
 <script lang="ts">
-  let { totalItems, limit, pagination } = $props();
+  let { totalItems, limit, pagination, onLimitChange, resetPagination, fetchData } = $props();
 
   let options = [12, 24, 48];
 </script>
@@ -7,7 +7,13 @@
 <div class="gap-sm flex items-center justify-center text-[#4E4F54]">
   <p>Items per page:</p>
   <select
-    bind:value={limit}
+    value={limit}
+    onchange={(event) => {
+      let target = event.target as HTMLSelectElement;
+      onLimitChange(parseInt(target.value));
+      resetPagination();
+      fetchData();
+    }}
     name="limit"
     class="bg-ghost-white p-xs rounded border border-slate-200"
   >

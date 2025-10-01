@@ -1,5 +1,7 @@
 <script lang="ts">
-  let { totalItems, limit, pagination } = $props();
+  import { setSearchParams } from '../../utils/urlUtils';
+
+  let { totalItems, limit, pagination, onPaginationChange, fetchData } = $props();
 
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
   let pagesArray = $derived(Array.from({ length: numberOfPages }, (_, i) => i + 1));
@@ -8,24 +10,24 @@
   let canGoForward = $derived(pagination + 1 <= numberOfPages);
 
   const moveBackward = () => {
-    const url = new URL(window.location.href);
-    let pagination = url.searchParams.get('pagination');
-
     if (pagination && parseInt?.(pagination) - 1 > 0) {
-      pagination = (parseInt?.(pagination) - 1) as any;
-      url.searchParams?.set('pagination', (pagination as any)?.toString());
-      window.location.href = url?.toString();
+      const newPagination = (parseInt?.(pagination) - 1) as any;
+      onPaginationChange(newPagination);
+      setSearchParams({
+        pagination: newPagination?.toString(),
+      });
+      fetchData();
     }
   };
 
   const moveForward = () => {
-    const url = new URL(window.location.href);
-    let pagination = url.searchParams.get('pagination');
-
     if (pagination && parseInt?.(pagination) + 1 <= numberOfPages) {
-      pagination = (parseInt?.(pagination) + 1) as any;
-      url.searchParams?.set('pagination', (pagination as any)?.toString());
-      window.location.href = url?.toString();
+      const newPagination = (parseInt?.(pagination) + 1) as any;
+      onPaginationChange(newPagination);
+      setSearchParams({
+        pagination: newPagination?.toString(),
+      });
+      fetchData();
     }
   };
 </script>
@@ -33,9 +35,14 @@
 <div class="gap-sm flex justify-center">
   <div class="gap-sm flex items-center text-[#4E4F54]">
     <select
-      bind:value={pagination}
+      value={pagination}
       name="pagination"
       class="bg-ghost-white p-xs rounded border border-slate-200"
+      onchange={(event) => {
+        let target = event.target as HTMLSelectElement;
+        onPaginationChange(parseInt(target.value));
+        fetchData();
+      }}
     >
       {#each pagesArray as page}
         <option value={page}>
