@@ -1,17 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import {
-    defaultItemsLimit,
-    defaultPagination,
-    IS_MOCK,
-    PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
-  } from '../../utils/constants';
-  import {
-    clearParams,
-    setSearchParams,
-    updateUrl,
-    updateUrlFromCheckbox,
-  } from '../../utils/urlUtils';
+  import { IS_MOCK, PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID } from '../../utils/constants';
+  import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
@@ -21,20 +11,23 @@
     extractFilterOptions,
     parseUrlFilters,
     extractToleranceConfig,
-    extractFilterOptionsWithQuantityWithTolerance,
     type FilterCriteria,
-    type FilterOptionsWithQuantity,
+    createFilterCache,
     type FilterCache,
+    clearFilterCache,
+    getMemoizedFilterOptionsForColumnWithTolerance,
   } from '../../utils/filterUtils/filterUtils.refactored';
 
-  import type { ColumnId } from '../../../types/hubdb';
+  import type { ColumnId, FilterWithOptions } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockKioskDocumentsFiltersResponse } from './mock';
   import { getFilter } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
+  import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
+  import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
 
-  let { isParentLoading } = $props();
+  let { isParentLoading, formId } = $props();
 
   // Configuration from HubSpot fields
   const searchFromFields = window?.Tosoh?.KioskDocumentsContent?.search;
@@ -48,9 +41,12 @@
   // Extract tolerance configuration from filter definitions
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
-  let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
+  let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
+
+  // Cache for memoized filter options (like product catalog)
+  let filterOptionsCache: FilterCache = createFilterCache();
 
   // Store raw data for advanced filtering
   let rawData: any[] = [];
@@ -58,11 +54,8 @@
   // Debounce timeout for filter updates (like product catalog)
   let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
-  const resetPaginationAndLimit = () => {
-    setSearchParams({
-      pagination: `${defaultPagination}`,
-      limit: `${defaultItemsLimit}`,
-    });
+  const resetPaginationAndFetchData = () => {
+    resetPaginationAndFetchDataEvent();
   };
 
   // Debounced filter update (mimics product catalog's debouncedFilterProducts)
@@ -76,28 +69,52 @@
   };
 
   const onChange = (event: Event) => {
-    resetPaginationAndLimit();
-    if ((event.target as HTMLInputElement).type === 'checkbox') {
+    const target = event.target as HTMLInputElement;
+    if (!target) return;
+    if (target.type === 'checkbox') {
       updateUrlFromCheckbox(event);
+    } else if (target.name === 'rt_min') {
+      return;
     } else {
-      updateUrl(event);
+      setSearchParams({
+        [target.name]: target.value,
+      });
     }
-
-    // Debounce filter updates like product catalog
     debouncedFilterUpdate();
+
+    updateFormEvent(formId);
+    resetPaginationAndFetchData();
   };
 
-  const onReset = () => {
-    resetPaginationAndLimit();
-
+  const clearParams = () => {
     if (filtersFromFields?.length > 0) {
-      clearParams(filtersFromFields as string[]);
+      setClearParams(filtersFromFields);
     }
+  };
 
-    // Refresh filter options with no active filters
+  const onResetForSearch = (searchCb: () => void) => {
+    clearParams();
+    resetFormEvent(formId);
+    searchCb();
+
     if (rawData.length > 0) {
       updateFilterOptionsBasedOnCurrentUrl(rawData);
     }
+
+    resetPaginationAndFetchData();
+  };
+
+  const onReset = () => {
+    clearParams();
+    clearFilterCache(filterOptionsCache);
+
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
+
+    resetFormEvent(formId);
+
+    resetPaginationAndFetchData();
   };
 
   const fetchInitialData = async () => {
@@ -152,12 +169,25 @@
         }
       });
 
-      // Use enhanced filtering with caching (like product catalog)
-      const options = extractFilterOptionsWithQuantityWithTolerance(
-        data,
-        currentFilters,
-        toleranceConfig
-      );
+      // Calculate filter options for each column individually with proper exclusion
+      const options: any = {};
+
+      filtersFromFields.forEach((columnId: ColumnId) => {
+        // Skip search column as it's handled separately
+        if (columnId === searchColumnId) return;
+
+        // Get filter options for this specific column, with tolerance-aware matching
+        const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
+          data,
+          columnId,
+          currentFilters,
+          toleranceConfig,
+          filterOptionsCache
+        );
+
+        // Add the options for this column
+        options[columnId] = columnOptions;
+      });
 
       allAvailableFiltersWithTheirOptions = options;
     } catch (error) {
@@ -177,8 +207,8 @@
   });
 
   onDestroy(() => {
-    // Clean up debounce timeout and cache (like product catalog)
     clearTimeout(filterDebounceTimeout);
+    clearFilterCache(filterOptionsCache);
   });
 </script>
 
@@ -213,9 +243,10 @@
   </div>
 
   <SearchInput
+    {formId}
+    onReset={onResetForSearch}
     customClasses="mt-base"
     manualTableId={searchTableId}
-    filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
     {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
   />
@@ -227,7 +258,7 @@
       {#if searchColumnId !== columnId}
         <TopicFilter
           {filter}
-          options={(allAvailableFiltersWithTheirOptions as FilterOptionsWithQuantity)[
+          options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
             columnId as ColumnId
           ] || []}
           name={columnId}

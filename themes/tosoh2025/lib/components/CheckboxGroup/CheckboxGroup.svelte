@@ -7,6 +7,7 @@
     labelPosition = 'top',
     label,
     isLoading,
+    multiple = false,
   }: {
     options: any[];
     name: string;
@@ -15,10 +16,11 @@
     labelPosition?: 'top' | 'left';
     label?: string;
     isLoading?: boolean;
+    multiple?: boolean;
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
-  const activeFilters = urlParams.getAll(name);
+  const activeFilters = multiple ? urlParams.getAll(name) : [urlParams.get(name)].filter(Boolean);
 
   const setupFilterTitle = (column: string) =>
     column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
@@ -40,7 +42,7 @@
               class={`gap-sm hover:text-imperial-red flex  items-center transition-colors duration-200  ${option?.quantity === 0 ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
             >
               <input
-                type="checkbox"
+                type={multiple ? 'checkbox' : 'radio'}
                 {name}
                 value={option.name}
                 disabled={disabled || option?.quantity === 0 ? true : false}
@@ -60,7 +62,7 @@
               class="gap-sm hover:text-imperial-red flex cursor-pointer items-center transition-colors duration-200"
             >
               <input
-                type="checkbox"
+                type={multiple ? 'checkbox' : 'radio'}
                 {name}
                 value={skeletonOption}
                 disabled={true}

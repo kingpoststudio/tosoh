@@ -16,12 +16,12 @@
     formId,
   }: {
     searchFromFields: Search;
+    onReset: (searchCb: () => void) => void;
+    formId: string;
     customClasses?: string;
     manualTableId?: string;
     disabled?: boolean;
     accessLevel?: string;
-    onReset?: (searchCb: () => void) => void;
-    formId?: string;
   } = $props();
 
   const {

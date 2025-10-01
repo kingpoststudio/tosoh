@@ -39,6 +39,7 @@
 
   let title = kioskDocumentsContent?.title;
   let description = kioskDocumentsContent?.description;
+  const formId = 'kiosk-documents';
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
@@ -73,11 +74,11 @@
       sort: '-start_date',
       tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
       properties: 'title,document_type,image,page_path,start_date,end_date',
-      limit: parseInt(params?.get('limit') || defaultItemsLimit),
-      pagination: parseInt(params?.get('pagination') || defaultPagination),
+      limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
+      pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
       offset:
-        parseInt(params?.get('limit') || defaultItemsLimit) *
-          (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
+        parseInt(params?.get('limit') || `${defaultItemsLimit}`) *
+          (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
       filters: constructFilterParams(nonNumericFilters),
       numericComparisonFilters: [...baseNumericFilters, ...rangePmFilters],
     };
@@ -128,7 +129,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading}></Filters>
+  <Filters isParentLoading={isLoading} {formId}></Filters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
@@ -138,9 +139,9 @@
     {:else}
       <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard}></ItemsGrid>
 
-      {#if tableRows?.length > 0}
-        <PaginationWithLimit {totalItems}></PaginationWithLimit>
-      {/if}
+      <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
+        <PaginationWithLimit {totalItems} {fetchData}></PaginationWithLimit>
+      </div>
     {/if}
   </div>
 </div>

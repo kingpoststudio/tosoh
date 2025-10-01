@@ -60,12 +60,10 @@ export const updateUrlFromCheckbox = (e: Event) => {
     if (!values.length) {
       url.searchParams.delete(name);
     } else {
-      url.searchParams.set(name, value);
+      url.searchParams.set(name, values.join(','));
     }
 
     window.history.replaceState({}, '', url.toString());
-
-    // window.location.href = url.toString();
   }
 };
 

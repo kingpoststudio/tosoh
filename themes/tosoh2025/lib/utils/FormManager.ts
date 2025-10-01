@@ -81,7 +81,10 @@ export const resetForm = (form: HTMLFormElement) => {
     if (el.tagName === 'SELECT') {
       const select = el as HTMLSelectElement;
       select.value = 'none';
-    } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'checkbox') {
+    } else if (
+      el.tagName === 'INPUT' &&
+      ((el as HTMLInputElement).type === 'checkbox' || (el as HTMLInputElement).type === 'radio')
+    ) {
       const input = el as HTMLInputElement;
       input.checked = false;
     } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'number') {
@@ -115,7 +118,10 @@ export const populateFormFromUrl = (form: HTMLFormElement, suppressEvents: boole
             select.dispatchEvent(new Event('change', { bubbles: true }));
           }
         }
-      } else if (el.tagName === 'INPUT' && (el as HTMLInputElement).type === 'checkbox') {
+      } else if (
+        el.tagName === 'INPUT' &&
+        ((el as HTMLInputElement).type === 'checkbox' || (el as HTMLInputElement).type === 'radio')
+      ) {
         const input = el as HTMLInputElement;
         const shouldBeChecked = values.includes(input.value);
         if (input.checked !== shouldBeChecked) {
@@ -212,7 +218,11 @@ export function createFormManager(
           addEventListenerWithTracking(element, 'input', inputHandler);
         }
 
-        if (element.tagName === 'INPUT' && (element as HTMLInputElement).type === 'checkbox') {
+        if (
+          element.tagName === 'INPUT' &&
+          ((element as HTMLInputElement).type === 'checkbox' ||
+            (element as HTMLInputElement).type === 'radio')
+        ) {
           const changeHandler = (e: Event) => {
             setFormValuesToParams();
             if (onChange) onChange(e);
