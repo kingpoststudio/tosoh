@@ -70,7 +70,6 @@ if (IS_MOCK) {
       ],
       hubdb_table_id: 690033851,
     },
-    type: 'module',
   };
 }
 

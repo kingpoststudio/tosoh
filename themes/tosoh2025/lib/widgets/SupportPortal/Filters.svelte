@@ -1,13 +1,8 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import {
-    defaultItemsLimit,
-    defaultPagination,
-    IS_MOCK,
-    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
-  } from '../../utils/constants';
+  import { IS_MOCK, PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID } from '../../utils/constants';
   import { mockPortalFilters } from './mock';
-  import { clearParams, setSearchParams, updateUrl } from '../../utils/urlUtils';
+  import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
@@ -21,10 +16,15 @@
     extractFilterOptions,
     parseUrlFilters,
     extractToleranceConfig,
-    extractFilterOptionsWithQuantityWithTolerance,
     type FilterCriteria,
+    createFilterCache,
+    type FilterCache,
+    clearFilterCache,
+    getMemoizedFilterOptionsForColumnWithTolerance,
   } from '../../utils/filterUtils/filterUtils.refactored';
-  let { isParentLoading, viewAs, handleChangeView } = $props();
+  import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
+  import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
+  let { isParentLoading, viewAs, handleChangeView, formId } = $props();
 
   const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
@@ -49,17 +49,17 @@
   let isLoading = $state(false);
   let hasError = $state(false);
 
+  // Cache for memoized filter options (like product catalog)
+  let filterOptionsCache: FilterCache = createFilterCache();
+
   // Store raw data for advanced filtering
   let rawData: any[] = [];
 
   // Debounce timeout for filter updates (like product catalog)
   let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
-  const resetPaginationAndLimit = () => {
-    setSearchParams({
-      pagination: `${defaultPagination}`,
-      limit: `${defaultItemsLimit}`,
-    });
+  const resetPaginationAndFetchData = () => {
+    resetPaginationAndFetchDataEvent();
   };
 
   // Debounced filter update (mimics product catalog's debouncedFilterProducts)
@@ -73,23 +73,55 @@
   };
 
   const onChange = (event: Event) => {
-    onReset();
-
-    updateUrl(event);
-
-    // Debounce filter updates like product catalog
+    const target = event.target as HTMLInputElement;
+    if (!target) return;
+    if (target.type === 'checkbox') {
+      updateUrlFromCheckbox(event);
+    } else if (target.name === 'rt_min') {
+      return;
+    } else {
+      setSearchParams({
+        [target.name]: target.value,
+      });
+    }
     debouncedFilterUpdate();
+
+    updateFormEvent(formId);
+    resetPaginationAndFetchData();
   };
 
-  const onReset = () => {
-    resetPaginationAndLimit();
-
+  const clearParams = () => {
     if (filtersFromFields?.length > 0) {
-      clearParams(filtersFromFields as string[]);
+      setClearParams(filtersFromFields);
     }
   };
 
-  const getFilterOptions = async () => {
+  const onResetForSearch = (searchCb: () => void) => {
+    clearParams();
+    resetFormEvent(formId);
+    searchCb();
+
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
+
+    resetPaginationAndFetchData();
+  };
+
+  const onReset = () => {
+    clearParams();
+    clearFilterCache(filterOptionsCache);
+
+    if (rawData.length > 0) {
+      updateFilterOptionsBasedOnCurrentUrl(rawData);
+    }
+
+    resetFormEvent(formId);
+
+    resetPaginationAndFetchData();
+  };
+
+  const fetchInitialData = async () => {
     isLoading = true;
 
     try {
@@ -142,12 +174,25 @@
         }
       });
 
-      // Use enhanced filtering with caching (like product catalog)
-      const options = extractFilterOptionsWithQuantityWithTolerance(
-        data,
-        currentFilters,
-        toleranceConfig
-      );
+      // Calculate filter options for each column individually with proper exclusion
+      const options: any = {};
+
+      filtersFromFields.forEach((columnId: ColumnId) => {
+        // Skip search column as it's handled separately
+        if (columnId === searchColumnId) return;
+
+        // Get filter options for this specific column, with tolerance-aware matching
+        const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
+          data,
+          columnId,
+          currentFilters,
+          toleranceConfig,
+          filterOptionsCache
+        );
+
+        // Add the options for this column
+        options[columnId] = columnOptions;
+      });
 
       allAvailableFiltersWithTheirOptions = options;
     } catch (error) {
@@ -159,17 +204,16 @@
 
   const reloadFilterOptions = () => {
     hasError = false;
-    getFilterOptions();
+    fetchInitialData();
   };
 
   onMount(() => {
-    getFilterOptions();
+    fetchInitialData();
   });
-
-  $inspect(allAvailableFiltersWithTheirOptions);
 
   onDestroy(() => {
     clearTimeout(filterDebounceTimeout);
+    clearFilterCache(filterOptionsCache);
   });
 </script>
 
@@ -203,13 +247,14 @@
   </div>
 
   <SearchInput
+    {formId}
     customClasses="mt-base"
     accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
     manualTableId={prodSupportPortalTableId}
-    filtersToDelete={[...filtersFromFields, 'pagination', 'limit']}
     {searchFromFields}
+    onReset={onResetForSearch}
   />
-  <FilterForm trigger="change" {onChange} {onReset}>
+  <FilterForm trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
 

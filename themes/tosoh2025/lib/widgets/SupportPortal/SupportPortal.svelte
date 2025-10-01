@@ -29,7 +29,7 @@
 
   const supportPortalContent = window?.Tosoh?.SupportPortalContent;
   const topicFilters = supportPortalContent?.topic_filters?.filters || [];
-
+  const formId = 'support-portal';
   let accessLevel = supportPortalContent?.access_level || 'Customer';
 
   let searchColumnId = supportPortalContent?.search
@@ -58,11 +58,11 @@
       properties:
         'name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url',
       accessLevel: accessLevel,
-      limit: parseInt(params?.get('limit') || defaultItemsLimit),
-      pagination: parseInt(params?.get('pagination') || defaultPagination),
+      limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
+      pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
       offset:
-        parseInt(params?.get('limit') || defaultItemsLimit) *
-          (parseInt(params?.get('pagination') || defaultPagination) - 1) || 0,
+        parseInt(params?.get('limit') || `${defaultItemsLimit}`) *
+          (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
       filters: constructFilterParams(nonNumericFilters),
       numericComparisonFilters: [...rangePmFilters],
     };
@@ -115,7 +115,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading} {viewAs} {handleChangeView}></Filters>
+  <Filters isParentLoading={isLoading} {viewAs} {handleChangeView} {formId}></Filters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
@@ -125,9 +125,9 @@
     {:else}
       <ItemsGrid {tableRows} {isLoading} {viewAs} {Card} {SkeletonCard}></ItemsGrid>
 
-      {#if tableRows?.length > 0}
-        <PaginationWithLimit {totalItems}></PaginationWithLimit>
-      {/if}
+      <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
+        <PaginationWithLimit {totalItems} {fetchData}></PaginationWithLimit>
+      </div>
     {/if}
   </div>
 </div>
