@@ -1,3 +1,5 @@
+import type { FilterType } from './global';
+
 export type TopicFilters = {
   filters: {
     filter_label: string;

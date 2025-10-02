@@ -1,3 +1,4 @@
+import type { TopicFilters } from '../../../types/fields';
 import type { ColumnId, ColumnItem, SupportPortalRowForFilter } from '../../../types/hubdb';
 
 // Types for better type safety
@@ -27,11 +28,17 @@ export const parseUrlFilters = (searchString: string = window.location.search): 
 };
 
 // Extract tolerance configuration from filter definitions
-export const extractToleranceConfig = (filterDefinitions: any[]): Record<string, number> => {
+export const extractToleranceConfig = (
+  filterDefinitions: TopicFilters['filters']
+): Record<string, number> => {
   const toleranceConfig: Record<string, number> = {};
 
   filterDefinitions?.forEach((filter) => {
-    if (filter.hubdb_column_id && typeof filter.tolerance === 'number') {
+    if (
+      filter?.hubdb_column_id &&
+      typeof filter?.tolerance === 'number' &&
+      filter?.type === 'range-pm'
+    ) {
       toleranceConfig[filter.hubdb_column_id] = filter.tolerance;
     }
   });
@@ -56,7 +63,6 @@ const isNumericColumn = (value: FilterValue): value is number => {
   return typeof value === 'number';
 };
 
-// Core matching logic (enhanced to support checkbox comma-separated values and numeric tolerance)
 export const checkColumnValueMatch = (
   columnValue: FilterValue,
   filterValue: string,

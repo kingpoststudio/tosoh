@@ -2,7 +2,7 @@ import type { Search } from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
-type FilterType = 'dropdown' | 'checkbox' | 'range-pm';
+export type FilterType = 'dropdown' | 'checkbox' | 'range-pm';
 
 declare global {
   interface Window {
