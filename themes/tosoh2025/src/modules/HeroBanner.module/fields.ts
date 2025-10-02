@@ -1,4 +1,5 @@
 import { choiceField, imageField, richTextField } from 'hs-fieldkit';
+import { contentBlockRtfFeatures } from '../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -26,6 +27,7 @@ const generateFields = () => {
       },
     }),
     richTextField('title', 'Title', {
+      enabled_features: contentBlockRtfFeatures,
       visibility: {
         controlling_field: 'banner_type',
         controlling_value_regex: 'simple',
@@ -33,6 +35,7 @@ const generateFields = () => {
       },
     }),
     richTextField('description', 'Description', {
+      enabled_features: contentBlockRtfFeatures,
       visibility: {
         controlling_field: 'banner_type',
         controlling_value_regex: 'simple',

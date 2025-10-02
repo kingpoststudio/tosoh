@@ -17,11 +17,7 @@
   %}
 
   {% for post in contents %}
-
-    {% set tag_str = post.tag_list|map("slug")|join(" ") %}
-    {% if "featured" in tag_str == false %}
-      {% do standard_posts.append(post) %}
-    {% endif %}
+    {% do standard_posts.append(post) %}
   {% endfor %}
 
   {%- macro render_listing(post) %}
@@ -58,8 +54,7 @@
         module "hero_banner_featured"
         path="/TosohTheme2025/modules/HeroBanner",
         type="simple",
-        eyebrow="<p class='font-semibold'>{{ featured_posts[0].tag_list[0].slug }}</p> • <p>{{ macros.calculate_reading_time(featured_posts[0]) }}</p>",
-        title="<h1 class=\"text-4xl\">{{ featured_posts[0].title }}</h1>",
+        title="<a href=\"{{ featured_posts[0].absolute_url }}\"><h1 class=\"text-4xl\">{{ featured_posts[0].title }}</h1></a>",
       %}
     {% else %}
       {# Standard Banner #}
@@ -87,7 +82,6 @@
           <tosoh-reveal-group groupId="{{ groupIndex }}" {{ isRevealed }}>
             <div class="gap-base mx-auto grid w-fit grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-4">
               {% for post in group %}
-                {% set tag_list = post.tag_list|map("slug")|join(" ") %}
                 {% if post %}
                   {{ render_listing(post) }}
                 {% endif %}
