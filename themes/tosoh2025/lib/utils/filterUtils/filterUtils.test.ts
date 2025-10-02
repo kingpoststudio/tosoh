@@ -4,8 +4,10 @@ import {
   parseUrlFilters,
   checkColumnValueMatch,
   extractFilterOptions,
+  getMemoizedFilterOptionsForColumnWithTolerance,
 } from './filterUtils';
 import type { TopicFilters } from '../../../types/fields';
+import type { FilterCache } from './filterUtils';
 
 // Test data
 const hplcProductFamily = {
@@ -741,6 +743,663 @@ describe('extractFilterOptions', () => {
       // Should keep only one based on name matching
       expect(result.test_column).toHaveLength(1);
       expect(result.test_column?.[0].name).toBe('Duplicate Name');
+    });
+  });
+});
+
+describe('getMemoizedFilterOptionsForColumnWithTolerance', () => {
+  let cache: FilterCache;
+
+  beforeEach(() => {
+    cache = new Map();
+  });
+
+  describe('when extracting filter options without active filters', () => {
+    it('should extract all unique options with correct quantities from multi-select column', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily] } },
+        { values: { multiSelectColumn: [hplcProductFamily, aiaClProductFamily] } },
+        { values: { multiSelectColumn: [aiaClProductFamily] } },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      const hplcOption = result.find((opt) => opt.name === 'HPLC Applications');
+      const aiaOption = result.find((opt) => opt.name === 'AIA-CL');
+      expect(hplcOption?.quantity).toBe(2);
+      expect(aiaOption?.quantity).toBe(2);
+    });
+
+    it('should extract all unique options with correct quantities from single-select column', () => {
+      const rows = [
+        { values: { selectColumn: pdfDocumentType } },
+        { values: { selectColumn: pdfDocumentType } },
+        { values: { selectColumn: videoDocumentType } },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'selectColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      const pdfOption = result.find((opt) => opt.name === 'PDF');
+      const videoOption = result.find((opt) => opt.name === 'Video');
+      expect(pdfOption?.quantity).toBe(2);
+      expect(videoOption?.quantity).toBe(1);
+    });
+
+    it('should handle string columns correctly', () => {
+      const rows = [
+        { values: { stringColumn: 'Value A' } },
+        { values: { stringColumn: 'Value A' } },
+        { values: { stringColumn: 'Value B' } },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'stringColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      const valueAOption = result.find((opt) => opt.name === 'Value A');
+      const valueBOption = result.find((opt) => opt.name === 'Value B');
+      expect(valueAOption?.quantity).toBe(2);
+      expect(valueBOption?.quantity).toBe(1);
+    });
+
+    it('should skip rows with null or undefined values for the target column', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily] } },
+        { values: { multiSelectColumn: null } },
+        { values: { multiSelectColumn: undefined } },
+        { values: {} },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(1);
+      expect(result[0].quantity).toBe(1);
+    });
+  });
+
+  describe('when filtering with active filters', () => {
+    it('should only count rows matching other active filters', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], selectColumn: pdfDocumentType } },
+        { values: { multiSelectColumn: [hplcProductFamily], selectColumn: videoDocumentType } },
+        { values: { multiSelectColumn: [aiaClProductFamily], selectColumn: pdfDocumentType } },
+      ] as any;
+
+      const currentFilters = { selectColumn: 'PDF' };
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        currentFilters,
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      const hplcOption = result.find((opt) => opt.name === 'HPLC Applications');
+      const aiaOption = result.find((opt) => opt.name === 'AIA-CL');
+      expect(hplcOption?.quantity).toBe(1); // Only one HPLC with PDF
+      expect(aiaOption?.quantity).toBe(1); // Only one AIA-CL with PDF
+    });
+
+    it('should exclude current column from filter matching', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], selectColumn: pdfDocumentType } },
+        { values: { multiSelectColumn: [aiaClProductFamily], selectColumn: pdfDocumentType } },
+      ] as any;
+
+      const currentFilters = {
+        multiSelectColumn: 'HPLC Applications',
+        selectColumn: 'PDF',
+      };
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        currentFilters,
+        {},
+        cache
+      );
+
+      // Should show both options because we exclude current column from matching
+      expect(result).toHaveLength(2);
+      expect(result[0].quantity).toBe(1);
+      expect(result[1].quantity).toBe(1);
+    });
+
+    it('should handle multiple active filters correctly', () => {
+      const rows = [
+        {
+          values: {
+            multiSelectColumn: [hplcProductFamily],
+            selectColumn: pdfDocumentType,
+            stringColumn: 'Test1',
+          },
+        },
+        {
+          values: {
+            multiSelectColumn: [hplcProductFamily],
+            selectColumn: pdfDocumentType,
+            stringColumn: 'Test2',
+          },
+        },
+        {
+          values: {
+            multiSelectColumn: [aiaClProductFamily],
+            selectColumn: videoDocumentType,
+            stringColumn: 'Test2',
+          },
+        },
+        {
+          values: {
+            multiSelectColumn: [hplcProductFamily],
+            selectColumn: videoDocumentType,
+            stringColumn: 'Test3',
+          },
+        },
+      ] as any;
+
+      const activeFilters = {
+        selectColumn: 'PDF',
+        stringColumn: 'Test2',
+      };
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        activeFilters,
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      expect(result[0].name).toBe('AIA-CL');
+      expect(result[0].quantity).toBe(0);
+    });
+
+    it('should return all options with zero quantities when no rows match filters', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], selectColumn: pdfDocumentType } },
+        { values: { multiSelectColumn: [aiaClProductFamily], selectColumn: pdfDocumentType } },
+      ] as any;
+
+      const currentFilters = { selectColumn: 'Video' }; // No rows have Video
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        currentFilters,
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      expect(result[0].quantity).toBe(0);
+      expect(result[1].quantity).toBe(0);
+    });
+  });
+
+  describe('when using tolerance configuration', () => {
+    it('should apply tolerance when matching numeric filters', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], rt_min: 4.5 } },
+        { values: { multiSelectColumn: [hplcProductFamily], rt_min: 5.0 } },
+        { values: { multiSelectColumn: [aiaClProductFamily], rt_min: 6.5 } },
+      ] as any;
+
+      const activeFilters = { rt_min: 5 };
+      const toleranceConfig = { rt_min: 1 };
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        activeFilters as any,
+        toleranceConfig,
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      const hplcOption = result?.find((opt) => opt.name === 'HPLC Applications');
+      const aiaOption = result?.find((opt) => opt.name === 'AIA-CL');
+      expect(hplcOption?.quantity).toBe(2); // Both within tolerance
+      expect(aiaOption?.quantity).toBe(0); // 6.5 is outside tolerance of 5±1
+    });
+
+    it('should exclude rows outside tolerance range', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], rt_min: 3.5 } },
+        { values: { multiSelectColumn: [hplcProductFamily], rt_min: 5.0 } },
+        { values: { multiSelectColumn: [aiaClProductFamily], rt_min: 7.0 } },
+      ] as any;
+
+      const currentFilters = { rt_min: 5 };
+      const toleranceConfig = { rt_min: 1 };
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        currentFilters as any,
+        toleranceConfig,
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      const hplcOption = result.find((opt) => opt.name === 'HPLC Applications');
+      const aiaOption = result.find((opt) => opt.name === 'AIA-CL');
+      expect(hplcOption?.quantity).toBe(1); // Only one within tolerance
+      expect(aiaOption?.quantity).toBe(0); // Outside tolerance
+    });
+
+    it('should handle multiple tolerance configurations', () => {
+      const rows = [
+        { values: { selectColumn: hplcProductFamily, rt_min: 4.5 } },
+        { values: { selectColumn: hplcProductFamily, rt_min: 5.5 } },
+        { values: { selectColumn: aiaClProductFamily, rt_min: 6, rt_max: 7.0 } },
+      ] as any;
+
+      const currentFilters = { rt_min: 5, rt_max: 6 };
+      const toleranceConfig = { rt_min: 1, rt_max: 1 };
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'selectColumn',
+        currentFilters as any,
+        toleranceConfig,
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+      const hplcOption = result?.find((opt) => opt.name === 'AIA-CL');
+      expect(hplcOption?.quantity).toBe(1); // Both match tolerance
+    });
+  });
+
+  describe('when using custom sort order', () => {
+    it('should sort options according to custom order', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily] } },
+        { values: { multiSelectColumn: [aiaClProductFamily] } },
+        { values: { multiSelectColumn: [videoDocumentType] } },
+      ] as any;
+
+      const customSortOrder = [
+        { uid: '4', text: 'Video' },
+        { uid: '1', text: 'HPLC Applications' },
+        { uid: '2', text: 'AIA-CL' },
+      ];
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache,
+        customSortOrder
+      );
+
+      expect(result).toHaveLength(3);
+      expect(result[0].name).toBe('Video');
+      expect(result[1].name).toBe('HPLC Applications');
+      expect(result[2].name).toBe('AIA-CL');
+    });
+
+    it('should place items not in custom order at the end', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily] } },
+        { values: { multiSelectColumn: [aiaClProductFamily] } },
+        { values: { multiSelectColumn: [videoDocumentType] } },
+      ] as any;
+
+      const customSortOrder = [{ uid: '1', text: 'HPLC Applications' }];
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache,
+        customSortOrder
+      );
+
+      expect(result).toHaveLength(3);
+      expect(result[0].name).toBe('HPLC Applications');
+      // Other two remain but order between them is not guaranteed
+    });
+
+    it('should match custom order by both uid and name', () => {
+      const rows = [
+        { values: { stringColumn: 'Alpha' } },
+        { values: { stringColumn: 'Beta' } },
+        { values: { stringColumn: 'Gamma' } },
+      ] as any;
+
+      const customSortOrder = [
+        { uid: 'Gamma', text: 'Gamma' },
+        { uid: 'Alpha', text: 'Alpha' },
+        { uid: 'Beta', text: 'Beta' },
+      ];
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'stringColumn',
+        {},
+        {},
+        cache,
+        customSortOrder
+      );
+
+      expect(result).toHaveLength(3);
+      expect(result[0].name).toBe('Gamma');
+      expect(result[1].name).toBe('Alpha');
+      expect(result[2].name).toBe('Beta');
+    });
+  });
+
+  describe('when using default sorting', () => {
+    it('should sort alphabetically by default', () => {
+      const rows = [
+        { values: { multiSelectColumn: [videoDocumentType] } },
+        { values: { multiSelectColumn: [hplcProductFamily] } },
+        { values: { multiSelectColumn: [aiaClProductFamily] } },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(3);
+      expect(result[0].name).toBe('AIA-CL');
+      expect(result[1].name).toBe('HPLC Applications');
+      expect(result[2].name).toBe('Video');
+    });
+
+    it('should sort numerically when values are numbers', () => {
+      const item1 = { ...pdfDocumentType, id: '1', name: '1' };
+      const item2 = { ...pdfDocumentType, id: '2', name: '2' };
+      const item10 = { ...pdfDocumentType, id: '10', name: '10' };
+      const item20 = { ...pdfDocumentType, id: '20', name: '20' };
+
+      const rows = [
+        { values: { selectColumn: item20 } },
+        { values: { selectColumn: item2 } },
+        { values: { selectColumn: item10 } },
+        { values: { selectColumn: item1 } },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'selectColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(4);
+      expect(result[0].name).toBe('1');
+      expect(result[1].name).toBe('2');
+      expect(result[2].name).toBe('10');
+      expect(result[3].name).toBe('20');
+    });
+
+    it('should handle mixed numeric and non-numeric values', () => {
+      const rows = [
+        { values: { stringColumn: 'Text' } },
+        { values: { stringColumn: '10' } },
+        { values: { stringColumn: '2' } },
+        { values: { stringColumn: 'Alpha' } },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'stringColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(4);
+      // Numbers should be sorted numerically first, then text alphabetically
+      expect(result[0].name).toBe('2');
+      expect(result[1].name).toBe('10');
+    });
+  });
+
+  describe('when using cache', () => {
+    it('should cache results and return cached values on subsequent calls', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily] } },
+        { values: { multiSelectColumn: [aiaClProductFamily] } },
+      ] as any;
+
+      const result1 = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      const result2 = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      // Should return exact same reference from cache
+      expect(result2).toBe(result1);
+      expect(cache.size).toBe(1);
+    });
+
+    it('should create different cache keys for different column IDs', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], selectColumn: pdfDocumentType } },
+      ] as any;
+
+      getMemoizedFilterOptionsForColumnWithTolerance(rows, 'multiSelectColumn', {}, {}, cache);
+      getMemoizedFilterOptionsForColumnWithTolerance(rows, 'selectColumn', {}, {}, cache);
+
+      expect(cache.size).toBe(2);
+    });
+
+    it('should create different cache keys for different filter states', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], selectColumn: pdfDocumentType } },
+      ] as any;
+
+      getMemoizedFilterOptionsForColumnWithTolerance(rows, 'multiSelectColumn', {}, {}, cache);
+
+      getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        { selectColumn: 'PDF' },
+        {},
+        cache
+      );
+
+      expect(cache.size).toBe(2);
+    });
+
+    it('should create different cache keys for different tolerance configs', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], stringColumn: '5.0' } },
+      ] as any;
+
+      getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        { stringColumn: '5' },
+        {},
+        cache
+      );
+
+      getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        { stringColumn: '5' },
+        { stringColumn: 1 },
+        cache
+      );
+
+      expect(cache.size).toBe(2);
+    });
+
+    it('should work without cache parameter', () => {
+      const rows = [{ values: { multiSelectColumn: [hplcProductFamily] } }] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {}
+      );
+
+      expect(result).toHaveLength(1);
+      expect(result[0].name).toBe('HPLC Applications');
+    });
+
+    it('should exclude current column from cache key generation', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily], selectColumn: pdfDocumentType } },
+      ] as any;
+
+      getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        { multiSelectColumn: 'HPLC Applications', selectColumn: 'PDF' },
+        {},
+        cache
+      );
+
+      getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        { multiSelectColumn: 'AIA-CL', selectColumn: 'PDF' },
+        {},
+        cache
+      );
+
+      // Should use same cache because only current column filter changed
+      expect(cache.size).toBe(1);
+    });
+  });
+
+  describe('when handling edge cases', () => {
+    it('should handle empty rows array', () => {
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        [],
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toEqual([]);
+    });
+
+    it('should handle rows with missing values property', () => {
+      const rows = [
+        { multiSelectColumn: [hplcProductFamily] },
+        { multiSelectColumn: [aiaClProductFamily] },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      expect(result).toHaveLength(2);
+    });
+
+    it('should maintain quantity accuracy with duplicate option names across rows', () => {
+      const rows = [
+        { values: { multiSelectColumn: [hplcProductFamily, aiaClProductFamily] } },
+        { values: { multiSelectColumn: [hplcProductFamily] } },
+        { values: { multiSelectColumn: [hplcProductFamily, aiaClProductFamily] } },
+      ] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      const hplcOption = result.find((opt) => opt.name === 'HPLC Applications');
+      const aiaOption = result.find((opt) => opt.name === 'AIA-CL');
+      expect(hplcOption?.quantity).toBe(3);
+      expect(aiaOption?.quantity).toBe(2);
+    });
+
+    it('should preserve all properties from original ColumnItem', () => {
+      const rows = [{ values: { multiSelectColumn: [hplcProductFamily] } }] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'multiSelectColumn',
+        {},
+        {},
+        cache
+      );
+
+      const option = result[0];
+      expect(option.id).toBe('1');
+      expect(option.label).toBe('HPLC Applications');
+      expect(option.type).toBe('option');
+      expect(option.createdAt).toBe('2023-01-01T00:00:00.000Z');
+      expect(option.quantity).toBe(1);
+    });
+
+    it('should create proper ColumnItem structure for string columns', () => {
+      const rows = [{ values: { stringColumn: 'Test Value' } }] as any;
+
+      const result = getMemoizedFilterOptionsForColumnWithTolerance(
+        rows,
+        'stringColumn',
+        {},
+        {},
+        cache
+      );
+
+      const option = result[0];
+      expect(option.id).toBe('Test Value');
+      expect(option.name).toBe('Test Value');
+      expect(option.label).toBe('Test Value');
+      expect(option.type).toBe('string');
+      expect(option.quantity).toBe(1);
     });
   });
 });

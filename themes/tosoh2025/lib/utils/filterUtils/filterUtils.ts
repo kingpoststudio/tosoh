@@ -73,26 +73,26 @@ export const checkColumnValueMatch = (
   }
 
   // Handle comma-separated values for checkbox-type filters
-  if (filterValue.includes(',')) {
-    const filterValues = filterValue.split(',');
-    return filterValues.some((val) => checkColumnValueMatch(columnValue, val.trim(), tolerance));
+  if (typeof filterValue === 'string' && filterValue?.includes(',')) {
+    const filterValues = filterValue?.split(',');
+    return filterValues?.some((val) => checkColumnValueMatch(columnValue, val?.trim(), tolerance));
   }
 
   if (isMultiSelectColumn(columnValue)) {
-    return columnValue.some((item) => item.name === filterValue);
+    return columnValue?.some((item) => item.name === filterValue);
   }
 
   if (isSelectColumn(columnValue)) {
-    return columnValue.name === filterValue;
+    return columnValue?.name === filterValue;
   }
 
   if (isStringColumn(columnValue)) {
-    return columnValue.toLowerCase().includes(filterValue.toLowerCase());
+    return columnValue?.toLowerCase().includes(filterValue?.toLowerCase());
   }
 
   if (isNumericColumn(columnValue)) {
-    const filterValueTrimmed = filterValue.trim();
-    const numericValue = parseFloat(columnValue.toString());
+    const filterValueTrimmed = typeof filterValue === 'string' ? filterValue?.trim() : filterValue;
+    const numericValue = parseFloat(columnValue?.toString());
     const filterNumericValue = parseFloat(filterValueTrimmed);
 
     if (isNaN(numericValue) || isNaN(filterNumericValue)) {
@@ -166,13 +166,13 @@ export const getMemoizedFilterOptionsForColumnWithTolerance = (
   customSortOrder?: Array<{ uid: string; text: string }>
 ): FilterOptionWithQuantity[] => {
   // Create cache key based on filter and current filter state (excluding current column)
-  const filterStateKey = Object.entries(currentFilters)
+  const filterStateKey = Object?.entries(currentFilters)
     .filter(([key]) => key !== columnId)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([key, value]) => `${key}:${value}`)
     .join('|');
 
-  const toleranceKey = Object.entries(toleranceConfig)
+  const toleranceKey = Object?.entries(toleranceConfig)
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([key, value]) => `${key}:${value}`)
     .join('|');
