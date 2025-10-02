@@ -31,7 +31,9 @@
       {%- for breadcrumb in breadcrumbs %}
 
         {% if !loop.last %}
-          <a href="{{ breadcrumb.url.href }}" class="text-nickel cursor-pointer text-lg">{{ breadcrumb.title }}</a>
+          <a href="{{ breadcrumb.url.href }}" class="text-nickel break-word cursor-pointer text-lg">
+            {{ breadcrumb.title }}
+          </a>
           <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
             <svg
               class="max-h-inherit max-w-inherit"
@@ -46,7 +48,7 @@
         {% endif %}
 
         {% if loop.last %}
-          <span class="text-default text-lg font-bold">{{ breadcrumb.title }}</span>
+          <span class="text-default break-word text-lg font-bold">{{ breadcrumb.title }}</span>
         {% endif %}
       {%- endfor -%}
     </div>

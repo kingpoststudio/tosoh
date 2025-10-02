@@ -34,19 +34,6 @@ const generateFields = () => {
       }),
     ]),
     topicFilters,
-    // groupField('filters', 'Filters', {
-    //   children: [
-    //     textField('hubdb_column_id', 'HubDB Column ID', {
-    //       inline_help_text:
-    //         'The ID of the column you wish to filter. This is not the label for the column, but the single-string ID (i.e., <code>column_id</code>).',
-    //       required: true,
-    //     }),
-    //   ],
-    //   occurrence: {
-    //     min: 1,
-    //     max: null,
-    //   },
-    // }),
     booleanField('display_video_download', 'Display video download?', {
       inline_help_text:
         'If enabled, a button will be displayed on the video player that allows the user to download the video.',
