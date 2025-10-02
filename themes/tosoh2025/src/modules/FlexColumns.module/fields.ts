@@ -20,7 +20,6 @@ import {
   linkVariantChoices,
   paddingFields,
   presetPaddingFields,
-  revealSettingsGroup,
   sizeChoices,
   textAlignmentChoices,
   themeColorChoices,
@@ -446,7 +445,6 @@ const generateFields = () => {
         }),
         columnSettingsGroup,
         animationSettingsGroup,
-        revealSettingsGroup,
       ],
       occurrence: {
         sorting_label_field: 'columns.type',

@@ -29,7 +29,7 @@
   --spacing-5xl: 16rem;
 
   --spacing-header-height-mobile: 6rem;
-  --spacing-header-height-desktop: 7rem;
+  --spacing-header-height-desktop: 7.25rem;
 
   --container-8xl: 96rem;
   --container-12xl: 120rem;
@@ -128,7 +128,10 @@ button:not([class*='ToolbarIconButton__IconButton']),
   }
 
   &.plain {
-    @apply text-default border-none bg-none p-0 shadow-none focus:ring-0! active:shadow-none active:ring-0! active:outline-none!;
+    @apply text-default border-0 bg-none p-0 shadow-none focus:ring-0! active:shadow-none active:ring-0! active:outline-none!;
+    &.border {
+      @apply border!;
+    }
   }
 
   &.dark {

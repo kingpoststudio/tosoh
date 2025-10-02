@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tosoh Tailwind Configuration Demo</title>
+
+    <script type="module" src="../lib/components/Header/mock.ts"></script>
+    <script type="module" src="../lib/main.ts"></script>
+    <link rel="stylesheet" href="../lib/styles/main.css" />
+
+    <script>
+      function trimText(text, length) {
+        return text.length > length ? text.substring(0, length) + '...' : text;
+      }
+    </script>
+  </head>
+
+  <body class="min-h-[100vh]">
+    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
+      <div class="gap-sm flex w-full flex-col justify-between md:flex-row">
+        <div class="gap-xs flex flex-col">
+          <h6 class="text-imperial-red tracking-widest">Hi</h6>
+
+          <h3 class="font-bold">Hi</h3>
+        </div>
+
+        <div class="gap-sm align-center my-auto flex h-full items-center md:justify-center">
+          <button
+            aria-label="Previous slide"
+            class="group plain bg-imperial-red embla__prev disabled:border-nickel! border-imperial-red flex h-8 w-8 items-center justify-center rounded-full! border disabled:bg-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="35"
+              viewBox="0 0 21 35"
+              fill="none"
+              class="h-4 w-4"
+            >
+              <path
+                d="M17.4663 0.693359L20.2059 3.43304L6.15403 17.4849L20.2059 31.5368L17.4663 34.2765L0.76305 17.4849L17.4663 0.693359Z"
+                class="group-disabled:fill-nickel fill-white"
+              />
+            </svg>
+          </button>
+          <button
+            class="group plain bg-imperial-red embla__next disabled:border-nickel! border-imperial-red flex h-8 w-8 items-center justify-center rounded-full! border disabled:bg-white"
+            aria-label="Next slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="35"
+              viewBox="0 0 21 35"
+              fill="none"
+              class="h-4 w-4"
+            >
+              <path
+                d="M3.53362 0.693359L0.793945 3.43304L14.8458 17.4849L0.793945 31.5368L3.53362 34.2765L20.2368 17.4849L3.53362 0.693359Z"
+                class="group-disabled:fill-nickel fill-white"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="gap-sm flex flex-col">
+        <div class="embla w-full overflow-hidden">
+          <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
+            <a
+              href="//145184808.hs-sites-eu1.com/blog/specifica-clone-clone"
+              class="group embla__slide border-border relative flex w-full min-w-[100%] basis-[100%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%]"
+            >
+              <div class="relative h-[16rem] max-h-[16rem] w-full flex-shrink-0 overflow-hidden">
+                <img
+                  src="https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=360&amp;name=inotiv-lab-tech.jpg"
+                  alt="Specifica (Clone) (Clone)"
+                  width="360"
+                  srcset="
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=180&amp;name=inotiv-lab-tech.jpg   180w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=360&amp;name=inotiv-lab-tech.jpg   360w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=540&amp;name=inotiv-lab-tech.jpg   540w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=720&amp;name=inotiv-lab-tech.jpg   720w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=900&amp;name=inotiv-lab-tech.jpg   900w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=1080&amp;name=inotiv-lab-tech.jpg 1080w
+                  "
+                  sizes="(max-width: 360px) 100vw, 360px"
+                  class="absolute top-0 left-0 h-full w-full object-cover transition-all duration-200 group-hover:scale-105"
+                />
+              </div>
+              <div class="p-md gap-sm flex flex-col">
+                <div class="gap-sm flex justify-between">
+                  <p class="text-imperial-red font-normal">July 23, 2025</p>
+                </div>
+                <h4 class="font-sans-narrow font-semibold">Specifica (Clone) (Clone)</h4>
+
+                <span class="text-nickel break-word line-clamp-2"
+                  >'adwdwadawdwadwdwa dawdwadwdwa dawdwadwdwa dawdwadw...<span
+                    class="text-imperial-red underline"
+                    >Read More</span
+                  ></span
+                >
+              </div>
+            </a>
+            <a
+              href="//145184808.hs-sites-eu1.com/blog/specifica-clone-clone"
+              class="group embla__slide border-border relative flex w-full min-w-[100%] basis-[100%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%]"
+            >
+              <div class="relative h-[16rem] max-h-[16rem] w-full flex-shrink-0 overflow-hidden">
+                <img
+                  src="https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=360&amp;name=inotiv-lab-tech.jpg"
+                  alt="Specifica (Clone) (Clone)"
+                  width="360"
+                  srcset="
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=180&amp;name=inotiv-lab-tech.jpg   180w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=360&amp;name=inotiv-lab-tech.jpg   360w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=540&amp;name=inotiv-lab-tech.jpg   540w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=720&amp;name=inotiv-lab-tech.jpg   720w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=900&amp;name=inotiv-lab-tech.jpg   900w,
+                    https://145184808.hs-sites-eu1.com/hs-fs/hubfs/inotiv-lab-tech.jpg?width=1080&amp;name=inotiv-lab-tech.jpg 1080w
+                  "
+                  sizes="(max-width: 360px) 100vw, 360px"
+                  class="absolute top-0 left-0 h-full w-full object-cover transition-all duration-200 group-hover:scale-105"
+                />
+              </div>
+              <div class="p-md gap-sm flex flex-col">
+                <div class="gap-sm flex justify-between">
+                  <p class="text-imperial-red font-normal">July 23, 2025</p>
+                </div>
+                <h4 class="font-sans-narrow font-semibold">Specifica (Clone) (Clone)</h4>
+
+                <span class="text-nickel break-word line-clamp-2">'adwdwadawdwadwdwa'</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <a
+          class="button outlined w-fit!"
+          href="//145184808.hs-sites-eu1.com/blog/specifica-clone-clone"
+          >View All</a
+        >
+      </div>
+    </div>
+  </body>
+</html>

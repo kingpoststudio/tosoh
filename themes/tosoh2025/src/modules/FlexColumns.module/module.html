@@ -45,7 +45,7 @@
   {% set text_align = content.text_align or "text-left" %}
   <div class="{{ text_align }} gap-base flex flex-col">
     {%- if content.eyebrow %}
-      <div class="text-imperial-red text-2xl font-light">{{ content.eyebrow }}</div>
+      <div class="text-imperial-red text-2xl font-light tracking-widest">{{ content.eyebrow }}</div>
     {%- endif %}
     {%- if content.title %}
       <div class="text-5xl font-semibold">{{ content.title }}</div>
