@@ -1,5 +1,10 @@
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { extractToleranceConfig, parseUrlFilters, checkColumnValueMatch } from './filterUtils';
+import {
+  extractToleranceConfig,
+  parseUrlFilters,
+  checkColumnValueMatch,
+  extractFilterOptions,
+} from './filterUtils';
 import type { TopicFilters } from '../../../types/fields';
 
 // Test data
@@ -385,6 +390,357 @@ describe('checkColumnValueMatch', () => {
     it('should differentiate between string "0" and numeric 0', () => {
       const result = checkColumnValueMatch('Product 0 Guide', '0');
       expect(result).toBe(true);
+    });
+  });
+});
+
+describe('extractFilterOptions', () => {
+  // Additional test data for extractFilterOptions
+  const turbidimetryProductFamily = {
+    id: '5',
+    name: 'Turbidimetry',
+    label: 'Turbidimetry',
+    type: 'option' as const,
+    createdAt: '2023-01-01T00:00:00.000Z',
+    createdByUserId: 1,
+    updatedAt: '2023-01-01T00:00:00.000Z',
+    updatedByUserId: 1,
+    order: 1,
+  };
+
+  const zebraProductFamily = {
+    id: '6',
+    name: 'Zebra',
+    label: 'Zebra',
+    type: 'option' as const,
+    createdAt: '2023-01-01T00:00:00.000Z',
+    createdByUserId: 1,
+    updatedAt: '2023-01-01T00:00:00.000Z',
+    updatedByUserId: 1,
+    order: 1,
+  };
+
+  const imageDocumentType = {
+    id: '7',
+    name: 'Image',
+    label: 'Image',
+    type: 'option' as const,
+    createdAt: '2023-01-01T00:00:00.000Z',
+    createdByUserId: 1,
+    updatedAt: '2023-01-01T00:00:00.000Z',
+    updatedByUserId: 1,
+    order: 1,
+  };
+
+  describe('when handling empty or invalid input', () => {
+    it('should return empty object for empty rows array', () => {
+      const result = extractFilterOptions([]);
+      expect(result).toEqual({});
+    });
+
+    it('should handle rows with no values property', () => {
+      const rows = [
+        {
+          product_family: [hplcProductFamily],
+          document_type: pdfDocumentType,
+        },
+      ] as any;
+
+      const result = extractFilterOptions(rows);
+      expect(result).toHaveProperty('product_family');
+      expect(result).toHaveProperty('document_type');
+    });
+  });
+
+  describe('when extracting from single-select columns', () => {
+    it('should extract unique options from single-select column', () => {
+      const rows = [
+        { values: { document_type: pdfDocumentType } },
+        { values: { document_type: videoDocumentType } },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.document_type).toHaveLength(2);
+      expect(result.document_type).toContainEqual(pdfDocumentType);
+      expect(result.document_type).toContainEqual(videoDocumentType);
+    });
+
+    it('should deduplicate single-select options with same name', () => {
+      const rows = [
+        { values: { document_type: pdfDocumentType } },
+        { values: { document_type: pdfDocumentType } },
+        { values: { document_type: pdfDocumentType } },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.document_type).toHaveLength(1);
+      expect(result.document_type).toContainEqual(pdfDocumentType);
+    });
+
+    it('should sort single-select options alphabetically', () => {
+      const rows = [
+        { values: { document_type: videoDocumentType } }, // Video
+        { values: { document_type: pdfDocumentType } }, // PDF
+        { values: { document_type: imageDocumentType } }, // Image
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.document_type).toHaveLength(3);
+      expect(result.document_type?.[0].name).toBe('Image');
+      expect(result.document_type?.[1].name).toBe('PDF');
+      expect(result.document_type?.[2].name).toBe('Video');
+    });
+  });
+
+  describe('when extracting from multi-select columns', () => {
+    it('should extract all unique options from multi-select column', () => {
+      const rows = [{ values: { product_family: [hplcProductFamily, aiaClProductFamily] } }] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.product_family).toHaveLength(2);
+      expect(result.product_family).toContainEqual(hplcProductFamily);
+      expect(result.product_family).toContainEqual(aiaClProductFamily);
+    });
+
+    it('should deduplicate options across multiple rows with multi-select', () => {
+      const rows = [
+        { values: { product_family: [hplcProductFamily, aiaClProductFamily] } },
+        { values: { product_family: [aiaClProductFamily, turbidimetryProductFamily] } },
+        { values: { product_family: [hplcProductFamily] } },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.product_family).toHaveLength(3);
+      expect(result.product_family).toContainEqual(hplcProductFamily);
+      expect(result.product_family).toContainEqual(aiaClProductFamily);
+      expect(result.product_family).toContainEqual(turbidimetryProductFamily);
+    });
+
+    it('should sort multi-select options alphabetically', () => {
+      const rows = [
+        {
+          values: {
+            product_family: [
+              zebraProductFamily, // Zebra
+              aiaClProductFamily, // AIA-CL
+              hplcProductFamily, // HPLC Applications
+              turbidimetryProductFamily, // Turbidimetry
+            ],
+          },
+        },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.product_family).toHaveLength(4);
+      expect(result.product_family?.[0].name).toBe('AIA-CL');
+      expect(result.product_family?.[1].name).toBe('HPLC Applications');
+      expect(result.product_family?.[2].name).toBe('Turbidimetry');
+      expect(result.product_family?.[3].name).toBe('Zebra');
+    });
+
+    it('should handle empty multi-select arrays', () => {
+      const rows = [{ values: { product_family: [] } }] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.product_family).toEqual([]);
+    });
+  });
+
+  describe('when extracting from mixed column types', () => {
+    it('should handle rows with both single-select and multi-select columns', () => {
+      const rows = [
+        {
+          values: {
+            product_family: [hplcProductFamily, aiaClProductFamily],
+            document_type: pdfDocumentType,
+          },
+        },
+        {
+          values: {
+            product_family: [turbidimetryProductFamily],
+            document_type: videoDocumentType,
+          },
+        },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.product_family).toHaveLength(3);
+      expect(result.document_type).toHaveLength(2);
+    });
+
+    it('should process multiple different columns correctly', () => {
+      const rows = [
+        {
+          values: {
+            product_family: [hplcProductFamily],
+            document_type: pdfDocumentType,
+            another_column: videoDocumentType,
+          },
+        },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result).toHaveProperty('product_family');
+      expect(result).toHaveProperty('document_type');
+      expect(result).toHaveProperty('another_column');
+      expect(result.product_family).toHaveLength(1);
+      expect(result.document_type).toHaveLength(1);
+      expect(result.another_column).toHaveLength(1);
+    });
+  });
+
+  describe('when handling sorting edge cases', () => {
+    it('should perform case-insensitive alphabetical sorting', () => {
+      const lowercase = {
+        ...pdfDocumentType,
+        id: '10',
+        name: 'abc',
+      };
+      const uppercase = {
+        ...pdfDocumentType,
+        id: '11',
+        name: 'ABC',
+      };
+      const mixed = {
+        ...pdfDocumentType,
+        id: '12',
+        name: 'AbC',
+      };
+
+      const rows = [
+        { values: { test_column: uppercase } },
+        { values: { test_column: lowercase } },
+        { values: { test_column: mixed } },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      // All three should be present and sorted (case-insensitive)
+      expect(result.test_column).toHaveLength(3);
+    });
+
+    it('should handle numeric strings in sorting', () => {
+      const item1 = { ...pdfDocumentType, id: '20', name: 'Item 1' };
+      const item2 = { ...pdfDocumentType, id: '21', name: 'Item 2' };
+      const item10 = { ...pdfDocumentType, id: '22', name: 'Item 10' };
+      const item20 = { ...pdfDocumentType, id: '23', name: 'Item 20' };
+
+      const rows = [
+        { values: { test_column: item20 } },
+        { values: { test_column: item1 } },
+        { values: { test_column: item10 } },
+        { values: { test_column: item2 } },
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      // With numeric: true, should sort as Item 1, Item 2, Item 10, Item 20
+      expect(result.test_column).toHaveLength(4);
+      expect(result.test_column?.[0].name).toBe('Item 1');
+      expect(result.test_column?.[1].name).toBe('Item 2');
+      expect(result.test_column?.[2].name).toBe('Item 10');
+      expect(result.test_column?.[3].name).toBe('Item 20');
+    });
+  });
+
+  describe('when processing complex real-world scenarios', () => {
+    it('should handle the mock rows data correctly', () => {
+      const result = extractFilterOptions(mockRows) as any;
+
+      expect(result.product_family).toHaveLength(2);
+      expect(result.document_type).toHaveLength(2);
+
+      // Check alphabetical ordering
+      expect(result.product_family?.[0].name).toBe('AIA-CL');
+      expect(result.product_family?.[1].name).toBe('HPLC Applications');
+      expect(result.document_type?.[0].name).toBe('PDF');
+      expect(result.document_type?.[1].name).toBe('Video');
+    });
+
+    it('should extract unique options from large dataset with many duplicates', () => {
+      const rows = Array.from({ length: 100 }, (_, i) => ({
+        values: {
+          product_family: [
+            hplcProductFamily,
+            i % 2 === 0 ? aiaClProductFamily : turbidimetryProductFamily,
+          ],
+          document_type: i % 3 === 0 ? pdfDocumentType : videoDocumentType,
+        },
+      })) as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      // Should still only have unique items despite 100 rows
+      expect(result.product_family).toHaveLength(3);
+      expect(result.document_type).toHaveLength(2);
+    });
+
+    it('should handle rows with varying column presence', () => {
+      const rows = [
+        { values: { product_family: [hplcProductFamily], document_type: pdfDocumentType } },
+        { values: { product_family: [aiaClProductFamily] } }, // Missing document_type
+        { values: { document_type: videoDocumentType } }, // Missing product_family
+        { values: { other_column: imageDocumentType } }, // Different column
+      ] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      expect(result.product_family).toHaveLength(2);
+      expect(result.document_type).toHaveLength(2);
+      expect(result.other_column).toHaveLength(1);
+    });
+  });
+
+  describe('when handling edge cases and data integrity', () => {
+    it('should maintain all item properties during extraction', () => {
+      const rows = [{ values: { product_family: [hplcProductFamily] } }] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      const extractedItem = result.product_family?.[0];
+      expect(extractedItem).toEqual(hplcProductFamily);
+      expect(extractedItem?.id).toBe('1');
+      expect(extractedItem?.label).toBe('HPLC Applications');
+      expect(extractedItem?.type).toBe('option');
+      expect(extractedItem?.createdAt).toBe('2023-01-01T00:00:00.000Z');
+    });
+
+    it('should not mutate original rows data', () => {
+      const rows = [
+        {
+          values: {
+            product_family: [hplcProductFamily, aiaClProductFamily],
+            document_type: pdfDocumentType,
+          },
+        },
+      ] as any;
+
+      const originalRowsCopy = JSON.parse(JSON.stringify(rows));
+      extractFilterOptions(rows);
+
+      expect(rows).toEqual(originalRowsCopy);
+    });
+
+    it('should handle items with identical names but different IDs', () => {
+      const item1 = { ...pdfDocumentType, id: '100', name: 'Duplicate Name' };
+      const item2 = { ...pdfDocumentType, id: '101', name: 'Duplicate Name' };
+
+      const rows = [{ values: { test_column: item1 } }, { values: { test_column: item2 } }] as any;
+
+      const result = extractFilterOptions(rows) as any;
+
+      // Should keep only one based on name matching
+      expect(result.test_column).toHaveLength(1);
+      expect(result.test_column?.[0].name).toBe('Duplicate Name');
     });
   });
 });
