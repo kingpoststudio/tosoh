@@ -1,0 +1,107 @@
+<!--
+    templateType: blog_listing
+    isAvailableForNewContent: true
+    label: Blog Listing
+-->
+
+{% extends "../layouts/base.html" %}
+{% block body %}
+
+  {% set blog_id = content.parent_blog.id or "default" %}
+  {% set standard_posts = [] %}
+  {%
+    set featured_posts = topic ? blog_recent_tag_posts(blog_id, [
+      topic,
+      "featured"
+    ], 9, "AND") : blog_recent_tag_posts(blog_id, "featured", 9)
+  %}
+
+  {% for post in contents %}
+
+    {% set tag_str = post.tag_list|map("slug")|join(" ") %}
+    {% if "featured" in tag_str == false %}
+      {% do standard_posts.append(post) %}
+    {% endif %}
+  {% endfor %}
+
+  {%- macro render_listing(post) %}
+    <a
+      href="{{ post.absolute_url }}"
+      class="group embla__slide border-border relative flex min-h-full w-full min-w-[100%] basis-[100%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%]">
+      <div class="relative h-[12rem] max-h-[12rem] w-full overflow-hidden">
+        <img
+          src="{{ post.featured_image }}"
+          alt="{{ post.title }}"
+          class="absolute top-0 left-0 h-full w-full object-cover transition-all duration-200 group-hover:scale-105"
+          width="360" />
+      </div>
+
+      <div class="p-md gap-sm flex flex-col">
+        <div class="gap-sm flex justify-between">
+          <p class="text-imperial-red font-normal">{{ post.publish_date|datetimeformat("%B %e, %Y") }}</p>
+        </div>
+        <h4 class="font-sans-narrow font-semibold">{{ post.name }}</h4>
+
+        <span class="text-nickel break-word line-clamp-2">
+          {{ post.meta_description|truncate(70) }}{{ post.meta_description|length >= 70 ? '...' : '.' }}
+          <span class="text-imperial-red underline">Read more</span>
+        </span>
+      </div>
+    </a>
+  {%- endmacro -%}
+
+  {# Blog Listing #}
+  <main>
+    {% if featured_posts|length > 0 and current_page_num == 1 %}
+      {# Featured Banner #}
+      {%
+        module "hero_banner_featured"
+        path="/TosohTheme2025/modules/HeroBanner",
+        type="simple",
+        eyebrow="<p class='font-semibold'>{{ featured_posts[0].tag_list[0].slug }}</p> • <p>{{ macros.calculate_reading_time(featured_posts[0]) }}</p>",
+        title="<h1 class=\"text-4xl\">{{ featured_posts[0].title }}</h1>",
+      %}
+    {% else %}
+      {# Standard Banner #}
+      {%
+        module "hero_banner"
+        path="/TosohTheme2025/modules/HeroBanner",
+        title="<h1 class=\"text-4xl\">Blog</h1>",
+      %}
+    {% endif %}
+    {%
+      module "blog_list_header"
+      path="/TosohTheme2025/modules/FlexColumns"
+    %}
+    {%
+      module "blog_tag_filter"
+      path="/TosohTheme2025/modules/blog/BlogTagFilter"
+    %}
+
+    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto w-full">
+      <div class="gap-md mx-auto flex flex-col">
+        {% for group in standard_posts|batch(4, false) %}
+          {% set groupIndex = loop.index0 %}
+          {% set isRevealed = groupIndex == 0 ? "isRevealed=\"true\"" : null %}
+
+          <tosoh-reveal-group groupId="{{ groupIndex }}" {{ isRevealed }}>
+            <div class="gap-base mx-auto grid w-fit grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-4">
+              {% for post in group %}
+                {% set tag_list = post.tag_list|map("slug")|join(" ") %}
+                {% if post %}
+                  {{ render_listing(post) }}
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            {% if not loop.last %}
+              <tosoh-reveal-group variant="action" groupId="{{ groupIndex + 1 }}" class="mt-lg mx-auto block w-fit">
+                <button>Load more</button>
+              </tosoh-reveal-group>
+            {% endif %}
+          </tosoh-reveal-group>
+        {% endfor %}
+      </div>
+    </div>
+  </main>
+{% endblock body %}

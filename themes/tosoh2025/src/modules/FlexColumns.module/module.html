@@ -15,15 +15,7 @@
       y="{{ column.animation_settings.y_travel }}"
       delay="{{ column.animation_settings.delay }}"
       duration="{{ column.animation_settings.duration }}">
-      {% if column.reveal_settings.is_concealed %}
-        {% set max_height = (column.reveal_settings.max_height or 32) ~ "rem" %}
-        <tosoh-reveal-below maxHeight="{{ max_height }}">
-          {{ caller() }}
-          <span slot="label">{{ column.reveal_settings.reveal_label }}</span>
-        </tosoh-reveal-below>
-      {% else %}
-        {{ caller() }}
-      {% endif %}
+      {{ caller() }}
     </tosoh-in-view>
   {%- else %}
     <div class="{{ size }} {{ alignment }} {{ justify }}">{{ caller() }}</div>

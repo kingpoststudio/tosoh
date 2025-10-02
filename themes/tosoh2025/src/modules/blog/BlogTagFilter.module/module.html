@@ -1,0 +1,19 @@
+{% set blog_id = content.parent_blog.id or "default" %}
+
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto w-full">
+  <tosoh-scroll-x scrollbarHeight="1px">
+    <div class="gap-md border-border mx-auto flex w-full min-w-lg border-b">
+      <a
+        href="{{ content.parent_blog.absolute_url }}"
+        class="link p-xs {{ not tag ? "bg-ghost-white text-imperial-red  rounded-t-2xl" : null }} flex items-center justify-center">
+        {{ module.show_all_label or "Show all" }}
+      </a>
+
+      {% for t in module.tags %}
+        {% set active = tag == t.tag.slug ? "bg-ghost-white text-imperial-red  rounded-t-2xl" : null %}
+        {% set tag_href = blog_tag_url(blog_id, t.tag.slug) %}
+        <a href="{{ tag_href }}" class="link {{ active }} p-xs flex items-center justify-center">{{ t.tag.name }}</a>
+      {% endfor %}
+    </div>
+  </tosoh-scroll-x>
+</div>
