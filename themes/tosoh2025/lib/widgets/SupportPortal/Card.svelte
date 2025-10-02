@@ -88,8 +88,7 @@
         class="button flex items-center justify-center gap-[1.25rem] text-center {viewAs === 'list'
           ? 'w-fit!'
           : 'w-full!'}"
-        href={`support-portal/${item.path}`}
-        role="button">View</a
+        href={`support-portal/${item.path}`}>View</a
       >
     {:else}
       <a

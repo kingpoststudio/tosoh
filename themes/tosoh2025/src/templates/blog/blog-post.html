@@ -1,0 +1,31 @@
+<!--
+    templateType: blog_post
+    isAvailableForNewContent: true
+    label: Blog Post
+-->
+
+{% extends "../layouts/base.html" %}
+{% block body %}
+  <main>
+    {%
+      module "hero_banner"
+      path="/TosohTheme2025/modules/HeroBanner",
+      type="simple",
+      eyebrow="{{ content.tag_list[0].slug }}",
+      title="<h2>{{ content.title }}</h2>",
+    %}
+
+    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto w-full">{{ content.post_body }}</div>
+
+    {%
+      module "related_blog_posts"
+      path="/TosohTheme2025/modules/blog/RelatedBlogPosts",
+      posts_to_display=6,
+      title="Related Blog Posts",
+      eyebrow="{{ content.tag_list[0].slug }}",
+      display_image=true,
+      read_more_label="Read More"
+      settings={"is_hidden": false}
+    %}
+  </main>
+{% endblock body %}

@@ -116,8 +116,7 @@ h6 {
 }
 
 button:not([class*='ToolbarIconButton__IconButton']),
-.button,
-*[role='button'] {
+.button {
   @apply px-md py-xs cursor-pointer rounded-lg border-2 font-normal transition-all duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 
   &:not(.outlined):not(.plain):not(.dark) {
