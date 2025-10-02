@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { parseUrlFilters } from './filterUtils';
 
 // Test data
@@ -75,6 +75,26 @@ const mockRows = [
 ] as any;
 
 describe('parseUrlFilters', () => {
+  beforeEach(() => {
+    // Mock window.location for tests that need it
+    const mockLocation = {
+      search: '',
+      href: 'http://localhost/',
+      origin: 'http://localhost',
+      pathname: '/',
+      hash: '',
+      host: 'localhost',
+      hostname: 'localhost',
+      port: '',
+      protocol: 'http:',
+    };
+    vi.stubGlobal('window', { location: mockLocation });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it('should parse URL search parameters into filter criteria', () => {
     const searchString = '?product_family=HPLC%20Applications&document_type=PDF';
     const result = parseUrlFilters(searchString);
@@ -88,5 +108,14 @@ describe('parseUrlFilters', () => {
   it('should return empty object for empty search string', () => {
     const result = parseUrlFilters('');
     expect(result).toEqual({});
+  });
+
+  it('should return from window.location.search if no search string is provided', () => {
+    window.location.search = '?product_family=HPLC%20Applications&document_type=PDF';
+    const result = parseUrlFilters();
+    expect(result).toEqual({
+      product_family: 'HPLC Applications',
+      document_type: 'PDF',
+    });
   });
 });
