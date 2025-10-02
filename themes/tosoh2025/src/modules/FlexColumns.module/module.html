@@ -26,17 +26,7 @@
       {% endif %}
     </tosoh-in-view>
   {%- else %}
-    <div class="{{ size }} {{ alignment }} {{ justify }}">
-      {% if column.reveal_settings.is_concealed %}
-        {% set max_height = (column.reveal_settings.max_height or 24) ~ "rem" %}
-        <tosoh-reveal-below maxHeight="{{ max_height }}">
-          {{ caller() }}
-          <span slot="label">{{ column.reveal_settings.reveal_label }}</span>
-        </tosoh-reveal-below>
-      {% else %}
-        {{ caller() }}
-      {% endif %}
-    </div>
+    <div class="{{ size }} {{ alignment }} {{ justify }}">{{ caller() }}</div>
   {%- endif %}
 {%- endmacro -%}
 
@@ -45,10 +35,10 @@
   {% set text_align = content.text_align or "text-left" %}
   <div class="{{ text_align }} gap-base flex flex-col">
     {%- if content.eyebrow %}
-      <div class="text-imperial-red text-2xl font-light tracking-widest">{{ content.eyebrow }}</div>
+      <div class="text-imperial-red text-xl font-thin tracking-widest">{{ content.eyebrow }}</div>
     {%- endif %}
     {%- if content.title %}
-      <div class="text-5xl font-semibold">{{ content.title }}</div>
+      <div class="font-sans-narrow text-4xl font-semibold">{{ content.title }}</div>
     {%- endif %}
     {%- if content.description %}
       <div class="text-nickel text-lg">{{ content.description }}</div>
@@ -205,7 +195,8 @@
     {%- set rounded = column.column_settings.is_rounded ? "rounded-2xl overflow-hidden" : "" -%}
 
     {% call wrap_with_carousel_slide() %}
-      <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ width }} {{ rounded }} flex">
+      <div
+        class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ width }} {{ rounded }} flex min-h-full self-stretch">
         {% call column_wrapper(column) %}
           {{ render_column_type(column) }}
         {% endcall %}
