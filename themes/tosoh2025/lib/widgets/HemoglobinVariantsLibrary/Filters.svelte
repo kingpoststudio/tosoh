@@ -17,7 +17,7 @@
     type FilterCriteria,
     type FilterOptionsWithQuantity,
     type FilterCache,
-  } from '../../utils/filterUtils/filterUtils.refactored';
+  } from '../../utils/filterUtils/filterUtils';
 
   import type { ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';

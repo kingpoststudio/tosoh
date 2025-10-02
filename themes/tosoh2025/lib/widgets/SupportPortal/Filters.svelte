@@ -21,7 +21,7 @@
     type FilterCache,
     clearFilterCache,
     getMemoizedFilterOptionsForColumnWithTolerance,
-  } from '../../utils/filterUtils/filterUtils.refactored';
+  } from '../../utils/filterUtils/filterUtils';
   import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
   let { isParentLoading, viewAs, handleChangeView, formId } = $props();

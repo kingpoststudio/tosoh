@@ -12,7 +12,7 @@
     parseUrlFilters,
     type FilterCache,
     type FilterCriteria,
-  } from '../../utils/filterUtils/filterUtils.refactored';
+  } from '../../utils/filterUtils/filterUtils';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
   import { IS_MOCK, PROD_TOSOH_WEBINARS_TABLE_ID } from '../../utils/constants';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
