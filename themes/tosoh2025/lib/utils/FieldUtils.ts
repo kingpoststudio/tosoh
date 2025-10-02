@@ -300,6 +300,7 @@ export const themeColorChoices = [
   ['nickel', 'Nickel'],
   ['ghost-white', 'Ghost White'],
   ['prussian-blue', 'Prussian Blue'],
+  ['midnight-green', 'Midnight Green'],
   ['transparent', 'Transparent'],
 ];
 
