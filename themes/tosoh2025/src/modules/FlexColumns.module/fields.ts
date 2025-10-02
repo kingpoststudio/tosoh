@@ -190,6 +190,10 @@ const moduleSettingsGroup = groupField('module_settings', 'Module Settings', {
       inline_help_text: 'Sets the color of the grid accent.',
     }),
 
+    booleanField('carousel_is_enabled', 'Enable carousel?', {
+      inline_help_text: 'If enabled, the columns will be displayed in a carousel.',
+    }),
+
     textField('custom_id', 'Module Id', {
       inline_help_text:
         'Optionally provide a unique ID for this module. This can be used for anchor link navigation (e.g., scrolling to this section when a link is clicked elsewhere on the page).',

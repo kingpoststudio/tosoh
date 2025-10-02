@@ -204,11 +204,13 @@
     {% set width= column.type == 'video' or column.type == 'navigation_list' ? 'w-full h-full' : '' %}
     {%- set rounded = column.column_settings.is_rounded ? "rounded-2xl overflow-hidden" : "" -%}
 
-    <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ width }} {{ rounded }} flex">
-      {% call column_wrapper(column) %}
-        {{ render_column_type(column) }}
-      {% endcall %}
-    </div>
+    {% call wrap_with_carousel_slide() %}
+      <div class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ width }} {{ rounded }} flex">
+        {% call column_wrapper(column) %}
+          {{ render_column_type(column) }}
+        {% endcall %}
+      </div>
+    {% endcall %}
   {% endfor -%}
 {%- endmacro -%}
 
@@ -253,6 +255,63 @@
   {% endif %}
 {% endmacro %}
 
+{% macro wrap_with_carousel() %}
+  {%- set is_carousel_enabled = module.module_settings.carousel_is_enabled -%}
+  {% if is_carousel_enabled %}
+    <div class="gap-sm flex flex-col">
+      <div class="gap-sm align-center my-auto flex items-center md:justify-center md:self-end">
+        <button
+          aria-label="Previous slide"
+          class="group plain bg-imperial-red embla__prev disabled:border-nickel! border-imperial-red flex h-8 w-8 items-center justify-center rounded-full! border disabled:bg-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="35"
+            viewBox="0 0 21 35"
+            fill="none"
+            class="h-4 w-4">
+            <path
+              d="M17.4663 0.693359L20.2059 3.43304L6.15403 17.4849L20.2059 31.5368L17.4663 34.2765L0.76305 17.4849L17.4663 0.693359Z"
+              class="group-disabled:fill-nickel fill-white" />
+          </svg>
+        </button>
+        <button
+          class="group plain bg-imperial-red embla__next disabled:border-nickel! border-imperial-red flex h-8 w-8 items-center justify-center rounded-full! border disabled:bg-white"
+          aria-label="Next slide">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="35"
+            viewBox="0 0 21 35"
+            fill="none"
+            class="h-4 w-4">
+            <path
+              d="M3.53362 0.693359L0.793945 3.43304L14.8458 17.4849L0.793945 31.5368L3.53362 34.2765L20.2368 17.4849L3.53362 0.693359Z"
+              class="group-disabled:fill-nickel fill-white" />
+          </svg>
+        </button>
+      </div>
+      <div class="embla h-full w-full overflow-hidden">
+        <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">{{ caller() }}</div>
+      </div>
+    </div>
+  {% else %}
+    {{ caller() }}
+  {% endif %}
+{% endmacro %}
+
+{% macro wrap_with_carousel_slide() %}
+  {%- set is_carousel_enabled = module.module_settings.carousel_is_enabled -%}
+  {% if is_carousel_enabled %}
+    <div
+      class="group embla__slide border-border relative flex min-h-full w-full min-w-[100%] basis-[100%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%]">
+      {{ caller() }}
+    </div>
+  {% else %}
+    {{ caller() }}
+  {% endif %}
+{% endmacro %}
+
 {# Module Container #}
 
 {% call wrap_with_grid_accent() %}
@@ -290,7 +349,9 @@
       {# Standard Columns #}
     {%- else %}
       {% call flex_layout(module.module_settings) %}
-        {{ render_columns(module.columns, module.module_settings) }}
+        {% call wrap_with_carousel() %}
+          {{ render_columns(module.columns, module.module_settings) }}
+        {% endcall %}
       {% endcall %}
     {%- endif %}
   </div>
