@@ -138,6 +138,7 @@
         data = await getTableFilterOptions({
           filters: filtersFromFields,
           tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
+          isActivated: true,
         });
       } else {
         data = mockHemoglobinVariantsLibraryFiltersResponse.results as any;
