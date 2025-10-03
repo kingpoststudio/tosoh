@@ -68,6 +68,7 @@
           (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
       filters: constructFilterParams(nonNumericFilters, { topic: filterByTopic }),
       numericComparisonFilters: rangePmFilters,
+      isActivated: true,
     };
   };
 

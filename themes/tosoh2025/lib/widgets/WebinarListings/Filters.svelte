@@ -125,6 +125,7 @@
         data = await getTableFilterOptions({
           filters: filtersArray,
           tableId: prodWebinarListingsTableId,
+          isActivated: true,
         });
       } else {
         data = mockWebinarListingsFilterOptions?.results;
