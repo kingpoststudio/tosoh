@@ -46,7 +46,22 @@ declare global {
         title: string;
         topic_filters: TopicFilters;
       };
-
+      PortaleEmogiobineContent: {
+        breadcrumbs: {
+          title: string;
+          url: {
+            content_id: string | null;
+            href: string;
+            href_with_scheme: string;
+            type: string;
+          };
+        }[];
+        search: Search;
+        title: string;
+        description: string;
+        eyebrow: string;
+        topic_filters: TopicFilters;
+      };
       KioskDocumentsContent: {
         description: string;
         email_form: {

@@ -15,6 +15,7 @@ import './widgets/WebinarListings/WebinarListings.svelte';
 import './widgets/SupportPortal/SupportPortal.svelte';
 import './widgets/KioskDocuments/KioskDocuments.svelte';
 import './widgets/HemoglobinVariantsLibrary/HemoglobinVariantsLibrary.svelte';
+import './widgets/PortaleEmogiobine/PortaleEmogiobine.svelte';
 
 import EmblaCarousel, { type EmblaCarouselType } from 'embla-carousel';
 

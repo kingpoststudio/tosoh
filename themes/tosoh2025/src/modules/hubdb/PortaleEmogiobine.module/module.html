@@ -1,0 +1,10 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
+{% require_js position="head" %}
+    <script>    
+    window.Tosoh.PortaleEmogiobineContent =  {{ module|tojson }};
+    </script>
+{% end_require_js %}   
+
+{{ macros.breadcrumbs(module.breadcrumbs) }}
+<tosoh-portale-emogiobine></tosoh-portale-emogiobine>
