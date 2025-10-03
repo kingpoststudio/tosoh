@@ -80,13 +80,10 @@
       </tosoh-modal>
 
       <tosoh-modal variant="modal" modalId={name}>
-        <div slot="title" class="w-full"></div>
+        <div slot="title" class="w-full"><h2 class="text-4xl">{name}</h2></div>
         <div slot="content">
           <div class="flex flex-col space-y-2">
-            <h2 class="text-4xl">{name}</h2>
-
-            <div class="font-semibold italic">{@html summary}</div>
-            <hr class="my-2" />
+            <div class="text-xl font-semibold italic">{@html summary}</div>
 
             <div class="relative overflow-auto">
               <div class="my-8 overflow-hidden rounded-t-lg">
