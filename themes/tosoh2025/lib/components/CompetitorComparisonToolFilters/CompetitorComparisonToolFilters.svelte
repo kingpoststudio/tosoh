@@ -8,8 +8,9 @@
 <script lang="ts">
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import Select from '../Select/Select.svelte';
-  import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
+
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
+  import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
 
   const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
@@ -17,6 +18,9 @@
 
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
   const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
+
+  const formId = 'cct-filters';
+  let printFormId = 'cct-print-filters';
 
   const clearOnProductLineChange = () => {
     deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
@@ -35,6 +39,10 @@
   };
   const clearOnTosohInstrumentReset = () => {
     deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
+    window.location.search = window.location.search;
+  };
+  const clearOnCompetitorInstrumentReset = () => {
+    deleteMultipleSearchParams(['competitor_instrument_name']);
     window.location.search = window.location.search;
   };
 
@@ -91,7 +99,7 @@
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">Select</p>
   </div>
-  <FilterForm trigger="change" {onChange}>
+  <FilterForm trigger="change" {onChange} {formId}>
     <div class="mt-base">
       <Select
         options={allProductLines}
@@ -121,11 +129,12 @@
         label="Competitor Instrument"
         disabled={!isTosohInstrumentSelected}
         {customDisabledOption}
+        customClearFilter={clearOnCompetitorInstrumentReset}
       />
     </div>
   </FilterForm>
 
-  <FilterForm trigger="submit" onSubmit={onPrint}>
+  <FilterForm trigger="submit" onSubmit={onPrint} formId={printFormId}>
     <div class="mt-base">
       <Checkbox
         options={[
@@ -162,24 +171,4 @@
   >
     Submit a Suggestion
   </a>
-
-  <!-- <FilterForm trigger="submit" {onSubmit} {onReset}>
-    <div class="mt-base">
-      <Checkbox
-        options={personas}
-        name="persona"
-        label="For Who (Option to print)"
-        disabled={false}
-      />
-    </div>
-    <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
-      <button type="submit" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Print</button
-      >
-      <button type="button" onclick={onDetails} class=" w-full hover:bg-red-50"> Details</button>
-      <button type="button" onclick={submitSuggestion} class="mt-md dark w-full hover:bg-red-50">
-        Submit A Suggestion
-      </button>
-    </div>
-  </FilterForm> -->
 </div>
