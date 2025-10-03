@@ -138,7 +138,6 @@
         data = await getTableFilterOptions({
           filters: filtersFromFields,
           tableId: PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
-          isActivated: true,
         });
       } else {
         data = mockPortaleEmogiobineFiltersResponse.results as any;
@@ -257,6 +256,7 @@
     {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
     onReset={onResetForSearch}
+    isActivatedQuery={false}
   />
 
   <FilterForm updateUrl={false} trigger="change" {onChange} {onReset} {formId}>

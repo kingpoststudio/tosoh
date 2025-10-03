@@ -22,7 +22,7 @@ function findMatchesInRows(
 
 async function fetchPartialMatchesByTerm(req: any) {
   const body = req && req.body ? req.body : {};
-  const { term, tableId, columnId, accessLevel } = body;
+  const { term, tableId, columnId, accessLevel, isActivated } = body;
 
   if (!term || !tableId || !columnId)
     throw new Error(
@@ -39,7 +39,9 @@ async function fetchPartialMatchesByTerm(req: any) {
 
   console.log(accessLevel, "accessLevel");
 
-  const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows?properties=${columnId}&deactivate__eq=false${renderAccessLevel()}`;
+  const deactivateQuery = isActivated ? "&deactivate__eq=false" : "";
+
+  const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows?properties=${columnId}${deactivateQuery}${renderAccessLevel()}`;
 
   console.log(apiUrl, "apiUrl");
 

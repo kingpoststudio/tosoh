@@ -53,7 +53,8 @@
 
     return {
       tableId: PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
-      properties: 'hs_name',
+      properties:
+        'name,summary,sex,patient_dob,ethnicity,history,anomaly,blood_count,hemoglobin_status,other,advice,diagnosis,other_diagnosis,attachment_1,attachment_2,attachment_3,attachment_4',
       limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
       pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
       offset:

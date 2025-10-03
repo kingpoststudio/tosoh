@@ -6,4 +6,4 @@ export const PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID = '30049103';
 
 export const defaultItemsLimit = 12;
 export const defaultPagination = 1;
-export const IS_MOCK = true;
+export const IS_MOCK = false;

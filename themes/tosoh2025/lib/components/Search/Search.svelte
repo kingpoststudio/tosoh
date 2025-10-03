@@ -14,6 +14,7 @@
     accessLevel,
     onReset,
     formId,
+    isActivatedQuery = true,
   }: {
     searchFromFields: Search;
     onReset: (searchCb: () => void) => void;
@@ -22,6 +23,7 @@
     manualTableId?: string;
     disabled?: boolean;
     accessLevel?: string;
+    isActivatedQuery?: boolean;
   } = $props();
 
   const {
@@ -89,6 +91,7 @@
             term: searchString,
             tableId: manualTableId || searchTableId,
             columnId: searchColumnId,
+            isActivated: isActivatedQuery,
           }),
         }
       );

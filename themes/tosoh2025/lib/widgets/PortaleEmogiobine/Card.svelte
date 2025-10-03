@@ -1,125 +1,68 @@
 <script lang="ts">
-  import type { HemoglobinVariantsLibraryItem } from '../../../types/hubdb';
   import { constructCDNUrl, onTagClick } from '../../utils/utils';
-  let { item }: { item: HemoglobinVariantsLibraryItem } = $props();
+  import type { PortaleEmogiobineItem } from '../../../types/hubdb';
+  let { item }: { item: PortaleEmogiobineItem } = $props();
 
   const {
-    aka,
-    variant_image,
-    variant_name,
-    mutation,
-    window,
-    rt_min,
-    rt_max,
-    area_under_peak,
-    hgvs_name,
-    instrument,
-    heterozygote_clinical_presentation,
-    heterozygote_laboratory_findings,
-    homozygote_clinical_presentation,
-    homozygote_laboratory_findings,
-    homozygote_comments,
+    name,
+    summary,
+    sex,
+    patient_dob,
     ethnicity,
-    comments,
-    references,
-    mutation_description,
-    heterozygote_comments,
-    document_url,
+    history,
+    anomaly,
+    blood_count,
+    hemoglobin_status,
+    other,
+    diagnosis,
+    other_diagnosis,
+    advice,
+    attachment_1,
+    attachment_2,
+    attachment_3,
+    attachment_4,
   } = item?.values;
 
   const schema = [
-    { label: 'Variant Name', value: variant_name },
-    { label: 'HGVS Name', value: hgvs_name },
-    { label: 'Mutation', value: mutation.label },
-    { label: 'Mutation Description', value: mutation_description },
-    { label: 'Heterozygote Clinical Presentation', value: heterozygote_clinical_presentation },
-    { label: 'Heterozygote Laboratory Findings', value: heterozygote_laboratory_findings },
-    { label: 'Heterozygote Comments', value: heterozygote_comments },
-    { label: 'Homozygote Clinical Presentation', value: homozygote_clinical_presentation },
-    { label: 'Homozygote Laboratory Findings', value: homozygote_laboratory_findings },
-    { label: 'Homozygote Comments', value: homozygote_comments },
-    { label: 'Ethnicity', value: ethnicity },
-    { label: 'Additional Comments', value: comments },
-    { label: 'Instrument', value: instrument.label },
-    { label: '% Min-Max', value: area_under_peak },
-    { label: 'RT Min', value: rt_min },
-    { label: 'RT Max', value: rt_max },
-    { label: 'Migration in window', value: window.label },
-    { label: 'References', value: references },
+    { label: 'Sesso', value: sex.label },
+    { label: 'Data di nascita paziente (gg/mm/00)', value: patient_dob },
+    { label: "Eventuali informazioni sull'etnia", value: ethnicity },
+    { label: 'Anamnesi', value: history },
+    { label: 'Eventuali anomalie nelle indagini svolte', value: anomaly },
+    { label: 'Emocromo', value: blood_count },
+    { label: 'Assetto emoglobinico', value: hemoglobin_status },
+    { label: 'Altro', value: other },
+    { label: 'Diagnosi', value: diagnosis },
+    { label: 'Altro', value: other_diagnosis },
+    { label: 'Consigliare', value: advice },
   ];
 </script>
+
+{#snippet renderAttachment(attachment: any)}
+  <img
+    class="max-h-[36rem] object-contain"
+    src={constructCDNUrl(attachment.url, 400)}
+    alt={attachment.altText}
+  />
+{/snippet}
 
 <div
   class={`border-border relative flex h-full w-full flex-col content-around gap-[1.25rem] rounded-2xl border p-[1.25rem]`}
 >
-  {#if variant_image?.url}
-    <img
-      alt={item.name}
-      src={constructCDNUrl(variant_image?.url, 350)}
-      loading="lazy"
-      class="max-h-[12rem] min-h-[12rem] w-full object-contain"
-    />
-  {:else}
-    <div
-      class="aspect-square
-         h-[12rem] rounded-2xl bg-slate-200"
-    ></div>
-  {/if}
-
   <div class="gap-sm flex h-full w-full flex-col justify-between">
     <div class="gap-sm flex-col items-center">
-      <h5 class="break-word text-raisin-black mt-base font-sans-narrow font-semibold">
-        {@html variant_name}
+      <h5 class="break-word text-raisin-black font-sans-narrow font-semibold">
+        {@html name}
       </h5>
-      <span class="gap-xs flex items-center text-lg font-bold text-[#029F53]">
-        {area_under_peak}%
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="14"
-          height="9"
-          viewBox="0 0 14 9"
-          fill="none"
-        >
-          <path d="M9.5 1H13.5V5" stroke="#029F53" stroke-linecap="round" stroke-linejoin="round" />
-          <path
-            d="M13.5 1L7.85 6.65C7.75654 6.74161 7.63088 6.79293 7.5 6.79293C7.36912 6.79293 7.24346 6.74161 7.15 6.65L4.85 4.35C4.75654 4.25839 4.63088 4.20707 4.5 4.20707C4.36912 4.20707 4.24346 4.25839 4.15 4.35L0.5 8"
-            stroke="#029F53"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </span>
     </div>
     <div>
-      {@html aka}
+      {@html summary}
     </div>
 
     <div class="flex flex-col">
-      <div class="gap-xs align-start flex flex-row flex-wrap">
-        <button
-          onclick={() => onTagClick('window', window?.name)}
-          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
-        >
-          {window?.label}
-        </button>
-        <button
-          onclick={() => onTagClick('instrument', instrument?.name)}
-          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
-        >
-          {instrument?.label}
-        </button>
-      </div>
-
-      <button
-        class="plain px-sm! py-xs! text-default font-bold! rounded-2xl! absolute right-[1.25rem] top-[1.25rem] bg-gray-100 uppercase"
-        onclick={() => onTagClick('mutation', mutation?.name)}
-      >
-        {mutation?.label}
-      </button>
-      <tosoh-modal variant="action" modalId={variant_name}>
+      <tosoh-modal variant="action" modalId={name}>
         <button class="gap-sm w-full! mt-sm flex items-center justify-center text-center">
-          View Details
+          {@html name}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"
@@ -136,42 +79,22 @@
         </button>
       </tosoh-modal>
 
-      <tosoh-modal variant="modal" modalId={variant_name}>
-        <div slot="title" class="w-full">
-          <a href={document_url} class="button" target="_blank">DOWNLOAD PDF</a>
-        </div>
+      <tosoh-modal variant="modal" modalId={name}>
+        <div slot="title" class="w-full"></div>
         <div slot="content">
-          <div class="flex flex-col space-y-8">
-            <h2 class="text-4xl">{variant_name}</h2>
-            <div
-              class="mx-au to w-full overflow-hidden rounded-lg border border-zinc-200 p-2 shadow-lg"
-            >
-              <img
-                src={constructCDNUrl(variant_image?.url, 1450)}
-                alt={variant_name}
-                class="w-full object-contain"
-              />
-            </div>
-            <br />
-            <div class="italic"><span class="font-bold">Also known as:</span> {@html aka}</div>
-            <div class="space-y-2">
-              <div><span class="font-bold">Mutation Type:</span> {mutation.label}</div>
-              <div>
-                <span class="font-bold">Mutation Description:</span>
-                {@html mutation_description}
-              </div>
-              <div><span class="font-bold">Migration Zone:</span> {window.label}</div>
-            </div>
-            <hr />
+          <div class="flex flex-col space-y-2">
+            <h2 class="text-4xl">{name}</h2>
+
+            <div class="font-semibold italic">{@html summary}</div>
+            <hr class="my-2" />
 
             <div class="relative overflow-auto">
-              <h3 class="text-2xl">Variant Details</h3>
               <div class="my-8 overflow-hidden rounded-t-lg">
                 <table class="w-full table-auto border-collapse text-sm">
                   <thead>
                     <tr class="bg-zinc-700 text-white">
-                      <th class="border-b p-4 text-left font-bold">Property</th>
-                      <th class="border-b p-4 text-left font-bold">Value</th>
+                      <th class="border-b p-4 text-left font-bold">Proprietà</th>
+                      <th class="border-b p-4 text-left font-bold">Valore</th>
                     </tr>
                   </thead>
                   <tbody class="bg-white">
@@ -183,6 +106,25 @@
                     {/each}
                   </tbody>
                 </table>
+                <div class="mt-sm gap-sm flex flex-col flex-wrap">
+                  <h5>Allegati</h5>
+                  <p>Clicca su un'immagine per vedere di più.</p>
+                  <hr />
+                  <div class="gap-sm flex">
+                    {#if attachment_1}
+                      {@render renderAttachment(attachment_1)}
+                    {/if}
+                    {#if attachment_2}
+                      {@render renderAttachment(attachment_2)}
+                    {/if}
+                    {#if attachment_3}
+                      {@render renderAttachment(attachment_3)}
+                    {/if}
+                    {#if attachment_4}
+                      {@render renderAttachment(attachment_4)}
+                    {/if}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

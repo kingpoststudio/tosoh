@@ -62,7 +62,36 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'HB anomala associata ',
       values: {
         summary: 'HB anomala associata ',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/ftluboeffuur.emoglobina%20patologica.jpg',
+          width: 595,
+          height: 1666,
+          altText: '',
+          fileId: 180535504246,
+          type: 'image',
+        },
+        anomaly:
+          'sami di chimica clinica (bilirubina, stato marziale, altro) non segni di emolisi in atto ',
+        blood_count: 'RBC 2.85, Hb 10.9, MCV 106.3, MCH 38.2 ',
+        patient_dob: 364780800000,
+        ethnicity: 'caucasica ',
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          "<p>Commento</p>\n<p>Nella s. di Diamond-Blackfan uno dei criteri diagnostici minori è dato dall'aumento di HbF, come appare in questo caso. Si rileva che il profilo relativo ad HbF non è ottimale; infatti il picco risulta allargato per probabili fenomeni di degradazione del campione che hanno parzialmente alterato la frazione HbF.<br>&nbsp;<br>Conclusione: aumento di HbF in soggetto con s. di Diamond-Blackfan.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'Caso 50',
+        diagnosis: 'Ipotesi diagnostica HB anomala associata o persistenza di Hb-F ',
+        history: ' paziente con anemia di Diamond-Blackfan ',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -76,7 +105,37 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'Hb anomala associata a carenza marziale ',
       values: {
         summary: 'Hb anomala associata a carenza marziale ',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/vilbsiyliwfs.Q51-%20caso%2051.jpg',
+          width: 450,
+          height: 631,
+          altText: '',
+          fileId: 180535490179,
+          type: 'image',
+        },
+        anomaly:
+          'esami di chimica clinica (bilirubina, stato marziale, altro) carenza marziale, no segni di emolisi. ',
+        blood_count:
+          'GR 3.86, Hb 7.0, MCV 61.4, MCH 18.1, WBC nella norma, lieve frammantazione eritrocitaria ',
+        patient_dob: 1243296000000,
+        ethnicity: 'caucasica ',
+        advice:
+          "<p>Commento&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p>\n<p>l profilo HPLC-talassemia mostra alcune frazioni pre A0 (campione in parte degradato?), corrispondenti ad una maggiore frazione pre-HbA1c nel tracciato relativo. Il quadro ematologico complessivo, riportato come dovuto a carenza marziale in bambino di 13 mesi, solleva l'ulteriore ipotesi di s. alfa-talassemica, in base agli indici eritrocitari (molto bassi) ed alla ridotta HbA2. <br>&nbsp;<br>Il caso dovrebbe essere valutato su campione fresco per chiarire la natura del picco pre A0, ricorrendo in seconda istanza a test di biologia molecolare. Tuttavia, prima di procedere sul bimbo, varrebbe la pena di studiare i genitori, e di avere maggiori informazioni sui parametri per la valutazione della carenza marziale.</p>",
+        sex: {
+          id: '1',
+          name: 'm',
+          label: 'M',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 0,
+        },
         name: 'Caso 51',
+        diagnosis: 'Diagnosi Ipotesi diagnostica Hb anomala',
+        history:
+          "Breve anamnesi (compresa la descrizione di eventuali terapie, sprattutto se marziali) e motivazioni dell'indagine sconosciuta ",
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -90,7 +149,39 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'Difetto alfa',
       values: {
         summary: 'Difetto alfa',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/jrlpfgrduvxo.Q53.jpg',
+          width: 574,
+          height: 647,
+          altText: '',
+          fileId: 180540181901,
+          type: 'image',
+        },
+        anomaly:
+          "esami di chimica clinica (bilirubina, stato marziale, altro) eseguito solo l'emocromo ",
+        blood_count:
+          'GR 6.02, Hb 8.9, MCV 44.2, MCH 14.8, RDW CV 27.7, WBC 20.28 con numerosi linfociti attivati, discreta anisopoichilocitosi, emazie a bersaglio e frammentazione eritrocitaria moderata',
+        hemoglobin_status: 'vedere fax ',
+        patient_dob: 1217894400000,
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          "<p>Commento</p>\n<p>&nbsp;Apparentemente il problema potrebbe essere dovuto ad una infezione in atto con anemia da mancata utilizzazione del ferro. Non appaiono elementi che depongano per una emoglobinopatia.<br>Si consiglia di ripetere lo studio dopo la&nbsp; remissione del bambino od&nbsp; eventualmente, nel frattempo, fare lo studio sui genitori per valutare l'eventuale stato di portatore sano di beta-talassemia (più che di variante emoglobinica).</p>",
+        sex: {
+          id: '1',
+          name: 'm',
+          label: 'M',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 0,
+        },
         name: 'Caso 53',
+        diagnosis:
+          'Ipotesi diagnostica é sufficiente carenza marziale e difetto alfa a motivare il quadro ematologico ',
+        history:
+          "Breve anamnesi (compresa la descrizione di eventuali terapie, sprattutto se marziali) e motivazioni dell'indagine sconosciuta ",
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -104,7 +195,33 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'Riscontro di una probabile emoglobina variante',
       values: {
         summary: 'Riscontro di una probabile emoglobina variante',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/nkwitpfrpony.Cionini.bmp',
+          altText: '',
+          type: 'image',
+        },
+        anomaly:
+          'esami di chimica clinica (bilirubina, stato marziale, altro)\nFerritina, vitB12 e folati nella norma. ',
+        blood_count: 'Hb 9.5 g/dl, GR 3.47*10^6/ul, MCV 81.8 fl. ',
+        hemoglobin_status:
+          'Presenza di un picco anomalo (39.9%) con tempo di ritenzione inferiore (1.88 min) rispetto alla HbA0 (programma B-thalassemia G8).',
+        patient_dob: 1673222400000,
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          "<p>l dato che emerge dal  cromatogramma sembra compatibile con la Hb Camperdown, che normalmente è associata a normocitosi. Il soggetto è anziano, del 1923, e la riduzione dell'Hb è legata probabilmente ad anemia, da valutare eventualmente con maggiore attenzione, ad esempio quantificando il valore della ferritinemia, anche se è riferita essere normale. Altri esami che potrebbero risultare utili potrebbero essere la ricerca dei corpi di Heinz e la valutazione dell'affinità per l’ossigeno (P50).\n \nPer la conferma della variante si consiglia, se opportuno, diagnostica molecolare.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'caso 66',
+        diagnosis: 'potesi diagnostica\nHb patologica (Hb Camperdown o HbJ)? ',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -118,6 +235,34 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'Alfa talassemia con presenza di emoglobina instabile (Hb Constant Spring)? ',
       values: {
         summary: 'Alfa talassemia con presenza di emoglobina instabile (Hb Constant Spring)? ',
+        other: 'consigliata consulenza genetica',
+        blood_count:
+          'RBC= 3.72 (3.9-5.0) Hb= 6.4 (11.0-13.8) HCT= 26.7 (32-40) MCV= 71.8 (72-87) MCH= 17.2 (27-32) MCHC= 24 (32-36) Allo striscio evidenziata la presenza di precipitati intereritrocitari, emazie a bersaglio, contracted cells, frammentazione eritrocitaria moderata e sferociti. ',
+        patient_dob: 1183161600000,
+        ethnicity: 'sud-est asiatico ',
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          '<p>COMMENTO\n\nIl complesso dei dati riportati evidenzia:\n-         elevato grado di anemia, microcitemia, ipocromia;\n-         presenza di inclusioni eritrocitarie da attribuire ad Heinz bodies (eventualmente da confermare con violetto di metile) dovuti ad eccesso di catene beta-globiniche aggregate e causa di sofferenza cellulare ed iperemolisi → misurare aptoglobina\n-         poichilocitosi, schistocitosi\n-         in HPLC picco veloce da attribuire (come riportato) ad HbH/Bart ed uno lento da attribuire ad Hbcs o simili\n \nDa un punto di vista genetico l’ipotesi più verosimile è una sindrome da HbH dovuta a doppia eterozigosi con contributo quindi di entrambi i genitori, che vanno indagati da un punto di vista fenotipico e genotipico.</p>',
+        sex: {
+          id: '1',
+          name: 'm',
+          label: 'M',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 0,
+        },
+        diagnosis: 'Ipotesi diagnostica\nHb-H/CS disease? ',
+        history: 'esami di chimica clinica (bilirubina, stato marziale, altro) ',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/icubjqrjdqot.C67.jpg',
+          altText: '',
+          type: 'image',
+        },
+        hemoglobin_status:
+          'Vedere FAX emoglobina variante a rapida eluizione compatibile con Hb-H = 14.3% picco emoglobinico con tempo di eluizione superiore a Hb-A2 = 3.8% Hb-A2= 0.4% Hb-F= 3.8% ',
         name: 'Caso 67',
       },
       childTableId: '0',
@@ -133,6 +278,40 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       values: {
         summary:
           'Paziente gravida, nota portatrice di tratto talassemico indagata per eventuale studio molecolare di coppia e sul nascituro ',
+        other: 'vedi allegato',
+        anomaly: 'esami di chimica clinica (bilirubina, stato marziale, altro)\nvedi sopra ',
+        patient_dob: 210556800000,
+        ethnicity: 'caucasica ',
+        other_diagnosis:
+          'Altre ulteriori segnalazioni\nemocromo suggestivo per tratto beta talassemico. ',
+        advice:
+          "<p>COMMENTO\n\nIl forte sospetto è che la paziente abbia una doppia eterozigoti per alfa talassemia zero ed anemia falciforme. L'aumento dell'HbA2 è dovuto alla glicata dell'HbS ed il suo valore non viene alterato dalla presenza dell'alfa talassemia. Lo studio del partner  è necessario.\n\nSi suggerisce una conferma della presenza dell'HbS tramite test di falcizzazione e si raccomanda quindi l'analisi molecolare per completare e definire il quadro.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
+        diagnosis:
+          "Ipotesi diagnostica\ntratto alfa talassemico + HbAS per presenza di picco significativo nell'area S ma inferiore al 30% dell'HbAS normale (A2 aumentata per trascinamento?) ",
+        history:
+          "Breve anamnesi (compresa la descrizione di eventuali terapie, sprattutto se marziali) e motivazioni dell'indagine\nstato del ferro nella norma. no terapie in atto ",
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/nryeyuywivme.Q70%201.jpg',
+          altText: '',
+          type: 'image',
+        },
+        hemoglobin_status: 'vedi allegato',
+        attachment_2: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/weyhkcnkoqlk.Q70%202.jpg',
+          altText: '',
+          type: 'image',
+        },
         name: 'Caso 70',
       },
       childTableId: '0',
@@ -147,7 +326,33 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: "Durante l'esecuzione dell'elettroforesi fell0hb abbiamo rilevato una a2 alta ",
       values: {
         summary: "Durante l'esecuzione dell'elettroforesi fell0hb abbiamo rilevato una a2 alta ",
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/ermgvmybptii.Q71.jpg',
+          altText: '',
+          type: 'image',
+        },
+        anomaly:
+          'esami di chimica clinica (bilirubina, stato marziale, altro)\nfe 59 ferritina 23 ',
+        blood_count: 'rbc 5.61 hb 14.3 hct 25.5 mcv 75.7 mch 25.2 mchc 33.8 plt 389 ',
+        hemoglobin_status: 'tracciato inviato tramite fax ',
+        patient_dob: 961027200000,
+        ethnicity: 'pakistan ',
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          ",p>COMMENTO\n\nL'emocromo andrebbe rifatto, l'ematocrito è troppo basso. E' presente una variante beta al 50 % in posizione dell'HbA2, ma non dovrebbe essere HbE in quanto in genere quest'ultima è presente attorno al 25-30% del totale delle frazioni emoglobiniche. Dovrebbe essere una variante stabile con la possibilità che possa essere associata ad alfa talassemia (MCV ed MCH ridotti). \n \nSi suggerisce un'analisi molecolare per i geni beta ed alfa globinici.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'Caso 71',
+        diagnosis: 'Ipotesi diagnostica\npossibile hb e????? ',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -161,7 +366,34 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: ' Screening in gravidanza',
       values: {
         summary: ' Screening in gravidanza',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/eitcmgwxbehc.Q73.jpg',
+          altText: '',
+          type: 'image',
+        },
+        anomaly:
+          'esami di chimica clinica (bilirubina, stato marziale, altro)\nNESSUNA ANOMALIA RILEVATA ',
+        blood_count:
+          'ERITROCITI: 4,63 M/ul EMATOCRITO: 40,3 % EMOGLOBINA: 13,4 g/dl MCV: 86,9 fl MCH: 28,8 pg ',
+        hemoglobin_status: 'Hb AO: 85,2 Hb A2: 1,3 Hb F: 0,8 segue cromatogramma ',
+        patient_dob: 253238400000,
+        ethnicity: 'ALGERIA ',
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          "<p>RISPOSTA\n\nIl tracciato HPLC non dice praticamente nulla, quelle 2-3 piccole frazioni pre A0 sono normali (glico-Hb e carbamil-Hb). L'emocromo appare nella norma. L'’unica notazione potrebbe (?) riguardare il basso livello di HbA2 ed essere quindi indice di una delezione di unico gene alfa (ma la diagnosi va fatta con la biologia molecolare). In ogni caso non viene neppure formulato un quesito, né avanzata un'ipotesi. Quindi notizie troppo scarse e soprattutto poca/nulla evidenza. Se si desiderano maggiori chiarimenti occorre dare più notizie ed eventualmente inviare un campione.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'Caso 73',
+        diagnosis: 'Ipotesi diagnostica\nNESSUNA ',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -176,7 +408,32 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       values: {
         summary:
           'Riscontro di Hb variante di tipo HbC in presenza di probabile trait beta talassemico eterozigote ',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/coxymcwbeicn.q75.jpg',
+          altText: '',
+          type: 'image',
+        },
+        anomaly: 'esami di chimica clinica (bilirubina, stato marziale, altro)\nNon disponibili',
+        blood_count: 'GR 5.6*10^6/ul, Hb 11.7 g/dl, MCV 65.4 fl, MCH 21 pg',
+        patient_dob: -821577600000,
+        ethnicity: 'caucasica ',
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          "<p> Risposta                                                                                                                                       \n\n\"I dati ematologici (globuli rossi aumentati, MCV ed MCH ridotti) ed il valore dell'HbA2 del 5.2% ci fanno pensare ad un classico caso di beta  trait. Nel cromatogramma è presente un picco in zona C del 10%. Il valore è troppo basso per essere una C ed inoltre con la beta talassemia non avremmo avuto A0 o valori bassissimi di A0. Con molta probabilità si tratta di un'alfa variante che necessita d'analisi molecolare per la sua tipizzazione.\"\n\n Il centro del Dott. Giambona è disponibile per eseguire le analisi molecolari.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'Caso 75',
+        diagnosis:
+          'Ipotesi diagnostica\nHb C in presenza di trait beta talassemico o altra anomalia? ',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -190,7 +447,32 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'Contemporaneo incremento della HbA2 (6.6%)e della HbF (4.4%).',
       values: {
         summary: 'Contemporaneo incremento della HbA2 (6.6%)e della HbF (4.4%).',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/dgrjogyetsdn.Q81.jpg',
+          altText: '',
+          type: 'image',
+        },
+        anomaly:
+          'esami di chimica clinica (bilirubina, stato marziale, altro)\nFerro 47 ug/dL, ferritina 304 ug/L, folati 4.6 ng/mL, vitamina B12 119 pg/mL, transferrina 147 mg/dL ',
+        blood_count: 'RBC 2.92*10^6/uL, Hb 6g/dL, MCV 64.5 fL, MCH 20.4 pg.',
+        patient_dob: 102816000000,
+        ethnicity: 'caucasica ',
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          '<p>RISPOSTA\nIl quadro appare compatibile con una condizione di β-talassemia eterozigote con aumentata HbF in paziente gravemente anemica. Tuttavia è opportuna una considerazione aggiuntiva, visto che nella paziente l’elevata anemia potrebbe essere sostenuta dal riferito probabile mieloma micromolecolare, e quindi causata della sostituzione midollare operata dalle cellule mielomatose. Sarebbe quindi utile avere dati sul frazionamento di Hb in epoca precedente alla diagnosi di mieloma, se disponibili. </p>',
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'Caso 81',
+        diagnosis: 'Ipotesi diagnostica\nNessuna ',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -204,7 +486,32 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'Incremento consistente della HbA2 ',
       values: {
         summary: 'Incremento consistente della HbA2 ',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/rjkssxghvvkt.Q85.jpg',
+          altText: '',
+          type: 'image',
+        },
+        anomaly:
+          "esami di chimica clinica (bilirubina, stato marziale, altro)\nPaziente in terapia marziale; al momento dell'esame ferritina pari a 44.8 ug/L. ",
+        blood_count: 'GR 5.11*10^6/ul Hb 13 g/dl MCV 79.9 fl MCH 25.5 pg ',
+        ethnicity: 'caucasica ',
+        other_diagnosis:
+          'Altre ulteriori segnalazioni\nPaziente nota per ipotiroidismo in trattamento con levotiroxina.',
+        advice:
+          "<p>Risposta\n\nIl picco in A2 sembra compatibile con Hb-Lepore sia  per la percentuale del valore di variante in A2, sia per la morfologia del picco, che per i parametri ematologici. Naturalmente l'indagine molecolare è necessaria per la corretta caratterizzazione.\n\nLa fetale, poco superiore alla norma, potrebbe essere giustificata dalla presenza di qualche polimorfismo in gamma.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'Caso 85',
+        diagnosis: 'Ipotesi diagnostica\nPresenza di variante comigrante con HbA2? ',
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -218,7 +525,33 @@ export const mockPortaleEmogiobineTableRowsResponse = {
       name: 'Contemporaneo incremento di HbA2 ed HbF. ',
       values: {
         summary: 'Contemporaneo incremento di HbA2 ed HbF. ',
+        attachment_1: {
+          url: 'https://landing.tosoh-diagnostics.com/hubfs/emoglobine-it/oqwixobdpyux.Q86.jpg',
+          altText: '',
+          type: 'image',
+        },
+        anomaly:
+          'esami di chimica clinica (bilirubina, stato marziale, altro)\nNon evidenti, stato marziale non accertato.',
+        blood_count: 'GR 4.53*10^6/ul, Hb 9.4 g/dl, MCV 66.4 fL, MCH 20.8 pg ',
+        patient_dob: 433641600000,
+        ethnicity: 'caucasica ',
+        other_diagnosis: 'Altre ulteriori segnalazioni ',
+        advice:
+          "<p>RISPOSTA\n\n Nel caso in oggetto non mi sento di interpretare i valori di HbF rilevati come semplice conseguenza della gravidanza in una condizione di Beta Microcitemia.\n       Più facilmente si potrebbe trattare di associazione tra una condizione Beta microcitemica e una HPFH.\n       Considerato il quadro ematologico (pur in assenza di parametri relativi al metabolismo marziale), non posso escludere l'associazione di un difetto Beta° con triplicazione dei geni Alfa globinici o, in alternativa, con un difetto Beta silente e quindi un quadro clinico di Talassemia Intermedia (lieve) che giustificherebbe, di per se, l'aumento della quota di HbF. A tal proposito, orientativamente, sarebbe utile il confronto dell'attuale quadro ematologico con un esame emocromocitometrico precedente la gravidanza e l'obiettività della paziente per valutazione di eventuale splenomegalia.\n       Sempre ai fini della diagnosi è utile uno studio familiare (in particolare per i genitori della probanda) per la valutazione dei parametri ematologici-emoglobinici (può facilitare la diagnosi differenziale).\n       Per ottenere una diagnosi definitiva sarà opportuno il ricorso allo studio del DNA dei geni Beta globinici (comprendendo anche i difetti Beta silenti e triplicazione alfa) e l'analisi dei polimorfismi più comuni dei geni gamma.\n       Ai fini preventivi si raccomanda lo studio ematologico-emoglobinico del partner della probanda.</p>",
+        sex: {
+          id: '2',
+          name: 'f',
+          label: 'F',
+          type: 'option',
+          createdAt: '2024-10-08T19:04:30.412Z',
+          createdByUserId: 478790,
+          updatedAt: '2024-10-08T19:04:30.412Z',
+          updatedByUserId: 478790,
+          order: 1,
+        },
         name: 'Caso 86',
+        diagnosis:
+          "Ipotesi diagnostica\nAssociazione tra beta talassemia eterozigote ed HPFH, oppure l'incremento della HbF è imputabile allo stato di gravidanza? ",
       },
       childTableId: '0',
       isSoftEditable: false,
@@ -227,7 +560,7 @@ export const mockPortaleEmogiobineTableRowsResponse = {
   paging: {
     next: {
       offset: 12,
-      link: 'https://api.hubapi.com/cms/v3/hubdb/tables/30049103/rows?offset=12&limit=12&properties=name%2Csummary',
+      link: 'https://api.hubapi.com/cms/v3/hubdb/tables/30049103/rows?offset=12&limit=12&properties=name%2Csummary%2Csex%2Cpatient_dob%2Cethnicity%2Chistory%2Canomaly%2Cblood_count%2Chemoglobin_status%2Cother%2Cadvice%2Cdiagnosis%2Cother_diagnosis%2Cattachment_1%2Cattachment_2%2Cattachment_3%2Cattachment_4',
     },
   },
   type: 'RANDOM_ACCESS',
