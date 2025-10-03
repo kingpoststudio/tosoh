@@ -62,7 +62,7 @@
       </div>
 
       <div class="gap-sm flex flex-col">
-        <div class="embla w-full overflow-hidden">
+        <div class="embla p-sm w-full overflow-hidden">
           <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
             {% for post in related_posts %}
               <a
@@ -93,9 +93,6 @@
             {% endfor %}
           </div>
         </div>
-        {% if blog && module.blog_link_label %}
-          <a class="button w-fit! md:self-end" href="{{ blog.absolute_url }}">{{ module.blog_link_label }}</a>
-        {% endif %}
       </div>
     </div>
   {% endif %}

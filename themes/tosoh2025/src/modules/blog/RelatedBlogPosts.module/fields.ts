@@ -1,14 +1,4 @@
-import {
-  blogField,
-  booleanField,
-  choiceField,
-  groupField,
-  numberField,
-  tagField,
-  textField,
-} from 'hs-fieldkit';
-import { constructFieldValues } from '../../../../lib/utils/fieldUtils';
-import { sizeChoices } from '../../../../lib/utils/fieldUtils';
+import { blogField, booleanField, groupField, numberField, tagField, textField } from 'hs-fieldkit';
 
 const generateFields = () => {
   return [
@@ -38,7 +28,6 @@ const generateFields = () => {
     textField('read_more_label', 'Read More Label', {
       default: 'Read More',
     }),
-    textField('blog_link_label', 'Blog Link Label'),
     groupField('settings', 'Settings', {
       children: [
         booleanField('is_hidden', 'Is Hidden', {
