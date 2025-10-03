@@ -46,6 +46,7 @@
     resetSearchInput();
 
     if (tableFilterManager) {
+      (document.querySelector('select[name="category"]') as HTMLSelectElement).value = 'none';
       tableFilterManager.clearFilters();
     }
   };
