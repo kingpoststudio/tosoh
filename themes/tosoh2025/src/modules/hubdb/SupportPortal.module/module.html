@@ -12,49 +12,35 @@ window.Tosoh.SupportPortalContent =  {{module |tojson}};
 {% if dynamic_page_hubdb_row %}
     {% set wistia_video_id = row.wistia_cached_url|split('/')|reverse|first %}
     {% set wistia_video_url = row.wistia_video_url %}
-        {% require_js %}
-        <script>
-          window._wq = window._wq || [];
-          _wq.push({
-            id: "{{ wistia_video_id }}",
-            options: {
-              playerColor: "ed1a3b",
-              backgroundOpacity: 1,
-            }
-          });
-        </script>
-        <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
-        {% end_require_js %}
-      
-        <div class="gap-base max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto mt-header-height flex items-center">
-            <a href="/" class="text-nickel cursor-pointer text-lg break-word">Home</a>
-            <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
-              <svg
-                class="max-h-inherit max-w-inherit"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="100%"
-                viewBox="0 0 11 19"
-                fill="none">
-                <path d="M1.55 0L0 1.55L7.95 9.5L0 17.45L1.55 19L11 9.5L1.55 0Z" fill="currentColor" />
-              </svg>
-            </div>
-            
-            <a href="/support-portal" class="text-nickel cursor-pointer text-lg break-word">Support Portal</a>
-            <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
-              <svg
-                class="max-h-inherit max-w-inherit"
-                xmlns="http://www.w3.org/2000/svg"
-                width="100%"
-                height="100%"
-                viewBox="0 0 11 19"
-                fill="none">
-                <path d="M1.55 0L0 1.55L7.95 9.5L0 17.45L1.55 19L11 9.5L1.55 0Z" fill="currentColor" />
-              </svg>
-            </div>
-            <span class="text-default text-lg font-bold break-all">{{ row.name }}</span>
-      </div>
+    {% set manual_breadcrumbs = [
+      {
+        title: 'Home',
+        url: {href:'/'},
+      },
+      {
+        title: 'Support Portal',
+        url: {href:'/support-portal'},
+      },
+      {
+        title: '{{ row.name }}'
+      }]
+    %}
 
+    {% require_js %}
+    <script>
+      window._wq = window._wq || [];
+      _wq.push({
+        id: "{{ wistia_video_id }}",
+        options: {
+          playerColor: "ed1a3b",
+          backgroundOpacity: 1,
+        }
+      });
+    </script>
+    <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    {% end_require_js %}
+      
+        {{macros.breadcrumbs(manual_breadcrumbs)}}
         <div class='p-md pt-0 md:pl-2xl md:pr-2xl mb-[6rem] max-w-max-page mx-auto'>
           <div class="flex flex-col gap-md">
             <h1 class="text-xl font-bold break-all">{{ row.name }}</h1>
