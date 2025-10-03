@@ -88,7 +88,6 @@
   const onClickSubmit = () => {
     const numberInput = document.querySelector('input[name="rt_min"]') as HTMLInputElement;
     if (numberInput?.value) {
-      console.log(numberInput.value, 'numberInput');
       setSearchParams({
         [numberInput.name]: numberInput.value,
       });

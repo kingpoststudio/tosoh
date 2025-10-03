@@ -4,13 +4,14 @@ exports.main = async (req: any) => {
 
     const tableId = body?.tableId;
     const filters = body.filters || [];
+    const isActivated = body?.isActivated;
     const accessLevel = body?.accessLevel;
 
     if (!tableId) {
       throw new Error("Make sure to include tableId in request body");
     }
 
-    const HUBDB_API = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}/rows?limit=10000&deactivate__eq=false`;
+    const HUBDB_API = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}/rows?limit=10000`;
 
     console.log(filters, "filters");
 
@@ -25,6 +26,13 @@ exports.main = async (req: any) => {
       return "";
     };
 
+    const constructDeactivateQuery = () => {
+      if (isActivated) {
+        return `&deactivate__eq=false`;
+      }
+      return "";
+    };
+
     const constructAccessLevelQuery = () => {
       if (accessLevel && typeof accessLevel == "string") {
         return `&visibility__in=${accessLevel}`;
@@ -34,7 +42,7 @@ exports.main = async (req: any) => {
     };
 
     const res = await fetch(
-      `${HUBDB_API}${constructProperties()}${constructAccessLevelQuery()}`,
+      `${HUBDB_API}${constructProperties()}${constructAccessLevelQuery()}${constructDeactivateQuery()}`,
       {
         method: "GET",
         headers: {

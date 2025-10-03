@@ -10,6 +10,7 @@ exports.main = async (req) => {
         const limit = body?.limit ? parseInt(body.limit, 10) : 12;
         const offset = body?.offset ? parseInt(body.offset, 10) : 0;
         const filters = body?.filters || {};
+        const isActivated = body?.isActivated;
         const numericComparisonFilters = body?.numericComparisonFilters || [];
         const HUBDB_ENDPOINT = `https://api.hubapi.com/cms/v3/hubdb/tables/${tableId}`;
         if (!tableId || !properties) {
@@ -76,7 +77,13 @@ exports.main = async (req) => {
                 return "";
             }
         };
-        const portalItemsRes = await fetch(`${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}${createNumericComparisonFilters()}&deactivate__eq=false${createAccessLevelQuery()}${createSortQuery()}`, {
+        const createDeactivateQuery = () => {
+            if (isActivated) {
+                return `&deactivate__eq=false`;
+            }
+            return "";
+        };
+        const portalItemsRes = await fetch(`${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}${createNumericComparisonFilters()}${createAccessLevelQuery()}${createSortQuery()}${createDeactivateQuery()}`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,

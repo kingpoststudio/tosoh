@@ -132,6 +132,7 @@
           filters: filtersFromFields,
           accessLevel: accessLevel,
           tableId: prodSupportPortalTableId,
+          isActivated: true,
         });
       } else {
         data = mockPortalFilters?.results;
