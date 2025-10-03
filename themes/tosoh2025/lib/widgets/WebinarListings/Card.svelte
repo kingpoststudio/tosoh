@@ -160,8 +160,8 @@
     {@render shapesBg()}
 
     {#if date && isUpcoming(date)}
-      <div class="relative">
-        <span class="mb-4 rounded-3xl bg-[#FFFFFF4F] px-4 py-3 text-sm font-thin text-[#FFFFFF]">
+      <div class="relative mb-4">
+        <span class="rounded-3xl bg-[#FFFFFF4F] px-4 py-3 text-sm font-thin text-[#FFFFFF]">
           Upcoming
         </span>
       </div>

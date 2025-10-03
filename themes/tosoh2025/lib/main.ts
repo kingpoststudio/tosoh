@@ -20,11 +20,21 @@ import './widgets/PortaleEmogiobine/PortaleEmogiobine.svelte';
 import EmblaCarousel, { type EmblaCarouselType } from 'embla-carousel';
 
 document.addEventListener('DOMContentLoaded', () => {
-  const emblaNode = document.querySelector('.embla') as HTMLElement;
-  const prevButtonNode = document.querySelector('.embla__prev');
-  const nextButtonNode = document.querySelector('.embla__next');
+  const emblaNodes = document.querySelectorAll('.embla') as NodeListOf<HTMLElement>;
 
-  if (emblaNode) {
+  emblaNodes.forEach((emblaNode) => {
+    // Find the parent container that holds both the carousel and its buttons
+    const parentContainer = emblaNode.closest('.max-w-max-page, [data-carousel-container]');
+
+    if (!parentContainer) {
+      console.warn('Carousel parent container not found for', emblaNode);
+      return;
+    }
+
+    // Scope button selection to this specific carousel's container
+    const prevButtonNode = parentContainer.querySelector('.embla__prev');
+    const nextButtonNode = parentContainer.querySelector('.embla__next');
+
     const options = {
       loop: false,
       dragFree: false,
@@ -36,23 +46,27 @@ document.addEventListener('DOMContentLoaded', () => {
     prevButtonNode?.addEventListener('click', () => embla.scrollPrev(), false);
     nextButtonNode?.addEventListener('click', () => embla.scrollNext(), false);
 
-    embla.on('slidesInView', controlScroll);
+    embla.on('slidesInView', () => controlScroll(embla, prevButtonNode, nextButtonNode));
 
-    function controlScroll(emblaEvent: EmblaCarouselType) {
+    function controlScroll(
+      emblaEvent: EmblaCarouselType,
+      prevButton: Element | null,
+      nextButton: Element | null
+    ) {
       const canScrollNext = emblaEvent?.canScrollNext();
       const canScrollPrev = emblaEvent?.canScrollPrev();
 
       if (canScrollNext) {
-        nextButtonNode?.removeAttribute('disabled');
+        nextButton?.removeAttribute('disabled');
       } else {
-        nextButtonNode?.setAttribute('disabled', '');
+        nextButton?.setAttribute('disabled', '');
       }
 
       if (canScrollPrev) {
-        prevButtonNode?.removeAttribute('disabled');
+        prevButton?.removeAttribute('disabled');
       } else {
-        prevButtonNode?.setAttribute('disabled', '');
+        prevButton?.setAttribute('disabled', '');
       }
     }
-  }
+  });
 });
