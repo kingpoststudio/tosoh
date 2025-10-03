@@ -128,6 +128,7 @@
         data = await getTableFilterOptions({
           filters: filtersFromFields,
           tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+          isActivated: true,
         });
       } else {
         data = mockKioskDocumentsFiltersResponse.results as any;
