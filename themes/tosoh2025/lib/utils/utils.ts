@@ -126,6 +126,6 @@ export const removeHtmlTags = (value: string) => {
 
 export const scrollToTop = (behavior: ScrollBehavior = 'smooth') => {
   if (typeof window !== 'undefined') {
-    window.scrollTo({ top: 0, behavior });
+    window.scrollTo({ top: 120, behavior });
   }
 };

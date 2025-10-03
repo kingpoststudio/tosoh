@@ -41,6 +41,7 @@
 
   let title = portaleEmogiobineContent?.title;
   let eyebrow = portaleEmogiobineContent?.eyebrow;
+  let description = portaleEmogiobineContent?.description;
 
   let tableRows: any = $state([]);
   let totalItems = $state(0);
@@ -106,6 +107,9 @@
     {/if}
     {#if title}
       <h2 class="font-bold">{title}</h2>
+    {/if}
+    {#if description}
+      <p class="text-xl">{description}</p>
     {/if}
   </div>
 {/if}
