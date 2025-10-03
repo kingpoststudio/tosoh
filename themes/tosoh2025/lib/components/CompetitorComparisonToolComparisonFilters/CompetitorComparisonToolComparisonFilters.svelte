@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: 'tosoh-cct-details-filters',
+    tag: 'tosoh-competitor-comparison-tool-comparison-filters',
     shadow: 'none',
   }}
 />
@@ -13,6 +13,7 @@
   import { cctSearchManager } from '../../utils/textSearchUtils';
   import { TableFilterManager } from '../../utils/tableFilterUtils';
 
+  const formId = 'cct-details-filters';
   let matchInfo = $state({ current: 0, total: 0 });
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   let tableFilterManager: TableFilterManager | null = null;
@@ -138,7 +139,7 @@
   </svg>
 {/snippet}
 
-<FilterForm trigger="change" {onChange} {onReset} customClasses="w-full" updateUrl={false}>
+<FilterForm trigger="change" {onChange} {onReset} customClasses="w-full" updateUrl={false} {formId}>
   <div
     transition:fade={{ duration: 100 }}
     class="gap-base p-sm flex w-full flex-col items-center justify-end md:flex-row"
@@ -187,7 +188,6 @@
     </div>
     <div class="w-full min-w-[16rem] md:w-fit">
       <Select
-        disableReset={true}
         placeholder={'Select Category'}
         displayLabel={false}
         options={categoryOptions}
@@ -195,6 +195,6 @@
         disabled={false}
       />
     </div>
-    <button data-type="reset" class="w-full md:w-fit"> Reset </button>
+    <button type="button" data-type="reset" class="w-full md:w-fit"> Reset </button>
   </div>
 </FilterForm>
