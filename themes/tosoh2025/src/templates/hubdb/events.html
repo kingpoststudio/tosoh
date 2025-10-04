@@ -10,7 +10,7 @@
     module "hero_banner"
     path="/TosohTheme2025/modules/HeroBanner",
     type="simple",
-    description="{{ featured ? 'Featured Event' : 'EVENT / ' ~ event.event_type.name|upper }}",
+    description="{{ featured ? 'Featured Event' : event.event_type.name|upper }}",
     title="<h1>{{ event.name }}</h1>",
     bg={src: event.image.url, alt: event.name }
   %}
@@ -59,7 +59,10 @@
               </div>
               <div class="gap-base flex flex-col md:flex-row">
                 {% if event.cta_title and event.cta_url %}
-                  <a class="button" href="{{ event.cta_url }}" target="{{ cta_new_tab ? '_blank' : '_self' }}">
+                  <a
+                    class="button"
+                    href="{{ event.cta_url }}"
+                    target="{{ event.cta_open_in_new_tab ? '_blank' : '_self' }}">
                     {{ event.cta_title }}
                   </a>
                 {% endif %}
@@ -102,7 +105,6 @@
       {# Featured Event Banner #}
       {% if featured_row|length > 0 %}
         {{ event_hero_banner(featured_row[0], true) }}
-
         {# Standard Banner #}
       {% else %}
         {%
@@ -115,18 +117,27 @@
         %}
       {% endif %}
 
-      <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto w-full">
+      <div class="max-w-max-page gap-base p-md md:pl-2xl md:pr-2xl m-auto flex w-full flex-col">
         {% if rows|length > 0 %}
-          {% for group in rows|batch(8, false) %}
-            <div class="gap-md mt-md grid grid-cols-1 md:grid-cols-3">
-              {% for row in group %}
-                {% if row is truthy %}
-                  {{ macros.render_event_card(row, false) }}
-                {% endif %}
-              {% endfor %}
-            </div>
+          {% for group in rows|batch(4, false) %}
+            {% set groupIndex = loop.index0 %}
+            {% set isRevealed = groupIndex == 0 ? "isRevealed=\"true\"" : null %}
+
+            <tosoh-reveal-group groupId="{{ groupIndex }}" {{ isRevealed }}>
+              <div class="gap-base mx-auto grid w-full grid-cols-1 justify-center md:grid-cols-2 xl:grid-cols-4">
+                {% for row in group %}
+                  {% if row %}
+                    {{ macros.render_event_card(row, false) }}
+                  {% endif %}
+                {% endfor %}
+              </div>
+              {% if not loop.last %}
+                <tosoh-reveal-group variant="action" groupId="{{ groupIndex + 1 }}" class="mt-lg mx-auto block w-fit">
+                  <button>Load more</button>
+                </tosoh-reveal-group>
+              {% endif %}
+            </tosoh-reveal-group>
           {% endfor %}
-          <button>Load more</button>
         {% else %}
           <div class="gap-sm flex flex-col items-center">
             <h3>No results found.</h3>

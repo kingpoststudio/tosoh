@@ -24,14 +24,14 @@
 {%- endmacro -%}
 
 {%- macro render_event_card(event, is_carousel_slide) -%}
-  {% set is_carousel_slide = is_carousel_slide ? 'embla__slide min-w-[100%] basis-[100%] md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%]' : '' %}
+  {% set is_carousel_slide = is_carousel_slide ? 'embla__slide min-w-[100%] basis-[100%] md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%] max-w-[32rem]' : 'w-full' %}
   {% set current_time = local_dt|unixtimestamp %}
   <div
-    class="border-border {{ is_carousel_slide }} flex max-w-[32rem] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border bg-white transition-all duration-200 hover:shadow-sm">
+    class="border-border {{ is_carousel_slide }} flex flex-col self-stretch overflow-hidden rounded-2xl border bg-white shadow-md transition-all duration-200">
     <div class="bg-prussian-blue p-md relative flex min-h-[12rem] flex-col justify-end overflow-hidden text-white">
       <img
-        src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
-        alt=""
+        src="{{ event.image.url }}"
+        alt="{{ event.image.alt }}"
         class="absolute top-0 left-0 h-full w-full object-cover transition-all duration-200 group-hover:scale-105" />
 
       {% if event.date_start > current_time %}
@@ -61,6 +61,7 @@
         <div class="flex items-center">
           <h5 class="break-word font-sans-narrow font-semibold">{{ event.name }}</h5>
         </div>
+        <p class="text-nickel font-semibold">{{ event.location }}</p>
       </div>
     </div>
     <div class="p-md w-full">
