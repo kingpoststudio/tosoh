@@ -1,0 +1,139 @@
+<!--
+    templateType: page
+    isAvailableForNewContent: true
+    label: HubDB Events
+-->
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
+{% macro event_hero_banner(event, featured) %}
+  {%
+    module "hero_banner"
+    path="/TosohTheme2025/modules/HeroBanner",
+    type="simple",
+    description="{{ featured ? 'Featured Event' : 'EVENT / ' ~ event.event_type.name|upper }}",
+    title="<h1>{{ event.name }}</h1>",
+    bg={src: event.image.url, alt: event.name }
+  %}
+{% endmacro %}
+{% extends "../layouts/base.html" %}
+
+{% block body %}
+
+  {% set event = dynamic_page_hubdb_row %}
+
+  {# Event: View #}
+  {% if event %}
+
+    {# If Event is deactivated, immediately redirect to listing. #}
+    {% if event.deactivate %}
+      <script>
+        window.location.href = '/events';
+      </script>
+    {% endif %}
+
+    <main class="mb-lg">
+      {{ event_hero_banner(event) }}
+
+      <div class="flex flex-col">
+        <div class="gap-md max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto flex flex-col md:flex-row">
+          {% if event.event_details %}
+            <div class="gap-sm flex w-full flex-col items-start">
+              <h3 class="font-sans-narrow font-semibold">About this event</h3>
+              <div>{{ event.event_details }}</div>
+              <div>
+                {% if event.date_start or event.date_end %}
+                  <p class="font-normal">
+                    <span class="font-sans-narrow text-imperial-red font-semibold">EVENT DATE:</span>
+                    {{ datetimeformat(event.date_start, '%B %e, %Y') }}
+                    {% if event.date_end %}
+                      to {{ datetimeformat(event.date_end, '%B %e, %Y') }}
+                    {% endif %}
+                  </p>
+                {% endif %}
+                {% if event.location %}
+                  <p class="font-normal">
+                    <span class="font-sans-narrow text-imperial-red font-semibold">LOCATION:</span>
+                    {{ event.location }}
+                  </p>
+                {% endif %}
+              </div>
+              <div class="gap-base flex flex-col md:flex-row">
+                {% if event.cta_title and event.cta_url %}
+                  <a class="button" href="{{ event.cta_url }}" target="{{ cta_new_tab ? '_blank' : '_self' }}">
+                    {{ event.cta_title }}
+                  </a>
+                {% endif %}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div>
+          {%
+            module "related_events"
+            title="Related Events"
+            eyebrow="Tosoh Events"
+            path="/TosohTheme2025/modules/hubdb/RelatedEvents"
+          %}
+        </div>
+      </div>
+    </main>
+
+    {# Events: Listing #}
+  {% elif dynamic_page_hubdb_table_id %}
+
+    {# DB Query #}
+    {% set db_query = '&orderBy=-date_start&deactivate=false' %}
+
+    {# Search Term #}
+    {% if request.query_dict.search_term %}
+      {% set db_query = db_query ~ '&name__icontains=' ~ request.query_dict.search_term %}
+    {% endif %}
+
+    {# Event Type #}
+    {% if request.query_dict.event_type %}
+      {% set db_query = db_query ~ '&event_type__in=' ~ request.query_dict.event_type %}
+    {% endif %}
+
+    {# Table Rows #}
+    {% set rows = hubdb_table_rows(dynamic_page_hubdb_table_id, db_query) %}
+    {% set featured_row = hubdb_table_rows(dynamic_page_hubdb_table_id, db_query ~ '&limit=1&featured=true') %}
+
+    <main>
+      {# Featured Event Banner #}
+      {% if featured_row|length > 0 %}
+        {{ event_hero_banner(featured_row[0], true) }}
+
+        {# Standard Banner #}
+      {% else %}
+        {%
+          module "hero_banner"
+          path="/TosohTheme2025/modules/HeroBanner",
+          type="simple",
+          description="<p>All Tosoh Events</p>",
+          title="<h1>Events</h1>",
+          bg={src: rows[0].image.url, alt: rows[0].name }
+        %}
+      {% endif %}
+
+      <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto w-full">
+        {% if rows|length > 0 %}
+          {% for group in rows|batch(8, false) %}
+            <div class="gap-md mt-md grid grid-cols-1 md:grid-cols-3">
+              {% for row in group %}
+                {% if row is truthy %}
+                  {{ macros.render_event_card(row, false) }}
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endfor %}
+          <button>Load more</button>
+        {% else %}
+          <div class="gap-sm flex flex-col items-center">
+            <h3>No results found.</h3>
+            <h5>Please try another selection.</h5>
+          </div>
+        {% endif %}
+      </div>
+    </main>
+  {% endif %}
+{% endblock body %}

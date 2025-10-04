@@ -23,6 +23,57 @@
   -}}
 {%- endmacro -%}
 
+{%- macro render_event_card(event, is_carousel_slide) -%}
+  {% set is_carousel_slide = is_carousel_slide ? 'embla__slide min-w-[100%] basis-[100%] md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%]' : '' %}
+  {% set current_time = local_dt|unixtimestamp %}
+  <div
+    class="border-border {{ is_carousel_slide }} flex max-w-[32rem] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border bg-white transition-all duration-200 hover:shadow-sm">
+    <div class="bg-prussian-blue p-md relative flex min-h-[12rem] flex-col justify-end overflow-hidden text-white">
+      <img
+        src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
+        alt=""
+        class="absolute top-0 left-0 h-full w-full object-cover transition-all duration-200 group-hover:scale-105" />
+
+      {% if event.date_start > current_time %}
+        <div class="absolute -top-2 right-4 items-center justify-center text-black">
+          <div class="relative h-[9rem] w-[7.5rem]">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 141 164" fill="none" class="absolute top-0">
+              <path d="M0.804688 0H140.195V163.316L70.5001 128.114L0.804688 163.316V0Z" fill="#013a55"></path>
+            </svg>
+
+            <div class="pt-md absolute left-0 flex h-full w-full flex-col items-center">
+              <div class="font-sans-narrow text-center text-4xl leading-none font-bold text-white">
+                {{ event.date_start|datetimeformat("%e") }}
+              </div>
+              <div class="font-sans-narrow text-xl font-medium text-white">
+                {{ event.date_start|datetimeformat("%b, %y") }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    <div class="p-md my-auto flex flex-col justify-between pb-0">
+      <div class="gap-sm flex h-full flex-col justify-center">
+        {% if event.date_start > current_time %}
+          <p class="text-imperial-red font-semibold">{{ event.time }}</p>
+        {% endif %}
+        <div class="flex items-center">
+          <h5 class="break-word font-sans-narrow font-semibold">{{ event.name }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="p-md w-full">
+      <a
+        target="_blank"
+        class="button with-arrow bg-imperial-red block w-full! rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
+        href="/events/{{ event.hs_path }}">
+        {{ module.cta_label || 'View Details' }}
+      </a>
+    </div>
+  </div>
+{%- endmacro -%}
+
 {%- macro breadcrumbs(breadcrumbs) -%}
   <div class="mt-header-height"></div>
 
