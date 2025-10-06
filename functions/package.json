@@ -9,7 +9,9 @@
     "copy:config": "cp hubspot.config.yml dist/ && echo '{\"name\":\"tosoh\",\"srcDir\":\".\",\"platformVersion\":\"2025.1\"}' > dist/hsproject.json",
     "build": "npm run clean && npm run build:ts && npm run copy:files && npm run copy:config",
     "watch": "tsc --watch",
-    "upload": "cd dist && hs project upload"
+    "upload": "cd dist && hs project upload",
+    "deploy": "npm run build && npm run upload",
+    "deploy:staging": "npm run build && npm run upload --account=tosoh-sandbox"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",

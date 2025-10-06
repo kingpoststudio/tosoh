@@ -58,7 +58,13 @@ npm run clean
 
 ## Deployment
 
-### Build and upload to HubSpot
+### Deploy to HubSpot (Build + Upload)
+```bash
+npm run deploy
+```
+This single command will build and upload your functions in one step.
+
+### Manual deployment (separate steps)
 ```bash
 # Build the project
 npm run build
@@ -70,11 +76,6 @@ npm run upload
 The `upload` command will:
 1. Navigate to the `dist/` directory
 2. Run `hs project upload` to deploy your compiled functions
-
-You can also combine both steps:
-```bash
-npm run build && npm run upload
-```
 
 ## How it works
 
