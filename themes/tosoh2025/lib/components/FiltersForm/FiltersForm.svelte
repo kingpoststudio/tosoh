@@ -12,31 +12,32 @@
   } from '../../utils/formManager';
 
   let {
-    trigger,
-    onChange,
-    onSubmit,
-    onReset,
-    onClickOutside,
     children,
     customClasses,
-    updateUrl = true,
-    formId,
     excludeFromObserver = false,
+    formId,
+    onChange,
+    onClickOutside,
+    onReset,
+    onSubmit,
+    trigger,
+    updateUrl = true,
   }: {
-    trigger: triggerType;
-    onSubmit?: (e: Event) => void;
-    onChange?: (e: Event) => void;
-    onReset?: (e: Event) => void;
-    onClickOutside?: (e?: Event) => void;
     children: Snippet;
     customClasses?: string;
-    updateUrl?: boolean;
-    formId: string;
     excludeFromObserver?: boolean;
+    formId: string;
+    onChange?: (e: Event) => void;
+    onClickOutside?: (e?: Event) => void;
+    onReset?: (e: Event) => void;
+    onSubmit?: (e: Event) => void;
+    trigger: triggerType;
+    updateUrl?: boolean;
   } = $props();
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
+  let debounceTimeout: Timer | null = null;
 
   const initiateFormManager = () => {
     if (formElement && !formManager) {
@@ -66,8 +67,6 @@
     }
   };
 
-  let debounceTimeout: Timer | null = null;
-
   const debouncedInitiate = () => {
     if (debounceTimeout) {
       clearTimeout(debounceTimeout);
@@ -82,6 +81,35 @@
       }
     }, 100);
   };
+
+  const clickOutside = on(document, 'click', (event: MouseEvent) => {
+    if (onClickOutside) {
+      if (!(event.target instanceof HTMLElement)) return;
+
+      if (formElement && !formElement?.contains(event.target)) {
+        onClickOutside();
+      }
+    }
+  });
+
+  const onResetForm = on(window, 'TosohFormReset', (e: Event) => {
+    const { detail } = e as CustomEvent;
+    if (detail?.id === formId) {
+      if (formElement) {
+        resetForm(formElement);
+      }
+    }
+  });
+
+  const onChangeValues = on(window, 'TosohFormValuesChanged', (e: Event) => {
+    const { detail } = e as CustomEvent;
+
+    if (detail?.id === formId) {
+      if (formManager && formElement) {
+        populateFormFromUrl(formElement, true);
+      }
+    }
+  });
 
   $effect(() => {
     if (formElement) {
@@ -112,45 +140,14 @@
     }
   });
 
-  const clickOutside = on(document, 'click', (event: MouseEvent) => {
-    if (onClickOutside) {
-      if (!(event.target instanceof HTMLElement)) return;
-
-      if (formElement && !formElement?.contains(event.target)) {
-        onClickOutside();
-      }
-    }
-  });
-
-  onDestroy(() => {
-    if (formManager) {
-      formManager.destroy();
-    }
-    clickOutside();
-  });
-
-  const onResetForm = on(window, 'TosohFormReset', (e: Event) => {
-    const { detail } = e as CustomEvent;
-    if (detail?.id === formId) {
-      if (formElement) {
-        resetForm(formElement);
-      }
-    }
-  });
-
-  const onChangeValues = on(window, 'TosohFormValuesChanged', (e: Event) => {
-    const { detail } = e as CustomEvent;
-
-    if (detail?.id === formId) {
-      if (formManager && formElement) {
-        populateFormFromUrl(formElement, true);
-      }
-    }
-  });
-
   onDestroy(() => {
     onChangeValues();
     onResetForm();
+    clickOutside();
+
+    if (formManager) {
+      formManager.destroy();
+    }
   });
 </script>
 
