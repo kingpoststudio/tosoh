@@ -1,21 +1,21 @@
 <script lang="ts">
   let {
-    options,
-    name,
     disabled,
     displayLabel = true,
-    labelPosition = 'top',
-    label,
     isLoading,
+    label,
+    labelPosition = 'top',
+    name,
+    options,
   }: {
-    options: any[];
-    name: string;
     disabled: boolean;
     displayLabel?: boolean;
-    labelPosition?: 'top' | 'left';
-    label?: string;
     isLoading?: boolean;
+    label?: string;
+    labelPosition?: 'top' | 'left';
     multiple?: boolean;
+    name: string;
+    options: any[];
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -100,8 +100,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 6px;
-    height: 10px;
+    width: 0.375rem;
+    height: 0.625rem;
     border: solid white;
     border-width: 0 2px 2px 0;
     transform: translate(-50%, -60%) rotate(45deg);
