@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const emblaNodes = document.querySelectorAll('.embla') as NodeListOf<HTMLElement>;
 
   emblaNodes.forEach((emblaNode) => {
-    // Find the parent container that holds both the carousel and its buttons
     const parentContainer = emblaNode.closest('.max-w-max-page, [data-carousel-container]');
 
     if (!parentContainer) {
@@ -31,7 +30,6 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Scope button selection to this specific carousel's container
     const prevButtonNode = parentContainer.querySelector('.embla__prev');
     const nextButtonNode = parentContainer.querySelector('.embla__next');
 

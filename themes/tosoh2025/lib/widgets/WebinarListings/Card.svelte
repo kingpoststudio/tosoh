@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { WebinarListingsItem } from '../../../types/hubdb';
+  import type { WebinarListingsItem } from '../../../types/webinarListings';
   import { constructCDNUrl, isUpcoming } from '../../utils/utils';
 
   let { item }: { item: WebinarListingsItem } = $props();

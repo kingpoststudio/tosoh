@@ -7,7 +7,7 @@
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
+  import type { FilterWithOptions, ColumnId } from '../../../types/supportPortal';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import { getFilter } from '../../utils/utils';
