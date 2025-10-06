@@ -1,6 +1,6 @@
 <script lang="ts">
   import { constructCDNUrl } from '../../utils/utils';
-  import type { PortaleEmogiobineItem } from '../../../types/hubdb';
+  import type { PortaleEmogiobineItem } from '../../../types/portaleEmogiobine';
   let { item }: { item: PortaleEmogiobineItem } = $props();
 
   const {

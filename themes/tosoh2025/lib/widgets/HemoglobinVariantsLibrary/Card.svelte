@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { HemoglobinVariantsLibraryItem } from '../../../types/hubdb';
+  import type { HemoglobinVariantsLibraryItem } from '../../../types/hemoglobinVariantsLibrary';
   import { constructCDNUrl, onTagClick } from '../../utils/utils';
 
   let { item }: { item: HemoglobinVariantsLibraryItem } = $props();

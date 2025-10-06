@@ -3,6 +3,7 @@
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import Input from '../Input/Input.svelte';
   import type { TopicFilters } from '../../../types/fields';
+  import type { ColumnId } from '../../../types/hubdb';
 
   let {
     customClasses,
@@ -21,7 +22,7 @@
     filter: TopicFilters['filters'][number];
     isLoading: boolean;
     labelPosition?: 'top' | 'left';
-    name: string;
+    name: string | any;
     options: any[];
     placeholder?: string;
   } = $props();

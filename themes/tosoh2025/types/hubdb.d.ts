@@ -9,3 +9,14 @@ export type ColumnItem = {
   updatedByUserId: number;
   order: number;
 };
+
+export type ColumnId =
+  | keyof SupportPortalRowForFilter['values']
+  | keyof HemoglobinVariantsLibraryItem['values']
+  | keyof WebinarListingsItem['values']
+  | keyof PortaleEmogiobineItem['values']
+  | keyof CCTComparison['values']
+  | keyof CCTInstrumentForFilter['values']
+  | string;
+
+export type FilterWithOptions = Record<ColumnId, ColumnItem[]>;

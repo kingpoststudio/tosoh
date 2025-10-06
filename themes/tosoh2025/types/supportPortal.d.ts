@@ -1,6 +1,4 @@
 export type Matches = { [id in keyof SupportPortalRowForFilter['values']]: boolean };
-export type ColumnId = keyof SupportPortalRowForFilter['values'];
-export type FilterWithOptions = Record<ColumnId, ColumnItem[]>;
 
 export type SupportPortalRowForFilter = {
   id: string;

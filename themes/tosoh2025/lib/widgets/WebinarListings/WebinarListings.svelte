@@ -20,7 +20,7 @@
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import { mockWebinarCollectionRes } from './mock';
   import WebinarListingsFilters from './Filters.svelte';
-  import type { ColumnId, WebinarListingsItem } from '../../../types/hubdb';
+  import type { WebinarListingsItem } from '../../../types/webinarListings';
   import SkeletonCard from './SkeletonCard.svelte';
   import { setSearchParams } from '../../utils/urlUtils';
   import {

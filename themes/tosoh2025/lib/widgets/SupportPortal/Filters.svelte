@@ -7,7 +7,7 @@
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
-  import type { FilterWithOptions, ColumnId } from '../../../types/supportPortal';
+  import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import { getFilter } from '../../utils/utils';
@@ -88,7 +88,7 @@
 
   const clearParams = () => {
     if (filtersFromFields?.length > 0) {
-      setClearParams(filtersFromFields);
+      setClearParams(filtersFromFields as string[]);
     }
   };
 
@@ -248,7 +248,10 @@
   />
   <FilterForm trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}
-      {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
+      {@const filter = getFilter(
+        topic_filters,
+        columnId as string
+      ) as TopicFilters['filters'][number]}
 
       {#if searchColumnId !== columnId}
         <TopicFilter
