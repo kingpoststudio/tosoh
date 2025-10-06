@@ -28,6 +28,7 @@
     constructRangePmFilters,
     getFilterColumnIds,
   } from '../../utils/utils';
+
   const formId = 'hemoglobin-variants-library-filters';
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
@@ -75,7 +76,6 @@
       if (!IS_MOCK) {
         data = await fetchTableRows(constructBody());
       } else {
-        console.log(constructBody(), 'body');
         data = mockHemoglobinVariantsLibraryTableRowsResponse;
       }
 
@@ -115,7 +115,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading} {fetchData} {formId}></Filters>
+  <Filters isParentLoading={isLoading} {formId}></Filters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">

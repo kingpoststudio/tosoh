@@ -81,12 +81,14 @@
 
   /* For Firefox - enable number input controls */
   :global(input[type='number']) {
+    appearance: textfield;
     -moz-appearance: textfield;
   }
 
   /* Firefox specific styles */
   @supports (-moz-appearance: textfield) {
     :global(input[type='number']) {
+      appearance: number-input;
       -moz-appearance: number-input;
     }
   }

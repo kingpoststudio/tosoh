@@ -27,8 +27,8 @@
   import type { TopicFilters } from '../../../types/fields';
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
   import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
-  let { isParentLoading, fetchData, formId } = $props();
-  // Configuration from HubSpot fields
+  let { isParentLoading, formId } = $props();
+
   const searchFromFields = window?.Tosoh?.HemoglobinVariantsLibraryContent?.search;
   const searchColumnId = searchFromFields?.hubdb_column_id;
   const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
@@ -37,42 +37,38 @@
   let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
   filtersFromFields.push(searchColumnId);
 
-  // Extract tolerance configuration from filter definitions
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  // Cache for memoized filter options (like product catalog)
   let filterOptionsCache: FilterCache = createFilterCache();
 
-  // Store raw data for advanced filtering
   let rawData: any[] = [];
 
-  // Debounce timeout for filter updates (like product catalog)
   let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const resetPaginationAndFetchData = () => {
     resetPaginationAndFetchDataEvent();
   };
 
-  // Debounced filter update (mimics product catalog's debouncedFilterProducts)
   const debouncedFilterUpdate = () => {
     clearTimeout(filterDebounceTimeout);
     filterDebounceTimeout = setTimeout(() => {
       if (rawData.length > 0) {
         updateFilterOptionsBasedOnCurrentUrl(rawData);
       }
-    }, 300); // Same debounce timing as product catalog
+    }, 300);
   };
 
   const onChange = (event: Event) => {
     const target = event.target as HTMLInputElement;
+
     if (!target) return;
     if (target.type === 'checkbox') {
       updateUrlFromCheckbox(event);
-    } else if (target.name === 'rt_min') {
+    } else if (target.type === 'number') {
       return;
     } else {
       setSearchParams({
@@ -150,7 +146,6 @@
       }
 
       if (data?.length > 0) {
-        // Store raw data for advanced filtering
         rawData = data;
 
         updateFilterOptionsBasedOnCurrentUrl(data);
@@ -180,14 +175,11 @@
         }
       });
 
-      // Calculate filter options for each column individually with proper exclusion
       const options: FilterOptionsWithQuantity = {};
 
       filtersFromFields.forEach((columnId: ColumnId) => {
-        // Skip search column as it's handled separately
         if (columnId === searchColumnId) return;
 
-        // Get filter options for this specific column, with tolerance-aware matching
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
           columnId,
@@ -203,7 +195,6 @@
       allAvailableFiltersWithTheirOptions = options;
     } catch (error) {
       console.error('Error updating filter options:', error);
-      // Fallback to basic filter options without quantities
       allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
     }
   };
@@ -218,14 +209,13 @@
   });
 
   onDestroy(() => {
-    // Clean up debounce timeout and cache (like product catalog)
     clearTimeout(filterDebounceTimeout);
     clearFilterCache(filterOptionsCache);
   });
 </script>
 
 {#snippet filterIcon()}
-  <div class="h-[1.375rem] w-[1rem]">
+  <div class="w-base h-[1.375rem]">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
