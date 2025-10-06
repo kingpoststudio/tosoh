@@ -1,8 +1,8 @@
 <script lang="ts">
-  let { totalItems, limit, pagination, onLimitChange, resetPagination, fetchData } = $props();
   import { scrollToTop } from '../../utils/utils';
 
-  let options = [12, 24, 48];
+  let { totalItems, limit, pagination, onLimitChange, resetPagination, fetchData } = $props();
+  const options = [12, 24, 48];
 </script>
 
 <div class="gap-sm flex items-center justify-center text-[#4E4F54]">
@@ -10,7 +10,7 @@
   <select
     value={limit}
     onchange={(event) => {
-      let target = event.target as HTMLSelectElement;
+      const target = event.target as HTMLSelectElement;
       onLimitChange(parseInt(target.value));
       resetPagination();
       fetchData();
