@@ -61,7 +61,7 @@
         id={name}
         {name}
         disabled={disabled || options?.length === 0 || !options}
-        class="p-sm focus:ring-imperial-red peer w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+        class="p-sm focus:ring-imperial-red peer h-full w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
       >
         <option value="none" selected disabled hidden class="text-imperial-red"
           >{placeholder ? placeholder : 'Select'}</option
