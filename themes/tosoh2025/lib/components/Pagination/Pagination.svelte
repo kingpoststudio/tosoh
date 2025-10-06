@@ -1,6 +1,7 @@
 <script lang="ts">
   import { setSearchParams } from '../../utils/urlUtils';
   import { scrollToTop } from '../../utils/utils';
+
   let { totalItems, limit, pagination, onPaginationChange, fetchData } = $props();
 
   let numberOfPages = $derived(Math.ceil(totalItems / limit));
@@ -10,23 +11,26 @@
   let canGoForward = $derived(pagination + 1 <= numberOfPages);
 
   const moveBackward = () => {
-    if (pagination && parseInt?.(pagination) - 1 > 0) {
-      const newPagination = (parseInt?.(pagination) - 1) as any;
-      onPaginationChange(newPagination);
+    const canGoBackward = pagination && parseInt?.(pagination) - 1 > 0;
+    if (canGoBackward) {
+      const previousPagination = (parseInt?.(pagination) - 1) as any;
+      onPaginationChange(previousPagination);
       setSearchParams({
-        pagination: newPagination?.toString(),
+        pagination: previousPagination?.toString(),
       });
+
       fetchData();
       scrollToTop();
     }
   };
 
   const moveForward = () => {
-    if (pagination && parseInt?.(pagination) + 1 <= numberOfPages) {
-      const newPagination = (parseInt?.(pagination) + 1) as any;
-      onPaginationChange(newPagination);
+    const canGoForward = pagination && parseInt?.(pagination) + 1 <= numberOfPages;
+    if (canGoForward) {
+      const nextPagination = (parseInt?.(pagination) + 1) as any;
+      onPaginationChange(nextPagination);
       setSearchParams({
-        pagination: newPagination?.toString(),
+        pagination: nextPagination?.toString(),
       });
       fetchData();
       scrollToTop();
