@@ -5,6 +5,9 @@
   let { item }: { item: WebinarListingsItem } = $props();
 
   const {
+    cta_label,
+    date,
+    language,
     presenter_1_image,
     presenter_1_location,
     presenter_1_name,
@@ -17,13 +20,10 @@
     presenter_3_location,
     presenter_3_name,
     presenter_3_title,
-    webinar_title,
-    cta_label,
-    date,
+    registration_page_url,
     start_time,
     stop_time,
-    language,
-    registration_page_url,
+    webinar_title,
   } = item?.values;
 
   const speaker1 = {

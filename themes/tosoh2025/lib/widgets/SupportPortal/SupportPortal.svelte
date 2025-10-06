@@ -13,6 +13,7 @@
   import {
     defaultItemsLimit,
     defaultPagination,
+    IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
   import PaginationWithLimit from '../../components/PaginationWithLimit/PaginationWithLimit.svelte';
@@ -72,8 +73,12 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      const data = await fetchTableRows(constructBody());
-      // const data = mockPortalItems;
+      let data;
+      if (!IS_MOCK) {
+        data = await fetchTableRows(constructBody());
+      } else {
+        data = mockPortalItems;
+      }
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;

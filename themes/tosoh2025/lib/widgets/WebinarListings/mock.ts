@@ -1,3 +1,5 @@
+import { IS_MOCK } from '../../utils/constants';
+
 export const mockWebinarCollectionRes = {
   total: 35,
   results: [
@@ -1891,3 +1893,38 @@ export const mockWebinarListingsFilterOptions = {
   ],
   type: 'STREAMING',
 };
+
+if (IS_MOCK) {
+  window.Tosoh.WebinarListings = {
+    advanced: {
+      filter_by_topic: '',
+    },
+    hubdb_table_id: 690033851,
+    past_section_eyebrow: 'Past Event Highlights',
+    past_section_title: 'Recorded',
+    preselected_language: '',
+    search: {
+      enable_search: true,
+      hubdb_column_id: 'webinar_title',
+      hubdb_table_id: 99968194,
+      placeholder: 'Search',
+      title: '',
+      typeahead_enabled: true,
+    },
+    topic_filters: {
+      filters: [
+        {
+          filter_label: '',
+          hubdb_column_id: 'language',
+          max: 0,
+          min: 0,
+          tolerance: 1,
+          type: 'dropdown',
+        },
+      ],
+      hubdb_table_id: 99968194,
+    },
+    upcoming_section_eyebrow: 'Event Highlights',
+    upcoming_section_title: 'Upcoming Webinars',
+  };
+}

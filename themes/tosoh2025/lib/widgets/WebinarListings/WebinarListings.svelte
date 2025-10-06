@@ -11,6 +11,7 @@
   import {
     defaultItemsLimit,
     defaultPagination,
+    IS_MOCK,
     PROD_TOSOH_WEBINARS_TABLE_ID,
   } from '../../utils/constants';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
@@ -76,8 +77,12 @@
     try {
       isLoading = true;
 
-      const data = await fetchTableRows(constructBody());
-      // const data = mockWebinarCollectionRes;
+      let data;
+      if (!IS_MOCK) {
+        data = await fetchTableRows(constructBody());
+      } else {
+        data = mockWebinarCollectionRes;
+      }
 
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;

@@ -87,7 +87,6 @@ declare global {
         past_section_title: string;
         preselected_language: string;
         search: Search;
-        title: string;
         topic_filters: TopicFilters;
         upcoming_section_eyebrow: string;
         upcoming_section_title: string;

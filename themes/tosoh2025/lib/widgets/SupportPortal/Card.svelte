@@ -12,11 +12,11 @@
         const params = [];
 
         if (disposition) {
-          params.push(disposition);
+          params?.push(disposition);
         }
-        params.push(disposition ? '&video_still_time=10' : '?video_still_time=10');
+        params?.push(disposition ? '&video_still_time=10' : '?video_still_time=10');
 
-        return baseUrl + params.join('');
+        return baseUrl + params?.join('');
       }
     ) as string;
   };
@@ -26,7 +26,7 @@
       setupWistiaThumbnail(item?.values?.wistia_video_url as string)
   );
   let name = $derived(item?.values?.name);
-  let downloadUrl = $derived(item?.values?.document_url || item.wistia_video_url);
+  let downloadUrl = $derived(item?.values?.document_url || item?.wistia_video_url);
   let documentType = $derived(item?.values?.document_type?.label);
   let productTypes = $derived(item?.values?.product_type?.map((type: any) => `${type.label}`));
 

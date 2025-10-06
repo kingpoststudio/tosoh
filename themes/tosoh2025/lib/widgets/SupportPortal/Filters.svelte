@@ -49,27 +49,23 @@
   let isLoading = $state(false);
   let hasError = $state(false);
 
-  // Cache for memoized filter options (like product catalog)
   let filterOptionsCache: FilterCache = createFilterCache();
 
-  // Store raw data for advanced filtering
   let rawData: any[] = [];
 
-  // Debounce timeout for filter updates (like product catalog)
   let filterDebounceTimeout: ReturnType<typeof setTimeout> | undefined;
 
   const resetPaginationAndFetchData = () => {
     resetPaginationAndFetchDataEvent();
   };
 
-  // Debounced filter update (mimics product catalog's debouncedFilterProducts)
   const debouncedFilterUpdate = () => {
     clearTimeout(filterDebounceTimeout);
     filterDebounceTimeout = setTimeout(() => {
       if (rawData.length > 0) {
         updateFilterOptionsBasedOnCurrentUrl(rawData);
       }
-    }, 300); // Same debounce timing as product catalog
+    }, 300);
   };
 
   const onChange = (event: Event) => {
@@ -77,7 +73,7 @@
     if (!target) return;
     if (target.type === 'checkbox') {
       updateUrlFromCheckbox(event);
-    } else if (target.name === 'rt_min') {
+    } else if (target.type === 'number') {
       return;
     } else {
       setSearchParams({
@@ -175,14 +171,11 @@
         }
       });
 
-      // Calculate filter options for each column individually with proper exclusion
       const options: any = {};
 
       filtersFromFields.forEach((columnId: ColumnId) => {
-        // Skip search column as it's handled separately
         if (columnId === searchColumnId) return;
 
-        // Get filter options for this specific column, with tolerance-aware matching
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
           columnId,
@@ -191,14 +184,12 @@
           filterOptionsCache
         );
 
-        // Add the options for this column
         options[columnId] = columnOptions;
       });
 
       allAvailableFiltersWithTheirOptions = options;
     } catch (error) {
       console.error('Error updating filter options:', error);
-      // Fallback to basic filter options without quantities
       allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
     }
   };
@@ -219,7 +210,7 @@
 </script>
 
 {#snippet filterIcon()}
-  <div class="h-[1.375rem] w-[1rem]">
+  <div class="w-base h-[1.375rem]">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="100%"
