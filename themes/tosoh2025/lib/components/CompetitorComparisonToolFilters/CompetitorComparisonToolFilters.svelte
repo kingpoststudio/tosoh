@@ -13,18 +13,19 @@
   import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
 
   const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
-  const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
   const activeCompetitorInstruments = window?.Tosoh?.CCT?.activeCompetitorInstruments || [];
+  const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
+
+  const formId = 'cct-filters';
+  const printFormId = 'cct-print-filters';
 
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
   const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
 
-  const formId = 'cct-filters';
-  let printFormId = 'cct-print-filters';
-
   const clearOnProductLineChange = () => {
     deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
   };
+
   const clearOnTosohInstrumentChange = () => {
     deleteMultipleSearchParams(['competitor_instrument_name']);
   };
@@ -35,12 +36,15 @@
       'tosoh_instrument_name',
       'competitor_instrument_name',
     ]);
+
     window.location.search = window.location.search;
   };
+
   const clearOnTosohInstrumentReset = () => {
     deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
     window.location.search = window.location.search;
   };
+
   const clearOnCompetitorInstrumentReset = () => {
     deleteMultipleSearchParams(['competitor_instrument_name']);
     window.location.search = window.location.search;
@@ -52,6 +56,7 @@
     if (name === 'product_line') {
       clearOnProductLineChange();
     }
+
     if (name === 'tosoh_instrument_name') {
       clearOnTosohInstrumentChange();
     }
@@ -63,9 +68,11 @@
     const tosohInstrumentName = (
       document.querySelector('select[name="tosoh_instrument_name"]') as HTMLSelectElement
     )?.value;
+
     const competitorInstrumentName = (
       document.querySelector('select[name="competitor_instrument_name"]') as HTMLSelectElement
     )?.value;
+
     const url = `/cct-comparison?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
     window.open(url);
   };
