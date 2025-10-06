@@ -5,25 +5,25 @@
   import type { TopicFilters } from '../../../types/fields';
 
   let {
-    filter,
-    options,
-    name,
-    disabled,
-    isLoading,
-    placeholder,
-    labelPosition,
-    displayLabel,
     customClasses,
+    disabled,
+    displayLabel,
+    filter,
+    isLoading,
+    labelPosition,
+    name,
+    options,
+    placeholder,
   }: {
-    filter: TopicFilters['filters'][number];
-    options: any[];
-    name: string;
-    disabled: boolean;
-    isLoading: boolean;
-    placeholder?: string;
-    labelPosition?: 'top' | 'left';
-    displayLabel?: boolean;
     customClasses?: string;
+    disabled: boolean;
+    displayLabel?: boolean;
+    filter: TopicFilters['filters'][number];
+    isLoading: boolean;
+    labelPosition?: 'top' | 'left';
+    name: string;
+    options: any[];
+    placeholder?: string;
   } = $props();
 </script>
 
