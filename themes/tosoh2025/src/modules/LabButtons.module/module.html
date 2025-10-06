@@ -17,7 +17,7 @@
 
   {% for grid_row in module.grid_rows %}
     <div
-      class="p-md md:pl-2xl md:pr-2xl gap-2xl max-w-max-page m-auto grid h-full w-full grid-cols-1 content-center items-center justify-center md:grid-cols-3 lg:grid-cols-4">
+      class="grid h-full w-full grid-cols-1 content-center items-center justify-center md:grid-cols-3 lg:grid-cols-4">
       {% for lab_button in grid_row.lab_buttons %}
 
         {% set wrapper_size = lab_button.size == 'small' ? 'h-[6rem]' : lab_button.size == 'medium' ? 'h-[7rem]' : 'h-[9rem]' %}
