@@ -1,0 +1,18 @@
+{
+  "name": "tosoh-functions",
+  "version": "1.0.0",
+  "description": "Build pipeline for HubSpot serverless functions",
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build:ts": "tsc",
+    "copy:files": "rsync -av --exclude='node_modules' --include='*/' --include='*.json' --include='*.js' --include='*.lock' --exclude='*' src/ dist/",
+    "copy:config": "cp hubspot.config.yml dist/ && echo '{\"name\":\"tosoh\",\"srcDir\":\".\",\"platformVersion\":\"2025.1\"}' > dist/hsproject.json",
+    "build": "npm run clean && npm run build:ts && npm run copy:files && npm run copy:config",
+    "watch": "tsc --watch",
+    "upload": "cd dist && hs project upload"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.9.3"
+  }
+}
