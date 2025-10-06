@@ -1,25 +1,26 @@
 <script lang="ts">
   import type { Component } from 'svelte';
   import { fade } from 'svelte/transition';
+  import { getUrlParam } from '../../utils/urlUtils';
 
   const {
-    tableRows,
-    isLoading,
-    viewAs = 'grid',
-    hasLargeElements = false,
     Card,
     SkeletonCard,
+    hasLargeElements = false,
+    isLoading,
+    tableRows,
+    viewAs = 'grid',
   }: {
-    tableRows: any[];
-    isLoading: boolean;
-    viewAs?: string;
-    hasLargeElements?: boolean;
     Card: Component | any;
     SkeletonCard: Component | any;
+    hasLargeElements?: boolean;
+    isLoading: boolean;
+    tableRows: any[];
+    viewAs?: string;
   } = $props();
 
   const constructLengthForSkeletons = () => {
-    return parseInt(new URLSearchParams(window.location.search)?.get('limit') || '12');
+    return parseInt(getUrlParam('limit') || '12');
   };
 
   let skeletonItems = $state(
