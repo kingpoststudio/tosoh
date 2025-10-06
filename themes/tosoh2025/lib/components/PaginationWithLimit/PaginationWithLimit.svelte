@@ -1,13 +1,17 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { defaultItemsLimit, defaultPagination } from '../../utils/constants';
+  import { on } from 'svelte/events';
+
+  import {
+    defaultItemsLimit,
+    defaultPagination,
+    RESET_PAGINATION_AND_FETCH_DATA_EVENT,
+  } from '../../utils/constants';
   import { setSearchParams } from '../../utils/urlUtils';
+  import { scrollToTop } from '../../utils/utils';
 
   import Limit from '../Limit/Limit.svelte';
   import Pagination from '../Pagination/Pagination.svelte';
-  import { on } from 'svelte/events';
-  import { RESET_PAGINATION_AND_FETCH_DATA_EVENT } from '../../utils/paginationAndLimitUtils';
-  import { scrollToTop } from '../../utils/utils';
   let { totalItems, fetchData } = $props();
 
   const params = new URLSearchParams(window.location.search);
@@ -23,14 +27,10 @@
     setSearchParams({ limit: newLimit.toString() });
     limit = newLimit;
   };
+
   const onPaginationChange = (newPagination: number) => {
     setSearchParams({ pagination: newPagination.toString() });
     pagination = newPagination;
-  };
-
-  const resetLimit = () => {
-    setSearchParams({ limit: defaultItemsLimit.toString() });
-    limit = defaultItemsLimit as any;
   };
 
   const initControllers = () => {
