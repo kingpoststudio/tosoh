@@ -1,35 +1,34 @@
 <script lang="ts">
+  import { setupFilterTitle } from '../../utils/utils';
+
   let {
-    name,
-    type = 'text',
     disabled,
     displayLabel = true,
-    labelPosition = 'top',
-    label,
     isLoading,
-    min,
+    label,
+    labelPosition = 'top',
     max,
-    step,
+    min,
+    name,
     placeholder,
+    step,
+    type = 'text',
   }: {
-    name: string;
-    type: string;
     disabled: boolean;
     displayLabel?: boolean;
-    labelPosition?: 'top' | 'left';
-    label?: string;
     isLoading?: boolean;
-    min?: number;
+    label?: string;
+    labelPosition?: 'top' | 'left';
     max?: number;
-    step?: number;
+    min?: number;
+    name: string;
     placeholder?: string;
+    step?: number;
+    type: string;
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
   const activeFilter = urlParams.get(name);
-
-  const setupFilterTitle = (column: string) =>
-    column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
 </script>
 
 <div class="gap-sm flex flex-col">

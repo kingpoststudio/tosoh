@@ -129,3 +129,6 @@ export const scrollToTop = (behavior: ScrollBehavior = 'smooth') => {
     window.scrollTo({ top: 120, behavior });
   }
 };
+
+export const setupFilterTitle = (column: string) =>
+  column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());

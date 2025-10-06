@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { setupFilterTitle } from '../../utils/utils';
+
   let {
     disabled,
     displayLabel = true,
@@ -20,9 +22,6 @@
 
   const urlParams = new URLSearchParams(window.location.search);
   const activeFilters = urlParams.getAll(name);
-
-  const setupFilterTitle = (column: string) =>
-    column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
 </script>
 
 <div class="gap-sm flex flex-col">

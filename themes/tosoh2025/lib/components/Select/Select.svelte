@@ -1,5 +1,6 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
+  import { setupFilterTitle } from '../../utils/utils';
 
   let {
     options,
@@ -24,9 +25,6 @@
   } = $props();
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
-
-  const setupFilterTitle = (column: string) =>
-    column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
 </script>
 
 <div class="gap-sm flex flex-col">
