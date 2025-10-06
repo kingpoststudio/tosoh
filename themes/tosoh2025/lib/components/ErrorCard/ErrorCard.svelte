@@ -3,8 +3,17 @@
   import { onMount } from 'svelte';
 
   let { message, retryCallback }: { message: string; retryCallback: () => void } = $props();
+
   let enableReload = $state(false);
   let countdown = $state(30);
+
+  const handleRetry = () => {
+    if (retryCallback) {
+      retryCallback();
+    } else {
+      window.location.reload();
+    }
+  };
 
   onMount(() => {
     const timer = setInterval(() => {
@@ -17,14 +26,6 @@
 
     return () => clearInterval(timer);
   });
-
-  const handleRetry = () => {
-    if (retryCallback) {
-      retryCallback();
-    } else {
-      window.location.reload();
-    }
-  };
 </script>
 
 <div transition:fade class="p-sm w-full rounded-lg bg-red-50">
