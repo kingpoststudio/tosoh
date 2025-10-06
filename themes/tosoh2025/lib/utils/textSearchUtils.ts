@@ -233,4 +233,4 @@ export class TextSearchManager {
 }
 
 // Global instance for the CCT details page
-export const cctSearchManager = new TextSearchManager('table tbody');
+export const tableSearchManager = new TextSearchManager('table tbody');

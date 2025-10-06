@@ -7,37 +7,44 @@
 
 <script lang="ts">
   import { fade } from 'svelte/transition';
-  import { onMount, onDestroy } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
+
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import Select from '../Select/Select.svelte';
-  import { cctSearchManager } from '../../utils/textSearchUtils';
+
+  import { tableSearchManager } from '../../utils/textSearchUtils';
   import { TableFilterManager } from '../../utils/tableFilterUtils';
 
   const formId = 'cct-details-filters';
   let matchInfo = $state({ current: 0, total: 0 });
   let debounceTimer: ReturnType<typeof setTimeout> | undefined;
   let tableFilterManager: TableFilterManager | null = null;
-  let categoryOptions = window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map(
+  const categoryOptions = window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map(
     (row: any) => row.category
   );
 
   const resetSearchInput = () => {
-    cctSearchManager.clearHighlights();
+    tableSearchManager.clearHighlights();
     (document.querySelector('input[name="search_term"]') as HTMLInputElement).value = '';
     matchInfo = { current: 0, total: 0 };
   };
 
   const onChange = (event: Event) => {
-    if (event.target && event.target instanceof HTMLInputElement) {
+    if (!event?.target) return;
+
+    const searchInputChanged = event.target instanceof HTMLInputElement;
+    const selectChanged = event.target instanceof HTMLSelectElement;
+
+    if (searchInputChanged) {
       handleSearchInput(event);
     }
 
-    if (event.target && event.target instanceof HTMLSelectElement) {
-      const targetId = event.target.value;
+    if (selectChanged) {
+      const tableRowId = event.target.value;
 
       if (tableFilterManager) {
         resetSearchInput();
-        tableFilterManager.filterById(targetId || null);
+        tableFilterManager.filterById(tableRowId || null);
       }
     }
   };
@@ -52,32 +59,32 @@
   };
 
   const handleSearchInput = (event: Event) => {
-    const target = event.target as HTMLInputElement;
+    const target = event?.target as HTMLInputElement;
 
-    performSearch(target.value);
+    performTableSearch(target?.value);
   };
 
-  const performSearch = (term: string) => {
+  const performTableSearch = (term: string) => {
     if (!term.trim()) {
-      cctSearchManager.clearHighlights();
+      tableSearchManager.clearHighlights();
       matchInfo = { current: 0, total: 0 };
       return;
     }
 
     setTimeout(() => {
-      cctSearchManager.search(term);
-      matchInfo = cctSearchManager.getCurrentMatchInfo();
+      tableSearchManager.search(term);
+      matchInfo = tableSearchManager.getCurrentMatchInfo();
     }, 100);
   };
 
   const navigateToNext = () => {
-    cctSearchManager.nextMatch();
-    matchInfo = cctSearchManager.getCurrentMatchInfo();
+    tableSearchManager.nextMatch();
+    matchInfo = tableSearchManager.getCurrentMatchInfo();
   };
 
   const navigateToPrevious = () => {
-    cctSearchManager.previousMatch();
-    matchInfo = cctSearchManager.getCurrentMatchInfo();
+    tableSearchManager.previousMatch();
+    matchInfo = tableSearchManager.getCurrentMatchInfo();
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -89,7 +96,7 @@
         navigateToNext();
       }
     } else if (event.key === 'Escape') {
-      cctSearchManager.clearHighlights();
+      tableSearchManager.clearHighlights();
       matchInfo = { current: 0, total: 0 };
     }
   };
@@ -100,7 +107,6 @@
       tableFilterManager = new TableFilterManager(table);
     }
 
-    // Add keyboard shortcuts for navigation
     const handleGlobalKeyDown = (event: KeyboardEvent) => {
       if ((event.ctrlKey || event.metaKey) && event.key === 'f') {
         event.preventDefault();
@@ -118,7 +124,7 @@
     if (debounceTimer) {
       clearTimeout(debounceTimer);
     }
-    cctSearchManager.clearHighlights();
+    tableSearchManager.clearHighlights();
   });
 </script>
 
