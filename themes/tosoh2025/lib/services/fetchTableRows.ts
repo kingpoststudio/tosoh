@@ -1,11 +1,11 @@
 export const fetchTableRows = async (body: {
-  tableId: string;
-  filters: string[];
-  properties: string;
   accessLevel?: string;
+  filters: string[];
   limit: number;
-  pagination: number;
   offset: number;
+  pagination: number;
+  properties: string;
+  tableId: string;
 }) => {
   try {
     const response = await fetch(
