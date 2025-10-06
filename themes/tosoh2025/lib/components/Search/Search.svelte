@@ -1,29 +1,31 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
 
-  import FilterForm from '../FiltersForm/FiltersForm.svelte';
-  import { onMount } from 'svelte';
-  import type { Search } from '../../../types/fields';
   import { setSearchParams } from '../../utils/urlUtils';
   import { updateFormEvent } from '../../utils/formManager';
+
+  import FilterForm from '../FiltersForm/FiltersForm.svelte';
+
+  import type { Search } from '../../../types/fields';
   const {
-    searchFromFields,
-    customClasses,
-    manualTableId,
-    disabled,
     accessLevel,
-    onReset,
+    customClasses,
+    disabled,
     formId,
     isActivatedQuery = true,
+    manualTableId,
+    onReset,
+    searchFromFields,
   }: {
-    searchFromFields: Search;
-    onReset: (searchCb: () => void) => void;
-    formId: string;
-    customClasses?: string;
-    manualTableId?: string;
-    disabled?: boolean;
     accessLevel?: string;
+    customClasses?: string;
+    disabled?: boolean;
+    formId: string;
     isActivatedQuery?: boolean;
+    manualTableId?: string;
+    onReset: (searchCb: () => void) => void;
+    searchFromFields: Search;
   } = $props();
 
   const {
@@ -35,11 +37,12 @@
     enable_search: isSearchEnabled,
   } = searchFromFields || {};
 
+  const activeFilter = new URLSearchParams(window.location.search)?.get(searchColumnId as string);
+
   let matches: string[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
   let mounted = $state(false);
-  const activeFilter = new URLSearchParams(window.location.search)?.get(searchColumnId as string);
   let searchValue = $state(activeFilter || '');
 
   const handleFetch = (searchTerm: string) => {
