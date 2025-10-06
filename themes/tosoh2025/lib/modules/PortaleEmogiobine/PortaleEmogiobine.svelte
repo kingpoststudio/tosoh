@@ -102,15 +102,15 @@
 {#if title || eyebrow}
   <div class="max-w-max-page gap-sm p-md md:pl-2xl md:pr-2xl m-auto flex flex-col pt-0">
     {#if eyebrow}
-      <h6 class="text-imperial-red tracking-widest">
-        {eyebrow}
-      </h6>
+      <div class="text-imperial-red tracking-widest">
+        {@html eyebrow}
+      </div>
     {/if}
     {#if title}
-      <h2 class="font-bold">{title}</h2>
+      <div class="font-bold">{@html title}</div>
     {/if}
     {#if description}
-      <p class="text-xl">{description}</p>
+      <div class="text-xl">{@html description}</div>
     {/if}
   </div>
 {/if}

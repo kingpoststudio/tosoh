@@ -11,11 +11,11 @@ import './components/ScrollX/ScrollX.svelte';
 import './components/Modal/Modal.svelte';
 import './components/RevealGroup/RevealGroup.svelte';
 
-import './widgets/WebinarListings/WebinarListings.svelte';
-import './widgets/SupportPortal/SupportPortal.svelte';
-import './widgets/KioskDocuments/KioskDocuments.svelte';
-import './widgets/HemoglobinVariantsLibrary/HemoglobinVariantsLibrary.svelte';
-import './widgets/PortaleEmogiobine/PortaleEmogiobine.svelte';
+import './modules/WebinarListings/WebinarListings.svelte';
+import './modules/SupportPortal/SupportPortal.svelte';
+import './modules/KioskDocuments/KioskDocuments.svelte';
+import './modules/HemoglobinVariantsLibrary/HemoglobinVariantsLibrary.svelte';
+import './modules/PortaleEmogiobine/PortaleEmogiobine.svelte';
 
 import EmblaCarousel, { type EmblaCarouselType } from 'embla-carousel';
 

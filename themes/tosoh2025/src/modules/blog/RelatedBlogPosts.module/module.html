@@ -82,7 +82,7 @@
                   <div class="gap-sm flex justify-between">
                     <p class="text-imperial-red font-normal">{{ post.publish_date|datetimeformat("%B %e, %Y") }}</p>
                   </div>
-                  <h4 class="font-sans-narrow font-semibold">{{ post.name }}</h4>
+                  <h5 class="font-sans-narrow font-semibold">{{ post.name }}</h5>
 
                   <span class="text-nickel break-word line-clamp-2">
                     {{ post.meta_description|truncate(70) }}{{ post.meta_description|length >= 70 ? '...' : '.' }}

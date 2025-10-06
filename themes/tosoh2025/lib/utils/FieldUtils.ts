@@ -23,7 +23,7 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
 
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
-    hubDbTableField('hubdb_table_id', 'Table', { required: true }),
+    hubDbTableField('hubdb_table_id', 'Table', { required: false }),
     groupField('filters', 'Filters', {
       children: [
         textField('filter_label', 'Filter Label'),
