@@ -1,26 +1,26 @@
 <script lang="ts">
-  import { constructCDNUrl, onTagClick } from '../../utils/utils';
+  import { constructCDNUrl } from '../../utils/utils';
   import type { PortaleEmogiobineItem } from '../../../types/hubdb';
   let { item }: { item: PortaleEmogiobineItem } = $props();
 
   const {
-    name,
-    summary,
-    sex,
-    patient_dob,
-    ethnicity,
-    history,
-    anomaly,
-    blood_count,
-    hemoglobin_status,
-    other,
-    diagnosis,
-    other_diagnosis,
     advice,
+    anomaly,
     attachment_1,
     attachment_2,
     attachment_3,
     attachment_4,
+    blood_count,
+    diagnosis,
+    ethnicity,
+    hemoglobin_status,
+    history,
+    name,
+    other,
+    other_diagnosis,
+    patient_dob,
+    sex,
+    summary,
   } = item?.values;
 
   const schema = [

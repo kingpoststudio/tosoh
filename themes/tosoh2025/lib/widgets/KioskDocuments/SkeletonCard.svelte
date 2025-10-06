@@ -17,6 +17,5 @@
     <div class="h-12 w-full rounded-xl bg-red-100"></div>
   </div>
 
-  <!-- Document type badge skeleton -->
   <div class="bg-ghost-white absolute right-[1.25rem] top-[1.25rem] h-8 w-16 rounded-lg"></div>
 </div>
