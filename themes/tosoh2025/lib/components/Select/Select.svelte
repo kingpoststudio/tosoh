@@ -3,25 +3,25 @@
   import { setupFilterTitle } from '../../utils/utils';
 
   let {
-    options,
-    name,
+    customClearFilter,
+    customDisabledOption,
     disabled,
     displayLabel = true,
-    labelPosition = 'top',
-    placeholder,
     label,
-    customDisabledOption,
-    customClearFilter,
+    labelPosition = 'top',
+    name,
+    options,
+    placeholder,
   }: {
-    options: any[];
-    name: string;
+    customClearFilter?: () => void;
+    customDisabledOption?: (option: any) => boolean;
     disabled?: boolean;
     displayLabel?: boolean;
-    labelPosition?: 'top' | 'left';
-    placeholder?: string;
     label?: string;
-    customDisabledOption?: (option: any) => boolean;
-    customClearFilter?: () => void;
+    labelPosition?: 'top' | 'left';
+    name: string;
+    options: any[];
+    placeholder?: string;
   } = $props();
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
