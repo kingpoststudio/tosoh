@@ -1,7 +1,9 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
-{% set all_events =  hubdb_table_rows("events",'&deactivate__eq=false') %}
 
-{% if all_events|length > 0 %}
+{% set all_events = hubdb_table_rows("events",'&deactivate__eq=false') %}
+{% set filtered_events = module.exclude_event_id ? all_events|selectattr('hs_id', 'ne', module.exclude_event_id): all_events %}
+
+{% if filtered_events|length > 0 %}
   <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
     <div class="gap-sm flex w-full flex-col justify-between md:flex-row">
       <div class="gap-xs flex flex-col">
@@ -50,7 +52,7 @@
     <div class="gap-sm flex flex-col">
       <div class="embla py-sm w-full overflow-hidden">
         <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
-          {% for event in all_events %}
+          {% for event in filtered_events %}
             {{ macros.render_event_card(event, true) }}
           {% endfor %}
         </div>

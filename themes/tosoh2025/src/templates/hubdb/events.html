@@ -7,12 +7,16 @@
 
 {% macro event_hero_banner(event, featured) %}
   {%
-    module "hero_banner"
-    path="/TosohTheme2025/modules/HeroBanner",
-    type="simple",
-    description="{{ featured ? 'Featured Event' : event.event_type.name|upper }}",
+    module "event_hero_banner"
+    path="/TosohTheme2025/modules/EventsHeroBanner",
+    eyebrow="EVENT / {{ event.event_type.name|upper }}",
     title="<h1>{{ event.name }}</h1>",
-    bg={src: event.image.url, alt: event.name }
+    image={src: event.image.url, alt: event.name }
+    location={location_title: "LOCATION", location_value: event.location},
+    date={date_title: "EVENT DATE", date_value: event.date_start|datetimeformat("%B %e, %Y")},
+    breadcrumbs=[
+        {title: "Home", url: "/"},
+        {title: "Events"}]
   %}
 {% endmacro %}
 {% extends "../layouts/base.html" %}
@@ -40,23 +44,6 @@
             <div class="gap-sm flex w-full flex-col items-start">
               <h3 class="font-sans-narrow font-semibold">About this event</h3>
               <div>{{ event.event_details }}</div>
-              <div>
-                {% if event.date_start or event.date_end %}
-                  <p class="font-normal">
-                    <span class="font-sans-narrow text-imperial-red font-semibold">EVENT DATE:</span>
-                    {{ datetimeformat(event.date_start, '%B %e, %Y') }}
-                    {% if event.date_end %}
-                      to {{ datetimeformat(event.date_end, '%B %e, %Y') }}
-                    {% endif %}
-                  </p>
-                {% endif %}
-                {% if event.location %}
-                  <p class="font-normal">
-                    <span class="font-sans-narrow text-imperial-red font-semibold">LOCATION:</span>
-                    {{ event.location }}
-                  </p>
-                {% endif %}
-              </div>
               <div class="gap-base flex flex-col md:flex-row">
                 {% if event.cta_title and event.cta_url %}
                   <a
@@ -74,6 +61,7 @@
           {%
             module "related_events"
             title="Related Events"
+            exclude_event_id='{{ event.hs_id }}'
             eyebrow="Tosoh Events"
             path="/TosohTheme2025/modules/hubdb/RelatedEvents"
           %}
