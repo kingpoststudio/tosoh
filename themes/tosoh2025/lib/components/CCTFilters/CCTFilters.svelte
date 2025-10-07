@@ -73,7 +73,7 @@
       document.querySelector('select[name="competitor_instrument_name"]') as HTMLSelectElement
     )?.value;
 
-    const url = `/cct-comparison?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
+    const url = `/cct-details?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
     window.open(url);
   };
 
