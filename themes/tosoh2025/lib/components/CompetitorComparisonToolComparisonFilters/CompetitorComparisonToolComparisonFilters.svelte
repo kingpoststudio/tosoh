@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: 'tosoh-competitor-comparison-tool-comparison-filters',
+    tag: 'tosoh-cct-details-filters',
     shadow: 'none',
   }}
 />
@@ -15,18 +15,19 @@
   import { tableSearchManager } from '../../utils/textSearchUtils';
   import { TableFilterManager } from '../../utils/tableFilterUtils';
 
-  const formId = 'cct-details-filters';
-  let matchInfo = $state({ current: 0, total: 0 });
-  let debounceTimer: ReturnType<typeof setTimeout> | undefined;
+  const FILTERS_FORM_ID = 'cct-details-filters';
+
+  let searchValue = $state('');
+  let searchMatches = $state({ current: 0, total: 0 });
   let tableFilterManager: TableFilterManager | null = null;
-  const categoryOptions = window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map(
-    (row: any) => row.category
-  );
+
+  const categoryOptions =
+    window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map((row: any) => row?.category) || [];
 
   const resetSearchInput = () => {
     tableSearchManager.clearHighlights();
-    (document.querySelector('input[name="search_term"]') as HTMLInputElement).value = '';
-    matchInfo = { current: 0, total: 0 };
+    searchValue = '';
+    searchMatches = { current: 0, total: 0 };
   };
 
   const onChange = (event: Event) => {
@@ -67,24 +68,24 @@
   const performTableSearch = (term: string) => {
     if (!term.trim()) {
       tableSearchManager.clearHighlights();
-      matchInfo = { current: 0, total: 0 };
+      searchMatches = { current: 0, total: 0 };
       return;
     }
 
     setTimeout(() => {
       tableSearchManager.search(term);
-      matchInfo = tableSearchManager.getCurrentMatchInfo();
+      searchMatches = tableSearchManager.getCurrentMatchInfo();
     }, 100);
   };
 
   const navigateToNext = () => {
     tableSearchManager.nextMatch();
-    matchInfo = tableSearchManager.getCurrentMatchInfo();
+    searchMatches = tableSearchManager.getCurrentMatchInfo();
   };
 
   const navigateToPrevious = () => {
     tableSearchManager.previousMatch();
-    matchInfo = tableSearchManager.getCurrentMatchInfo();
+    searchMatches = tableSearchManager.getCurrentMatchInfo();
   };
 
   const handleKeyDown = (event: KeyboardEvent) => {
@@ -97,7 +98,7 @@
       }
     } else if (event.key === 'Escape') {
       tableSearchManager.clearHighlights();
-      matchInfo = { current: 0, total: 0 };
+      searchMatches = { current: 0, total: 0 };
     }
   };
 
@@ -121,9 +122,6 @@
   });
 
   onDestroy(() => {
-    if (debounceTimer) {
-      clearTimeout(debounceTimer);
-    }
     tableSearchManager.clearHighlights();
   });
 </script>
@@ -146,7 +144,14 @@
   </svg>
 {/snippet}
 
-<FilterForm trigger="change" {onChange} {onReset} customClasses="w-full" updateUrl={false} {formId}>
+<FilterForm
+  trigger="change"
+  {onChange}
+  {onReset}
+  customClasses="w-full"
+  updateUrl={false}
+  formId={FILTERS_FORM_ID}
+>
   <div
     transition:fade={{ duration: 100 }}
     class="gap-base p-sm flex w-full flex-col items-center justify-end md:flex-row"
@@ -154,6 +159,7 @@
     <div class="gap-sm flex w-full flex-col md:w-fit md:flex-row-reverse">
       <div class={`relative w-full min-w-[16rem] rounded-lg border border-slate-200 md:w-fit`}>
         <input
+          bind:value={searchValue}
           onkeydown={handleKeyDown}
           name={'search_term'}
           class="p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
@@ -166,12 +172,12 @@
           {@render magnifier()}
         </div>
       </div>
-      {#if matchInfo.total > 0}
+      {#if searchMatches.total > 0}
         <div
           transition:fade={{ duration: 100 }}
           class="gap-sm flex items-center text-sm text-gray-600"
         >
-          <span>{matchInfo.current} of {matchInfo.total} matches</span>
+          <span>{searchMatches.current} of {searchMatches.total} matches</span>
           <div class="flex gap-1">
             <button
               onclick={navigateToPrevious}

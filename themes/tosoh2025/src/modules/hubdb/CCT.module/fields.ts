@@ -10,6 +10,7 @@ const generateFields = () => {
         ['cl', 'CL'],
         ['aia_cl', 'AIA-CL'],
       ],
+
       default: 'all',
     }),
     textField('title', 'Title'),

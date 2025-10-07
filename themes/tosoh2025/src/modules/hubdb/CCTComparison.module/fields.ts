@@ -1,4 +1,4 @@
-import { richTextField, textField } from 'hs-fieldkit';
+import { richTextField } from 'hs-fieldkit';
 import { contentBlockRtfFeatures } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
