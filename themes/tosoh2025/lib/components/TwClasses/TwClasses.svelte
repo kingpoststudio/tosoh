@@ -41,6 +41,9 @@
     'flex-8',
     'border',
     'hidden',
+    'text-left',
+    'text-center',
+    'text-right',
   ];
   //We construct all the classes, and then we copy paset the console log output in the div. Tailwind was not parsing values if we do that programmatically.
   console.log(allClasses.join(' '));
