@@ -15,7 +15,7 @@
     PROD_TOSOH_WEBINARS_TABLE_ID,
   } from '../../utils/constants';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
-  import PaginationWithLimit from '../../components/PaginationWithLimit/PaginationWithLimit.svelte';
+  import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
   import Card from './Card.svelte';
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import { mockWebinarCollectionRes } from './mock';

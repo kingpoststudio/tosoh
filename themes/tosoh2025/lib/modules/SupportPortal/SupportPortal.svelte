@@ -16,7 +16,7 @@
     IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
-  import PaginationWithLimit from '../../components/PaginationWithLimit/PaginationWithLimit.svelte';
+  import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
   import Card from './Card.svelte';
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
