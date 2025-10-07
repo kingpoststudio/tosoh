@@ -23,7 +23,7 @@
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %} 
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
       
-{% set roles = [['Laboratory Manager', 'lab_man_benefits'], ['Laboratory Staff', 'lab_staff_benefits'], ['Clinician', 'clinician_benefits'], ['Procurement Manager', 'procurement_benefits']] %}
+{% set roles = [{label: 'Laboratory Manager', name: 'lab_man_benefits'}, {label: 'Laboratory Staff', name: 'lab_staff_benefits'}, {label: 'Clinician', name: 'clinician_benefits'}, {label: 'Procurement Manager', name: 'procurement_benefits'}] %}
         
 {% require_js position="head" %}
   <script>
@@ -74,11 +74,12 @@
               <div class="mx-auto flex w-full min-w-[56rem] lg:min-w-0 {{ tosoh_instrument_name or competitor_instrument_name ? 'opacity-100' : 'opacity-50 pointer-events-none' }}">
                 {% for role in roles %}
                   <tosoh-tab-group
-                    {{ loop.last ? 'isLast="true"' : '' }}
                     variant="action"
-                    groupId="{{ role[1] }}"
+                    groupId="{{ role.name }}"
                     {{ loop.first ? 'active="true"' : '' }}>
-                    {{ role[0] }}
+                    <span class="whitespace-nowrap">
+                    {{ role.label }}
+                    </span>
                   </tosoh-tab-group>
                 {% endfor %}
               </div>
@@ -87,8 +88,8 @@
                 {% if tosoh_instrument_name %}
                 <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
                 {% for role in roles %}
-                  <tosoh-tab-group variant="tab" groupId="{{ role[1] }}" {{ loop.first ? 'active="true"' : '' }}>
-                    <div>{{ tosoh_instrument[role[1]] }}</div>
+                  <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
+                    <div>{{ tosoh_instrument[role.name] }}</div>
                   </tosoh-tab-group>
                 {% endfor %}
                 {% else %}
@@ -100,8 +101,8 @@
                 {% if competitor_instrument_name %}
                 <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
                 {% for role in roles %}
-                  <tosoh-tab-group variant="tab" groupId="{{ role[1] }}" {{ loop.first ? 'active="true"' : '' }}>
-                    <div>{{ competitor_instrument[role[1]] }}</div>
+                  <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
+                    <div>{{ competitor_instrument[role.name] }}</div>
                   </tosoh-tab-group>
                 {% endfor %}
                 {% else %}
