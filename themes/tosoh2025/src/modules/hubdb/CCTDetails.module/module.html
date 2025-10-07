@@ -6,7 +6,7 @@
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %}
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
 
-{% set table_columns = [['category',"Category"], ['status', "Status"], ['lab_manager', "Lab Manager"], ['lab_technician', "Lab Technician"], ['procurement_manager', "Procurement Manager"], ['clinician', "Clinician"]] %}
+{% set table_columns = [{label: "Category"}, {label: "Status"}, {label: "Lab Manager"}, {label: "Lab Technician"}, {label: "Procurement Manager"}, {label: "Clinician"}] %}
 
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-header-height flex flex-col">
   {% if tosoh_instrument_name and competitor_instrument_name %}
@@ -43,7 +43,7 @@
           <thead class="border-border border-t border-b bg-white">
             <tr class="divide-border divide-x">
               {% for column in table_columns %}
-                <th class="table-head">{{ column[1] }}</th>
+                <th class="table-head">{{ column.label }}</th>
               {% endfor %}
             </tr>
           </thead>
