@@ -2,7 +2,6 @@ import './styles/main.css';
 
 import './components/Header/Header.svelte';
 import './components/GridAccent/GridAccent.svelte';
-import './components/TwClasses/TwClasses.svelte';
 import './components/Modal/Modal.svelte';
 import './components/CCTFilters/CCTFilters.svelte';
 import './components/CCTDetailsFilters/CCTDetailsFilters.svelte';
