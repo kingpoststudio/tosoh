@@ -38,6 +38,23 @@ window.Tosoh.SupportPortalContent =  {{module |tojson}};
       });
     </script>
     <script charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js" async></script>
+    <script>
+    
+    (function() {
+      const wistiaVideoUrl = "{{ wistia_video_url }}";
+      if (wistiaVideoUrl) {
+
+        if (wistiaVideoUrl.endsWith('.bin') && !wistiaVideoUrl.includes('?disposition=attachment')) {
+          wistiaVideoUrl += '?disposition=attachment';
+        }
+
+        let downloadLink = document.querySelector('a[href="{{ wistia_video_url }}"]');
+        if (downloadLink) {
+          downloadLink.href = wistiaVideoUrl;
+        }
+      }
+    })();
+    </script>
     {% end_require_js %}
       
         {{macros.breadcrumbs(manual_breadcrumbs)}}
