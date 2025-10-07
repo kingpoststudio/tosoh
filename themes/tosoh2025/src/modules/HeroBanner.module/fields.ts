@@ -15,6 +15,16 @@ const generateFields = () => {
       default: true,
     }),
 
+    booleanField('is_reversed', 'Is Reversed', {
+      default: false,
+      visibility: {
+        controlling_field: 'banner_type',
+        controlling_value_regex: 'double_image',
+        operator: 'EQUAL',
+      },
+      inline_help_text: 'Reverses the order of the images on the banner, on smaller devices.',
+    }),
+
     imageField('left_image', 'Left image', {
       visibility: {
         controlling_field: 'banner_type',
