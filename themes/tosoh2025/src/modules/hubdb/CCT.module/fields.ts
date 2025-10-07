@@ -10,7 +10,8 @@ const generateFields = () => {
         ['cl', 'CL'],
         ['aia_cl', 'AIA-CL'],
       ],
-
+      inline_help_text:
+        "If you select 'All', the module will display all instruments. If you select a specific access level, the module will only display instruments with that access level.",
       default: 'all',
     }),
     textField('title', 'Title'),
