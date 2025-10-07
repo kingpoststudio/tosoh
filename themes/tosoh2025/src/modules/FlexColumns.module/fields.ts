@@ -217,6 +217,11 @@ const columnSettingsGroup = groupField('column_settings', 'Column Settings', {
       default: false,
       inline_help_text: 'If enabled, the column will have rounded corners.',
     }),
+    booleanField('match_tallest_column', 'Match tallest column?', {
+      default: false,
+      inline_help_text:
+        'If enabled, the column will be the same height as the tallest column. By doing that you will lose the ability to align the column content vertically.',
+    }),
     choiceField('column_size', 'Column size', {
       choices: constructFieldValues('w', widthChoices),
       visibility: {
@@ -289,6 +294,12 @@ const generateFields = () => {
               choices: constructFieldValues('text', textAlignmentChoices),
               default: 'text-left',
               inline_help_text: 'Controls the alignment of content within this column.',
+            }),
+            choiceField('horizontal_align', 'Horizontal Alignment', {
+              choices: constructFieldValues('items', alignmentChoices),
+              default: 'items-start',
+              inline_help_text:
+                'Controls the horizontal alignment of content within this content block.',
             }),
             richTextField('eyebrow', 'Eyebrow', {
               enabled_features: contentBlockRtfFeatures,

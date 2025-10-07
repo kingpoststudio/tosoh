@@ -61,8 +61,8 @@
       &.dark {
         &::before {
           background-image:
-            linear-gradient(to right, #000000 1px, transparent 1px),
-            linear-gradient(to bottom, #000000 1px, transparent 1px);
+            linear-gradient(to right, #0000006a 1px, transparent 1px),
+            linear-gradient(to bottom, #0000006a 1px, transparent 1px);
         }
       }
 

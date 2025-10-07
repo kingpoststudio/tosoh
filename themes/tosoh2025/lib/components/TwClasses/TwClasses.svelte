@@ -44,6 +44,9 @@
     'text-left',
     'text-center',
     'text-right',
+    'justify-self-center',
+    'justify-self-end',
+    'justify-self-start',
   ];
   //We construct all the classes, and then we copy paset the console log output in the div. Tailwind was not parsing values if we do that programmatically.
   console.log(allClasses.join(' '));
