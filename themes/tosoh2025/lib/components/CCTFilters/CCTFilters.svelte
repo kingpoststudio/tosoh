@@ -1,6 +1,6 @@
 <svelte:options
   customElement={{
-    tag: 'tosoh-competitor-comparison-tool-filters',
+    tag: 'tosoh-cct-filters',
     shadow: 'none',
   }}
 />
