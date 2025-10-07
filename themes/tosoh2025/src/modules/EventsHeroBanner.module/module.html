@@ -1,0 +1,52 @@
+{% set image = module.image %}
+{% set eyebrow = module.eyebrow %}
+{% set title = module.title %}
+{% set location = module.location %}
+{% set date = module.date %}
+
+<div
+  class="p-md md:pr-2xl md:pl-2xl max-w-max-page gap-md relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full flex-col justify-center overflow-hidden">
+  <div
+    class="absolute top-0 left-0 h-full w-full object-cover"
+    style="background: linear-gradient(135deg,  var(--color-black-charcoal) 0%,  var(--color-prussian-blue) 100%);"></div>
+
+  <div class="gap-md flex flex-col items-center md:flex-row">
+    <div class="gap-sm relative flex w-full flex-col text-left">
+      <span class="font-sans-narrow text-xl font-semibold text-white">{{ eyebrow }}</span>
+      <div class="text-3xl font-semibold text-white md:text-6xl">{{ title }}</div>
+      <div class="gap-md flex md:flex-row md:items-start md:justify-start">
+        <div class="gap-2xs flex flex-col">
+          <span class="font-sans-narrow text-lg font-bold text-white">{{ location.location_title }}</span>
+          <span class="font-light! text-white">{{ location.location_value }}</span>
+        </div>
+
+        <div class="gap-2xs flex flex-col">
+          <span class="font-sans-narrow text-lg font-bold text-white">{{ date.date_title }}</span>
+          <span class="font-light text-white">{{ date.date_value }}</span>
+        </div>
+      </div>
+    </div>
+    {% if image.src %}
+      <div class="gap-md relative h-[25rem] w-full flex-col overflow-hidden rounded-l-[20rem] rounded-r-2xl shadow-lg">
+        <img src="{{ image.src }}" class="h-full w-full object-cover" />
+      </div>
+    {% endif %}
+  </div>
+  <div class="bottom-md md:left-2xl left-md absolute text-left text-sm font-thin text-white">
+    {% for breadcrumb in module.breadcrumbs %}
+
+      {% if !loop.last %}
+        {% if breadcrumb.url.href %}
+          <a href="{{ breadcrumb.url.href }}" class="link font-thin">{{ breadcrumb.title }}</a>
+        {% else %}
+          <span class="font-semibold text-white">{{ breadcrumb.title }}</span>
+        {% endif %}
+        /
+      {% endif %}
+
+      {% if loop.last %}
+        <span class="font-semibold text-white">{{ breadcrumb.title }}</span>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>

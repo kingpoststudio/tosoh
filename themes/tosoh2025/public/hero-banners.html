@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tosoh Tailwind Configuration Demo</title>
+
+    <script type="module" src="../lib/components/Header/mock.ts"></script>
+    <script type="module" src="../lib/main.ts"></script>
+    <link rel="stylesheet" href="../lib/styles/main.css" />
+  </head>
+  <body class="min-h-[100vh]">
+    <div
+      class="p-md md:pr-2xl md:pl-2xl max-w-max-page gap-md relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full flex-col justify-center overflow-hidden"
+    >
+      <img
+        src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/971742371c0b4bb7f341af60e98f3399b98a2f67.jpg"
+        class="absolute top-0 left-0 h-full w-full object-cover"
+      />
+      <div class="pointer-events-none opacity-0">
+        <a href="/" class="font-thin text-white">Home</a> /
+        <span class="font-semibold text-white">Tosoh Events</span>
+      </div>
+      <div
+        class="absolute top-0 left-0 h-full w-full object-cover"
+        style="background: linear-gradient(135deg,  var(--color-black-charcoal) 0%,  var(--color-prussian-blue) 100%);"
+      ></div>
+      <div class="gap-md flex flex-col items-center md:flex-row">
+        <div class="gap-md relative w-full text-center md:w-1/2 md:text-left">
+          <h1 class="font-sans text-3xl font-semibold text-white md:text-6xl">Tosoh Events</h1>
+        </div>
+
+        <div
+          class="gap-md relative h-[25rem] flex-col overflow-hidden rounded-l-[20rem] rounded-r-2xl shadow-lg md:w-1/2"
+        >
+          <img
+            src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/971742371c0b4bb7f341af60e98f3399b98a2f67.jpg"
+            class="h-full w-full object-cover"
+          />
+        </div>
+      </div>
+      <div class="relative text-left text-sm font-thin text-white">
+        <a href="/" class="link font-thin">Home</a> /
+        <span class="font-semibold text-white">Tosoh Events</span>
+      </div>
+    </div>
+
+    <div
+      class="p-md md:pr-2xl md:pl-2xl max-w-max-page gap-md relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full flex-col justify-center overflow-hidden"
+    >
+      <div
+        class="absolute top-0 left-0 h-full w-full object-cover"
+        style="background: linear-gradient(135deg,  var(--color-black-charcoal) 0%,  var(--color-prussian-blue) 100%);"
+      ></div>
+      <div class="gap-md flex flex-col md:flex-row">
+        <div class="gap-md relative flex w-full flex-col text-left">
+          <span class="font-sans-narrow text-xl font-semibold text-white"> EVENT / CONFERENCE</span>
+          <h1 class="text-3xl font-semibold text-white md:text-6xl">
+            Biomarkers & Precision Medicine 2025
+          </h1>
+          <div class="gap-md flex md:flex-row md:items-start md:justify-start">
+            <div class="gap-2xs flex flex-col">
+              <span class="font-sans-narrow text-lg font-bold text-white"> Location </span>
+              <span class="font-light! text-white"> Location, Location </span>
+            </div>
+
+            <div class="gap-2xs flex flex-col">
+              <span class="font-sans-narrow text-lg font-bold text-white"> Date </span>
+              <span class="font-light! text-white"> October 10, 2025 </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-md md:left-2xl left-md absolute text-left text-sm font-thin text-white">
+        <a href="/" class="link font-thin">Home</a> /
+        <span class="font-semibold text-white">Events</span>
+      </div>
+    </div>
+  </body>
+</html>

@@ -108,12 +108,14 @@
         {# Standard Banner #}
       {% else %}
         {%
-          module "hero_banner"
-          path="/TosohTheme2025/modules/HeroBanner",
-          type="simple",
-          description="<p>All Tosoh Events</p>",
+          module "events_hero_banner"
+          path="/TosohTheme2025/modules/EventsHeroBanner",
+          eyebrow="<p>All Tosoh Events</p>",
           title="<h1>Events</h1>",
-          bg={src: rows[0].image.url, alt: rows[0].name }
+          image={src: rows[0].image.url, alt: rows[0].name }
+          breadcrumbs=[
+              {title: "Home", url: "/"},
+              {title: "Events"}]
         %}
       {% endif %}
 
