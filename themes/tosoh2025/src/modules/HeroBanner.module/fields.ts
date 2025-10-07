@@ -1,4 +1,4 @@
-import { choiceField, imageField, richTextField } from 'hs-fieldkit';
+import { booleanField, choiceField, imageField, richTextField } from 'hs-fieldkit';
 import { contentBlockRtfFeatures } from '../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
@@ -11,6 +11,9 @@ const generateFields = () => {
       default: 'simple',
     }),
     imageField('bg', 'Background Image'),
+    booleanField('has_overlay', 'Has Overlay', {
+      default: true,
+    }),
 
     imageField('left_image', 'Left image', {
       visibility: {

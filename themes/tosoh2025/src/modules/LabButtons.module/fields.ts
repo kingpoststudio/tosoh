@@ -62,14 +62,14 @@ const generateFields = () => {
     }),
     booleanField('display_footnote', 'Display Footnote', {
       default: false,
+    }),
+    richTextField('footnote', 'Footnote', {
+      enabled_features: contentBlockRtfFeatures,
       visibility: {
         controlling_field_path: 'display_footnote',
         controlling_value_regex: true,
         operator: 'EQUAL',
       },
-    }),
-    richTextField('footnote', 'Footnote', {
-      enabled_features: contentBlockRtfFeatures,
     }),
   ];
 };
