@@ -18,7 +18,7 @@
   <div class="gap-lg flex flex-col">
     {% for grid_row in module.grid_rows %}
       <div
-        class="gap-lg md:grid-cols-{{ grid_row.lab_buttons|length }} mx-auto grid h-full w-fit grid-cols-1 content-center items-center justify-center">
+        class="gap-lg sm:grid-cols-{{ grid_row.lab_buttons|length }} mx-auto grid h-full w-fit grid-cols-1 content-center items-center justify-center">
         {% for lab_button in grid_row.lab_buttons %}
 
           {% set wrapper_size = lab_button.size == 'small' ? 'h-[6rem]' : lab_button.size == 'medium' ? 'h-[7rem]' : 'h-[9rem]' %}

@@ -164,7 +164,7 @@
     </tosoh-scroll-x>
   {%- else %}
     {%- set dir = settings.is_reversed_mobile ? "flex-col-reverse md:flex-row" : "flex-col md:flex-row" -%}
-    <div class="{{ dir }} {{ gap }} {{ settings.justify }} flex w-full">{{ caller() }}</div>
+    <div class="{{ dir }} {{ gap }} {{ settings.justify }} relative flex w-full">{{ caller() }}</div>
   {%- endif %}
 {%- endmacro -%}
 
@@ -234,12 +234,11 @@
   {%- endif %}
 {% endmacro -%}
 
-{% macro wrap_with_grid_accent() %}
-  {%- set grid_accent_color_dark = module.module_settings.grid_accent_color == 'dark' ? 'dark="true"' : '' -%}
+{% macro render_grid_accent() %}
+  {%- set grid_accent_color_dark = module.module_settings.grid_accent_color == 'dark' ? 'dark' : '' -%}
   {% if module.module_settings.has_grid_accent %}
-    <tosoh-grid-accent {{ grid_accent_color_dark }} class="max-w-max-page m-auto">{{ caller() }}</tosoh-grid-accent>
-  {% else %}
-    {{ caller() }}
+    <div class="grid-accent position-bl {{ grid_accent_color_dark }}"></div>
+    <div class="grid-accent position-tr {{ grid_accent_color_dark }}"></div>
   {% endif %}
 {% endmacro %}
 
@@ -286,45 +285,46 @@
 
 {# Module Container #}
 
-{% call wrap_with_grid_accent() %}
-  <div {{ module_id }} class="max-w-max-page {{ macros.classes(module.module_settings) }} scroll-mt-5xl m-auto">
-    {# Tab Groups #}
-    {%- if module.tab_group_settings.is_enabled %}
-      <div class="flex w-full flex-col">
-        {# Tab Actions #}
-        <tosoh-scroll-x scrollbarHeight="1px">
-          <div class="gap-sm px-md mx-auto flex w-full justify-center">
-            {%- for tab_group in module.tab_group_settings.tab_groups -%}
-              {%- set is_active = loop.first ? "active=\"true\"" : null -%}
-              <tosoh-tab-group variant="action" groupId="{{ tab_group.group_id }}" {{ is_active }}>
-                {{ tab_group.group_label }}
-              </tosoh-tab-group>
-            {%- endfor %}
+<div
+  {{ module_id }}
+  class="max-w-max-page {{ macros.classes(module.module_settings) }} scroll-mt-5xl m-auto overflow-hidden">
+  {{ render_grid_accent() }}
+  {# Tab Groups #}
+  {%- if module.tab_group_settings.is_enabled %}
+    <div class="flex w-full flex-col">
+      {# Tab Actions #}
+      <tosoh-scroll-x scrollbarHeight="1px">
+        <div class="gap-sm px-md mx-auto flex w-full justify-center">
+          {%- for tab_group in module.tab_group_settings.tab_groups -%}
+            {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+            <tosoh-tab-group variant="action" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+              {{ tab_group.group_label }}
+            </tosoh-tab-group>
+          {%- endfor %}
+        </div>
+      </tosoh-scroll-x>
+
+      {# Tab Content #}
+      {%- for tab_group in module.tab_group_settings.tab_groups -%}
+        {%- set columns = module.columns|selectattr('tab_group_id', 'equalto', tab_group.group_id) -%}
+        {%- set is_active = loop.first ? "active=\"true\"" : null -%}
+
+        <tosoh-tab-group variant="tab" groupId="{{ tab_group.group_id }}" {{ is_active }}>
+          <div {# {{ macros.container_attrs(tab_group.tab_settings) }} #}>
+            {% call flex_layout(tab_group.tab_settings) %}
+              {{ render_columns(columns, tab_group.tab_settings) }}
+            {% endcall %}
           </div>
-        </tosoh-scroll-x>
+        </tosoh-tab-group>
+      {%- endfor %}
+    </div>
 
-        {# Tab Content #}
-        {%- for tab_group in module.tab_group_settings.tab_groups -%}
-          {%- set columns = module.columns|selectattr('tab_group_id', 'equalto', tab_group.group_id) -%}
-          {%- set is_active = loop.first ? "active=\"true\"" : null -%}
-
-          <tosoh-tab-group variant="tab" groupId="{{ tab_group.group_id }}" {{ is_active }}>
-            <div {# {{ macros.container_attrs(tab_group.tab_settings) }} #}>
-              {% call flex_layout(tab_group.tab_settings) %}
-                {{ render_columns(columns, tab_group.tab_settings) }}
-              {% endcall %}
-            </div>
-          </tosoh-tab-group>
-        {%- endfor %}
-      </div>
-
-      {# Standard Columns #}
-    {%- else %}
-      {% call flex_layout(module.module_settings) %}
-        {% call wrap_with_carousel() %}
-          {{ render_columns(module.columns, module.module_settings) }}
-        {% endcall %}
+    {# Standard Columns #}
+  {%- else %}
+    {% call flex_layout(module.module_settings) %}
+      {% call wrap_with_carousel() %}
+        {{ render_columns(module.columns, module.module_settings) }}
       {% endcall %}
-    {%- endif %}
-  </div>
-{% endcall %}
+    {% endcall %}
+  {%- endif %}
+</div>
