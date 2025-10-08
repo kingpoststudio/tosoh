@@ -8,6 +8,38 @@
     <script type="module" src="../lib/components/Header/mock.ts"></script>
     <script type="module" src="../lib/main.ts"></script>
     <link rel="stylesheet" href="../lib/styles/main.css" />
+
+    <script>
+      function setHSFormInputValues() {
+        var quantity = document.querySelector('input[name="quantity"]')?.value;
+        var pick_size = document.querySelector('select[name="pick_size"]')?.value;
+
+        var hsFormQuantityInput = document.querySelector('input[name="qty"]');
+        var hsFormPickSizeInput = document.querySelector('input[name="size"]');
+
+        if (hsFormQuantityInput) hsFormQuantityInput.value = quantity;
+        if (hsFormPickSizeInput) hsFormPickSizeInput.value = pick_size;
+
+        console.log('quantity', quantity);
+        console.log('pick_size', pick_size);
+
+        if (!quantity || !pick_size) {
+          document.querySelector('button[id="request-quote-button"]')?.setAttribute('disabled', '');
+        } else {
+          document.querySelector('button[id="request-quote-button"]')?.removeAttribute('disabled');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var quantity = document.querySelector('input[name="quantity"]');
+        if (quantity) quantity.addEventListener('change', setHSFormInputValues);
+      });
+
+      document.addEventListener('DOMContentLoaded', function () {
+        var pick_size = document.querySelector('select[name="pick_size"]');
+        if (pick_size) pick_size.addEventListener('change', setHSFormInputValues);
+      });
+    </script>
   </head>
 
   <body class="gap-lg flex min-h-[100vh] flex-col">
@@ -19,7 +51,7 @@
           src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
         >
         </tosoh-active-product-image>
-        <div class="embla mt-sm relative h-full w-full overflow-hidden">
+        <div class="embla mt-sm relative h-fit w-full overflow-hidden">
           <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
             <button
               index="3"
@@ -174,19 +206,39 @@
               <div class="text-sm">Qty:</div>
               <input
                 type="number"
-                name="qty"
+                name="quantity"
                 step="1"
                 min="1"
                 class="placeholder:text-default h-full w-full focus:outline-none"
               />
             </div>
           </div>
-          <button
-            class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[10rem]"
-          >
-            Request a Quote
-          </button>
+
+          <tosoh-modal variant="action" modalId="request-quote">
+            <button
+              id="request-quote-button"
+              disabled
+              class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[10rem]"
+            >
+              Request a Quote
+            </button>
+          </tosoh-modal>
         </div>
+        <tosoh-modal variant="modal" modalId="request-quote">
+          <h4 slot="title">Request a Quote</h4>
+          <div slot="content">
+            <div class="fc-form light">
+              {%
+                form "flex_form"
+                form_to_use="{{ form.form_id }}"
+                response_response_type="{{ form.response_type }}"
+                response_message="{{ form.message }}"
+                response_redirect_id="{{ form.redirect_id }}"
+                response_redirect_url="{{ form.redirect_url }}"
+              %}
+            </div>
+          </div>
+        </tosoh-modal>
 
         <div class="gap-sm flex w-full flex-col">
           <p class="text-lg font-semibold">Key Features</p>

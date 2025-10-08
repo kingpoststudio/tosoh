@@ -1,0 +1,214 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+
+{% require_js position="head" %}
+  <script>
+    function setHSFormInputValues() {
+      var quantity = document.querySelector('input[name="quantity"]')?.value;
+      var pick_size = document.querySelector('select[name="pick_size"]')?.value;
+
+      var hsFormQuantityInput = document.querySelector('input[name="qty"]');
+      var hsFormPickSizeInput = document.querySelector('input[name="size"]');
+
+      if (hsFormQuantityInput) hsFormQuantityInput.value = quantity;
+      if (hsFormPickSizeInput) hsFormPickSizeInput.value = pick_size;
+
+      if (!quantity || !pick_size) {
+        document.querySelector('button[id="request-quote-button"]')?.setAttribute('disabled', '');
+      } else {
+        document.querySelector('button[id="request-quote-button"]')?.removeAttribute('disabled');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var quantity = document.querySelector('input[name="quantity"]');
+      if (quantity) quantity.addEventListener('change', setHSFormInputValues);
+    });
+
+    document.addEventListener('DOMContentLoaded', function () {
+      var pick_size = document.querySelector('select[name="pick_size"]');
+      if (pick_size) pick_size.addEventListener('change', setHSFormInputValues);
+    });
+  </script>
+{% end_require_js %}
+
+{% set images = module.images %}
+{% set eyebrow = module.eyebrow %}
+{% set title = module.title %}
+{% set description = module.description %}
+{% set part_no = module.part_no %}
+{% set short_description = module.short_description %}
+{% set key_features = module.key_features %}
+{% set pick_sizes = module.pick_sizes %}
+{% set form = module.form %}
+{% set download_brochure_url = module.download_brochure_url %}
+{% set product_type = module.product_type %}
+{% set breadcrumbs = module.breadcrumbs %}
+
+{{ macros.breadcrumbs(breadcrumbs) }}
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex w-[100vw] flex-col md:flex-row">
+  <div class="flex w-full flex-col md:w-2/5">
+    <tosoh-active-product-image src="{{ images[0].image.src }}"></tosoh-active-product-image>
+    {% if images|length > 1 %}
+      <div class="embla mt-sm relative h-fit w-full overflow-hidden">
+        <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
+          {% for image in images %}
+            <button
+              class="{{ loop.index == 1 ? 'border-imperial-red' : 'border-border' }} plain group embla__slide product_image_slide relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+              index="{{ loop.index }}">
+              <img src="{{ image.image.src }}" alt="{{ image.image.alt }}" class="group h-full w-full object-contain" />
+            </button>
+          {% endfor %}
+        </div>
+        <button
+          aria-label="Previous slide"
+          class="group plain bg-imperial-red embla__prev disabled:border-nickel! border-imperial-red left-sm absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full! border disabled:bg-white">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="35"
+            viewBox="0 0 21 35"
+            fill="none"
+            class="h-6 w-6">
+            <path
+              d="M17.4663 0.693359L20.2059 3.43304L6.15403 17.4849L20.2059 31.5368L17.4663 34.2765L0.76305 17.4849L17.4663 0.693359Z"
+              class="group-disabled:fill-nickel fill-white" />
+          </svg>
+        </button>
+
+        <button
+          class="group plain bg-imperial-red embla__next disabled:border-nickel! border-imperial-red right-sm absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full! border disabled:bg-white"
+          aria-label="Next slide">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="21"
+            height="35"
+            viewBox="0 0 21 35"
+            fill="none"
+            class="h-6 w-6">
+            <path
+              d="M3.53362 0.693359L0.793945 3.43304L14.8458 17.4849L0.793945 31.5368L3.53362 34.2765L20.2368 17.4849L3.53362 0.693359Z"
+              class="group-disabled:fill-nickel fill-white" />
+          </svg>
+        </button>
+      </div>
+    {% endif %}
+  </div>
+  <div class="gap-sm flex w-full flex-col md:w-3/5">
+    <div class="text-imperial-red w-full text-xl font-thin tracking-widest">{{ eyebrow }}</div>
+
+    <div class="font-sans-narrow w-full text-4xl font-semibold">{{ title }}</div>
+
+    <div class="text-nickel w-full">{{ description }}</div>
+    <div class="mt-sm gap-md flex w-full flex-col md:flex-row">
+      <div class="flex w-fit flex-col">
+        <span>Part No:</span>
+        <span class="text-sm">{{ part_no }}</span>
+      </div>
+      <div class="flex w-fit flex-col">
+        <span>Short Description:</span>
+        <span class="text-sm">{{ short_description }}</span>
+      </div>
+    </div>
+
+    <div class="gap-sm flex w-full flex-col md:flex-row">
+      <div class="relative w-full md:max-w-[10rem]">
+        <select class="custom-select" name="pick_size">
+          <option disabled selected hidden value="none">Pick Size</option>
+          {% for pick_size in pick_sizes %}
+            <option value="{{ pick_size.pick_size_value }}">{{ pick_size.pick_size_value }}</option>
+          {% endfor %}
+        </select>
+        <div
+          class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180">
+          <svg class="text-nickel h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M19 9l-7 7-7-7"></path>
+          </svg>
+        </div>
+      </div>
+      <div class="gap-sm flex w-full flex-row items-center md:max-w-[8rem]">
+        <div
+          class="focus-within:border-imperial-red border-imperial-red py-sm px-base gap-xs relative flex h-full w-full flex-row items-center rounded-xl border">
+          <div class="text-sm">Qty:</div>
+          <input
+            type="number"
+            name="quantity"
+            step="1"
+            min="1"
+            class="placeholder:text-default h-full w-full focus:outline-none" />
+        </div>
+      </div>
+
+      {% if product_type == 'consumable' %}
+        <tosoh-modal variant="action" modalId="request-quote">
+          <button
+            id="request-quote-button"
+            disabled
+            class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[10rem]">
+            Request a Quote
+          </button>
+        </tosoh-modal>
+      {% endif %}
+    </div>
+    <tosoh-modal variant="modal" modalId="request-quote">
+      <h4 slot="title">Request a Quote</h4>
+      <div slot="content">
+        <div class="fc-form light">
+          {%
+            form "flex_form"
+            form_to_use="{{ form.form_id }}"
+            response_response_type="{{ form.response_type }}"
+            response_message="{{ form.message }}"
+            response_redirect_id="{{ form.redirect_id }}"
+            response_redirect_url="{{ form.redirect_url }}"
+          %}
+        </div>
+      </div>
+    </tosoh-modal>
+
+    <div class="gap-sm flex w-full flex-col">
+      <p class="text-lg font-semibold">Key Features</p>
+
+      <div class="gap-md p-md pt-sm grid grid-cols-2">
+        {% for key_feature in key_features %}
+          <div class="text-nickel"><li>{{ key_feature.key_value }}</li></div>
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if product_type == 'instrument' %}
+      <div class="gap-sm flex w-full flex-col md:flex-row">
+        <tosoh-modal variant="action" modalId="request-quote">
+          <button
+            id="request-quote-button"
+            disabled
+            class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[12rem]">
+            Request a Quote
+          </button>
+        </tosoh-modal>
+
+        {% if download_brochure_url.href %}
+          <a
+            href="{{ download_brochure_url.href }}"
+            target="_blank"
+            class="button p-sm! outlined gap-2xs flex w-full items-center justify-center rounded-xl text-sm whitespace-nowrap md:max-w-[12rem]">
+            Download Brochure
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 23 23"
+              fill="none"
+              class="h-4 w-4 min-w-[1rem]">
+              <path
+                d="M1.00006 16.5629V17.8701C1.00006 18.9144 1.4149 19.9159 2.15333 20.6544C2.89175 21.3928 3.89327 21.8076 4.93756 21.8076H18.0626C19.1069 21.8076 20.1084 21.3928 20.8468 20.6544C21.5852 19.9159 22.0001 18.9144 22.0001 17.8701V16.5576M11.5001 1.46387V15.9014M11.5001 15.9014L16.0938 11.3076M11.5001 15.9014L6.90631 11.3076"
+                stroke="#231F20"
+                stroke-width="1.96875"
+                stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
