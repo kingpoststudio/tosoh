@@ -49,11 +49,16 @@
   onDestroy(() => mainImageHandler());
 </script>
 
-<div
-  transition:fade
-  class="border-imperial-red aspect-square w-full overflow-hidden rounded-lg border"
->
-  <img src={mainImage} alt={mainImage} class="h-full w-full object-contain" />
+<div class="border-imperial-red aspect-square w-full overflow-hidden rounded-lg border">
+  {#key mainImage}
+    <img
+      src={mainImage}
+      alt={mainImage}
+      class="h-full w-full object-contain"
+      in:fade={{ duration: 300 }}
+      out:fade={{ duration: 200 }}
+    />
+  {/key}
 </div>
 
 <style lang="postcss">
