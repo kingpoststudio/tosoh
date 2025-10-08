@@ -2,8 +2,9 @@
 
 {% set all_events = hubdb_table_rows("events",'&deactivate__eq=false') %}
 {% set filtered_events = module.exclude_event_id ? all_events|selectattr('hs_id', 'ne', module.exclude_event_id): all_events %}
+{% set filtered_by_type = module.include_by_type ? filtered_events|selectattr('event_type.name', 'eq', module.include_by_type): filtered_events %}
 
-{% if filtered_events|length > 0 %}
+{% if filtered_by_type|length > 0 %}
   <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
     <div class="gap-sm flex w-full flex-col justify-between md:flex-row">
       <div class="gap-xs flex flex-col">
@@ -52,7 +53,7 @@
     <div class="gap-sm flex flex-col">
       <div class="embla py-sm w-full overflow-hidden">
         <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
-          {% for event in filtered_events %}
+          {% for event in filtered_by_type %}
             {{ macros.render_event_card(event, true) }}
           {% endfor %}
         </div>
