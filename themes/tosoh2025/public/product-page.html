@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tosoh Tailwind Configuration Demo</title>
+
+    <script type="module" src="../lib/components/Header/mock.ts"></script>
+    <script type="module" src="../lib/main.ts"></script>
+    <link rel="stylesheet" href="../lib/styles/main.css" />
+
+    <script>
+      window.Tosoh = window.Tosoh || {};
+      window.Tosoh.ProductImagesCarouselContent = {};
+      window.Tosoh.ProductImagesCarouselContent = {
+        images: [
+          {
+            src: 'https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg',
+            alt: 'Image 1',
+          },
+          {
+            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
+            alt: 'Image 2',
+          },
+          {
+            src: 'https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg',
+            alt: 'Image 3',
+          },
+          {
+            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
+            alt: 'Image 2',
+          },
+          {
+            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
+            alt: 'Image 2',
+          },
+          {
+            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
+            alt: 'Image 2',
+          },
+          {
+            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
+            alt: 'Image 2',
+          },
+          {
+            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
+            alt: 'Image 2',
+          },
+        ],
+      };
+    </script>
+  </head>
+
+  <body class="gap-lg flex min-h-[100vh] flex-col">
+    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex w-[100vw] flex-col">
+      <div class="flex w-full flex-col">
+        <tosoh-active-product-image
+          src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
+        >
+        </tosoh-active-product-image>
+        <div class="embla mt-sm relative h-full w-full overflow-hidden">
+          <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
+            <button
+              index="3"
+              class="plain group embla__slide product_image_slide border-border relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+            >
+              <img
+                src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png"
+                alt="Image 3"
+                class="group h-full w-full object-contain"
+              />
+            </button>
+            <button
+              class="plain group embla__slide product_image_slide border-border relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+              index="0"
+            >
+              <img
+                src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
+                alt="Image 3"
+                class="group h-full w-full object-contain"
+              />
+            </button>
+            <button
+              class="plain group embla__slide product_image_slide border-border relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+              index="1"
+            >
+              <img
+                src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
+                alt="Image 3"
+                class="group h-full w-full object-contain"
+              />
+            </button>
+            <button
+              class="plain group embla__slide product_image_slide border-border relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+            >
+              <img
+                src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
+                alt="Image 3"
+                class="group h-full w-full object-contain"
+              />
+            </button>
+            <button
+              class="plain group embla__slide product_image_slide border-border relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+            >
+              <img
+                src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
+                alt="Image 3"
+                class="group h-full w-full object-contain"
+              />
+            </button>
+            <button
+              class="plain group embla__slide product_image_slide border-border relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+            >
+              <img
+                src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
+                alt="Image 3"
+                class="group h-full w-full object-contain"
+              />
+            </button>
+          </div>
+          <button
+            aria-label="Previous slide"
+            class="group plain bg-imperial-red embla__prev disabled:border-nickel! border-imperial-red left-sm absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full! border disabled:bg-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="35"
+              viewBox="0 0 21 35"
+              fill="none"
+              class="h-6 w-6"
+            >
+              <path
+                d="M17.4663 0.693359L20.2059 3.43304L6.15403 17.4849L20.2059 31.5368L17.4663 34.2765L0.76305 17.4849L17.4663 0.693359Z"
+                class="group-disabled:fill-nickel fill-white"
+              />
+            </svg>
+          </button>
+          <button
+            class="group plain bg-imperial-red embla__next disabled:border-nickel! border-imperial-red right-sm absolute top-1/2 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full! border disabled:bg-white"
+            aria-label="Next slide"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="21"
+              height="35"
+              viewBox="0 0 21 35"
+              fill="none"
+              class="h-6 w-6"
+            >
+              <path
+                d="M3.53362 0.693359L0.793945 3.43304L14.8458 17.4849L0.793945 31.5368L3.53362 34.2765L20.2368 17.4849L3.53362 0.693359Z"
+                class="group-disabled:fill-nickel fill-white"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
