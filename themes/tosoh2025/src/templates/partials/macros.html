@@ -27,7 +27,7 @@
   {% set is_carousel_slide = is_carousel_slide ? 'embla__slide min-w-[100%] basis-[100%] md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%] max-w-[32rem]' : 'w-full' %}
   {% set current_time = local_dt|unixtimestamp %}
   <div
-    class="border-border {{ is_carousel_slide }} flex flex-col self-stretch overflow-hidden rounded-2xl border bg-white shadow-md transition-all duration-200">
+    class="border-border {{ is_carousel_slide }} flex flex-col self-stretch overflow-hidden rounded-2xl border bg-white shadow-sm transition-all duration-200">
     <div class="bg-prussian-blue p-md relative flex min-h-[12rem] flex-col justify-end overflow-hidden text-white">
       <img
         src="{{ event.image.url }}"
