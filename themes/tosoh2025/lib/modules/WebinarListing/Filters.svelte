@@ -118,7 +118,7 @@
     try {
       let data;
 
-      if (IS_MOCK) {
+      if (!IS_MOCK) {
         data = await getTableFilterOptions({
           filters: filtersArray,
           tableId: prodWebinarListingsTableId,
