@@ -174,13 +174,13 @@
           </div>
         {/if}
         <div
-          class={`relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
+          class={`focus-within:border-imperial-red relative w-full rounded-lg border ${showDropdown ? 'border-imperial-red' : 'border-slate-200'}`}
         >
           <input
             bind:value={searchValue}
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
             name={searchColumnId}
-            class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
+            class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:ring-1"
             placeholder={placeholder || 'Search here...'}
             {disabled}
           />
