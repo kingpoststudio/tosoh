@@ -68,7 +68,7 @@
       <a
         target="_blank"
         class="button with-arrow bg-imperial-red block w-full! rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
-        href="/events/{{ event.hs_path }}">
+        href="{{ event.hs_path ? '/events/' ~ event.hs_path : event.cta_url }}">
         {{ module.cta_label || 'View Details' }}
       </a>
     </div>
