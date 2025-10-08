@@ -8,52 +8,13 @@
     <script type="module" src="../lib/components/Header/mock.ts"></script>
     <script type="module" src="../lib/main.ts"></script>
     <link rel="stylesheet" href="../lib/styles/main.css" />
-
-    <script>
-      window.Tosoh = window.Tosoh || {};
-      window.Tosoh.ProductImagesCarouselContent = {};
-      window.Tosoh.ProductImagesCarouselContent = {
-        images: [
-          {
-            src: 'https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg',
-            alt: 'Image 1',
-          },
-          {
-            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
-            alt: 'Image 2',
-          },
-          {
-            src: 'https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg',
-            alt: 'Image 3',
-          },
-          {
-            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
-            alt: 'Image 2',
-          },
-          {
-            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
-            alt: 'Image 2',
-          },
-          {
-            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
-            alt: 'Image 2',
-          },
-          {
-            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
-            alt: 'Image 2',
-          },
-          {
-            src: 'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/43403887649998a0fb4e7061de08158488e10a81.png',
-            alt: 'Image 2',
-          },
-        ],
-      };
-    </script>
   </head>
 
   <body class="gap-lg flex min-h-[100vh] flex-col">
-    <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex w-[100vw] flex-col">
-      <div class="flex w-full flex-col">
+    <div
+      class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex w-[100vw] flex-col md:flex-row"
+    >
+      <div class="flex w-full flex-col md:w-2/5">
         <tosoh-active-product-image
           src="https://labs.iqvia.com/hubfs/IQVIA/Event%20Locations/2881_Park%20Guell%20in%20Barcelona%2c%20Spain.jpg"
         >
@@ -151,6 +112,117 @@
               <path
                 d="M3.53362 0.693359L0.793945 3.43304L14.8458 17.4849L0.793945 31.5368L3.53362 34.2765L20.2368 17.4849L3.53362 0.693359Z"
                 class="group-disabled:fill-nickel fill-white"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="gap-sm flex w-full flex-col md:w-3/5">
+        <div class="text-imperial-red w-full text-xl font-thin tracking-widest">
+          Reliable. Precision.
+        </div>
+
+        <div class="font-sans-narrow w-full text-4xl font-semibold">Tosoh A1c Reagent Pack</div>
+
+        <div class="text-nickel w-full">
+          The Tosoh A1c Reagent Pack is a complete solution for measuring A1c in the laboratory. It
+          includes all the reagents and materials needed to perform the test.
+        </div>
+        <div class="mt-sm gap-md flex w-full flex-col md:flex-row">
+          <div class="flex w-fit flex-col">
+            <span> Part No:</span><span class="text-sm">1234567890</span>
+          </div>
+          <div class="flex w-fit flex-col">
+            <span>Description:</span
+            ><span class="text-sm"
+              >GR01-compatible HbA1c reagent pack, ready-to-use, 50 tests.</span
+            >
+          </div>
+        </div>
+
+        <div class="gap-sm flex w-full flex-col md:flex-row">
+          <div class="relative w-full md:max-w-[10rem]">
+            <select class="custom-select" name="pick_size">
+              <option disabled selected hidden value="none">Pick Size</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <div
+              class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
+            >
+              <svg
+                class="text-nickel h-4 w-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="4"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="gap-sm flex w-full flex-row items-center md:max-w-[8rem]">
+            <div
+              class="focus-within:border-imperial-red border-imperial-red py-sm px-base gap-xs relative flex h-full w-full flex-row items-center rounded-xl border"
+            >
+              <div class="text-sm">Qty:</div>
+              <input
+                type="number"
+                name="qty"
+                step="1"
+                min="1"
+                class="placeholder:text-default h-full w-full focus:outline-none"
+              />
+            </div>
+          </div>
+          <button
+            class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[10rem]"
+          >
+            Request a Quote
+          </button>
+        </div>
+
+        <div class="gap-sm flex w-full flex-col">
+          <p class="text-lg font-semibold">Key Features</p>
+
+          <div class="gap-md p-md pt-sm grid grid-cols-2">
+            <div class="text-nickel"><li>Use: HbA1c testing</li></div>
+            <div class="text-nickel"><li>Use: HbA1c testing</li></div>
+            <div class="text-nickel"><li>Use: HbA1c testing</li></div>
+            <div class="text-nickel"><li>Use: HbA1c testing</li></div>
+          </div>
+        </div>
+
+        <div class="gap-sm flex w-full flex-col md:flex-row">
+          <button
+            class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[12rem]"
+          >
+            Request a Quote
+          </button>
+          <button
+            class="p-sm! outlined gap-2xs flex w-full items-center justify-center rounded-xl text-sm whitespace-nowrap md:max-w-[12rem]"
+          >
+            Download Brochure
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 23 23"
+              fill="none"
+              class="h-4 w-4 min-w-[1rem]"
+            >
+              <path
+                d="M1.00006 16.5629V17.8701C1.00006 18.9144 1.4149 19.9159 2.15333 20.6544C2.89175 21.3928 3.89327 21.8076 4.93756 21.8076H18.0626C19.1069 21.8076 20.1084 21.3928 20.8468 20.6544C21.5852 19.9159 22.0001 18.9144 22.0001 17.8701V16.5576M11.5001 1.46387V15.9014M11.5001 15.9014L16.0938 11.3076M11.5001 15.9014L6.90631 11.3076"
+                stroke="#231F20"
+                stroke-width="1.96875"
+                stroke-linecap="round"
+                stroke-linejoin="round"
               />
             </svg>
           </button>
