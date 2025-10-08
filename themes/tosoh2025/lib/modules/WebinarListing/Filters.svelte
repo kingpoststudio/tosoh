@@ -218,7 +218,7 @@
 
   {#if areFiltersEnabled}
     <FilterForm trigger="change" {onChange} {onReset} {formId}>
-      <div class="gap-md flex w-full">
+      <div class="gap-md flex h-full w-full">
         {#each filtersArray as columnId}
           {@const filter = getFilter(topicFilters, columnId) as TopicFilters['filters'][number]}
           <TopicFilter
@@ -232,7 +232,7 @@
             placeholder={getLabelForSelect(columnId)}
             labelPosition="left"
             displayLabel={false}
-            customClasses="min-w-[16rem]"
+            customClasses="min-w-[16rem] h-full"
           />
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">

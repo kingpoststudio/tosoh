@@ -180,7 +180,7 @@
             bind:value={searchValue}
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
             name={searchColumnId}
-            class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:ring-1"
+            class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:outline-none focus:ring-1"
             placeholder={placeholder || 'Search here...'}
             {disabled}
           />

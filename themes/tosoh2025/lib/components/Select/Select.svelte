@@ -27,8 +27,8 @@
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
 </script>
 
-<div class="gap-sm flex flex-col">
-  <div class={`gap-sm flex ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
+<div class="gap-sm flex h-full flex-col">
+  <div class={`gap-sm flex h-full ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     {#if displayLabel}
       <div class="gap-sm flex items-center">
         {#if displayLabel}
@@ -54,7 +54,7 @@
         {/if}
       </div>
     {/if}
-    <div class="relative w-full">
+    <div class="relative h-full w-full">
       <select
         id={name}
         {name}
