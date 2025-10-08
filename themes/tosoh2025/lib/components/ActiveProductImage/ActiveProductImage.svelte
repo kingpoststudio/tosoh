@@ -49,7 +49,7 @@
   onDestroy(() => mainImageHandler());
 </script>
 
-<div class="border-imperial-red aspect-square w-full overflow-hidden rounded-lg border">
+<div class="border-imperial-red aspect-square w-full overflow-hidden rounded-2xl border">
   {#key mainImage}
     <img
       src={mainImage}
