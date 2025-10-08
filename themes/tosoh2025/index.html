@@ -827,7 +827,14 @@
       </div>
       <!--end widget-span -->
     </div>
-    {# END OF ACCENT #}
+    {# END OF ACCENT #} {# Accordion #}
+    <div class="p-md max-w-max-page bg-prussian-blue m-auto">
+      <tosoh-accordion groupId="{{ loop.index }}" variant="action" class="accordion-action">
+        H iHiHiHiHiHiHi H iHiHiHiHiHiHi H iHiHiHiHiHiHi H iHiHiHiHiHiHi
+      </tosoh-accordion>
+      <tosoh-accordion groupId="{{ loop.index }}" variant="reveal">Hello</tosoh-accordion>
+    </div>
+    {# /Accordion #}
 
     <div class="p-md pt-4xl min-h-[100vh] bg-white">
       <div class="gap-base max-w-max-page m-auto flex items-center">

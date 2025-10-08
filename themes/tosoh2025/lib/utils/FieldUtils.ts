@@ -140,6 +140,7 @@ export const widthChoices = [
   ['7xl', '7X-large'],
   ['8xl', '8X-large'],
   ['max-page', 'Max Page'],
+  ['full', 'Full'],
 ];
 
 export const constructFieldValues = (tailwindIdentifier: string, choices: string[][]) => {

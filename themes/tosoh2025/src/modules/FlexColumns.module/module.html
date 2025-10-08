@@ -90,6 +90,20 @@
   {%- endif %}
 {%- endmacro -%}
 
+{# Macro for accordions rendering #}
+{%- macro render_accordions(column) -%}
+  <div class="gap-sm flex w-full flex-col">
+    {%- for accordion in column.accordions -%}
+      <div class="accordion-wrapper">
+        <tosoh-accordion groupId="{{ loop.index }}" variant="action" class="accordion-action">
+          {{ accordion.button_content }}
+        </tosoh-accordion>
+        <tosoh-accordion groupId="{{ loop.index }}" variant="reveal">{{ accordion.reveal_content }}</tosoh-accordion>
+      </div>
+    {%- endfor -%}
+  </div>
+{%- endmacro -%}
+
 {# Macro for video rendering #}
 {%- macro render_video() -%}
   {% set video = column.video %}
@@ -211,6 +225,10 @@
     {# Media #}
   {%- elif column.type == "image" %}
     {{ render_image(column.image) }}
+
+    {# Accordions #}
+  {%- elif column.type == "accordions" %}
+    {{ render_accordions(column) }}
 
     {# Navigation List #}
   {%- elif column.type == "navigation_list" %}

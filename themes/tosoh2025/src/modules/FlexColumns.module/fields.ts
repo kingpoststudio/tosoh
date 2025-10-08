@@ -276,6 +276,7 @@ const generateFields = () => {
           choices: [
             ['content', 'Content'],
             ['image', 'Image'],
+            ['accordions', 'Accordions'],
             ['video', 'Video'],
             ['form', 'Form'],
             ['spacer', 'Spacer'],
@@ -397,6 +398,26 @@ const generateFields = () => {
 
         /* Video Fields */
         ...generateVideoFields(),
+
+        /* Accordion */
+        groupField('accordions', 'Accordions', {
+          children: [
+            richTextField('button_content', 'Button Content', {
+              enabled_features: contentBlockRtfFeatures,
+              inline_help_text: 'Content to display in the button of the accordion.',
+            }),
+            richTextField('reveal_content', 'Reveal Content', {
+              enabled_features: contentBlockRtfFeatures,
+              inline_help_text: 'Content to display in the reveal of the accordion.',
+            }),
+          ],
+          visibility: {
+            controlling_field_path: 'columns.type',
+            controlling_value_regex: 'accordions',
+            operator: 'EQUAL',
+          },
+          occurrence: {},
+        }),
 
         /* Form */
         groupField('form', 'Form', {
