@@ -1,0 +1,45 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+{% set eyebrow = module.eyebrow %}
+{% set title = module.title %}
+{% set products = module.products %}
+
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
+  <div class="gap-sm flex w-full flex-col justify-between md:flex-row">
+    <div class="gap-xs flex flex-col">
+      {% if eyebrow %}
+        <h6 class="text-imperial-red tracking-widest">{{ module.eyebrow }}</h6>
+      {% endif %}
+      {% if title %}
+        <h3 class="font-bold">{{ title }}</h3>
+      {% endif %}
+    </div>
+
+    {{ macros.render_carousel_buttons() }}
+  </div>
+
+  <div class="gap-sm flex flex-col">
+    <div class="embla p-sm w-full overflow-hidden">
+      <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
+        {% for product in products %}
+          <a
+            href="{{ product.product_link.href }}"
+            target="_blank"
+            class="group embla__slide border-border relative flex min-h-full w-full min-w-[100%] basis-[100%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border shadow-sm transition-all duration-200 hover:shadow-md md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%]">
+            <div class="relative h-[16rem] max-h-[16rem] w-full overflow-hidden">
+              <img
+                src="{{ product.product_image.src }}"
+                alt="{{ product.product_name }}"
+                class="absolute top-0 left-0 h-full w-full object-contain transition-all duration-200 group-hover:scale-105"
+                width="360" />
+            </div>
+
+            <div class="p-md gap-sm flex flex-col">
+              <h5 class="font-sans-narrow font-semibold">{{ product.product_name }}</h5>
+              <span class="text-nickel break-word line-clamp-2">{{ product.product_description }}</span>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
