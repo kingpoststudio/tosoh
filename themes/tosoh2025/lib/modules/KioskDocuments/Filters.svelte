@@ -21,7 +21,12 @@
   import type { ColumnId, FilterWithOptions } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockKioskDocumentsFiltersResponse } from './mock';
-  import { getFilter } from '../../utils/utils';
+  import {
+    getFilter,
+    getFilterColumnIds,
+    getFiltersTableId,
+    parseSearchColumnId,
+  } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
   import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
@@ -29,13 +34,18 @@
 
   let { isParentLoading, formId } = $props();
 
-  const searchFromFields = window?.Tosoh?.KioskDocumentsContent?.search;
-  const searchColumnId = searchFromFields?.hubdb_column_id;
+  const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
+  const searchFromFields = kioskDocumentsContent?.search;
+  const searchColumnId = parseSearchColumnId(searchFromFields);
   const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
 
-  const topic_filters = window?.Tosoh?.KioskDocumentsContent?.topic_filters?.filters;
-  let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
-  filtersFromFields.push(searchColumnId);
+  const filtersTableId = getFiltersTableId(
+    PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+    kioskDocumentsContent?.topic_filters?.hubdb_table_id
+  );
+
+  const topic_filters = kioskDocumentsContent?.topic_filters?.filters;
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
 
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
@@ -121,7 +131,7 @@
       if (!IS_MOCK) {
         data = await getTableFilterOptions({
           filters: filtersFromFields,
-          tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+          tableId: filtersTableId,
           isActivated: true,
         });
       } else {

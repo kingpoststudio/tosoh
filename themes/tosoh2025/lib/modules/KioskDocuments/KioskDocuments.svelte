@@ -27,13 +27,12 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
+    parseSearchColumnId,
   } from '../../utils/utils';
   const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
   const topicFilters = kioskDocumentsContent?.topic_filters?.filters || [];
 
-  let searchColumnId = kioskDocumentsContent?.search
-    ? kioskDocumentsContent?.search?.hubdb_column_id
-    : '';
+  let searchColumnId = parseSearchColumnId(kioskDocumentsContent?.search);
 
   const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
 
