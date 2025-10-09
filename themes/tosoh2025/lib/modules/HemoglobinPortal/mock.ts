@@ -1,7 +1,7 @@
 import { IS_MOCK } from '../../utils/constants';
 
 if (IS_MOCK) {
-  window.Tosoh.PortaleEmogiobineContent = {
+  window.Tosoh.HemoglobinPortalContent = {
     breadcrumbs: [
       {
         title: 'Home',

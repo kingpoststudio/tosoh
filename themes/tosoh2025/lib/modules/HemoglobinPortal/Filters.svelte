@@ -1,6 +1,10 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import { IS_MOCK, PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID } from '../../utils/constants';
+  import {
+    IS_MOCK,
+    PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
+    USE_HARDCODED_IDS,
+  } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
@@ -22,21 +26,25 @@
   import type { ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockPortaleEmogiobineFiltersResponse } from './mock';
-  import { getFilter } from '../../utils/utils';
+  import { getFilter, getFilterColumnIds, parseSearchColumnId } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
   import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
+
   let { isParentLoading, formId } = $props();
 
-  const searchFromFields = window?.Tosoh?.PortaleEmogiobineContent?.search;
-  const searchColumnId = searchFromFields?.hubdb_column_id;
+  const windowTosohPortaleEmogiobineContent = window?.Tosoh?.HemoglobinPortalContent;
+  const searchFromFields = windowTosohPortaleEmogiobineContent?.search;
+  const searchColumnId = parseSearchColumnId(searchFromFields);
   const searchTableId = PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID;
 
-  const topic_filters = window?.Tosoh?.PortaleEmogiobineContent?.topic_filters?.filters;
-  let filtersFromFields = topic_filters?.map((filter: any) => filter.hubdb_column_id) || [];
-  filtersFromFields.push(searchColumnId);
+  const filtersTableId = USE_HARDCODED_IDS
+    ? PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID
+    : windowTosohPortaleEmogiobineContent?.topic_filters?.hubdb_table_id;
 
+  const topic_filters = windowTosohPortaleEmogiobineContent?.topic_filters?.filters;
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
@@ -132,7 +140,7 @@
       if (!IS_MOCK) {
         data = await getTableFilterOptions({
           filters: filtersFromFields,
-          tableId: PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
+          tableId: filtersTableId,
         });
       } else {
         data = mockPortaleEmogiobineFiltersResponse.results as any;

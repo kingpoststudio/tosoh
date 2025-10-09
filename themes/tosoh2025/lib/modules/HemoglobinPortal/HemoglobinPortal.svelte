@@ -27,16 +27,15 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
+    parseSearchColumnId,
   } from '../../utils/utils';
   const formId = 'portale-emogiobine-filters';
 
-  const portaleEmogiobineContent = window?.Tosoh?.PortaleEmogiobineContent;
+  const portaleEmogiobineContent = window?.Tosoh?.HemoglobinPortalContent;
   const topicFilters = portaleEmogiobineContent?.topic_filters?.filters || [];
 
   let searchEnabled = portaleEmogiobineContent?.search?.enable_search;
-  let searchColumnId = portaleEmogiobineContent?.search
-    ? portaleEmogiobineContent?.search?.hubdb_column_id
-    : '';
+  let searchColumnId = parseSearchColumnId(portaleEmogiobineContent?.search);
 
   let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
 
@@ -117,7 +116,7 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
-  {#if topicFilters?.filters?.length > 0 || searchEnabled}
+  {#if topicFilters?.length > 0 || searchEnabled}
     <Filters isParentLoading={isLoading} {formId}></Filters>
   {/if}
   <div class="flex w-full flex-col justify-between">

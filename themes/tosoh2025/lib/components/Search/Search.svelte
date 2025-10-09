@@ -4,7 +4,7 @@
 
   import { setSearchParams } from '../../utils/urlUtils';
   import { updateFormEvent } from '../../utils/formManager';
-
+  import { USE_HARDCODED_IDS } from '../../utils/constants';
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
 
   import type { Search } from '../../../types/fields';
@@ -92,7 +92,7 @@
           body: JSON.stringify({
             accessLevel: accessLevel,
             term: searchString,
-            tableId: manualTableId || searchTableId,
+            tableId: USE_HARDCODED_IDS ? manualTableId : searchTableId,
             columnId: searchColumnId,
             isActivated: isActivatedQuery,
           }),

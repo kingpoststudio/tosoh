@@ -1,4 +1,4 @@
-import type { TopicFilters } from '../../types/fields';
+import type { Search, TopicFilters } from '../../types/fields';
 import { updateUrl } from './urlUtils';
 
 export const isUpcoming = (date: number) => {
@@ -80,23 +80,33 @@ export const constructRangePmFilters = (topicFilters: TopicFilters['filters']) =
   return rangePmFilters;
 };
 
+const clearExtraColumnIds = (extraColumnIds: string[] | any[]) => {
+  if (!extraColumnIds || extraColumnIds?.length === 0) return [];
+  return extraColumnIds?.filter((columnId) => columnId !== '');
+};
+
 export const getFilterColumnIds = (
   topicFilters: TopicFilters['filters'],
   mode: 'all' | 'numeric' | 'non-numeric' = 'all',
   extraColumnIds?: string[]
 ) => {
+  const filteredExtraColumnIds = clearExtraColumnIds(extraColumnIds || []);
+
   if (mode === 'all') {
-    return [...topicFilters?.map((filter) => filter?.hubdb_column_id), ...(extraColumnIds || [])];
+    return [
+      ...topicFilters?.map((filter) => filter?.hubdb_column_id),
+      ...(filteredExtraColumnIds || []),
+    ];
   } else if (mode === 'numeric') {
     let numericFilters = topicFilters
       ?.filter((filter) => filter?.type === 'range-pm')
       ?.map((filter) => filter?.hubdb_column_id);
-    return [...numericFilters, ...(extraColumnIds || [])];
+    return [...numericFilters, ...(filteredExtraColumnIds || [])];
   } else if (mode === 'non-numeric') {
     let nonNumericFilters = topicFilters
       ?.filter((filter) => filter?.type !== 'range-pm')
       ?.map((filter) => filter?.hubdb_column_id);
-    return [...nonNumericFilters, ...(extraColumnIds || [])];
+    return [...nonNumericFilters, ...(filteredExtraColumnIds || [])];
   }
 };
 
@@ -132,3 +142,7 @@ export const scrollToTop = (behavior: ScrollBehavior = 'smooth') => {
 
 export const setupFilterTitle = (column: string) =>
   column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
+
+export const parseSearchColumnId = (search: Search) => {
+  return search && search?.enable_search ? search?.hubdb_column_id : '';
+};

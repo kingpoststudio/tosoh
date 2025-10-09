@@ -46,7 +46,7 @@ declare global {
         title: string;
         topic_filters: TopicFilters;
       };
-      PortaleEmogiobineContent: {
+      HemoglobinPortalContent: {
         breadcrumbs: {
           title: string;
           url: {
