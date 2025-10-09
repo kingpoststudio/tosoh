@@ -10,7 +10,12 @@
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
-  import { getFilter } from '../../utils/utils';
+  import {
+    getFilter,
+    getFilterColumnIds,
+    getFiltersTableId,
+    parseSearchColumnId,
+  } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
   import {
     extractFilterOptions,
@@ -26,22 +31,22 @@
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
   let { isParentLoading, viewAs, handleChangeView, formId } = $props();
 
-  const searchFromFields = window?.Tosoh?.SupportPortalContent?.search;
-  const searchColumnId = searchFromFields?.hubdb_column_id;
+  const supportPortalContent = window?.Tosoh?.SupportPortalContent;
+  const searchFromFields = supportPortalContent?.search;
+  const searchColumnId = parseSearchColumnId(searchFromFields);
   const prodSupportPortalTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
 
   const isSearchAccessLevelFilterEnabled =
-    window?.Tosoh?.SupportPortalContent?.search?.is_access_level_filter_enabled || false;
+    supportPortalContent?.search?.is_access_level_filter_enabled || false;
 
-  let accessLevel = window?.Tosoh?.SupportPortalContent?.access_level || 'Customer';
+  let accessLevel = supportPortalContent?.access_level || 'Customer';
 
-  const topic_filters = window?.Tosoh?.SupportPortalContent?.topic_filters?.filters;
-  let filtersFromFields = topic_filters
-    ? ([
-        ...topic_filters.map((filter: any) => filter.hubdb_column_id),
-        searchColumnId,
-      ] as ColumnId[])
-    : [];
+  const topic_filters = supportPortalContent?.topic_filters?.filters;
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
+  const filtersTableId = getFiltersTableId(
+    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+    supportPortalContent?.topic_filters?.hubdb_table_id
+  );
 
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
@@ -127,7 +132,7 @@
         data = await getTableFilterOptions({
           filters: filtersFromFields,
           accessLevel: accessLevel,
-          tableId: prodSupportPortalTableId,
+          tableId: filtersTableId,
           isActivated: true,
         });
       } else {
