@@ -2,7 +2,7 @@ import type { Search, TopicFilters } from '../../types/fields';
 import { USE_HARDCODED_IDS } from './constants';
 import { updateUrl } from './urlUtils';
 
-export const isUpcoming = (date: number) => {
+export const isUpcomingEvent = (date: number) => {
   const now = new Date();
   const dateEvent = date ? new Date(date) : null;
 
@@ -12,7 +12,7 @@ export const isUpcoming = (date: number) => {
   }
 };
 
-export const isPast = (date: number) => {
+export const isPastEvent = (date: number) => {
   const now = new Date();
   const dateEvent = date ? new Date(date) : null;
 

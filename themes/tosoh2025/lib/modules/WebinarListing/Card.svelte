@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { WebinarListingsItem } from '../../../types/webinarListings';
-  import { constructCDNUrl, isUpcoming } from '../../utils/utils';
+  import { constructCDNUrl, isUpcomingEvent } from '../../utils/utils';
 
   let { item }: { item: WebinarListingsItem } = $props();
 
@@ -155,11 +155,11 @@
   class="border-border mx-auto flex max-w-[32rem] flex-col overflow-hidden rounded-2xl border bg-white"
 >
   <div
-    class={`bg-prussian-blue relative flex min-h-[18rem]  flex-col ${date && isUpcoming(date) ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
+    class={`bg-prussian-blue relative flex min-h-[18rem]  flex-col ${date && isUpcomingEvent(date) ? 'justify-between' : 'justify-end'} p-md overflow-hidden text-white`}
   >
     {@render shapesBg()}
 
-    {#if date && isUpcoming(date)}
+    {#if date && isUpcomingEvent(date)}
       <div class="relative mb-4">
         <span class="rounded-3xl bg-[#FFFFFF4F] px-4 py-3 text-sm font-thin text-[#FFFFFF]">
           Upcoming
@@ -167,12 +167,12 @@
       </div>
     {/if}
 
-    {#if date && isUpcoming(date)}
+    {#if date && isUpcomingEvent(date)}
       {@render dateBanner()}
     {/if}
 
     <div class="self-end">
-      {#if (start_time || stop_time) && isUpcoming(date)}
+      {#if (start_time || stop_time) && isUpcomingEvent(date)}
         <div class=" mt-md relative mb-2">
           <div class="text-lg font-semibold">{start_time} - {stop_time}</div>
         </div>

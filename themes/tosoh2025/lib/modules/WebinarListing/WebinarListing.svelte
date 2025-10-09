@@ -27,8 +27,8 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    isPast,
-    isUpcoming,
+    isPastEvent,
+    isUpcomingEvent,
     parseSearchColumnId,
   } from '../../utils/utils';
   import { fade } from 'svelte/transition';
@@ -100,13 +100,13 @@
   };
 
   const getUpcoming = (allRows: WebinarListingsItem[]) => {
-    const upcomingWebinars = allRows?.filter((row) => isUpcoming(row?.values?.date)) || [];
+    const upcomingWebinars = allRows?.filter((row) => isUpcomingEvent(row?.values?.date)) || [];
     return upcomingWebinars;
   };
 
   const getPastEvents = (allRows: WebinarListingsItem[]) => {
     const pastWebinars =
-      allRows?.filter((row) => isPast(row?.values?.date) || !row?.values?.date) || [];
+      allRows?.filter((row) => isPastEvent(row?.values?.date) || !row?.values?.date) || [];
 
     return pastWebinars;
   };
@@ -185,11 +185,11 @@
   {/if}
 
   {#if !isLoading}
-    {@const hasUpcomingEvents = getUpcoming(tableRows)?.length > 0}
     {@const upcomingEvents = getUpcoming(tableRows)}
+    {@const hasUpcomingEvents = upcomingEvents?.length > 0}
 
-    {@const hasPastEvents = getPastEvents(tableRows)?.length > 0}
     {@const pastEvents = getPastEvents(tableRows)}
+    {@const hasPastEvents = pastEvents?.length > 0}
 
     {#if hasUpcomingEvents}
       {@render header(upcomingSectionEyebrow, upcomingSectionTitle, true)}
