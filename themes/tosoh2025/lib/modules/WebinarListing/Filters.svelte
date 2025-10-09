@@ -20,7 +20,12 @@
   import Search from '../../components/Search/Search.svelte';
   import { fade } from 'svelte/transition';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
-  import { getFilter } from '../../utils/utils';
+  import {
+    getFilter,
+    getFilterColumnIds,
+    getFiltersTableId,
+    parseSearchColumnId,
+  } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
   import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
@@ -28,15 +33,17 @@
   let { formId } = $props();
 
   const prodWebinarListingsTableId = PROD_TOSOH_WEBINARS_TABLE_ID;
-  const topicFilters = window?.Tosoh?.WebinarListings?.topic_filters?.filters;
-  const filtersArray = window?.Tosoh?.WebinarListings?.topic_filters?.filters
-    ? [...topicFilters.map((filter: any) => filter.hubdb_column_id)]
-    : [];
+  const webinarListingsWindow = window.Tosoh?.WebinarListings;
+  const topicFilters = webinarListingsWindow?.topic_filters?.filters;
+  const filtersTableId = getFiltersTableId(
+    PROD_TOSOH_WEBINARS_TABLE_ID,
+    webinarListingsWindow?.topic_filters?.hubdb_table_id
+  );
 
   const areFiltersEnabled = topicFilters?.length > 0;
-  const searchFromFields = window?.Tosoh?.WebinarListings?.search;
-  const searchColumnId = searchFromFields?.hubdb_column_id;
-  filtersArray.push(searchColumnId);
+  const searchFromFields = webinarListingsWindow?.search;
+  const searchColumnId = parseSearchColumnId(searchFromFields);
+  const filtersArray = getFilterColumnIds(topicFilters, 'all', [searchColumnId]) || [];
 
   const toleranceConfig = extractToleranceConfig(topicFilters || []);
 
@@ -121,7 +128,7 @@
       if (!IS_MOCK) {
         data = await getTableFilterOptions({
           filters: filtersArray,
-          tableId: prodWebinarListingsTableId,
+          tableId: filtersTableId,
           isActivated: true,
         });
       } else {

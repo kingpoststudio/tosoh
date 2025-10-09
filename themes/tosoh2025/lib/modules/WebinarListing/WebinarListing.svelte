@@ -29,6 +29,7 @@
     getFilterColumnIds,
     isPast,
     isUpcoming,
+    parseSearchColumnId,
   } from '../../utils/utils';
   import { fade } from 'svelte/transition';
 
@@ -39,7 +40,6 @@
   let isLoading = $state(false);
 
   const webinarListingsWindow = window.Tosoh?.WebinarListings;
-  // const tableId = window?.Tosoh?.WebinarListings?.tableId;
   const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
   const preselectedLanguage = webinarListingsWindow?.preselected_language;
   const upcomingSectionEyebrow = webinarListingsWindow?.upcoming_section_eyebrow;
@@ -48,7 +48,7 @@
   const pastSectionTitle = webinarListingsWindow?.past_section_title;
   const filterByTopic = webinarListingsWindow?.advanced?.filter_by_topic;
   const searchGroup = webinarListingsWindow?.search;
-  const searchColumnId = searchGroup?.hubdb_column_id;
+  const searchColumnId = parseSearchColumnId(searchGroup);
   const topicFilters = webinarListingsWindow?.topic_filters?.filters || [];
 
   const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
