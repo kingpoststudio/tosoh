@@ -20,9 +20,6 @@
         if (hsFormQuantityInput) hsFormQuantityInput.value = quantity;
         if (hsFormPickSizeInput) hsFormPickSizeInput.value = pick_size;
 
-        console.log('quantity', quantity);
-        console.log('pick_size', pick_size);
-
         if (!quantity || !pick_size) {
           document.querySelector('button[id="request-quote-button"]')?.setAttribute('disabled', '');
         } else {

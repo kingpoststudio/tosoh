@@ -1,6 +1,5 @@
 import {
   choiceField,
-  booleanField,
   groupField,
   imageField,
   richTextField,

@@ -75,7 +75,6 @@
       if (!IS_MOCK) {
         data = await fetchTableRows(constructBody());
       } else {
-        console.log(constructBody(), 'body');
         data = mockPortaleEmogiobineTableRowsResponse;
       }
 
