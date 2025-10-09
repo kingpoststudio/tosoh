@@ -30,7 +30,7 @@
   import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
 
-  let { formId } = $props();
+  let { formId, isSkeleton = false }: { formId: string; isSkeleton?: boolean } = $props();
 
   const prodWebinarListingsTableId = PROD_TOSOH_WEBINARS_TABLE_ID;
   const webinarListingsWindow = window.Tosoh?.WebinarListings;
@@ -120,6 +120,7 @@
   };
 
   const fetchInitialData = async () => {
+    if (isSkeleton) return;
     isLoading = true;
 
     try {

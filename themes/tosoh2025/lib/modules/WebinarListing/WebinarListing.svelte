@@ -153,7 +153,7 @@
       <div class="mt-sm h-14 min-w-[16rem] rounded-lg bg-gray-200"></div>
     </div>
 
-    <WebinarListingsFilters {formId} />
+    <WebinarListingsFilters {formId} isSkeleton={true} />
   </div>
 {/snippet}
 
