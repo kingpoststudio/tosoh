@@ -61,7 +61,7 @@
 <div
   in:fade={{ duration: 300 }}
   out:fade={{ duration: 200 }}
-  class="border-imperial-red aspect-square h-full min-h-[28rem] w-full overflow-hidden rounded-2xl border"
+  class="border-imperial-red aspect-square h-full w-full overflow-hidden rounded-2xl border"
 >
   {#key mainImage}
     <img
