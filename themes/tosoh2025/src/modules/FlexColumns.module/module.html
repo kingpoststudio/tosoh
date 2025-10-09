@@ -207,7 +207,7 @@
 
     {% call wrap_with_carousel_slide() %}
       <div
-        class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ width }} {{ rounded }} {{ match_tallest_column }} flex">
+        class="{{ flex_factor }} {{ border_color }} {{ column_settings }} {{ width }} {{ rounded }} {{ match_tallest_column }} flex max-w-full">
         {% call column_wrapper(column) %}
           {{ render_column_type(column) }}
         {% endcall %}

@@ -28,11 +28,14 @@
   --spacing-3xl: 8rem;
   --spacing-4xl: 12rem;
   --spacing-5xl: 16rem;
+  --spacing-6xl: 24rem;
+  --spacing-7xl: 32rem;
+  --spacing-8xl: 40rem;
+  --spacing-9xl: 48rem;
 
   --spacing-header-height-mobile: 6rem;
   --spacing-header-height-desktop: 7.25rem;
 
-  --container-8xl: 96rem;
   --container-12xl: 120rem;
   --container-max-page: 96rem;
 

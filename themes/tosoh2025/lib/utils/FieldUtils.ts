@@ -144,6 +144,7 @@ export const widthChoices = [
   ['6xl', '6X-large'],
   ['7xl', '7X-large'],
   ['8xl', '8X-large'],
+  ['9xl', '9X-large'],
   ['max-page', 'Max Page'],
   ['full', 'Full'],
 ];
