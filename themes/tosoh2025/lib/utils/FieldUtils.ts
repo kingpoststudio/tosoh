@@ -23,7 +23,10 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
 
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
-    hubDbTableField('hubdb_table_id', 'Table', { required: false }),
+    hubDbTableField('hubdb_table_id', 'Table', {
+      required: true,
+      inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
+    }),
     groupField('filters', 'Filters', {
       children: [
         textField('filter_label', 'Filter Label'),
@@ -94,6 +97,11 @@ export const searchField = (extraFields: any = []) => {
   return groupField('search', 'Search', {
     children: [
       booleanField('enable_search', 'Enable search?', { id: 'search.enable_search' }),
+      hubDbTableField('hubdb_table_id', 'HubDB Table', {
+        required: true,
+        inline_help_text: 'Defines the hubDB table that will be used to search against.',
+        ...searchVisibilityRule,
+      }),
       textField('hubdb_column_id', 'HubDB Column ID', {
         inline_help_text: 'Defines the hubDB column id that will be used to search against.',
         default: 'search_term',
@@ -109,10 +117,7 @@ export const searchField = (extraFields: any = []) => {
         default: false,
         ...searchVisibilityRule,
       }),
-      hubDbTableField('hubdb_table_id', 'HubDB Table', {
-        required: true,
-        ...searchVisibilityRule,
-      }),
+
       ...extraFields,
     ],
   });
