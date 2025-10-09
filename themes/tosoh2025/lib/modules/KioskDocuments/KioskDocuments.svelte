@@ -93,7 +93,6 @@
       } else {
         data = mockKioskDocumentsTableRowsResponse;
       }
-      // const data = mockKioskDocumentsTableRowsResponse;
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;
