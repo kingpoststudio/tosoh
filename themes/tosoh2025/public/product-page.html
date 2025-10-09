@@ -37,6 +37,19 @@
         if (pick_size) pick_size.addEventListener('change', setHSFormInputValues);
       });
     </script>
+
+    <script>
+      function handleTabGroupChange(event) {
+        const tabGroup = event.target.value;
+        const tabGroupElement = document.querySelector(`tosoh-tab-group[groupId="${tabGroup}"]`);
+
+        console.log(tabGroupElement);
+
+        window.dispatchEvent(
+          new CustomEvent('TosohTabGroupActive', { detail: { groupId: tabGroup }, bubbles: true })
+        );
+      }
+    </script>
   </head>
 
   <body class="flex min-h-[100vh] flex-col">
@@ -240,7 +253,7 @@
         <div class="gap-sm flex w-full flex-col">
           <p class="text-lg font-semibold">Key Features</p>
 
-          <div class="gap-md p-md pt-sm grid grid-cols-2">
+          <div class="gap-base p-md pt-sm grid grid-cols-1 md:grid-cols-2">
             <div class="text-nickel"><li>Use: HbA1c testing</li></div>
             <div class="text-nickel"><li>Use: HbA1c testing</li></div>
             <div class="text-nickel"><li>Use: HbA1c testing</li></div>
@@ -282,24 +295,52 @@
     <div
       class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col"
     >
-      <tosoh-scroll-x>
-        <div class="mb-xs min-w-9xl mx-auto flex w-full justify-center">
-          <tosoh-tab-group variant="action" groupId="tab_group.group_id" active="true">
-            Instructions For Use
-          </tosoh-tab-group>
-          <tosoh-tab-group variant="action" groupId="Safety Data Sheets (SDS)">
-            Safety Data Sheets (SDS)
-          </tosoh-tab-group>
-          <tosoh-tab-group variant="action" groupId="Certificates of Analysis (CoA)">
-            Instructions For Use
-          </tosoh-tab-group>
+      <div class="hidden w-full md:block">
+        <tosoh-scroll-x>
+          <div class="mb-xs min-w-9xl mx-auto flex w-full justify-center">
+            <tosoh-tab-group variant="action" groupId="tab_group.group_id" active="true">
+              Instructions For Use
+            </tosoh-tab-group>
+            <tosoh-tab-group variant="action" groupId="Safety Data Sheets (SDS)">
+              Safety Data Sheets (SDS)
+            </tosoh-tab-group>
+            <tosoh-tab-group variant="action" groupId="Certificates of Analysis (CoA)">
+              Instructions For Use
+            </tosoh-tab-group>
+          </div>
+        </tosoh-scroll-x>
+      </div>
+
+      <div class="relative block w-full md:hidden md:max-w-[10rem]">
+        <select class="custom-select" onchange="handleTabGroupChange(event)">
+          <option value="tab_group.group_id">Instructions For Use</option>
+          <option value="Safety Data Sheets (SDS)">Safety Data Sheets (SDS)</option>
+        </select>
+
+        <div
+          class="pointer-events-none absolute inset-y-0 right-3 flex items-center transition-transform duration-200 peer-open:rotate-180"
+        >
+          <svg
+            class="text-imperial-red h-4 w-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="4"
+              d="M19 9l-7 7-7-7"
+            ></path>
+          </svg>
         </div>
-      </tosoh-scroll-x>
+      </div>
 
       <tosoh-tab-group variant="tab" groupId="tab_group.group_id" active="true">
         <a
           href="#"
-          class="group p-sm md:p-base border-border gap-sm flex cursor-pointer flex-row items-center justify-between rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm"
+          disabled
+          class="group p-sm md:p-base border-border gap-sm relative flex cursor-pointer flex-row items-center justify-between overflow-hidden rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm"
         >
           <div class="gap-sm flex flex-row items-center">
             <svg
@@ -330,7 +371,7 @@
             </svg>
             <div class="gap-2xs flex flex-col">
               <h6
-                class="text-default group-hover:text-imperial-red font-sans-narrow font-semibold transition-all duration-200"
+                class="text-default group-hover:text-imperial-red group-[&[disabled]]:text-nickel font-sans-narrow font-semibold transition-all duration-200"
               >
                 Getting Started with GR0121 but with lorem ipsum dolor sit amet consectetur
                 adipisicing elit. Quisquam, quos.
@@ -367,6 +408,47 @@
               stroke-linejoin="round"
             />
           </svg>
+
+          <div
+            class="gap-sm absolute top-0 right-0 hidden h-full w-full items-center justify-center bg-black/60 group-[&[disabled]]:flex"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="54"
+              height="54"
+              viewBox="0 0 54 54"
+              fill="none"
+            >
+              <foreignObject x="-2.16" y="-2.16" width="58.32" height="58.32"
+                ><div
+                  xmlns="http://www.w3.org/1999/xhtml"
+                  style="backdrop-filter:blur(1.08px);clip-path:url(#bgblur_0_96_2968_clip_path);height:100%;width:100%"
+                ></div
+              ></foreignObject>
+              <g data-figma-bg-blur-radius="2.16">
+                <rect width="54" height="54" rx="27" fill="white" fill-opacity="0.14" />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M13.4326 26.2471C13.4326 25.0477 13.9091 23.8974 14.7572 23.0492C15.6054 22.2011 16.7557 21.7246 17.9551 21.7246H36.0451C37.2446 21.7246 38.3949 22.2011 39.243 23.0492C40.0911 23.8974 40.5676 25.0477 40.5676 26.2471V36.7996C40.5676 37.9991 40.0911 39.1494 39.243 39.9975C38.3949 40.8456 37.2446 41.3221 36.0451 41.3221H17.9551C16.7557 41.3221 15.6054 40.8456 14.7572 39.9975C13.9091 39.1494 13.4326 37.9991 13.4326 36.7996V26.2471ZM28.5076 29.2621C28.5076 28.8623 28.3488 28.4789 28.0661 28.1961C27.7834 27.9134 27.3999 27.7546 27.0001 27.7546C26.6003 27.7546 26.2169 27.9134 25.9342 28.1961C25.6514 28.4789 25.4926 28.8623 25.4926 29.2621V33.7846C25.4926 34.1844 25.6514 34.5679 25.9342 34.8506C26.2169 35.1333 26.6003 35.2921 27.0001 35.2921C27.3999 35.2921 27.7834 35.1333 28.0661 34.8506C28.3488 34.5679 28.5076 34.1844 28.5076 33.7846V29.2621Z"
+                  fill="white"
+                />
+                <path
+                  d="M20.9707 23.2312V18.7087C20.9707 17.1095 21.606 15.5757 22.7368 14.4449C23.8677 13.314 25.4014 12.6787 27.0007 12.6787C28.6 12.6787 30.1337 13.314 31.2646 14.4449C32.3954 15.5757 33.0307 17.1095 33.0307 18.7087V23.2312"
+                  stroke="white"
+                  stroke-width="3.015"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </g>
+              <defs>
+                <clipPath id="bgblur_0_96_2968_clip_path" transform="translate(2.16 2.16)">
+                  <rect width="54" height="54" rx="27" />
+                </clipPath>
+              </defs>
+            </svg>
+            <span class="text-white">Login to unlock and download this file</span>
+          </div>
         </a>
       </tosoh-tab-group>
     </div>
