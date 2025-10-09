@@ -52,7 +52,7 @@
           {step}
           {placeholder}
           disabled={disabled || isLoading}
-          class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
+          class=" p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8 disabled:cursor-not-allowed disabled:opacity-50"
         />
       </div>
     </div>

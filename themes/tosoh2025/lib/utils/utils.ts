@@ -1,4 +1,5 @@
 import type { Search, TopicFilters } from '../../types/fields';
+import { USE_HARDCODED_IDS } from './constants';
 import { updateUrl } from './urlUtils';
 
 export const isUpcoming = (date: number) => {
@@ -145,4 +146,8 @@ export const setupFilterTitle = (column: string) =>
 
 export const parseSearchColumnId = (search: Search) => {
   return search && search?.enable_search ? search?.hubdb_column_id : '';
+};
+
+export const getFiltersTableId = (hardcodedTableId: string, searchTableId: string) => {
+  return USE_HARDCODED_IDS ? hardcodedTableId : searchTableId;
 };

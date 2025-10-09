@@ -26,7 +26,12 @@
   import type { ColumnId } from '../../../types/hubdb';
   import { getTableFilterOptions } from '../../services/fetchTableFilterOptions';
   import { mockPortaleEmogiobineFiltersResponse } from './mock';
-  import { getFilter, getFilterColumnIds, parseSearchColumnId } from '../../utils/utils';
+  import {
+    getFilter,
+    getFilterColumnIds,
+    getFiltersTableId,
+    parseSearchColumnId,
+  } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
@@ -39,9 +44,10 @@
   const searchColumnId = parseSearchColumnId(searchFromFields);
   const searchTableId = PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID;
 
-  const filtersTableId = USE_HARDCODED_IDS
-    ? PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID
-    : windowTosohPortaleEmogiobineContent?.topic_filters?.hubdb_table_id;
+  const filtersTableId = getFiltersTableId(
+    PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
+    windowTosohPortaleEmogiobineContent?.topic_filters?.hubdb_table_id
+  );
 
   const topic_filters = windowTosohPortaleEmogiobineContent?.topic_filters?.filters;
   let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];

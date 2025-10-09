@@ -27,6 +27,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
+    parseSearchColumnId,
   } from '../../utils/utils';
 
   const formId = 'hemoglobin-variants-library-filters';
@@ -34,9 +35,7 @@
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
   const topicFilters = hemoglobinVariantsLibraryContent?.topic_filters?.filters || [];
 
-  let searchColumnId = hemoglobinVariantsLibraryContent?.search
-    ? hemoglobinVariantsLibraryContent?.search?.hubdb_column_id
-    : '';
+  let searchColumnId = parseSearchColumnId(hemoglobinVariantsLibraryContent?.search);
 
   let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
 
