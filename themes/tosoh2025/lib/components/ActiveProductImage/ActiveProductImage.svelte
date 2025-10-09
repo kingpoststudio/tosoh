@@ -45,19 +45,26 @@
     });
   };
 
-  onMount(() => assignOnClick());
+  const destoryPlaceholder = () => {
+    document.querySelectorAll('.active-product-image-placeholder').forEach((placeholder) => {
+      placeholder.remove();
+    });
+  };
+
+  onMount(() => {
+    assignOnClick();
+    destoryPlaceholder();
+  });
   onDestroy(() => mainImageHandler());
 </script>
 
-<div class="border-imperial-red aspect-square w-full overflow-hidden rounded-2xl border">
+<div
+  in:fade={{ duration: 300 }}
+  out:fade={{ duration: 200 }}
+  class="border-imperial-red aspect-square h-full min-h-[28rem] w-full overflow-hidden rounded-2xl border"
+>
   {#key mainImage}
-    <img
-      src={mainImage}
-      alt={mainImage}
-      class="h-full w-full object-contain"
-      in:fade={{ duration: 300 }}
-      out:fade={{ duration: 200 }}
-    />
+    <img src={mainImage} loading="eager" alt={mainImage} class="h-full w-full object-contain" />
   {/key}
 </div>
 

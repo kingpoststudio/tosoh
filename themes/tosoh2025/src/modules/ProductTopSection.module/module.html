@@ -47,6 +47,7 @@
 {{ macros.breadcrumbs(breadcrumbs) }}
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex w-[100vw] flex-col md:flex-row">
   <div class="flex w-full flex-col md:w-2/5">
+    <div class="active-product-image-placeholder min-h-[28rem]"></div>
     <tosoh-active-product-image src="{{ images[0].image.src }}"></tosoh-active-product-image>
     {% if images|length > 1 %}
       <div class="embla mt-sm relative h-fit w-full overflow-hidden">
@@ -55,7 +56,11 @@
             <button
               class="{{ loop.index == 1 ? 'border-imperial-red' : 'border-border' }} plain group embla__slide product_image_slide relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
               index="{{ loop.index }}">
-              <img src="{{ image.image.src }}" alt="{{ image.image.alt }}" class="group h-full w-full object-contain" />
+              <img
+                src="{{ image.image.src }}"
+                alt="{{ image.image.alt }}"
+                width="700"
+                class="group h-full w-full object-contain" />
             </button>
           {% endfor %}
         </div>
@@ -100,14 +105,18 @@
 
     <div class="text-nickel w-full">{{ description }}</div>
     <div class="mt-sm gap-md flex w-full flex-col md:flex-row">
-      <div class="flex w-fit flex-col">
-        <span>Part No:</span>
-        <span class="text-sm">{{ part_no }}</span>
-      </div>
-      <div class="flex w-fit flex-col">
-        <span>Short Description:</span>
-        <span class="text-sm">{{ short_description }}</span>
-      </div>
+      {% if part_no %}
+        <div class="flex w-fit flex-col">
+          <span>Part No:</span>
+          <span class="text-sm">{{ part_no }}</span>
+        </div>
+      {% endif %}
+      {% if short_description %}
+        <div class="flex w-fit flex-col">
+          <span>Short Description:</span>
+          <span class="text-sm">{{ short_description }}</span>
+        </div>
+      {% endif %}
     </div>
 
     <div class="gap-sm flex w-full flex-col md:flex-row">
