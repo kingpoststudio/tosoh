@@ -64,7 +64,14 @@
   class="border-imperial-red aspect-square h-full min-h-[28rem] w-full overflow-hidden rounded-2xl border"
 >
   {#key mainImage}
-    <img src={mainImage} loading="eager" alt={mainImage} class="h-full w-full object-contain" />
+    <img
+      src={mainImage}
+      loading="eager"
+      alt={mainImage}
+      class="h-full w-full object-contain"
+      in:fade={{ duration: 400 }}
+      out:fade={{ duration: 200 }}
+    />
   {/key}
 </div>
 

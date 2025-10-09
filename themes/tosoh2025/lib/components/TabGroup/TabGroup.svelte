@@ -70,8 +70,7 @@
     text-align: center;
     cursor: pointer;
     height: 100% !important;
-    border-right: 1px solid var(--color-border);
-    border-top: 1px solid var(--color-border);
+    color: var(--color-nickel);
     border-bottom: 1px solid var(--color-border);
 
     &.isLast {
@@ -81,7 +80,8 @@
     &.active {
       font-weight: 600;
       background: var(--color-ghost-white);
-      color: var(--color-imperial-red);
+      border-bottom: 2px solid var(--color-imperial-red);
+      color: var(--color-default);
     }
   }
 
