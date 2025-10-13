@@ -55,7 +55,7 @@
   }
 
   form {
-    @apply gap-md mx-auto flex w-full max-w-6xl flex-col;
+    @apply gap-md mx-auto flex w-full flex-col;
     @apply p-xs;
 
     div#hs-membership-password-requirements {

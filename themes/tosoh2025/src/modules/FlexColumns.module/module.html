@@ -241,7 +241,9 @@
     {# Form #}
   {%- elif column.type == "form" -%}
     <div class="gap-md fc-form flex flex-col">
-      {{ render_content_block(column.form) }}
+      {% if column.form.eyebrow or column.form.title or column.form.description %}
+        {{ render_content_block(column.form) }}
+      {% endif %}
       {% if column.form.form %}
         {{ render_form() }}
       {% endif %}
