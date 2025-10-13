@@ -3,7 +3,6 @@
   import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import Input from '../Input/Input.svelte';
   import type { TopicFilters } from '../../../types/fields';
-  import type { ColumnId } from '../../../types/hubdb';
 
   let {
     customClasses,
@@ -31,10 +30,26 @@
 {#if filter?.type}
   <div class={customClasses || 'mt-base'}>
     {#if filter?.type === 'dropdown'}
-      <Select {options} {name} {disabled} {placeholder} {labelPosition} {displayLabel} />
+      <Select
+        {options}
+        {name}
+        {disabled}
+        label={filter?.filter_label}
+        {placeholder}
+        {labelPosition}
+        {displayLabel}
+      />
     {/if}
     {#if filter?.type === 'checkbox'}
-      <Checkbox {options} {name} {disabled} {isLoading} {labelPosition} {displayLabel} />
+      <Checkbox
+        {options}
+        {name}
+        {disabled}
+        {isLoading}
+        label={filter?.filter_label}
+        {labelPosition}
+        {displayLabel}
+      />
     {/if}
     {#if filter?.type === 'range-pm'}
       <Input
