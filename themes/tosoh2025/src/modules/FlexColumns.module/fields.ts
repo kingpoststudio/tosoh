@@ -378,7 +378,7 @@ const generateFields = () => {
               },
               inline_help_text: 'Upload or select an image to display.',
             }),
-
+            linkField('link', 'Link'),
             booleanField('is_image_contained', 'Is image contained?', {
               inline_help_text:
                 'If enabled, the image will be contained within the column, otherwise it will fill the column width.',

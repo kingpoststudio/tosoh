@@ -82,11 +82,23 @@
 {%- macro render_image(image) -%}
   {%- if image.type == "single" -%}
     {%- set object_fit = image.is_image_contained ? "object-contain" : "object-cover" -%}
-    <img
-      src="{{ image.image.src }}"
-      alt="{{ image.image.alt }}"
-      width="720"
-      class="{{ object_fit }} relative block h-full w-full" />
+    {%- set link = image.link.url.href -%}
+
+    {%- if !link -%}
+      <img
+        src="{{ image.image.src }}"
+        alt="{{ image.image.alt }}"
+        width="720"
+        class="{{ object_fit }} relative block h-full w-full" />
+    {%- else -%}
+      <a href="{{ link }}" target="_blank" class="block h-full w-full">
+        <img
+          src="{{ image.image.src }}"
+          alt="{{ image.image.alt }}"
+          width="720"
+          class="{{ object_fit }} relative block h-full w-full transition-all duration-200 hover:scale-105" />
+      </a>
+    {%- endif %}
   {%- endif %}
 {%- endmacro -%}
 
