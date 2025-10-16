@@ -10,6 +10,7 @@ import './components/Modal/Modal.svelte';
 import './components/RevealGroup/RevealGroup.svelte';
 import './components/Accordion/Accordion.svelte';
 import './components/ActiveProductImage/ActiveProductImage.svelte';
+import './components/InView/InView.svelte';
 
 import './modules/WebinarListing/WebinarListing.svelte';
 import './modules/SupportPortal/SupportPortal.svelte';

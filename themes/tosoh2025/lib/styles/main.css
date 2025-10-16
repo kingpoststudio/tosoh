@@ -189,6 +189,32 @@ a[href]:not(.button):not(.systems-page a) {
   @apply divide-border divide-x;
 }
 
+table:not(:has(.table-cell, .table-row)),
+table:not(:where(:has(.table-cell), :has(.table-row))) {
+  border-collapse: collapse;
+  width: 100%;
+  background: white;
+}
+
+table:not(:has(.table-cell, .table-row)) th,
+table:not(:has(.table-cell, .table-row)) td,
+table:not(:where(:has(.table-cell), :has(.table-row))) th,
+table:not(:where(:has(.table-cell), :has(.table-row))) td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #18181b;
+  text-align: left;
+  font-size: 1rem;
+  vertical-align: top;
+  text-wrap: break-all;
+}
+
+table:not(:has(.table-cell, .table-row)) th,
+table:not(:where(:has(.table-cell), :has(.table-row))) th {
+  background: #f5f5f5;
+  text-wrap: break-all;
+  font-weight: 600;
+}
+
 .tosoh-radio {
   @apply border-border mr-2 h-6 w-6 appearance-none rounded-full border bg-transparent text-white focus:ring-0 focus:outline-none;
 }

@@ -268,6 +268,49 @@ export const presetPaddingFields = [
   }),
 ];
 
+export const presetPaddingFieldsBase = [
+  choiceField('pt_mobile', 'Top padding (mobile)', {
+    choices: constructFieldValues('pt', sizeChoices),
+    default: 'pt-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pt_desktop', 'Top padding (desktop)', {
+    choices: constructFieldValues('md:pt', sizeChoices),
+    default: 'md:pt-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pr_mobile', 'Right padding (mobile)', {
+    choices: constructFieldValues('pr', sizeChoices),
+    default: 'pr-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pr_desktop', 'Right padding (desktop)', {
+    choices: constructFieldValues('md:pr', sizeChoices),
+    default: 'md:pr-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pb_mobile', 'Bottom padding (mobile)', {
+    choices: constructFieldValues('pb', sizeChoices),
+    default: 'pb-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pb_desktop', 'Bottom padding (desktop)', {
+    choices: constructFieldValues('md:pb', sizeChoices),
+    default: 'md:pb-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pl_mobile', 'Left padding (mobile)', {
+    choices: constructFieldValues('pl', sizeChoices),
+    default: 'pl-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pl_desktop', 'Left padding (desktop)', {
+    choices: constructFieldValues('md:pl', sizeChoices),
+    default: 'md:pl-base',
+    display_width: 'half_width',
+  }),
+];
+
 export const contentBlockRtfFeatures = [
   'indents',
   'charmap',
