@@ -263,8 +263,6 @@ table:not(:where(:has(.table-cell), :has(.table-row))) th {
 }
 
 select.custom-select {
-  @apply py-sm px-base focus-visible:ring-imperial-red focus-visible:border-imperial-red border-imperial-red mr-0 w-full rounded-xl border focus-visible:ring-0 focus-visible:outline-0;
-
   &,
   &::picker(select) {
     appearance: base-select;

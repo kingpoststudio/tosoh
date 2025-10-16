@@ -121,7 +121,9 @@
 
     <div class="gap-sm flex w-full flex-col md:flex-row">
       <div class="relative w-full md:max-w-[10rem]">
-        <select class="custom-select" name="pick_size">
+        <select
+          class="custom-select p-sm focus:ring-imperial-red peer focus:ring-opacity-50 h-full w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+          name="pick_size">
           <option disabled selected hidden value="none">Pick Size</option>
           {% for pick_size in pick_sizes %}
             <option value="{{ pick_size.pick_size_value }}">{{ pick_size.pick_size_value }}</option>
@@ -136,7 +138,7 @@
       </div>
       <div class="gap-sm flex w-full flex-row items-center md:max-w-[8rem]">
         <div
-          class="focus-within:border-imperial-red border-imperial-red py-sm px-base gap-xs relative flex h-full w-full flex-row items-center rounded-xl border">
+          class="focus-within:border-imperial-red border-imperial-red py-sm px-base gap-xs relative flex h-full w-full flex-row items-center rounded-lg border">
           <div class="text-sm">Qty:</div>
           <input
             type="number"
