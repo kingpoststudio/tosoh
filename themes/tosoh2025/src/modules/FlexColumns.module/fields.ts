@@ -425,6 +425,13 @@ const generateFields = () => {
             'A form block that allows you to add a form with a title and description.',
           children: [
             ...generateFormDialogFields(),
+            choiceField('theme', 'Theme', {
+              choices: [
+                ['', 'Default'],
+                ['light', 'Light'],
+              ],
+              inline_help_text: 'Select the theme for the form.',
+            }),
             richTextField('eyebrow', 'Eyebrow', {
               enabled_features: contentBlockRtfFeatures,
               inline_help_text: 'Optional short text above the form title.',

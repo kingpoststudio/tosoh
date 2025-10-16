@@ -24,7 +24,7 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
     hubDbTableField('hubdb_table_id', 'Table', {
-      required: true,
+      required: false,
       inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
     }),
     groupField('filters', 'Filters', {

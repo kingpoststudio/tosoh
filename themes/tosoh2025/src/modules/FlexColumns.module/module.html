@@ -240,7 +240,9 @@
 
     {# Form #}
   {%- elif column.type == "form" -%}
-    <div class="gap-md fc-form flex flex-col">
+    {%- set theme = column.form.theme or '' -%}
+
+    <div class="gap-md fc-form {{ theme }} flex flex-col">
       {% if column.form.eyebrow or column.form.title or column.form.description %}
         {{ render_content_block(column.form) }}
       {% endif %}

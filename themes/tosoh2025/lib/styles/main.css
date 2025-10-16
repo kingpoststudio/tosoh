@@ -118,7 +118,7 @@ h6 {
   @apply overflow-hidden rounded-lg;
 }
 
-button:not([class*='ToolbarIconButton__IconButton']),
+button:not([class*='ToolbarIconButton__IconButton']):not([class*='pika']),
 .button {
   @apply px-md py-xs cursor-pointer rounded-lg border-2 font-normal transition-all duration-200 hover:shadow-md hover:shadow-zinc-200 focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50;
 
@@ -189,17 +189,17 @@ a[href]:not(.button):not(.systems-page a) {
   @apply divide-border divide-x;
 }
 
-table:not(:has(.table-cell, .table-row)),
-table:not(:where(:has(.table-cell), :has(.table-row))) {
+table:not(:has(.table-cell, .table-row)):not(tosoh-modal *),
+table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) {
   border-collapse: collapse;
   width: 100%;
   background: white;
 }
 
-table:not(:has(.table-cell, .table-row)) th,
-table:not(:has(.table-cell, .table-row)) td,
-table:not(:where(:has(.table-cell), :has(.table-row))) th,
-table:not(:where(:has(.table-cell), :has(.table-row))) td {
+table:not(:has(.table-cell, .table-row)):not(tosoh-modal *) th,
+table:not(:has(.table-cell, .table-row)):not(tosoh-modal *) td,
+table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) th,
+table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) td {
   padding: 0.5rem 0.75rem;
   border: 1px solid #18181b;
   text-align: left;
@@ -208,8 +208,8 @@ table:not(:where(:has(.table-cell), :has(.table-row))) td {
   text-wrap: break-all;
 }
 
-table:not(:has(.table-cell, .table-row)) th,
-table:not(:where(:has(.table-cell), :has(.table-row))) th {
+table:not(:has(.table-cell, .table-row)):not(tosoh-modal *) th,
+table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) th {
   background: #f5f5f5;
   text-wrap: break-all;
   font-weight: 600;

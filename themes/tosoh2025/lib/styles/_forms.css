@@ -14,6 +14,28 @@
           @apply border-border!;
         }
 
+        input.hs-input {
+          @apply focus:border-imperial-red focus:ring-imperial-red/20 border-border w-full! rounded-2xl border px-4 py-4 text-lg placeholder-gray-400 transition-all duration-200 focus:ring-2 focus:outline-none;
+
+          &[type='checkbox'] {
+            @apply focus:ring-imperial-red/20 border-border max-h-4 min-h-4 w-4 max-w-4 min-w-4 flex-shrink-0 appearance-none rounded-xl border bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
+
+            &:checked {
+              @apply bg-imperial-red border-imperial-red;
+              background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='m13.854 3.646-7.5 7.5a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6 10.293l7.146-7.147a.5.5 0 0 1 .708.708z'/%3e%3c/svg%3e");
+            }
+          }
+
+          &[type='radio'] {
+            @apply focus:ring-imperial-red/20 border-border max-h-2! min-h-2 w-2 max-w-2! min-w-2 flex-shrink-0 appearance-none rounded-full border bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
+
+            &:checked {
+              @apply bg-imperial-red border-imperial-red;
+              background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e");
+            }
+          }
+        }
+
         :has(input[id^='LEGAL_CONSENT']) {
           span {
             @apply text-default! ml-0!;
@@ -123,17 +145,19 @@
         }
       }
 
-      legend {
-        @apply hidden;
-      }
-
       div.input {
         @apply w-full ring-0;
 
         input:not([id^='LEGAL_CONSENT']),
         select,
         textarea {
-          @apply mt-base p-base outline-imperial-red focus-visible:ring-imperial-red focus-visible:border-imperial-red mr-0 w-full rounded-xl border border-[#E9E9E938] focus-visible:ring-0 focus-visible:outline-0;
+          @apply p-base outline-imperial-red focus-visible:ring-imperial-red focus-visible:border-imperial-red mr-0 w-full rounded-xl border border-[#E9E9E938] focus-visible:ring-0 focus-visible:outline-0;
+        }
+
+        input:not([id^='LEGAL_CONSENT']):not([type='radio']),
+        select,
+        textarea {
+          @apply mt-base;
         }
 
         :has(input[id^='LEGAL_CONSENT']) {
@@ -209,7 +233,7 @@
           @apply mb-0 inline-flex flex-row;
 
           > label {
-            @apply gap-xs flex cursor-pointer items-center text-sm;
+            @apply gap-sm mt-sm flex items-center text-lg;
           }
         }
       }
