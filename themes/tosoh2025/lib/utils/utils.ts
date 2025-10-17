@@ -148,6 +148,9 @@ export const parseSearchColumnId = (search: Search) => {
   return search && search?.enable_search ? search?.hubdb_column_id : '';
 };
 
-export const getFiltersTableId = (hardcodedTableId: string, searchTableId: string) => {
-  return USE_HARDCODED_IDS ? hardcodedTableId : searchTableId;
+export const getFiltersTableId = (
+  hardcodedTableId: string,
+  topicFiltersTableId: TopicFilters['hubdb_table_id']
+) => {
+  return USE_HARDCODED_IDS ? hardcodedTableId : topicFiltersTableId;
 };

@@ -39,14 +39,13 @@
     const { detail } = e as CustomEvent;
 
     const shouldBeShown = detail?.groupId === groupId;
+    const isHostTab = $host().getAttribute('variant') === 'tab';
 
     isActive = shouldBeShown;
 
-    console.log();
-
-    if (shouldBeShown && $host().getAttribute('variant') === 'tab') {
+    if (shouldBeShown && isHostTab) {
       $host().classList?.remove('hidden');
-    } else if ($host().getAttribute('variant') === 'tab' && !shouldBeShown) {
+    } else if (isHostTab && !shouldBeShown) {
       $host().classList?.add('hidden');
     }
   });

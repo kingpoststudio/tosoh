@@ -27,14 +27,20 @@
     constructRangePmFilters,
     getFilterColumnIds,
     parseSearchColumnId,
+    getFiltersTableId,
   } from '../../utils/utils';
 
   const supportPortalContent = window?.Tosoh?.SupportPortalContent;
+
   const topicFilters = supportPortalContent?.topic_filters?.filters || [];
   const formId = 'support-portal';
   let accessLevel = supportPortalContent?.access_level || 'Customer';
 
   let searchColumnId = parseSearchColumnId(supportPortalContent?.search);
+  const tableId = getFiltersTableId(
+    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+    supportPortalContent?.topic_filters?.hubdb_table_id
+  );
 
   let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
   const rangePmFilters = constructRangePmFilters(topicFilters);
@@ -54,7 +60,7 @@
     const params = new URLSearchParams(window.location.search);
 
     return {
-      tableId: PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+      tableId: tableId,
       properties:
         'name,image,hs_path,product_family,product_type,document_type,wistia_video_url,document_url',
       accessLevel: accessLevel,

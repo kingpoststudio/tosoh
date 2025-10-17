@@ -1,4 +1,4 @@
-import type { Search } from './fields';
+import type { Search, TopicFilters } from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 

@@ -9,7 +9,7 @@ export type TopicFilters = {
     tolerance?: number | null;
     type: FilterType;
   }[];
-  hubdb_table_id: number;
+  hubdb_table_id: string;
 };
 
 export type Search = {
