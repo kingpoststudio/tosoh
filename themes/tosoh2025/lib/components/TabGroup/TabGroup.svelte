@@ -38,7 +38,17 @@
   const handler = on(window, 'TosohTabGroupActive', (e: Event) => {
     const { detail } = e as CustomEvent;
 
-    isActive = detail?.groupId === groupId;
+    const shouldBeShown = detail?.groupId === groupId;
+
+    isActive = shouldBeShown;
+
+    console.log();
+
+    if (shouldBeShown && $host().getAttribute('variant') === 'tab') {
+      $host().classList?.remove('hidden');
+    } else if ($host().getAttribute('variant') === 'tab' && !shouldBeShown) {
+      $host().classList?.add('hidden');
+    }
   });
 
   onDestroy(() => handler());
@@ -49,7 +59,7 @@
     <svelte:element this={'slot'} />
   </button>
 {:else if isActive}
-  <div class="tab-wrapper" in:fade>
+  <div class="tab-wrapper" class:active={isActive} in:fade>
     <svelte:element this={'slot'} />
   </div>
 {/if}
