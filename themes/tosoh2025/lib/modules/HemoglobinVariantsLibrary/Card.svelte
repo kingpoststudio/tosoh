@@ -58,7 +58,7 @@
       alt={item.name}
       src={constructCDNUrl(variant_image?.url, 350)}
       loading="lazy"
-      class="max-h-4xl min-h-4xl w-full object-contain"
+      class="max-h-3xl min-h-3xl w-full object-contain"
     />
   {:else}
     <div
@@ -69,7 +69,7 @@
 
   <div class="gap-sm flex h-full w-full flex-col justify-between">
     <div class="gap-sm flex-col items-center">
-      <h5 class="break-word text-raisin-black mt-base font-sans-narrow font-semibold">
+      <h5 class="break-word text-raisin-black font-sans-narrow font-semibold">
         {@html variant_name}
       </h5>
       <span class="gap-xs flex items-center text-lg font-bold text-[#029F53]">

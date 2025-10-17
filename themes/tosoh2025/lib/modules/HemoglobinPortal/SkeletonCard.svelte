@@ -9,6 +9,5 @@
       <div class="skeleton w-3/3 h-4 rounded"></div>
       <div class="skeleton h-4 w-2/3 rounded"></div>
     </div>
-    <div class="skeleton gap-sm flex h-12 w-full items-center justify-center rounded-xl"></div>
   </div>
 </div>

@@ -30,6 +30,7 @@
     isPastEvent,
     isUpcomingEvent,
     parseSearchColumnId,
+    getFiltersTableId,
   } from '../../utils/utils';
   import { fade } from 'svelte/transition';
 
@@ -40,7 +41,10 @@
   let isLoading = $state(false);
 
   const webinarListingsWindow = window.Tosoh?.WebinarListings;
-  const tableId = PROD_TOSOH_WEBINARS_TABLE_ID;
+  const tableId = getFiltersTableId(
+    PROD_TOSOH_WEBINARS_TABLE_ID,
+    webinarListingsWindow?.topic_filters?.hubdb_table_id
+  );
   const preselectedLanguage = webinarListingsWindow?.preselected_language;
   const upcomingSectionEyebrow = webinarListingsWindow?.upcoming_section_eyebrow;
   const upcomingSectionTitle = webinarListingsWindow?.upcoming_section_title;

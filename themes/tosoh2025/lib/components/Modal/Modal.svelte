@@ -9,10 +9,12 @@
     modalId,
     variant = 'modal',
     isVisible = false,
+    width = 'full',
   }: {
     modalId: string;
     variant: 'modal' | 'action';
     isVisible: boolean;
+    width: 'full' | 'fit-content';
   } = $props();
 
   let dialogEl: HTMLDialogElement | null = $state(null);
@@ -92,7 +94,11 @@
 </script>
 
 {#if variant === 'action'}
-  <button onclick={setModalActive} aria-label="Modal action">
+  <button
+    onclick={setModalActive}
+    aria-label="Modal action"
+    class={width === 'full' ? 'w-full' : 'w-fit-content'}
+  >
     <svelte:element this={'slot'} />
   </button>
 {:else}
@@ -149,7 +155,14 @@
     all: unset;
     display: flex;
     cursor: pointer;
-    width: 100%;
+
+    &.w-full {
+      width: 100%;
+    }
+
+    &.w-fit-content {
+      width: fit-content;
+    }
   }
 
   .close-button {

@@ -28,9 +28,14 @@
     constructRangePmFilters,
     getFilterColumnIds,
     parseSearchColumnId,
+    getFiltersTableId,
   } from '../../utils/utils';
   const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
   const topicFilters = kioskDocumentsContent?.topic_filters?.filters || [];
+  const tableId = getFiltersTableId(
+    PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+    kioskDocumentsContent?.topic_filters?.hubdb_table_id
+  );
 
   let searchColumnId = parseSearchColumnId(kioskDocumentsContent?.search);
 
@@ -71,7 +76,7 @@
 
     return {
       sort: '-start_date',
-      tableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
+      tableId: tableId,
       properties: 'title,document_type,image,page_path,start_date,end_date',
       limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
       pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),

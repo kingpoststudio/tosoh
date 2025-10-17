@@ -17,7 +17,11 @@ const generateFields = () => {
       required: true,
       default: 'Customer',
     }),
-
+    booleanField('force_list_view', 'Force list view?', {
+      inline_help_text:
+        'When enabled, the module will always display the results as a list and will also hide the grid view button.',
+      default: false,
+    }),
     breadCrumbField,
     textField('title', 'Title', {
       default: 'Tosoh Support Portal',

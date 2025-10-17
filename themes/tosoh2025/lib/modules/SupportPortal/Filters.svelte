@@ -40,6 +40,7 @@
     supportPortalContent?.search?.is_access_level_filter_enabled || false;
 
   let accessLevel = supportPortalContent?.access_level || 'Customer';
+  let forceListView = supportPortalContent?.force_list_view || false;
 
   const topic_filters = supportPortalContent?.topic_filters?.filters;
   let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
@@ -273,13 +274,15 @@
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
         Reset
       </button>
-      <button
-        type="button"
-        class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
-        onclick={handleChangeView}
-      >
-        {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
-      </button>
+      {#if !forceListView}
+        <button
+          type="button"
+          class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
+          onclick={handleChangeView}
+        >
+          {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
+        </button>
+      {/if}
     </div>
   </FilterForm>
 </div>

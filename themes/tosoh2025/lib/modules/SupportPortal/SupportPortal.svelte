@@ -53,8 +53,12 @@
   let hasError = $state(false);
   let isLoading = $state(false);
 
+  let forceListView = supportPortalContent?.force_list_view || false;
+
   const params = new URLSearchParams(window.location.search);
-  let viewAs: 'grid' | 'list' = $state((params.get('view') as 'grid' | 'list') || 'grid');
+  let viewAs: 'grid' | 'list' = $state(
+    forceListView ? 'list' : (params.get('view') as 'grid' | 'list') || 'grid'
+  );
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);

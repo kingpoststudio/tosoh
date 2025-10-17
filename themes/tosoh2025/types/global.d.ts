@@ -11,6 +11,7 @@ declare global {
         mainNavigationMenu?: HubSpotMenu;
       };
       SupportPortalContent: {
+        force_list_view: boolean;
         access_level: 'Customer' | 'Distributor' | 'Internal';
         breadcrumbs: {
           title: string;

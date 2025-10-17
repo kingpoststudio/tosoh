@@ -28,12 +28,16 @@
     constructRangePmFilters,
     getFilterColumnIds,
     parseSearchColumnId,
+    getFiltersTableId,
   } from '../../utils/utils';
   const formId = 'portale-emogiobine-filters';
 
   const portaleEmogiobineContent = window?.Tosoh?.HemoglobinPortalContent;
   const topicFilters = portaleEmogiobineContent?.topic_filters?.filters || [];
-
+  const tableId = getFiltersTableId(
+    PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
+    portaleEmogiobineContent?.topic_filters?.hubdb_table_id
+  );
   let searchEnabled = portaleEmogiobineContent?.search?.enable_search;
   let searchColumnId = parseSearchColumnId(portaleEmogiobineContent?.search);
 
@@ -53,7 +57,7 @@
     const rangePmFilters = constructRangePmFilters(topicFilters);
 
     return {
-      tableId: PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
+      tableId: tableId,
       properties:
         'name,summary,sex,patient_dob,ethnicity,history,anomaly,blood_count,hemoglobin_status,other,advice,diagnosis,other_diagnosis,attachment_1,attachment_2,attachment_3,attachment_4',
       limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),

@@ -3,11 +3,11 @@
 <div
   class="border-border relative flex h-full w-full flex-col content-around gap-[1.25rem] rounded-2xl border p-[1.25rem]"
 >
-  <div class="skeleton h-[20rem] w-full rounded-lg"></div>
+  <div class="skeleton h-3xl min-h-3xl w-full rounded-lg"></div>
 
   <div class="gap-sm flex h-full w-full flex-col justify-between">
     <div class="gap-sm flex flex-col">
-      <div class="mt-base w-3/4">
+      <div class="w-3/4">
         <div class="skeleton h-6 w-full rounded"></div>
       </div>
 

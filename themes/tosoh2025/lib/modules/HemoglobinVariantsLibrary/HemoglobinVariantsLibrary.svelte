@@ -28,13 +28,17 @@
     constructRangePmFilters,
     getFilterColumnIds,
     parseSearchColumnId,
+    getFiltersTableId,
   } from '../../utils/utils';
 
   const formId = 'hemoglobin-variants-library-filters';
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
   const topicFilters = hemoglobinVariantsLibraryContent?.topic_filters?.filters || [];
-
+  const tableId = getFiltersTableId(
+    PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
+    hemoglobinVariantsLibraryContent?.topic_filters?.hubdb_table_id
+  );
   let searchColumnId = parseSearchColumnId(hemoglobinVariantsLibraryContent?.search);
 
   let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
@@ -53,7 +57,7 @@
 
     return {
       sort: '-start_date',
-      tableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
+      tableId: tableId,
       properties:
         'document_url,heterozygote_comments,aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
       limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
