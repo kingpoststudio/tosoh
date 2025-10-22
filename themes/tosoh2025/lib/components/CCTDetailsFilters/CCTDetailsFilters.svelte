@@ -21,6 +21,8 @@
   let searchMatches = $state({ current: 0, total: 0 });
   let tableFilterManager: TableFilterManager | null = null;
 
+  let categorySelectValue: string = $state('none');
+
   const categoryOptions =
     window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map((row: any) => row?.category) || [];
 
@@ -54,7 +56,7 @@
     resetSearchInput();
 
     if (tableFilterManager) {
-      (document.querySelector('select[name="category"]') as HTMLSelectElement).value = 'none';
+      categorySelectValue = 'none';
       tableFilterManager.clearFilters();
     }
   };
@@ -206,6 +208,7 @@
         options={categoryOptions}
         name={'category'}
         disabled={false}
+        bind:value={categorySelectValue}
       />
     </div>
     <button type="button" data-type="reset" class="w-full md:w-fit"> Reset </button>

@@ -12,6 +12,7 @@
     name,
     options,
     placeholder,
+    value = $bindable(),
   }: {
     customClearFilter?: () => void;
     customDisabledOption?: (option: any) => boolean;
@@ -22,6 +23,7 @@
     name: string;
     options: any[];
     placeholder?: string;
+    value?: unknown;
   } = $props();
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
@@ -60,6 +62,7 @@
         {name}
         disabled={disabled || options?.length === 0 || !options}
         class="p-sm focus:ring-imperial-red peer h-full w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+        bind:value
       >
         <option value="none" selected disabled hidden class="text-imperial-red"
           >{placeholder ? placeholder : 'Select'}</option
@@ -105,45 +108,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  select {
-    &,
-    &::picker(select) {
-      appearance: base-select;
-    }
-    transition: border-color 0.2s ease-in-out;
-
-    &:open {
-      border-color: var(--color-imperial-red);
-      border-width: 1px;
-    }
-
-    &::picker(select) {
-      border-color: var(--color-slate-200);
-      border-width: 1px;
-      max-height: 16rem;
-    }
-
-    &::picker-icon {
-      display: none !important;
-    }
-
-    &:open::picker(select) {
-      margin-top: 0.5rem;
-      margin-bottom: 0.5rem;
-      border-radius: 0.5rem;
-    }
-  }
-  option {
-    padding: 0.5rem;
-
-    &:hover {
-      background-color: var(--color-red-50);
-    }
-  }
-
-  option::checkmark {
-    display: block;
-  }
-</style>

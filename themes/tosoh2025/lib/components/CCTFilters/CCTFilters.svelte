@@ -22,6 +22,16 @@
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
   const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
 
+  const selectedTosohInstrument = (
+    isTosohInstrumentSelected ? getUrlParam('tosoh_instrument_name') : 'none'
+  ) as string;
+  const selectedCompetitorInstrument = (
+    isCompetitorInstrumentSelected ? getUrlParam('competitor_instrument_name') : 'none'
+  ) as string;
+
+  let tosohInstrumentSelectValue: string = $state(selectedTosohInstrument);
+  let competitorInstrumentSelectValue: string = $state(selectedCompetitorInstrument);
+
   const clearOnProductLineChange = () => {
     deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
   };
@@ -65,13 +75,11 @@
   };
 
   const onDetails = () => {
-    const tosohInstrumentName = (
-      document.querySelector('select[name="tosoh_instrument_name"]') as HTMLSelectElement
-    )?.value;
+    const tosohInstrumentName = tosohInstrumentSelectValue ? tosohInstrumentSelectValue : '';
 
-    const competitorInstrumentName = (
-      document.querySelector('select[name="competitor_instrument_name"]') as HTMLSelectElement
-    )?.value;
+    const competitorInstrumentName = competitorInstrumentSelectValue
+      ? competitorInstrumentSelectValue
+      : '';
 
     const url = `/cct-details?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
     window.open(url);
@@ -127,6 +135,7 @@
         name="tosoh_instrument_name"
         label="Tosoh Instrument"
         customClearFilter={clearOnTosohInstrumentReset}
+        bind:value={tosohInstrumentSelectValue}
       />
     </div>
     <div class="mt-base">
@@ -137,6 +146,7 @@
         disabled={!isTosohInstrumentSelected}
         {customDisabledOption}
         customClearFilter={clearOnCompetitorInstrumentReset}
+        bind:value={competitorInstrumentSelectValue}
       />
     </div>
   </FilterForm>
