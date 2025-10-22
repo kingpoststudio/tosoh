@@ -24,7 +24,7 @@
           : ''} skeleton skeleton-pulse rounded-lg"
       ></div>
       <span
-        class="skeleton-pulse! flex h-12 items-center justify-center gap-[1.25rem] rounded-lg bg-red-100 text-center text-sm {viewAs ===
+        class="skeleton-pulse! h-lg flex items-center justify-center gap-[1.25rem] rounded-lg bg-red-100 text-center text-sm {viewAs ===
         'list'
           ? 'w-fit'
           : 'w-full'}"

@@ -22,8 +22,8 @@
 
     <div class="gap-sm flex flex-col">
       <div class="gap-sm align-start flex flex-col md:flex-row">
-        <div class="skeleton p-xs h-8 w-full rounded-2xl md:w-20"></div>
-        <div class="skeleton p-xs h-8 w-full rounded-2xl md:w-24"></div>
+        <div class="skeleton p-xs h-md w-full rounded-2xl md:w-20"></div>
+        <div class="skeleton p-xs h-md md:w-2xl w-full rounded-2xl"></div>
       </div>
 
       <div class="skeleton gap-sm flex h-10 w-full items-center justify-center rounded">

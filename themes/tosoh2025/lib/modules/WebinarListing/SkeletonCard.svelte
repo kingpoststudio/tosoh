@@ -29,7 +29,7 @@
       <div class="flex items-center">
         <!-- Avatar -->
         <div class="mr-3 flex -space-x-6">
-          <div class="skeleton skeleton-pulse h-12 w-12 rounded-full"></div>
+          <div class="skeleton skeleton-pulse h-lg w-lg rounded-full"></div>
         </div>
         <!-- Speaker Info -->
         <div class="flex-1 space-y-2">
@@ -40,6 +40,6 @@
     </div>
 
     <!-- Register Button Skeleton -->
-    <div class="skeleton skeleton-pulse h-12 w-full rounded-lg"></div>
+    <div class="skeleton skeleton-pulse h-lg w-full rounded-lg"></div>
   </div>
 </div>

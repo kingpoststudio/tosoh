@@ -153,8 +153,8 @@
     class="gap-md flex w-full flex-col items-center justify-between md:flex-row"
   >
     <div>
-      <div class=" h-8 min-w-[8rem] rounded-lg bg-red-50"></div>
-      <div class="mt-sm h-14 min-w-[16rem] rounded-lg bg-gray-200"></div>
+      <div class=" h-md min-w-3xl rounded-lg bg-red-50"></div>
+      <div class="mt-sm min-w-5xl h-14 rounded-lg bg-gray-200"></div>
     </div>
 
     <WebinarListingsFilters {formId} isSkeleton={true} />

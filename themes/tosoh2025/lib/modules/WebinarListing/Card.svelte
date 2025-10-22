@@ -126,7 +126,7 @@
 
 {#snippet avatar(image_src: string)}
   <div
-    class="flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 border-white bg-gray-300 text-xs font-medium text-gray-600"
+    class="h-lg w-lg flex items-center justify-center overflow-hidden rounded-full border-2 border-white bg-gray-300 text-xs font-medium text-gray-600"
   >
     <img src={constructCDNUrl(image_src, 50)} alt="" class="rounded-full object-contain" />
   </div>

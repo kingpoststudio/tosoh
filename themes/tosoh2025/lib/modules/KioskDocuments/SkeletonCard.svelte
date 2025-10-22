@@ -10,12 +10,12 @@
 
   <div class=" mt-base flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
-      <div class="skeleton skeleton-pulse mb-2 h-8 w-1/2 rounded"></div>
-      <div class=" skeleton skeleton-pulse mb-2 h-6 w-full rounded"></div>
+      <div class="skeleton skeleton-pulse mb-xs h-md w-1/2 rounded"></div>
+      <div class=" skeleton skeleton-pulse mb-xs h-6 w-full rounded"></div>
       <div class=" skeleton skeleton-pulse h-6 w-3/4 rounded"></div>
     </div>
-    <div class="h-12 w-full rounded-xl bg-red-100"></div>
+    <div class="h-lg w-full rounded-xl bg-red-100"></div>
   </div>
 
-  <div class="bg-ghost-white absolute right-[1.25rem] top-[1.25rem] h-8 w-16 rounded-lg"></div>
+  <div class="bg-ghost-white h-md w-xl absolute right-[1.25rem] top-[1.25rem] rounded-lg"></div>
 </div>

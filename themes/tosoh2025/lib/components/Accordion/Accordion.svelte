@@ -3,7 +3,7 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import { on } from 'svelte/events';
-  import { slide, fade } from 'svelte/transition';
+  import { slide } from 'svelte/transition';
 
   let {
     groupId,

@@ -64,23 +64,23 @@
       <tosoh-modal variant="modal" modalId={name}>
         <div slot="title" class="w-full"><h2 class="text-4xl">{name}</h2></div>
         <div slot="content">
-          <div class="flex flex-col space-y-2">
+          <div class="space-y-xs flex flex-col">
             <div class="text-xl font-semibold italic">{@html summary}</div>
 
             <div class="relative overflow-auto">
-              <div class="my-8 overflow-hidden rounded-t-lg">
+              <div class="my-md overflow-hidden rounded-t-lg">
                 <table class="w-full table-auto border-collapse text-sm">
                   <thead>
                     <tr class="bg-zinc-700 text-white">
-                      <th class="border-b p-4 text-left font-bold">Proprietà</th>
-                      <th class="border-b p-4 text-left font-bold">Valore</th>
+                      <th class="p-base border-b text-left font-bold">Proprietà</th>
+                      <th class="p-base border-b text-left font-bold">Valore</th>
                     </tr>
                   </thead>
                   <tbody class="bg-white">
                     {#each schema as col}
                       <tr class="border-b border-zinc-200">
-                        <td class="p-4">{col.label}</td>
-                        <td class="p-4">{@html col.value}</td>
+                        <td class="p-base">{col.label}</td>
+                        <td class="p-base">{@html col.value}</td>
                       </tr>
                     {/each}
                   </tbody>
