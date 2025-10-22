@@ -45,7 +45,7 @@
       {/if}
     </span>
     {#if enableReload}
-      <button transition:fade class="btn-primary" onclick={handleRetry}> Reload </button>
+      <button transition:fade onclick={handleRetry}> Reload </button>
     {/if}
   </div>
 </div>

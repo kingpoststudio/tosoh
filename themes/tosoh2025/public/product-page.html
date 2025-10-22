@@ -184,7 +184,7 @@
 
         <div class="gap-sm flex w-full flex-col md:flex-row">
           <div class="relative w-full md:max-w-[10rem]">
-            <select class="custom-select" name="pick_size">
+            <select name="pick_size">
               <option disabled selected hidden value="none">Pick Size</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -312,7 +312,7 @@
       </div>
 
       <div class="relative block w-full md:hidden md:max-w-[10rem]">
-        <select class="custom-select" onchange="handleTabGroupChange(event)">
+        <select onchange="handleTabGroupChange(event)">
           <option value="tab_group.group_id">Instructions For Use</option>
           <option value="Safety Data Sheets (SDS)">Safety Data Sheets (SDS)</option>
         </select>

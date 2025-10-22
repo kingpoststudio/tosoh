@@ -58,38 +58,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  /* Use :global() to ensure webkit pseudo-elements work properly */
-  :global(input[type='number']::-webkit-outer-spin-button),
-  :global(input[type='number']::-webkit-inner-spin-button) {
-    opacity: 1;
-    height: 22px;
-    width: 18px;
-    cursor: pointer;
-    -webkit-appearance: none;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 24'%3E%3Cpath d='M4 8l6-5 6 5H4z' fill='%23ed1a3b'/%3E%3Cpath d='M4 16l6 5 6-5H4z' fill='%23ed1a3b'/%3E%3C/svg%3E");
-    background-size: 18px 22px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: var(--spacing-xs);
-
-    background-repeat: no-repeat;
-  }
-
-  /* For Firefox - enable number input controls */
-  :global(input[type='number']) {
-    appearance: textfield;
-    -moz-appearance: textfield;
-  }
-
-  /* Firefox specific styles */
-  @supports (-moz-appearance: textfield) {
-    :global(input[type='number']) {
-      appearance: number-input;
-      -moz-appearance: number-input;
-    }
-  }
-</style>
