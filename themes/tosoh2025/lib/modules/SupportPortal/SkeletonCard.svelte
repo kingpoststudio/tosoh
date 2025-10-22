@@ -26,11 +26,11 @@
       <span
         class="skeleton-pulse! h-lg flex items-center justify-center gap-[1.25rem] rounded-lg bg-red-100 text-center text-sm {viewAs ===
         'list'
-          ? 'w-fit'
+          ? 'w-4xl'
           : 'w-full'}"
       >
       </span>
     </div>
-    <div class=" top-base right-base absolute h-[2rem] w-[3.125rem] rounded-lg bg-red-50"></div>
+    <div class="top-base right-base h-md w-lg absolute rounded-lg bg-red-50"></div>
   </div>
 </div>

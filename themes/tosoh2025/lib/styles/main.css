@@ -347,6 +347,7 @@ input[type='number'] {
 
 /* Select */
 select {
+  &,
   &::picker(select) {
     appearance: base-select;
   }
@@ -360,7 +361,6 @@ select {
   &::picker(select) {
     border-color: var(--color-slate-200);
     border-width: 1px;
-    max-height: 16rem;
   }
 
   &::picker-icon {
