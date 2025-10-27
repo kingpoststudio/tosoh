@@ -7,7 +7,7 @@ const generateFields = () => {
       choices: [
         ['all', 'All'],
         ['hplc', 'HPLC'],
-        ['cl', 'CL'],
+        ['aia', 'AIA'],
         ['aia_cl', 'AIA-CL'],
       ],
       inline_help_text:
