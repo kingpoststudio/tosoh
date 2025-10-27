@@ -63,6 +63,13 @@
   --z-index-tooltip: 90;
 }
 
+@layer base {
+  ul,
+  ol {
+    list-style: revert;
+  }
+}
+
 :root {
   --spacing-header-height: var(--spacing-header-height-mobile);
 }

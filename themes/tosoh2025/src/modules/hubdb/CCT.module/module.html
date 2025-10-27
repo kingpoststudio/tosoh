@@ -13,12 +13,13 @@
  
  {% if tosoh_instrument_name %}
   {% set active_compariso_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__eq='~tosoh_instrument_name) %}
+    
     {% for row in active_compariso_rows_based_on_tosoh_instrument %}
       {% for foreign_row in row.competitor_instrument_name %}
-        {{ active_competitor_instruments.append({name: foreign_row.product_name, label: foreign_row.company.label ~ ' : ' ~ foreign_row.product_name, sufficient_data_status: foreign_row.sufficient_data_status.name }) }}
-      {% endfor %}
+      {% do active_competitor_instruments.append({name: foreign_row.product_name, label: foreign_row.company.label ~ ' : ' ~ foreign_row.product_name, sufficient_data_status: foreign_row.sufficient_data_status.name }) %}
     {% endfor %}
- {% endif %} 
+  {% endfor %}
+{% endif %} 
 
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %} 
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
