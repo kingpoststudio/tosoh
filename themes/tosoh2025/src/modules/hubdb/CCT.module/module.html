@@ -6,7 +6,7 @@
 {% set access_level = module.access_level or "all" %}
   
 {% set all_instruments = access_level == 'all' ? hubdb_table_rows("cct_instruments",'&active__eq=true') : hubdb_table_rows("cct_instruments",'&active__eq=true&access_level__contains='~access_level) %}
-{{ access_level }}
+
 {% set all_product_lines = all_instruments|selectattr('product_line')|map(attribute='product_line')|unique %}
 {% set instruments_based_on_product_line = product_line == 'all' ? all_instruments|selectattr('company.name', 'equalto', 'Tosoh')|map(attribute='product_name')|unique : all_instruments|selectattr('company.name', 'equalto', 'Tosoh')|selectattr('product_line.name', 'equalto', product_line)|map(attribute='product_name')|unique %}
 {% set active_competitor_instruments = [] %}
