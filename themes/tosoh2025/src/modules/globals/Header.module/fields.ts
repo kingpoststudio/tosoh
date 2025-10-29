@@ -12,7 +12,10 @@ const generateFields = () => {
   return [
     groupField('header_configurations', 'Header Configurations', {
       children: [
-        textField('configuration_name', 'Variation name'),
+        textField('configuration_name', 'Configuration Name', {
+          inline_help_text:
+            'The "Selected header configuration" field on the page level must match this value to display this header configuration.',
+        }),
         imageField('logo', 'Logo'),
         menuField('menu', 'Navigation menu'),
         linkField('logo_link', 'Logo link'),

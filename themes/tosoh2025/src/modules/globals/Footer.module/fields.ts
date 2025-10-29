@@ -3,7 +3,10 @@ import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
 const generateFields = () => [
   groupField('footer_configurations', 'Footer Configurations', {
     children: [
-      textField('configuration_name', 'Variation name'),
+      textField('configuration_name', 'Configuration Name', {
+        inline_help_text:
+          'The "Selected footer configuration" field on the page level must match this value to display this footer configuration.',
+      }),
       imageField('logo', 'Logo'),
       textField('info', 'Information block', {
         default:
