@@ -3,6 +3,7 @@
 {% set active_configuration_menu = menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
 {% set active_logo = active_configuration.logo.src %}
+{% set active_logo_link = active_configuration.logo_link.url.href or '/' %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
 {% set active_ctas = active_configuration.ctas %}
 {% set active_aux = active_configuration.aux %}
@@ -27,7 +28,9 @@
 
 <tosoh-header>
   {% if active_logo %}
-    <img slot="logo" src="{{ active_logo }}" alt="{{ active_logo_alt }}" class="md:py-xs h-18 w-auto md:h-20" />
+    <a slot="logo" href="{{ active_logo_link }}" aria-label="Home">
+    <img src="{{ active_logo }}" alt="{{ active_logo_alt }}" class="md:py-xs h-18 w-auto md:h-20" />
+    </a>
   {% endif %}
 
   {% if active_ctas|length or active_portal_access.is_enabled %}

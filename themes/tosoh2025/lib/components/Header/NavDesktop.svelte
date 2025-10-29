@@ -38,9 +38,7 @@
 
 <div class="wrapper">
   <header>
-    <a class="logo" href="/" aria-label="Home">
-      <svelte:element this={'slot'} name="logo" />
-    </a>
+    <svelte:element this={'slot'} name="logo" />
 
     <nav aria-label="Main navigation">
       {#if menu}
