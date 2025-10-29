@@ -198,6 +198,7 @@
     width: 100%;
     min-height: 5.5rem;
     padding: var(--spacing-sm) var(--spacing-md);
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
 
     > div {
       display: flex;

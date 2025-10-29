@@ -1,0 +1,6 @@
+<tosoh-sub-header>
+  <img slot="logo" src="{{ module.logo.src }}" alt="{{ module.logo.alt }}" />
+  {% if module.cta_id %}
+    <div slot="cta">{% cta 'sub_header_cta' guid="{{ module.cta_id }}" %}</div>
+  {% endif %}
+</tosoh-sub-header>
