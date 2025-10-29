@@ -1,4 +1,4 @@
-{% set active_configuration = module.header_configurations|selectattr('variation_name', 'equalto',  widget_data.selected_header_configuration.value)|first %}
+{% set active_configuration = module.header_configurations|selectattr('configuration_name', 'equalto',  widget_data.selected_header_configuration.value)|first %}
 
 {% set active_configuration_menu = menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}

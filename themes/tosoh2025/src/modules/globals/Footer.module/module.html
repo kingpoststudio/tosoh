@@ -1,4 +1,4 @@
-{% set active_configuration = module.footer_configurations|selectattr('variation_name', 'equalto',  widget_data.selected_footer_configuration.value)|first %}
+{% set active_configuration = module.footer_configurations|selectattr('configuration_name', 'equalto',  widget_data.selected_footer_configuration.value)|first %}
 
 {% set active_logo = active_configuration.logo.src %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}

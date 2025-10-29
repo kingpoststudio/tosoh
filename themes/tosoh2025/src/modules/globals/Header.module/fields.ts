@@ -12,7 +12,7 @@ const generateFields = () => {
   return [
     groupField('header_configurations', 'Header Configurations', {
       children: [
-        textField('variation_name', 'Variation name'),
+        textField('configuration_name', 'Variation name'),
         imageField('logo', 'Logo'),
         menuField('menu', 'Navigation menu'),
         linkField('logo_link', 'Logo link'),

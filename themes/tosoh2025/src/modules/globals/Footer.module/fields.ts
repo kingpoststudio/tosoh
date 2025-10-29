@@ -3,7 +3,7 @@ import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
 const generateFields = () => [
   groupField('footer_configurations', 'Footer Configurations', {
     children: [
-      textField('variation_name', 'Variation name'),
+      textField('configuration_name', 'Variation name'),
       imageField('logo', 'Logo'),
       textField('info', 'Information block', {
         default:
