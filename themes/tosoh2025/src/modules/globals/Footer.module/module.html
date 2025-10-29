@@ -21,12 +21,10 @@
 
       <div class="gap-xs flex items-center">
         {% if module.legal|length %}
-          <div class="*:px-sm flex divide-x first:pl-0 last:pr-0">
+          <div class="*:px-sm flex divide-x divide-white first:pl-0 last:pr-0">
             {% for legal in module.legal %}
               {% set legal_target = legal.link.open_in_new_tab ? "_blank" : "_self" %}
-              <a class="text-white" href="{{ legal.link.url.href }}" target="{{ legal_target }}">
-                {{ legal.linkLabel }}
-              </a>
+              <a href="{{ legal.link.url.href }}" target="{{ legal_target }}">{{ legal.linkLabel }}</a>
             {% endfor %}
           </div>
         {% endif %}
