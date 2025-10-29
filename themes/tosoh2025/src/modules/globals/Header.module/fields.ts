@@ -1,30 +1,63 @@
-import { choiceField, imageField, groupField, linkField, menuField, textField } from 'hs-fieldkit';
+import {
+  choiceField,
+  imageField,
+  groupField,
+  linkField,
+  menuField,
+  textField,
+  booleanField,
+} from 'hs-fieldkit';
 
 const generateFields = () => {
   return [
-    imageField('logo', 'Logo'),
-    menuField('menu', 'Navigation menu'),
-    groupField('ctas', 'CTAs', {
+    groupField('header_configurations', 'Header Configurations', {
       children: [
-        textField('linkLabel', 'Link label'),
-        linkField('link', 'Link'),
-        choiceField('variant', 'Variant', {
-          choices: [
-            ['button', 'Button'],
-            ['button outlined', 'Button (outlined)'],
+        textField('variation_name', 'Variation name'),
+        imageField('logo', 'Logo'),
+        menuField('menu', 'Navigation menu'),
+        linkField('logo_link', 'Logo link'),
+
+        groupField('ctas', 'CTAs', {
+          children: [
+            textField('linkLabel', 'Link label'),
+            linkField('link', 'Link'),
+            choiceField('variant', 'Variant', {
+              choices: [
+                ['button', 'Button'],
+                ['button outlined', 'Button (outlined)'],
+              ],
+            }),
+          ],
+          occurrence: {
+            min: null,
+            max: 2,
+          },
+        }),
+        groupField('aux', 'Auxiliary links', {
+          children: [textField('linkLabel', 'Link label'), linkField('link', 'Link')],
+          occurrence: {
+            min: null,
+            max: 2,
+          },
+        }),
+        groupField('portal_access', 'Portal access', {
+          children: [
+            booleanField('is_enabled', 'Enable portal access?', {
+              default: false,
+            }),
+            textField('login_label', 'Login label', {
+              default: 'Login',
+            }),
+            linkField('login_redirect_url', 'Login redirect URL'),
+            textField('logout_label', 'Logout label', {
+              default: 'Logout',
+            }),
           ],
         }),
       ],
       occurrence: {
         min: null,
-        max: 2,
-      },
-    }),
-    groupField('aux', 'Auxiliary links', {
-      children: [textField('linkLabel', 'Link label'), linkField('link', 'Link')],
-      occurrence: {
-        min: null,
-        max: 2,
+        max: null,
       },
     }),
   ];

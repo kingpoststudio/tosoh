@@ -1,38 +1,56 @@
-{% set menu = menu(module.menu) %}
-{% set menu_json = menu|tojson %}
+{% set active_configuration = module.header_configurations|selectattr('variation_name', 'equalto',  widget_data.selected_header_configuration.value)|first %}
+
+{% set active_configuration_menu = menu(active_configuration.menu) %}
+{% set active_configuration_menu_json = active_configuration_menu|tojson %}
+{% set active_logo = active_configuration.logo.src %}
+{% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
+{% set active_ctas = active_configuration.ctas %}
+{% set active_aux = active_configuration.aux %}
+{% set active_portal_access = active_configuration.portal_access %}
+
+{% set logged_in = request_contact.is_logged_in %}
+{%
+  set auth_href = logged_in
+  ? request.scheme ~ "://" ~ request.domain ~ "/_hcms/mem/logout"
+  : request.scheme ~ "://" ~ request.domain ~ "/_hcms/mem/login?redirect_url=" ~
+  (active_portal_access.login_redirect_url.url.href ? active_portal_access.login_redirect_url.url.href : contact.hs_analytics_last_url)
+%}
 
 {% require_js position="head" %}
   <script>
     window.Tosoh = window.Tosoh || {};
     window.Tosoh.Header = {
-      mainNavigationMenu: {{ menu_json }}
+      mainNavigationMenu: {{ active_configuration_menu_json }}
     };
   </script>
 {% end_require_js %}
 
 <tosoh-header>
-  {% if module.logo.src %}
-    <img
-      slot="logo"
-      src="{{ module.logo.src }}"
-      alt="{{ module.logo.alt or 'Tosoh' }}"
-      class="md:py-xs h-18 w-auto md:h-20" />
+  {% if active_logo %}
+    <img slot="logo" src="{{ active_logo }}" alt="{{ active_logo_alt }}" class="md:py-xs h-18 w-auto md:h-20" />
   {% endif %}
 
-  {% if module.ctas|length %}
+  {% if active_ctas|length or active_portal_access.is_enabled %}
     <div slot="cta" class="gap-sm md:pb-2xs flex flex-row">
-      {% for cta in module.ctas %}
+      {% for cta in active_ctas %}
         {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self" %}
         <a class="{{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
           {{ cta.linkLabel }}
         </a>
       {% endfor %}
+      {% if active_portal_access.is_enabled %}
+        {% if logged_in %}
+          <a class="button" href="{{ auth_href }}" target="_self">{{ active_portal_access.logout_label }}</a>
+        {% else %}
+          <a class="button" href="{{ auth_href }}" target="_self">{{ active_portal_access.login_label }}</a>
+        {% endif %}
+      {% endif %}
     </div>
   {% endif %}
 
-  {% if module.aux|length %}
+  {% if active_aux|length %}
     <div slot="aux" class="gap-sm flex text-sm uppercase">
-      {% for aux in module.aux %}
+      {% for aux in active_aux %}
         {% set aux_target = aux.link.open_in_new_tab ? "_blank" : "_self" %}
         <a href="{{ aux.link.url.href }}" target="{{ aux_target }}">{{ aux.linkLabel }}</a>
       {% endfor %}
