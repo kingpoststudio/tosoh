@@ -36,66 +36,68 @@
   {/if}
 {/snippet}
 
-<header>
-  <a class="logo" href="/" aria-label="Home">
-    <svelte:element this={'slot'} name="logo" />
-  </a>
+<div class="wrapper">
+  <header>
+    <a class="logo" href="/" aria-label="Home">
+      <svelte:element this={'slot'} name="logo" />
+    </a>
 
-  <nav aria-label="Main navigation">
-    {#if menu}
-      <ul
-        class="first-level"
-        onmouseleave={handleMenuMouseLeave}
-        onmouseenter={handleMenuMouseEnter}
-      >
-        {#each menu.children ?? [] as item, i}
-          <li
-            class={activeMenuItem === i ? 'active' : undefined}
-            onmouseenter={() => setActiveFirstLevelItem(i)}
-          >
-            {@render navItem(item)}
-            {#if activeMenuItem === i && hasChildren(item)}
-              <div class="dropdown" in:fade={{ duration: 100 }}>
-                <ul class="second-level">
-                  {#each item.children ?? [] as secondLevel}
-                    {#if secondLevel.label || !hasChildren(secondLevel)}
-                      <li>
-                        {@render navItem(secondLevel)}
-                        {#if hasChildren(secondLevel)}
-                          <ul class="third-level">
-                            {#each secondLevel.children ?? [] as thirdLevel}
-                              <li>
-                                {@render navItem(thirdLevel)}
-                              </li>
-                            {/each}
-                          </ul>
-                        {/if}
-                      </li>
-                    {:else}
-                      {#each secondLevel.children ?? [] as thirdLevel}
+    <nav aria-label="Main navigation">
+      {#if menu}
+        <ul
+          class="first-level"
+          onmouseleave={handleMenuMouseLeave}
+          onmouseenter={handleMenuMouseEnter}
+        >
+          {#each menu.children ?? [] as item, i}
+            <li
+              class={activeMenuItem === i ? 'active' : undefined}
+              onmouseenter={() => setActiveFirstLevelItem(i)}
+            >
+              {@render navItem(item)}
+              {#if activeMenuItem === i && hasChildren(item)}
+                <div class="dropdown" in:fade={{ duration: 100 }}>
+                  <ul class="second-level">
+                    {#each item.children ?? [] as secondLevel}
+                      {#if secondLevel.label || !hasChildren(secondLevel)}
                         <li>
-                          {@render navItem(thirdLevel)}
+                          {@render navItem(secondLevel)}
+                          {#if hasChildren(secondLevel)}
+                            <ul class="third-level">
+                              {#each secondLevel.children ?? [] as thirdLevel}
+                                <li>
+                                  {@render navItem(thirdLevel)}
+                                </li>
+                              {/each}
+                            </ul>
+                          {/if}
                         </li>
-                      {/each}
-                    {/if}
-                  {/each}
-                </ul>
-              </div>
-            {/if}
-          </li>
-        {/each}
-      </ul>
-    {/if}
-  </nav>
+                      {:else}
+                        {#each secondLevel.children ?? [] as thirdLevel}
+                          <li>
+                            {@render navItem(thirdLevel)}
+                          </li>
+                        {/each}
+                      {/if}
+                    {/each}
+                  </ul>
+                </div>
+              {/if}
+            </li>
+          {/each}
+        </ul>
+      {/if}
+    </nav>
 
-  <div class="aux">
-    <svelte:element this={'slot'} name="aux" />
-  </div>
+    <div class="aux">
+      <svelte:element this={'slot'} name="aux" />
+    </div>
 
-  <div class="cta">
-    <svelte:element this={'slot'} name="cta" />
-  </div>
-</header>
+    <div class="cta">
+      <svelte:element this={'slot'} name="cta" />
+    </div>
+  </header>
+</div>
 
 <style lang="postcss">
   * {
@@ -115,6 +117,12 @@
     }
   }
 
+  .wrapper {
+    position: relative;
+    width: 100%;
+    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
+  }
+
   header {
     position: relative;
     display: flex;
@@ -124,7 +132,6 @@
     max-width: var(--container-max-page);
     padding: var(--spacing-base) var(--spacing-md);
     margin: 0 auto;
-    box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
   }
 
   nav {
