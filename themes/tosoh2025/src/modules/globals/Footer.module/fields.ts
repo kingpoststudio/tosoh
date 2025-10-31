@@ -1,4 +1,4 @@
-import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
+import { groupField, imageField, linkField, menuField, textField } from 'hs-fieldkit';
 
 const generateFields = () => [
   groupField('footer_configurations', 'Footer Configurations', {
@@ -12,6 +12,7 @@ const generateFields = () => [
         default:
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.,',
       }),
+      menuField('menu', 'Footer menu'),
       textField('copyright', 'Copyright', {
         inline_help_text: 'Text to display in the copyright notice',
         default: '© {{ year }} Tosoh Diagnostics. All rights reserved.',

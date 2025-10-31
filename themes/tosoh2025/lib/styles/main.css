@@ -391,3 +391,124 @@ option {
 option::checkmark {
   display: block;
 }
+
+.footer-menu-container {
+  @apply relative;
+
+  &.menu-items-1 {
+    > div {
+      @apply md:grid-cols-[1fr_1fr];
+    }
+    .hs-menu-wrapper {
+      @apply w-full;
+
+      > ul {
+        @apply md:grid-cols-1;
+      }
+    }
+  }
+
+  &.menu-items-2 {
+    > div {
+      @apply md:grid-cols-[1fr_2fr];
+    }
+    .hs-menu-wrapper {
+      @apply w-full;
+
+      > ul {
+        @apply md:grid-cols-2;
+      }
+    }
+  }
+
+  &.menu-items-3 {
+    > div {
+      @apply md:grid-cols-[1fr_3fr];
+    }
+    .hs-menu-wrapper {
+      @apply w-full;
+
+      > ul {
+        @apply md:grid-cols-3;
+      }
+    }
+  }
+
+  &.menu-items-4 {
+    > div {
+      @apply md:grid-cols-[1fr_4fr];
+    }
+    .hs-menu-wrapper {
+      @apply w-full;
+
+      > ul {
+        @apply md:grid-cols-4;
+      }
+    }
+  }
+
+  &.menu-items-5 {
+    > div {
+      @apply md:grid-cols-[1fr_5fr];
+    }
+    .hs-menu-wrapper {
+      @apply w-full;
+
+      > ul {
+        @apply md:grid-cols-5;
+      }
+    }
+  }
+
+  .hs_cos_wrapper {
+    @apply w-full;
+  }
+
+  /* HubSpot menu wrapper - main container */
+  .hs-menu-wrapper {
+    @apply h-full w-full;
+
+    /* Top level ul - contains the 4 main columns */
+    > ul {
+      @apply gap-lg md:divide-border/20 m-0 grid h-full list-none grid-cols-1 p-0 md:grid-cols-4 md:gap-0 md:divide-x;
+    }
+
+    /* Top level menu items - these are the column headers */
+    .hs-menu-depth-1 {
+      @apply md:px-lg flex h-full list-none flex-col items-center text-center;
+
+      /* Column header link */
+      > a {
+        @apply mb-sm block text-sm font-semibold tracking-wider text-white uppercase no-underline hover:text-white hover:decoration-transparent;
+      }
+
+      /* Children wrapper - contains the column items */
+      > .hs-menu-children-wrapper {
+        @apply m-0 list-none space-y-2 p-0;
+      }
+    }
+
+    /* Second level menu items - the actual links in each column */
+    .hs-menu-depth-2 {
+      @apply list-none;
+
+      > a {
+        @apply block text-sm text-white/90 no-underline transition-colors duration-200 hover:text-white hover:decoration-transparent;
+      }
+
+      /* Third level children if any */
+      > .hs-menu-children-wrapper {
+        @apply ml-sm mt-2 list-none space-y-2 p-0;
+      }
+    }
+
+    /* Third level menu items */
+    .hs-menu-depth-3 {
+      @apply list-none;
+
+      > a {
+        @apply block text-sm text-white/80 no-underline transition-colors duration-200 hover:text-white hover:decoration-transparent;
+      }
+    }
+  }
+}
