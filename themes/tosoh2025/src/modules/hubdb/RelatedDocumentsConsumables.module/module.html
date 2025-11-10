@@ -10,8 +10,66 @@
 {% set hubdb_tab_group_columns = [ifu_documents, sds_documents, coa_documents] %}
 {% set all_tab_group_columns = hubdb_tab_group_columns + tab_group_columns %}
 
+{% set filtered_documents = hubdb_table_rows("support_portal_products",'&product_code__eq='~module.product_code) %}
+
+{% macro render_document_card(document, language) %}
+
+  {% set document_name = language.label ~ '_' ~ document.f %}
+  {% set document_url = document.document_folder ~ language.label ~ '_' ~ document.document_url_part %}
+
+  {% if document.visibility.label == module.access_level %}
+    <a
+      href="{{ is_locked ? '/_hcms/mem/login' : document_url }}"
+      target="_blank"
+      {{ lock_card }}
+      class="group p-sm md:p-base border-border gap-sm relative flex cursor-pointer flex-row items-center justify-between overflow-hidden rounded-lg border transition-[shadow] duration-500 hover:shadow-sm">
+      <div class="gap-sm flex flex-row items-center">
+        {{ macros.render_document_type('PDF') }}
+        <div class="gap-2xs flex flex-col">
+          <h6
+            class="text-default group-hover:text-imperial-red group-[&[disabled]]:text-nickel font-sans-narrow font-semibold transition-all duration-200">
+            {{ document_name }}
+          </h6>
+        </div>
+      </div>
+      {{ macros.render_download_document_icon() }}
+      {{ macros.render_lock(module.locked_message) }}
+    </a>
+  {% endif %}
+{% endmacro %}
+
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col">
   {{ macros.tab_actions_selector(all_tab_group_columns) }}
+
+  <tosoh-tab-group variant="tab" groupId="{{ ifu_documents.column_label }}" active="true">
+    <div class="gap-base flex flex-col">
+      {% for document in filtered_documents[0].ifu_link %}
+        {% for language in document.languages %}
+          {{ render_document_card(document, language) }}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </tosoh-tab-group>
+
+  <tosoh-tab-group variant="tab" groupId="{{ sds_documents.column_label }}">
+    <div class="gap-base flex flex-col">
+      {% for document in filtered_documents[0].sds_link %}
+        {% for language in document.languages %}
+          {{ render_document_card(document, language) }}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </tosoh-tab-group>
+
+  <tosoh-tab-group variant="tab" groupId="{{ coa_documents.column_label }}">
+    <div class="gap-base flex flex-col">
+      {% for document in filtered_documents[0].coa_link %}
+        {% for language in document.languages %}
+          {{ render_document_card(document, language) }}
+        {% endfor %}
+      {% endfor %}
+    </div>
+  </tosoh-tab-group>
 
   {% for tab_group_column in all_tab_group_columns %}
     <tosoh-tab-group
