@@ -6,6 +6,7 @@ import {
   textField,
   urlField,
 } from 'hs-fieldkit';
+import { documentTypeChoices } from '../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -33,18 +34,7 @@ const generateFields = () => {
                 'URL that will point to another page on the site. If url is provided, the tab group button will act as a link. ',
             }),
             choiceField('document_type', 'Document Type', {
-              choices: [
-                ['EXE', 'EXE'],
-                ['Excel Sheet', 'Excel Sheet'],
-                ['DEF', 'DEF'],
-                ['IMAGE', 'IMAGE'],
-                ['PDF', 'PDF'],
-                ['PowerPoint', 'PowerPoint'],
-                ['TXT', 'TXT'],
-                ['Word Document', 'Word Document'],
-                ['Video', 'Video'],
-                ['ZIP', 'ZIP'],
-              ],
+              choices: documentTypeChoices,
               default: 'PDF',
             }),
           ],

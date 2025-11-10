@@ -426,3 +426,16 @@ export const animationSettingsGroup = groupField('animation_settings', 'Animatio
     }),
   ],
 });
+
+export const documentTypeChoices: string[][] = [
+  ['EXE', 'EXE'],
+  ['Excel Sheet', 'Excel Sheet'],
+  ['DEF', 'DEF'],
+  ['IMAGE', 'IMAGE'],
+  ['PDF', 'PDF'],
+  ['PowerPoint', 'PowerPoint'],
+  ['TXT', 'TXT'],
+  ['Word Document', 'Word Document'],
+  ['Video', 'Video'],
+  ['ZIP', 'ZIP'],
+];
