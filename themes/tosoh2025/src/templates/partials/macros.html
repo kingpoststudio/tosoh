@@ -190,7 +190,7 @@
             variant="action"
             groupId="{{ tab_group_column.column_label }}"
             {{ loop.first ? 'active="true"' : '' }}>
-            {{ tab_group_column.column_label }}
+            <span class="line-clamp-1">{{ tab_group_column.column_label }}</span>
           </tosoh-tab-group>
         {% endfor %}
       </div>

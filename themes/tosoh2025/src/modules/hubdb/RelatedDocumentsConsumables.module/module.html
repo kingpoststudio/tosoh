@@ -3,10 +3,17 @@
 {% set lock_card = module.is_locked ? 'disabled' : '' %}
 {% set is_locked = module.is_locked %}
 
-<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col">
-  {{ macros.tab_actions_selector(tab_group_columns) }}
+{% set ifu_documents = module.ifu_documents %}
+{% set sds_documents = module.sds_documents %}
+{% set coa_documents = module.coa_documents %}
 
-  {% for tab_group_column in tab_group_columns %}
+{% set hubdb_tab_group_columns = [ifu_documents, sds_documents, coa_documents] %}
+{% set all_tab_group_columns = hubdb_tab_group_columns + tab_group_columns %}
+
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col">
+  {{ macros.tab_actions_selector(all_tab_group_columns) }}
+
+  {% for tab_group_column in all_tab_group_columns %}
     <tosoh-tab-group
       variant="tab"
       groupId="{{ tab_group_column.column_label }}"
