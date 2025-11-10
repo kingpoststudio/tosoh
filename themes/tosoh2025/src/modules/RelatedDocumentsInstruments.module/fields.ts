@@ -2,7 +2,6 @@ import {
   booleanField,
   choiceField,
   groupField,
-  hubDbTableField,
   imageField,
   textField,
   urlField,
