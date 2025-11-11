@@ -12,6 +12,7 @@
     name,
     options,
     placeholder,
+    customClasses,
     value = $bindable(),
   }: {
     customClearFilter?: () => void;
@@ -23,13 +24,14 @@
     name: string;
     options: any[];
     placeholder?: string;
+    customClasses?: string;
     value?: unknown;
   } = $props();
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
 </script>
 
-<div class="gap-sm flex h-full flex-col">
+<div class={`gap-sm flex h-full flex-col ${customClasses}`}>
   <div class={`gap-sm flex h-full ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     {#if displayLabel}
       <div class="gap-sm flex items-center">

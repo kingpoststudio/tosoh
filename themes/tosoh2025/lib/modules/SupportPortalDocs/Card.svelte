@@ -1,9 +1,18 @@
 <script lang="ts">
   import { onTagClick } from '../../utils/utils';
+  import Select from '../../components/Select/Select.svelte';
+  let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
 
-  let { item, hasSiblings, viewAs }: { item: any; hasSiblings: boolean; viewAs: 'list' } = $props();
+  let activeLanguage = $state(item?.values?.languages?.[0]?.label);
 
-  console.log(item);
+  const languages = item?.values?.languages;
+  const documentFolder = item?.values?.document_folder;
+  const documentUrlPart = item?.values?.document_url_part;
+  const fileName = item?.values?.f;
+
+  const constructDownloadUrl = () => {
+    return `${documentFolder}${activeLanguage}_${documentUrlPart}`;
+  };
 
   //   {
   //     "id": "199218894609",
@@ -293,34 +302,24 @@
 >
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
-      <div class="gap-2xs flex flex-wrap">
-        {#each languages as language, index}
-          {@const isLast = index === languages?.length - 1}
-          <button
-            onclick={() => onTagClick('languages', language.name)}
-            class="plain text-imperial-red! text-xl">{language.label}{isLast ? '' : ','}</button
-          >
-        {/each}
-      </div>
       <h5 class="break-word text-raisin-black mt-base font-sans-narrow font-semibold">
-        {name}
+        {fileName}
       </h5>
     </div>
-
-    {#if documentType === 'Video'}
+    <div class="gap-sm flex flex-col sm:flex-row">
+      {#if languages?.length > 1}
+        <Select
+          name="languages"
+          options={languages}
+          bind:value={activeLanguage}
+          labelPosition="left"
+          label="Language:"
+          customClasses="sm:w-5xl w-full"
+        />
+      {/if}
       <a
-        target="_blank"
-        class="button flex items-center justify-center gap-[1.25rem] text-center {viewAs === 'list'
-          ? 'w-fit!'
-          : 'w-full!'}"
-        href={`support-portal/${item.path}`}>View</a
-      >
-    {:else}
-      <a
-        href={downloadUrl}
-        class="button gap-sm flex items-center justify-center text-center {viewAs === 'list'
-          ? 'w-fit!'
-          : 'w-full!'}"
+        href={constructDownloadUrl()}
+        class="button gap-sm w-fit! flex items-center justify-center text-center"
         target="_blank"
       >
         Download
@@ -341,16 +340,12 @@
           />
         </svg>
       </a>
-    {/if}
+    </div>
   </div>
 
   <span
     class="p-xs text-md text-imperial-red absolute right-[1.25rem] top-[1.25rem] break-all rounded-lg bg-red-100 text-xs font-bold"
   >
-    {#if documentType === 'PDF'}
-      {@render pdfIcon()}
-    {:else}
-      {documentType}
-    {/if}
+    {@render pdfIcon()}
   </span>
 </div>

@@ -117,11 +117,11 @@
 <div
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading} {viewAs} handleChangeView={() => {}} {formId}></Filters>
+  <Filters isParentLoading={isLoading} {formId}></Filters>
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal documents" retryCallback={reloadData} />
+        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
