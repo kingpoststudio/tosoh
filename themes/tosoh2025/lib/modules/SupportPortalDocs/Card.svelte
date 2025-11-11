@@ -1,38 +1,280 @@
 <script lang="ts">
-  import { constructCDNUrl, onTagClick } from '../../utils/utils';
+  import { onTagClick } from '../../utils/utils';
 
-  let { item, hasSiblings, viewAs }: { item: any; hasSiblings: boolean; viewAs: 'grid' | 'list' } =
-    $props();
+  let { item, hasSiblings, viewAs }: { item: any; hasSiblings: boolean; viewAs: 'list' } = $props();
 
-  const setupWistiaThumbnail = (url: string): string => {
-    return url?.replace(
-      /\.bin(\?disposition=attachment)?(?:\?video_still_time=\d+)?$/,
-      (match, disposition) => {
-        const baseUrl = '.jpg';
-        const params = [];
+  console.log(item);
 
-        if (disposition) {
-          params?.push(disposition);
-        }
-        params?.push(disposition ? '&video_still_time=10' : '?video_still_time=10');
-
-        return baseUrl + params?.join('');
-      }
-    ) as string;
-  };
-
-  let imgSrc = $derived(
-    constructCDNUrl(item?.values?.image?.url as string) ||
-      setupWistiaThumbnail(item?.values?.wistia_video_url as string)
-  );
-  let name = $derived(item?.values?.name);
-  let downloadUrl = $derived(item?.values?.document_url || item?.wistia_video_url);
-  let documentType = $derived(item?.values?.document_type?.label);
-  let productTypes = $derived(item?.values?.product_type?.map((type: any) => `${type.label}`));
-
-  const handleImageError = () => {
-    imgSrc = '';
-  };
+  //   {
+  //     "id": "199218894609",
+  //     "createdAt": "2025-11-06T22:09:06.009Z",
+  //     "updatedAt": "2025-11-06T22:35:04.318Z",
+  //     "publishedAt": "2025-11-06T22:35:09.528Z",
+  //     "path": null,
+  //     "name": null,
+  //     "values": {
+  //         "document_folder": "https://support.tosoh-diagnostics.com/hubfs/customer-support/SDS/Safety Data Sheets/AIA/TOSOH-02, wash/",
+  //         "languages": [
+  //             {
+  //                 "id": "9",
+  //                 "name": "BG",
+  //                 "label": "BG",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 0
+  //             },
+  //             {
+  //                 "id": "10",
+  //                 "name": "CS",
+  //                 "label": "CS",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 1
+  //             },
+  //             {
+  //                 "id": "11",
+  //                 "name": "DA",
+  //                 "label": "DA",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 2
+  //             },
+  //             {
+  //                 "id": "12",
+  //                 "name": "DE",
+  //                 "label": "DE",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 3
+  //             },
+  //             {
+  //                 "id": "13",
+  //                 "name": "EL",
+  //                 "label": "EL",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 4
+  //             },
+  //             {
+  //                 "id": "14",
+  //                 "name": "EN",
+  //                 "label": "EN",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 5
+  //             },
+  //             {
+  //                 "id": "23",
+  //                 "name": "ES",
+  //                 "label": "ES",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T18:06:52.899Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T18:06:52.899Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 6
+  //             },
+  //             {
+  //                 "id": "15",
+  //                 "name": "ET",
+  //                 "label": "ET",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 7
+  //             },
+  //             {
+  //                 "id": "16",
+  //                 "name": "FL",
+  //                 "label": "FL",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 8
+  //             },
+  //             {
+  //                 "id": "17",
+  //                 "name": "FR",
+  //                 "label": "FR",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 9
+  //             },
+  //             {
+  //                 "id": "18",
+  //                 "name": "HR",
+  //                 "label": "HR",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 10
+  //             },
+  //             {
+  //                 "id": "19",
+  //                 "name": "HU",
+  //                 "label": "HU",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 11
+  //             },
+  //             {
+  //                 "id": "20",
+  //                 "name": "IT",
+  //                 "label": "IT",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 12
+  //             },
+  //             {
+  //                 "id": "21",
+  //                 "name": "LT",
+  //                 "label": "LT",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.761Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.761Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 13
+  //             },
+  //             {
+  //                 "id": "22",
+  //                 "name": "LV",
+  //                 "label": "LV",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.761Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.761Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 14
+  //             },
+  //             {
+  //                 "id": "1",
+  //                 "name": "NL",
+  //                 "label": "NL",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T18:23:20.997Z",
+  //                 "updatedByUserId": 4988626,
+  //                 "order": 15
+  //             },
+  //             {
+  //                 "id": "2",
+  //                 "name": "NO",
+  //                 "label": "NO",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T18:23:20.997Z",
+  //                 "updatedByUserId": 4988626,
+  //                 "order": 16
+  //             },
+  //             {
+  //                 "id": "3",
+  //                 "name": "PL",
+  //                 "label": "PL",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T18:23:20.997Z",
+  //                 "updatedByUserId": 4988626,
+  //                 "order": 17
+  //             },
+  //             {
+  //                 "id": "4",
+  //                 "name": "PT",
+  //                 "label": "PT",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 18
+  //             },
+  //             {
+  //                 "id": "5",
+  //                 "name": "RO",
+  //                 "label": "RO",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 19
+  //             },
+  //             {
+  //                 "id": "6",
+  //                 "name": "SK",
+  //                 "label": "SK",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 20
+  //             },
+  //             {
+  //                 "id": "7",
+  //                 "name": "SL",
+  //                 "label": "SL",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 21
+  //             },
+  //             {
+  //                 "id": "8",
+  //                 "name": "SV",
+  //                 "label": "SV",
+  //                 "type": "option",
+  //                 "createdAt": "2025-11-02T17:44:57.760Z",
+  //                 "createdByUserId": 478790,
+  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
+  //                 "updatedByUserId": 478790,
+  //                 "order": 22
+  //             }
+  //         ],
+  //         "f": "SDS_AIA-PACK_Wash_Concentrate_202508_TOSOH-02.pdf",
+  //         "document_url_part": "SDS_AIA-PACK_Wash_Concentrate_202508_TOSOH-02"
+  //     },
+  //     "isSoftEditable": false,
+  //     "childTableId": "0"
+  // }
 </script>
 
 {#snippet pdfIcon()}
@@ -49,31 +291,14 @@
     hasSiblings ? 'h-full' : 'h-fit'
   }`}
 >
-  {#if viewAs === 'grid'}
-    {#if imgSrc}
-      <img
-        alt={item.name}
-        src={imgSrc}
-        loading="lazy"
-        class="aspect-video w-full rounded-lg object-contain"
-        onerror={handleImageError}
-      />
-    {:else}
-      <div
-        class="aspect-video
-       rounded-lg bg-slate-200 md:h-[12rem]"
-      ></div>
-    {/if}
-  {/if}
-
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
       <div class="gap-2xs flex flex-wrap">
-        {#each productTypes as productType, index}
-          {@const isLast = index === productTypes?.length - 1}
+        {#each languages as language, index}
+          {@const isLast = index === languages?.length - 1}
           <button
-            onclick={() => onTagClick('product_type', productType.name)}
-            class="plain text-imperial-red! text-xl">{productType}{isLast ? '' : ','}</button
+            onclick={() => onTagClick('languages', language.name)}
+            class="plain text-imperial-red! text-xl">{language.label}{isLast ? '' : ','}</button
           >
         {/each}
       </div>

@@ -31,6 +31,22 @@ declare global {
 
         type: 'module';
       };
+      SupportPortalDocsContent: {
+        access_level: 'Customer' | 'Distributor' | 'Internal';
+        breadcrumbs: {
+          title: string;
+          url: {
+            content_id: string | null;
+            href: string;
+            href_with_scheme: string;
+            type: string;
+          };
+        }[];
+        description: string;
+        search: Search;
+        title: string;
+        topic_filters: TopicFilters;
+      };
       HemoglobinVariantsLibraryContent: {
         breadcrumbs: {
           title: string;

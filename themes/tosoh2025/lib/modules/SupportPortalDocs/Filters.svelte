@@ -1,7 +1,11 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import { IS_MOCK, PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID } from '../../utils/constants';
-  import { mockPortalFilters } from './mock';
+  import {
+    IS_MOCK,
+    PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
+    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
+  } from '../../utils/constants';
+  import { mockPortalDocsFilters } from './mock';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
@@ -31,22 +35,21 @@
   import { resetFormEvent, updateFormEvent } from '../../utils/formManager';
   let { isParentLoading, viewAs, handleChangeView, formId } = $props();
 
-  const supportPortalContent = window?.Tosoh?.SupportPortalContent;
-  const searchFromFields = supportPortalContent?.search;
+  const supportPortalDocsContent = window?.Tosoh?.SupportPortalDocsContent;
+  const searchFromFields = supportPortalDocsContent?.search;
   const searchColumnId = parseSearchColumnId(searchFromFields);
-  const prodSupportPortalTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
+  const prodSupportPortalDocsTableId = PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID;
 
   const isSearchAccessLevelFilterEnabled =
-    supportPortalContent?.search?.is_access_level_filter_enabled || false;
+    supportPortalDocsContent?.search?.is_access_level_filter_enabled || false;
 
-  let accessLevel = supportPortalContent?.access_level || 'Customer';
-  let forceListView = supportPortalContent?.force_list_view || false;
+  let accessLevel = supportPortalDocsContent?.access_level || 'Customer';
 
-  const topic_filters = supportPortalContent?.topic_filters?.filters;
+  const topic_filters = supportPortalDocsContent?.topic_filters?.filters;
   let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
   const filtersTableId = getFiltersTableId(
-    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
-    supportPortalContent?.topic_filters?.hubdb_table_id
+    prodSupportPortalDocsTableId,
+    supportPortalDocsContent?.topic_filters?.hubdb_table_id
   );
 
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
@@ -137,7 +140,7 @@
           isActivated: true,
         });
       } else {
-        data = mockPortalFilters?.results;
+        data = mockPortalDocsFilters?.results;
       }
 
       if (!data?.error) {
@@ -248,7 +251,7 @@
     {formId}
     customClasses="mt-base"
     accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
-    manualTableId={prodSupportPortalTableId}
+    manualTableId={prodSupportPortalDocsTableId}
     {searchFromFields}
     onReset={onResetForSearch}
   />
@@ -274,15 +277,6 @@
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
         Reset
       </button>
-      {#if !forceListView}
-        <button
-          type="button"
-          class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
-          onclick={handleChangeView}
-        >
-          {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
-        </button>
-      {/if}
     </div>
   </FilterForm>
 </div>
