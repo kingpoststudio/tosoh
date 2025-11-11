@@ -83,7 +83,17 @@
           {{ lock_card }}
           class="group p-sm md:p-base border-border gap-sm relative flex cursor-pointer flex-row items-center justify-between overflow-hidden rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm">
           <div class="gap-sm flex flex-row items-center">
-            {{ macros.render_document_type(document.document_type) }}
+            {% if !document.document_image.src %}
+              {{ macros.render_document_type(document.document_type) }}
+            {% else %}
+              <div class="h-full max-h-16 w-full max-w-16 overflow-hidden rounded-lg">
+                <img
+                  src="{{ document.document_image.src }}"
+                  alt="{{ document.document_image.alt }}"
+                  class="h-full w-full object-contain" />
+              </div>
+            {% endif %}
+
             <div class="gap-2xs flex flex-col">
               <h6
                 class="text-default group-hover:text-imperial-red group-[&[disabled]]:text-nickel font-sans-narrow font-semibold transition-all duration-200">
