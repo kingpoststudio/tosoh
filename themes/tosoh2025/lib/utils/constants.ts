@@ -5,11 +5,13 @@ export const PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID = '5628180';
 export const PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID = '30049103';
 
 export const PROD_TOSOH_SUPPORT_PORTAL_PRODUCTS_TABLE_ID = '138717564';
-export const PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID = '138702467';
+// export const PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID = '138702467';
+//The local table id for the SDS docs
+export const PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID = '819815627';
 
 export const defaultItemsLimit = 12;
 export const defaultPagination = 1;
-export const IS_MOCK = true;
+export const IS_MOCK = false;
 export const USE_HARDCODED_IDS = true;
 
 export const RESET_PAGINATION_AND_FETCH_DATA_EVENT = 'TosohPaginationResetAndFetchData';
