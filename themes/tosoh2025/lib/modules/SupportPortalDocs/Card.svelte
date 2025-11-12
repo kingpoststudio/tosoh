@@ -3,27 +3,30 @@
   import Select from '../../components/Select/Select.svelte';
   let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
 
+  console.log(item, 'item');
+
   let activeLanguage = $state(item?.values?.languages?.[0]?.label);
 
   const languages = item?.values?.languages;
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
   const fileName = item?.values?.f;
+  const name = item?.values?.name;
 
   const constructDownloadUrl = () => {
     return `${documentFolder}${activeLanguage}_${documentUrlPart}`;
   };
 
   //   {
-  //     "id": "199218894609",
-  //     "createdAt": "2025-11-06T22:09:06.009Z",
-  //     "updatedAt": "2025-11-06T22:35:04.318Z",
-  //     "publishedAt": "2025-11-06T22:35:09.528Z",
-  //     "path": null,
-  //     "name": null,
-  //     "values": {
-  //         "document_folder": "https://support.tosoh-diagnostics.com/hubfs/customer-support/SDS/Safety Data Sheets/AIA/TOSOH-02, wash/",
-  //         "languages": [
+  //     "sds_link": [
+  //         {
+  //             "id": "199218894695",
+  //             "name": "SDS_CL_AIA-PACK_Serie_13_20240417_TOSOH-78_052024",
+  //             "type": "foreignid"
+  //         }
+  //     ],
+  //     "name": "CL AIA-PACK AFP TEST CUP",
+  // "languages": [
   //             {
   //                 "id": "9",
   //                 "name": "BG",
@@ -278,11 +281,21 @@
   //                 "order": 22
   //             }
   //         ],
-  //         "f": "SDS_AIA-PACK_Wash_Concentrate_202508_TOSOH-02.pdf",
-  //         "document_url_part": "SDS_AIA-PACK_Wash_Concentrate_202508_TOSOH-02"
+  //     "category": {
+  //         "id": "2",
+  //         "name": "AIA-CL",
+  //         "label": "AIA-CL",
+  //         "type": "option",
+  //         "createdAt": "2025-11-02T20:25:18.400Z",
+  //         "createdByUserId": 4988626,
+  //         "updatedAt": "2025-11-02T20:25:18.400Z",
+  //         "updatedByUserId": 4988626,
+  //         "order": 1
   //     },
-  //     "isSoftEditable": false,
-  //     "childTableId": "0"
+  //     "product_code": "0029107",
+  //     "document_folder": "https://support.tosoh-diagnostics.com/hubfs/customer-support/SDS/Safety Data Sheets/AIA CL/CL TOSOH-78 Serie 13/",
+  //     "f": "SDS_CL_AIA-PACK_Serie_13_20240417_TOSOH-78_052024.pdf",
+  //     "document_url_part": "SDS_CL_AIA-PACK_Serie_13_20240417_TOSOH-78_052024"
   // }
 </script>
 
@@ -303,7 +316,7 @@
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div>
       <h5 class="break-word text-raisin-black mt-base font-sans-narrow font-semibold">
-        {fileName}
+        {name}
       </h5>
     </div>
     <div class="gap-sm flex flex-col sm:flex-row">

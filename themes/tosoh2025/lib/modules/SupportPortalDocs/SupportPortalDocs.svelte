@@ -8,40 +8,46 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
+  import Card from './Card.svelte';
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
-  import { mockPortalDocsItems } from './mock';
+  import Filters from './Filters.svelte';
+  import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
+  import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
+  import SkeletonCard from './SkeletonCard.svelte';
+
+  import { fetchTableRows } from '../../services/fetchTableRows';
+
   import {
+    DEFAULT_ACCESS_LEVEL,
     defaultItemsLimit,
     defaultPagination,
     IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
   } from '../../utils/constants';
-  import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
-  import Card from './Card.svelte';
-  import SkeletonCard from './SkeletonCard.svelte';
-  import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
-  import { fetchTableRows } from '../../services/fetchTableRows';
-  import Filters from './Filters.svelte';
+  import { getPaginationParams } from '../../utils/urlUtils';
   import {
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
     getFiltersTableId,
+    parseSearchColumnId,
   } from '../../utils/utils';
 
+  import { mockPortalDocsItems } from './mock';
+
+  export const SUPPORT_DOCS_PROPERTIES =
+    'f,document_folder,document_url_part,languages,designation,category,linked_product_codes';
   const supportPortalDocsContent = window?.Tosoh?.SupportPortalDocsContent;
 
   const topicFilters = supportPortalDocsContent?.topic_filters?.filters || [];
   const formId = 'support-portal-docs';
-  let accessLevel = supportPortalDocsContent?.access_level || 'Customer';
+  let accessLevel = supportPortalDocsContent?.access_level || DEFAULT_ACCESS_LEVEL;
 
   let searchColumnId = parseSearchColumnId(supportPortalDocsContent?.search);
-  const tableId = getFiltersTableId(
+  const documentsTableId = getFiltersTableId(
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
     supportPortalDocsContent?.topic_filters?.hubdb_table_id
   );
-
   let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
   const rangePmFilters = constructRangePmFilters(topicFilters);
 
@@ -56,17 +62,15 @@
   const viewAs = 'list';
 
   const constructBody = () => {
-    const params = new URLSearchParams(window.location.search);
+    const { limit, pagination, offset } = getPaginationParams(defaultItemsLimit, defaultPagination);
 
     return {
-      tableId: tableId,
-      properties: 'f,document_folder,languages,document_url_part',
-      accessLevel: accessLevel,
-      limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
-      pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
-      offset:
-        parseInt(params?.get('limit') || `${defaultItemsLimit}`) *
-          (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
+      tableId: documentsTableId,
+      properties: SUPPORT_DOCS_PROPERTIES,
+      limit,
+      accessLevel,
+      pagination,
+      offset,
       filters: constructFilterParams(nonNumericFilters),
       numericComparisonFilters: [...rangePmFilters],
       isActivated: true,
@@ -115,7 +119,7 @@
 {/if}
 
 <div
-  class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
+  class={`p-md md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
   <Filters isParentLoading={isLoading} {formId}></Filters>
   <div class="flex w-full flex-col justify-between">

@@ -1,11 +1,13 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
+
+  import { mockPortalDocsFilters } from './mock';
   import {
+    DEFAULT_ACCESS_LEVEL,
     IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
-  import { mockPortalDocsFilters } from './mock';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
@@ -43,7 +45,7 @@
   const isSearchAccessLevelFilterEnabled =
     supportPortalDocsContent?.search?.is_access_level_filter_enabled || false;
 
-  let accessLevel = supportPortalDocsContent?.access_level || 'Customer';
+  let accessLevel = supportPortalDocsContent?.access_level || DEFAULT_ACCESS_LEVEL;
 
   const topic_filters = supportPortalDocsContent?.topic_filters?.filters;
   let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
