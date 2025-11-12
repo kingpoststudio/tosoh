@@ -1,302 +1,24 @@
 <script lang="ts">
   import { onTagClick } from '../../utils/utils';
   import Select from '../../components/Select/Select.svelte';
+  import { getUrlParam } from '../../utils/urlUtils';
   let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
 
   console.log(item, 'item');
 
-  let activeLanguage = $state(item?.values?.languages?.[0]?.label);
+  let activeLanguage = $state(getUrlParam('languages') || item?.values?.languages?.[0]?.label);
 
   const languages = item?.values?.languages;
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
   const fileName = item?.values?.f;
-  const name = item?.values?.name;
+  const productCodes = item?.values?.linked_product_codes;
+  const designations = item?.values?.designation;
+  const categories = item?.values?.category;
 
   const constructDownloadUrl = () => {
     return `${documentFolder}${activeLanguage}_${documentUrlPart}`;
   };
-
-  //   {
-  //     "sds_link": [
-  //         {
-  //             "id": "199218894695",
-  //             "name": "SDS_CL_AIA-PACK_Serie_13_20240417_TOSOH-78_052024",
-  //             "type": "foreignid"
-  //         }
-  //     ],
-  //     "name": "CL AIA-PACK AFP TEST CUP",
-  // "languages": [
-  //             {
-  //                 "id": "9",
-  //                 "name": "BG",
-  //                 "label": "BG",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 0
-  //             },
-  //             {
-  //                 "id": "10",
-  //                 "name": "CS",
-  //                 "label": "CS",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 1
-  //             },
-  //             {
-  //                 "id": "11",
-  //                 "name": "DA",
-  //                 "label": "DA",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 2
-  //             },
-  //             {
-  //                 "id": "12",
-  //                 "name": "DE",
-  //                 "label": "DE",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 3
-  //             },
-  //             {
-  //                 "id": "13",
-  //                 "name": "EL",
-  //                 "label": "EL",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 4
-  //             },
-  //             {
-  //                 "id": "14",
-  //                 "name": "EN",
-  //                 "label": "EN",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 5
-  //             },
-  //             {
-  //                 "id": "23",
-  //                 "name": "ES",
-  //                 "label": "ES",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T18:06:52.899Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T18:06:52.899Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 6
-  //             },
-  //             {
-  //                 "id": "15",
-  //                 "name": "ET",
-  //                 "label": "ET",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 7
-  //             },
-  //             {
-  //                 "id": "16",
-  //                 "name": "FL",
-  //                 "label": "FL",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 8
-  //             },
-  //             {
-  //                 "id": "17",
-  //                 "name": "FR",
-  //                 "label": "FR",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 9
-  //             },
-  //             {
-  //                 "id": "18",
-  //                 "name": "HR",
-  //                 "label": "HR",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 10
-  //             },
-  //             {
-  //                 "id": "19",
-  //                 "name": "HU",
-  //                 "label": "HU",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 11
-  //             },
-  //             {
-  //                 "id": "20",
-  //                 "name": "IT",
-  //                 "label": "IT",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 12
-  //             },
-  //             {
-  //                 "id": "21",
-  //                 "name": "LT",
-  //                 "label": "LT",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.761Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.761Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 13
-  //             },
-  //             {
-  //                 "id": "22",
-  //                 "name": "LV",
-  //                 "label": "LV",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.761Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.761Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 14
-  //             },
-  //             {
-  //                 "id": "1",
-  //                 "name": "NL",
-  //                 "label": "NL",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T18:23:20.997Z",
-  //                 "updatedByUserId": 4988626,
-  //                 "order": 15
-  //             },
-  //             {
-  //                 "id": "2",
-  //                 "name": "NO",
-  //                 "label": "NO",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T18:23:20.997Z",
-  //                 "updatedByUserId": 4988626,
-  //                 "order": 16
-  //             },
-  //             {
-  //                 "id": "3",
-  //                 "name": "PL",
-  //                 "label": "PL",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T18:23:20.997Z",
-  //                 "updatedByUserId": 4988626,
-  //                 "order": 17
-  //             },
-  //             {
-  //                 "id": "4",
-  //                 "name": "PT",
-  //                 "label": "PT",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 18
-  //             },
-  //             {
-  //                 "id": "5",
-  //                 "name": "RO",
-  //                 "label": "RO",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 19
-  //             },
-  //             {
-  //                 "id": "6",
-  //                 "name": "SK",
-  //                 "label": "SK",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 20
-  //             },
-  //             {
-  //                 "id": "7",
-  //                 "name": "SL",
-  //                 "label": "SL",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 21
-  //             },
-  //             {
-  //                 "id": "8",
-  //                 "name": "SV",
-  //                 "label": "SV",
-  //                 "type": "option",
-  //                 "createdAt": "2025-11-02T17:44:57.760Z",
-  //                 "createdByUserId": 478790,
-  //                 "updatedAt": "2025-11-02T17:44:57.760Z",
-  //                 "updatedByUserId": 478790,
-  //                 "order": 22
-  //             }
-  //         ],
-  //     "category": {
-  //         "id": "2",
-  //         "name": "AIA-CL",
-  //         "label": "AIA-CL",
-  //         "type": "option",
-  //         "createdAt": "2025-11-02T20:25:18.400Z",
-  //         "createdByUserId": 4988626,
-  //         "updatedAt": "2025-11-02T20:25:18.400Z",
-  //         "updatedByUserId": 4988626,
-  //         "order": 1
-  //     },
-  //     "product_code": "0029107",
-  //     "document_folder": "https://support.tosoh-diagnostics.com/hubfs/customer-support/SDS/Safety Data Sheets/AIA CL/CL TOSOH-78 Serie 13/",
-  //     "f": "SDS_CL_AIA-PACK_Serie_13_20240417_TOSOH-78_052024.pdf",
-  //     "document_url_part": "SDS_CL_AIA-PACK_Serie_13_20240417_TOSOH-78_052024"
-  // }
 </script>
 
 {#snippet pdfIcon()}
@@ -314,10 +36,43 @@
   }`}
 >
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
-    <div>
-      <h5 class="break-word text-raisin-black mt-base font-sans-narrow font-semibold">
-        {name}
+    <div class="gap-sm flex flex-col">
+      <div class="gap-2xs flex flex-wrap">
+        {#each categories as category, index}
+          {@const isLast = index === categories?.length - 1}
+          <button
+            onclick={() => onTagClick('category', category.name)}
+            class="plain text-imperial-red! text-xl">{category.name}{isLast ? '' : ','}</button
+          >
+        {/each}
+      </div>
+      <h5 class="break-word text-raisin-black font-sans-narrow font-semibold">
+        {fileName}
       </h5>
+      {#if productCodes?.length > 0}
+        <div class="gap-2xs flex flex-wrap">
+          <span class="text-nickel text-md">For product codes:</span>
+          {#each productCodes as productCode, index}
+            {@const isLast = index === productCodes?.length - 1}
+            <button
+              onclick={() => onTagClick('linked_product_codes', productCode.name)}
+              class="plain text-imperial-red! text-md">{productCode.name}{isLast ? '' : ','}</button
+            >
+          {/each}
+        </div>
+      {/if}
+      {#if designations?.length > 0}
+        <div class="gap-2xs flex flex-wrap">
+          <span class="text-nickel text-md">For products:</span>
+          {#each designations as designation, index}
+            {@const isLast = index === designations?.length - 1}
+            <button
+              onclick={() => onTagClick('designation', designation.name)}
+              class="plain text-imperial-red! text-md">{designation.name}{isLast ? '' : ','}</button
+            >
+          {/each}
+        </div>
+      {/if}
     </div>
     <div class="gap-sm flex flex-col sm:flex-row">
       {#if languages?.length > 1}
