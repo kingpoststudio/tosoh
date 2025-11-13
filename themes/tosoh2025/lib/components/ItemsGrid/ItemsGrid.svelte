@@ -42,11 +42,10 @@
 
 <div transition:fade={{ duration: 100 }} class={gridClass}>
   {#if isLoading}
-    {#each skeletonItems as item}
-      <SkeletonCard {viewAs}></SkeletonCard>
-    {/each}
+    {#each skeletonItems as item}{/each}
   {:else if tableRows?.length > 0 && !isLoading}
     {#each tableRows as item}
+      <SkeletonCard {viewAs}></SkeletonCard>
       <Card {viewAs} hasSiblings={tableRows?.length > 1} {item}></Card>
     {/each}
   {:else}

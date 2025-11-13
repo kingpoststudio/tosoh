@@ -12,9 +12,7 @@
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
   const fileName = item?.values?.f;
-  const productCodes = item?.values?.linked_product_codes;
-  const designations = item?.values?.designation;
-  const categories = item?.values?.category;
+  const categoryLabel = item?.values?.category?.label;
 
   const constructDownloadUrl = () => {
     return `${documentFolder}${activeLanguage}_${documentUrlPart}`;
@@ -38,41 +36,13 @@
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div class="gap-sm flex flex-col">
       <div class="gap-2xs flex flex-wrap">
-        {#each categories as category, index}
-          {@const isLast = index === categories?.length - 1}
-          <button
-            onclick={() => onTagClick('category', category.name)}
-            class="plain text-imperial-red! text-xl">{category.name}{isLast ? '' : ','}</button
-          >
-        {/each}
+        {#if categoryLabel?.length > 0}
+          <span class="text-imperial-red text-lg">{categoryLabel}</span>
+        {/if}
       </div>
       <h5 class="break-word text-raisin-black font-sans-narrow font-semibold">
         {fileName}
       </h5>
-      {#if productCodes?.length > 0}
-        <div class="gap-2xs flex flex-wrap">
-          <span class="text-nickel text-md">For product codes:</span>
-          {#each productCodes as productCode, index}
-            {@const isLast = index === productCodes?.length - 1}
-            <button
-              onclick={() => onTagClick('linked_product_codes', productCode.name)}
-              class="plain text-imperial-red! text-md">{productCode.name}{isLast ? '' : ','}</button
-            >
-          {/each}
-        </div>
-      {/if}
-      {#if designations?.length > 0}
-        <div class="gap-2xs flex flex-wrap">
-          <span class="text-nickel text-md">For products:</span>
-          {#each designations as designation, index}
-            {@const isLast = index === designations?.length - 1}
-            <button
-              onclick={() => onTagClick('designation', designation.name)}
-              class="plain text-imperial-red! text-md">{designation.name}{isLast ? '' : ','}</button
-            >
-          {/each}
-        </div>
-      {/if}
     </div>
     <div class="gap-sm flex flex-col sm:flex-row">
       {#if languages?.length > 1}

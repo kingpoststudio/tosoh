@@ -11,7 +11,7 @@ export const PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID = '819815627';
 
 export const defaultItemsLimit = 12;
 export const defaultPagination = 1;
-export const IS_MOCK = false;
+export const IS_MOCK = true;
 export const USE_HARDCODED_IDS = true;
 
 export const RESET_PAGINATION_AND_FETCH_DATA_EVENT = 'TosohPaginationResetAndFetchData';
