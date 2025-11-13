@@ -10,7 +10,9 @@
 {% set hubdb_tab_group_columns = [ifu_documents, sds_documents, coa_documents] %}
 {% set all_tab_group_columns = hubdb_tab_group_columns + tab_group_columns %}
 
-{% set filtered_documents = hubdb_table_rows("support_portal_products",'&product_code__eq='~module.product_code) %}
+{% set filtered_sds_documents = hubdb_table_rows("sds_docs",'&linked_product_codes__in='~module.product_code) %}
+{# {% set filtered_ifu_documents = hubdb_table_rows("ifu_docs",'&linked_product_codes__in='~module.product_code) %}
+{% set filtered_coa_documents = hubdb_table_rows("coa_docs",'&linked_product_codes__in='~module.product_code) %} #}
 
 {% macro render_document_card(document, language) %}
 
@@ -43,30 +45,24 @@
 
   <tosoh-tab-group variant="tab" groupId="{{ ifu_documents.column_label }}" active="true">
     <div class="gap-base flex flex-col">
-      {% for document in filtered_documents[0].ifu_link %}
-        {% for language in document.languages %}
-          {{ render_document_card(document, language) }}
-        {% endfor %}
+      {% for language in filtered_ifu_documents[0].languages %}
+        {{ render_document_card(filtered_ifu_documents[0], language) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
 
   <tosoh-tab-group variant="tab" groupId="{{ sds_documents.column_label }}">
     <div class="gap-base flex flex-col">
-      {% for document in filtered_documents[0].sds_link %}
-        {% for language in document.languages %}
-          {{ render_document_card(document, language) }}
-        {% endfor %}
+      {% for language in filtered_sds_documents[0].languages %}
+        {{ render_document_card(filtered_sds_documents[0], language) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
 
   <tosoh-tab-group variant="tab" groupId="{{ coa_documents.column_label }}">
     <div class="gap-base flex flex-col">
-      {% for document in filtered_documents[0].coa_link %}
-        {% for language in document.languages %}
-          {{ render_document_card(document, language) }}
-        {% endfor %}
+      {% for language in filtered_coa_documents[0].languages %}
+        {{ render_document_card(filtered_coa_documents[0], language) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
