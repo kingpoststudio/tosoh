@@ -5,14 +5,14 @@
 
 {% set ifu_documents = module.ifu_documents %}
 {% set sds_documents = module.sds_documents %}
-{% set coa_documents = module.coa_documents %}
+{% set cofa_documents = module.cofa_documents %}
 
-{% set hubdb_tab_group_columns = [ifu_documents, sds_documents, coa_documents] %}
+{% set hubdb_tab_group_columns = [ifu_documents, sds_documents, cofa_documents] %}
 {% set all_tab_group_columns = hubdb_tab_group_columns + tab_group_columns %}
 
-{% set filtered_sds_documents = hubdb_table_rows("sds_docs",'&linked_product_codes__in='~module.product_code) %}
-{# {% set filtered_ifu_documents = hubdb_table_rows("ifu_docs",'&linked_product_codes__in='~module.product_code) %}
-{% set filtered_coa_documents = hubdb_table_rows("coa_docs",'&linked_product_codes__in='~module.product_code) %} #}
+{% set filtered_sds_documents = hubdb_table_rows("support_portal_sds",'&linked_product_codes__in='~module.product_code) %}
+{% set filtered_ifu_documents = hubdb_table_rows("support_portal_ifu",'&linked_product_codes__in='~module.product_code) %}
+{% set filtered_cofa_documents = hubdb_table_rows("support_portal_cofa",'&linked_product_codes__in='~module.product_code) %}
 
 {% macro render_document_card(document, language) %}
 
@@ -59,10 +59,10 @@
     </div>
   </tosoh-tab-group>
 
-  <tosoh-tab-group variant="tab" groupId="{{ coa_documents.column_label }}">
+  <tosoh-tab-group variant="tab" groupId="{{ cofa_documents.column_label }}">
     <div class="gap-base flex flex-col">
-      {% for language in filtered_coa_documents[0].languages %}
-        {{ render_document_card(filtered_coa_documents[0], language) }}
+      {% for language in filtered_cofa_documents[0].languages %}
+        {{ render_document_card(filtered_cofa_documents[0], language) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
