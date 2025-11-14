@@ -3,7 +3,7 @@ type TableData = {
     name: string;
     label: string;
     id: string;
-    type: "TEXT" | "MULTISELECT" | "SELECT";
+    type: "TEXT" | "MULTISELECT" | "SELECT" | "FOREIGN_ID";
   }[];
 };
 
@@ -58,7 +58,7 @@ exports.main = async (req: any) => {
                   `${filterKey}__contains=${filters[filterKey]}`
                 );
               }
-              if (column.type === "SELECT") {
+              if (column.type === "SELECT" || column.type === "FOREIGN_ID") {
                 filterConditions.push(`${filterKey}__in=${filters[filterKey]}`);
               }
             }

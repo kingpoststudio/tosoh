@@ -18,6 +18,7 @@ import './modules/SupportPortal/SupportPortal.svelte';
 import './modules/KioskDocuments/KioskDocuments.svelte';
 import './modules/HemoglobinVariantsLibrary/HemoglobinVariantsLibrary.svelte';
 import './modules/HemoglobinPortal/HemoglobinPortal.svelte';
+import './modules/SupportPortalDocs/SupportPortalDocs.svelte';
 
 import EmblaCarousel, { type EmblaCarouselType } from 'embla-carousel';
 

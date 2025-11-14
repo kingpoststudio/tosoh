@@ -1,0 +1,109 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+{% set tab_group_columns = module.tab_group_columns %}
+{% set lock_card = module.is_locked ? 'disabled' : '' %}
+{% set is_locked = module.is_locked %}
+
+{% set ifu_documents = module.ifu_documents %}
+{% set sds_documents = module.sds_documents %}
+{% set cofa_documents = module.cofa_documents %}
+
+{% set hubdb_tab_group_columns = [ifu_documents, sds_documents, cofa_documents] %}
+{% set all_tab_group_columns = hubdb_tab_group_columns + tab_group_columns %}
+
+{% set filtered_sds_documents = hubdb_table_rows("support_portal_sds",'&linked_product_codes__in='~module.product_code) %}
+{% set filtered_ifu_documents = hubdb_table_rows("support_portal_ifu",'&linked_product_codes__in='~module.product_code) %}
+{% set filtered_cofa_documents = hubdb_table_rows("support_portal_cofa",'&linked_product_codes__in='~module.product_code) %}
+
+{% macro render_document_card(document, language) %}
+
+  {% set document_name = language.label ~ '_' ~ document.f %}
+  {% set document_url = document.document_folder ~ language.label ~ '_' ~ document.document_url_part %}
+
+  {% if document.visibility.label == module.access_level && !document.deactivate %}
+    <a
+      href="{{ is_locked ? '/_hcms/mem/login' : document_url }}"
+      target="_blank"
+      {{ lock_card }}
+      class="group p-sm md:p-base border-border gap-sm relative flex cursor-pointer flex-row items-center justify-between overflow-hidden rounded-lg border transition-[shadow] duration-500 hover:shadow-sm">
+      <div class="gap-sm flex flex-row items-center">
+        {{ macros.render_document_type('PDF') }}
+        <div class="gap-2xs flex flex-col">
+          <h6
+            class="text-default group-hover:text-imperial-red group-[&[disabled]]:text-nickel font-sans-narrow font-semibold transition-all duration-200">
+            {{ document_name }}
+          </h6>
+        </div>
+      </div>
+      {{ macros.render_download_document_icon() }}
+      {{ macros.render_lock(module.locked_message) }}
+    </a>
+  {% endif %}
+{% endmacro %}
+
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col">
+  {{ macros.tab_actions_selector(all_tab_group_columns) }}
+
+  <tosoh-tab-group variant="tab" groupId="{{ ifu_documents.column_label }}" active="true">
+    <div class="gap-base flex flex-col">
+      {% for language in filtered_ifu_documents[0].languages %}
+        {{ render_document_card(filtered_ifu_documents[0], language) }}
+      {% endfor %}
+    </div>
+  </tosoh-tab-group>
+
+  <tosoh-tab-group variant="tab" groupId="{{ sds_documents.column_label }}">
+    <div class="gap-base flex flex-col">
+      {% for language in filtered_sds_documents[0].languages %}
+        {{ render_document_card(filtered_sds_documents[0], language) }}
+      {% endfor %}
+    </div>
+  </tosoh-tab-group>
+
+  <tosoh-tab-group variant="tab" groupId="{{ cofa_documents.column_label }}">
+    <div class="gap-base flex flex-col">
+      {% for language in filtered_cofa_documents[0].languages %}
+        {{ render_document_card(filtered_cofa_documents[0], language) }}
+      {% endfor %}
+    </div>
+  </tosoh-tab-group>
+
+  {% for tab_group_column in all_tab_group_columns %}
+    <tosoh-tab-group
+      variant="tab"
+      groupId="{{ tab_group_column.column_label }}"
+      {{ loop.first ? 'active="true"' : '' }}>
+      {% for document in tab_group_column.documents %}
+        <a
+          href="{{ is_locked ? '/_hcms/mem/login' : '#' }}"
+          target="_blank"
+          {{ lock_card }}
+          class="group p-sm md:p-base border-border gap-sm relative flex cursor-pointer flex-row items-center justify-between overflow-hidden rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm">
+          <div class="gap-sm flex flex-row items-center">
+            {% if !document.document_image.src %}
+              {{ macros.render_document_type(document.document_type) }}
+            {% else %}
+              <div class="h-full max-h-16 w-full max-w-16 overflow-hidden rounded-lg">
+                <img
+                  src="{{ document.document_image.src }}"
+                  alt="{{ document.document_image.alt }}"
+                  class="h-full w-full object-contain" />
+              </div>
+            {% endif %}
+
+            <div class="gap-2xs flex flex-col">
+              <h6
+                class="text-default group-hover:text-imperial-red group-[&[disabled]]:text-nickel font-sans-narrow font-semibold transition-all duration-200">
+                {{ document.document_name }}
+              </h6>
+              <span class="text-nickel gap-xs flex flex-row items-center text-sm">
+                {{ document.document_description }}
+              </span>
+            </div>
+          </div>
+          {{ macros.render_download_document_icon() }}
+          {{ macros.render_lock(module.locked_message) }}
+        </a>
+      {% endfor %}
+    </tosoh-tab-group>
+  {% endfor %}
+</div>
