@@ -1,21 +1,29 @@
 <script lang="ts">
-  import { onTagClick } from '../../utils/utils';
-  import Select from '../../components/Select/Select.svelte';
   import { getUrlParam } from '../../utils/urlUtils';
-  let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
+  let { item, hasSiblings, language }: { item: any; hasSiblings: boolean; language: any } =
+    $props();
 
-  console.log(item, 'item');
+  console.log(item);
 
-  let activeLanguage = $state(getUrlParam('languages') || item?.values?.languages?.[0]?.label);
+  let selectedLanguageFromUser = $state(getUrlParam('languages'));
 
   const languages = item?.values?.languages;
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
   const fileName = item?.values?.f;
   const categoryLabel = item?.values?.category?.label;
+  const designations = item?.values?.designation;
+  const productCodes = item?.values?.linked_product_codes;
+
+  const visibleFields = window?.Tosoh?.SupportPortalDocsContent?.visible_fields;
+  const isCategoryVisible = visibleFields?.is_category_visible;
+  const isDesignationVisible = visibleFields?.is_designation_visible;
+  const isProductCodeVisible = visibleFields?.is_product_code_visible;
+  const isBatchNumberVisible = visibleFields?.is_batch_number_visible;
+  const isExpirationDateVisible = visibleFields?.is_expiration_date_visible;
 
   const constructDownloadUrl = () => {
-    return `${documentFolder}${activeLanguage}_${documentUrlPart}`;
+    return `${documentFolder}${language?.label}_${documentUrlPart}`;
   };
 </script>
 
@@ -28,62 +36,66 @@
   </svg>
 {/snippet}
 
-<div
-  class={`border-border relative flex w-full flex-col content-around gap-[1.25rem] rounded-2xl border p-[1.25rem] ${
-    hasSiblings ? 'h-full' : 'h-fit'
-  }`}
->
-  <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
-    <div class="gap-sm flex flex-col">
-      <div class="gap-2xs flex flex-wrap">
-        {#if categoryLabel?.length > 0}
-          <span class="text-imperial-red text-lg">{categoryLabel}</span>
-        {/if}
-      </div>
-      <h5 class="break-word text-raisin-black font-sans-narrow font-semibold">
-        {fileName}
-      </h5>
-    </div>
-    <div class="gap-sm flex flex-col sm:flex-row">
-      {#if languages?.length > 1}
-        <Select
-          name="languages"
-          options={languages}
-          bind:value={activeLanguage}
-          labelPosition="left"
-          label="Language:"
-          customClasses="sm:w-5xl w-full"
-        />
-      {/if}
-      <a
-        href={constructDownloadUrl()}
-        class="button gap-sm w-fit! flex items-center justify-center text-center"
-        target="_blank"
-      >
-        Download
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="19"
-          height="18"
-          viewBox="0 0 19 18"
-          fill="none"
-          class="h-4 w-4 min-w-[1rem]"
-        >
-          <path
-            d="M1.34863 13.004V14C1.34863 14.7956 1.6647 15.5587 2.22731 16.1213C2.78992 16.6839 3.55298 17 4.34863 17H14.3486C15.1443 17 15.9073 16.6839 16.47 16.1213C17.0326 15.5587 17.3486 14.7956 17.3486 14V13M9.34863 1.5V12.5M9.34863 12.5L12.8486 9M9.34863 12.5L5.84863 9"
-            stroke="white"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </a>
-    </div>
-  </div>
-
-  <span
-    class="p-xs text-md text-imperial-red absolute right-[1.25rem] top-[1.25rem] break-all rounded-lg bg-red-100 text-xs font-bold"
+{#if selectedLanguageFromUser === language?.label || !selectedLanguageFromUser}
+  <a
+    href={constructDownloadUrl()}
+    target="_blank"
+    class="border-border group rounded-2xl border transition-all duration-200 hover:shadow-sm"
   >
-    {@render pdfIcon()}
-  </span>
-</div>
+    <div
+      class={` relative flex w-full content-around gap-[1.25rem] p-[1.25rem] ${
+        hasSiblings ? 'h-full' : 'h-fit'
+      }`}
+    >
+      <span
+        class="p-xs text-md text-imperial-red max-h-fit self-center break-all rounded-lg bg-red-100 text-xs font-bold"
+      >
+        {@render pdfIcon()}
+      </span>
+      <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
+        <div class="gap-sm flex flex-col">
+          <div class="gap-2xs flex flex-wrap">
+            {#if isCategoryVisible && categoryLabel?.length > 0}
+              <span class="text-imperial-red text-lg">{categoryLabel}</span>
+            {/if}
+          </div>
+          <h5
+            class="break-word text-raisin-black font-sans-narrow group-hover:text-imperial-red font-semibold transition-all duration-200"
+          >
+            {language?.label}_{fileName}
+          </h5>
+          {#if isDesignationVisible && designations?.length > 0}
+            <div class="gap-2xs flex flex-wrap">
+              <span class="text-nickel text-sm"
+                >{designations.map((designation: any) => designation.name).join(', ')}</span
+              >
+            </div>
+          {/if}
+          {#if isProductCodeVisible && productCodes?.length > 0}
+            <div class="gap-2xs flex flex-wrap">
+              <span class="text-imperial-red text-sm"
+                >{productCodes.map((productCode: any) => productCode.name).join(', ')}</span
+              >
+            </div>
+          {/if}
+        </div>
+      </div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="23"
+        height="23"
+        viewBox="0 0 23 23"
+        fill="none"
+        class="h-6 w-6 min-w-[3rem] self-center"
+      >
+        <path
+          d="M1.00006 16.5629V17.8701C1.00006 18.9144 1.4149 19.9159 2.15333 20.6544C2.89175 21.3928 3.89327 21.8076 4.93756 21.8076H18.0626C19.1069 21.8076 20.1084 21.3928 20.8468 20.6544C21.5852 19.9159 22.0001 18.9144 22.0001 17.8701V16.5576M11.5001 1.46387V15.9014M11.5001 15.9014L16.0938 11.3076M11.5001 15.9014L6.90631 11.3076"
+          stroke="#231F20"
+          stroke-width="1.96875"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </div>
+  </a>
+{/if}

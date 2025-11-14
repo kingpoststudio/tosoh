@@ -10,6 +10,7 @@ declare global {
       Header?: {
         mainNavigationMenu?: HubSpotMenu;
       };
+
       SupportPortalContent: {
         force_list_view: boolean;
         access_level: 'Customer' | 'Distributor' | 'Internal';
@@ -46,6 +47,13 @@ declare global {
         search: Search;
         title: string;
         topic_filters: TopicFilters;
+        visible_fields: {
+          is_batch_number_visible: boolean;
+          is_category_visible: boolean;
+          is_designation_visible: boolean;
+          is_expiration_date_visible: boolean;
+          is_product_code_visible: boolean;
+        };
       };
       HemoglobinVariantsLibraryContent: {
         breadcrumbs: {

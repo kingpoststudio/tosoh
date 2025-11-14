@@ -1,4 +1,4 @@
-import { textField, booleanField, choiceField } from 'hs-fieldkit';
+import { textField, booleanField, choiceField, groupField } from 'hs-fieldkit';
 import {
   breadCrumbField,
   searchField,
@@ -18,6 +18,20 @@ const generateFields = () => {
       default: 'Customer',
     }),
     breadCrumbField,
+    groupField('visible_fields', 'Visible Fields', {
+      children: [
+        booleanField('is_category_visible', 'Is Category visible?'),
+        booleanField('is_product_code_visible', 'Is Product Code visible?'),
+        booleanField('is_designation_visible', 'Is Designation visible?'),
+        booleanField('is_batch_number_visible', 'Is Batch Number visible?', {
+          inline_help_text: 'Applicable only for CoA documents.',
+        }),
+        booleanField('is_expiration_date_visible', 'Is Expiration Date visible?', {
+          inline_help_text: 'Applicable only for CoA documents.',
+        }),
+      ],
+    }),
+
     textField('title', 'Title', {
       default: 'Tosoh Support Portal Docs',
     }),

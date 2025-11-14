@@ -1540,7 +1540,6 @@ if (IS_MOCK) {
     description:
       'Browse technical manuals, user guides, and official documentation to support your Tosoh products and services.',
     search: {
-      title: '',
       enable_search: true,
       hubdb_column_id: 'f',
       hubdb_table_id: 720920794,
@@ -1587,5 +1586,12 @@ if (IS_MOCK) {
       hubdb_table_id: 99968194,
     },
     type: 'module',
+    visible_fields: {
+      is_batch_number_visible: true,
+      is_category_visible: true,
+      is_designation_visible: true,
+      is_expiration_date_visible: true,
+      is_product_code_visible: true,
+    },
   };
 }
