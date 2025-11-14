@@ -47,13 +47,7 @@
     {/each}
   {:else if tableRows?.length > 0 && !isLoading}
     {#each tableRows as item}
-      {#if item?.values?.languages?.length > 1}
-        {#each item?.values?.languages as language}
-          <Card {viewAs} hasSiblings={tableRows?.length > 1} {item} {language}></Card>
-        {/each}
-      {:else}
-        <Card {viewAs} hasSiblings={tableRows?.length > 1} {item}></Card>
-      {/if}
+      <Card {viewAs} hasSiblings={tableRows?.length > 1} {item}></Card>
     {/each}
   {:else}
     <div class="p-sm">

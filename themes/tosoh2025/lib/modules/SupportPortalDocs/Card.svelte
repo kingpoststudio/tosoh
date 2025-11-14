@@ -1,11 +1,10 @@
 <script lang="ts">
+  import Select from '../../components/Select/Select.svelte';
   import { getUrlParam } from '../../utils/urlUtils';
-  let { item, hasSiblings, language }: { item: any; hasSiblings: boolean; language: any } =
-    $props();
+  let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
 
-  console.log(item);
-
-  let selectedLanguageFromUser = $state(getUrlParam('languages'));
+  let activeLanguage = $state(getUrlParam('languages') || item?.values?.languages?.[0]?.label);
+  let selectedCardLanguage = $state(activeLanguage);
 
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
@@ -23,7 +22,7 @@
   const isExpirationDateVisible = visibleFields?.is_expiration_date_visible;
 
   const constructDownloadUrl = () => {
-    return `${documentFolder}${language?.label}_${documentUrlPart}`;
+    return `${documentFolder}${selectedCardLanguage}_${documentUrlPart}.pdf`;
   };
 </script>
 
@@ -36,34 +35,40 @@
   </svg>
 {/snippet}
 
-{#if selectedLanguageFromUser === language?.label || !selectedLanguageFromUser}
-  <a
-    href={constructDownloadUrl()}
-    target="_blank"
-    class="border-border group rounded-2xl border transition-all duration-200 hover:shadow-sm"
-  >
-    <div
-      class={` relative flex w-full content-around gap-[1.25rem] p-[1.25rem] ${
-        hasSiblings ? 'h-full' : 'h-fit'
-      }`}
-    >
-      <span
-        class="p-xs text-md text-imperial-red max-h-fit self-center break-all rounded-lg bg-red-100 text-xs font-bold"
+<div
+  class={` border-border relative flex w-full content-around gap-[1.25rem] rounded-2xl  border p-[1.25rem] ${
+    hasSiblings ? 'h-full' : 'h-fit'
+  }`}
+>
+  <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
+    <div class="gap-sm flex flex-col">
+      <div class="gap-2xs flex flex-wrap">
+        {#if isCategoryVisible && categoryLabel?.length > 0}
+          <span class="text-imperial-red text-lg">{categoryLabel}</span>
+        {/if}
+      </div>
+      <h5
+        class="break-word text-raisin-black font-sans-narrow group-hover:text-imperial-red font-semibold transition-all duration-200"
       >
-        {@render pdfIcon()}
-      </span>
-      <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
-        <div class="gap-sm flex flex-col">
-          <div class="gap-2xs flex flex-wrap">
-            {#if isCategoryVisible && categoryLabel?.length > 0}
-              <span class="text-imperial-red text-lg">{categoryLabel}</span>
-            {/if}
-          </div>
-          <h5
-            class="break-word text-raisin-black font-sans-narrow group-hover:text-imperial-red font-semibold transition-all duration-200"
-          >
-            {language?.label}_{fileName}
-          </h5>
+        {fileName}
+      </h5>
+
+      {#if (isDesignationVisible && designations?.length > 0) || (isProductCodeVisible && productCodes?.length > 0) || (isBatchNumberVisible && batchNumber?.length > 0) || (isExpirationDateVisible && expirationDate?.length > 0)}
+        <div class="gap-3xs flex flex-col flex-wrap">
+          {#if isDesignationVisible && designations?.length > 0}
+            <div class="gap-2xs flex flex-wrap">
+              <span class="text-nickel text-sm"
+                >{designations.map((designation: any) => designation.name).join(', ')}</span
+              >
+            </div>
+          {/if}
+          {#if isProductCodeVisible && productCodes?.length > 0}
+            <div class="gap-2xs flex flex-wrap">
+              <span class="text-imperial-red text-sm"
+                >{productCodes.map((productCode: any) => productCode.name).join(', ')}</span
+              >
+            </div>
+          {/if}
           {#if (isBatchNumberVisible && batchNumber?.length > 0) || (isExpirationDateVisible && expirationDate?.length > 0)}
             <div class="gap-sm flex flex-row flex-wrap">
               {#if isBatchNumberVisible && batchNumber?.length > 0}
@@ -75,42 +80,47 @@
               {/if}
             </div>
           {/if}
-          {#if (isDesignationVisible && designations?.length > 0) || (isProductCodeVisible && productCodes?.length > 0)}
-            <div class="gap-3xs flex flex-col flex-wrap">
-              {#if isDesignationVisible && designations?.length > 0}
-                <div class="gap-2xs flex flex-wrap">
-                  <span class="text-nickel text-sm"
-                    >{designations.map((designation: any) => designation.name).join(', ')}</span
-                  >
-                </div>
-              {/if}
-              {#if isProductCodeVisible && productCodes?.length > 0}
-                <div class="gap-2xs flex flex-wrap">
-                  <span class="text-imperial-red text-sm"
-                    >{productCodes.map((productCode: any) => productCode.name).join(', ')}</span
-                  >
-                </div>
-              {/if}
-            </div>
-          {/if}
         </div>
+      {/if}
+      <div class="gap-sm flex w-full max-w-5xl flex-row">
+        <Select
+          options={item?.values?.languages?.length > 0 ? [...item?.values?.languages] : []}
+          name="languages"
+          label="Language"
+          labelPosition="left"
+          bind:value={selectedCardLanguage}
+          customClasses="w-full max-w-4xl"
+        ></Select>
+        <a
+          href={constructDownloadUrl()}
+          aria-label="Download Document"
+          class="button min-w-0! p-0! gap-sm group flex w-fit items-center justify-center rounded-lg text-center"
+          target="_blank"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="23"
+            height="23"
+            viewBox="0 0 23 23"
+            fill="none"
+            class="h-6 w-6 min-w-[3rem]"
+          >
+            <path
+              d="M1.00006 16.5629V17.8701C1.00006 18.9144 1.4149 19.9159 2.15333 20.6544C2.89175 21.3928 3.89327 21.8076 4.93756 21.8076H18.0626C19.1069 21.8076 20.1084 21.3928 20.8468 20.6544C21.5852 19.9159 22.0001 18.9144 22.0001 17.8701V16.5576M11.5001 1.46387V15.9014M11.5001 15.9014L16.0938 11.3076M11.5001 15.9014L6.90631 11.3076"
+              stroke="white"
+              stroke-width="1.96875"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </a>
       </div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="23"
-        height="23"
-        viewBox="0 0 23 23"
-        fill="none"
-        class="h-6 w-6 min-w-[3rem] self-center"
-      >
-        <path
-          d="M1.00006 16.5629V17.8701C1.00006 18.9144 1.4149 19.9159 2.15333 20.6544C2.89175 21.3928 3.89327 21.8076 4.93756 21.8076H18.0626C19.1069 21.8076 20.1084 21.3928 20.8468 20.6544C21.5852 19.9159 22.0001 18.9144 22.0001 17.8701V16.5576M11.5001 1.46387V15.9014M11.5001 15.9014L16.0938 11.3076M11.5001 15.9014L6.90631 11.3076"
-          stroke="#231F20"
-          stroke-width="1.96875"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        />
-      </svg>
     </div>
-  </a>
-{/if}
+  </div>
+
+  <span
+    class="top-base right-base p-xs text-md text-imperial-red absolute max-h-fit self-center break-all rounded-lg bg-red-100 text-xs font-bold"
+  >
+    {@render pdfIcon()}
+  </span>
+</div>

@@ -30,8 +30,8 @@ const generateFields = () => {
     groupField('sds_documents', 'Safety Data Sheets (SDS) Documents', {
       children: [columnLabelField('Safety Data Sheets (SDS)')],
     }),
-    groupField('coa_documents', 'Certificates of Analysis (CoA) Documents', {
-      children: [columnLabelField('Certificates of Analysis (CoA)')],
+    groupField('coa_documents', 'Certificates of Analysis (CofA) Documents', {
+      children: [columnLabelField('Certificates of Analysis (CofA)')],
     }),
     ...relatedDocumentsSharedFields,
   ];

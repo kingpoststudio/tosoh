@@ -35,14 +35,13 @@
 
   import { mockPortalDocsItems } from './mock';
 
-  export const SUPPORT_DOCS_PROPERTIES =
-    'f,document_folder,document_url_part,languages,designation,category,linked_product_codes';
+  const SUPPORT_DOCS_PROPERTIES =
+    'f,document_folder,document_url_part,languages,designation,category,linked_product_codes,expiration_date,batch_number';
   const supportPortalDocsContent = window?.Tosoh?.SupportPortalDocsContent;
 
   const topicFilters = supportPortalDocsContent?.topic_filters?.filters || [];
   const formId = 'support-portal-docs';
   let accessLevel = supportPortalDocsContent?.access_level || DEFAULT_ACCESS_LEVEL;
-
   let searchColumnId = parseSearchColumnId(supportPortalDocsContent?.search);
   const documentsTableId = getFiltersTableId(
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,

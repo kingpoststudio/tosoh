@@ -18,16 +18,17 @@ const generateFields = () => {
       default: 'Customer',
     }),
     breadCrumbField,
+
     groupField('visible_fields', 'Visible Fields', {
       children: [
         booleanField('is_category_visible', 'Is Category visible?'),
-        booleanField('is_product_code_visible', 'Is Product Code visible?'),
         booleanField('is_designation_visible', 'Is Designation visible?'),
+        booleanField('is_product_code_visible', 'Is Product Code visible?'),
         booleanField('is_batch_number_visible', 'Is Batch Number visible?', {
-          inline_help_text: 'Applicable only for CoA documents.',
+          inline_help_text: 'Applicable only for CofA documents.',
         }),
         booleanField('is_expiration_date_visible', 'Is Expiration Date visible?', {
-          inline_help_text: 'Applicable only for CoA documents.',
+          inline_help_text: 'Applicable only for CofA documents.',
         }),
       ],
     }),
