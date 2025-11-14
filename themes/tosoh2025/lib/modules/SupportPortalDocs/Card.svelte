@@ -7,14 +7,14 @@
 
   let selectedLanguageFromUser = $state(getUrlParam('languages'));
 
-  const languages = item?.values?.languages;
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
   const fileName = item?.values?.f;
   const categoryLabel = item?.values?.category?.label;
   const designations = item?.values?.designation;
   const productCodes = item?.values?.linked_product_codes;
-
+  const batchNumber = item?.values?.batch_number;
+  const expirationDate = item?.values?.expiration_date;
   const visibleFields = window?.Tosoh?.SupportPortalDocsContent?.visible_fields;
   const isCategoryVisible = visibleFields?.is_category_visible;
   const isDesignationVisible = visibleFields?.is_designation_visible;
@@ -64,18 +64,33 @@
           >
             {language?.label}_{fileName}
           </h5>
-          {#if isDesignationVisible && designations?.length > 0}
-            <div class="gap-2xs flex flex-wrap">
-              <span class="text-nickel text-sm"
-                >{designations.map((designation: any) => designation.name).join(', ')}</span
-              >
+          {#if (isBatchNumberVisible && batchNumber?.length > 0) || (isExpirationDateVisible && expirationDate?.length > 0)}
+            <div class="gap-sm flex flex-row flex-wrap">
+              {#if isBatchNumberVisible && batchNumber?.length > 0}
+                <span class="text-nickel text-sm"><b>Batch No.:</b> {batchNumber || 'N/A'}</span>
+              {/if}
+              {#if isExpirationDateVisible && expirationDate?.length > 0}
+                <span class="text-nickel text-sm"><b> Exp. Date:</b> {expirationDate || 'N/A'}</span
+                >
+              {/if}
             </div>
           {/if}
-          {#if isProductCodeVisible && productCodes?.length > 0}
-            <div class="gap-2xs flex flex-wrap">
-              <span class="text-imperial-red text-sm"
-                >{productCodes.map((productCode: any) => productCode.name).join(', ')}</span
-              >
+          {#if (isDesignationVisible && designations?.length > 0) || (isProductCodeVisible && productCodes?.length > 0)}
+            <div class="gap-3xs flex flex-col flex-wrap">
+              {#if isDesignationVisible && designations?.length > 0}
+                <div class="gap-2xs flex flex-wrap">
+                  <span class="text-nickel text-sm"
+                    >{designations.map((designation: any) => designation.name).join(', ')}</span
+                  >
+                </div>
+              {/if}
+              {#if isProductCodeVisible && productCodes?.length > 0}
+                <div class="gap-2xs flex flex-wrap">
+                  <span class="text-imperial-red text-sm"
+                    >{productCodes.map((productCode: any) => productCode.name).join(', ')}</span
+                  >
+                </div>
+              {/if}
             </div>
           {/if}
         </div>
