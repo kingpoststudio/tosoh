@@ -39,6 +39,18 @@ const generateFields = () => {
             imageField('image', 'Image', {
               required: true,
             }),
+
+            choiceField('bracket_color', 'Bracket Color', {
+              choices: [
+                ['fill-imperial-red', 'Imperial Red'],
+                ['fill-prussian-blue', 'Prussian Blue'],
+                ['fill-midnight-green', 'Midnight Green'],
+                ['fill-black-charcoal', 'Black Charcoal'],
+              ],
+              default: 'fill-imperial-red',
+              required: true,
+            }),
+
             choiceField('size', 'Size', {
               choices: [
                 ['small', 'Small'],

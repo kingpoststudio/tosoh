@@ -23,10 +23,11 @@
 
           {% set wrapper_size = lab_button.size == 'small' ? 'h-[6rem]' : lab_button.size == 'medium' ? 'h-[7rem]' : 'h-[9rem]' %}
           {% set bracket_size = lab_button.size == 'small' ? 'h-[7.75rem]' : lab_button.size == 'medium' ? 'h-[9rem]' : 'h-[11.5rem]' %}
+          {% set bracket_color = lab_button.bracket_color ? lab_button.bracket_color : 'fill-imperial-red' %}
 
           <div class="group {{ wrapper_size }} relative m-auto block aspect-square">
             <div
-              class="fill-imperial-red {{ bracket_size }} pointer-events-none absolute inset-0 top-[50%] left-[50%] flex aspect-square translate-x-[-50%] translate-y-[-50%] items-center justify-center transition-all duration-600 group-hover:scale-50 group-hover:rotate-180">
+              class="{{ bracket_color }} {{ bracket_size }} pointer-events-none absolute inset-0 top-[50%] left-[50%] flex aspect-square translate-x-[-50%] translate-y-[-50%] items-center justify-center transition-all duration-600 group-hover:scale-50 group-hover:rotate-180">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.22 187.39">
                 <path
                   class="bracket"
