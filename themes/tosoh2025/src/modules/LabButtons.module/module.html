@@ -38,16 +38,18 @@
             </div>
 
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="aspect-square h-full overflow-hidden rounded-full">
+              <div
+                class="aspect-square h-full overflow-hidden rounded-full transition-all duration-600 group-hover:scale-110">
                 <img
                   src="{{ lab_button.image.src }}"
                   alt="{{ lab_button.image.alt }}"
+                  width="200"
                   class="h-full w-full object-cover" />
               </div>
             </div>
 
             <div
-              class="{{ wrapper_size }} absolute bottom-[50%] left-[50%] aspect-square translate-x-[-50%] translate-y-[50%] rounded-full bg-black opacity-20"></div>
+              class="{{ wrapper_size }} absolute bottom-[50%] left-[50%] aspect-square translate-x-[-50%] translate-y-[50%] rounded-full bg-black opacity-20 transition-all duration-600 group-hover:scale-110"></div>
             <p
               class="absolute top-[50%] left-[50%] w-fit translate-x-[-50%] translate-y-[-50%] text-center font-semibold text-white">
               {{ lab_button.button_label }}
