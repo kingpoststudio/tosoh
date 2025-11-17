@@ -24,7 +24,7 @@
     IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
   } from '../../utils/constants';
-  import { getPaginationParams } from '../../utils/urlUtils';
+  import { getPaginationParams, setSearchParams } from '../../utils/urlUtils';
   import {
     constructFilterParams,
     constructRangePmFilters,
@@ -58,6 +58,7 @@
   let hasError = $state(false);
   let isLoading = $state(false);
 
+  const defaultLanguage = supportPortalDocsContent?.default_language;
   const viewAs = 'list';
 
   const constructBody = () => {
@@ -99,6 +100,20 @@
     hasError = false;
     fetchData();
   };
+
+  const setDefaultLanguage = () => {
+    if (defaultLanguage) {
+      const params = new URLSearchParams(window.location.search);
+
+      if (!params.has('languages') && !params?.has(searchColumnId)) {
+        setSearchParams({
+          languages: defaultLanguage,
+        });
+      }
+    }
+  };
+
+  setDefaultLanguage();
 
   onMount(() => {
     fetchData();

@@ -44,6 +44,7 @@ declare global {
           };
         }[];
         description: string;
+        default_language: string;
         search: Search;
         title: string;
         topic_filters: TopicFilters;

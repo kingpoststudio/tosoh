@@ -1539,6 +1539,7 @@ if (IS_MOCK) {
     breadcrumbs: [],
     description:
       'Browse technical manuals, user guides, and official documentation to support your Tosoh products and services.',
+    default_language: 'EN',
     search: {
       enable_search: true,
       hubdb_column_id: 'f',

@@ -18,7 +18,11 @@ const generateFields = () => {
       default: 'Customer',
     }),
     breadCrumbField,
-
+    textField('default_language', 'Default Language', {
+      default: 'EN',
+      inline_help_text:
+        'Default language to display the documents in. Make sure the value matches a value from the "LANGUAGES" column in the HubDB table.',
+    }),
     groupField('visible_fields', 'Visible Fields', {
       children: [
         booleanField('is_category_visible', 'Is Category visible?'),
