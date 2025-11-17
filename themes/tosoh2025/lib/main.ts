@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     prevButtonNode?.addEventListener('click', () => embla.scrollPrev(), false);
     nextButtonNode?.addEventListener('click', () => embla.scrollNext(), false);
 
+    embla.on('init', () => controlScroll(embla, prevButtonNode, nextButtonNode));
+    embla.on('scroll', () => controlScroll(embla, prevButtonNode, nextButtonNode));
+    embla.on('settle', () => controlScroll(embla, prevButtonNode, nextButtonNode));
     embla.on('slidesInView', () => controlScroll(embla, prevButtonNode, nextButtonNode));
 
     function controlScroll(
