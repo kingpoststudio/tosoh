@@ -124,6 +124,14 @@ export const searchField = (extraFields: any = []) => {
   });
 };
 
+export const limitedSizeChoices = [
+  ['xs', 'Extra-small'],
+  ['sm', 'Small'],
+  ['base', 'Base'],
+  ['md', 'Medium'],
+  ['lg', 'Large'],
+];
+
 export const sizeChoices = [
   ['auto', 'Auto'],
   ['0', 'None'],
@@ -307,6 +315,49 @@ export const presetPaddingFieldsBase = [
   }),
   choiceField('pl_desktop', 'Left padding (desktop)', {
     choices: constructFieldValues('md:pl', sizeChoices),
+    default: 'md:pl-base',
+    display_width: 'half_width',
+  }),
+];
+
+export const presetPaddingFieldsLimited = [
+  choiceField('pt_mobile', 'Top padding (mobile)', {
+    choices: constructFieldValues('pt', limitedSizeChoices),
+    default: 'pt-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pt_desktop', 'Top padding (desktop)', {
+    choices: constructFieldValues('md:pt', limitedSizeChoices),
+    default: 'md:pt-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pr_mobile', 'Right padding (mobile)', {
+    choices: constructFieldValues('pr', limitedSizeChoices),
+    default: 'pr-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pr_desktop', 'Right padding (desktop)', {
+    choices: constructFieldValues('md:pr', limitedSizeChoices),
+    default: 'md:pr-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pb_mobile', 'Bottom padding (mobile)', {
+    choices: constructFieldValues('pb', limitedSizeChoices),
+    default: 'pb-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pb_desktop', 'Bottom padding (desktop)', {
+    choices: constructFieldValues('md:pb', limitedSizeChoices),
+    default: 'md:pb-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pl_mobile', 'Left padding (mobile)', {
+    choices: constructFieldValues('pl', limitedSizeChoices),
+    default: 'pl-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pl_desktop', 'Left padding (desktop)', {
+    choices: constructFieldValues('md:pl', limitedSizeChoices),
     default: 'md:pl-base',
     display_width: 'half_width',
   }),
