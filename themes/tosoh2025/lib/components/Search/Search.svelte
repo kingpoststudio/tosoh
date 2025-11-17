@@ -30,45 +30,60 @@
 
   const {
     hubdb_table_id: searchTableId,
-    hubdb_column_id: searchColumnId,
+    hubdb_column_ids: searchColumnIds = [],
     title,
     placeholder,
     typeahead_enabled: typeaheadEnabled,
     enable_search: isSearchEnabled,
   } = searchFromFields || {};
 
-  const activeFilter = new URLSearchParams(window.location.search)?.get(searchColumnId as string);
+  // Extract column ID strings from the array of objects
+  const columnIds = searchColumnIds?.map((col) => col.hubdb_column_id) || [];
 
-  let matches: string[] = $state([]);
+  // Check if any of the column IDs have a value in the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const activeFilter = columnIds.find((colId) => urlParams.get(colId))
+    ? urlParams.get(columnIds.find((colId) => urlParams.get(colId)) as string)
+    : '';
+  const activeColumnId = columnIds.find((colId) => urlParams.get(colId)) || '';
+
+  interface MatchResult {
+    value: string;
+    columnId: string;
+  }
+
+  let matches: MatchResult[] = $state([]);
   let isLoading = $state(false);
   let showDropdown = $state(false);
   let mounted = $state(false);
   let searchValue = $state(activeFilter || '');
 
-  const handleFetch = (searchTerm: string) => {
+  const handleFetch = (searchTerm: string, columnId: string) => {
     showDropdown = false;
     searchValue = searchTerm;
 
     onReset?.(() => {
-      setSearchParams({ [searchColumnId]: searchTerm });
+      setSearchParams({ [columnId]: searchTerm });
       updateFormEvent(formId as string);
     });
   };
 
   const onSubmit = (e: Event) => {
-    if (e?.target && searchColumnId) {
+    if (e?.target && columnIds.length > 0) {
       const formElement = e.target as HTMLFormElement;
-      const searchTerm = new FormData(formElement).get(searchColumnId) as string;
+      // Use the first column ID as the default for manual search submission
+      const defaultColumnId = activeColumnId || columnIds[0];
+      const searchTerm = new FormData(formElement).get(defaultColumnId) as string;
 
       if (searchTerm) {
-        handleFetch(searchTerm);
+        handleFetch(searchTerm, defaultColumnId);
       }
     }
   };
 
-  const onClick = (searchTerm: string) => {
-    if (searchTerm) {
-      handleFetch(searchTerm);
+  const onClick = (match: MatchResult) => {
+    if (match?.value && match?.columnId) {
+      handleFetch(match.value, match.columnId);
     }
   };
 
@@ -93,7 +108,7 @@
             accessLevel: accessLevel,
             term: searchString,
             tableId: USE_HARDCODED_IDS ? manualTableId : searchTableId,
-            columnId: searchColumnId,
+            columnIds: columnIds,
             isActivated: isActivatedQuery,
           }),
         }
@@ -101,9 +116,9 @@
       const data = await response.json();
 
       if (!data?.error) {
-        const { matchingTerms } = data;
-        matches = [...matchingTerms];
-        showDropdown = matchingTerms.length > 0;
+        const { matches: matchResults } = data;
+        matches = matchResults;
+        showDropdown = matches.length > 0;
       }
 
       if (data?.error) {
@@ -170,7 +185,7 @@
       <div class="gap-sm flex flex-col">
         {#if title}
           <div class="gap-sm flex items-center">
-            <label for={searchColumnId} class=" text-xl font-black">{title}</label>
+            <label for={columnIds[0]} class=" text-xl font-black">{title}</label>
           </div>
         {/if}
         <div
@@ -179,7 +194,7 @@
           <input
             bind:value={searchValue}
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
-            name={searchColumnId}
+            name={columnIds[0]}
             class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50"
             placeholder={placeholder || 'Search here...'}
             {disabled}
@@ -210,7 +225,10 @@
                   onClick(match);
                 }}
               >
-                {@html match}
+                <div class="flex flex-col gap-1">
+                  <span>{@html match.value}</span>
+                  <span class="text-xs lowercase text-gray-500">{match.columnId}</span>
+                </div>
               </button>
             {/if}
           {/each}

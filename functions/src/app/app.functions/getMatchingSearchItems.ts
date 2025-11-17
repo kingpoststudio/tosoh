@@ -1,84 +1,293 @@
+// Types
+interface FetchMatchesRequest {
+  term: string;
+  tableId: string;
+  columnIds: string[];
+  accessLevel?: string;
+  isActivated?: boolean;
+}
+
+interface MatchResult {
+  value: string;
+  columnId: string;
+}
+
+interface HubDBRow {
+  values: Record<string, unknown>;
+}
+
+interface HubDBResponse {
+  results: HubDBRow[];
+}
+
+interface ColumnMetadata {
+  id: string;
+  name: string;
+  type: "TEXT" | "MULTISELECT" | "SELECT" | "FOREIGN_ID";
+}
+
+interface TableSchema {
+  columns: ColumnMetadata[];
+}
+
+// Constants
 const HS_API_URL = "https://api.hubapi.com/cms/v3";
 
+const QUERY_PARAMS = {
+  VISIBILITY: "visibility__in",
+  DEACTIVATE: "deactivate__eq",
+  PROPERTIES: "properties",
+} as const;
+
+const HTTP_STATUS = {
+  OK: 200,
+  INTERNAL_SERVER_ERROR: 500,
+} as const;
+
+// Type guards
+function isValidRequestBody(body: unknown): body is FetchMatchesRequest {
+  if (!body || typeof body !== "object") return false;
+
+  const { term, tableId, columnIds } = body as Partial<FetchMatchesRequest>;
+
+  return (
+    typeof term === "string" &&
+    typeof tableId === "string" &&
+    Array.isArray(columnIds) &&
+    columnIds.length > 0 &&
+    columnIds.every((id) => typeof id === "string")
+  );
+}
+
+function isValidHubDBResponse(data: unknown): data is HubDBResponse {
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    "results" in data &&
+    Array.isArray((data as HubDBResponse).results)
+  );
+}
+
+// Pure utility functions
+function extractSearchableText(value: unknown, columnType: string): string[] {
+  if (!value) return [];
+
+  switch (columnType) {
+    case "FOREIGN_ID":
+    case "MULTISELECT":
+      // Array of {id, name, type} objects
+      if (Array.isArray(value)) {
+        return value.map((item) => item?.name || "").filter(Boolean);
+      }
+      return [];
+
+    case "SELECT":
+      // Single {id, name, label, type} object
+      return [(value as any)?.name || (value as any)?.label || ""].filter(
+        Boolean
+      );
+
+    default:
+      // TEXT
+      if (typeof value !== "string") return [];
+      return value.split(",").map((s) => s.trim());
+  }
+}
+
+function findMatchesInValue(
+  value: unknown,
+  searchTerm: string,
+  columnType: string
+): string[] {
+  const searchableTexts = extractSearchableText(value, columnType);
+  return searchableTexts.filter((text) =>
+    text.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+}
+
 function findMatchesInRows(
-  rows: any[],
-  term: string | string[],
-  columnId: string | string[]
-) {
-  const matches: string[] = [];
+  rows: HubDBRow[],
+  searchTerm: string,
+  columnIds: string[],
+  columnMetadata: Map<string, ColumnMetadata>
+): MatchResult[] {
+  const matchesMap = new Map<string, MatchResult>();
 
   rows.forEach((row) => {
-    if (!row.values[columnId as string]) return;
+    columnIds.forEach((columnId) => {
+      const columnValue = row.values[columnId];
+      if (!columnValue) return;
 
-    row.values[columnId as string].split(",").forEach((value: string) => {
-      if (value.toLowerCase().includes((term as string).toLowerCase())) {
-        matches.push(value.trim());
-      }
+      const columnType = columnMetadata.get(columnId)?.type || "TEXT";
+      const valueMatches = findMatchesInValue(
+        columnValue,
+        searchTerm,
+        columnType
+      );
+
+      valueMatches.forEach((match) => {
+        // Create a unique key combining value and columnId
+        const key = `${match}::${columnId}`;
+        if (!matchesMap.has(key)) {
+          matchesMap.set(key, {
+            value: match,
+            columnId: columnId,
+          });
+        }
+      });
     });
   });
 
-  return [...new Set(matches)].sort();
+  return Array.from(matchesMap.values());
 }
 
-async function fetchPartialMatchesByTerm(req: any) {
-  const body = req && req.body ? req.body : {};
-  const { term, tableId, columnId, accessLevel, isActivated } = body;
+function buildQueryParams(request: FetchMatchesRequest): URLSearchParams {
+  const params = new URLSearchParams();
+  const { columnIds, isActivated, accessLevel } = request;
 
-  if (!term || !tableId || !columnId)
-    throw new Error(
-      "Make sure to include term, tableId, columnId in request body"
-    );
+  columnIds.forEach((columnId) => {
+    params.append(QUERY_PARAMS.PROPERTIES, columnId);
+  });
 
-  const renderAccessLevel = () => {
-    if (accessLevel && typeof accessLevel === "string") {
-      return `&visibility__in=${accessLevel}`;
-    } else {
-      return "";
-    }
-  };
+  if (isActivated) {
+    params.append(QUERY_PARAMS.DEACTIVATE, "false");
+  }
 
-  console.log(accessLevel, "accessLevel");
+  if (accessLevel && typeof accessLevel === "string") {
+    params.append(QUERY_PARAMS.VISIBILITY, accessLevel);
+  }
 
-  const deactivateQuery = isActivated ? "&deactivate__eq=false" : "";
+  return params;
+}
 
-  const apiUrl = `${HS_API_URL}/hubdb/tables/${tableId}/rows?properties=${columnId}${deactivateQuery}${renderAccessLevel()}`;
+function buildApiUrl(tableId: string, queryParams: URLSearchParams): string {
+  return `${HS_API_URL}/hubdb/tables/${tableId}/rows?${queryParams.toString()}`;
+}
 
-  console.log(apiUrl, "apiUrl");
-
-  const res = await fetch(apiUrl, {
+// API functions for schema
+async function fetchTableSchema(tableId: string): Promise<ColumnMetadata[]> {
+  const response = await fetch(`${HS_API_URL}/hubdb/tables/${tableId}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
     },
   });
 
-  if (!res.ok) {
-    throw new Error(`Failed to fetch: ${res.status} ${res.statusText}`);
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch table schema: ${response.status} ${response.statusText}`
+    );
   }
 
-  const data = (await res.json()) as any;
+  const data = await response.json();
+  return (data as TableSchema)?.columns || [];
+}
 
-  const rows = data?.results || [];
-  if (!Array.isArray(rows)) {
+function validateRequestBody(body: unknown): FetchMatchesRequest {
+  if (!isValidRequestBody(body)) {
+    const errors: string[] = [];
+    const bodyObj = (body as Partial<FetchMatchesRequest>) || {};
+
+    // Check if body exists and is an object
+    if (!body || typeof body !== "object") {
+      throw new Error("Request body must be a valid object");
+    }
+
+    // Validate term
+    if (!bodyObj.term) {
+      errors.push("term is required");
+    } else if (typeof bodyObj.term !== "string") {
+      errors.push("term must be a string");
+    }
+
+    // Validate tableId
+    if (!bodyObj.tableId) {
+      errors.push("tableId is required");
+    } else if (typeof bodyObj.tableId !== "string") {
+      errors.push("tableId must be a string");
+    }
+
+    // Validate columnIds
+    if (!bodyObj.columnIds) {
+      errors.push("columnIds is required");
+    } else if (!Array.isArray(bodyObj.columnIds)) {
+      errors.push("columnIds must be an array");
+    } else if (bodyObj.columnIds.length === 0) {
+      errors.push("columnIds must not be empty");
+    } else if (!bodyObj.columnIds.every((id) => typeof id === "string")) {
+      errors.push("all columnIds must be strings");
+    }
+
+    throw new Error(`Invalid request body: ${errors.join(", ")}`);
+  }
+
+  return body;
+}
+
+// API functions
+async function fetchHubDBRows(apiUrl: string): Promise<HubDBRow[]> {
+  const response = await fetch(apiUrl, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch HubDB data: ${response.status} ${response.statusText}`
+    );
+  }
+
+  const data = await response.json();
+
+  if (!isValidHubDBResponse(data)) {
     return [];
   }
 
-  console.log(data, "data");
-  const matches = findMatchesInRows(rows, term, columnId);
-  return matches;
+  return data.results;
+}
+
+async function fetchPartialMatchesByTerm(
+  request: FetchMatchesRequest
+): Promise<MatchResult[]> {
+  const { tableId, term, columnIds } = request;
+
+  // Fetch table schema to get column types
+  const columns = await fetchTableSchema(tableId);
+  const columnMetadata = new Map(columns.map((col) => [col.name, col]));
+
+  const queryParams = buildQueryParams(request);
+  const apiUrl = buildApiUrl(tableId, queryParams);
+
+  const rows = await fetchHubDBRows(apiUrl);
+  const results = findMatchesInRows(rows, term, columnIds, columnMetadata);
+
+  // Sort by value first, then by columnId for consistent ordering
+  return results.sort((a, b) => {
+    const valueCompare = a.value.localeCompare(b.value);
+    if (valueCompare !== 0) return valueCompare;
+    return a.columnId.localeCompare(b.columnId);
+  });
 }
 
 exports.main = async (req: any) => {
   try {
-    const matchingTerms = await fetchPartialMatchesByTerm(req);
+    const body = req?.body || {};
+    const validatedRequest = validateRequestBody(body);
+    const matches = await fetchPartialMatchesByTerm(validatedRequest);
+
     return {
-      statusCode: 200,
-      body: JSON.stringify({ matchingTerms }),
+      statusCode: HTTP_STATUS.OK,
+      body: JSON.stringify({ matches }),
     };
-  } catch (err: any) {
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+
     return {
-      statusCode: 500,
-      body: JSON.stringify({ error: err.message }),
+      statusCode: HTTP_STATUS.INTERNAL_SERVER_ERROR,
+      body: JSON.stringify({ error: errorMessage }),
     };
   }
 };

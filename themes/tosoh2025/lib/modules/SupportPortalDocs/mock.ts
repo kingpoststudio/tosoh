@@ -1542,7 +1542,7 @@ if (IS_MOCK) {
     default_language: 'EN',
     search: {
       enable_search: true,
-      hubdb_column_id: 'f',
+      hubdb_column_ids: ['f'],
       hubdb_table_id: 720920794,
       is_access_level_filter_enabled: true,
       placeholder: 'Search',

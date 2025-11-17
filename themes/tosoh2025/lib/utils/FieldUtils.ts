@@ -103,11 +103,18 @@ export const searchField = (extraFields: any = []) => {
         inline_help_text: 'Defines the hubDB table that will be used to search against.',
         ...searchVisibilityRule,
       }),
-      textField('hubdb_column_id', 'HubDB Column ID', {
-        inline_help_text: 'Defines the hubDB column id that will be used to search against.',
-        default: 'search_term',
-        required: true,
-        ...searchVisibilityRule,
+      groupField('hubdb_column_ids', 'HubDB Column IDs', {
+        children: [
+          textField('hubdb_column_id', 'HubDB Column ID', {
+            inline_help_text: 'Defines the hubDB column id that will be used to search against.',
+            required: true,
+            ...searchVisibilityRule,
+          }),
+        ],
+        occurrence: {
+          min: 1,
+          max: null,
+        },
       }),
       textField('title', 'Title', { ...searchVisibilityRule }),
       textField('placeholder', 'Placeholder', {
