@@ -135,9 +135,15 @@ export const removeHtmlTags = (value: string) => {
   return value?.replace(/<[^>]+>/g, ' ');
 };
 
-export const scrollToTop = (behavior: ScrollBehavior = 'smooth') => {
+export const scrollToTop = (behavior: ScrollBehavior = 'smooth', idToScrollToTop?: string) => {
+  const elementToScrollTo = idToScrollToTop ? document.getElementById(idToScrollToTop) : null;
+
   if (typeof window !== 'undefined') {
-    window.scrollTo({ top: 120, behavior });
+    if (elementToScrollTo) {
+      elementToScrollTo.scrollIntoView({ block: 'start', inline: 'nearest', behavior });
+    } else {
+      window.scrollTo({ top: 120, behavior });
+    }
   }
 };
 

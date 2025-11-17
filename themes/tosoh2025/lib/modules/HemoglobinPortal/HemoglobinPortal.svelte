@@ -118,6 +118,7 @@
 {/if}
 
 <div
+  id={formId}
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
   {#if topicFilters?.length > 0 || searchEnabled}
@@ -133,7 +134,8 @@
       <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
 
       <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData}></PaginationWithLimit>
+        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
+        ></PaginationWithLimit>
       </div>
     {/if}
   </div>

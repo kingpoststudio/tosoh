@@ -10,7 +10,7 @@
   import { setSearchParams } from '../../utils/urlUtils';
   import { scrollToTop } from '../../utils/utils';
 
-  let { totalItems, fetchData } = $props();
+  let { totalItems, fetchData, idToScrollToTop } = $props();
 
   const params = new URLSearchParams(window.location.search);
   const limitOptions = [12, 24, 48];
@@ -56,7 +56,7 @@
     RESET_PAGINATION_AND_FETCH_DATA_EVENT,
     async () => {
       resetPagination();
-      scrollToTop();
+      scrollToTop('smooth', idToScrollToTop);
       await fetchData();
     }
   );
@@ -71,7 +71,7 @@
       });
 
       fetchData();
-      scrollToTop();
+      scrollToTop('smooth', idToScrollToTop);
     }
   };
 
@@ -84,7 +84,7 @@
         pagination: nextPagination?.toString(),
       });
       fetchData();
-      scrollToTop();
+      scrollToTop('smooth', idToScrollToTop);
     }
   };
 
@@ -110,7 +110,7 @@
           onLimitChange(parseInt(target.value));
           resetPagination();
           fetchData();
-          scrollToTop();
+          scrollToTop('smooth', idToScrollToTop);
         }}
         name="limit"
         class="bg-ghost-white p-xs rounded border border-slate-200"
@@ -135,7 +135,7 @@
             let target = event.target as HTMLSelectElement;
             onPaginationChange(parseInt(target.value));
             fetchData();
-            scrollToTop();
+            scrollToTop('smooth', idToScrollToTop);
           }}
         >
           {#each pagesArray as page}
