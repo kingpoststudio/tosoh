@@ -227,7 +227,6 @@
               >
                 <div class="flex flex-col gap-1">
                   <span>{@html match.value}</span>
-                  <span class="text-xs lowercase text-gray-500">{match.columnId}</span>
                 </div>
               </button>
             {/if}
