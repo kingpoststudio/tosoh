@@ -67,12 +67,11 @@
         bind:value
       >
         <option
-          value=""
+          value="none"
           class="text-default disabled:cursor-not-allowed disabled:opacity-50"
-          selected={activeFilter === '' || !activeFilter}
+          selected={activeFilter === 'none' || !activeFilter}
           >{placeholder ? placeholder : 'All'}</option
         >
-
         {#if (options?.length === 0 || !options) && activeFilter}
           <option value={activeFilter} selected disabled hidden class="text-imperial-red"
             >{activeFilter}</option

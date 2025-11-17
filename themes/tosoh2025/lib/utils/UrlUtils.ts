@@ -9,7 +9,11 @@ export const deleteMultipleSearchParams = (paramNames: string[]) => {
 export const setSearchParams = (params: Record<string, string>) => {
   const url = new URL(window.location.href);
   Object.entries(params).forEach(([key, value]) => {
-    url.searchParams.set(key, value);
+    if (value === 'none') {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
   });
   window.history.replaceState({}, '', url.toString());
 };

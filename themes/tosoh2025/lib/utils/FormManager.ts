@@ -47,9 +47,13 @@ export const updateUrlWithFormData = (
       const elName = el.getAttribute('name') as string;
       if (!elName) return acc;
 
-      if (elName && !acc[elName]) acc[elName] = Array.from(formData.getAll(elName)) as string[];
-      acc[elName] = acc[elName]?.filter((value: string) => value) || [];
+      if (elName && !acc[elName]) {
+        const values = Array.from(formData.getAll(elName)) as string[];
+        // Filter out empty values and 'none' (which represents "All" or no selection)
+        acc[elName] = values.filter((value: string) => value && value !== 'none');
+      }
 
+      console.log(acc, 'acc');
       return acc;
     },
     {} as Record<string, string[]>
@@ -153,17 +157,6 @@ export function createFormManager(
 ): FormManagerInstance {
   const { onSubmit, onReset, onChange, triggerType = 'submit', updateUrl = true } = options;
 
-  const setFormValuesToParams = (reset?: boolean, input?: string) => {
-    const formData = new FormData(form);
-    if (updateUrl) {
-      updateUrlWithFormData(formData, form, { reset, input });
-    }
-
-    if (reset && onReset) {
-      onReset();
-    }
-  };
-
   let debounceTimeouts: Map<Element, Timer> = new Map();
   let eventListeners: Map<Element, { type: string; handler: EventListener }[]> = new Map();
 
@@ -193,7 +186,6 @@ export function createFormManager(
       Array.from(form.elements).forEach((element) => {
         if (element.tagName === 'SELECT') {
           (element as HTMLSelectElement).onchange = (e: Event) => {
-            setFormValuesToParams();
             if (onChange) onChange(e);
           };
         }
@@ -207,11 +199,9 @@ export function createFormManager(
 
             if (hasDebounce) {
               debounceInput(element, debounceDelay, () => {
-                setFormValuesToParams();
                 if (onChange) onChange(e);
               });
             } else {
-              setFormValuesToParams();
               if (onChange) onChange(e);
             }
           };
@@ -224,7 +214,6 @@ export function createFormManager(
             (element as HTMLInputElement).type === 'radio')
         ) {
           const changeHandler = (e: Event) => {
-            setFormValuesToParams();
             if (onChange) onChange(e);
           };
           addEventListenerWithTracking(element, 'change', changeHandler);
@@ -235,7 +224,6 @@ export function createFormManager(
     if (triggerType === 'submit') {
       form.onsubmit = (e) => {
         e.preventDefault();
-        setFormValuesToParams();
 
         if (onSubmit) {
           onSubmit(e);
@@ -261,7 +249,9 @@ export function createFormManager(
   };
 
   const resetAction = () => {
-    setFormValuesToParams(true);
+    if (onReset) {
+      onReset();
+    }
   };
 
   const destroy = () => {
@@ -291,6 +281,13 @@ export function createFormManager(
     // Clear debounce timeouts
     debounceTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
     debounceTimeouts.clear();
+  };
+
+  const setFormValuesToParams = (reset?: boolean, input?: string) => {
+    if (updateUrl) {
+      const formData = new FormData(form);
+      updateUrlWithFormData(formData, form, { reset, input });
+    }
   };
 
   selectActiveFormValues();
