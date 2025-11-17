@@ -1,4 +1,5 @@
 {
+    "icon": "ellipsis-h",
     "label": "Breadcrumbs",
     "external_js": [],
     "global": false,

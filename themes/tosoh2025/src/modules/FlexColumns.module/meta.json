@@ -1,4 +1,5 @@
 {
+    "icon": "columns",
     "label": "Flex Columns",
     "external_js": [],
     "global": false,

@@ -1,4 +1,5 @@
 {
+    "icon": "life-ring",
     "global": false,
     "host_template_types": [
       "PAGE"

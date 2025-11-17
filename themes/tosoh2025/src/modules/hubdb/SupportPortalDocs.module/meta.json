@@ -1,4 +1,5 @@
 {
+    "icon": "question-circle",
     "global": false,
     "host_template_types": [
       "PAGE"

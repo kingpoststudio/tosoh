@@ -1,4 +1,5 @@
 {
+  "icon": "arrow-down",
   "label": "Footer (global)",
   "external_js": [],
   "global": true,

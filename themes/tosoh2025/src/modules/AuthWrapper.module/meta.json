@@ -1,4 +1,5 @@
 {
+    "icon": "lock",
     "label": "Auth Wrapper",
     "external_js": [],
     "global": false,

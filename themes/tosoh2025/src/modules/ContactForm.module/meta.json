@@ -1,4 +1,5 @@
 {
+    "icon": "envelope",
     "label": "Contact Form",
     "external_js": [],
     "global": false,
