@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tosoh Tailwind Configuration Demo</title>
+    <title>Tosoh Components Demo</title>
 
     <script type="module" src="lib/components/Header/mock.ts"></script>
-    <script type="module" src="lib/modules/SupportPortal/mock.ts"></script>
     <script type="module" src="lib/main.ts"></script>
     <link rel="stylesheet" href="lib/styles/main.css" />
   </head>
 
   <body>
+    <!-- ============================================ -->
+    <!-- HEADER COMPONENT -->
+    <!-- ============================================ -->
     <tosoh-header>
       <img
         slot="logo"
@@ -19,58 +21,38 @@
         alt="Tosoh Diagnostics Logo"
         class="md:py-xs h-18 w-auto md:h-20" />
       <div slot="cta" class="gap-sm md:pb-2xs flex flex-row">
-        <a class="button">Contact</a>
-        <a class="button outlined">Login</a>
+        <a class="button" href="#contact">Contact</a>
+        <a class="button outlined" href="#login">Login</a>
       </div>
       <div slot="aux" class="gap-sm flex text-sm uppercase">
-        <a href="#">Help</a>
-        <a href="#">Settings</a>
+        <a href="#help">Help</a>
+        <a href="#settings">Settings</a>
       </div>
     </tosoh-header>
 
-    {# WEBINAR HERO #} {# Webinar Listings #}
-    <div class="mt-4xl"></div>
-    <tosoh-webinar-listings></tosoh-webinar-listings>
-    {# /Webinar Listings #}
-
-    <div
-      class="p-lg gap-xl max-w-max-page relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full flex-col items-center justify-between overflow-hidden lg:min-h-[40rem] lg:flex-row">
+    <!-- ============================================ -->
+    <!-- SUB HEADER COMPONENT -->
+    <!-- ============================================ -->
+    <tosoh-sub-header class="subheader">
       <img
-        src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/971742371c0b4bb7f341af60e98f3399b98a2f67.jpg"
-        class="absolute top-0 left-0 h-full w-full object-cover" />
-      <div class="absolute top-0 left-0 h-full w-full bg-[#01151EA8] object-cover"></div>
-
-      <div class="gap-md relative flex flex-col">
-        <p class="text-xl font-bold text-white md:text-2xl">3:00 PM – 4:30 PM BST</p>
-        <h1 class="text-3xl font-bold text-white md:text-6xl">
-          Potential clinical applications of KL-6 in interstitial and rare lung diseases
-        </h1>
-        <div class="gap-md flex flex-col lg:flex-row">
-          <div class="gap-base flex max-w-[24rem] items-center">
-            <img
-              src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/c50aecc3d639d993708863451867f2935a00537d.jpg"
-              alt=""
-              class="aspect-square w-16 rounded-full object-cover lg:w-20" />
-            <div class="gap-2xs flex flex-col">
-              <h5 class="text-xl font-bold text-white md:text-3xl">Dr. Sukhjinder Marwah</h5>
-              <span class="text-lg font-bold text-[#C7C7C7] md:text-2xl">Sandwell General Hospital</span>
-            </div>
-          </div>
-        </div>
+        slot="logo"
+        src="https://www.pngkey.com/png/full/641-6419535_tosoh-com-tosoh-bioscience.png"
+        alt="Tosoh Diagnostics Logo"
+        class="md:py-xs h-18 w-auto md:h-20" />
+      <div slot="cta" class="gap-sm md:pb-2xs flex flex-row">
+        <a class="button" href="#contact">Contact</a>
+        <a class="button outlined" href="#login">Login</a>
       </div>
-      <div
-        class="p-base gap-sm relative flex w-full flex-col items-center justify-center rounded-lg bg-white sm:max-w-[25rem]">
-        <a class="button w-full text-center">Register Now</a>
-        <span class="text-nickel font-bold">Limited Seats Available</span>
-      </div>
-    </div>
+    </tosoh-sub-header>
 
-    {# /WEBINAR HERO #} {# Hero Banner #}
-
+    <!-- ============================================ -->
+    <!-- HERO BANNER -->
+    <!-- ============================================ -->
     <div
       class="p-2xl max-w-max-page relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full items-center justify-center overflow-hidden lg:min-h-[40rem]">
       <img
         src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/971742371c0b4bb7f341af60e98f3399b98a2f67.jpg"
+        alt="Hero background"
         class="absolute top-0 left-0 h-full w-full object-cover" />
       <div class="absolute top-0 left-0 h-full w-full bg-[#01151EA8] object-cover"></div>
 
@@ -79,20 +61,22 @@
           TOSOH DIAGNOSTICS FORUM Better Diagnostics For Better Living
         </h1>
         <span class="text-3xl font-thin text-white">
-          Welcome to the Tosoh Bioscience-Diagnostics EMEAcentralized Service & Support portal access.
+          Welcome to the Tosoh Bioscience-Diagnostics EMEA centralized Service & Support portal access.
         </span>
       </div>
     </div>
 
-    {# /Hero Banner #} {# SPEAKER CARDS #}
-
-    <div class="p-md gap-lg max-w-max-page m-auto flex flex-col">
-      <h3 class="text-5xl font-semibold">Speakers</h3>
+    <!-- ============================================ -->
+    <!-- SPEAKER CARDS -->
+    <!-- ============================================ -->
+    <div class="p-md gap-lg max-w-max-page mt-4xl m-auto flex flex-col">
+      <h3 class="text-5xl font-semibold">Featured Speakers</h3>
       <div class="gap-md grid w-full grid-cols-1 md:grid-cols-3">
         <div
           class="bg-ghost-white p-lg md:p-xl gap-lg m-auto flex min-h-[30rem] w-full max-w-[32rem] flex-col items-center justify-center rounded-xl">
           <img
             src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/c50aecc3d639d993708863451867f2935a00537d.jpg"
+            alt="Dr. Sukhjinder Marwah"
             class="border-imperial-red aspect-square w-32 rounded-full border-4 object-cover" />
 
           <div class="gap-sm flex flex-col text-center">
@@ -102,1277 +86,246 @@
             </p>
           </div>
         </div>
-      </div>
-    </div>
 
-    {# /SPEAKER CARDS #} {# FORM #} {# FORM WITH VIDEO #}
-    <div
-      id="form"
-      class="max-w-max-page pt-md md:pt-2xl pr-md md:pr-xl pb-md md:pb-2xl pl-md md:pl-xl bg-prussian-blue text-ghost-white gap-md scroll-mt-5xl m-auto justify-center">
-      <div class="gap-md flex w-full flex-col justify-center md:flex-row">
-        <div class="flex self-center justify-self-start border border-transparent">
-          <div class="h-full w-full self-center justify-self-start">
-            <div class="gap-md fc-form flex flex-col">
-              <div class="gap-base flex flex-col text-left">
-                <div class="text-5xl font-semibold">
-                  <div style="text-align: center">
-                    <span style="color: #ffffff">Don't Miss Out! Register Now for the Webinar</span>
-                  </div>
-                </div>
-                <div class="text-nickel text-lg">
-                  <p style="text-align: center">
-                    <span style="color: #ffffff">
-                      It is a long established fact that a reader will be distracted by the readable
-                    </span>
-                  </p>
-                  <p style="text-align: center">
-                    <span style="color: #ffffff">
-                      content of a page when looking at its layout. The point of using Lorem Ipsum.
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              <tosoh-modal variant="modal" modalid="gated_form_1">
-                <h4 slot="title" class="p-sm">Hello</h4>
-                <div slot="content" class="p-lg">
-                  <span
-                    id="hs_cos_wrapper_widget_1756892802821_flex_form"
-                    class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form"
-                    style=""
-                    data-hs-cos-general-type="widget"
-                    data-hs-cos-type="form">
-                    <h3
-                      id="hs_cos_wrapper_widget_1756892802821_flex_form_title"
-                      class="hs_cos_wrapper form-title"
-                      data-hs-cos-general-type="widget_field"
-                      data-hs-cos-type="text"></h3>
-
-                    <div id="hs_form_target_widget_1756892802821_flex_form" data-hs-forms-root="true">
-                      <form
-                        id="hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                        method="POST"
-                        accept-charset="UTF-8"
-                        enctype="multipart/form-data"
-                        novalidate=""
-                        action="https://forms-eu1.hsforms.com/submissions/v3/public/submit/formsnext/multipart/145184808/d9274e8e-660d-4694-b903-53a7ad0aee06"
-                        class="hs-form-private hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06 hs-form-d9274e8e-660d-4694-b903-53a7ad0aee06 hs-form-d9274e8e-660d-4694-b903-53a7ad0aee06_e76a3a01-7ebe-4c49-a645-4451ab414f6b hs-form stacked hs-custom-form"
-                        target="target_iframe_d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                        data-instance-id="e76a3a01-7ebe-4c49-a645-4451ab414f6b"
-                        data-form-id="d9274e8e-660d-4694-b903-53a7ad0aee06"
-                        data-portal-id="145184808"
-                        data-test-id="hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                        <fieldset class="form-columns-2">
-                          <div class="hs_salutation hs-salutation hs-fieldtype-text field hs-form-field">
-                            <label
-                              id="label-salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                              class=""
-                              for="salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                              <span>Salutation</span>
-                            </label>
-                            <div class="input">
-                              <input
-                                id="salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                name="salutation"
-                                placeholder="Salutation"
-                                type="text"
-                                class="hs-input"
-                                inputmode="text"
-                                autocomplete="honorific-prefix"
-                                value="" />
-                            </div>
-                          </div>
-                          <div class="hs_email hs-email hs-fieldtype-text field hs-form-field">
-                            <label
-                              id="label-email-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                              class=""
-                              for="email-d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                              <span>Email</span>
-                              <span class="hs-form-required">*</span>
-                            </label>
-                            <div class="input">
-                              <input
-                                id="email-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                name="email"
-                                required=""
-                                placeholder=""
-                                type="email"
-                                class="hs-input"
-                                inputmode="email"
-                                autocomplete="email"
-                                value="dimitrisnouv@gmail.com" />
-                            </div>
-                          </div>
-                        </fieldset>
-                        <fieldset class="form-columns-2">
-                          <div class="hs_company hs-company hs-fieldtype-text field hs-form-field">
-                            <label
-                              id="label-company-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                              class=""
-                              for="company-d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                              <span>Company name</span>
-                            </label>
-                            <div class="input">
-                              <input
-                                id="company-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                name="company"
-                                placeholder=""
-                                type="text"
-                                class="hs-input"
-                                inputmode="text"
-                                autocomplete="organization"
-                                value="Epa;" />
-                            </div>
-                          </div>
-                          <div class="hs_firstname hs-firstname hs-fieldtype-text field hs-form-field">
-                            <label
-                              id="label-firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                              class=""
-                              for="firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                              <span>First name</span>
-                            </label>
-                            <div class="input">
-                              <input
-                                id="firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                name="firstname"
-                                placeholder=""
-                                type="text"
-                                class="hs-input"
-                                inputmode="text"
-                                autocomplete="given-name"
-                                value="Jim" />
-                            </div>
-                          </div>
-                        </fieldset>
-                        <fieldset class="form-columns-1">
-                          <div class="hs_hs_role hs-hs_role hs-fieldtype-select field hs-form-field">
-                            <label
-                              id="label-hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                              class=""
-                              for="hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                              <span>Employment Role</span>
-                            </label>
-                            <div class="input">
-                              <select
-                                id="hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                class="hs-input is-placeholder"
-                                name="hs_role">
-                                <option disabled="" value="">Please Select</option>
-                                <option value="accounting">Accounting</option>
-                                <option value="administrative">Administrative</option>
-                                <option value="business_development">Business Development</option>
-                                <option value="communications">Communications</option>
-                                <option value="consulting">Consulting</option>
-                                <option value="customer_service">Customer Service</option>
-                                <option value="design">Design</option>
-                                <option value="education">Education</option>
-                                <option value="engineering">Engineering</option>
-                                <option value="entrepreneurship">Entrepreneurship</option>
-                                <option value="finance">Finance</option>
-                                <option value="health_professional">Health Professional</option>
-                                <option value="human_resources">Human Resources</option>
-                                <option value="information_technology">Information Technology</option>
-                                <option value="legal">Legal</option>
-                                <option value="marketing">Marketing</option>
-                                <option value="operations">Operations</option>
-                                <option value="product">Product</option>
-                                <option value="project_management">Project Management</option>
-                                <option value="public_relations">Public Relations</option>
-                                <option value="quality_assurance">Quality Assurance</option>
-                                <option value="real_estate">Real Estate</option>
-                                <option value="recruiting">Recruiting</option>
-                                <option value="research">Research</option>
-                                <option value="sales">Sales</option>
-                                <option value="support">Support</option>
-                                <option value="retired">Retired</option>
-                              </select>
-                            </div>
-                          </div>
-                        </fieldset>
-                        <fieldset class="form-columns-1">
-                          <div class="hs_city hs-city hs-fieldtype-text field hs-form-field">
-                            <label
-                              id="label-city-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                              class=""
-                              for="city-d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                              <span>City</span>
-                            </label>
-                            <div class="input">
-                              <input
-                                id="city-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                name="city"
-                                placeholder=""
-                                type="text"
-                                class="hs-input"
-                                inputmode="text"
-                                autocomplete="address-level2"
-                                value="" />
-                            </div>
-                          </div>
-                        </fieldset>
-                        <fieldset class="form-columns-1">
-                          <div class="hs_message hs-message hs-fieldtype-textarea field hs-form-field">
-                            <label
-                              id="label-message-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                              class=""
-                              for="message-d9274e8e-660d-4694-b903-53a7ad0aee06_2563">
-                              <span>Message</span>
-                            </label>
-                            <div class="input">
-                              <textarea
-                                id="message-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                class="hs-input hs-fieldtype-textarea"
-                                name="message"
-                                placeholder=""></textarea>
-                            </div>
-                          </div>
-                        </fieldset>
-                        <fieldset class="form-columns-1">
-                          <div class="legal-consent-container">
-                            <div class="hs-richtext">
-                              Kingpost is committed to protecting and respecting your privacy, and we’ll only use your
-                              personal information to administer your account and to provide the products and services
-                              you requested from us. From time to time, we would like to contact you about our products
-                              and services, as well as other content that may be of interest to you. If you consent to
-                              us contacting you for this purpose, please tick below to say how you would like us to
-                              contact you:
-                            </div>
-                            <div>
-                              <div class="hs-dependent-field">
-                                <div
-                                  class="hs_LEGAL_CONSENT.subscription_type_411908685 hs-LEGAL_CONSENT.subscription_type_411908685 hs-fieldtype-booleancheckbox field hs-form-field">
-                                  <div class="input">
-                                    <ul class="inputs-list">
-                                      <li class="hs-form-booleancheckbox">
-                                        <label
-                                          for="LEGAL_CONSENT.subscription_type_411908685-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                          class="hs-form-booleancheckbox-display">
-                                          <input
-                                            id="LEGAL_CONSENT.subscription_type_411908685-d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                                            class="hs-input"
-                                            type="checkbox"
-                                            name="LEGAL_CONSENT.subscription_type_411908685"
-                                            value="true" />
-                                          <span>I agree to receive other communications from Kingpost.</span>
-                                        </label>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                              <legend class="hs-field-desc checkbox-desc" style="display: none"></legend>
-                            </div>
-                            <div class="hs-richtext">
-                              You can unsubscribe from these communications at any time. For more information on how to
-                              unsubscribe, our privacy practices, and how we are committed to protecting and respecting
-                              your privacy, please review our Privacy Policy.
-                            </div>
-                            <div class="hs-richtext">
-                              By clicking submit below, you consent to allow Kingpost to store and process the personal
-                              information submitted above to provide you the content requested.
-                            </div>
-                          </div>
-                        </fieldset>
-                        <div class="hs_submit hs-submit">
-                          <div class="hs-field-desc" style="display: none"></div>
-                          <div class="actions">
-                            <input type="submit" class="hs-button primary large" value="Submit" />
-                          </div>
-                        </div>
-                        <input
-                          name="hs_context"
-                          type="hidden"
-                          value='{"embedAtTimestamp":"1756990077584","formDefinitionUpdatedAt":"1756898527923","lang":"en","legalConsentOptions":"{\"communicationConsentCheckboxes\":[{\"communicationTypeId\":411908685,\"label\":\"I agree to receive other communications from Kingpost.\",\"required\":false}],\"legitimateInterestLegalBasis\":\"LEGITIMATE_INTEREST_PQL\",\"communicationConsentText\":\"Kingpost is committed to protecting and respecting your privacy, and we’ll only use your personal information to administer your account and to provide the products and services you requested from us. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you. If you consent to us contacting you for this purpose, please tick below to say how you would like us to contact you:\",\"processingConsentType\":\"IMPLICIT\",\"processingConsentText\":\"By clicking submit below, you consent to allow Kingpost to store and process the personal information submitted above to provide you the content requested.\",\"processingConsentCheckboxLabel\":\"I agree to allow Kingpost to store and process my personal data.\",\"privacyPolicyText\":\"You can unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy Policy.\",\"isLegitimateInterest\":false}","draftState":"DRAFT","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36","pageTitle":"Webinar Detail","pageUrl":"https://145184808.hs-sites-eu1.com/webinar-detail?hs_preview=NklKAdMS-271679871170","pageId":"271679871170","urlParams":{"hs_preview":"NklKAdMS-271679871170"},"isHubSpotCmsGeneratedPage":true,"hutk":"902d48c161d7a9fcf08621d160cc0911","__hstc":"205882892.902d48c161d7a9fcf08621d160cc0911.1742383649038.1756904456924.1756975478259.123","formTarget":"#hs_form_target_widget_1756892802821_flex_form","formInstanceId":"2563","contentType":"standard-page","pageName":"Webinar Detail","boolCheckBoxFields":"LEGAL_CONSENT.subscription_type_411908685","rumScriptExecuteTime":952.6999999992549,"rumTotalRequestTime":1242.199999999255,"rumTotalRenderTime":1308,"rumServiceResponseTime":289.5,"rumFormRenderTime":65.80000000074506,"connectionType":"4g","firstContentfulPaint":0,"largestContentfulPaint":0,"locale":"en","timestamp":1756990078257,"originalEmbedContext":{"portalId":"145184808","formId":"d9274e8e-660d-4694-b903-53a7ad0aee06","region":"eu1","target":"#hs_form_target_widget_1756892802821_flex_form","isBuilder":false,"isTestPage":false,"isPreview":false,"formInstanceId":"2563","formsBaseUrl":"/_hcms/forms","deactivateSmartForm":true,"css":"","redirectUrl":"https://youtube.com","useDraft":true,"isMobileResponsive":true,"pageName":"Webinar Detail","pageId":"271679871170","contentType":"standard-page","formData":{"cssClass":"hs-form stacked hs-custom-form"},"isCMSModuleEmbed":true},"correlationId":"e76a3a01-7ebe-4c49-a645-4451ab414f6b","renderedFieldsIds":["salutation","email","company","firstname","hs_role","city","message","LEGAL_CONSENT.subscription_type_411908685"],"captchaStatus":"NOT_APPLICABLE","emailResubscribeStatus":"NOT_APPLICABLE","isInsideCrossOriginFrame":false,"source":"forms-embed-1.9606","sourceName":"forms-embed","sourceVersion":"1.9606","sourceVersionMajor":"1","sourceVersionMinor":"9606","allPageIds":{"embedContextPageId":"271679871170","contentPageId":271679871170,"contentAnalyticsPageId":"271679871170"},"_debug_embedLogLines":[{"clientTimestamp":1756990077635,"level":"INFO","message":"Retrieved customer callbacks used on embed context: [\"getExtraMetaDataBeforeSubmit\"]"},{"clientTimestamp":1756990077635,"level":"INFO","message":"Retrieved pageContext values which may be overriden by the embed context: {\"pageTitle\":\"Webinar Detail\",\"pageUrl\":\"https://145184808.hs-sites-eu1.com/webinar-detail?hs_preview=NklKAdMS-271679871170\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"urlParams\":{\"hs_preview\":\"NklKAdMS-271679871170\"},\"pageId\":\"271679871170\",\"contentAnalyticsPageId\":\"271679871170\",\"contentPageId\":271679871170,\"isHubSpotCmsGeneratedPage\":true}"},{"clientTimestamp":1756990077636,"level":"INFO","message":"Retrieved countryCode property from normalized embed definition response: \"GR\""}]}' />
-                        <iframe
-                          name="target_iframe_d9274e8e-660d-4694-b903-53a7ad0aee06_2563"
-                          style="display: none"></iframe>
-                      </form>
-                    </div>
-                  </span>
-                </div>
-              </tosoh-modal>
-              <tosoh-modal slot="cta" variant="action" modalid="gated_form_1" class="w-fit-content">
-                <button>Hello</button>
-              </tosoh-modal>
-            </div>
-          </div>
-        </div>
-
-        <div class="flex h-full w-full self-center justify-self-center border border-transparent">
-          <div class="h-full w-full self-center justify-self-center">
-            <div
-              class="hs-video-widget"
-              data-hsv-embed-id="b928f983-ff66-4783-a05d-2ce1cdf88782"
-              data-hsv-status="loaded">
-              <div class="hs-video-container" style="max-width: 100%; margin: 0 auto">
-                <div class="hs-video-wrapper" style="position: relative; height: 0; padding-bottom: 56.25%">
-                  <iframe
-                    referrerpolicy="origin"
-                    sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
-                    allow="autoplay; fullscreen;"
-                    style="
-                      position: absolute !important;
-                      width: 100% !important;
-                      height: 100% !important;
-                      left: 0;
-                      top: 0;
-                      border: 0 none;
-                      pointer-events: initial;
-                    "
-                    title="HubSpot Video"
-                    loading="lazy"
-                    data-hsv-id="246464351426"
-                    src="https://play-eu1.hubspotvideo.com/v/145184808/id/246464351426?parentOrigin=https%3A%2F%2F145184808.hs-sites-eu1.com&amp;renderContext=hubl-iframe&amp;locale=en#hsvid=b928f983-ff66-4783-a05d-2ce1cdf88782"></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    {# /FORM WITH VIDEO #} {# FORM #}
-    <div
-      id="hs_cos_wrapper_widget_1756892802821_flex_form"
-      class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form"
-      style=""
-      data-hs-cos-general-type="widget"
-      data-hs-cos-type="form">
-      <h3
-        id="hs_cos_wrapper_widget_1756892802821_flex_form_title"
-        class="hs_cos_wrapper form-title"
-        data-hs-cos-general-type="widget_field"
-        data-hs-cos-type="text"></h3>
-
-      <div
-        id="hs_form_target_widget_1756892802821_flex_form"
-        data-hs-forms-root="true"
-        class="fc-form bg-prussian-blue text-white">
-        <form
-          id="hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-          method="POST"
-          accept-charset="UTF-8"
-          enctype="multipart/form-data"
-          novalidate=""
-          action="https://forms-eu1.hsforms.com/submissions/v3/public/submit/formsnext/multipart/145184808/d9274e8e-660d-4694-b903-53a7ad0aee06"
-          class="hs-form-private hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06 hs-form-d9274e8e-660d-4694-b903-53a7ad0aee06 hs-form-d9274e8e-660d-4694-b903-53a7ad0aee06_695b4b87-fd0b-4934-8ad7-96be870b23b1 hs-form stacked hs-custom-form"
-          target="target_iframe_d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-          data-instance-id="695b4b87-fd0b-4934-8ad7-96be870b23b1"
-          data-form-id="d9274e8e-660d-4694-b903-53a7ad0aee06"
-          data-portal-id="145184808"
-          data-test-id="hsForm_d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-          <fieldset class="form-columns-2">
-            <div class="hs_salutation hs-salutation hs-fieldtype-text field hs-form-field">
-              <label
-                id="label-salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                class=""
-                for="salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-                <span>Salutation</span>
-              </label>
-              <div class="input">
-                <input
-                  id="salutation-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                  name="salutation"
-                  placeholder="Salutation"
-                  type="text"
-                  class="hs-input"
-                  inputmode="text"
-                  autocomplete="honorific-prefix"
-                  value="" />
-              </div>
-            </div>
-            <div class="hs_email hs-email hs-fieldtype-text field hs-form-field">
-              <label
-                id="label-email-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                class=""
-                for="email-d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-                <span>Email</span>
-                <span class="hs-form-required">*</span>
-              </label>
-              <div class="input">
-                <input
-                  id="email-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                  name="email"
-                  required=""
-                  placeholder=""
-                  type="email"
-                  class="hs-input invalid error"
-                  inputmode="email"
-                  autocomplete="email"
-                  value="" />
-              </div>
-              <ul class="no-list hs-error-msgs inputs-list" role="alert">
-                <li><label class="hs-error-msg hs-main-font-element">Please complete this required field.</label></li>
-              </ul>
-            </div>
-          </fieldset>
-          <fieldset class="form-columns-2">
-            <div class="hs_company hs-company hs-fieldtype-text field hs-form-field">
-              <label
-                id="label-company-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                class=""
-                for="company-d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-                <span>Company name</span>
-              </label>
-              <div class="input">
-                <input
-                  id="company-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                  name="company"
-                  placeholder=""
-                  type="text"
-                  class="hs-input"
-                  inputmode="text"
-                  autocomplete="organization"
-                  value="" />
-              </div>
-            </div>
-            <div class="hs_firstname hs-firstname hs-fieldtype-text field hs-form-field">
-              <label
-                id="label-firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                class=""
-                for="firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-                <span>First name</span>
-              </label>
-              <div class="input">
-                <input
-                  id="firstname-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                  name="firstname"
-                  placeholder=""
-                  type="text"
-                  class="hs-input"
-                  inputmode="text"
-                  autocomplete="given-name"
-                  value="" />
-              </div>
-            </div>
-          </fieldset>
-          <fieldset class="form-columns-1">
-            <div class="hs_hs_role hs-hs_role hs-fieldtype-select field hs-form-field">
-              <label
-                id="label-hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                class=""
-                for="hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-                <span>Employment Role</span>
-              </label>
-              <div class="input">
-                <select
-                  id="hs_role-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                  class="hs-input is-placeholder"
-                  name="hs_role">
-                  <option disabled="" value="">Please Select</option>
-                  <option value="accounting">Accounting</option>
-                  <option value="administrative">Administrative</option>
-                  <option value="business_development">Business Development</option>
-                  <option value="communications">Communications</option>
-                  <option value="consulting">Consulting</option>
-                  <option value="customer_service">Customer Service</option>
-                  <option value="design">Design</option>
-                  <option value="education">Education</option>
-                  <option value="engineering">Engineering</option>
-                  <option value="entrepreneurship">Entrepreneurship</option>
-                  <option value="finance">Finance</option>
-                  <option value="health_professional">Health Professional</option>
-                  <option value="human_resources">Human Resources</option>
-                  <option value="information_technology">Information Technology</option>
-                  <option value="legal">Legal</option>
-                  <option value="marketing">Marketing</option>
-                  <option value="operations">Operations</option>
-                  <option value="product">Product</option>
-                  <option value="project_management">Project Management</option>
-                  <option value="public_relations">Public Relations</option>
-                  <option value="quality_assurance">Quality Assurance</option>
-                  <option value="real_estate">Real Estate</option>
-                  <option value="recruiting">Recruiting</option>
-                  <option value="research">Research</option>
-                  <option value="sales">Sales</option>
-                  <option value="support">Support</option>
-                  <option value="retired">Retired</option>
-                </select>
-              </div>
-            </div>
-          </fieldset>
-          <fieldset class="form-columns-1">
-            <div class="hs_city hs-city hs-fieldtype-text field hs-form-field">
-              <label
-                id="label-city-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                class=""
-                for="city-d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-                <span>City</span>
-              </label>
-              <div class="input">
-                <input
-                  id="city-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                  name="city"
-                  placeholder=""
-                  type="text"
-                  class="hs-input"
-                  inputmode="text"
-                  autocomplete="address-level2"
-                  value="" />
-              </div>
-            </div>
-          </fieldset>
-          <fieldset class="form-columns-1">
-            <div class="hs_message hs-message hs-fieldtype-textarea field hs-form-field">
-              <label
-                id="label-message-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                class=""
-                for="message-d9274e8e-660d-4694-b903-53a7ad0aee06_1966">
-                <span>Message</span>
-              </label>
-              <div class="input">
-                <textarea
-                  id="message-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                  class="hs-input hs-fieldtype-textarea"
-                  name="message"
-                  placeholder=""></textarea>
-              </div>
-            </div>
-          </fieldset>
-          <fieldset class="form-columns-1">
-            <div class="legal-consent-container">
-              <div class="hs-richtext">
-                Kingpost is committed to protecting and respecting your privacy, and we’ll only use your personal
-                information to administer your account and to provide the products and services you requested from us.
-                From time to time, we would like to contact you about our products and services, as well as other
-                content that may be of interest to you. If you consent to us contacting you for this purpose, please
-                tick below to say how you would like us to contact you:
-              </div>
-              <div>
-                <div class="hs-dependent-field">
-                  <div
-                    class="hs_LEGAL_CONSENT.subscription_type_411908685 hs-LEGAL_CONSENT.subscription_type_411908685 hs-fieldtype-booleancheckbox field hs-form-field">
-                    <div class="input">
-                      <ul class="inputs-list">
-                        <li class="hs-form-booleancheckbox">
-                          <label
-                            for="LEGAL_CONSENT.subscription_type_411908685-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                            class="hs-form-booleancheckbox-display">
-                            <input
-                              id="LEGAL_CONSENT.subscription_type_411908685-d9274e8e-660d-4694-b903-53a7ad0aee06_1966"
-                              class="hs-input"
-                              type="checkbox"
-                              name="LEGAL_CONSENT.subscription_type_411908685"
-                              value="true" />
-                            <span>I agree to receive other communications from Kingpost.</span>
-                          </label>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <legend class="hs-field-desc checkbox-desc" style="display: none"></legend>
-              </div>
-              <div class="hs-richtext">
-                You can unsubscribe from these communications at any time. For more information on how to unsubscribe,
-                our privacy practices, and how we are committed to protecting and respecting your privacy, please review
-                our Privacy Policy.
-              </div>
-              <div class="hs-richtext">
-                By clicking submit below, you consent to allow Kingpost to store and process the personal information
-                submitted above to provide you the content requested.
-              </div>
-            </div>
-          </fieldset>
-          <div class="hs_submit hs-submit">
-            <div class="hs-field-desc" style="display: none"></div>
-            <div class="actions"><input type="submit" class="hs-button primary large" value="Submit" /></div>
-          </div>
-          <input
-            name="hs_context"
-            type="hidden"
-            value='{"embedAtTimestamp":"1756978429904","formDefinitionUpdatedAt":"1756898527923","lang":"en","legalConsentOptions":"{\"communicationConsentCheckboxes\":[{\"communicationTypeId\":411908685,\"label\":\"I agree to receive other communications from Kingpost.\",\"required\":false}],\"legitimateInterestLegalBasis\":\"LEGITIMATE_INTEREST_PQL\",\"communicationConsentText\":\"Kingpost is committed to protecting and respecting your privacy, and we’ll only use your personal information to administer your account and to provide the products and services you requested from us. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you. If you consent to us contacting you for this purpose, please tick below to say how you would like us to contact you:\",\"processingConsentType\":\"IMPLICIT\",\"processingConsentText\":\"By clicking submit below, you consent to allow Kingpost to store and process the personal information submitted above to provide you the content requested.\",\"processingConsentCheckboxLabel\":\"I agree to allow Kingpost to store and process my personal data.\",\"privacyPolicyText\":\"You can unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy Policy.\",\"isLegitimateInterest\":false}","draftState":"DRAFT","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36","pageTitle":"Webinar Detail","pageUrl":"https://145184808.hubspotpreview-eu1.com/_hcms/preview/content/271679871170?_preview=true&amp;benderPackage=InpageEditorUI&amp;cacheBust=1756978428965&amp;cssPath=bundles%2Fapp.css&amp;inpageEditorUI=true&amp;localAssets=false&amp;portalId=145184808&amp;preview_key=NklKAdMS&amp;scriptPath=bundles%2Fapp.js&amp;staticVersion=static-1.81197&amp;preview_theme=true&amp;env=prod&amp;injectedScripts=hubspot-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-2.1406&amp;injectedScripts=react-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-1.54&amp;hsSmartContentDefault=true&amp;hsEditorApp=page&amp;buffer_theme=false","pageId":"271679871170","referrer":"https://app-eu1.hubspot.com/","urlParams":{"_preview":"true","benderPackage":"InpageEditorUI","cacheBust":"1756978428965","cssPath":"bundles/app.css","inpageEditorUI":"true","localAssets":"false","portalId":"145184808","preview_key":"NklKAdMS","scriptPath":"bundles/app.js","staticVersion":"static-1.81197","preview_theme":"true","env":"prod","injectedScripts":"react-dlb,bundle.production.js,false,static-1.54","hsSmartContentDefault":"true","hsEditorApp":"page","buffer_theme":"false"},"isHubSpotCmsGeneratedPage":true,"formTarget":"#hs_form_target_widget_1756892802821_flex_form","formInstanceId":"1966","contentType":"standard-page","pageName":"Webinar Detail","boolCheckBoxFields":"LEGAL_CONSENT.subscription_type_411908685","rumScriptExecuteTime":752.2000000001863,"rumTotalRequestTime":880.5,"rumTotalRenderTime":932.5999999996275,"rumServiceResponseTime":128.29999999981374,"rumFormRenderTime":52.09999999962747,"connectionType":"4g","firstContentfulPaint":0,"largestContentfulPaint":0,"locale":"en","timestamp":1756979110428,"originalEmbedContext":{"portalId":"145184808","formId":"d9274e8e-660d-4694-b903-53a7ad0aee06","region":"eu1","target":"#hs_form_target_widget_1756892802821_flex_form","isBuilder":false,"isTestPage":false,"isPreview":false,"formInstanceId":"1966","formsBaseUrl":"/_hcms/forms","deactivateSmartForm":true,"css":"","redirectUrl":"https://youtube.com","useDraft":true,"isMobileResponsive":true,"pageName":"Webinar Detail","pageId":"271679871170","contentType":"standard-page","formData":{"cssClass":"hs-form stacked hs-custom-form"},"isCMSModuleEmbed":true},"correlationId":"695b4b87-fd0b-4934-8ad7-96be870b23b1","renderedFieldsIds":["salutation","email","company","firstname","hs_role","city","message","LEGAL_CONSENT.subscription_type_411908685"],"captchaStatus":"NOT_APPLICABLE","emailResubscribeStatus":"NOT_APPLICABLE","isInsideCrossOriginFrame":true,"source":"forms-embed-1.9606","sourceName":"forms-embed","sourceVersion":"1.9606","sourceVersionMajor":"1","sourceVersionMinor":"9606","allPageIds":{"embedContextPageId":"271679871170","contentPageId":271679871170,"contentAnalyticsPageId":"271679871170"},"_debug_embedLogLines":[{"clientTimestamp":1756978429844,"level":"INFO","message":"Retrieved customer callbacks used on embed context: [\"getExtraMetaDataBeforeSubmit\"]"},{"clientTimestamp":1756978429844,"level":"INFO","message":"Retrieved pageContext values which may be overriden by the embed context: {\"pageTitle\":\"Webinar Detail\",\"pageUrl\":\"https://145184808.hubspotpreview-eu1.com/_hcms/preview/content/271679871170?_preview=true&amp;benderPackage=InpageEditorUI&amp;cacheBust=1756978428965&amp;cssPath=bundles%2Fapp.css&amp;inpageEditorUI=true&amp;localAssets=false&amp;portalId=145184808&amp;preview_key=NklKAdMS&amp;scriptPath=bundles%2Fapp.js&amp;staticVersion=static-1.81197&amp;preview_theme=true&amp;env=prod&amp;injectedScripts=hubspot-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-2.1406&amp;injectedScripts=react-dlb%2Cbundle.production.js%2Cfalse%2Cstatic-1.54&amp;hsSmartContentDefault=true&amp;hsEditorApp=page&amp;buffer_theme=false\",\"referrer\":\"https://app-eu1.hubspot.com/\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"urlParams\":{\"_preview\":\"true\",\"benderPackage\":\"InpageEditorUI\",\"cacheBust\":\"1756978428965\",\"cssPath\":\"bundles/app.css\",\"inpageEditorUI\":\"true\",\"localAssets\":\"false\",\"portalId\":\"145184808\",\"preview_key\":\"NklKAdMS\",\"scriptPath\":\"bundles/app.js\",\"staticVersion\":\"static-1.81197\",\"preview_theme\":\"true\",\"env\":\"prod\",\"injectedScripts\":\"react-dlb,bundle.production.js,false,static-1.54\",\"hsSmartContentDefault\":\"true\",\"hsEditorApp\":\"page\",\"buffer_theme\":\"false\"},\"pageId\":\"271679871170\",\"contentAnalyticsPageId\":\"271679871170\",\"contentPageId\":271679871170,\"isHubSpotCmsGeneratedPage\":true,\"isCMSEditor\":true}"},{"clientTimestamp":1756978429845,"level":"INFO","message":"Retrieved countryCode property from normalized embed definition response: \"GR\""}]}' />
-          <iframe name="target_iframe_d9274e8e-660d-4694-b903-53a7ad0aee06_1966" style="display: none"></iframe>
-        </form>
-      </div>
-    </div>
-    {# /FORM #} {# START OF ACCENT #}
-
-    <div class="row-fluid">
-      <div
-        class="span12 widget-span widget-type-cell dnd-column"
-        style=""
-        data-widget-type="cell"
-        data-x="0"
-        data-w="12">
-        <div class="row-fluid-wrapper row-depth-1 row-number-10 dnd-row">
-          <div class="row-fluid">
-            <div
-              class="span12 widget-span widget-type-custom_widget dnd-module"
-              style=""
-              data-widget-type="custom_widget"
-              data-x="0"
-              data-w="12">
-              <div
-                id="hs_cos_wrapper_widget_1759404280886"
-                class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module"
-                style=""
-                data-hs-cos-general-type="widget"
-                data-hs-cos-type="module">
-                <div
-                  class="max-w-max-page pt-md md:pt-md pr-md md:pr-2xl pb-md md:pb-md pl-md md:pl-2xl bg-prussian-blue text-default gap-md scroll-mt-5xl m-auto justify-center overflow-hidden">
-                  <div class="gap-md relative flex w-full flex-col justify-center md:flex-row">
-                    <div class="flex self-center justify-self-start border border-transparent">
-                      <div class="h-full w-full self-center justify-self-start">
-                        <div class="gap-base flex flex-col items-start">
-                          <div class="text-imperial-red w-full text-center text-xl font-thin tracking-widest">
-                            <span style="color: #ffffff">Seamless Control</span>
-                          </div>
-                          <div class="font-sans-narrow w-full text-center text-4xl font-semibold">
-                            <span style="color: #ffffff">Effortless Operation and Usability</span>
-                          </div>
-                          <div class="text-nickel w-full text-center text-lg">
-                            <span style="color: #ffffff">
-                              It is a long established fact that a reader will be distracted by the readable content of
-                              a page when looking at its layout
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--end widget-span -->
-          </div>
-          <!--end row-->
-        </div>
-        <!--end row-wrapper -->
-
-        <div class="row-fluid-wrapper row-depth-1 row-number-11 dnd-row">
-          <div class="row-fluid">
-            <div
-              class="span12 widget-span widget-type-custom_widget dnd-module"
-              style=""
-              data-widget-type="custom_widget"
-              data-x="0"
-              data-w="12">
-              <div
-                id="hs_cos_wrapper_widget_1759405694676"
-                class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module"
-                style=""
-                data-hs-cos-general-type="widget"
-                data-hs-cos-type="module">
-                <div
-                  class="max-w-max-page pt-md md:pt-md pr-md md:pr-2xl pb-md md:pb-md pl-md md:pl-2xl bg-prussian-blue text-light-silver gap-md scroll-mt-5xl m-auto">
-                  <div class="grid-accent position-bl"></div>
-                  <div class="grid-accent position-tr"></div>
-
-                  <div class="gap-md relative flex w-full flex-col md:flex-row">
-                    <div
-                      class="pt-md md:pt-md pr-md md:pr-md pb-md md:pb-md pl-md md:pl-md bg-midnight-green flex self-center justify-self-start overflow-hidden rounded-2xl border-transparent">
-                      <div class="h-full w-full self-center justify-self-start">
-                        <div class="gap-base flex flex-col items-start">
-                          <div class="font-sans-narrow w-full text-left text-4xl font-semibold">
-                            <h5><span style="color: #ffffff">Intuitive Touchscreen</span></h5>
-                          </div>
-                          <div class="text-nickel w-full text-left text-lg">
-                            <p style="text-align: left">
-                              <span style="color: #ffffff">
-                                The high-resolution Windows-based color touchscreen offers an intuitive, user-friendly
-                                experience, making daily operations simple for all users.
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="pt-md md:pt-md pr-md md:pr-md pb-md md:pb-md pl-md md:pl-md bg-midnight-green flex self-center justify-self-start overflow-hidden rounded-2xl border-transparent">
-                      <div class="h-full w-full self-center justify-self-start">
-                        <div class="gap-base flex flex-col items-start">
-                          <div class="font-sans-narrow w-full text-left text-4xl font-semibold">
-                            <h5><span style="color: #ffffff">Intuitive Touchscreen</span></h5>
-                          </div>
-                          <div class="text-nickel w-full text-left text-lg">
-                            <p>
-                              <span style="color: #ffffff">
-                                The high-resolution Windows-based color touchscreen offers an intuitive, user-friendly
-                                experience, making daily operations simple for all users.
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="pt-md md:pt-md pr-md md:pr-md pb-md md:pb-md pl-md md:pl-md bg-midnight-green flex self-center justify-self-start overflow-hidden rounded-2xl border-transparent">
-                      <div class="h-full w-full self-center justify-self-start">
-                        <div class="gap-base flex flex-col items-start">
-                          <div class="font-sans-narrow w-full text-left text-4xl font-semibold">
-                            <h5><span style="color: #ffffff">Intuitive Touchscreen</span></h5>
-                          </div>
-                          <div class="text-nickel w-full text-left text-lg">
-                            <p>
-                              <span style="color: #ffffff">
-                                The high-resolution Windows-based color touchscreen offers an intuitive, user-friendly
-                                experience, making daily operations simple for all users.
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--end widget-span -->
-          </div>
-          <!--end row-->
-        </div>
-        <!--end row-wrapper -->
-      </div>
-      <!--end widget-span -->
-    </div>
-    {# END OF ACCENT #} {# Accordion #}
-    <div class="p-md max-w-max-page bg-prussian-blue m-auto">
-      <tosoh-accordion groupId="{{ loop.index }}" variant="action" class="accordion-action">
-        H iHiHiHiHiHiHi H iHiHiHiHiHiHi H iHiHiHiHiHiHi H iHiHiHiHiHiHi
-      </tosoh-accordion>
-      <tosoh-accordion groupId="{{ loop.index }}" variant="reveal">Hello</tosoh-accordion>
-    </div>
-    {# /Accordion #}
-
-    <div class="p-md pt-4xl min-h-[100vh] bg-white">
-      <div class="gap-base max-w-max-page m-auto flex items-center">
-        <a class="text-md text-nickel cursor-pointer md:text-2xl">Hi</a>
-        <div class="text-nickel max-h-[1.1875rem] max-w-[0.675rem]">
-          <svg
-            class="max-h-inherit max-w-inherit"
-            xmlns="http://www.w3.org/2000/svg"
-            width="100%"
-            height="100%"
-            viewBox="0 0 11 19"
-            fill="none">
-            <path d="M1.55 0L0 1.55L7.95 9.5L0 17.45L1.55 19L11 9.5L1.55 0Z" fill="currentColor" />
-          </svg>
-        </div>
-        <a class="text-md cursor-pointer font-semibold md:text-2xl">Tosoh Support Portal</a>
-      </div>
-
-      {#
-      <tosoh-support-portal></tosoh-support-portal>
-      #}
-    </div>
-    <div class="row-fluid">
-      <div
-        class="span12 widget-span widget-type-custom_widget dnd-module"
-        style=""
-        data-widget-type="custom_widget"
-        data-x="0"
-        data-w="12">
         <div
-          id="hs_cos_wrapper_module_17606027674923"
-          class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_module"
-          style=""
-          data-hs-cos-general-type="widget"
-          data-hs-cos-type="module">
-          <div
-            class="max-w-max-page pt-md md:pt-md pr-md md:pr-2xl pb-md md:pb-md pl-md md:pl-2xl text-default gap-md scroll-mt-5xl m-auto overflow-hidden">
-            <div class="gap-md relative flex w-full flex-col md:flex-row">
-              <div class="flex max-w-full self-center justify-self-start border border-transparent">
-                <tosoh-in-view
-                  class="block h-full w-full self-center justify-self-start"
-                  x="0"
-                  y="1rem"
-                  delay="500"
-                  duration="500">
-                  <template shadowrootmode="open">
-                    <div class="svelte-11mvbge">
-                      <div class="svelte-11mvbge">
-                        <slot class="svelte-11mvbge"></slot>
-                        <!---->
-                      </div>
-                      <!---->
-                    </div>
-                    <style id="svelte-11mvbge">
-                      :host {
-                        display: contents;
-                      }
-                      div.svelte-11mvbge {
-                        width: 100%;
-                        height: 100%;
-                      }
-                    </style>
-                  </template>
+          class="bg-ghost-white p-lg md:p-xl gap-lg m-auto flex min-h-[30rem] w-full max-w-[32rem] flex-col items-center justify-center rounded-xl">
+          <img
+            src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/c50aecc3d639d993708863451867f2935a00537d.jpg"
+            alt="Dr. Jane Smith"
+            class="border-imperial-red aspect-square w-32 rounded-full border-4 object-cover" />
 
-                  <div class="gap-md fc-form light flex flex-col">
-                    <span
-                      id="hs_cos_wrapper_module_17606027674923_flex_form"
-                      class="hs_cos_wrapper hs_cos_wrapper_widget hs_cos_wrapper_type_form"
-                      style=""
-                      data-hs-cos-general-type="widget"
-                      data-hs-cos-type="form">
-                      <h3
-                        id="hs_cos_wrapper_module_17606027674923_flex_form_title"
-                        class="hs_cos_wrapper form-title"
-                        data-hs-cos-general-type="widget_field"
-                        data-hs-cos-type="text"></h3>
+          <div class="gap-sm flex flex-col text-center">
+            <span class="text-3xl font-semibold">Dr. Jane Smith</span>
+            <p class="text-nickel text-2xl">Clinical Laboratory Director, Medical Research Institute</p>
+          </div>
+        </div>
 
-                      <div id="hs_form_target_module_17606027674923_flex_form" data-hs-forms-root="true">
-                        <form
-                          id="hsForm_a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                          method="POST"
-                          accept-charset="UTF-8"
-                          enctype="multipart/form-data"
-                          novalidate=""
-                          action="https://forms.hsforms.com/submissions/v3/public/submit/formsnext/multipart/19644636/a897176f-71a3-49e3-960f-20c040ababd0"
-                          class="hs-form-private hsForm_a897176f-71a3-49e3-960f-20c040ababd0 hs-form-a897176f-71a3-49e3-960f-20c040ababd0 hs-form-a897176f-71a3-49e3-960f-20c040ababd0_da5082e7-201c-4487-abc4-812c205c9e89 hs-form stacked hs-custom-form"
-                          target="target_iframe_a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                          data-instance-id="da5082e7-201c-4487-abc4-812c205c9e89"
-                          data-form-id="a897176f-71a3-49e3-960f-20c040ababd0"
-                          data-portal-id="19644636"
-                          data-test-id="hsForm_a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                          <fieldset class="form-columns-0">
-                            <div class="hs-richtext hs-main-font-element">
-                              <h1><span style="color: #e30a2d">Modulo per quesito Hb&nbsp;</span></h1>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-0">
-                            <div class="hs-richtext hs-main-font-element">
-                              <div align="left">
-                                IMPORTANTE Per proteggere la privacy, chiediamo gentilmente di eliminare dagli allegati
-                                &nbsp;qualsiasi dato identificativo del paziente prima di caricarli online. Grazie&nbsp;
-                                <br />
-                                &nbsp;
-                              </div>
-                              <div align="left">&nbsp;</div>
-                              *
-                              <span
-                                style="
-                                  font-family:
-                                    Trebuchet MS,
-                                    Arial,
-                                    Verdana;
-                                ">
-                                Risposte obbligatorie
-                                <br />
-                                <strong>Dati anagrafici del richiedente</strong>
-                                <br />
-                              </span>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-2">
-                            <div class="hs_lastname hs-lastname hs-fieldtype-text field hs-form-field">
-                              <label
-                                id="label-lastname-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="lastname-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Cognome</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <input
-                                  id="lastname-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  name="lastname"
-                                  required=""
-                                  placeholder=""
-                                  type="text"
-                                  class="hs-input"
-                                  inputmode="text"
-                                  autocomplete="family-name"
-                                  value="" />
-                              </div>
-                            </div>
-                            <div class="hs_firstname hs-firstname hs-fieldtype-text field hs-form-field">
-                              <label
-                                id="label-firstname-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="firstname-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Nome</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <input
-                                  id="firstname-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  name="firstname"
-                                  required=""
-                                  placeholder=""
-                                  type="text"
-                                  class="hs-input"
-                                  inputmode="text"
-                                  autocomplete="given-name"
-                                  value="" />
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div class="hs_address hs-address hs-fieldtype-text field hs-form-field">
-                              <label
-                                id="label-address-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="address-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Indirizzo</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <input
-                                  id="address-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  name="address"
-                                  required=""
-                                  placeholder=""
-                                  type="text"
-                                  class="hs-input"
-                                  inputmode="text"
-                                  autocomplete="address-line1"
-                                  value="" />
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-2">
-                            <div class="hs_email hs-email hs-fieldtype-text field hs-form-field">
-                              <label
-                                id="label-email-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="email-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>E-mail</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <input
-                                  id="email-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  name="email"
-                                  required=""
-                                  placeholder=""
-                                  type="email"
-                                  class="hs-input"
-                                  inputmode="email"
-                                  autocomplete="email"
-                                  value="" />
-                              </div>
-                            </div>
-                            <div class="hs_phone hs-phone hs-fieldtype-phonenumber field hs-form-field">
-                              <label
-                                id="label-phone-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="phone-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>&nbsp;Telefono</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <input
-                                  id="phone-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  name="phone"
-                                  required=""
-                                  placeholder=""
-                                  type="tel"
-                                  class="hs-input"
-                                  inputmode="tel"
-                                  autocomplete="tel"
-                                  value="" />
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div
-                              class="hs_clinical_question hs-clinical_question hs-fieldtype-textarea field hs-form-field">
-                              <label
-                                id="label-clinical_question-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="clinical_question-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Quesito clinico</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <legend class="hs-field-desc">Descriva brevemente le motivazioni dell'indagine</legend>
-                              <div class="input">
-                                <textarea
-                                  id="clinical_question-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input hs-fieldtype-textarea"
-                                  name="clinical_question"
-                                  required=""
-                                  placeholder=""></textarea>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div
-                              class="hs_medical_history hs-medical_history hs-fieldtype-textarea field hs-form-field">
-                              <label
-                                id="label-medical_history-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="medical_history-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Storia clinica&nbsp;</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <legend class="hs-field-desc">
-                                Breve anamnesi (comprese le terapie, in particolare la terapia con &nbsp;ferro) e motivo
-                                della richiesta.
-                              </legend>
-                              <div class="input">
-                                <textarea
-                                  id="medical_history-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input hs-fieldtype-textarea"
-                                  name="medical_history"
-                                  required=""
-                                  placeholder=""></textarea>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div
-                              class="hs_details_of_ethnic_origin hs-details_of_ethnic_origin hs-fieldtype-text field hs-form-field">
-                              <label
-                                id="label-details_of_ethnic_origin-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="details_of_ethnic_origin-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>&nbsp;Eventuali informazioni sull'etnia</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <input
-                                  id="details_of_ethnic_origin-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  name="details_of_ethnic_origin"
-                                  required=""
-                                  placeholder=""
-                                  type="text"
-                                  class="hs-input"
-                                  inputmode="text"
-                                  value="" />
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div
-                              class="hs_patient_s_birth_date hs-patient_s_birth_date hs-fieldtype-date field hs-form-field">
-                              <label
-                                id="label-patient_s_birth_date-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="patient_s_birth_date-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>data di nascita paziente</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <div class="hs-dateinput">
-                                  <input
-                                    id="patient_s_birth_date-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                    class="hs-input"
-                                    type="text"
-                                    readonly=""
-                                    required=""
-                                    value="" />
-                                  <input name="patient_s_birth_date" class="hs-input" type="hidden" value="" />
-                                  <div class="hs-datepicker" style="position: absolute; z-index: 10000">
-                                    <div
-                                      class="pika-single fn-date-picker is-hidden is-bound"
-                                      style="position: static; left: auto; top: auto"></div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div class="hs_sex hs-sex hs-fieldtype-radio field hs-form-field">
-                              <label id="label-sex-a897176f-71a3-49e3-960f-20c040ababd0_8058" class="">
-                                <span>Sesso</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <ul role="checkbox" class="inputs-list multi-container">
-                                  <li class="hs-form-radio" role="radio">
-                                    <label
-                                      for="sex0-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                      class="hs-form-radio-display">
-                                      <input
-                                        id="sex0-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                        class="hs-input"
-                                        type="radio"
-                                        name="sex"
-                                        value="M" />
-                                      <span>M</span>
-                                    </label>
-                                  </li>
-                                  <li class="hs-form-radio" role="radio">
-                                    <label
-                                      for="sex1-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                      class="hs-form-radio-display">
-                                      <input
-                                        id="sex1-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                        class="hs-input"
-                                        type="radio"
-                                        name="sex"
-                                        value="F" />
-                                      <span>F</span>
-                                    </label>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div
-                              class="hs_please_indicate_any_abnormalities_arising_from_your_investigation hs-please_indicate_any_abnormalities_arising_from_your_investigation hs-fieldtype-textarea field hs-form-field">
-                              <label
-                                id="label-please_indicate_any_abnormalities_arising_from_your_investigation-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="please_indicate_any_abnormalities_arising_from_your_investigation-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Eventuali anomalie nelle indagini svolte&nbsp;</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <legend class="hs-field-desc">
-                                esami di chimica clinica (bilirubina, stato marziale, altro)&nbsp;
-                              </legend>
-                              <div class="input">
-                                <textarea
-                                  id="please_indicate_any_abnormalities_arising_from_your_investigation-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input hs-fieldtype-textarea"
-                                  name="please_indicate_any_abnormalities_arising_from_your_investigation"
-                                  required=""
-                                  placeholder=""></textarea>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div class="hs_emocromo hs-emocromo hs-fieldtype-textarea field hs-form-field">
-                              <label
-                                id="label-emocromo-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="emocromo-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>emocromo</span>
-                              </label>
-                              <div class="input">
-                                <textarea
-                                  id="emocromo-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input hs-fieldtype-textarea"
-                                  name="emocromo"
-                                  placeholder=""></textarea>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div
-                              class="hs_haemoglobin_asset hs-haemoglobin_asset hs-fieldtype-textarea field hs-form-field">
-                              <label
-                                id="label-haemoglobin_asset-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="haemoglobin_asset-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>
-                                  assetto emoglobinico (commentare od inviare fax del profilo HPLC od elettroforetico,
-                                  al numero verde 800019668)
-                                </span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <div class="input">
-                                <textarea
-                                  id="haemoglobin_asset-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input hs-fieldtype-textarea"
-                                  name="haemoglobin_asset"
-                                  required=""
-                                  placeholder=""></textarea>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div class="hs_diagnosi hs-diagnosi hs-fieldtype-textarea field hs-form-field">
-                              <label
-                                id="label-diagnosi-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="diagnosi-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Diagnosi</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <legend class="hs-field-desc">Ipotesi diagnostica</legend>
-                              <div class="input">
-                                <textarea
-                                  id="diagnosi-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input hs-fieldtype-textarea"
-                                  name="diagnosi"
-                                  required=""
-                                  placeholder=""></textarea>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div class="hs_other hs-other hs-fieldtype-textarea field hs-form-field">
-                              <label
-                                id="label-other-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="other-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>Altro&nbsp;</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <legend class="hs-field-desc">Ulteriori informazioni</legend>
-                              <div class="input">
-                                <textarea
-                                  id="other-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input hs-fieldtype-textarea"
-                                  name="other"
-                                  required=""
-                                  placeholder=""></textarea>
-                              </div>
-                            </div>
-                          </fieldset>
-                          <fieldset class="form-columns-1">
-                            <div class="hs_file_upload hs-file_upload hs-fieldtype-file field hs-form-field">
-                              <label
-                                id="label-file_upload-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                class=""
-                                for="file_upload-a897176f-71a3-49e3-960f-20c040ababd0_8058">
-                                <span>IMPORTANTE</span>
-                                <span class="hs-form-required">*</span>
-                              </label>
-                              <legend class="hs-field-desc">
-                                È possibile caricare documenti relativi al caso (cromatogrammi e altri report). vedere
-                                le istruzioni e il file
-                              </legend>
-                              <div class="input">
-                                <input
-                                  id="file_upload-a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                                  class="hs-input"
-                                  type="file"
-                                  required=""
-                                  name="file_upload"
-                                  size="30"
-                                  multiple="" />
-                              </div>
-                            </div>
-                          </fieldset>
-                          <div class="hs_submit hs-submit">
-                            <div class="hs-field-desc" style="display: none"></div>
-                            <div class="actions">
-                              <input type="submit" class="hs-button primary large" value="Invia" />
-                            </div>
-                          </div>
-                          <input
-                            name="hs_context"
-                            type="hidden"
-                            value='{"embedAtTimestamp":"1760604114150","formDefinitionUpdatedAt":"1733367560490","lang":"en","embedType":"REGULAR","clonedFromForm":"ef3bbc84-8891-484b-8d6b-e68f05f99314","draftState":"DRAFT","userAgent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36","pageTitle":"Form in Italian for Question HB for the Expert","pageUrl":"https://www-tosoh-diagnostics-it.sandbox.hs-sites.com/it/modulo-per-quesito-hb?hs_preview=vpuxPgsf-197684455441&amp;","pageId":"197684455441","urlParams":{"hs_preview":"vpuxPgsf-197684455441"},"isHubSpotCmsGeneratedPage":true,"hutk":"2db91e2d6e478a9b323c1f210d666f88","__hstc":"233546881.2db91e2d6e478a9b323c1f210d666f88.1749035741110.1760108276975.1760113866185.32","formTarget":"#hs_form_target_module_17606027674923_flex_form","formInstanceId":"8058","rawInlineMessage":"Thanks for submitting the form.","hsFormKey":"1c3c5df214acf3e1797d141481dba3f6","contentType":"landing-page","pageName":"Form in Italian for Question HB for the Expert","dateFields":"patient_s_birth_date","rumScriptExecuteTime":614.4000000003725,"rumTotalRequestTime":886.8000000007451,"rumTotalRenderTime":962.5,"rumServiceResponseTime":272.40000000037253,"rumFormRenderTime":75.69999999925494,"connectionType":"4g","firstContentfulPaint":0,"largestContentfulPaint":0,"locale":"en","timestamp":1760604114287,"originalEmbedContext":{"portalId":"19644636","formId":"a897176f-71a3-49e3-960f-20c040ababd0","region":"na1","target":"#hs_form_target_module_17606027674923_flex_form","isBuilder":false,"isTestPage":false,"isPreview":false,"formInstanceId":"8058","formsBaseUrl":"/_hcms/forms","deactivateSmartForm":true,"css":"","inlineMessage":"Thanks for submitting the form.","useDraft":true,"isMobileResponsive":true,"rawInlineMessage":"Thanks for submitting the form.","hsFormKey":"1c3c5df214acf3e1797d141481dba3f6","pageName":"Form in Italian for Question HB for the Expert","pageId":"197684455441","contentType":"landing-page","formData":{"cssClass":"hs-form stacked hs-custom-form"},"isCMSModuleEmbed":true},"correlationId":"da5082e7-201c-4487-abc4-812c205c9e89","renderedFieldsIds":["lastname","firstname","address","email","phone","clinical_question","medical_history","details_of_ethnic_origin","patient_s_birth_date","sex","please_indicate_any_abnormalities_arising_from_your_investigation","emocromo","haemoglobin_asset","diagnosi","other","file_upload"],"captchaStatus":"NOT_APPLICABLE","emailResubscribeStatus":"NOT_APPLICABLE","isInsideCrossOriginFrame":false,"source":"forms-embed-1.9978","sourceName":"forms-embed","sourceVersion":"1.9978","sourceVersionMajor":"1","sourceVersionMinor":"9978","allPageIds":{"embedContextPageId":"197684455441","contentPageId":197684455441,"contentAnalyticsPageId":"197684455441"},"_debug_embedLogLines":[{"clientTimestamp":1760604114210,"level":"INFO","message":"Retrieved customer callbacks used on embed context: [\"getExtraMetaDataBeforeSubmit\"]"},{"clientTimestamp":1760604114210,"level":"INFO","message":"Retrieved pageContext values which may be overriden by the embed context: {\"pageTitle\":\"Form in Italian for Question HB for the Expert\",\"pageUrl\":\"https://www-tosoh-diagnostics-it.sandbox.hs-sites.com/it/modulo-per-quesito-hb?hs_preview=vpuxPgsf-197684455441&amp;\",\"userAgent\":\"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36\",\"urlParams\":{\"hs_preview\":\"vpuxPgsf-197684455441\"},\"pageId\":\"197684455441\",\"contentAnalyticsPageId\":\"197684455441\",\"contentPageId\":197684455441,\"isHubSpotCmsGeneratedPage\":true}"},{"clientTimestamp":1760604114211,"level":"INFO","message":"Retrieved countryCode property from normalized embed definition response: \"GR\""}]}' />
-                          <iframe
-                            name="target_iframe_a897176f-71a3-49e3-960f-20c040ababd0_8058"
-                            style="display: none"></iframe>
-                        </form>
-                      </div>
-                    </span>
-                  </div>
-                </tosoh-in-view>
+        <div
+          class="bg-ghost-white p-lg md:p-xl gap-lg m-auto flex min-h-[30rem] w-full max-w-[32rem] flex-col items-center justify-center rounded-xl">
+          <img
+            src="https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/c50aecc3d639d993708863451867f2935a00537d.jpg"
+            alt="Dr. Robert Chen"
+            class="border-imperial-red aspect-square w-32 rounded-full border-4 object-cover" />
+
+          <div class="gap-sm flex flex-col text-center">
+            <span class="text-3xl font-semibold">Dr. Robert Chen</span>
+            <p class="text-nickel text-2xl">Professor of Diagnostics, Global Health University</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- MODAL COMPONENT DEMO -->
+    <!-- ============================================ -->
+    <div class="p-md gap-lg max-w-max-page mt-4xl m-auto flex flex-col">
+      <h3 class="text-5xl font-semibold">Modal Component Demo</h3>
+      <div class="gap-md flex flex-wrap">
+        <tosoh-modal variant="action" modalid="demo_modal_1" class="w-fit-content">
+          <button class="button">Open Modal 1</button>
+        </tosoh-modal>
+
+        <tosoh-modal variant="modal" modalid="demo_modal_1">
+          <h4 slot="title" class="text-2xl font-semibold">Welcome to Tosoh Diagnostics</h4>
+          <div slot="content" class="gap-md flex flex-col">
+            <p>
+              This is a demo modal showcasing the modal component. It can contain any content including forms, images,
+              and text.
+            </p>
+            <p class="text-nickel">
+              The modal is dismissible by clicking outside, pressing Escape, or using the close button.
+            </p>
+          </div>
+        </tosoh-modal>
+
+        <tosoh-modal variant="action" modalid="demo_modal_2" class="w-fit-content">
+          <button class="button outlined">Open Modal 2</button>
+        </tosoh-modal>
+
+        <tosoh-modal variant="modal" modalid="demo_modal_2">
+          <h4 slot="title" class="text-2xl font-semibold">Contact Information</h4>
+          <div slot="content" class="gap-md flex flex-col">
+            <p class="text-lg font-semibold">Get in Touch</p>
+            <p>Email: info@tosoh-diagnostics.com</p>
+            <p>Phone: +1 (555) 123-4567</p>
+            <p>Address: 123 Diagnostics Way, Science City, SC 12345</p>
+          </div>
+        </tosoh-modal>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ACCORDION COMPONENT DEMO -->
+    <!-- ============================================ -->
+    <div class="p-md max-w-max-page bg-prussian-blue mt-4xl m-auto">
+      <h3 class="mb-lg text-5xl font-semibold text-white">Accordion Component Demo</h3>
+
+      <div class="gap-sm flex flex-col">
+        <tosoh-accordion groupId="1" variant="action" class="accordion-action">
+          <span class="text-xl text-white">What makes Tosoh Diagnostics unique?</span>
+        </tosoh-accordion>
+        <tosoh-accordion groupId="1" variant="reveal">
+          <p class="text-white">
+            Tosoh Diagnostics combines cutting-edge technology with decades of expertise in clinical diagnostics. Our
+            systems offer unparalleled accuracy, efficiency, and reliability for laboratories worldwide.
+          </p>
+        </tosoh-accordion>
+
+        <tosoh-accordion groupId="2" variant="action" class="accordion-action">
+          <span class="text-xl text-white">How do I get technical support?</span>
+        </tosoh-accordion>
+        <tosoh-accordion groupId="2" variant="reveal">
+          <p class="text-white">
+            Our technical support team is available 24/7 via phone, email, or our online portal. We also offer on-site
+            support and comprehensive training programs for your team.
+          </p>
+        </tosoh-accordion>
+
+        <tosoh-accordion groupId="3" variant="action" class="accordion-action">
+          <span class="text-xl text-white">What products does Tosoh offer?</span>
+        </tosoh-accordion>
+        <tosoh-accordion groupId="3" variant="reveal">
+          <p class="text-white">
+            Tosoh offers a comprehensive range of diagnostic analyzers, including automated immunoassay systems, HPLC
+            systems for diabetes monitoring, and automated glycohemoglobin analyzers. We also provide reagents,
+            calibrators, and quality control materials.
+          </p>
+        </tosoh-accordion>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- IN-VIEW ANIMATION DEMO -->
+    <!-- ============================================ -->
+    <div class="p-md max-w-max-page mt-4xl m-auto">
+      <h3 class="mb-lg text-5xl font-semibold">In-View Animation Demo</h3>
+      <div class="gap-xl flex flex-col">
+        <tosoh-in-view x="0" y="2rem" delay="0" duration="600">
+          <div class="bg-ghost-white p-xl rounded-xl">
+            <h4 class="mb-md text-3xl font-semibold">Precision Diagnostics</h4>
+            <p class="text-nickel text-lg">
+              Our advanced systems deliver accurate results with minimal sample volume, ensuring optimal patient care
+              and laboratory efficiency.
+            </p>
+          </div>
+        </tosoh-in-view>
+
+        <tosoh-in-view x="0" y="2rem" delay="200" duration="600">
+          <div class="bg-ghost-white p-xl rounded-xl">
+            <h4 class="mb-md text-3xl font-semibold">Automated Workflow</h4>
+            <p class="text-nickel text-lg">
+              Streamline your laboratory operations with our fully automated analyzers, reducing hands-on time and
+              increasing throughput.
+            </p>
+          </div>
+        </tosoh-in-view>
+
+        <tosoh-in-view x="0" y="2rem" delay="400" duration="600">
+          <div class="bg-ghost-white p-xl rounded-xl">
+            <h4 class="mb-md text-3xl font-semibold">Global Support Network</h4>
+            <p class="text-nickel text-lg">
+              Access our worldwide network of technical experts and comprehensive training programs to maximize your
+              investment in Tosoh technology.
+            </p>
+          </div>
+        </tosoh-in-view>
+      </div>
+    </div>
+
+    <!-- ============================================ -->
+    <!-- ACCENT CARDS SECTION -->
+    <!-- ============================================ -->
+    <div class="max-w-max-page bg-prussian-blue mt-4xl m-auto overflow-hidden">
+      <div class="gap-md relative flex w-full flex-col md:flex-row">
+        <div class="grid-accent position-bl"></div>
+        <div class="grid-accent position-tr"></div>
+
+        <div
+          class="pt-md md:pt-2xl pr-md md:pr-2xl pb-md md:pb-2xl pl-md md:pl-2xl text-ghost-white gap-md relative flex w-full flex-col">
+          <div class="gap-base flex flex-col items-center text-center">
+            <div class="text-imperial-red w-full text-xl font-thin tracking-widest">
+              <span>Seamless Control</span>
+            </div>
+            <div class="font-sans-narrow w-full text-4xl font-semibold">
+              <span>Effortless Operation and Usability</span>
+            </div>
+            <div class="text-nickel w-full text-lg">
+              <span>
+                Our intuitive interfaces and advanced automation make complex diagnostics simple for all users
+              </span>
+            </div>
+          </div>
+
+          <div class="gap-md mt-lg grid grid-cols-1 md:grid-cols-3">
+            <div
+              class="pt-md md:pt-md pr-md md:pr-md pb-md md:pb-md pl-md md:pl-md bg-midnight-green flex overflow-hidden rounded-2xl">
+              <div class="gap-base flex flex-col items-start">
+                <div class="font-sans-narrow w-full text-left text-4xl font-semibold">
+                  <h5><span>Intuitive Touchscreen</span></h5>
+                </div>
+                <div class="text-nickel w-full text-left text-lg">
+                  <p>
+                    The high-resolution Windows-based color touchscreen offers an intuitive, user-friendly experience,
+                    making daily operations simple for all users.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="pt-md md:pt-md pr-md md:pr-md pb-md md:pb-md pl-md md:pl-md bg-midnight-green flex overflow-hidden rounded-2xl">
+              <div class="gap-base flex flex-col items-start">
+                <div class="font-sans-narrow w-full text-left text-4xl font-semibold">
+                  <h5><span>Automated Workflows</span></h5>
+                </div>
+                <div class="text-nickel w-full text-left text-lg">
+                  <p>
+                    Smart automation handles repetitive tasks, allowing your team to focus on critical analysis and
+                    patient care.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="pt-md md:pt-md pr-md md:pr-md pb-md md:pb-md pl-md md:pl-md bg-midnight-green flex overflow-hidden rounded-2xl">
+              <div class="gap-base flex flex-col items-start">
+                <div class="font-sans-narrow w-full text-left text-4xl font-semibold">
+                  <h5><span>Real-time Monitoring</span></h5>
+                </div>
+                <div class="text-nickel w-full text-left text-lg">
+                  <p>
+                    Track sample status and system performance in real-time with comprehensive dashboards and alerts.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <!--end widget-span -->
     </div>
 
-    <div class="max-w-max-page bg-prussian-blue relative mx-auto text-sm text-white">
+    <!-- ============================================ -->
+    <!-- FOOTER -->
+    <!-- ============================================ -->
+    <div class="max-w-max-page bg-prussian-blue relative mx-auto overflow-hidden text-sm text-white">
       <div class="grid-accent position-bl"></div>
       <div class="grid-accent position-tr"></div>
       <div class="gap-sm py-xl px-md flex h-full w-full flex-col items-center justify-center">
         <img class="w-24" src="https://landing.tosoh-diagnostics.com/hubfs/tosoh-logo-white.png" alt="Tosoh Logo" />
         <p class="w-full text-center md:w-1/2">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-          magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+          Tosoh Bioscience is committed to advancing healthcare through innovative diagnostic solutions. Our mission is
+          to provide accurate, reliable, and efficient tools that empower laboratories worldwide.
         </p>
       </div>
       <div class="gap-sm p-md flex flex-col items-center justify-between border-t border-white/10 md:flex-row">
         <p>Copyright ©2025 Tosoh Bioscience. All rights reserved.</p>
         <div class="gap-xs flex items-center">
           <div class="*:px-sm flex divide-x first:pl-0 last:pr-0">
-            <a class="text-white" href="#">Privacy Policy</a>
-            <a class="text-white" href="#">Terms of Service</a>
+            <a class="text-white" href="#privacy">Privacy Policy</a>
+            <a class="text-white" href="#terms">Terms of Service</a>
           </div>
-          <a class="mb-xs text-white" href="https://www.linkedin.com/company/tosoh-bioscience">
+          <a class="mb-xs text-white" href="https://www.linkedin.com/company/tosoh-bioscience" aria-label="LinkedIn">
             <svg width="1.5rem" height="1.5rem" viewBox="0 0 35 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 d="M3.93833 0C2.89382 0 1.89209 0.41493 1.15351 1.15351C0.41493 1.89209 0 2.89382 0 3.93833C0 4.98284 0.41493 5.98458 1.15351 6.72316C1.89209 7.46174 2.89382 7.87667 3.93833 7.87667C4.98284 7.87667 5.98458 7.46174 6.72316 6.72316C7.46174 5.98458 7.87667 4.98284 7.87667 3.93833C7.87667 2.89382 7.46174 1.89209 6.72316 1.15351C5.98458 0.41493 4.98284 0 3.93833 0ZM0.231667 11.12C0.170225 11.12 0.111299 11.1444 0.0678534 11.1879C0.0244075 11.2313 0 11.2902 0 11.3517V35.445C0 35.5729 0.103787 35.6767 0.231667 35.6767H7.645C7.70644 35.6767 7.76537 35.6523 7.80881 35.6088C7.85226 35.5654 7.87667 35.5064 7.87667 35.445V11.3517C7.87667 11.2902 7.85226 11.2313 7.80881 11.1879C7.76537 11.1444 7.70644 11.12 7.645 11.12H0.231667ZM12.2783 11.12C12.2169 11.12 12.158 11.1444 12.1145 11.1879C12.0711 11.2313 12.0467 11.2902 12.0467 11.3517V35.445C12.0467 35.5729 12.1505 35.6767 12.2783 35.6767H19.6917C19.7531 35.6767 19.812 35.6523 19.8555 35.6088C19.8989 35.5654 19.9233 35.5064 19.9233 35.445V22.4717C19.9233 21.55 20.2894 20.6662 20.9411 20.0145C21.5928 19.3628 22.4767 18.9967 23.3983 18.9967C24.32 18.9967 25.2038 19.3628 25.8555 20.0145C26.5072 20.6662 26.8733 21.55 26.8733 22.4717V35.445C26.8733 35.5729 26.9771 35.6767 27.105 35.6767H34.5183C34.5798 35.6767 34.6387 35.6523 34.6821 35.6088C34.7256 35.5654 34.75 35.5064 34.75 35.445V19.4693C34.75 14.9712 30.8395 11.4536 26.3637 11.8595C24.979 11.9865 23.6226 12.3292 22.3438 12.8751L19.9233 13.913V11.3517C19.9233 11.2902 19.8989 11.2313 19.8555 11.1879C19.812 11.1444 19.7531 11.12 19.6917 11.12H12.2783Z"
