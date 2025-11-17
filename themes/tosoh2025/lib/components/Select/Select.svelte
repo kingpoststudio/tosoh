@@ -66,8 +66,11 @@
         class="p-sm focus:ring-imperial-red peer h-full w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
         bind:value
       >
-        <option value="none" selected disabled hidden class="text-imperial-red"
-          >{placeholder ? placeholder : 'Select'}</option
+        <option
+          value=""
+          class="text-default disabled:cursor-not-allowed disabled:opacity-50"
+          selected={activeFilter === '' || !activeFilter}
+          >{placeholder ? placeholder : 'All'}</option
         >
 
         {#if (options?.length === 0 || !options) && activeFilter}
