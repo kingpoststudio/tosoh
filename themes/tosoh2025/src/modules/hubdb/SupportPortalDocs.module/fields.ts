@@ -1,6 +1,7 @@
-import { textField, booleanField, choiceField, groupField } from 'hs-fieldkit';
+import { textField, booleanField, choiceField, groupField, richTextField } from 'hs-fieldkit';
 import {
   breadCrumbField,
+  contentBlockRtfFeatures,
   searchField,
   searchVisibilityRule,
   topicFilters,
@@ -23,17 +24,16 @@ const generateFields = () => {
       inline_help_text:
         'Default language to display the documents in. Make sure the value matches a value from the "LANGUAGES" column in the HubDB table.',
     }),
-    groupField('visible_fields', 'Visible Fields', {
+    groupField('card_fields', 'Card Fields', {
+      inline_help_text:
+        'Define the columns that will be visible in the card. The column IDs must match the column IDs in the HubDB table.',
       children: [
-        booleanField('is_category_visible', 'Is Category visible?'),
-        booleanField('is_designation_visible', 'Is Designation visible?'),
-        booleanField('is_product_code_visible', 'Is Product Code visible?'),
-        booleanField('is_batch_number_visible', 'Is Batch Number visible?', {
-          inline_help_text: 'Applicable only for CofA documents.',
-        }),
-        booleanField('is_expiration_date_visible', 'Is Expiration Date visible?', {
-          inline_help_text: 'Applicable only for CofA documents.',
-        }),
+        textField('above_title', 'Above Title Column ID'),
+        textField('title', 'Title Column ID'),
+        textField('subtitle_1', 'Subtitle 1 Column ID'),
+        textField('subtitle_2', 'Subtitle 2 Column ID'),
+        textField('subtitle_3', 'Subtitle 3 Column ID'),
+        textField('subtitle_4', 'Subtitle 4 Column ID'),
       ],
     }),
 

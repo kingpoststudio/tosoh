@@ -6,20 +6,30 @@
   let activeLanguage = $state(getUrlParam('languages') || item?.values?.languages?.[0]?.label);
   let selectedCardLanguage = $state(activeLanguage);
 
+  const parseColumnId = (columnId: string): string | any[] => {
+    const value = item?.values?.[columnId];
+    if (Array.isArray(value) && value.length > 0) {
+      return value.map((item: any) => item.name).join(', ');
+    } else {
+      if (value?.label) {
+        return value.label;
+      }
+      if (value?.name) {
+        return value.name;
+      }
+      return value;
+    }
+  };
+
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
-  const fileName = item?.values?.f;
-  const categoryLabel = item?.values?.category?.label;
-  const designations = item?.values?.designation;
-  const productCodes = item?.values?.linked_product_codes;
-  const batchNumber = item?.values?.batch_number;
-  const expirationDate = item?.values?.expiration_date;
-  const visibleFields = window?.Tosoh?.SupportPortalDocsContent?.visible_fields;
-  const isCategoryVisible = visibleFields?.is_category_visible;
-  const isDesignationVisible = visibleFields?.is_designation_visible;
-  const isProductCodeVisible = visibleFields?.is_product_code_visible;
-  const isBatchNumberVisible = visibleFields?.is_batch_number_visible;
-  const isExpirationDateVisible = visibleFields?.is_expiration_date_visible;
+  const cardFields = window?.Tosoh?.SupportPortalDocsContent?.card_fields;
+  const aboveTitle = parseColumnId(cardFields?.above_title);
+  const title = parseColumnId(cardFields?.title);
+  const subtitle1 = parseColumnId(cardFields?.subtitle_1);
+  const subtitle2 = parseColumnId(cardFields?.subtitle_2);
+  const subtitle3 = parseColumnId(cardFields?.subtitle_3);
+  const subtitle4 = parseColumnId(cardFields?.subtitle_4);
 
   const constructDownloadUrl = () => {
     return `${documentFolder}${selectedCardLanguage}_${documentUrlPart}.pdf`;
@@ -43,42 +53,29 @@
   <div class="flex h-full w-full flex-col justify-between gap-[1.25rem]">
     <div class="gap-sm flex flex-col">
       <div class="gap-2xs flex flex-wrap">
-        {#if isCategoryVisible && categoryLabel?.length > 0}
-          <span class="text-imperial-red text-lg">{categoryLabel}</span>
+        {#if aboveTitle && aboveTitle?.length > 0}
+          <span class="text-imperial-red text-lg">{aboveTitle}</span>
         {/if}
       </div>
       <h5
         class="break-word text-raisin-black font-sans-narrow group-hover:text-imperial-red font-semibold transition-all duration-200"
       >
-        {fileName}
+        {title}
       </h5>
 
-      {#if (isDesignationVisible && designations?.length > 0) || (isProductCodeVisible && productCodes?.length > 0) || (isBatchNumberVisible && batchNumber?.length > 0) || (isExpirationDateVisible && expirationDate?.length > 0)}
+      {#if (subtitle1 && subtitle1?.length > 0) || (subtitle2 && subtitle2?.length > 0) || (subtitle3 && subtitle3?.length > 0)}
         <div class="gap-3xs flex flex-col flex-wrap">
-          {#if isDesignationVisible && designations?.length > 0}
-            <div class="gap-2xs flex flex-wrap">
-              <span class="text-nickel text-sm"
-                >{designations.map((designation: any) => designation.name).join(', ')}</span
-              >
-            </div>
+          {#if subtitle1 && subtitle1?.length > 0}
+            <span class="text-nickel text-sm">{subtitle1}</span>
           {/if}
-          {#if isProductCodeVisible && productCodes?.length > 0}
-            <div class="gap-2xs flex flex-wrap">
-              <span class="text-imperial-red text-sm"
-                >{productCodes.map((productCode: any) => productCode.name).join(', ')}</span
-              >
-            </div>
+          {#if subtitle2 && subtitle2?.length > 0}
+            <span class="text-imperial-red text-sm">{subtitle2}</span>
           {/if}
-          {#if (isBatchNumberVisible && batchNumber?.length > 0) || (isExpirationDateVisible && expirationDate?.length > 0)}
-            <div class="gap-sm flex flex-row flex-wrap">
-              {#if isBatchNumberVisible && batchNumber?.length > 0}
-                <span class="text-nickel text-sm"><b>Batch No.:</b> {batchNumber || 'N/A'}</span>
-              {/if}
-              {#if isExpirationDateVisible && expirationDate?.length > 0}
-                <span class="text-nickel text-sm"><b> Exp. Date:</b> {expirationDate || 'N/A'}</span
-                >
-              {/if}
-            </div>
+          {#if subtitle3 && subtitle3?.length > 0}
+            <span class="text-nickel text-sm">{subtitle3}</span>
+          {/if}
+          {#if subtitle4 && subtitle4?.length > 0}
+            <span class="text-nickel text-sm">{subtitle4}</span>
           {/if}
         </div>
       {/if}
@@ -90,6 +87,7 @@
           labelPosition="left"
           bind:value={selectedCardLanguage}
           customClasses="w-full max-w-4xl"
+          excludeAllOption={true}
         ></Select>
         <a
           href={constructDownloadUrl()}

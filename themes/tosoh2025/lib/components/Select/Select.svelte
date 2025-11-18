@@ -9,6 +9,7 @@
     displayLabel = true,
     label,
     labelPosition = 'top',
+    excludeAllOption = false,
     name,
     options,
     placeholder,
@@ -26,6 +27,7 @@
     placeholder?: string;
     customClasses?: string;
     value?: unknown;
+    excludeAllOption?: boolean;
   } = $props();
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
@@ -68,8 +70,9 @@
       >
         <option
           value="none"
+          hidden={excludeAllOption}
           class="text-default disabled:cursor-not-allowed disabled:opacity-50"
-          selected={activeFilter === 'none' || !activeFilter}
+          selected={activeFilter === 'none' || !activeFilter || excludeAllOption}
           >{placeholder ? placeholder : 'All'}</option
         >
         {#if (options?.length === 0 || !options) && activeFilter}

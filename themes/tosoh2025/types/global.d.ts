@@ -48,12 +48,13 @@ declare global {
         search: Search;
         title: string;
         topic_filters: TopicFilters;
-        visible_fields: {
-          is_batch_number_visible: boolean;
-          is_category_visible: boolean;
-          is_designation_visible: boolean;
-          is_expiration_date_visible: boolean;
-          is_product_code_visible: boolean;
+        card_fields: {
+          above_title: string;
+          title: string;
+          subtitle_1: string;
+          subtitle_2: string;
+          subtitle_3: string;
+          subtitle_4: string;
         };
       };
       HemoglobinVariantsLibraryContent: {
