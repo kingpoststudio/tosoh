@@ -1,4 +1,5 @@
 {
+    "icon": "calendar-check",
     "label": "Related Events",
     "external_js": [],
     "global": false,

@@ -21,7 +21,9 @@ export const parseUrlFilters = (searchString: string = window.location.search): 
   const filters: FilterCriteria = {};
 
   params.forEach((value, key) => {
-    filters[key] = value;
+    if (value && value?.trim() !== '') {
+      filters[key] = value;
+    }
   });
 
   return filters;

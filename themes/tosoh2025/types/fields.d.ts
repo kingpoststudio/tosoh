@@ -14,8 +14,12 @@ export type TopicFilters = {
 
 export type Search = {
   enable_search: boolean;
-  hubdb_column_id: string;
-  hubdb_table_id: number;
+  hubdb_column_ids:
+    | {
+        hubdb_column_id: string;
+      }[]
+    | null;
+  hubdb_table_id: number | string;
   placeholder: string;
   title: string;
   typeahead_enabled: boolean;

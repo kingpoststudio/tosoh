@@ -1,5 +1,6 @@
 {
-  "label": "Blog Tag Filter",
+    "icon": "tags",
+    "label": "Blog Tag Filter",
   "external_js": [],
   "global": false,
   "help_text": "",

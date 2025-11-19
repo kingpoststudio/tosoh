@@ -117,6 +117,7 @@
   <FilterForm trigger="change" {onChange} {formId}>
     <div class="mt-base">
       <Select
+        excludeAllOption={true}
         options={allProductLines}
         placeholder="All Product Lines"
         name="product_line"
@@ -126,6 +127,7 @@
     </div>
     <div class="mt-base">
       <Select
+        excludeAllOption={true}
         options={instrumentsBasedOnProductLine
           ? instrumentsBasedOnProductLine?.map((instrument) => ({
               label: instrument,
@@ -140,6 +142,7 @@
     </div>
     <div class="mt-base">
       <Select
+        excludeAllOption={true}
         options={splitCompetitorInstruments(activeCompetitorInstruments)}
         name="competitor_instrument_name"
         label="Competitor Instrument"

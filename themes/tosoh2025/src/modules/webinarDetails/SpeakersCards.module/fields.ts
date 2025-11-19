@@ -1,5 +1,5 @@
 import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
-import { presetPaddingFieldsBase, presetPaddingFields } from '../../../../lib/utils/fieldUtils';
+import { presetPaddingFieldsLimited } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -17,11 +17,11 @@ const generateFields = () => {
     }),
 
     groupField('card_settings', 'Card Settings', {
-      children: [...presetPaddingFieldsBase],
+      children: [...presetPaddingFieldsLimited],
     }),
 
     groupField('module_settings', 'Module Settings', {
-      children: [...presetPaddingFields],
+      children: [...presetPaddingFieldsLimited],
     }),
   ];
 };

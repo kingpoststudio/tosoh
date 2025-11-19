@@ -9,7 +9,11 @@ export const deleteMultipleSearchParams = (paramNames: string[]) => {
 export const setSearchParams = (params: Record<string, string>) => {
   const url = new URL(window.location.href);
   Object.entries(params).forEach(([key, value]) => {
-    url.searchParams.set(key, value);
+    if (value === 'none') {
+      url.searchParams.delete(key);
+    } else {
+      url.searchParams.set(key, value);
+    }
   });
   window.history.replaceState({}, '', url.toString());
 };
@@ -70,4 +74,16 @@ export const updateUrlFromCheckbox = (e: Event) => {
 export const getUrlParam = (name: string) => {
   const url = new URL(window.location.href);
   return url.searchParams.get(name);
+};
+
+export const getPaginationParams = (
+  defaultLimit: number,
+  defaultPagination: number
+): { limit: number; pagination: number; offset: number } => {
+  const params = new URLSearchParams(window.location.search);
+  const limit = parseInt(params?.get('limit') || `${defaultLimit}`);
+  const pagination = parseInt(params?.get('pagination') || `${defaultPagination}`);
+  const offset = limit * (pagination - 1) || 0;
+
+  return { limit, pagination, offset };
 };

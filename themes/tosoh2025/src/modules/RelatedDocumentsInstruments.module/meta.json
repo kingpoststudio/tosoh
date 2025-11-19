@@ -1,5 +1,6 @@
 {
-    "label": "Related Documents",
+    "icon": "file-medical",
+    "label": "Instruments - Related Documents",
     "external_js": [],
     "global": false,
     "help_text": "",

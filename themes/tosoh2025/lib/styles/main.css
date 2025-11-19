@@ -35,6 +35,7 @@
 
   --spacing-header-height-mobile: 6rem;
   --spacing-header-height-desktop: 7rem;
+  --spacing-subheader-height: 0px;
 
   --container-12xl: 120rem;
   --container-max-page: 96rem;
@@ -266,7 +267,7 @@ table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) th {
 }
 
 .mt-header-height {
-  margin-top: var(--spacing-header-height);
+  margin-top: calc(var(--spacing-header-height) + var(--spacing-subheader-height, 0rem));
 }
 
 .grid-accent {

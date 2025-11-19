@@ -1,0 +1,10 @@
+{
+    "icon": "question-circle",
+    "global": false,
+    "host_template_types": [
+      "PAGE"
+    ],
+    "label": "HubDB Support Portal Docs",
+    "is_available_for_new_content": false
+  }
+  

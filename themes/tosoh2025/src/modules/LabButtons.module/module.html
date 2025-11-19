@@ -23,10 +23,11 @@
 
           {% set wrapper_size = lab_button.size == 'small' ? 'h-[6rem]' : lab_button.size == 'medium' ? 'h-[7rem]' : 'h-[9rem]' %}
           {% set bracket_size = lab_button.size == 'small' ? 'h-[7.75rem]' : lab_button.size == 'medium' ? 'h-[9rem]' : 'h-[11.5rem]' %}
+          {% set bracket_color = lab_button.bracket_color ? lab_button.bracket_color : 'fill-imperial-red' %}
 
           <div class="group {{ wrapper_size }} relative m-auto block aspect-square">
             <div
-              class="fill-imperial-red {{ bracket_size }} pointer-events-none absolute inset-0 top-[50%] left-[50%] flex aspect-square translate-x-[-50%] translate-y-[-50%] items-center justify-center transition-all duration-600 group-hover:scale-50 group-hover:rotate-180">
+              class="{{ bracket_color }} {{ bracket_size }} pointer-events-none absolute inset-0 top-[50%] left-[50%] flex aspect-square translate-x-[-50%] translate-y-[-50%] items-center justify-center transition-all duration-600 group-hover:scale-50 group-hover:rotate-180">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 197.22 187.39">
                 <path
                   class="bracket"
@@ -38,16 +39,18 @@
             </div>
 
             <div class="absolute inset-0 flex items-center justify-center">
-              <div class="aspect-square h-full overflow-hidden rounded-full">
+              <div
+                class="aspect-square h-full overflow-hidden rounded-full transition-all duration-600 group-hover:scale-110">
                 <img
                   src="{{ lab_button.image.src }}"
                   alt="{{ lab_button.image.alt }}"
+                  width="200"
                   class="h-full w-full object-cover" />
               </div>
             </div>
 
             <div
-              class="{{ wrapper_size }} absolute bottom-[50%] left-[50%] aspect-square translate-x-[-50%] translate-y-[50%] rounded-full bg-black opacity-20"></div>
+              class="{{ wrapper_size }} absolute bottom-[50%] left-[50%] aspect-square translate-x-[-50%] translate-y-[50%] rounded-full bg-black opacity-20 transition-all duration-600 group-hover:scale-110"></div>
             <p
               class="absolute top-[50%] left-[50%] w-fit translate-x-[-50%] translate-y-[-50%] text-center font-semibold text-white">
               {{ lab_button.button_label }}

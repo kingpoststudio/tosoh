@@ -54,7 +54,7 @@
         <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
           {% for image in images %}
             <button
-              class="{{ loop.index == 1 ? 'border-imperial-red' : 'border-border' }} plain group embla__slide product_image_slide relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
+              class="{{ loop.index == 1 ? 'border-imperial-red ml-xl' : 'border-border' }} {{ loop.last ? 'mr-xl' : '' }} plain group embla__slide product_image_slide relative flex aspect-square min-h-full w-[25%] min-w-[25%] basis-[25%] cursor-pointer flex-col self-stretch overflow-hidden rounded-2xl border transition-all duration-200 hover:shadow-sm"
               index="{{ loop.index }}">
               <img
                 src="{{ image.image.src }}"

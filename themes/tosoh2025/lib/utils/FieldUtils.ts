@@ -3,6 +3,7 @@ import {
   choiceField,
   groupField,
   hubDbTableField,
+  imageField,
   numberField,
   textField,
   urlField,
@@ -102,11 +103,18 @@ export const searchField = (extraFields: any = []) => {
         inline_help_text: 'Defines the hubDB table that will be used to search against.',
         ...searchVisibilityRule,
       }),
-      textField('hubdb_column_id', 'HubDB Column ID', {
-        inline_help_text: 'Defines the hubDB column id that will be used to search against.',
-        default: 'search_term',
-        required: true,
-        ...searchVisibilityRule,
+      groupField('hubdb_column_ids', 'HubDB Column IDs', {
+        children: [
+          textField('hubdb_column_id', 'HubDB Column ID', {
+            inline_help_text: 'Defines the hubDB column id that will be used to search against.',
+            required: true,
+            ...searchVisibilityRule,
+          }),
+        ],
+        occurrence: {
+          min: 0,
+          max: null,
+        },
       }),
       textField('title', 'Title', { ...searchVisibilityRule }),
       textField('placeholder', 'Placeholder', {
@@ -122,6 +130,14 @@ export const searchField = (extraFields: any = []) => {
     ],
   });
 };
+
+export const limitedSizeChoices = [
+  ['xs', 'Extra-small'],
+  ['sm', 'Small'],
+  ['base', 'Base'],
+  ['md', 'Medium'],
+  ['lg', 'Large'],
+];
 
 export const sizeChoices = [
   ['auto', 'Auto'],
@@ -311,6 +327,49 @@ export const presetPaddingFieldsBase = [
   }),
 ];
 
+export const presetPaddingFieldsLimited = [
+  choiceField('pt_mobile', 'Top padding (mobile)', {
+    choices: constructFieldValues('pt', limitedSizeChoices),
+    default: 'pt-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pt_desktop', 'Top padding (desktop)', {
+    choices: constructFieldValues('md:pt', limitedSizeChoices),
+    default: 'md:pt-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pr_mobile', 'Right padding (mobile)', {
+    choices: constructFieldValues('pr', limitedSizeChoices),
+    default: 'pr-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pr_desktop', 'Right padding (desktop)', {
+    choices: constructFieldValues('md:pr', limitedSizeChoices),
+    default: 'md:pr-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pb_mobile', 'Bottom padding (mobile)', {
+    choices: constructFieldValues('pb', limitedSizeChoices),
+    default: 'pb-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pb_desktop', 'Bottom padding (desktop)', {
+    choices: constructFieldValues('md:pb', limitedSizeChoices),
+    default: 'md:pb-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pl_mobile', 'Left padding (mobile)', {
+    choices: constructFieldValues('pl', limitedSizeChoices),
+    default: 'pl-base',
+    display_width: 'half_width',
+  }),
+  choiceField('pl_desktop', 'Left padding (desktop)', {
+    choices: constructFieldValues('md:pl', limitedSizeChoices),
+    default: 'md:pl-base',
+    display_width: 'half_width',
+  }),
+];
+
 export const contentBlockRtfFeatures = [
   'indents',
   'charmap',
@@ -426,3 +485,57 @@ export const animationSettingsGroup = groupField('animation_settings', 'Animatio
     }),
   ],
 });
+
+export const documentTypeChoices: string[][] = [
+  ['EXE', 'EXE'],
+  ['Excel Sheet', 'Excel Sheet'],
+  ['DEF', 'DEF'],
+  ['IMAGE', 'IMAGE'],
+  ['PDF', 'PDF'],
+  ['PowerPoint', 'PowerPoint'],
+  ['TXT', 'TXT'],
+  ['Word Document', 'Word Document'],
+  ['Video', 'Video'],
+  ['ZIP', 'ZIP'],
+];
+
+export const relatedDocumentsSharedFields = [
+  textField('locked_message', 'Locked Message', {
+    default: 'Login to unlock and download this file',
+  }),
+  booleanField('is_locked', 'Is Locked', {
+    default: false,
+  }),
+  groupField('tab_group_columns', 'Tab Group Columns', {
+    children: [
+      textField('column_label', 'Column Label'),
+      urlField('url', 'URL', {
+        inline_help_text:
+          'URL that will point to another page on the site. If url is provided, the tab group button will act as a link. ',
+      }),
+      groupField('documents', 'Documents', {
+        children: [
+          textField('document_name', 'Document Name'),
+          textField('document_description', 'Document Description'),
+          imageField('document_image', 'Document Image'),
+          urlField('document_url', 'Document URL', {
+            inline_help_text:
+              'URL that will point to another page on the site. If url is provided, the tab group button will act as a link. ',
+          }),
+          choiceField('document_type', 'Document Type', {
+            choices: documentTypeChoices,
+            default: 'PDF',
+          }),
+        ],
+        occurrence: {
+          min: null,
+          max: null,
+        },
+      }),
+    ],
+    occurrence: {
+      min: null,
+      max: null,
+    },
+  }),
+];

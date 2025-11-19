@@ -1,4 +1,5 @@
 {
+  "icon": "arrow-up",
   "label": "Header (global)",
   "external_js": [],
   "global": true,

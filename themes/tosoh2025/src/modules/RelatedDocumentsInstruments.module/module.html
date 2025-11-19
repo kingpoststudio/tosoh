@@ -1,0 +1,52 @@
+{% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
+{% set tab_group_columns = module.tab_group_columns %}
+{% set lock_card = module.is_locked ? 'disabled' : '' %}
+{% set is_locked = module.is_locked %}
+
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col">
+  {{ macros.tab_actions_selector(tab_group_columns) }}
+
+  {% for tab_group_column in tab_group_columns %}
+    <tosoh-tab-group
+      variant="tab"
+      groupId="{{ tab_group_column.column_label }}"
+      {{ loop.first ? 'active="true"' : '' }}>
+      <div class="gap-sm grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        {% for document in tab_group_column.documents %}
+          {% set document_image = document.document_image %}
+          {% set document_url = document.document_url %}
+
+          <a
+            href="{{ is_locked ? '/_hcms/mem/login' : document_url.href }}"
+            target="_blank"
+            {{ lock_card }}
+            class="group border-border relative flex aspect-square min-h-[24rem] max-w-full cursor-pointer flex-col items-center overflow-hidden rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm">
+            {{ macros.render_download_document_icon(true) }}
+
+            <div class="h-full w-full overflow-hidden rounded-t-2xl">
+              <img src="{{ document_image.src }}" alt="{{ document_image.alt }}" class="h-full w-full object-cover" />
+            </div>
+
+            <div class="p-base gap-sm flex h-fit w-full items-center">
+              {{ macros.render_document_type(document.document_type) }}
+
+              <div class="gap-2xs flex flex-col">
+                <h6
+                  class="text-default group-hover:text-imperial-red group-[&[disabled]]:text-nickel font-sans-narrow font-semibold transition-all duration-200">
+                  {{ document.document_name }}
+                </h6>
+
+                {% if document.document_description %}
+                  <span class="text-nickel gap-xs flex flex-row items-center text-sm">
+                    {{ document.document_description }}
+                  </span>
+                {% endif %}
+              </div>
+            </div>
+            {{ macros.render_lock(module.locked_message) }}
+          </a>
+        {% endfor %}
+      </div>
+    </tosoh-tab-group>
+  {% endfor %}
+</div>

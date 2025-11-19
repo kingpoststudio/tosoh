@@ -173,7 +173,8 @@
       ></ItemsGrid>
 
       <div class={`${rows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData}></PaginationWithLimit>
+        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
+        ></PaginationWithLimit>
       </div>
     {/if}
   {/if}
@@ -181,6 +182,7 @@
 
 <div
   transition:fade={{ duration: 100 }}
+  id={formId}
   class="md:pl-2xl md:pr-2xl md:pt-lg md:pb-lg p-md h-fit-content max-w-max-page gap-lg m-auto flex w-full flex-col"
 >
   {#if isLoading}

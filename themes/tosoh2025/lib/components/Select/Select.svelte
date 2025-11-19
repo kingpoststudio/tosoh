@@ -9,9 +9,11 @@
     displayLabel = true,
     label,
     labelPosition = 'top',
+    excludeAllOption = false,
     name,
     options,
     placeholder,
+    customClasses,
     value = $bindable(),
   }: {
     customClearFilter?: () => void;
@@ -23,13 +25,15 @@
     name: string;
     options: any[];
     placeholder?: string;
+    customClasses?: string;
     value?: unknown;
+    excludeAllOption?: boolean;
   } = $props();
 
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
 </script>
 
-<div class="gap-sm flex h-full flex-col">
+<div class={`gap-sm flex h-full flex-col ${customClasses}`}>
   <div class={`gap-sm flex h-full ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     {#if displayLabel}
       <div class="gap-sm flex items-center">
@@ -64,10 +68,13 @@
         class="p-sm focus:ring-imperial-red peer h-full w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
         bind:value
       >
-        <option value="none" selected disabled hidden class="text-imperial-red"
-          >{placeholder ? placeholder : 'Select'}</option
+        <option
+          value="none"
+          hidden={excludeAllOption}
+          class="text-default disabled:cursor-not-allowed disabled:opacity-50"
+          selected={activeFilter === 'none' || !activeFilter || excludeAllOption}
+          >{placeholder ? placeholder : excludeAllOption ? 'Select' : 'All'}</option
         >
-
         {#if (options?.length === 0 || !options) && activeFilter}
           <option value={activeFilter} selected disabled hidden class="text-imperial-red"
             >{activeFilter}</option

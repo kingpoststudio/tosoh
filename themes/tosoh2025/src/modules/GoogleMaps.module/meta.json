@@ -1,4 +1,5 @@
 {
+    "icon": "map-marker-alt",
     "label": "Google Maps",
     "external_js": [],
     "global": false,

@@ -203,6 +203,7 @@
     </div>
     <div class="w-full min-w-[16rem] md:w-fit">
       <Select
+        excludeAllOption={true}
         placeholder={'Select Category'}
         displayLabel={false}
         options={categoryOptions}
