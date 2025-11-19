@@ -52,7 +52,7 @@ function isValidRequestBody(body: unknown): body is FetchMatchesRequest {
 
   return (
     typeof term === "string" &&
-    typeof tableId === "string" &&
+    typeof tableId === "number" &&
     Array.isArray(columnIds) &&
     columnIds.length > 0 &&
     columnIds.every((id) => typeof id === "string")
@@ -203,8 +203,8 @@ function validateRequestBody(body: unknown): FetchMatchesRequest {
     // Validate tableId
     if (!bodyObj.tableId) {
       errors.push("tableId is required");
-    } else if (typeof bodyObj.tableId !== "string") {
-      errors.push("tableId must be a string");
+    } else if (typeof bodyObj.tableId !== "number") {
+      errors.push("tableId must be a number");
     }
 
     // Validate columnIds
