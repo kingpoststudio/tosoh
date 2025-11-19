@@ -73,7 +73,7 @@
           hidden={excludeAllOption}
           class="text-default disabled:cursor-not-allowed disabled:opacity-50"
           selected={activeFilter === 'none' || !activeFilter || excludeAllOption}
-          >{placeholder ? placeholder : 'All'}</option
+          >{placeholder ? placeholder : excludeAllOption ? 'Select' : 'All'}</option
         >
         {#if (options?.length === 0 || !options) && activeFilter}
           <option value={activeFilter} selected disabled hidden class="text-imperial-red"
