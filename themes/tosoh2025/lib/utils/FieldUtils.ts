@@ -112,7 +112,7 @@ export const searchField = (extraFields: any = []) => {
           }),
         ],
         occurrence: {
-          min: 1,
+          min: 0,
           max: null,
         },
       }),
