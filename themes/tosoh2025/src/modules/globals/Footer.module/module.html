@@ -14,8 +14,10 @@
 {% set wrapper_classes= has_active_menu ? "footer-menu-container menu-items-"~active_menu.children|length : '' %}
 
 <div class="border-border bg-prussian-blue relative w-full overflow-hidden border-t">
-  <div class="grid-accent position-bl"></div>
-  <div class="grid-accent position-tr"></div>
+  {% if !active_logo  && !has_active_menu %}
+    <div class="grid-accent position-bl"></div>
+    <div class="grid-accent position-tr"></div>
+  {% endif %}
   <div class="max-w-max-page {{ wrapper_classes }} mx-auto text-sm text-white">
     {% if has_active_menu %}
       <div class="p-lg gap-lg grid grid-cols-1 md:gap-0">
