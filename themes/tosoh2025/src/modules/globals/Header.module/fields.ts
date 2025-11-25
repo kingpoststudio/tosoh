@@ -28,6 +28,7 @@ const generateFields = () => {
               choices: [
                 ['button', 'Button'],
                 ['button outlined', 'Button (outlined)'],
+                ['link', 'Link'],
               ],
             }),
           ],
