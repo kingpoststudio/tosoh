@@ -9,22 +9,24 @@ import {
 } from 'hs-fieldkit';
 import { configurationChoices } from '../../../../lib/utils/FieldUtils';
 
+export const headerCtasFields = [
+  textField('link_label', 'Link label'),
+  linkField('link', 'Link'),
+  choiceField('variant', 'Variant', {
+    choices: [
+      ['button', 'Button'],
+      ['button outlined', 'Button (outlined)'],
+      ['link', 'Link'],
+    ],
+  }),
+];
+
 const headerFields = [
   imageField('logo', 'Logo'),
   menuField('menu', 'Navigation menu'),
   linkField('logo_link', 'Logo link'),
   groupField('ctas', 'CTAs', {
-    children: [
-      textField('link_label', 'Link label'),
-      linkField('link', 'Link'),
-      choiceField('variant', 'Variant', {
-        choices: [
-          ['button', 'Button'],
-          ['button outlined', 'Button (outlined)'],
-          ['link', 'Link'],
-        ],
-      }),
-    ],
+    children: headerCtasFields,
     occurrence: {
       min: null,
       max: 2,

@@ -1,4 +1,5 @@
 {% set config_settings = widget_data.config_settings.body  %}
+{% set header_overrides = config_settings.header_overrides %}
 {% set active_configuration = {}  %}
 
 
@@ -24,16 +25,16 @@
   {% set active_configuration = module.internal %}
 {% endif %}
 
-{% set active_configuration_menu =  config_settings.header_menu_override ? menu(config_settings.header_menu_override) : menu(active_configuration.menu) %}
+{% set active_configuration_menu =  header_overrides.menu ? menu(header_overrides.menu) : menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
 
-{% set active_auxiliary_menu = config_settings.header_auxiliary_menu_override ? menu(config_settings.header_auxiliary_menu_override) : menu(active_configuration.auxiliary_menu) %}
+{% set active_auxiliary_menu = header_overrides.auxiliary_menu ? menu(header_overrides.auxiliary_menu) : menu(active_configuration.auxiliary_menu) %}
 {% set active_auxiliary_menu_json = active_auxiliary_menu|tojson %}
   
 {% set active_logo = active_configuration.logo.src %}
 {% set active_logo_link = active_configuration.logo_link.url.href or '/' %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
-{% set active_ctas = active_configuration.ctas %}
+{% set active_ctas = header_overrides.ctas ? header_overrides.ctas : active_configuration.ctas %}
 {% set active_portal_access = active_configuration.portal_access %}
 
 {% set logged_in = request_contact.is_logged_in %}
@@ -76,15 +77,6 @@
           <a class="button" href="{{ auth_href }}" target="_self">{{ active_portal_access.login_label }}</a>
         {% endif %}
       {% endif %}
-    </div>
-  {% endif %}
-
-  {% if active_aux|length %}
-    <div slot="aux" class="gap-sm flex text-sm uppercase text-imperial-red">
-      {% for aux in active_aux %}
-        {% set aux_target = aux.link.open_in_new_tab ? "_blank" : "_self" %}
-        <a href="{{ aux.link.url.href }}" target="{{ aux_target }}">{{ aux.linkLabel }}</a>
-      {% endfor %}
     </div>
   {% endif %}
 </tosoh-header>

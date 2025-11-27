@@ -1,4 +1,6 @@
 {% set config_settings = widget_data.config_settings.body %}
+{% set footer_overrides = config_settings.footer_overrides %}
+
 {% set active_configuration = {} %}
 
 {% if config_settings.selected_configuration == 'default' %}
@@ -19,11 +21,11 @@
 
 {% set active_logo = active_configuration.logo.src %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
-{% set active_info = active_configuration.info %}
-{% set active_copyright = active_configuration.copyright %}
-{% set active_legal = config_settings.override_footer_legal ? config_settings.override_footer_legal : active_configuration.legal %}
+{% set active_info = footer_overrides.info ? footer_overrides.info : active_configuration.info %}
+{% set active_copyright = footer_overrides.copyright ? footer_overrides.copyright : active_configuration.copyright %}
+{% set active_legal = footer_overrides.legal ? footer_overrides.legal : active_configuration.legal %}
 {% set active_linkedin = active_configuration.linkedin %}
-{% set active_menu = config_settings.footer_menu_override ? menu(config_settings.footer_menu_override) : menu(active_configuration.menu) %}
+{% set active_menu = footer_overrides.menu ? menu(footer_overrides.menu) : menu(active_configuration.menu) %}
 {% set has_active_menu = active_menu.children|length > 0 %}
 
 {% set wrapper_classes= has_active_menu ? "footer-menu-container menu-items-"~active_menu.children|length : '' %}
