@@ -15,7 +15,7 @@ const headerFields = [
   linkField('logo_link', 'Logo link'),
   groupField('ctas', 'CTAs', {
     children: [
-      textField('linkLabel', 'Link label'),
+      textField('link_label', 'Link label'),
       linkField('link', 'Link'),
       choiceField('variant', 'Variant', {
         choices: [

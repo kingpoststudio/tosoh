@@ -1,15 +1,30 @@
-{% set active_configuration = module.footer_configurations|selectattr('configuration_name', 'equalto',  widget_data.selected_footer_configuration.value)|first %}
+{% set config_settings = widget_data.config_settings.body %}
+{% set active_configuration = {} %}
+
+{% if config_settings.selected_configuration == 'default' %}
+  {% set active_configuration = module.default %}
+{% elif config_settings.selected_configuration == 'gr01' %}
+  {% set active_configuration = module.gr01 %}
+{% elif config_settings.selected_configuration == 'aia_cl300' %}
+  {% set active_configuration = module.aia_cl300 %}
+{% elif config_settings.selected_configuration == 'webinars' %}
+  {% set active_configuration = module.webinars %}
+{% elif config_settings.selected_configuration == 'support_portal' %}
+  {% set active_configuration = module.support_portal %}
+{% elif config_settings.selected_configuration == 'italian_microsite' %}
+  {% set active_configuration = module.italian_microsite %}
+{% elif config_settings.selected_configuration == 'internal' %}
+  {% set active_configuration = module.internal %}
+{% endif %}
 
 {% set active_logo = active_configuration.logo.src %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
 {% set active_info = active_configuration.info %}
 {% set active_copyright = active_configuration.copyright %}
-{% set active_legal = active_configuration.legal %}
+{% set active_legal = config_settings.override_footer_legal ? config_settings.override_footer_legal : active_configuration.legal %}
 {% set active_linkedin = active_configuration.linkedin %}
-{% set active_menu = active_configuration.menu %}
-{% set active_menu = menu(active_menu) %}
+{% set active_menu = config_settings.footer_menu_override ? menu(config_settings.footer_menu_override) : menu(active_configuration.menu) %}
 {% set has_active_menu = active_menu.children|length > 0 %}
-{% set active_menu_json = active_menu|tojson %}
 
 {% set wrapper_classes= has_active_menu ? "footer-menu-container menu-items-"~active_menu.children|length : '' %}
 
@@ -55,7 +70,7 @@
           <div class="*:px-sm flex divide-x divide-white first:pl-0 last:pr-0">
             {% for legal in active_legal %}
               {% set legal_target = legal.link.open_in_new_tab ? "_blank" : "_self" %}
-              <a href="{{ legal.link.url.href }}" target="{{ legal_target }}">{{ legal.linkLabel }}</a>
+              <a href="{{ legal.link.url.href }}" target="{{ legal_target }}">{{ legal.link_label }}</a>
             {% endfor %}
           </div>
         {% endif %}

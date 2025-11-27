@@ -1,4 +1,4 @@
-import { choiceField, menuField } from 'hs-fieldkit';
+import { choiceField, groupField, linkField, menuField, textField } from 'hs-fieldkit';
 import { configurationChoices } from '../../../lib/utils/FieldUtils';
 
 const generateFields = () => {
@@ -18,6 +18,13 @@ const generateFields = () => {
     }),
     menuField('footer_menu_override', 'Footer menu override', {
       inline_help_text: 'Override the footer menu with a custom menu.',
+    }),
+    groupField('override_footer_legal', 'Override footer legal links', {
+      children: [textField('link_label', 'Link label'), linkField('link', 'Link')],
+      occurrence: {
+        min: null,
+        max: 3,
+      },
     }),
   ];
 };

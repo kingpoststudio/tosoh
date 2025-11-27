@@ -66,7 +66,7 @@
       {% for cta in active_ctas %}
         {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self" %}
         <a class="{{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
-          {{ cta.linkLabel }}
+          {{ cta.link_label }}
         </a>
       {% endfor %}
       {% if active_portal_access.is_enabled %}
