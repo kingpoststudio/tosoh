@@ -1,4 +1,27 @@
-{% set active_configuration = module.header_configurations|selectattr('configuration_name', 'equalto',  widget_data.selected_header_configuration.value)|first %}
+{% set active_configuration = {}  %}
+
+
+{% if widget_data.config_settings.body.selected_configuration == 'default' %}
+  {% set active_configuration = module.default %}
+
+{% elif widget_data.config_settings.body.selected_configuration == 'gr01' %}
+  {% set active_configuration = module.gr01 %}
+
+{% elif widget_data.config_settings.body.selected_configuration == 'aia_cl300' %}
+  {% set active_configuration = module.aia_cl300 %}
+
+{% elif widget_data.config_settings.body.selected_configuration == 'webinars' %}
+  {% set active_configuration = module.webinars %}
+
+{% elif widget_data.config_settings.body.selected_configuration == 'support_portal' %}
+  {% set active_configuration = module.support_portal %}
+
+{% elif widget_data.config_settings.body.selected_configuration == 'italian_microsite' %}
+  {% set active_configuration = module.italian_microsite %}
+
+{% elif widget_data.config_settings.body.selected_configuration == 'internal' %}
+  {% set active_configuration = module.internal %}
+{% endif %}
 
 {% set active_configuration_menu = menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
