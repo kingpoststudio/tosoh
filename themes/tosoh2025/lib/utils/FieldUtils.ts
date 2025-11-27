@@ -539,3 +539,13 @@ export const relatedDocumentsSharedFields = [
     },
   }),
 ];
+
+export const configurationChoices = [
+  ['default', 'Default'],
+  ['gr01', 'GR01'],
+  ['aia_cl300', 'AIA-CL300'],
+  ['webinars', 'Webinars'],
+  ['support_portal', 'Support Portal'],
+  ['italian_microsite', 'Italian Microsite'],
+  ['internal', 'Internal'],
+];
