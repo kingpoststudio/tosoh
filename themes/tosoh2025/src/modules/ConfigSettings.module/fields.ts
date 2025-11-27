@@ -13,9 +13,16 @@ const generateFields = () => {
     }),
 
     groupField('header_overrides', 'Header overrides', {
+      inline_help_text: 'Override the header only in this page with a custom configuration.',
       children: [
         menuField('menu', 'Menu', {
           inline_help_text: 'Override the header menu with a custom menu.',
+        }),
+        choiceField('menu_justification', 'Menu justification', {
+          choices: [
+            ['center', 'Center'],
+            ['end', 'Right'],
+          ],
         }),
         groupField('ctas', 'CTAs', {
           children: headerCtasFields,
@@ -31,6 +38,7 @@ const generateFields = () => {
     }),
 
     groupField('footer_overrides', 'Footer overrides', {
+      inline_help_text: 'Override the footer only in this page with a custom configuration.',
       children: [
         menuField('menu', 'Menu', {
           inline_help_text: 'Override the footer menu with a custom menu.',

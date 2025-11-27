@@ -5,6 +5,7 @@
 
   const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
   const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
+  const menuJustification: 'center' | 'end' = window.Tosoh?.Header?.menuJustification || 'end';
 
   let activeMenuItem: number | null = $state(null);
   let timeout: ReturnType<typeof setTimeout> | null = $state(null);
@@ -48,7 +49,7 @@
   <header>
     <svelte:element this={'slot'} name="logo" />
 
-    <nav aria-label="Main navigation">
+    <nav aria-label="Main navigation" class={`justify-${menuJustification}`}>
       {#if menu}
         <ul
           class="first-level"
@@ -148,7 +149,16 @@
 
   nav {
     height: 100%;
-    margin-left: auto;
+    width: 100%;
+    display: flex;
+
+    &.justify-center {
+      justify-content: center;
+    }
+
+    &.justify-end {
+      justify-content: flex-end;
+    }
 
     ul {
       list-style: none;

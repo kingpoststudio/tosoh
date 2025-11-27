@@ -32,6 +32,13 @@ const headerFields = [
       max: 2,
     },
   }),
+  choiceField('menu_justification', 'Menu justification', {
+    choices: [
+      ['center', 'Center'],
+      ['end', 'Right'],
+    ],
+    default: 'end',
+  }),
   menuField('auxiliary_menu', 'Auxiliary Menu'),
   groupField('portal_access', 'Portal access', {
     children: [

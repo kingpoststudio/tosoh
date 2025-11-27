@@ -35,6 +35,8 @@
 {% set active_logo_link = active_configuration.logo_link.url.href or '/' %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
 {% set active_ctas = header_overrides.ctas ? header_overrides.ctas : active_configuration.ctas %}
+{% set menu_justification = header_overrides.menu_justification or module.menu_justification or 'end' %}
+
 {% set active_portal_access = active_configuration.portal_access %}
 
 {% set logged_in = request_contact.is_logged_in %}
@@ -50,7 +52,8 @@
     window.Tosoh = window.Tosoh || {};
     window.Tosoh.Header = {
       mainNavigationMenu: {{ active_configuration_menu_json }},
-      auxiliaryMenu: {{ active_auxiliary_menu_json }}
+      auxiliaryMenu: {{ active_auxiliary_menu_json }},
+      menuJustification: '{{ menu_justification }}'
     };
   </script>
 {% end_require_js %}

@@ -10,6 +10,7 @@ declare global {
       Header?: {
         mainNavigationMenu?: HubSpotMenu;
         auxiliaryMenu?: HubSpotMenu;
+        menuJustification?: 'center' | 'end';
       };
 
       SupportPortalContent: {
