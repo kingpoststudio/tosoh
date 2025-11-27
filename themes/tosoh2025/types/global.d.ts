@@ -9,6 +9,7 @@ declare global {
     Tosoh: {
       Header?: {
         mainNavigationMenu?: HubSpotMenu;
+        auxiliaryMenu?: HubSpotMenu;
       };
 
       SupportPortalContent: {

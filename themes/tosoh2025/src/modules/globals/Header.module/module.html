@@ -1,35 +1,39 @@
+{% set config_settings = widget_data.config_settings.body  %}
 {% set active_configuration = {}  %}
 
 
-{% if widget_data.config_settings.body.selected_configuration == 'default' %}
+{% if config_settings.selected_configuration == 'default' %}
   {% set active_configuration = module.default %}
 
-{% elif widget_data.config_settings.body.selected_configuration == 'gr01' %}
+{% elif config_settings.selected_configuration == 'gr01' %}
   {% set active_configuration = module.gr01 %}
 
-{% elif widget_data.config_settings.body.selected_configuration == 'aia_cl300' %}
+{% elif config_settings.selected_configuration == 'aia_cl300' %}
   {% set active_configuration = module.aia_cl300 %}
 
-{% elif widget_data.config_settings.body.selected_configuration == 'webinars' %}
+{% elif config_settings.selected_configuration == 'webinars' %}
   {% set active_configuration = module.webinars %}
 
-{% elif widget_data.config_settings.body.selected_configuration == 'support_portal' %}
+{% elif config_settings.selected_configuration == 'support_portal' %}
   {% set active_configuration = module.support_portal %}
 
-{% elif widget_data.config_settings.body.selected_configuration == 'italian_microsite' %}
+{% elif config_settings.selected_configuration == 'italian_microsite' %}
   {% set active_configuration = module.italian_microsite %}
 
-{% elif widget_data.config_settings.body.selected_configuration == 'internal' %}
+{% elif config_settings.selected_configuration == 'internal' %}
   {% set active_configuration = module.internal %}
 {% endif %}
 
-{% set active_configuration_menu = menu(active_configuration.menu) %}
+{% set active_configuration_menu =  config_settings.header_menu_override ? menu(config_settings.header_menu_override) : menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
+
+{% set active_auxiliary_menu = config_settings.header_auxiliary_menu_override ? menu(config_settings.header_auxiliary_menu_override) : menu(active_configuration.auxiliary_menu) %}
+{% set active_auxiliary_menu_json = active_auxiliary_menu|tojson %}
+  
 {% set active_logo = active_configuration.logo.src %}
 {% set active_logo_link = active_configuration.logo_link.url.href or '/' %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
 {% set active_ctas = active_configuration.ctas %}
-{% set active_aux = active_configuration.aux %}
 {% set active_portal_access = active_configuration.portal_access %}
 
 {% set logged_in = request_contact.is_logged_in %}
@@ -44,7 +48,8 @@
   <script>
     window.Tosoh = window.Tosoh || {};
     window.Tosoh.Header = {
-      mainNavigationMenu: {{ active_configuration_menu_json }}
+      mainNavigationMenu: {{ active_configuration_menu_json }},
+      auxiliaryMenu: {{ active_auxiliary_menu_json }}
     };
   </script>
 {% end_require_js %}
@@ -75,7 +80,7 @@
   {% endif %}
 
   {% if active_aux|length %}
-    <div slot="aux" class="gap-sm flex text-sm uppercase">
+    <div slot="aux" class="gap-sm flex text-sm uppercase text-imperial-red">
       {% for aux in active_aux %}
         {% set aux_target = aux.link.open_in_new_tab ? "_blank" : "_self" %}
         <a href="{{ aux.link.url.href }}" target="{{ aux_target }}">{{ aux.linkLabel }}</a>

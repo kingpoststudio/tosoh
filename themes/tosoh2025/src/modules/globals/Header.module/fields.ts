@@ -30,13 +30,7 @@ const headerFields = [
       max: 2,
     },
   }),
-  groupField('aux', 'Auxiliary links', {
-    children: [textField('linkLabel', 'Link label'), linkField('link', 'Link')],
-    occurrence: {
-      min: null,
-      max: 2,
-    },
-  }),
+  menuField('auxiliary_menu', 'Auxiliary Menu'),
   groupField('portal_access', 'Portal access', {
     children: [
       booleanField('is_enabled', 'Enable portal access?', {

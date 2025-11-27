@@ -3,6 +3,7 @@
   import type { HubSpotMenu } from '../../../types/hubspot';
 
   const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
+  const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
 
   let activeMenuItem: number | null = $state(null);
   let timeout: ReturnType<typeof setTimeout> | null = $state(null);
@@ -88,7 +89,11 @@
     </nav>
 
     <div class="aux">
-      <svelte:element this={'slot'} name="aux" />
+      {#if auxiliaryMenu}
+        {#each auxiliaryMenu.children ?? [] as item}
+          {@render navItem(item)}
+        {/each}
+      {/if}
     </div>
 
     <div class="cta">
@@ -157,7 +162,7 @@
           display: inline-flex;
           align-items: center;
           height: 100%;
-          font-size: 0.95rem;
+          font-size: var(--spacing-base);
           font-weight: 400;
           color: inherit;
           padding-inline: var(--spacing-sm);
@@ -279,6 +284,35 @@
     position: absolute;
     top: var(--spacing-sm);
     right: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-sm);
+    color: var(--color-imperial-red);
+
+    > a {
+      position: relative;
+      color: inherit;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.125rem;
+        background: var(--color-imperial-red);
+        opacity: 0;
+        transform: scaleX(0);
+        transition:
+          opacity 200ms ease-in-out,
+          transform 200ms ease-in-out;
+      }
+      &:hover {
+        &:after {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+      }
+    }
   }
 
   .cta {
