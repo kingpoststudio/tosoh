@@ -66,7 +66,7 @@
     <div slot="cta" class="gap-sm md:pb-2xs flex flex-row">
       {% for cta in active_ctas %}
         {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self" %}
-        <a class="{{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
+        <a class="self-end min-w-lg text-center {{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
           {{ cta.link_label }}
         </a>
       {% endfor %}

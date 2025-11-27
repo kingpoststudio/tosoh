@@ -1,12 +1,15 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
+  import { onMount } from 'svelte';
 
   const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
   const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
 
   let activeMenuItem: number | null = $state(null);
   let timeout: ReturnType<typeof setTimeout> | null = $state(null);
+  let ctasSlotElement: HTMLSlotElement | any = $state(null);
+  let hasCTAs = $state(true);
 
   function setActiveFirstLevelItem(idx: number) {
     if (timeout) clearTimeout(timeout);
@@ -27,6 +30,10 @@
   function hasChildren(item: HubSpotMenu): boolean {
     return !!(item.children && item.children.length > 0);
   }
+
+  onMount(() => {
+    hasCTAs = !!((!!ctasSlotElement && ctasSlotElement?.assignedNodes()?.length > 0) || false);
+  });
 </script>
 
 {#snippet navItem(item: HubSpotMenu)}
@@ -96,9 +103,11 @@
       {/if}
     </div>
 
-    <div class="cta">
-      <svelte:element this={'slot'} name="cta" />
-    </div>
+    {#if hasCTAs}
+      <div class="cta">
+        <svelte:element this={'slot'} name="cta" bind:this={ctasSlotElement} />
+      </div>
+    {/if}
   </header>
 </div>
 
@@ -130,7 +139,7 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     width: 100%;
     max-width: var(--container-max-page);
     padding: var(--spacing-base) var(--spacing-md);
@@ -318,6 +327,6 @@
   .cta {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md, 2rem);
+    gap: var(--spacing-sm);
   }
 </style>
