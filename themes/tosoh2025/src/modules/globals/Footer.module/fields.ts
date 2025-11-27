@@ -1,6 +1,14 @@
 import { groupField, imageField, linkField, menuField, textField } from 'hs-fieldkit';
 import { configurationChoices } from '../../../../lib/utils/FieldUtils';
 
+export const legalFields = groupField('legal', 'Legal links', {
+  children: [textField('link_label', 'Link label'), linkField('link', 'Link')],
+  occurrence: {
+    min: null,
+    max: 3,
+  },
+});
+
 const footerFields = [
   imageField('logo', 'Logo'),
   textField('info', 'Information block', {
@@ -12,13 +20,7 @@ const footerFields = [
     inline_help_text: 'Text to display in the copyright notice',
     default: '© {{ year }} Tosoh Diagnostics. All rights reserved.',
   }),
-  groupField('legal', 'Legal links', {
-    children: [textField('link_label', 'Link label'), linkField('link', 'Link')],
-    occurrence: {
-      min: null,
-      max: 3,
-    },
-  }),
+  legalFields,
   linkField('linkedin', 'LinkedIn'),
 ];
 

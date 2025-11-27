@@ -1,6 +1,7 @@
-import { choiceField, groupField, linkField, menuField, textField } from 'hs-fieldkit';
+import { choiceField, groupField, menuField, textField } from 'hs-fieldkit';
 import { configurationChoices } from '../../../lib/utils/FieldUtils';
 import { headerCtasFields } from '../globals/Header.module/fields';
+import { legalFields } from '../globals/Footer.module/fields';
 
 const generateFields = () => {
   return [
@@ -49,13 +50,7 @@ const generateFields = () => {
         textField('copyright', 'Copyright', {
           inline_help_text: 'Override the footer copyright with a custom text.',
         }),
-        groupField('legal', 'Legal links', {
-          children: [textField('link_label', 'Link label'), linkField('link', 'Link')],
-          occurrence: {
-            min: null,
-            max: 3,
-          },
-        }),
+        legalFields,
       ],
     }),
   ];

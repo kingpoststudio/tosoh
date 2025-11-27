@@ -168,8 +168,8 @@ export const widthChoices = [
 export const constructFieldValues = (tailwindIdentifier: string, choices: string[][]) => {
   let choicesWithPrefixes: any = [];
 
-  choices.map((value) => {
-    choicesWithPrefixes.push([`${tailwindIdentifier}-${value[0]}`, `${value[1]}`]);
+  choices.forEach((choicePair) => {
+    choicesWithPrefixes.push([`${tailwindIdentifier}-${choicePair[0]}`, `${choicePair[1]}`]);
   });
 
   return choicesWithPrefixes;
@@ -178,8 +178,8 @@ export const constructFieldValues = (tailwindIdentifier: string, choices: string
 export const constructClasses = (tailwindIdentifier: string, choices: string[][]) => {
   let twClasses: any = [];
 
-  choices.map((value) => {
-    twClasses.push(`${tailwindIdentifier}-${value[0]}`);
+  choices.forEach((choicePair) => {
+    twClasses.push(`${tailwindIdentifier}-${choicePair[0]}`);
   });
 
   return twClasses;

@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
-  import { onMount } from 'svelte';
 
   const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
   const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
@@ -33,7 +33,7 @@
   }
 
   onMount(() => {
-    hasCTAs = !!((!!ctasSlotElement && ctasSlotElement?.assignedNodes()?.length > 0) || false);
+    hasCTAs = ctasSlotElement?.assignedNodes()?.length > 0 || false;
   });
 </script>
 
