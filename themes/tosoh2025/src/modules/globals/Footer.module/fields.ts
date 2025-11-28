@@ -1,5 +1,5 @@
 import { groupField, imageField, linkField, menuField, textField } from 'hs-fieldkit';
-import { configurationChoices } from '../../../../lib/utils/fieldUtils';
+import { themeConfigurationChoices } from '../../../../lib/utils/fieldUtils';
 
 export const legalFields = groupField('legal', 'Legal links', {
   children: [textField('link_label', 'Link label'), linkField('link', 'Link')],
@@ -27,7 +27,7 @@ const footerFields = [
 const generateFooterFields = () => {
   const footerConfigurations: any[] = [];
 
-  configurationChoices.forEach((choice) => {
+  themeConfigurationChoices.forEach((choice) => {
     footerConfigurations.push(
       groupField(choice[0], choice[1], {
         children: footerFields,

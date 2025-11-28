@@ -540,7 +540,7 @@ export const relatedDocumentsSharedFields = [
   }),
 ];
 
-export const configurationChoices = [
+export const themeConfigurationChoices = [
   ['default', 'Default'],
   ['gr01', 'GR01'],
   ['aia_cl300', 'AIA-CL300'],

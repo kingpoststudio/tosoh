@@ -1,5 +1,5 @@
 import { choiceField, groupField, menuField, textField } from 'hs-fieldkit';
-import { configurationChoices } from '../../../lib/utils/fieldUtils';
+import { themeConfigurationChoices } from '../../../lib/utils/fieldUtils';
 import { headerCtasFields } from '../globals/Header.module/fields';
 import { legalFields } from '../globals/Footer.module/fields';
 
@@ -8,7 +8,7 @@ const generateFields = () => {
     choiceField('selected_configuration', 'Selected configuration', {
       inline_help_text:
         'Based on this selection, the appropriate header and footer configurations will be displayed.',
-      choices: configurationChoices,
+      choices: themeConfigurationChoices,
       required: true,
       default: 'default',
     }),

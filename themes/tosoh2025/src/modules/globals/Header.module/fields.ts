@@ -7,7 +7,7 @@ import {
   textField,
   booleanField,
 } from 'hs-fieldkit';
-import { configurationChoices } from '../../../../lib/utils/fieldUtils';
+import { themeConfigurationChoices } from '../../../../lib/utils/fieldUtils';
 
 export const headerCtasFields = [
   textField('link_label', 'Link label'),
@@ -66,7 +66,7 @@ const headerFields = [
 const generateHeaderFields = () => {
   const headerConfigurations: any[] = [];
 
-  configurationChoices.forEach((choice) => {
+  themeConfigurationChoices.forEach((choice) => {
     headerConfigurations.push(
       groupField(choice[0], choice[1], {
         children: headerFields,
