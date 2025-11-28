@@ -1,29 +1,15 @@
 {% set config_settings = widget_data.config_settings.body  %}
 {% set header_overrides = config_settings.header_overrides %}
-{% set active_configuration = {}  %}
-
-
-{% if config_settings.selected_configuration == 'default' %}
-  {% set active_configuration = module.default %}
-
-{% elif config_settings.selected_configuration == 'gr01' %}
-  {% set active_configuration = module.gr01 %}
-
-{% elif config_settings.selected_configuration == 'aia_cl300' %}
-  {% set active_configuration = module.aia_cl300 %}
-
-{% elif config_settings.selected_configuration == 'webinars' %}
-  {% set active_configuration = module.webinars %}
-
-{% elif config_settings.selected_configuration == 'support_portal' %}
-  {% set active_configuration = module.support_portal %}
-
-{% elif config_settings.selected_configuration == 'italian_microsite' %}
-  {% set active_configuration = module.italian_microsite %}
-
-{% elif config_settings.selected_configuration == 'internal' %}
-  {% set active_configuration = module.internal %}
-{% endif %}
+{% set config_map = {
+  'default': module.default,
+  'gr01': module.gr01,
+  'aia_cl300': module.aia_cl300,
+  'webinars': module.webinars,
+  'support_portal': module.support_portal,
+  'italian_microsite': module.italian_microsite,
+  'internal': module.internal
+} %}
+{% set active_configuration = config_map[config_settings.selected_configuration] %}
 
 {% set active_configuration_menu =  header_overrides.menu ? menu(header_overrides.menu) : menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
