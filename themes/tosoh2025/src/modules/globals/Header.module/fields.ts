@@ -7,7 +7,7 @@ import {
   textField,
   booleanField,
 } from 'hs-fieldkit';
-import { configurationChoices } from '../../../../lib/utils/FieldUtils';
+import { configurationChoices } from '../../../../lib/utils/fieldUtils';
 
 export const headerCtasFields = [
   textField('link_label', 'Link label'),
@@ -51,6 +51,13 @@ const headerFields = [
       linkField('login_redirect_url', 'Login redirect URL'),
       textField('logout_label', 'Logout label', {
         default: 'Logout',
+      }),
+      choiceField('button_type', 'Button type', {
+        choices: [
+          ['button', 'Button'],
+          ['link', 'Link'],
+        ],
+        default: 'button',
       }),
     ],
   }),

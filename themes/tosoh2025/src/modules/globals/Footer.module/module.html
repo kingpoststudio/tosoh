@@ -27,11 +27,12 @@
 {% set active_linkedin = active_configuration.linkedin %}
 {% set active_menu = footer_overrides.menu ? menu(footer_overrides.menu) : menu(active_configuration.menu) %}
 {% set has_active_menu = active_menu.children|length > 0 %}
+{% set has_logo_not_menu = active_logo and !has_active_menu %}
 
 {% set wrapper_classes= has_active_menu ? "footer-menu-container menu-items-"~active_menu.children|length : '' %}
 
 <div class="border-border bg-prussian-blue relative w-full overflow-hidden border-t">
-  {% if !active_logo  && !has_active_menu %}
+  {% if !active_logo  or has_logo_not_menu %}
     <div class="grid-accent position-bl"></div>
     <div class="grid-accent position-tr"></div>
   {% endif %}
@@ -62,7 +63,7 @@
       </div>
     {% endif %}
 
-    <div class="gap-sm p-md flex flex-col items-center justify-between border-t border-white/10 md:flex-row">
+    <div class="gap-sm p-md gap-md flex flex-col items-center border-t border-white/10 md:flex-row">
       {% if active_copyright %}
         <p>{{ active_copyright }}</p>
       {% endif %}

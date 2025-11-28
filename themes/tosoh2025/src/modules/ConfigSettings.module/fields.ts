@@ -1,5 +1,5 @@
 import { choiceField, groupField, menuField, textField } from 'hs-fieldkit';
-import { configurationChoices } from '../../../lib/utils/FieldUtils';
+import { configurationChoices } from '../../../lib/utils/fieldUtils';
 import { headerCtasFields } from '../globals/Header.module/fields';
 import { legalFields } from '../globals/Footer.module/fields';
 

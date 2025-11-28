@@ -1,5 +1,5 @@
 import { groupField, imageField, linkField, menuField, textField } from 'hs-fieldkit';
-import { configurationChoices } from '../../../../lib/utils/FieldUtils';
+import { configurationChoices } from '../../../../lib/utils/fieldUtils';
 
 export const legalFields = groupField('legal', 'Legal links', {
   children: [textField('link_label', 'Link label'), linkField('link', 'Link')],
