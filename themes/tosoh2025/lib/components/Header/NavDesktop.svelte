@@ -1,11 +1,16 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
 
   const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
+  const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
+  const menuJustification: 'center' | 'end' = window.Tosoh?.Header?.menuJustification || 'end';
 
   let activeMenuItem: number | null = $state(null);
   let timeout: ReturnType<typeof setTimeout> | null = $state(null);
+  let ctasSlotElement: HTMLSlotElement | any = $state(null);
+  let hasCTAs = $state(true);
 
   function setActiveFirstLevelItem(idx: number) {
     if (timeout) clearTimeout(timeout);
@@ -26,6 +31,10 @@
   function hasChildren(item: HubSpotMenu): boolean {
     return !!(item.children && item.children.length > 0);
   }
+
+  onMount(() => {
+    hasCTAs = ctasSlotElement?.assignedNodes()?.length > 0 || false;
+  });
 </script>
 
 {#snippet navItem(item: HubSpotMenu)}
@@ -40,7 +49,7 @@
   <header>
     <svelte:element this={'slot'} name="logo" />
 
-    <nav aria-label="Main navigation">
+    <nav aria-label="Main navigation" class={`justify-${menuJustification}`}>
       {#if menu}
         <ul
           class="first-level"
@@ -88,12 +97,18 @@
     </nav>
 
     <div class="aux">
-      <svelte:element this={'slot'} name="aux" />
+      {#if auxiliaryMenu}
+        {#each auxiliaryMenu.children ?? [] as item}
+          {@render navItem(item)}
+        {/each}
+      {/if}
     </div>
 
-    <div class="cta">
-      <svelte:element this={'slot'} name="cta" />
-    </div>
+    {#if hasCTAs}
+      <div class="cta">
+        <svelte:element this={'slot'} name="cta" bind:this={ctasSlotElement} />
+      </div>
+    {/if}
   </header>
 </div>
 
@@ -125,7 +140,7 @@
     position: relative;
     display: flex;
     align-items: flex-end;
-    gap: var(--spacing-md);
+    gap: var(--spacing-sm);
     width: 100%;
     max-width: var(--container-max-page);
     padding: var(--spacing-base) var(--spacing-md);
@@ -134,7 +149,16 @@
 
   nav {
     height: 100%;
-    margin-left: auto;
+    width: 100%;
+    display: flex;
+
+    &.justify-center {
+      justify-content: center;
+    }
+
+    &.justify-end {
+      justify-content: flex-end;
+    }
 
     ul {
       list-style: none;
@@ -157,7 +181,7 @@
           display: inline-flex;
           align-items: center;
           height: 100%;
-          font-size: 0.95rem;
+          font-size: var(--spacing-base);
           font-weight: 400;
           color: inherit;
           padding-inline: var(--spacing-sm);
@@ -279,11 +303,40 @@
     position: absolute;
     top: var(--spacing-sm);
     right: var(--spacing-md);
+    display: flex;
+    gap: var(--spacing-sm);
+    color: var(--color-imperial-red);
+
+    > a {
+      position: relative;
+      color: inherit;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.125rem;
+        background: var(--color-imperial-red);
+        opacity: 0;
+        transform: scaleX(0);
+        transition:
+          opacity 200ms ease-in-out,
+          transform 200ms ease-in-out;
+      }
+      &:hover {
+        &:after {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+      }
+    }
   }
 
   .cta {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md, 2rem);
+    gap: var(--spacing-sm);
   }
 </style>

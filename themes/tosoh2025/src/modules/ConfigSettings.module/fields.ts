@@ -1,26 +1,57 @@
-import { choiceField, menuField } from 'hs-fieldkit';
+import { choiceField, groupField, menuField, textField } from 'hs-fieldkit';
+import { themeConfigurationChoices } from '../../../lib/utils/fieldUtils';
+import { headerCtasFields } from '../globals/Header.module/fields';
+import { legalFields } from '../globals/Footer.module/fields';
 
 const generateFields = () => {
   return [
-    choiceField('selected_header_configuration', 'Selected header configuration', {
-      choices: [
-        ['default', 'Default'],
-        ['gr01', 'GR01'],
-        ['aia_cl300', 'AIA-CL300'],
-        ['webinars', 'Webinars'],
-        ['support_portal', 'Support Portal'],
-        ['italian_microsite', 'Italian Microsite'],
-        ['internal', 'Internal'],
+    choiceField('selected_configuration', 'Selected configuration', {
+      inline_help_text:
+        'Based on this selection, the appropriate header and footer configurations will be displayed.',
+      choices: themeConfigurationChoices,
+      required: true,
+      default: 'default',
+    }),
+
+    groupField('header_overrides', 'Header overrides', {
+      inline_help_text: 'Override the header only in this page with a custom configuration.',
+      children: [
+        menuField('menu', 'Menu', {
+          inline_help_text: 'Override the header menu with a custom menu.',
+        }),
+        choiceField('menu_justification', 'Menu justification', {
+          choices: [
+            ['center', 'Center'],
+            ['end', 'Right'],
+          ],
+        }),
+        groupField('ctas', 'CTAs', {
+          children: headerCtasFields,
+          occurrence: {
+            min: null,
+            max: 2,
+          },
+        }),
+        menuField('auxiliary_menu', 'Auxiliary menu', {
+          inline_help_text: 'Override the auxiliary menu in the header with a custom menu.',
+        }),
       ],
     }),
-    menuField('menu_override', 'Menu override', {
-      inline_help_text: 'Override the main navigation menu with a custom menu.',
-    }),
-    menuField('auxiliary_menu_override', 'Auxiliary menu override', {
-      inline_help_text: 'Override the auxiliary menu with a custom menu.',
-    }),
-    menuField('footer_menu_override', 'Footer menu override', {
-      inline_help_text: 'Override the footer menu with a custom menu.',
+
+    groupField('footer_overrides', 'Footer overrides', {
+      inline_help_text: 'Override the footer only in this page with a custom configuration.',
+      children: [
+        menuField('menu', 'Menu', {
+          inline_help_text: 'Override the footer menu with a custom menu.',
+        }),
+        textField('info', 'Info', {
+          inline_help_text: 'Override the footer info with a custom text.',
+        }),
+        textField('copyright', 'Copyright', {
+          inline_help_text: 'Override the footer copyright with a custom text.',
+        }),
+        legalFields,
+      ],
     }),
   ];
 };

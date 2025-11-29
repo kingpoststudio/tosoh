@@ -513,3 +513,35 @@ option::checkmark {
     }
   }
 }
+
+tosoh-header {
+  div[slot='cta'] {
+    > a.link {
+      position: relative !important;
+      display: block !important;
+      padding-bottom: var(--spacing-sm) !important;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 0.125rem;
+        background: var(--color-imperial-red);
+        opacity: 0;
+        transform: scaleX(0);
+        transition:
+          opacity 200ms ease-in-out,
+          transform 200ms ease-in-out;
+      }
+      &:hover {
+        color: var(--color-imperial-red);
+        &:after {
+          opacity: 1;
+          transform: scaleX(1);
+        }
+      }
+    }
+  }
+}

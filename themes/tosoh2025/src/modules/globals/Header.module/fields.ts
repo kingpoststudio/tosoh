@@ -7,64 +7,78 @@ import {
   textField,
   booleanField,
 } from 'hs-fieldkit';
+import { themeConfigurationChoices } from '../../../../lib/utils/fieldUtils';
+
+export const headerCtasFields = [
+  textField('link_label', 'Link label'),
+  linkField('link', 'Link'),
+  choiceField('variant', 'Variant', {
+    choices: [
+      ['button', 'Button'],
+      ['button outlined', 'Button (outlined)'],
+      ['link', 'Link'],
+    ],
+  }),
+];
+
+const headerFields = [
+  imageField('logo', 'Logo'),
+  menuField('menu', 'Navigation menu'),
+  linkField('logo_link', 'Logo link'),
+  groupField('ctas', 'CTAs', {
+    children: headerCtasFields,
+    occurrence: {
+      min: null,
+      max: 2,
+    },
+  }),
+  choiceField('menu_justification', 'Menu justification', {
+    choices: [
+      ['center', 'Center'],
+      ['end', 'Right'],
+    ],
+    default: 'end',
+  }),
+  menuField('auxiliary_menu', 'Auxiliary Menu'),
+  groupField('portal_access', 'Portal access', {
+    children: [
+      booleanField('is_enabled', 'Enable portal access?', {
+        default: false,
+      }),
+      textField('login_label', 'Login label', {
+        default: 'Login',
+      }),
+      linkField('login_redirect_url', 'Login redirect URL'),
+      textField('logout_label', 'Logout label', {
+        default: 'Logout',
+      }),
+      choiceField('button_type', 'Button type', {
+        choices: [
+          ['button', 'Button'],
+          ['link', 'Link'],
+        ],
+        default: 'button',
+      }),
+    ],
+  }),
+];
+
+const generateHeaderFields = () => {
+  const headerConfigurations: any[] = [];
+
+  themeConfigurationChoices.forEach((choice) => {
+    headerConfigurations.push(
+      groupField(choice[0], choice[1], {
+        children: headerFields,
+      })
+    );
+  });
+
+  return headerConfigurations;
+};
 
 const generateFields = () => {
-  return [
-    groupField('header_configurations', 'Header Configurations', {
-      children: [
-        textField('configuration_name', 'Configuration Name', {
-          inline_help_text:
-            'The "Selected header configuration" field on the page level must match this value to display this header configuration.',
-        }),
-        imageField('logo', 'Logo'),
-        menuField('menu', 'Navigation menu'),
-        linkField('logo_link', 'Logo link'),
-
-        groupField('ctas', 'CTAs', {
-          children: [
-            textField('linkLabel', 'Link label'),
-            linkField('link', 'Link'),
-            choiceField('variant', 'Variant', {
-              choices: [
-                ['button', 'Button'],
-                ['button outlined', 'Button (outlined)'],
-                ['link', 'Link'],
-              ],
-            }),
-          ],
-          occurrence: {
-            min: null,
-            max: 2,
-          },
-        }),
-        groupField('aux', 'Auxiliary links', {
-          children: [textField('linkLabel', 'Link label'), linkField('link', 'Link')],
-          occurrence: {
-            min: null,
-            max: 2,
-          },
-        }),
-        groupField('portal_access', 'Portal access', {
-          children: [
-            booleanField('is_enabled', 'Enable portal access?', {
-              default: false,
-            }),
-            textField('login_label', 'Login label', {
-              default: 'Login',
-            }),
-            linkField('login_redirect_url', 'Login redirect URL'),
-            textField('logout_label', 'Logout label', {
-              default: 'Logout',
-            }),
-          ],
-        }),
-      ],
-      occurrence: {
-        min: null,
-        max: null,
-      },
-    }),
-  ];
+  return generateHeaderFields();
 };
 
 export default generateFields;

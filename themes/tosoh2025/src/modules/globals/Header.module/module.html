@@ -1,12 +1,28 @@
-{% set active_configuration = module.header_configurations|selectattr('configuration_name', 'equalto',  widget_data.selected_header_configuration.value)|first %}
+{% set config_settings = widget_data.config_settings.body  %}
+{% set header_overrides = config_settings.header_overrides %}
+{% set config_map = {
+  'default': module.default,
+  'gr01': module.gr01,
+  'aia_cl300': module.aia_cl300,
+  'webinars': module.webinars,
+  'support_portal': module.support_portal,
+  'italian_microsite': module.italian_microsite,
+  'internal': module.internal
+} %}
+{% set active_configuration = config_map[config_settings.selected_configuration] %}
 
-{% set active_configuration_menu = menu(active_configuration.menu) %}
+{% set active_configuration_menu =  header_overrides.menu ? menu(header_overrides.menu) : menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
+
+{% set active_auxiliary_menu = header_overrides.auxiliary_menu ? menu(header_overrides.auxiliary_menu) : menu(active_configuration.auxiliary_menu) %}
+{% set active_auxiliary_menu_json = active_auxiliary_menu|tojson %}
+  
 {% set active_logo = active_configuration.logo.src %}
 {% set active_logo_link = active_configuration.logo_link.url.href or '/' %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
-{% set active_ctas = active_configuration.ctas %}
-{% set active_aux = active_configuration.aux %}
+{% set active_ctas = header_overrides.ctas ? header_overrides.ctas : active_configuration.ctas %}
+{% set menu_justification = header_overrides.menu_justification or module.menu_justification or 'end' %}
+
 {% set active_portal_access = active_configuration.portal_access %}
 
 {% set logged_in = request_contact.is_logged_in %}
@@ -21,7 +37,9 @@
   <script>
     window.Tosoh = window.Tosoh || {};
     window.Tosoh.Header = {
-      mainNavigationMenu: {{ active_configuration_menu_json }}
+      mainNavigationMenu: {{ active_configuration_menu_json }},
+      auxiliaryMenu: {{ active_auxiliary_menu_json }},
+      menuJustification: '{{ menu_justification }}'
     };
   </script>
 {% end_require_js %}
@@ -34,29 +52,21 @@
   {% endif %}
 
   {% if active_ctas|length or active_portal_access.is_enabled %}
-    <div slot="cta" class="gap-sm md:pb-2xs flex flex-row">
+    <div slot="cta" class="gap-sm flex flex-row">
       {% for cta in active_ctas %}
         {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self" %}
-        <a class="{{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
-          {{ cta.linkLabel }}
+        <a class="self-end min-w-lg text-center {{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
+          {{ cta.link_label }}
         </a>
       {% endfor %}
       {% if active_portal_access.is_enabled %}
+        {% set button_type = active_portal_access.button_type %}
         {% if logged_in %}
-          <a class="button" href="{{ auth_href }}" target="_self">{{ active_portal_access.logout_label }}</a>
+          <a class="{{ button_type }} self-end min-w-lg text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.logout_label }}</a>
         {% else %}
-          <a class="button" href="{{ auth_href }}" target="_self">{{ active_portal_access.login_label }}</a>
+          <a class="{{ button_type }} self-end min-w-lg text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.login_label }}</a>
         {% endif %}
       {% endif %}
-    </div>
-  {% endif %}
-
-  {% if active_aux|length %}
-    <div slot="aux" class="gap-sm flex text-sm uppercase">
-      {% for aux in active_aux %}
-        {% set aux_target = aux.link.open_in_new_tab ? "_blank" : "_self" %}
-        <a href="{{ aux.link.url.href }}" target="{{ aux_target }}">{{ aux.linkLabel }}</a>
-      {% endfor %}
     </div>
   {% endif %}
 </tosoh-header>
