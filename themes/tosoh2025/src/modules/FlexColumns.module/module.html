@@ -78,6 +78,24 @@
   </div>
 {%- endmacro -%}
 
+{# Macro for icon cards list rendering #}
+{%- macro render_icon_cards(icon_cards) -%}
+  <div class="gap-base flex w-full flex-col">
+    {% for item in icon_cards %}
+      <div class="p-lg gap-md flex items-center">
+        {% if item.icon.src %}
+          <img src="{{ item.icon.src }}" alt="{{ item.icon.alt }}" class="h-20 w-20" />
+        {% endif %}
+
+        <div class="gap-xs flex flex-col">
+          <h5 class="text-xl font-bold tracking-wide uppercase">{{ item.title }}</h5>
+          <div class="text-nickel text-base">{{ item.description }}</div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{%- endmacro -%}
+
 {# Macro for image rendering #}
 {%- macro render_image(image) -%}
   {%- if image.type == "single" -%}
@@ -241,6 +259,10 @@
     {# Accordions #}
   {%- elif column.type == "accordions" %}
     {{ render_accordions(column) }}
+
+    {# Icon Cards List #}
+  {%- elif column.type == "icon_cards" %}
+    {{ render_icon_cards(column.icon_cards) }}
 
     {# Navigation List #}
   {%- elif column.type == "navigation_list" %}

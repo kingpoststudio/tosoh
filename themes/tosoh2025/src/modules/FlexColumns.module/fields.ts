@@ -277,6 +277,7 @@ const generateFields = () => {
             ['content', 'Content'],
             ['image', 'Image'],
             ['accordions', 'Accordions'],
+            ['icon_cards', 'Icon Cards'],
             ['video', 'Video'],
             ['form', 'Form'],
             ['spacer', 'Spacer'],
@@ -417,6 +418,24 @@ const generateFields = () => {
             operator: 'EQUAL',
           },
           occurrence: {},
+        }),
+
+        /* Icon Cards List */
+        groupField('icon_cards', 'Icon Cards', {
+          children: [
+            imageField('icon', 'Icon'),
+            textField('title', 'Title'),
+            richTextField('description', 'Description'),
+          ],
+          visibility: {
+            controlling_field_path: 'columns.type',
+            controlling_value_regex: 'icon_cards',
+            operator: 'EQUAL',
+          },
+          occurrence: {
+            min: 0,
+            max: null,
+          },
         }),
 
         /* Form */
