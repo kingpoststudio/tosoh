@@ -359,5 +359,6 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
+    margin-right: var(--spacing-sm);
   }
 </style>

@@ -55,16 +55,16 @@
     <div slot="cta" class="gap-sm flex flex-row">
       {% for cta in active_ctas %}
         {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self" %}
-        <a class="self-end min-w-lg text-center {{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
+        <a class="self-end text-center {{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
           {{ cta.link_label }}
         </a>
       {% endfor %}
       {% if active_portal_access.is_enabled %}
         {% set button_type = active_portal_access.button_type %}
         {% if logged_in %}
-          <a class="{{ button_type }} self-end min-w-lg text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.logout_label }}</a>
+          <a class="{{ button_type }} self-end text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.logout_label }}</a>
         {% else %}
-          <a class="{{ button_type }} self-end min-w-lg text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.login_label }}</a>
+          <a class="{{ button_type }} self-end text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.login_label }}</a>
         {% endif %}
       {% endif %}
     </div>
