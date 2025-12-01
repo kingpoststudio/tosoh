@@ -336,7 +336,7 @@
         display: block;
         position: absolute;
         left: 0;
-        bottom: var(--spacing-sm) * -1;
+        bottom: calc(var(--spacing-sm) * -1);
         width: 100%;
         height: 0.125rem;
         background: var(--color-imperial-red);
