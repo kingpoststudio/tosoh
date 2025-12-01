@@ -5,6 +5,9 @@
 
   const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
   const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
+  const hasAuxiliaryMenu =
+    auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0;
+
   const menuJustification: 'center' | 'end' = window.Tosoh?.Header?.menuJustification || 'end';
 
   let activeMenuItem: number | null = $state(null);
@@ -46,7 +49,7 @@
 {/snippet}
 
 <div class="wrapper">
-  <header>
+  <header class:has-auxiliary-menu={hasAuxiliaryMenu}>
     <svelte:element this={'slot'} name="logo" />
 
     <nav aria-label="Main navigation" class={`justify-${menuJustification}`}>
@@ -139,17 +142,30 @@
   header {
     position: relative;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: var(--spacing-sm);
     width: 100%;
     max-width: var(--container-max-page);
     padding: var(--spacing-base) var(--spacing-md);
     margin: 0 auto;
+    min-height: var(--spacing-header-height-desktop);
+
+    > nav {
+      margin-top: var(--spacing-sm);
+    }
+
+    &.has-auxiliary-menu {
+      align-items: flex-end;
+      > nav {
+        margin-top: 0;
+      }
+    }
   }
 
   nav {
     height: 100%;
     width: 100%;
+    min-height: 100%;
     display: flex;
 
     &.justify-center {
@@ -307,6 +323,11 @@
     gap: var(--spacing-sm);
     color: var(--color-imperial-red);
 
+    > a:last-child {
+      @media (min-width: 768px) {
+        margin-right: var(--spacing-sm);
+      }
+    }
     > a {
       position: relative;
       color: inherit;
@@ -315,7 +336,7 @@
         display: block;
         position: absolute;
         left: 0;
-        bottom: 0;
+        bottom: var(--spacing-sm) * -1;
         width: 100%;
         height: 0.125rem;
         background: var(--color-imperial-red);
