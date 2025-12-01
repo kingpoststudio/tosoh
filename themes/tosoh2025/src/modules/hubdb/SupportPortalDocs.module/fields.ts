@@ -24,6 +24,15 @@ const generateFields = () => {
       inline_help_text:
         'Default language to display the documents in. Make sure the value matches a value from the "LANGUAGES" column in the HubDB table.',
     }),
+    choiceField('language_location', 'Language Location', {
+      inline_help_text:
+        'This is used to determine the final strucutre of the url that will be used to download the document.',
+      choices: [
+        ['before_title', 'Before Title'],
+        ['after_title', 'After Title'],
+      ],
+      default: 'before_title',
+    }),
     groupField('card_fields', 'Card Fields', {
       inline_help_text:
         'Define the columns that will be visible in the card. The column IDs must match the column IDs in the HubDB table.',

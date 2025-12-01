@@ -36,6 +36,7 @@ declare global {
       };
       SupportPortalDocsContent: {
         access_level: 'Customer' | 'Distributor' | 'Internal';
+        language_location: 'before_title' | 'after_title';
         breadcrumbs: {
           title: string;
           url: {

@@ -24,6 +24,7 @@
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
   const cardFields = window?.Tosoh?.SupportPortalDocsContent?.card_fields;
+  const languageLocation = window?.Tosoh?.SupportPortalDocsContent?.language_location;
   const aboveTitle = parseColumnId(cardFields?.above_title);
   const title = parseColumnId(cardFields?.title);
   const subtitle1 = parseColumnId(cardFields?.subtitle_1);
@@ -32,7 +33,11 @@
   const subtitle4 = parseColumnId(cardFields?.subtitle_4);
 
   const constructDownloadUrl = () => {
-    return `${documentFolder}${selectedCardLanguage}_${documentUrlPart}.pdf`;
+    if (languageLocation === 'before_title') {
+      return `${documentFolder}${selectedCardLanguage}_${documentUrlPart}.pdf`;
+    } else {
+      return `${documentFolder}${documentUrlPart}_${selectedCardLanguage}.pdf`;
+    }
   };
 </script>
 
