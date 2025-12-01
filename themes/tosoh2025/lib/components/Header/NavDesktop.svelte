@@ -331,26 +331,10 @@
     > a {
       position: relative;
       color: inherit;
-      &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 0.125rem;
-        background: var(--color-imperial-red);
-        opacity: 0;
-        transform: scaleX(0);
-        transition:
-          opacity 200ms ease-in-out,
-          transform 200ms ease-in-out;
-      }
+      transition: color 200ms ease-in-out;
+
       &:hover {
-        &:after {
-          opacity: 1;
-          transform: scaleX(1);
-        }
+        color: var(--color-black-charcoal);
       }
     }
   }
