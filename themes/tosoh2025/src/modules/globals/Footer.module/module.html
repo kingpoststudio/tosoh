@@ -1,15 +1,3 @@
-{% macro calculate_number_of_menu_items(active_menu, has_logo_or_info) %}
-  {% set active_menu_data = active_menu ? menu(active_menu) : {} %}
-
-  {% if active_menu_data %}
-    {% if has_logo_or_info %}
-      menu-items-{{ active_menu_data.children|length }}
-    {% else %}
-      menu-items-{{ active_menu_data.children|length - 1 }}
-    {% endif %}
-  {% endif %}
-{% endmacro -%}
-
 {% set config_settings = widget_data.config_settings.body %}
 {% set footer_overrides = config_settings.footer_overrides %}
 {%
@@ -32,27 +20,27 @@
 {% set active_legal = footer_overrides.legal ? footer_overrides.legal : active_configuration.legal %}
 {% set active_linkedin = active_configuration.linkedin %}
 {% set active_menu = footer_overrides.menu ? footer_overrides.menu : active_configuration.menu %}
+{% set active_menu_data = active_menu ? menu(active_menu) : {} %}
 {% set has_logo_not_menu = active_logo and !active_menu %}
-{% set has_logo_or_info = active_logo or active_info %}
-{% set number_of_menu_items = calculate_number_of_menu_items(active_menu, has_logo_or_info) %}
-{% set wrapper_classes= active_menu ? "footer-menu-container"~number_of_menu_items : '' %}
+{% set has_logo_or_info = active_logo or active_info ? 'has-logo-or-info' : '' %}
+{% set wrapper_classes= active_menu ? "footer-menu-container menu-items-"~active_menu_data.children|length : '' %}
 
 <div class="border-border bg-prussian-blue relative w-full overflow-hidden border-t">
   {% if !active_logo  or has_logo_not_menu %}
     <div class="grid-accent position-bl"></div>
     <div class="grid-accent position-tr"></div>
   {% endif %}
-  <div class="max-w-max-page {{ wrapper_classes }} mx-auto text-sm text-white">
+  <div class="max-w-max-page {{ wrapper_classes }} {{ has_logo_or_info }} mx-auto text-sm text-white">
     {% if active_menu %}
       <div class="p-lg gap-lg grid grid-cols-1 md:gap-0">
         <div
-          class="gap-base md:px-lg logo-section flex flex-col items-center justify-start text-white md:border-r md:border-white/20">
+          class="{{ has_logo_or_info ? 'gap-base md:px-lg logo-section flex flex-col items-center justify-start text-white md:border-r md:border-white/20' : '' }}">
           {% if active_logo %}
             <img class="w-2xl" src="{{ active_logo }}" alt="{{ active_logo_alt }}" />
           {% endif %}
 
           {% if active_info %}
-            <p class="w-full text-center">{{ active_info }}</p>
+            <div class="w-full text-center">{{ active_info }}</div>
           {% endif %}
         </div>
         {% menu "footer_menu" id='{{active_menu}}' %}

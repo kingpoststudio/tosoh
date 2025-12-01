@@ -396,6 +396,43 @@ option::checkmark {
 .footer-menu-container {
   @apply relative;
 
+  &:not(.has-logo-or-info) {
+    &.menu-items-1 {
+      > div {
+        @apply md:grid-cols-[0fr_1fr];
+      }
+    }
+
+    &.menu-items-2 {
+      > div {
+        @apply md:grid-cols-[0fr_2fr];
+      }
+    }
+
+    &.menu-items-3 {
+      > div {
+        @apply md:grid-cols-[0fr_3fr];
+      }
+    }
+
+    &.menu-items-4 {
+      > div {
+        @apply md:grid-cols-[0fr_4fr];
+      }
+    }
+
+    &.menu-items-5 {
+      > div {
+        @apply md:grid-cols-[0fr_5fr];
+      }
+    }
+    &.menu-items-6 {
+      > div {
+        @apply md:grid-cols-[0fr_6fr];
+      }
+    }
+  }
+
   &.menu-items-1 {
     > div {
       @apply md:grid-cols-[1fr_1fr];
@@ -457,6 +494,19 @@ option::checkmark {
 
       > ul {
         @apply md:grid-cols-5;
+      }
+    }
+  }
+
+  &.menu-items-6 {
+    > div {
+      @apply md:grid-cols-[1fr_6fr];
+    }
+    .hs-menu-wrapper {
+      @apply w-full;
+
+      > ul {
+        @apply md:grid-cols-6;
       }
     }
   }

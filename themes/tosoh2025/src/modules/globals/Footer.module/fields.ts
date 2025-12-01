@@ -1,5 +1,12 @@
-import { groupField, imageField, linkField, menuField, textField } from 'hs-fieldkit';
-import { themeConfigurationChoices } from '../../../../lib/utils/fieldUtils';
+import {
+  groupField,
+  imageField,
+  linkField,
+  menuField,
+  richTextField,
+  textField,
+} from 'hs-fieldkit';
+import { themeConfigurationChoices } from '../../../../lib/utils/FieldUtils';
 
 export const legalFields = groupField('legal', 'Legal links', {
   children: [textField('link_label', 'Link label'), linkField('link', 'Link')],
@@ -11,7 +18,7 @@ export const legalFields = groupField('legal', 'Legal links', {
 
 const footerFields = [
   imageField('logo', 'Logo'),
-  textField('info', 'Information block', {
+  richTextField('info', 'Information block', {
     default:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.,',
   }),
