@@ -5,6 +5,7 @@
   import type { HubSpotMenu } from '../../../types/hubspot';
 
   let menu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
+  let auxiliaryMenu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.auxiliaryMenu || {});
   let isMenuOpen = $state(false);
   let expandedItems: Set<string> = $state(new Set());
 
@@ -152,9 +153,6 @@
             <div class="cta">
               <svelte:element this={'slot'} name="cta" />
             </div>
-            <div class="aux">
-              <svelte:element this={'slot'} name="aux" />
-            </div>
           </div>
           <button class="close" onclick={closeMenu} aria-label="Close menu">
             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -173,6 +171,14 @@
             </ul>
           {/if}
         </nav>
+
+        {#if auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0}
+          <div class="aux">
+            {#each auxiliaryMenu.children ?? [] as item}
+              <a href={item.url} class="link">{@html item.label}</a>
+            {/each}
+          </div>
+        {/if}
       </div>
     </div>
   {/if}
@@ -210,10 +216,6 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-    }
-
-    .aux {
-      margin-top: var(--spacing-sm);
     }
 
     /* Hamburger Button */
@@ -391,6 +393,23 @@
         .label {
           padding-left: calc(var(--spacing-base) * 4);
         }
+      }
+    }
+  }
+
+  .aux {
+    margin-top: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    padding-left: var(--spacing-md);
+    > a {
+      padding-block: var(--spacing-xs);
+      color: var(--color-imperial-red);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 200ms ease-in-out;
+      &:hover {
+        color: var(--color-black-charcoal);
       }
     }
   }
