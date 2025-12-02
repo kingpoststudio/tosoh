@@ -6,7 +6,7 @@ import {
   richTextField,
   textField,
 } from 'hs-fieldkit';
-import { themeConfigurationChoices } from '../../../../lib/utils/FieldUtils';
+import { themeConfigurationChoices } from '../../../../lib/utils/fieldUtils';
 
 export const legalFields = groupField('legal', 'Legal links', {
   children: [textField('link_label', 'Link label'), linkField('link', 'Link')],

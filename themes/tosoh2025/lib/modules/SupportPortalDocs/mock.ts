@@ -4688,7 +4688,7 @@ export const mockPortalDocsFilters = {
 if (IS_MOCK) {
   window.Tosoh.SupportPortalDocsContent = {
     access_level: 'Customer',
-    language_location: 'before_title',
+    document_type: 'cofa',
     breadcrumbs: [
       {
         title: 'Diagnostics EMEA - Portal',

@@ -36,7 +36,7 @@ declare global {
       };
       SupportPortalDocsContent: {
         access_level: 'Customer' | 'Distributor' | 'Internal';
-        language_location: 'before_title' | 'after_title';
+        document_type: 'ifu' | 'sds' | 'cofa';
         breadcrumbs: {
           title: string;
           url: {

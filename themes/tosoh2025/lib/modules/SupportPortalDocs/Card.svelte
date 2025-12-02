@@ -21,10 +21,12 @@
     }
   };
 
+  const cardFields = window?.Tosoh?.SupportPortalDocsContent?.card_fields;
+  const documentType = window?.Tosoh?.SupportPortalDocsContent?.document_type;
+
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
-  const cardFields = window?.Tosoh?.SupportPortalDocsContent?.card_fields;
-  const languageLocation = window?.Tosoh?.SupportPortalDocsContent?.language_location;
+  const batchNumber = item?.values?.batch_number;
   const aboveTitle = parseColumnId(cardFields?.above_title);
   const title = parseColumnId(cardFields?.title);
   const subtitle1 = parseColumnId(cardFields?.subtitle_1);
@@ -33,10 +35,12 @@
   const subtitle4 = parseColumnId(cardFields?.subtitle_4);
 
   const constructDownloadUrl = () => {
-    if (languageLocation === 'before_title') {
+    if (documentType === 'sds') {
       return `${documentFolder}${selectedCardLanguage}_${documentUrlPart}.pdf`;
-    } else {
+    } else if (documentType === 'ifu') {
       return `${documentFolder}${documentUrlPart}_${selectedCardLanguage}.pdf`;
+    } else if (documentType === 'cofa') {
+      return `${documentFolder}${batchNumber}.pdf`;
     }
   };
 </script>

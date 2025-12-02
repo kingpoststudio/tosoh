@@ -24,14 +24,16 @@ const generateFields = () => {
       inline_help_text:
         'Default language to display the documents in. Make sure the value matches a value from the "LANGUAGES" column in the HubDB table.',
     }),
-    choiceField('language_location', 'Language Location', {
+    choiceField('document_type', 'Document Type', {
       inline_help_text:
-        'This is used to determine the final strucutre of the url that will be used to download the document.',
+        'The type of document to display. This will be used to construct the approperiate download urls for the documents.',
       choices: [
-        ['before_title', 'Before Title'],
-        ['after_title', 'After Title'],
+        ['ifu', 'IFU'],
+        ['sds', 'SDS'],
+        ['cofa', 'COFA'],
       ],
-      default: 'before_title',
+      default: 'ifu',
+      required: true,
     }),
     groupField('card_fields', 'Card Fields', {
       inline_help_text:
