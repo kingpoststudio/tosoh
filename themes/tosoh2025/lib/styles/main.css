@@ -270,6 +270,10 @@ table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) th {
   margin-top: calc(var(--spacing-header-height) + var(--spacing-subheader-height, 0rem));
 }
 
+.pt-header-height {
+  padding-top: calc(var(--spacing-header-height) + var(--spacing-subheader-height, 0rem) + 2rem);
+}
+
 .grid-accent {
   position: absolute;
   width: 64rem;
