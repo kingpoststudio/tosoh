@@ -1,6 +1,6 @@
 import { choiceField, groupField, menuField, textField } from 'hs-fieldkit';
 import { themeConfigurationChoices } from '../../../lib/utils/fieldUtils';
-import { headerCtasFields } from '../globals/Header.module/fields';
+import { headerCtasFields, portalAccessLabelsFields } from '../globals/Header.module/fields';
 import { legalFields } from '../globals/Footer.module/fields';
 
 const generateFields = () => {
@@ -20,18 +20,21 @@ const generateFields = () => {
           inline_help_text: 'Override the header menu with a custom menu.',
         }),
         choiceField('menu_justification', 'Menu justification', {
+          inline_help_text: 'Override the menu justification in the header with a custom value.',
           choices: [
             ['center', 'Center'],
             ['end', 'Right'],
           ],
         }),
         groupField('ctas', 'CTAs', {
+          inline_help_text: 'Override the CTAs in the header with a custom configuration.',
           children: headerCtasFields,
           occurrence: {
             min: null,
             max: 2,
           },
         }),
+        ...portalAccessLabelsFields(false),
         menuField('auxiliary_menu', 'Auxiliary menu', {
           inline_help_text: 'Override the auxiliary menu in the header with a custom menu.',
         }),

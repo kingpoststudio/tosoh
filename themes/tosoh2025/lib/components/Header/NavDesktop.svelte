@@ -323,7 +323,8 @@
     gap: var(--spacing-sm);
     color: var(--color-imperial-red);
 
-    > a:last-child {
+    > a:last-child,
+    > span:last-child {
       @media (min-width: 768px) {
         margin-right: var(--spacing-sm);
       }

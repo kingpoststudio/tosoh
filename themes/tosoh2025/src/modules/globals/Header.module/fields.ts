@@ -21,6 +21,15 @@ export const headerCtasFields = [
   }),
 ];
 
+export const portalAccessLabelsFields = (haveDefaultValues: boolean) => [
+  textField('logout_label', 'Logout label', {
+    default: haveDefaultValues ? 'Logout' : undefined,
+  }),
+  textField('login_label', 'Login label', {
+    default: haveDefaultValues ? 'Login' : undefined,
+  }),
+];
+
 const headerFields = [
   imageField('logo', 'Logo'),
   menuField('menu', 'Navigation menu'),
@@ -45,13 +54,8 @@ const headerFields = [
       booleanField('is_enabled', 'Enable portal access?', {
         default: false,
       }),
-      textField('login_label', 'Login label', {
-        default: 'Login',
-      }),
       linkField('login_redirect_url', 'Login redirect URL'),
-      textField('logout_label', 'Logout label', {
-        default: 'Logout',
-      }),
+      ...portalAccessLabelsFields(true),
       choiceField('button_type', 'Button type', {
         choices: [
           ['button', 'Button'],

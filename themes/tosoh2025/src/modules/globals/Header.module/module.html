@@ -61,10 +61,13 @@
       {% endfor %}
       {% if active_portal_access.is_enabled %}
         {% set button_type = active_portal_access.button_type %}
+        {% set logout_label = header_overrides.logout_label or active_portal_access.logout_label %}
+        {% set login_label = header_overrides.login_label or active_portal_access.login_label %}
+          
         {% if logged_in %}
-          <a class="{{ button_type }} self-end text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.logout_label }}</a>
+          <a class="{{ button_type }} self-end text-center" href="{{ auth_href }}" target="_self">{{ logout_label }}</a>
         {% else %}
-          <a class="{{ button_type }} self-end text-center" href="{{ auth_href }}" target="_self">{{ active_portal_access.login_label }}</a>
+          <a class="{{ button_type }} self-end text-center" href="{{ auth_href }}" target="_self">{{ login_label }}</a>
         {% endif %}
       {% endif %}
     </div>
