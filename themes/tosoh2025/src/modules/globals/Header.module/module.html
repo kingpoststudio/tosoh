@@ -52,7 +52,7 @@
   {% endif %}
 
   {% if active_ctas|length or active_portal_access.is_enabled %}
-    <div slot="cta" class="gap-sm flex flex-row">
+    <div slot="cta" class="gap-[1.5rem] flex flex-row">
       {% for cta in active_ctas %}
         {% set cta_target = cta.link.open_in_new_tab ? "_blank" : "_self" %}
         <a class="self-end text-center {{ cta.variant or 'button' }}" href="{{ cta.link.url.href }}" target="{{ cta_target }}">
