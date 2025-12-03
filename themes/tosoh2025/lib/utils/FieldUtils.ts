@@ -392,6 +392,30 @@ export const contentBlockRtfFeatures = [
   'lineheight',
   'subscript',
   'superscript',
+];
+
+export const rtfFeatures = [
+  'indents',
+  'charmap',
+  'advanced_emphasis',
+  'standard_emphasis',
+  'anchor',
+  'colors',
+  'block',
+  'link',
+  'cta',
+  'embed',
+  'video',
+  'hr',
+  'table',
+  'personalize',
+  'emoji',
+  'image',
+  'lists',
+  'alignment',
+  'lineheight',
+  'subscript',
+  'superscript',
   'source_code',
 ];
 

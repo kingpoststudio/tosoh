@@ -20,6 +20,7 @@ import {
   linkVariantChoices,
   paddingFields,
   presetPaddingFields,
+  rtfFeatures,
   sizeChoices,
   textAlignmentChoices,
   themeColorChoices,
@@ -497,6 +498,7 @@ const generateFields = () => {
           children: [
             richTextField('content', 'Content', {
               inline_help_text: 'Enter the rich text content for this block.',
+              enabled_features: rtfFeatures,
             }),
           ],
           visibility: {
