@@ -12,7 +12,7 @@
       if (hsFormQuantityInput) hsFormQuantityInput.value = quantity;
       if (hsFormPackSizeInput) hsFormPackSizeInput.value = pack_size;
 
-      if (!quantity || !pack_size) {
+      if (!quantity || !pack_size || pack_size === 'none') {
         document.querySelector('button[id="request-quote-button"]')?.setAttribute('disabled', '');
       } else {
         document.querySelector('button[id="request-quote-button"]')?.removeAttribute('disabled');
