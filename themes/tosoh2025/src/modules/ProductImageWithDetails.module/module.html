@@ -35,10 +35,10 @@
 {% set eyebrow = module.eyebrow %}
 {% set title = module.title %}
 {% set description = module.description %}
-{% set part_no = module.part_no %}
-{% set short_description = module.short_description %}
-{% set key_features = module.key_features %}
-{% set pick_sizes = module.pick_sizes %}
+{% set part_no = module.part_no_group %}
+{% set short_description = module.short_description_group %}
+{% set key_features = module.key_features_group %}
+{% set pack_sizes = module.pack_sizes %}
 {% set form = module.form %}
 {% set download_brochure_url = module.download_brochure_url %}
 {% set product_type = module.product_type %}
@@ -105,16 +105,16 @@
 
     <div class="text-nickel w-full">{{ description }}</div>
     <div class="mt-sm gap-sm flex w-full flex-col md:flex-row">
-      {% if part_no %}
+      {% if part_no.part_no_value %}
         <div class="flex w-fit flex-col">
-          <span>Part No:</span>
-          <span class="text-sm">{{ part_no }}</span>
+          <span>{{ part_no.part_no_label }}</span>
+          <span class="text-sm">{{ part_no.part_no_value }}</span>
         </div>
       {% endif %}
-      {% if short_description %}
+      {% if short_description.short_description_value %}
         <div class="flex w-fit flex-col">
-          <span>Short Description:</span>
-          <span class="text-sm">{{ short_description }}</span>
+          <span>{{ short_description.short_description_label }}</span>
+          <span class="text-sm">{{ short_description.short_description_value }}</span>
         </div>
       {% endif %}
     </div>
@@ -125,8 +125,8 @@
           class="border-imperial-red p-sm focus:ring-imperial-red peer focus:ring-opacity-50 h-full w-full cursor-pointer appearance-none rounded-lg border focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
           name="pick_size">
           <option disabled selected hidden value="none">Pick Size</option>
-          {% for pick_size in pick_sizes %}
-            <option value="{{ pick_size.pick_size_value }}">{{ pick_size.pick_size_value }}</option>
+          {% for pack_size in pack_sizes %}
+            <option value="{{ pack_size.pack_size_value }}">{{ pack_size.pack_size_value }}</option>
           {% endfor %}
         </select>
         <div
@@ -145,6 +145,7 @@
             name="quantity"
             step="1"
             min="1"
+            defaultValue="1"
             class="placeholder:text-default h-full w-full focus:outline-none" />
         </div>
       </div>
@@ -176,15 +177,12 @@
       </div>
     </tosoh-modal>
 
-    <div class="gap-sm flex w-full flex-col">
-      <p class="text-lg font-semibold">Key Features</p>
-
-      <div class="gap-md p-md pt-sm grid grid-cols-2">
-        {% for key_feature in key_features %}
-          <div class="text-nickel"><li>{{ key_feature.key_value }}</li></div>
-        {% endfor %}
+    {% if key_features.features_content %}
+      <div class="gap-sm flex w-full flex-col">
+        <p class="text-lg font-semibold">{{ key_features.title }}</p>
+        <div>{{ key_features.features_content }}</div>
       </div>
-    </div>
+    {% endif %}
 
     {% if product_type == 'instrument' %}
       <div class="gap-sm flex w-full flex-col md:flex-row">

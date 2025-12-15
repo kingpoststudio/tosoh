@@ -36,18 +36,36 @@ const generateFields = () => {
     richTextField('description', 'Description', {
       enabled_features: contentBlockRtfFeatures,
     }),
-    textField('part_no', 'Part No'),
-    textField('short_description', 'Short Description'),
-    groupField('key_features', 'Key Features', {
-      children: [textField('key_value', 'Key Value')],
-      occurrence: {
-        min: 0,
-        max: null,
-      },
-    }),
-    groupField('pick_sizes', 'Pick Sizes', {
+
+    groupField('part_no_group', 'Part No Group', {
       children: [
-        numberField('pick_size_value', 'Pick Size Value', {
+        textField('part_no_label', 'Part No Label', {
+          default: 'Part No:',
+        }),
+        textField('part_no_value', 'Part No Value'),
+      ],
+    }),
+    groupField('short_description_group', 'Short Description Group', {
+      children: [
+        textField('short_description_label', 'Short Description Label', {
+          default: 'Short Description:',
+        }),
+        textField('short_description_value', 'Short Description Value'),
+      ],
+    }),
+    groupField('key_features_group', 'Key Features Group', {
+      children: [
+        textField('title', 'Key Features Title', {
+          default: 'Key Features',
+        }),
+        richTextField('features_content', 'Key Features Content', {
+          enabled_features: contentBlockRtfFeatures,
+        }),
+      ],
+    }),
+    groupField('pack_sizes', 'Pack Sizes', {
+      children: [
+        numberField('pack_size_value', 'Pack Size Value', {
           step: 1,
           min: 1,
           max: null,
