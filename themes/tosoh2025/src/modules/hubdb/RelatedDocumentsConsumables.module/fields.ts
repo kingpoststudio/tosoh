@@ -1,5 +1,5 @@
 import { choiceField, groupField, textField } from 'hs-fieldkit';
-import { relatedDocumentsSharedFields } from '../../../../lib/utils/fieldUtils';
+import { lockedGroupFields, relatedDocumentsSharedFields } from '../../../../lib/utils/fieldUtils';
 
 const columnLabelField = (defaultValue: string) =>
   textField('column_label', 'Column Label', {
@@ -25,13 +25,13 @@ const generateFields = () => {
     }),
 
     groupField('ifu_documents', 'Instructions For Use (IFU) Documents', {
-      children: [columnLabelField('Instructions For Use (IFU)')],
+      children: [columnLabelField('Instructions For Use (IFU)'), ...lockedGroupFields],
     }),
     groupField('sds_documents', 'Safety Data Sheets (SDS) Documents', {
-      children: [columnLabelField('Safety Data Sheets (SDS)')],
+      children: [columnLabelField('Safety Data Sheets (SDS)'), ...lockedGroupFields],
     }),
     groupField('cofa_documents', 'Certificates of Analysis (CofA) Documents', {
-      children: [columnLabelField('Certificates of Analysis (CofA)')],
+      children: [columnLabelField('Certificates of Analysis (CofA)'), ...lockedGroupFields],
     }),
     ...relatedDocumentsSharedFields,
   ];

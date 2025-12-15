@@ -523,13 +523,16 @@ export const documentTypeChoices: string[][] = [
   ['ZIP', 'ZIP'],
 ];
 
-export const relatedDocumentsSharedFields = [
+export const lockedGroupFields = [
   textField('locked_message', 'Locked Message', {
     default: 'Login to unlock and download this file',
   }),
   booleanField('is_locked', 'Is locked when logged out?', {
     default: false,
   }),
+];
+
+export const relatedDocumentsSharedFields = [
   groupField('tab_group_columns', 'Tab Group Columns', {
     children: [
       textField('column_label', 'Column Label'),
@@ -556,6 +559,7 @@ export const relatedDocumentsSharedFields = [
           max: null,
         },
       }),
+      ...lockedGroupFields,
     ],
     occurrence: {
       min: null,

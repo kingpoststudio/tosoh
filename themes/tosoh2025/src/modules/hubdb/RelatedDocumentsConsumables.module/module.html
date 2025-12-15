@@ -2,11 +2,19 @@
 {% set tab_group_columns = module.tab_group_columns %}
 {% set logged_in = request_contact.is_logged_in %}
 {% set is_locked = module.is_locked and not logged_in %}
-{% set lock_card = is_locked ? 'disabled' : '' %}
 
 {% set ifu_documents = module.ifu_documents %}
 {% set sds_documents = module.sds_documents %}
 {% set cofa_documents = module.cofa_documents %}
+
+{% set ifu_locked = ifu_documents.is_locked and not logged_in %}
+{% set ifu_locked_message = ifu_documents.locked_message %}
+
+{% set sds_locked = sds_documents.is_locked and not logged_in %}
+{% set sds_locked_message = sds_documents.locked_message %}
+
+{% set cofa_locked = cofa_documents.is_locked and not logged_in %}
+{% set cofa_locked_message = cofa_documents.locked_message %}
 
 {% set hubdb_tab_group_columns = [ifu_documents, sds_documents, cofa_documents] %}
 {% set all_tab_group_columns = hubdb_tab_group_columns + tab_group_columns %}
@@ -15,7 +23,7 @@
 {% set filtered_ifu_documents = hubdb_table_rows("support_portal_ifu",'&linked_product_codes__in='~module.product_code) %}
 {% set filtered_cofa_documents = hubdb_table_rows("support_portal_cofa",'&linked_product_codes__in='~module.product_code) %}
 
-{% macro render_document_card(document, language) %}
+{% macro render_document_card(document, language, is_locked, locked_message) %}
 
   {% set document_name = language.label ~ '_' ~ document.f %}
   {% set document_url = document.document_folder ~ language.label ~ '_' ~ document.document_url_part %}
@@ -24,7 +32,7 @@
     <a
       href="{{ is_locked ? '/_hcms/mem/login' : document_url }}"
       target="_blank"
-      {{ lock_card }}
+      {{ is_locked ? 'disabled' : '' }}
       class="group p-sm md:p-base border-border gap-sm relative flex cursor-pointer flex-row items-center justify-between overflow-hidden rounded-lg border transition-[shadow] duration-500 hover:shadow-sm">
       <div class="gap-sm flex flex-row items-center">
         {{ macros.render_document_type('PDF') }}
@@ -47,7 +55,7 @@
   <tosoh-tab-group variant="tab" groupId="{{ ifu_documents.column_label }}" active="true">
     <div class="gap-base flex flex-col">
       {% for language in filtered_ifu_documents[0].languages %}
-        {{ render_document_card(filtered_ifu_documents[0], language) }}
+        {{ render_document_card(filtered_ifu_documents[0], language, ifu_locked, ifu_locked_message) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
@@ -55,7 +63,7 @@
   <tosoh-tab-group variant="tab" groupId="{{ sds_documents.column_label }}">
     <div class="gap-base flex flex-col">
       {% for language in filtered_sds_documents[0].languages %}
-        {{ render_document_card(filtered_sds_documents[0], language) }}
+        {{ render_document_card(filtered_sds_documents[0], language, sds_locked, sds_locked_message) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
@@ -63,21 +71,24 @@
   <tosoh-tab-group variant="tab" groupId="{{ cofa_documents.column_label }}">
     <div class="gap-base flex flex-col">
       {% for language in filtered_cofa_documents[0].languages %}
-        {{ render_document_card(filtered_cofa_documents[0], language) }}
+        {{ render_document_card(filtered_cofa_documents[0], language, cofa_locked, cofa_locked_message) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
 
   {% for tab_group_column in all_tab_group_columns %}
+    {% set is_locked = tab_group_column.is_locked and not logged_in %}
+    {% set locked_message = tab_group_column.locked_message %}
+
     <tosoh-tab-group
       variant="tab"
       groupId="{{ tab_group_column.column_label }}"
       {{ loop.first ? 'active="true"' : '' }}>
       {% for document in tab_group_column.documents %}
         <a
-          href="{{ is_locked ? '/_hcms/mem/login' : '#' }}"
+          href="{{ is_locked ? '/_hcms/mem/login' : document.document_url.href }}"
           target="_blank"
-          {{ lock_card }}
+          {{ is_locked ? 'disabled' : '' }}
           class="group p-sm md:p-base border-border gap-sm relative flex cursor-pointer flex-row items-center justify-between overflow-hidden rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm">
           <div class="gap-sm flex flex-row items-center">
             {% if !document.document_image.src %}
@@ -102,7 +113,7 @@
             </div>
           </div>
           {{ macros.render_download_document_icon() }}
-          {{ macros.render_lock(module.locked_message) }}
+          {{ macros.render_lock(locked_message) }}
         </a>
       {% endfor %}
     </tosoh-tab-group>
