@@ -128,7 +128,7 @@
         <select
           class="border-imperial-red p-sm focus:ring-imperial-red peer focus:ring-opacity-50 h-full w-full cursor-pointer appearance-none rounded-lg border focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
           name="pack_size">
-          <option disabled selected hidden value="none">Pack Size</option>
+          <option disabled value="none">Pack Size</option>
           {% for pack_size in pack_sizes %}
             <option {{ loop.index == 1 ? 'selected' : '' }} value="{{ pack_size.pack_size_value }}">
               {{ pack_size.pack_size_value }}
