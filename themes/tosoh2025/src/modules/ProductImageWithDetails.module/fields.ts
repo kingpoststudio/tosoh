@@ -69,6 +69,8 @@ const generateFields = () => {
           step: 1,
           min: 1,
           max: null,
+          required: true,
+          default: 1,
         }),
       ],
       occurrence: {
