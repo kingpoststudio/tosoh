@@ -527,7 +527,7 @@ export const relatedDocumentsSharedFields = [
   textField('locked_message', 'Locked Message', {
     default: 'Login to unlock and download this file',
   }),
-  booleanField('is_locked', 'Is Locked', {
+  booleanField('is_locked', 'Is locked when logged out?', {
     default: false,
   }),
   groupField('tab_group_columns', 'Tab Group Columns', {

@@ -1,7 +1,8 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 {% set tab_group_columns = module.tab_group_columns %}
-{% set lock_card = module.is_locked ? 'disabled' : '' %}
-{% set is_locked = module.is_locked %}
+{% set logged_in = request_contact.is_logged_in %}
+{% set is_locked = module.is_locked and not logged_in %}
+{% set lock_card = is_locked ? 'disabled' : '' %}
 
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col">
   {{ macros.tab_actions_selector(tab_group_columns) }}

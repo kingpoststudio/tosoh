@@ -1,7 +1,8 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 {% set tab_group_columns = module.tab_group_columns %}
-{% set lock_card = module.is_locked ? 'disabled' : '' %}
-{% set is_locked = module.is_locked %}
+{% set logged_in = request_contact.is_logged_in %}
+{% set is_locked = module.is_locked and not logged_in %}
+{% set lock_card = is_locked ? 'disabled' : '' %}
 
 {% set ifu_documents = module.ifu_documents %}
 {% set sds_documents = module.sds_documents %}
