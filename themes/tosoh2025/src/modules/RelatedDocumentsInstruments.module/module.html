@@ -1,13 +1,14 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 {% set tab_group_columns = module.tab_group_columns %}
 {% set logged_in = request_contact.is_logged_in %}
-{% set is_locked = module.is_locked and not logged_in %}
-{% set lock_card = is_locked ? 'disabled' : '' %}
 
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-base bg-ghost-white m-auto flex w-full flex-col">
   {{ macros.tab_actions_selector(tab_group_columns) }}
 
   {% for tab_group_column in tab_group_columns %}
+    {% set is_locked = tab_group_column.is_locked and not logged_in %}
+    {% set locked_message = tab_group_column.locked_message %}
+
     <tosoh-tab-group
       variant="tab"
       groupId="{{ tab_group_column.column_label }}"
@@ -20,7 +21,7 @@
           <a
             href="{{ is_locked ? '/_hcms/mem/login' : document_url.href }}"
             target="_blank"
-            {{ lock_card }}
+            {{ is_locked ? 'disabled' : '' }}
             class="group border-border relative flex aspect-square min-h-[24rem] max-w-full cursor-pointer flex-col items-center overflow-hidden rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm">
             {{ macros.render_download_document_icon(true) }}
 
@@ -44,7 +45,7 @@
                 {% endif %}
               </div>
             </div>
-            {{ macros.render_lock(module.locked_message) }}
+            {{ macros.render_lock(locked_message) }}
           </a>
         {% endfor %}
       </div>
