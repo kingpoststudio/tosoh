@@ -202,12 +202,16 @@ function createComparisonTable(
   // Header row
   const headerCells = [
     new TableCell({
-      children: [new Paragraph({ children: [new TextRun({ text: 'Category', bold: true })] })],
+      children: [
+        new Paragraph({ children: [new TextRun({ text: 'Category', bold: true, font: 'Arial' })] }),
+      ],
       shading: { fill: 'E5E5E5' },
       width: { size: fixedColumnWidth, type: WidthType.DXA },
     }),
     new TableCell({
-      children: [new Paragraph({ children: [new TextRun({ text: 'Status', bold: true })] })],
+      children: [
+        new Paragraph({ children: [new TextRun({ text: 'Status', bold: true, font: 'Arial' })] }),
+      ],
       shading: { fill: 'E5E5E5' },
       width: { size: fixedColumnWidth, type: WidthType.DXA },
     }),
@@ -215,7 +219,9 @@ function createComparisonTable(
       (config) =>
         new TableCell({
           children: [
-            new Paragraph({ children: [new TextRun({ text: config.label, bold: true })] }),
+            new Paragraph({
+              children: [new TextRun({ text: config.label, bold: true, font: 'Arial' })],
+            }),
           ],
           shading: { fill: 'E5E5E5' },
           width: { size: dynamicColumnWidth, type: WidthType.DXA },
@@ -236,13 +242,19 @@ function createComparisonTable(
 
     const cells = [
       new TableCell({
-        children: [new Paragraph({ text: row.category?.label || '' })],
+        children: [
+          new Paragraph({
+            children: [new TextRun({ text: row.category?.label || '', font: 'Arial' })],
+          }),
+        ],
         width: { size: fixedColumnWidth, type: WidthType.DXA },
       }),
       new TableCell({
         children: [
           new Paragraph({
-            children: [new TextRun({ text: row.status?.name || '', color: statusColor })],
+            children: [
+              new TextRun({ text: row.status?.name || '', color: statusColor, font: 'Arial' }),
+            ],
           }),
         ],
         width: { size: fixedColumnWidth, type: WidthType.DXA },
@@ -251,7 +263,14 @@ function createComparisonTable(
         (config) =>
           new TableCell({
             children: [
-              new Paragraph({ text: stripHtml(row[config.key as keyof ComparisonRow] as string) }),
+              new Paragraph({
+                children: [
+                  new TextRun({
+                    text: stripHtml(row[config.key as keyof ComparisonRow] as string),
+                    font: 'Arial',
+                  }),
+                ],
+              }),
             ],
             width: { size: dynamicColumnWidth, type: WidthType.DXA },
           })

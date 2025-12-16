@@ -16,7 +16,6 @@
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
   const tosohInstrument = window?.Tosoh?.CCT?.tosohInstrument;
   const competitorInstrument = window?.Tosoh?.CCT?.competitorInstrument;
-  // Extract objects array if comparisonRows is a HubDB response wrapper (safety net)
   const _rawComparisonRows = window?.Tosoh?.CCT?.comparisonRows;
   const comparisonRows = Array.isArray(_rawComparisonRows)
     ? _rawComparisonRows
@@ -37,7 +36,6 @@
   let tosohInstrumentSelectValue: string = $state(selectedTosohInstrument);
   let competitorInstrumentSelectValue: string = $state(selectedCompetitorInstrument);
 
-  // Print options - default all columns selected
   const printColumnOptions = [
     { label: 'Lab Manager', name: 'lab_manager' },
     { label: 'Lab Technician', name: 'lab_technician' },
