@@ -112,13 +112,6 @@
   };
 
   const onPrint = async () => {
-    console.log('Print clicked - Data:', {
-      tosohInstrument,
-      competitorInstrument,
-      comparisonRows,
-      selectedPrintColumns,
-    });
-
     if (!tosohInstrument && !competitorInstrument) {
       console.warn('No instruments selected');
       return;
@@ -228,7 +221,9 @@
     <button
       type="button"
       onclick={onPrint}
-      disabled={!isTosohInstrumentSelected || !isCompetitorInstrumentSelected}
+      disabled={!isTosohInstrumentSelected ||
+        !isCompetitorInstrumentSelected ||
+        selectedPrintColumns?.length === 0}
       class="outlined mt-md w-full hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
     >
       Print
