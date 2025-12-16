@@ -1,4 +1,4 @@
-import { choiceField, groupField, menuField, textField } from 'hs-fieldkit';
+import { choiceField, groupField, linkField, menuField, textField } from 'hs-fieldkit';
 import { themeConfigurationChoices } from '../../../lib/utils/fieldUtils';
 import { headerCtasFields, portalAccessLabelsFields } from '../globals/Header.module/fields';
 import { legalFields } from '../globals/Footer.module/fields';
@@ -18,6 +18,9 @@ const generateFields = () => {
       children: [
         menuField('menu', 'Menu', {
           inline_help_text: 'Override the header menu with a custom menu.',
+        }),
+        linkField('logo_link', 'Logo link', {
+          inline_help_text: 'Override the logo link in the header with a custom link.',
         }),
         choiceField('menu_justification', 'Menu justification', {
           inline_help_text: 'Override the menu justification in the header with a custom value.',

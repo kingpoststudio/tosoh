@@ -18,7 +18,7 @@
 {% set active_auxiliary_menu_json = active_auxiliary_menu|tojson %}
   
 {% set active_logo = active_configuration.logo.src %}
-{% set active_logo_link = active_configuration.logo_link.url.href or '/' %}
+{% set active_logo_link = header_overrides.logo_link.url.href or active_configuration.logo_link.url.href or '/' %}
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
 {% set active_ctas = header_overrides.ctas ? header_overrides.ctas : active_configuration.ctas %}
 {% set menu_justification = header_overrides.menu_justification or module.menu_justification or 'end' %}
