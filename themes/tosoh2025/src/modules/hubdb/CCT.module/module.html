@@ -23,6 +23,8 @@
 
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %} 
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
+
+{% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name) : [] %}
       
 {% set roles = [{label: 'Laboratory Manager', name: 'lab_man_benefits'}, {label: 'Laboratory Staff', name: 'lab_staff_benefits'}, {label: 'Clinician', name: 'clinician_benefits'}, {label: 'Procurement Manager', name: 'procurement_benefits'}] %}
         
@@ -32,8 +34,11 @@
   const activeCompetitorInstruments = {{ active_competitor_instruments|unique|tojson }};
   const allProductLines = {{ all_product_lines|tojson }};
   const instrumentsBasedOnProductLine = {{ instruments_based_on_product_line|tojson }};
+  const tosohInstrument = {{ tosoh_instrument|tojson }};
+  const competitorInstrument = {{ competitor_instrument|tojson }};
+  const comparisonRows = {{ comparison_rows|tojson }};
 
-  window.Tosoh.CCT = { allInstruments, activeCompetitorInstruments, allProductLines, instrumentsBasedOnProductLine };
+  window.Tosoh.CCT = { allInstruments, activeCompetitorInstruments, allProductLines, instrumentsBasedOnProductLine, tosohInstrument, competitorInstrument, comparisonRows };
   </script>
 {% end_require_js %}
 

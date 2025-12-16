@@ -130,6 +130,9 @@ declare global {
         allInstruments: CCTInstruments;
         allProductLines: CCTInstruments['objects'][0]['product_line'][];
         instrumentsBasedOnProductLine: CCTInstruments['objects'][0]['product_name'][];
+        tosohInstrument?: CCTInstruments['objects'][0];
+        competitorInstrument?: CCTInstruments['objects'][0];
+        comparisonRows: CCTComparisons | CCTComparison[];
       };
       CCTDetails: {
         comparisonRows: CCTComparisons;

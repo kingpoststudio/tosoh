@@ -25,6 +25,7 @@
     "@sveltejs/vite-plugin-svelte": "^6.1.1",
     "@tsconfig/svelte": "^5.0.4",
     "@types/bun": "latest",
+    "@types/file-saver": "^2.0.7",
     "@types/web": "latest",
     "@vitest/coverage-v8": "3.2.4",
     "@vitest/ui": "3.2.4",
@@ -43,7 +44,9 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.11",
+    "docx": "^9.5.1",
     "embla-carousel": "^8.6.0",
+    "file-saver": "^2.0.5",
     "svelte": "^5.38.1",
     "tailwindcss": "^4.1.11"
   },

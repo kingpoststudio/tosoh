@@ -8,16 +8,21 @@
 <script lang="ts">
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import Select from '../Select/Select.svelte';
-
-  import Checkbox from '../CheckboxGroup/CheckboxGroup.svelte';
   import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
+  import { generateCCTDocument } from '../../utils/generateCCTDocument';
 
   const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
   const activeCompetitorInstruments = window?.Tosoh?.CCT?.activeCompetitorInstruments || [];
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
+  const tosohInstrument = window?.Tosoh?.CCT?.tosohInstrument;
+  const competitorInstrument = window?.Tosoh?.CCT?.competitorInstrument;
+  // Extract objects array if comparisonRows is a HubDB response wrapper (safety net)
+  const _rawComparisonRows = window?.Tosoh?.CCT?.comparisonRows;
+  const comparisonRows = Array.isArray(_rawComparisonRows)
+    ? _rawComparisonRows
+    : _rawComparisonRows?.objects || [];
 
   const formId = 'cct-filters';
-  const printFormId = 'cct-print-filters';
 
   const isTosohInstrumentSelected = !!getUrlParam('tosoh_instrument_name');
   const isCompetitorInstrumentSelected = !!getUrlParam('competitor_instrument_name');
@@ -31,6 +36,27 @@
 
   let tosohInstrumentSelectValue: string = $state(selectedTosohInstrument);
   let competitorInstrumentSelectValue: string = $state(selectedCompetitorInstrument);
+
+  // Print options - default all columns selected
+  const printColumnOptions = [
+    { label: 'Lab Manager', name: 'lab_manager' },
+    { label: 'Lab Technician', name: 'lab_technician' },
+    { label: 'Procurement Manager', name: 'procurement_manager' },
+    { label: 'Clinician', name: 'clinician' },
+  ];
+  let selectedPrintColumns: string[] = $state([]);
+
+  const handlePrintColumnChange = (event: Event) => {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    const checked = target.checked;
+
+    if (checked) {
+      selectedPrintColumns = [...selectedPrintColumns, value];
+    } else {
+      selectedPrintColumns = selectedPrintColumns.filter((col) => col !== value);
+    }
+  };
 
   const clearOnProductLineChange = () => {
     deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
@@ -85,7 +111,31 @@
     window.open(url);
   };
 
-  const onPrint = () => {};
+  const onPrint = async () => {
+    console.log('Print clicked - Data:', {
+      tosohInstrument,
+      competitorInstrument,
+      comparisonRows,
+      selectedPrintColumns,
+    });
+
+    if (!tosohInstrument && !competitorInstrument) {
+      console.warn('No instruments selected');
+      return;
+    }
+
+    if (selectedPrintColumns.length === 0) {
+      alert('Please select at least one column to include in the document.');
+      return;
+    }
+
+    await generateCCTDocument(
+      tosohInstrument,
+      competitorInstrument,
+      comparisonRows,
+      selectedPrintColumns
+    );
+  };
 
   const splitCompetitorInstruments = (instruments: any[]) => {
     let withSufficientData = [];
@@ -109,7 +159,7 @@
 </script>
 
 <div
-  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem]`}
+  class="bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem]"
 >
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">Select</p>
@@ -154,35 +204,44 @@
     </div>
   </FilterForm>
 
-  <FilterForm trigger="submit" onSubmit={onPrint} formId={printFormId}>
-    <div class="mt-base">
-      <Checkbox
-        options={[
-          { label: 'Lab Manager', name: 'lab_manager' },
-          { label: 'Lab Technician', name: 'lab_technician' },
-          { label: 'Procurement Manager', name: 'procurement_manager' },
-          { label: 'Clinician', name: 'clinician' },
-          { label: 'Proof', name: 'proof' },
-          { label: 'Competitor', name: 'competitor' },
-          { label: 'Tosoh Counter Argumentation', name: 'tosoh_counter_argumentation' },
-        ]}
-        name="option_to_print"
-        label="For Who (Option to print)"
-        disabled={false}
-      />
+  <div class="mt-base">
+    <div class="gap-sm flex flex-col">
+      <div class="text-lg font-semibold">For Who (Option to print)</div>
+      <div class="gap-sm flex flex-col">
+        {#each printColumnOptions as option (option.name)}
+          <label
+            class="gap-sm hover:text-imperial-red flex cursor-pointer items-center transition-colors duration-200"
+          >
+            <input
+              type="checkbox"
+              name="print_column"
+              value={option.name}
+              checked={selectedPrintColumns.includes(option.name)}
+              onchange={handlePrintColumnChange}
+              class="checkbox-custom focus:ring-imperial-red text-imperial-red h-base w-base cursor-pointer rounded border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50"
+            />
+            <span class="text-default select-none">{option.label}</span>
+          </label>
+        {/each}
+      </div>
     </div>
-    <button type="button" onclick={onPrint} class="outlined mt-md w-full hover:bg-red-50">
-      Print</button
+    <button
+      type="button"
+      onclick={onPrint}
+      disabled={!isTosohInstrumentSelected || !isCompetitorInstrumentSelected}
+      class="outlined mt-md w-full hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
     >
+      Print
+    </button>
     <button
       type="button"
       onclick={onDetails}
       disabled={!isTosohInstrumentSelected || !isCompetitorInstrumentSelected}
       class="mt-sm w-full hover:bg-red-50"
     >
-      Details</button
-    >
-  </FilterForm>
+      Details
+    </button>
+  </div>
 
   <a
     href="/cct-submit-a-suggestion"
@@ -192,3 +251,47 @@
     Submit a Suggestion
   </a>
 </div>
+
+<style>
+  .checkbox-custom {
+    appearance: none;
+    background-color: transparent;
+    border: 1px solid var(--color-border);
+    transition: all 0.2s ease-in-out;
+    position: relative;
+  }
+
+  .checkbox-custom:checked {
+    background-color: var(--color-imperial-red);
+    border-color: var(--color-imperial-red);
+  }
+
+  .checkbox-custom:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.375rem;
+    height: 0.625rem;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: translate(-50%, -60%) rotate(45deg);
+  }
+
+  .checkbox-custom:hover:not(:disabled) {
+    border-color: var(--color-imperial-red);
+  }
+
+  .checkbox-custom:disabled {
+    opacity: 0.7;
+  }
+
+  .checkbox-custom:focus {
+    box-shadow: 0 0 0 1px var(--color-imperial-red);
+  }
+
+  label:hover .checkbox-custom:not(:disabled) {
+    border-color: var(--color-imperial-red);
+  }
+</style>
