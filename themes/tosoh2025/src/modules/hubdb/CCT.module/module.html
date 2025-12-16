@@ -4,7 +4,7 @@
 {% set tosoh_instrument_name = request.query_dict.tosoh_instrument_name  or "" %}
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name  or "" %}
 {% set access_level = module.access_level or "all" %}
-  
+{% set docx_logo = module.docx_logo or "" %}
 {% set all_instruments = access_level == 'all' ? hubdb_table_rows("cct_instruments",'&active__eq=true') : hubdb_table_rows("cct_instruments",'&active__eq=true&access_level__contains='~access_level) %}
 
 {% set all_product_lines = all_instruments|selectattr('product_line')|map(attribute='product_line')|unique %}
@@ -37,8 +37,8 @@
   const tosohInstrument = {{ tosoh_instrument|tojson }};
   const competitorInstrument = {{ competitor_instrument|tojson }};
   const comparisonRows = {{ comparison_rows|tojson }};
-
-  window.Tosoh.CCT = { allInstruments, activeCompetitorInstruments, allProductLines, instrumentsBasedOnProductLine, tosohInstrument, competitorInstrument, comparisonRows };
+  const docxLogo = {{ docx_logo|tojson }};
+  window.Tosoh.CCT = { allInstruments, activeCompetitorInstruments, allProductLines, instrumentsBasedOnProductLine, tosohInstrument, competitorInstrument, comparisonRows, docxLogo };
   </script>
 {% end_require_js %}
 

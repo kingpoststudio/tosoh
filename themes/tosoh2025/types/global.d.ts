@@ -133,6 +133,10 @@ declare global {
         tosohInstrument?: CCTInstruments['objects'][0];
         competitorInstrument?: CCTInstruments['objects'][0];
         comparisonRows: CCTComparisons | CCTComparison[];
+        docxLogo: {
+          src: string;
+          alt: string;
+        };
       };
       CCTDetails: {
         comparisonRows: CCTComparisons;

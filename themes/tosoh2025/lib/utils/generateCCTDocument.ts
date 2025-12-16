@@ -47,21 +47,18 @@ const COLUMN_CONFIGS: ColumnConfig[] = [
   { key: 'clinician', label: 'Clinician', benefitKey: 'clinician_benefits' },
 ];
 
-const TOSOH_LOGO_URL =
-  'https://145184808.fs1.hubspotusercontent-eu1.net/hubfs/145184808/image%202-1.png';
-
-async function fetchLogoAsArrayBuffer(): Promise<ArrayBuffer> {
-  const response = await fetch(TOSOH_LOGO_URL);
+async function fetchLogoAsArrayBuffer(logoUrl: string): Promise<ArrayBuffer> {
+  const response = await fetch(logoUrl || '');
   return response.arrayBuffer();
 }
 
 const totalTableWidth = 9360;
 
 function createDocumentHeader(
-  logoBuffer: ArrayBuffer,
   tosohName: string,
   competitorName: string,
-  competitorCompany: string
+  competitorCompany: string,
+  logoBuffer: ArrayBuffer | null
 ): Header {
   const comparisonText = competitorCompany
     ? `TOSOH: ${tosohName} vs ${competitorCompany}: ${competitorName}`
@@ -87,11 +84,13 @@ function createDocumentHeader(
                 children: [
                   new Paragraph({
                     children: [
-                      new ImageRun({
-                        data: logoBuffer,
-                        transformation: { width: 58, height: 64 },
-                        type: 'png',
-                      }),
+                      logoBuffer
+                        ? new ImageRun({
+                            data: logoBuffer,
+                            transformation: { width: 58, height: 64 },
+                            type: 'png',
+                          })
+                        : new TextRun({ text: '' }),
                     ],
                     alignment: AlignmentType.LEFT,
                   }),
@@ -114,6 +113,7 @@ function createDocumentHeader(
                         bold: true,
                         size: 24,
                         color: 'ED1A3B',
+                        font: 'Arial',
                       }),
                     ],
                     alignment: AlignmentType.RIGHT,
@@ -151,7 +151,7 @@ function createBenefitsParagraphs(
 
   const paragraphs: Paragraph[] = [
     new Paragraph({
-      children: [new TextRun({ text: title, bold: true, color: 'ED1A3B' })],
+      children: [new TextRun({ text: title, bold: true, color: 'ED1A3B', font: 'Arial' })],
       heading: HeadingLevel.HEADING_2,
       spacing: { before: 400, after: 200 },
     }),
@@ -167,8 +167,8 @@ function createBenefitsParagraphs(
       paragraphs.push(
         new Paragraph({
           children: [
-            new TextRun({ text: `${config.label}: `, bold: true }),
-            new TextRun({ text: benefitText }),
+            new TextRun({ text: `${config.label}: `, bold: true, font: 'Arial' }),
+            new TextRun({ text: benefitText, font: 'Arial' }),
           ],
           spacing: { after: 120 },
         })
@@ -305,6 +305,7 @@ function formatPrintDate(): string {
 }
 
 export async function generateCCTDocument(
+  docxLogo: { src: string; alt: string },
   tosohInstrument: Instrument | undefined,
   competitorInstrument: Instrument | undefined,
   comparisonRows: ComparisonRow[],
@@ -315,13 +316,22 @@ export async function generateCCTDocument(
   const competitorCompany = competitorInstrument?.company?.label || '';
 
   // Fetch the logo for the header
-  const logoBuffer = await fetchLogoAsArrayBuffer();
+
+  let logoBuffer = null;
+  if (docxLogo.src) {
+    logoBuffer = await fetchLogoAsArrayBuffer(docxLogo.src);
+  }
 
   const children: (Paragraph | Table)[] = [
     // Print Date
     new Paragraph({
       children: [
-        new TextRun({ text: `Print Date: ${formatPrintDate()}`, size: 20, color: '6A7282' }),
+        new TextRun({
+          text: `Print Date: ${formatPrintDate()}`,
+          size: 20,
+          color: '6A7282',
+          font: 'Arial',
+        }),
       ],
       alignment: AlignmentType.RIGHT,
       spacing: { after: 200 },
@@ -329,12 +339,13 @@ export async function generateCCTDocument(
     // Title
     new Paragraph({
       children: [
-        new TextRun({ text: 'TOSOH: ', bold: true, color: 'ED1A3B' }),
-        new TextRun({ text: tosohName, bold: true, color: 'ED1A3B' }),
-        new TextRun({ text: ' vs ', italics: true, color: 'ED1A3B' }),
+        new TextRun({ text: 'TOSOH: ', bold: true, color: 'ED1A3B', font: 'Arial' }),
+        new TextRun({ text: tosohName, bold: true, color: 'ED1A3B', font: 'Arial' }),
+        new TextRun({ text: ' vs ', italics: true, color: 'ED1A3B', font: 'Arial' }),
         new TextRun({
           text: competitorCompany ? `${competitorCompany}: ${competitorName}` : competitorName,
           bold: true,
+          font: 'Arial',
           color: 'ED1A3B',
         }),
       ],
@@ -366,7 +377,14 @@ export async function generateCCTDocument(
   if (comparisonRows && comparisonRows.length > 0 && selectedColumns.length > 0) {
     children.push(
       new Paragraph({
-        children: [new TextRun({ text: 'Detailed Comparison', bold: true, color: 'ED1A3B' })],
+        children: [
+          new TextRun({
+            text: 'Detailed Comparison',
+            bold: true,
+            color: 'ED1A3B',
+            font: 'Arial',
+          }),
+        ],
         heading: HeadingLevel.HEADING_2,
         spacing: { before: 400, after: 200 },
       })
@@ -401,7 +419,7 @@ export async function generateCCTDocument(
     sections: [
       {
         headers: {
-          default: createDocumentHeader(logoBuffer, tosohName, competitorName, competitorCompany),
+          default: createDocumentHeader(tosohName, competitorName, competitorCompany, logoBuffer),
         },
         children,
       },

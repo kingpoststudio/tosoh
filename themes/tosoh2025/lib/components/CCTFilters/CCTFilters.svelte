@@ -110,6 +110,7 @@
   };
 
   const onPrint = async () => {
+    const docxLogo = window?.Tosoh?.CCT?.docxLogo;
     if (!tosohInstrument && !competitorInstrument) {
       console.warn('No instruments selected');
       return;
@@ -121,6 +122,7 @@
     }
 
     await generateCCTDocument(
+      { src: docxLogo?.src || '', alt: docxLogo?.alt || '' },
       tosohInstrument,
       competitorInstrument,
       comparisonRows,
