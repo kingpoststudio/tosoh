@@ -1,18 +1,18 @@
 import {
+  AlignmentType,
+  BorderStyle,
   Document,
+  Header,
+  HeadingLevel,
+  ImageRun,
   Packer,
   Paragraph,
-  TextRun,
   Table,
-  TableRow,
   TableCell,
-  WidthType,
-  AlignmentType,
-  HeadingLevel,
-  BorderStyle,
-  Header,
-  ImageRun,
+  TableRow,
+  TextRun,
   VerticalAlign,
+  WidthType,
 } from 'docx';
 import { saveAs } from 'file-saver';
 
@@ -40,6 +40,62 @@ interface ColumnConfig {
   benefitKey?: string;
 }
 
+const COLORS = {
+  primary: 'ED1A3B',
+  textMuted: '6A7282',
+  advantage: '00C950',
+  disadvantage: 'FF4444',
+  headerBackground: 'E5E5E5',
+  border: 'CCCCCC',
+} as const;
+
+const DOCUMENT_DIMENSIONS = {
+  tableWidth: 9360,
+  headerRowHeight: 1080,
+  logoWidth: 58,
+  logoHeight: 64,
+  headerCellWidthPercentage: 50,
+} as const;
+
+const FONT_SIZES = {
+  header: 24,
+  date: 20,
+} as const;
+
+const SPACING = {
+  large: 400,
+  medium: 200,
+  small: 120,
+} as const;
+
+const COLUMN_RATIOS = {
+  fixedColumn: 0.15,
+  dynamicColumns: 0.7,
+} as const;
+
+const NO_BORDERS = {
+  top: { style: BorderStyle.NONE },
+  bottom: { style: BorderStyle.NONE },
+  left: { style: BorderStyle.NONE },
+  right: { style: BorderStyle.NONE },
+  insideHorizontal: { style: BorderStyle.NONE },
+  insideVertical: { style: BorderStyle.NONE },
+} as const;
+
+const LIGHT_BORDERS = {
+  top: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+  bottom: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+  left: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+  right: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+  insideHorizontal: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+  insideVertical: { style: BorderStyle.SINGLE, size: 1, color: COLORS.border },
+} as const;
+
+const STATUS_COLORS: Record<string, string> = {
+  Advantage: COLORS.advantage,
+  Disadvantage: COLORS.disadvantage,
+} as const;
+
 const COLUMN_CONFIGS: ColumnConfig[] = [
   { key: 'lab_manager', label: 'Lab Manager', benefitKey: 'lab_man_benefits' },
   { key: 'lab_technician', label: 'Lab Technician', benefitKey: 'lab_staff_benefits' },
@@ -47,12 +103,21 @@ const COLUMN_CONFIGS: ColumnConfig[] = [
   { key: 'clinician', label: 'Clinician', benefitKey: 'clinician_benefits' },
 ];
 
-async function fetchLogoAsArrayBuffer(logoUrl: string): Promise<ArrayBuffer> {
-  const response = await fetch(logoUrl || '');
-  return response.arrayBuffer();
-}
+async function fetchLogoAsArrayBuffer(logoUrl: string): Promise<ArrayBuffer | null> {
+  if (!logoUrl) return null;
 
-const totalTableWidth = 9360;
+  try {
+    const response = await fetch(logoUrl);
+    if (!response.ok) {
+      console.error(`Failed to fetch logo: ${response.status}`);
+      return null;
+    }
+    return response.arrayBuffer();
+  } catch (error) {
+    console.error('Error fetching logo:', error);
+    return null;
+  }
+}
 
 function createDocumentHeader(
   tosohName: string,
@@ -68,17 +133,10 @@ function createDocumentHeader(
     children: [
       new Table({
         width: { size: 100, type: WidthType.PERCENTAGE },
-        borders: {
-          top: { style: BorderStyle.NONE },
-          bottom: { style: BorderStyle.NONE },
-          left: { style: BorderStyle.NONE },
-          right: { style: BorderStyle.NONE },
-          insideHorizontal: { style: BorderStyle.NONE },
-          insideVertical: { style: BorderStyle.NONE },
-        },
+        borders: NO_BORDERS,
         rows: [
           new TableRow({
-            height: { value: 1080, rule: 'exact' },
+            height: { value: DOCUMENT_DIMENSIONS.headerRowHeight, rule: 'exact' },
             children: [
               new TableCell({
                 children: [
@@ -87,7 +145,10 @@ function createDocumentHeader(
                       logoBuffer
                         ? new ImageRun({
                             data: logoBuffer,
-                            transformation: { width: 58, height: 64 },
+                            transformation: {
+                              width: DOCUMENT_DIMENSIONS.logoWidth,
+                              height: DOCUMENT_DIMENSIONS.logoHeight,
+                            },
                             type: 'png',
                           })
                         : new TextRun({ text: '' }),
@@ -95,14 +156,12 @@ function createDocumentHeader(
                     alignment: AlignmentType.LEFT,
                   }),
                 ],
-                width: { size: 50, type: WidthType.PERCENTAGE },
-                verticalAlign: VerticalAlign.CENTER,
-                borders: {
-                  top: { style: BorderStyle.NONE },
-                  bottom: { style: BorderStyle.NONE },
-                  left: { style: BorderStyle.NONE },
-                  right: { style: BorderStyle.NONE },
+                width: {
+                  size: DOCUMENT_DIMENSIONS.headerCellWidthPercentage,
+                  type: WidthType.PERCENTAGE,
                 },
+                verticalAlign: VerticalAlign.CENTER,
+                borders: NO_BORDERS,
               }),
               new TableCell({
                 children: [
@@ -111,22 +170,20 @@ function createDocumentHeader(
                       new TextRun({
                         text: comparisonText,
                         bold: true,
-                        size: 24,
-                        color: 'ED1A3B',
+                        size: FONT_SIZES.header,
+                        color: COLORS.primary,
                         font: 'Arial',
                       }),
                     ],
                     alignment: AlignmentType.RIGHT,
                   }),
                 ],
-                width: { size: 50, type: WidthType.PERCENTAGE },
-                verticalAlign: VerticalAlign.CENTER,
-                borders: {
-                  top: { style: BorderStyle.NONE },
-                  bottom: { style: BorderStyle.NONE },
-                  left: { style: BorderStyle.NONE },
-                  right: { style: BorderStyle.NONE },
+                width: {
+                  size: DOCUMENT_DIMENSIONS.headerCellWidthPercentage,
+                  type: WidthType.PERCENTAGE,
                 },
+                verticalAlign: VerticalAlign.CENTER,
+                borders: NO_BORDERS,
               }),
             ],
           }),
@@ -138,8 +195,47 @@ function createDocumentHeader(
 
 function stripHtml(html: string | undefined): string {
   if (!html) return '';
-  const doc = new DOMParser().parseFromString(html, 'text/html');
-  return doc.body.textContent || '';
+
+  let text = html.replace(/NEWLINE/g, '\n');
+
+  const hasHtmlTags = /<[^>]+>/.test(text);
+
+  if (hasHtmlTags) {
+    text = text
+      .replace(/<br\s*\/?>/gi, '\n')
+      .replace(/<\/p>/gi, '\n')
+      .replace(/<\/div>/gi, '\n')
+      .replace(/<\/li>/gi, '\n');
+
+    const doc = new DOMParser().parseFromString(text, 'text/html');
+    text = doc.body.textContent || '';
+  }
+
+  return text.replace(/\n{3,}/g, '\n\n').trim();
+}
+
+function createTextRunsWithBreaks(
+  text: string,
+  options: { bold?: boolean; font?: string } = {}
+): TextRun[] {
+  if (!text) return [];
+
+  const lines = text.split('\n');
+  const runs: TextRun[] = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const lineText = lines[i] || '';
+
+    if (i > 0) {
+      runs.push(new TextRun({ ...options, text: '', break: 1 }));
+    }
+
+    if (lineText) {
+      runs.push(new TextRun({ ...options, text: lineText }));
+    }
+  }
+
+  return runs;
 }
 
 function createBenefitsParagraphs(
@@ -151,9 +247,9 @@ function createBenefitsParagraphs(
 
   const paragraphs: Paragraph[] = [
     new Paragraph({
-      children: [new TextRun({ text: title, bold: true, color: 'ED1A3B', font: 'Arial' })],
+      children: [new TextRun({ text: title, bold: true, color: COLORS.primary, font: 'Arial' })],
       heading: HeadingLevel.HEADING_2,
-      spacing: { before: 400, after: 200 },
+      spacing: { before: SPACING.large, after: SPACING.medium },
     }),
   ];
 
@@ -168,9 +264,9 @@ function createBenefitsParagraphs(
         new Paragraph({
           children: [
             new TextRun({ text: `${config.label}: `, bold: true, font: 'Arial' }),
-            new TextRun({ text: benefitText, font: 'Arial' }),
+            ...createTextRunsWithBreaks(benefitText, { font: 'Arial' }),
           ],
-          spacing: { after: 120 },
+          spacing: { after: SPACING.small },
         })
       );
     }
@@ -187,32 +283,31 @@ function createComparisonTable(
 
   const activeConfigs = COLUMN_CONFIGS.filter((config) => selectedColumns.includes(config.key));
 
-  // Page content width in DXA (twips): 8.5" page - 1" margins each side = 6.5" = 9360 DXA
-  // Fixed columns (Category, Status) get 15% each, dynamic columns share the rest (70%)
-  const fixedColumnWidth = Math.floor(totalTableWidth * 0.15);
-  const dynamicColumnWidth = Math.floor((totalTableWidth * 0.7) / activeConfigs.length);
+  const tableWidth = DOCUMENT_DIMENSIONS.tableWidth;
+  const fixedColumnWidth = Math.floor(tableWidth * COLUMN_RATIOS.fixedColumn);
+  const dynamicColumnWidth = Math.floor(
+    (tableWidth * COLUMN_RATIOS.dynamicColumns) / activeConfigs.length
+  );
 
-  // Build column widths array for the table
   const columnWidths = [
     fixedColumnWidth,
     fixedColumnWidth,
     ...activeConfigs.map(() => dynamicColumnWidth),
   ];
 
-  // Header row
   const headerCells = [
     new TableCell({
       children: [
         new Paragraph({ children: [new TextRun({ text: 'Category', bold: true, font: 'Arial' })] }),
       ],
-      shading: { fill: 'E5E5E5' },
+      shading: { fill: COLORS.headerBackground },
       width: { size: fixedColumnWidth, type: WidthType.DXA },
     }),
     new TableCell({
       children: [
         new Paragraph({ children: [new TextRun({ text: 'Status', bold: true, font: 'Arial' })] }),
       ],
-      shading: { fill: 'E5E5E5' },
+      shading: { fill: COLORS.headerBackground },
       width: { size: fixedColumnWidth, type: WidthType.DXA },
     }),
     ...activeConfigs.map(
@@ -223,7 +318,7 @@ function createComparisonTable(
               children: [new TextRun({ text: config.label, bold: true, font: 'Arial' })],
             }),
           ],
-          shading: { fill: 'E5E5E5' },
+          shading: { fill: COLORS.headerBackground },
           width: { size: dynamicColumnWidth, type: WidthType.DXA },
         })
     ),
@@ -231,14 +326,8 @@ function createComparisonTable(
 
   const headerRow = new TableRow({ children: headerCells });
 
-  // Data rows
   const dataRows = comparisonRows.map((row) => {
-    const statusColor =
-      row.status?.name === 'Advantage'
-        ? '00C950'
-        : row.status?.name === 'Disadvantage'
-          ? 'FF4444'
-          : '6A7282';
+    const statusColor = STATUS_COLORS[row.status?.name] || COLORS.textMuted;
 
     const cells = [
       new TableCell({
@@ -264,12 +353,10 @@ function createComparisonTable(
           new TableCell({
             children: [
               new Paragraph({
-                children: [
-                  new TextRun({
-                    text: stripHtml(row[config.key as keyof ComparisonRow] as string),
-                    font: 'Arial',
-                  }),
-                ],
+                children: createTextRunsWithBreaks(
+                  stripHtml(row[config.key as keyof ComparisonRow] as string),
+                  { font: 'Arial' }
+                ),
               }),
             ],
             width: { size: dynamicColumnWidth, type: WidthType.DXA },
@@ -281,17 +368,10 @@ function createComparisonTable(
   });
 
   return new Table({
-    width: { size: totalTableWidth, type: WidthType.DXA },
+    width: { size: tableWidth, type: WidthType.DXA },
     columnWidths: columnWidths,
     rows: [headerRow, ...dataRows],
-    borders: {
-      top: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' },
-      bottom: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' },
-      left: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' },
-      right: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' },
-      insideHorizontal: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' },
-      insideVertical: { style: BorderStyle.SINGLE, size: 1, color: 'CCCCCC' },
-    },
+    borders: LIGHT_BORDERS,
   });
 }
 
@@ -328,30 +408,30 @@ export async function generateCCTDocument(
       children: [
         new TextRun({
           text: `Print Date: ${formatPrintDate()}`,
-          size: 20,
-          color: '6A7282',
+          size: FONT_SIZES.date,
+          color: COLORS.textMuted,
           font: 'Arial',
         }),
       ],
       alignment: AlignmentType.RIGHT,
-      spacing: { after: 200 },
+      spacing: { after: SPACING.medium },
     }),
     // Title
     new Paragraph({
       children: [
-        new TextRun({ text: 'TOSOH: ', bold: true, color: 'ED1A3B', font: 'Arial' }),
-        new TextRun({ text: tosohName, bold: true, color: 'ED1A3B', font: 'Arial' }),
-        new TextRun({ text: ' vs ', italics: true, color: 'ED1A3B', font: 'Arial' }),
+        new TextRun({ text: 'TOSOH: ', bold: true, color: COLORS.primary, font: 'Arial' }),
+        new TextRun({ text: tosohName, bold: true, color: COLORS.primary, font: 'Arial' }),
+        new TextRun({ text: ' vs ', italics: true, color: COLORS.primary, font: 'Arial' }),
         new TextRun({
           text: competitorCompany ? `${competitorCompany}: ${competitorName}` : competitorName,
           bold: true,
           font: 'Arial',
-          color: 'ED1A3B',
+          color: COLORS.primary,
         }),
       ],
       heading: HeadingLevel.HEADING_1,
       alignment: AlignmentType.CENTER,
-      spacing: { after: 400 },
+      spacing: { after: SPACING.large },
     }),
   ];
 
@@ -381,12 +461,12 @@ export async function generateCCTDocument(
           new TextRun({
             text: 'Detailed Comparison',
             bold: true,
-            color: 'ED1A3B',
+            color: COLORS.primary,
             font: 'Arial',
           }),
         ],
         heading: HeadingLevel.HEADING_2,
-        spacing: { before: 400, after: 200 },
+        spacing: { before: SPACING.large, after: SPACING.medium },
       })
     );
 
