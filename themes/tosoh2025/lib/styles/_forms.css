@@ -1,5 +1,5 @@
 .fc-form {
-  &.light {
+  &.default {
     form {
       div.legal-consent-container {
         @apply text-default!;
@@ -18,7 +18,7 @@
           @apply focus:border-imperial-red focus:ring-imperial-red/20 border-border w-full! rounded-2xl border px-4 py-4 text-lg placeholder-gray-400 transition-all duration-200 focus:ring-2 focus:outline-none;
 
           &[type='checkbox'] {
-            @apply focus:ring-imperial-red/20 border-border max-h-4 min-h-4 w-4 max-w-4 min-w-4 flex-shrink-0 appearance-none rounded-xl border bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
+            @apply focus:ring-imperial-red/20 border-border max-h-6 min-h-6 w-6 max-w-6 min-w-6 flex-shrink-0 appearance-none rounded-lg border bg-transparent transition-all duration-200 focus:ring-2 focus:outline-none;
 
             &:checked {
               @apply bg-imperial-red border-imperial-red;
@@ -77,8 +77,7 @@
   }
 
   form {
-    @apply gap-md mx-auto flex w-full flex-col;
-    @apply p-xs;
+    @apply gap-base p-xs mx-auto flex w-full flex-col;
 
     div#hs-membership-password-requirements {
       @apply mt-xs;
@@ -106,7 +105,7 @@
     }
 
     fieldset {
-      @apply gap-md flex max-w-full flex-col md:flex-row;
+      @apply gap-base flex max-w-full flex-col md:flex-row;
     }
 
     div.hs-form-field,
@@ -154,11 +153,11 @@
           @apply p-base outline-imperial-red focus-visible:ring-imperial-red focus-visible:border-imperial-red mr-0 w-full rounded-xl border border-[#E9E9E938] focus-visible:ring-0 focus-visible:outline-0;
         }
 
-        input:not([id^='LEGAL_CONSENT']):not([type='radio']),
+        /* input:not([id^='LEGAL_CONSENT']):not([type='radio']),
         select,
         textarea {
           @apply mt-base;
-        }
+        } */
 
         :has(input[id^='LEGAL_CONSENT']) {
           span {
@@ -167,7 +166,7 @@
         }
 
         input[type='checkbox'] {
-          @apply mr-2 h-6 w-6 appearance-none rounded-lg border border-white bg-transparent text-white focus:ring-0 focus:outline-none;
+          @apply h-8 w-8 appearance-none rounded-lg border border-white bg-transparent p-0 text-white focus:ring-0 focus:outline-none;
         }
 
         input[type='checkbox']:checked {
@@ -225,7 +224,7 @@
       }
 
       ul.inputs-list {
-        @apply ml-base gap-2xs m-0 flex list-none flex-col items-start p-0;
+        @apply gap-2xs m-0 flex list-none flex-col items-start p-0;
 
         li.hs-form-radio,
         li.hs-form-checkbox,

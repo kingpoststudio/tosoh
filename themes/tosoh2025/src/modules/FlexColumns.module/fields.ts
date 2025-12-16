@@ -447,9 +447,10 @@ const generateFields = () => {
             ...generateFormDialogFields(),
             choiceField('theme', 'Theme', {
               choices: [
-                ['', 'Default'],
+                ['default', 'Default'],
                 ['light', 'Light'],
               ],
+              default: 'default',
               inline_help_text: 'Select the theme for the form.',
             }),
             richTextField('eyebrow', 'Eyebrow', {
