@@ -43,8 +43,6 @@
         const tabGroup = event.target.value;
         const tabGroupElement = document.querySelector(`tosoh-tab-group[groupId="${tabGroup}"]`);
 
-        console.log(tabGroupElement);
-
         window.dispatchEvent(
           new CustomEvent('TosohTabGroupActive', { detail: { groupId: tabGroup }, bubbles: true })
         );
