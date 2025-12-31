@@ -323,21 +323,7 @@ function processNode(node: Node, inheritedStyles: ParsedTextStyle, runs: TextRun
     case 'del':
       currentStyles.strike = true;
       break;
-    case 'br':
-      runs.push(createLineBreak());
-      return;
-    case 'p':
-    case 'div':
-      // Add line break before block elements if we have content
-      if (runs.length > 0) {
-        runs.push(createLineBreak());
-      }
-      break;
     case 'li':
-      // Add bullet point and line break for list items
-      if (runs.length > 0) {
-        runs.push(createLineBreak());
-      }
       runs.push(
         new TextRun({
           text: '• ',
@@ -362,13 +348,6 @@ function processNode(node: Node, inheritedStyles: ParsedTextStyle, runs: TextRun
   const childNodes = element.childNodes;
   for (let i = 0; i < childNodes.length; i++) {
     processNode(childNodes[i], currentStyles, runs);
-  }
-
-  // Add line break after certain block elements
-  if (tagName === 'p' || tagName === 'div' || tagName === 'li') {
-    if (runs.length > 0) {
-      runs.push(createLineBreak());
-    }
   }
 }
 
