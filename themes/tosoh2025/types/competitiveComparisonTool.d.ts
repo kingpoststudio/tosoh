@@ -77,26 +77,24 @@ export type CCTForeignId = {
 };
 
 export type CCTComparison = {
-  product_line: CCTOption;
-  category: CCTOption;
+  category: {
+    label: string;
+    name: string;
+  };
   clinician: string;
-  competitor_instrument_name: CCTForeignId[];
-  hs_child_table_id: number;
-  hs_created_at: number;
-  hs_created_by_user_id: number;
-  hs_deleted_at: number;
-  hs_id: number;
-  hs_initial_published_at: number;
-  hs_is_edited: boolean;
-  hs_path: string;
-  hs_published_at: number;
-  hs_updated_at: number;
-  hs_updated_by_user_id: number;
+  clinician_competitor: string;
   lab_manager: string;
+  lab_manager_competitor: string;
   lab_technician: string;
+  lab_technician_competitor: string;
   procurement_manager: string;
-  status: CCTOption;
+  procurement_manager_competitor: string;
   tosoh_instrument_name: CCTForeignId[];
+  competitor_instrument_name: CCTForeignId[];
+  status: {
+    name: string;
+    label: string;
+  };
 };
 
 export type CCTComparisons = {

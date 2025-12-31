@@ -16,35 +16,20 @@ import {
 } from 'docx';
 import { saveAs } from 'file-saver';
 
-interface Instrument {
-  product_name: string;
-  company?: { label: string; name: string };
-  lab_man_benefits?: string;
-  lab_staff_benefits?: string;
-  clinician_benefits?: string;
-  procurement_benefits?: string;
-}
+import type { ColumnConfig, Instrument } from '../../types/cctDocuments';
+import type { CCTComparison } from '../../types/competitiveComparisonTool';
 
-interface ComparisonRow {
-  category: { label: string; name: string };
-  status: { label: string; name: string };
-  lab_manager?: string;
-  lab_technician?: string;
-  procurement_manager?: string;
-  clinician?: string;
-}
-
-interface ColumnConfig {
-  key: string;
-  label: string;
-  benefitKey?: string;
-}
+const FONTS = {
+  default: 'Arial',
+} as const;
 
 const COLORS = {
   primary: 'ED1A3B',
   textMuted: '6A7282',
   advantage: '00C950',
   disadvantage: 'FF4444',
+  advantageBackground: 'E8F5E9',
+  disadvantageBackground: 'FFEBEE',
   headerBackground: 'E5E5E5',
   border: 'CCCCCC',
 } as const;
@@ -73,6 +58,15 @@ const COLUMN_RATIOS = {
   dynamicColumns: 0.7,
 } as const;
 
+const HEX_COLOR = {
+  shortLength: 3,
+  fullLength: 6,
+} as const;
+
+const CATEGORY_NAMES = {
+  generalComparison: 'General Comparison',
+} as const;
+
 const NO_BORDERS = {
   top: { style: BorderStyle.NONE },
   bottom: { style: BorderStyle.NONE },
@@ -96,12 +90,339 @@ const STATUS_COLORS: Record<string, string> = {
   Disadvantage: COLORS.disadvantage,
 } as const;
 
+const STATUS_BACKGROUNDS: Record<string, string> = {
+  Advantage: COLORS.advantageBackground,
+  Disadvantage: COLORS.disadvantageBackground,
+} as const;
+
+/**
+ * Creates a TextRun representing a line break
+ */
+function createLineBreak(): TextRun {
+  return new TextRun({ text: '', break: 1, font: FONTS.default });
+}
+
 const COLUMN_CONFIGS: ColumnConfig[] = [
-  { key: 'lab_manager', label: 'Lab Manager', benefitKey: 'lab_man_benefits' },
-  { key: 'lab_technician', label: 'Lab Technician', benefitKey: 'lab_staff_benefits' },
-  { key: 'procurement_manager', label: 'Procurement Manager', benefitKey: 'procurement_benefits' },
-  { key: 'clinician', label: 'Clinician', benefitKey: 'clinician_benefits' },
+  { key: 'lab_manager', label: 'Lab Manager', benefitKey: 'lab_manager' },
+  {
+    key: 'lab_manager_competitor',
+    label: 'Lab Manager - Competitor',
+    benefitKey: 'lab_manager_competitor',
+  },
+  { key: 'lab_technician', label: 'Lab Technician', benefitKey: 'lab_technician' },
+  {
+    key: 'lab_technician_competitor',
+    label: 'Lab Technician - Competitor',
+    benefitKey: 'lab_technician_competitor',
+  },
+  { key: 'procurement_manager', label: 'Procurement Manager', benefitKey: 'procurement_manager' },
+  {
+    key: 'procurement_manager_competitor',
+    label: 'Procurement Manager - Competitor',
+    benefitKey: 'procurement_manager_competitor',
+  },
+  { key: 'clinician', label: 'Clinician', benefitKey: 'clinician' },
+  {
+    key: 'clinician_competitor',
+    label: 'Clinician - Competitor',
+    benefitKey: 'clinician_competitor',
+  },
 ];
+
+// Named colors map for HTML color conversion
+const NAMED_COLORS: Record<string, string> = {
+  red: 'FF0000',
+  green: '008000',
+  blue: '0000FF',
+  black: '000000',
+  white: 'FFFFFF',
+  yellow: 'FFFF00',
+  orange: 'FFA500',
+  purple: '800080',
+  pink: 'FFC0CB',
+  gray: '808080',
+  grey: '808080',
+  cyan: '00FFFF',
+  magenta: 'FF00FF',
+  lime: '00FF00',
+  maroon: '800000',
+  navy: '000080',
+  olive: '808000',
+  teal: '008080',
+  aqua: '00FFFF',
+  silver: 'C0C0C0',
+  fuchsia: 'FF00FF',
+};
+
+/**
+ * Converts various color formats to 6-character hex format for docx
+ * Supports: hex (#RGB, #RRGGBB), rgb(), rgba(), and named colors
+ * Returns undefined if parsing fails (safeguard)
+ */
+export function colorToHex(color: string): string | undefined {
+  if (!color || typeof color !== 'string') return undefined;
+
+  const trimmed = color.trim().toLowerCase();
+
+  // Handle hex colors (#RGB or #RRGGBB)
+  if (trimmed.startsWith('#')) {
+    const hex = trimmed.slice(1);
+    if (hex.length === HEX_COLOR.shortLength) {
+      // Convert #RGB to #RRGGBB
+      return (hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2]).toUpperCase();
+    }
+    if (hex.length === HEX_COLOR.fullLength && /^[0-9a-f]{6}$/i.test(hex)) {
+      return hex.toUpperCase();
+    }
+    return undefined;
+  }
+
+  // Handle rgb() and rgba() colors
+  const rgbMatch = trimmed.match(/rgba?\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/i);
+  if (rgbMatch) {
+    const red = Math.min(255, Math.max(0, parseInt(rgbMatch[1], 10)));
+    const green = Math.min(255, Math.max(0, parseInt(rgbMatch[2], 10)));
+    const blue = Math.min(255, Math.max(0, parseInt(rgbMatch[3], 10)));
+    return (
+      red.toString(16).padStart(2, '0') +
+      green.toString(16).padStart(2, '0') +
+      blue.toString(16).padStart(2, '0')
+    ).toUpperCase();
+  }
+
+  // Handle named colors
+  if (NAMED_COLORS[trimmed]) {
+    return NAMED_COLORS[trimmed];
+  }
+
+  return undefined;
+}
+
+interface ParsedTextStyle {
+  bold?: boolean;
+  italics?: boolean;
+  underline?: boolean;
+  strike?: boolean;
+  color?: string;
+}
+
+/**
+ * Parses HTML content and converts it to an array of TextRun objects
+ * preserving formatting like bold, italic, colors, underline, etc.
+ * Falls back to plain text on parsing errors (safeguard)
+ */
+export function parseHtmlToTextRuns(html: string | undefined): TextRun[] {
+  // Handle empty/null input
+  if (!html || typeof html !== 'string') {
+    return [];
+  }
+
+  // Replace NEWLINE markers before processing
+  const content = html.replace(/NEWLINE/g, '\n');
+
+  // Check if content has any HTML tags
+  const hasHtmlTags = /<[^>]+>/.test(content);
+
+  // If no HTML tags, just create text runs with line breaks
+  if (!hasHtmlTags) {
+    return createPlainTextRuns(content);
+  }
+
+  try {
+    const parsedHtml = new DOMParser().parseFromString(content, 'text/html');
+    const runs: TextRun[] = [];
+
+    processNode(parsedHtml.body, {}, runs);
+
+    // If parsing produced no runs but we have content, fall back to plain text
+    if (runs.length === 0 && content.trim()) {
+      return createPlainTextRuns(stripHtmlFallback(content));
+    }
+
+    return runs;
+  } catch (error) {
+    // Safeguard: fall back to plain text on any parsing error
+    console.error('Error parsing HTML for DOCX:', error);
+    return createPlainTextRuns(stripHtmlFallback(content));
+  }
+}
+
+/**
+ * Creates plain text runs with line break handling
+ */
+export function createPlainTextRuns(text: string): TextRun[] {
+  if (!text) return [];
+
+  const runs: TextRun[] = [];
+  const lines = text.split('\n');
+
+  for (let i = 0; i < lines.length; i++) {
+    if (i > 0) {
+      runs.push(createLineBreak());
+    }
+    const lineText = lines[i] || '';
+    if (lineText) {
+      runs.push(new TextRun({ text: lineText, font: FONTS.default }));
+    }
+  }
+
+  return runs;
+}
+
+/**
+ * Fallback HTML stripper for error cases
+ */
+function stripHtmlFallback(html: string): string {
+  return html
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n')
+    .replace(/<\/div>/gi, '\n')
+    .replace(/<\/li>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
+/**
+ * Recursively processes DOM nodes and creates TextRun objects
+ */
+function processNode(node: Node, inheritedStyles: ParsedTextStyle, runs: TextRun[]): void {
+  // Handle text nodes
+  if (node.nodeType === Node.TEXT_NODE) {
+    const text = node.textContent || '';
+    if (text) {
+      appendTextWithLineBreaks(text, inheritedStyles, runs);
+    }
+    return;
+  }
+
+  // Skip non-element nodes
+  if (node.nodeType !== Node.ELEMENT_NODE) return;
+
+  const element = node as HTMLElement;
+  const tagName = element.tagName?.toLowerCase() || '';
+
+  // Clone inherited styles for this branch
+  const currentStyles: ParsedTextStyle = { ...inheritedStyles };
+
+  // Apply tag-based styling
+  switch (tagName) {
+    case 'b':
+    case 'strong':
+      currentStyles.bold = true;
+      break;
+    case 'i':
+    case 'em':
+      currentStyles.italics = true;
+      break;
+    case 'u':
+      currentStyles.underline = true;
+      break;
+    case 's':
+    case 'strike':
+    case 'del':
+      currentStyles.strike = true;
+      break;
+    case 'br':
+      runs.push(createLineBreak());
+      return;
+    case 'p':
+    case 'div':
+      // Add line break before block elements if we have content
+      if (runs.length > 0) {
+        runs.push(createLineBreak());
+      }
+      break;
+    case 'li':
+      // Add bullet point and line break for list items
+      if (runs.length > 0) {
+        runs.push(createLineBreak());
+      }
+      runs.push(
+        new TextRun({
+          text: '• ',
+          font: FONTS.default,
+          bold: currentStyles.bold,
+          italics: currentStyles.italics,
+          underline: currentStyles.underline ? {} : undefined,
+          strike: currentStyles.strike,
+          color: currentStyles.color,
+        })
+      );
+      break;
+  }
+
+  // Extract color from inline styles or attributes
+  const colorFromStyle = extractColorFromElement(element);
+  if (colorFromStyle) {
+    currentStyles.color = colorFromStyle;
+  }
+
+  // Process child nodes
+  const childNodes = element.childNodes;
+  for (let i = 0; i < childNodes.length; i++) {
+    processNode(childNodes[i], currentStyles, runs);
+  }
+
+  // Add line break after certain block elements
+  if (tagName === 'p' || tagName === 'div' || tagName === 'li') {
+    if (runs.length > 0) {
+      runs.push(createLineBreak());
+    }
+  }
+}
+
+/**
+ * Appends text content to runs, handling embedded newlines
+ */
+function appendTextWithLineBreaks(text: string, styles: ParsedTextStyle, runs: TextRun[]): void {
+  const lines = text.split('\n');
+
+  for (let i = 0; i < lines.length; i++) {
+    if (i > 0) {
+      runs.push(createLineBreak());
+    }
+
+    const lineText = lines[i];
+    if (lineText) {
+      runs.push(
+        new TextRun({
+          text: lineText,
+          font: FONTS.default,
+          bold: styles.bold,
+          italics: styles.italics,
+          underline: styles.underline ? {} : undefined,
+          strike: styles.strike,
+          color: styles.color,
+        })
+      );
+    }
+  }
+}
+
+/**
+ * Extracts color from element's style attribute or color attribute
+ */
+function extractColorFromElement(element: HTMLElement): string | undefined {
+  // Check style attribute for color
+  const style = element.getAttribute('style');
+  if (style) {
+    const colorMatch = style.match(/(?:^|;)\s*color\s*:\s*([^;]+)/i);
+    if (colorMatch) {
+      const parsedColor = colorToHex(colorMatch[1].trim());
+      if (parsedColor) return parsedColor;
+    }
+  }
+
+  // Check color attribute (older HTML like <font color="...">)
+  const colorAttr = element.getAttribute('color');
+  if (colorAttr) {
+    const parsedColor = colorToHex(colorAttr);
+    if (parsedColor) return parsedColor;
+  }
+
+  return undefined;
+}
 
 async function fetchLogoAsArrayBuffer(logoUrl: string): Promise<ArrayBuffer | null> {
   if (!logoUrl) return null;
@@ -172,7 +493,7 @@ function createDocumentHeader(
                         bold: true,
                         size: FONT_SIZES.header,
                         color: COLORS.primary,
-                        font: 'Arial',
+                        font: FONTS.default,
                       }),
                     ],
                     alignment: AlignmentType.RIGHT,
@@ -193,61 +514,18 @@ function createDocumentHeader(
   });
 }
 
-function stripHtml(html: string | undefined): string {
-  if (!html) return '';
-
-  let text = html.replace(/NEWLINE/g, '\n');
-
-  const hasHtmlTags = /<[^>]+>/.test(text);
-
-  if (hasHtmlTags) {
-    text = text
-      .replace(/<br\s*\/?>/gi, '\n')
-      .replace(/<\/p>/gi, '\n')
-      .replace(/<\/div>/gi, '\n')
-      .replace(/<\/li>/gi, '\n');
-
-    const doc = new DOMParser().parseFromString(text, 'text/html');
-    text = doc.body.textContent || '';
-  }
-
-  return text.replace(/\n{3,}/g, '\n\n').trim();
-}
-
-function createTextRunsWithBreaks(
-  text: string,
-  options: { bold?: boolean; font?: string } = {}
-): TextRun[] {
-  if (!text) return [];
-
-  const lines = text.split('\n');
-  const runs: TextRun[] = [];
-
-  for (let i = 0; i < lines.length; i++) {
-    const lineText = lines[i] || '';
-
-    if (i > 0) {
-      runs.push(new TextRun({ ...options, text: '', break: 1 }));
-    }
-
-    if (lineText) {
-      runs.push(new TextRun({ ...options, text: lineText }));
-    }
-  }
-
-  return runs;
-}
-
 function createBenefitsParagraphs(
-  instrument: Instrument | undefined,
+  comparisonRow: CCTComparison | undefined,
   title: string,
   selectedColumns: string[]
 ): Paragraph[] {
-  if (!instrument) return [];
+  if (!comparisonRow) return [];
 
   const paragraphs: Paragraph[] = [
     new Paragraph({
-      children: [new TextRun({ text: title, bold: true, color: COLORS.primary, font: 'Arial' })],
+      children: [
+        new TextRun({ text: title, bold: true, color: COLORS.primary, font: FONTS.default }),
+      ],
       heading: HeadingLevel.HEADING_2,
       spacing: { before: SPACING.large, after: SPACING.medium },
     }),
@@ -256,15 +534,17 @@ function createBenefitsParagraphs(
   const activeConfigs = COLUMN_CONFIGS.filter((config) => selectedColumns.includes(config.key));
 
   for (const config of activeConfigs) {
-    const benefitKey = config.benefitKey as keyof Instrument;
-    const benefitText = stripHtml(instrument[benefitKey] as string);
+    const rawHtml = comparisonRow[config.key as keyof CCTComparison] as string;
 
-    if (benefitText) {
+    // Parse HTML content preserving formatting (colors, bold, etc.)
+    const contentRuns = parseHtmlToTextRuns(rawHtml);
+
+    if (contentRuns.length > 0) {
       paragraphs.push(
         new Paragraph({
           children: [
-            new TextRun({ text: `${config.label}: `, bold: true, font: 'Arial' }),
-            ...createTextRunsWithBreaks(benefitText, { font: 'Arial' }),
+            new TextRun({ text: `${config.label}: `, bold: true, font: FONTS.default }),
+            ...contentRuns,
           ],
           spacing: { after: SPACING.small },
         })
@@ -276,7 +556,7 @@ function createBenefitsParagraphs(
 }
 
 function createComparisonTable(
-  comparisonRows: ComparisonRow[],
+  comparisonRows: CCTComparison[],
   selectedColumns: string[]
 ): Table | null {
   if (!comparisonRows || comparisonRows.length === 0) return null;
@@ -298,14 +578,18 @@ function createComparisonTable(
   const headerCells = [
     new TableCell({
       children: [
-        new Paragraph({ children: [new TextRun({ text: 'Category', bold: true, font: 'Arial' })] }),
+        new Paragraph({
+          children: [new TextRun({ text: 'Category', bold: true, font: FONTS.default })],
+        }),
       ],
       shading: { fill: COLORS.headerBackground },
       width: { size: fixedColumnWidth, type: WidthType.DXA },
     }),
     new TableCell({
       children: [
-        new Paragraph({ children: [new TextRun({ text: 'Status', bold: true, font: 'Arial' })] }),
+        new Paragraph({
+          children: [new TextRun({ text: 'Status', bold: true, font: FONTS.default })],
+        }),
       ],
       shading: { fill: COLORS.headerBackground },
       width: { size: fixedColumnWidth, type: WidthType.DXA },
@@ -315,7 +599,7 @@ function createComparisonTable(
         new TableCell({
           children: [
             new Paragraph({
-              children: [new TextRun({ text: config.label, bold: true, font: 'Arial' })],
+              children: [new TextRun({ text: config.label, bold: true, font: FONTS.default })],
             }),
           ],
           shading: { fill: COLORS.headerBackground },
@@ -327,39 +611,46 @@ function createComparisonTable(
   const headerRow = new TableRow({ children: headerCells });
 
   const dataRows = comparisonRows.map((row) => {
-    const statusColor = STATUS_COLORS[row.status?.name] || COLORS.textMuted;
+    const statusColor = STATUS_COLORS[row.status?.name || ''] || COLORS.textMuted;
+    const statusBackground = STATUS_BACKGROUNDS[row.status?.name || ''];
+    const cellShading = statusBackground ? { fill: statusBackground } : undefined;
 
     const cells = [
       new TableCell({
         children: [
           new Paragraph({
-            children: [new TextRun({ text: row.category?.label || '', font: 'Arial' })],
+            children: [new TextRun({ text: row.category?.label || '', font: FONTS.default })],
           }),
         ],
         width: { size: fixedColumnWidth, type: WidthType.DXA },
+        shading: cellShading,
       }),
       new TableCell({
         children: [
           new Paragraph({
             children: [
-              new TextRun({ text: row.status?.name || '', color: statusColor, font: 'Arial' }),
+              new TextRun({
+                text: row.status?.name || '',
+                color: statusColor,
+                font: FONTS.default,
+              }),
             ],
           }),
         ],
         width: { size: fixedColumnWidth, type: WidthType.DXA },
+        shading: cellShading,
       }),
       ...activeConfigs.map(
         (config) =>
           new TableCell({
             children: [
               new Paragraph({
-                children: createTextRunsWithBreaks(
-                  stripHtml(row[config.key as keyof ComparisonRow] as string),
-                  { font: 'Arial' }
-                ),
+                // Parse HTML preserving formatting (colors, bold, etc.)
+                children: parseHtmlToTextRuns(row[config.key as keyof CCTComparison] as string),
               }),
             ],
             width: { size: dynamicColumnWidth, type: WidthType.DXA },
+            shading: cellShading,
           })
       ),
     ];
@@ -388,19 +679,23 @@ export async function generateCCTDocument(
   docxLogo: { src: string; alt: string },
   tosohInstrument: Instrument | undefined,
   competitorInstrument: Instrument | undefined,
-  comparisonRows: ComparisonRow[],
+  comparisonRows: CCTComparison[],
   selectedColumns: string[]
 ): Promise<void> {
   const tosohName = tosohInstrument?.product_name || 'N/A';
   const competitorName = competitorInstrument?.product_name || 'N/A';
   const competitorCompany = competitorInstrument?.company?.label || '';
 
-  // Fetch the logo for the header
+  const generalComparisonRow =
+    comparisonRows?.find((row) => row.category.name === CATEGORY_NAMES.generalComparison) ?? null;
 
-  let logoBuffer = null;
-  if (docxLogo.src) {
-    logoBuffer = await fetchLogoAsArrayBuffer(docxLogo.src);
-  }
+  const comparisonRowsWithoutGeneralComparison =
+    comparisonRows?.filter((row) => row.category.name !== CATEGORY_NAMES.generalComparison) ?? [];
+
+  const selectedColumnsWithCompetitorSuffix =
+    selectedColumns?.map((column) => column + '_competitor') ?? [];
+
+  const logoBuffer = docxLogo.src ? await fetchLogoAsArrayBuffer(docxLogo.src) : null;
 
   const children: (Paragraph | Table)[] = [
     // Print Date
@@ -410,7 +705,7 @@ export async function generateCCTDocument(
           text: `Print Date: ${formatPrintDate()}`,
           size: FONT_SIZES.date,
           color: COLORS.textMuted,
-          font: 'Arial',
+          font: FONTS.default,
         }),
       ],
       alignment: AlignmentType.RIGHT,
@@ -419,13 +714,13 @@ export async function generateCCTDocument(
     // Title
     new Paragraph({
       children: [
-        new TextRun({ text: 'TOSOH: ', bold: true, color: COLORS.primary, font: 'Arial' }),
-        new TextRun({ text: tosohName, bold: true, color: COLORS.primary, font: 'Arial' }),
-        new TextRun({ text: ' vs ', italics: true, color: COLORS.primary, font: 'Arial' }),
+        new TextRun({ text: 'TOSOH: ', bold: true, color: COLORS.primary, font: FONTS.default }),
+        new TextRun({ text: tosohName, bold: true, color: COLORS.primary, font: FONTS.default }),
+        new TextRun({ text: ' vs ', italics: true, color: COLORS.primary, font: FONTS.default }),
         new TextRun({
           text: competitorCompany ? `${competitorCompany}: ${competitorName}` : competitorName,
           bold: true,
-          font: 'Arial',
+          font: FONTS.default,
           color: COLORS.primary,
         }),
       ],
@@ -436,25 +731,29 @@ export async function generateCCTDocument(
   ];
 
   // Tosoh Benefits Section
-  if (tosohInstrument && selectedColumns.length > 0) {
+  if (tosohInstrument && generalComparisonRow && selectedColumns.length > 0) {
     children.push(
-      ...createBenefitsParagraphs(tosohInstrument, 'TOSOH Benefits Summary', selectedColumns)
+      ...createBenefitsParagraphs(generalComparisonRow, 'TOSOH Benefits Sum-Up', selectedColumns)
     );
   }
 
   // Competitor Benefits Section
-  if (competitorInstrument && selectedColumns.length > 0) {
+  if (competitorInstrument && generalComparisonRow && selectedColumns.length > 0) {
     children.push(
       ...createBenefitsParagraphs(
-        competitorInstrument,
-        'Competitor Benefits Summary',
-        selectedColumns
+        generalComparisonRow,
+        'Competitor Benefits Sum-Up',
+        selectedColumnsWithCompetitorSuffix
       )
     );
   }
 
   // Comparison Table Section
-  if (comparisonRows && comparisonRows.length > 0 && selectedColumns.length > 0) {
+  if (
+    comparisonRowsWithoutGeneralComparison &&
+    comparisonRowsWithoutGeneralComparison.length > 0 &&
+    selectedColumns.length > 0
+  ) {
     children.push(
       new Paragraph({
         children: [
@@ -462,7 +761,7 @@ export async function generateCCTDocument(
             text: 'Detailed Comparison',
             bold: true,
             color: COLORS.primary,
-            font: 'Arial',
+            font: FONTS.default,
           }),
         ],
         heading: HeadingLevel.HEADING_2,
@@ -470,28 +769,28 @@ export async function generateCCTDocument(
       })
     );
 
-    const table = createComparisonTable(comparisonRows, selectedColumns);
+    const table = createComparisonTable(comparisonRowsWithoutGeneralComparison, selectedColumns);
     if (table) {
       children.push(table);
     }
   }
 
-  const doc = new Document({
+  const document = new Document({
     styles: {
       default: {
         document: {
           run: {
-            font: 'Arial',
+            font: FONTS.default,
           },
         },
         heading1: {
           run: {
-            font: 'Arial',
+            font: FONTS.default,
           },
         },
         heading2: {
           run: {
-            font: 'Arial',
+            font: FONTS.default,
           },
         },
       },
@@ -506,7 +805,7 @@ export async function generateCCTDocument(
     ],
   });
 
-  const blob = await Packer.toBlob(doc);
+  const blob = await Packer.toBlob(document);
   const filename = `CCT_Comparison_${tosohName}_vs_${competitorName}.docx`.replace(/\s+/g, '_');
   saveAs(blob, filename);
 }

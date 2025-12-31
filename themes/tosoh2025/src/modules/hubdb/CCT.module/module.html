@@ -12,9 +12,9 @@
 {% set active_competitor_instruments = [] %}
  
  {% if tosoh_instrument_name %}
-  {% set active_compariso_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__eq='~tosoh_instrument_name) %}
+  {% set active_comparison_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__eq='~tosoh_instrument_name) %}
     
-    {% for row in active_compariso_rows_based_on_tosoh_instrument %}
+    {% for row in active_comparison_rows_based_on_tosoh_instrument %}
       {% for foreign_row in row.competitor_instrument_name %}
       {% do active_competitor_instruments.append({name: foreign_row.product_name, label: foreign_row.company.label ~ ' : ' ~ foreign_row.product_name, sufficient_data_status: foreign_row.sufficient_data_status.name }) %}
     {% endfor %}
@@ -25,8 +25,11 @@
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
 
 {% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name) : [] %}
-      
-{% set roles = [{label: 'Laboratory Manager', name: 'lab_man_benefits'}, {label: 'Laboratory Staff', name: 'lab_staff_benefits'}, {label: 'Clinician', name: 'clinician_benefits'}, {label: 'Procurement Manager', name: 'procurement_benefits'}] %}
+{% set general_comparison_row = comparison_rows|selectattr('category.name', 'equalto', 'General Comparison')|first %}
+ 
+
+
+{% set roles = [{label: 'Laboratory Manager', name: 'lab_manager'}, {label: 'Laboratory Technician', name: 'lab_technician'}, {label: 'Clinician', name: 'clinician'}, {label: 'Procurement Manager', name: 'procurement_manager'}] %}
         
 {% require_js position="head" %}
   <script>
@@ -58,8 +61,7 @@
 
   <div class="gap-md flex flex-col xl:flex-row">
   <tosoh-cct-filters></tosoh-cct-filters>
-
-    {% if !tosoh_instrument_name and !competitor_instrument_name %}
+    {% if not tosoh_instrument_name and not competitor_instrument_name %}
       <div class="text-xl font-semibold">{{ module.no_instrument_selected_message }}</div>
     {% else %}
     <div class="border-border flex w-full flex-col rounded-2xl border">
@@ -77,7 +79,7 @@
         </div>
         <div class="w-full max-w-[calc(100vw-(var(--spacing-md)*2))] h-full">
           <tosoh-scroll-x>
-              <div class="mx-auto flex w-full min-w-[56rem] lg:min-w-0 {{ tosoh_instrument_name or competitor_instrument_name ? 'opacity-100' : 'opacity-50 pointer-events-none' }}">
+              <div class="mx-auto flex w-full min-w-[56rem] lg:min-w-0 {{ tosoh_instrument_name and competitor_instrument_name ? 'opacity-100' : 'opacity-50 pointer-events-none' }}">
                 {% for role in roles %}
                   <tosoh-tab-group
                     variant="action"
@@ -91,11 +93,11 @@
               </div>
             <div class="divide-border flex h-full w-full min-w-[56rem] justify-center divide-x lg:min-w-0">
               <div class="p-md flex w-full h-full flex-col">
-                {% if tosoh_instrument_name %}
+                {% if tosoh_instrument_name and general_comparison_row %}
                 <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
                 {% for role in roles %}
                   <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
-                    <div>{{ tosoh_instrument[role.name] }}</div>
+                    <div>{{ general_comparison_row[role.name] }}</div>
                   </tosoh-tab-group>
                 {% endfor %}
                 {% else %}
@@ -104,11 +106,11 @@
               </div>
 
               <div class="p-md flex w-full h-full flex-col">
-                {% if competitor_instrument_name %}
+                {% if competitor_instrument_name and general_comparison_row %}
                 <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
                 {% for role in roles %}
                   <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
-                    <div>{{ competitor_instrument[role.name] }}</div>
+                    <div>{{ general_comparison_row[role.name~'_competitor'] }}</div>
                   </tosoh-tab-group>
                 {% endfor %}
                 {% else %}

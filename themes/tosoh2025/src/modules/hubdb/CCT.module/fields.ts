@@ -27,14 +27,14 @@ const generateFields = () => {
     }),
     richTextField('no_tosoh_instrument_selected_message', 'No Tosoh instrument selected message', {
       enabled_features: contentBlockRtfFeatures,
-      default: 'Please select a Tosoh instrument',
+      default: 'Please select both instruments to view the comparison',
     }),
     richTextField(
       'no_competitor_instrument_selected_message',
       'No competitor instrument selected message',
       {
         enabled_features: contentBlockRtfFeatures,
-        default: 'Please select a competitor instrument',
+        default: 'Please select both instruments to view the comparison',
       }
     ),
   ];

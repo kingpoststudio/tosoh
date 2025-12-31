@@ -10,12 +10,14 @@
 
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-header-height flex flex-col">
   {% if tosoh_instrument_name and competitor_instrument_name %}
-    {% set comparison_rows = hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name) %}
+
+    {% set category_exclusion_filter = '&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name~"&category__ne=General Comparison" %}
+    {% set comparison_rows = hubdb_table_rows("cct_comparison", category_exclusion_filter) %}
 
       {% require_js position="head" %}
         <script>
         const comparisonRows = {{ comparison_rows|tojson }};
-        window.Tosoh.CCTDetails = { comparisonRows};
+        window.Tosoh.CCTDetails = { comparisonRows };
         </script>
       {% end_require_js %}
 
@@ -28,7 +30,7 @@
         </svg>
         Return to main screen
       </a>
-
+      
       <h3 class="mb-sm text-3xl font-bold text-gray-900">
         Details for {{ tosoh_instrument.product_name }} versus {{ competitor_instrument.product_name }}
       </h3>
