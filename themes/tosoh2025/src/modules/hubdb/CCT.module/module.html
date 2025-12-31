@@ -61,7 +61,7 @@
 
   <div class="gap-md flex flex-col xl:flex-row">
   <tosoh-cct-filters></tosoh-cct-filters>
-    {% if not tosoh_instrument_name and not competitor_instrument_name %}
+    {% if not tosoh_instrument_name or not competitor_instrument_name %}
       <div class="text-xl font-semibold">{{ module.no_instrument_selected_message }}</div>
     {% else %}
     <div class="border-border flex w-full flex-col rounded-2xl border">
@@ -93,29 +93,21 @@
               </div>
             <div class="divide-border flex h-full w-full min-w-[56rem] justify-center divide-x lg:min-w-0">
               <div class="p-md flex w-full h-full flex-col">
-                {% if tosoh_instrument_name and general_comparison_row %}
                 <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
                 {% for role in roles %}
                   <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
                     <div>{{ general_comparison_row[role.name] }}</div>
                   </tosoh-tab-group>
                 {% endfor %}
-                {% else %}
-                  <div class="font-semibold">{{ module.no_tosoh_instrument_selected_message }}</div>
-                {% endif %}
               </div>
 
               <div class="p-md flex w-full h-full flex-col">
-                {% if competitor_instrument_name and general_comparison_row %}
                 <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
                 {% for role in roles %}
                   <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
                     <div>{{ general_comparison_row[role.name~'_competitor'] }}</div>
                   </tosoh-tab-group>
                 {% endfor %}
-                {% else %}
-                  <div class="font-semibold">{{ module.no_competitor_instrument_selected_message }}</div>
-                {% endif %}
               </div>
             </div>
           </tosoh-scroll-x>
