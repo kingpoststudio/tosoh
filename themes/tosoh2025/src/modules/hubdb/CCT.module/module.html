@@ -12,7 +12,7 @@
 {% set active_competitor_instruments = [] %}
  
  {% if tosoh_instrument_name %}
-  {% set active_comparison_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__eq='~tosoh_instrument_name) %}
+  {% set active_comparison_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__in='~tosoh_instrument_name) %}
     
     {% for row in active_comparison_rows_based_on_tosoh_instrument %}
       {% for foreign_row in row.competitor_instrument_name %}
@@ -24,7 +24,7 @@
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %} 
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
 
-{% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name) : [] %}
+{% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__in='~tosoh_instrument_name~"&competitor_instrument_name__in="~competitor_instrument_name) : [] %}
 {% set general_comparison_row = comparison_rows|selectattr('category.name', 'equalto', 'General Comparison')|first %}
  
 
@@ -93,7 +93,7 @@
               </div>
             <div class="divide-border flex h-full w-full min-w-[56rem] justify-center divide-x lg:min-w-0">
               <div class="p-md flex w-full h-full flex-col">
-                <h6 class="mb-sm text-center font-semibold">TOSOH Benefits Sum-Up</h6>
+                <h6 class="mb-sm text-center font-semibold"> TOSOH : {{ tosoh_instrument_name }} Benefits Sum-Up</h6>
                 {% for role in roles %}
                   <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
                     <div>{{ general_comparison_row[role.name] }}</div>
@@ -102,7 +102,7 @@
               </div>
 
               <div class="p-md flex w-full h-full flex-col">
-                <h6 class="mb-sm text-center font-semibold">Benefits Sum-Up</h6>
+                <h6 class="mb-sm text-center font-semibold">{{ competitor_instrument.company.label }} : {{ competitor_instrument.product_name }} Benefits Sum-Up</h6>
                 {% for role in roles %}
                   <tosoh-tab-group variant="tab" groupId="{{ role.name }}" {{ loop.first ? 'active="true"' : '' }}>
                     <div>{{ general_comparison_row[role.name~'_competitor'] }}</div>
