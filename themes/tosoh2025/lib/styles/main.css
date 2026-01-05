@@ -603,6 +603,6 @@ tosoh-header {
 .fc-wrapper {
   ul,
   ol {
-    @apply pl-[calc(var(--spacing-base)+0.05rem)];
+    @apply pl-[calc(var(--spacing-base)+0.125rem)];
   }
 }
