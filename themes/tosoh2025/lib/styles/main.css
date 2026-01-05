@@ -599,3 +599,10 @@ tosoh-header {
     }
   }
 }
+
+.fc-wrapper {
+  ul,
+  ol {
+    @apply pl-[calc(var(--spacing-base)+0.05rem)];
+  }
+}

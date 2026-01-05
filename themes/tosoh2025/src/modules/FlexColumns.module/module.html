@@ -27,7 +27,7 @@
   {% set text_align = content.text_align or "text-left" %}
   {% set horizontal_align = content.horizontal_align or "items-start" %}
 
-  <div class="gap-base {{ horizontal_align }} flex flex-col">
+  <div class="gap-base {{ horizontal_align }} fc-wrapper flex flex-col">
     {%- if content.eyebrow %}
       <div class="text-imperial-red {{ text_align }} w-full text-xl font-thin tracking-widest">
         {{ content.eyebrow }}
