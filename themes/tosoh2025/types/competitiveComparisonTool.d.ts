@@ -77,6 +77,9 @@ export type CCTForeignId = {
 };
 
 export type CCTComparison = {
+  description: string;
+  proof: string;
+  sub_category: string;
   category: {
     label: string;
     name: string;

@@ -103,30 +103,14 @@ function createLineBreak(): TextRun {
 }
 
 const COLUMN_CONFIGS: ColumnConfig[] = [
-  { key: 'lab_manager', label: 'Lab Manager', benefitKey: 'lab_manager' },
-  {
-    key: 'lab_manager_competitor',
-    label: 'Lab Manager',
-    benefitKey: 'lab_manager_competitor',
-  },
-  { key: 'lab_technician', label: 'Lab Technician', benefitKey: 'lab_technician' },
-  {
-    key: 'lab_technician_competitor',
-    label: 'Lab Technician',
-    benefitKey: 'lab_technician_competitor',
-  },
-  { key: 'procurement_manager', label: 'Procurement Manager', benefitKey: 'procurement_manager' },
-  {
-    key: 'procurement_manager_competitor',
-    label: 'Procurement Manager',
-    benefitKey: 'procurement_manager_competitor',
-  },
-  { key: 'clinician', label: 'Clinician', benefitKey: 'clinician' },
-  {
-    key: 'clinician_competitor',
-    label: 'Clinician',
-    benefitKey: 'clinician_competitor',
-  },
+  { key: 'lab_manager', label: 'Lab Manager' },
+  { key: 'lab_manager_competitor', label: 'Lab Manager Competitor' },
+  { key: 'lab_technician', label: 'Lab Technician' },
+  { key: 'lab_technician_competitor', label: 'Lab Technician Competitor' },
+  { key: 'procurement_manager', label: 'Procurement Manager' },
+  { key: 'procurement_manager_competitor', label: 'Procurement Manager Competitor' },
+  { key: 'clinician', label: 'Clinician' },
+  { key: 'clinician_competitor', label: 'Clinician Competitor' },
 ];
 
 // Named colors map for HTML color conversion
@@ -372,6 +356,10 @@ function processNode(node: Node, inheritedStyles: ParsedTextStyle, runs: TextRun
   }
 }
 
+function getActiveColumnConfigs(selectedColumns: string[]): ColumnConfig[] {
+  return COLUMN_CONFIGS.filter((config) => selectedColumns.includes(config.key));
+}
+
 /**
  * Appends text content to runs, handling embedded newlines
  */
@@ -531,7 +519,7 @@ function createBenefitsParagraphs(
     }),
   ];
 
-  const activeConfigs = COLUMN_CONFIGS.filter((config) => selectedColumns.includes(config.key));
+  const activeConfigs = getActiveColumnConfigs(selectedColumns);
 
   for (const config of activeConfigs) {
     const rawHtml = comparisonRow[config.key as keyof CCTComparison] as string;
@@ -561,19 +549,45 @@ function createComparisonTable(
 ): Table | null {
   if (!comparisonRows || comparisonRows.length === 0) return null;
 
-  const activeConfigs = COLUMN_CONFIGS.filter((config) => selectedColumns.includes(config.key));
+  const activeConfigs = getActiveColumnConfigs(selectedColumns);
+  const columnsForAllRoles = [
+    { key: 'subcategory', label: 'Subcategory' },
+    { key: 'description', label: 'Description' },
+    { key: 'proof', label: 'Proof' },
+  ];
 
   const tableWidth = DOCUMENT_DIMENSIONS.tableWidth;
   const fixedColumnWidth = Math.floor(tableWidth * COLUMN_RATIOS.fixedColumn);
+
+  const proofColumn = 1;
   const dynamicColumnWidth = Math.floor(
-    (tableWidth * COLUMN_RATIOS.dynamicColumns) / activeConfigs.length
+    (tableWidth * COLUMN_RATIOS.dynamicColumns) / activeConfigs.length + proofColumn
   );
 
   const columnWidths = [
+    // Category
     fixedColumnWidth,
+    // Status
     fixedColumnWidth,
+    // Subcategory
+    fixedColumnWidth,
+    // Description
+    fixedColumnWidth,
+    // Proof
+    dynamicColumnWidth,
     ...activeConfigs.map(() => dynamicColumnWidth),
   ];
+
+  const headerCell = (config: { key: string; label: string }) =>
+    new TableCell({
+      children: [
+        new Paragraph({
+          children: [new TextRun({ text: config.label, bold: true, font: FONTS.default })],
+        }),
+      ],
+      shading: { fill: COLORS.headerBackground },
+      width: { size: dynamicColumnWidth, type: WidthType.DXA },
+    });
 
   const headerCells = [
     new TableCell({
@@ -594,18 +608,8 @@ function createComparisonTable(
       shading: { fill: COLORS.headerBackground },
       width: { size: fixedColumnWidth, type: WidthType.DXA },
     }),
-    ...activeConfigs.map(
-      (config) =>
-        new TableCell({
-          children: [
-            new Paragraph({
-              children: [new TextRun({ text: config.label, bold: true, font: FONTS.default })],
-            }),
-          ],
-          shading: { fill: COLORS.headerBackground },
-          width: { size: dynamicColumnWidth, type: WidthType.DXA },
-        })
-    ),
+    ...columnsForAllRoles.map((config) => headerCell(config)),
+    ...activeConfigs.map((config) => headerCell(config)),
   ];
 
   const headerRow = new TableRow({ children: headerCells });
@@ -614,6 +618,18 @@ function createComparisonTable(
     const statusColor = STATUS_COLORS[row.status?.name || ''] || COLORS.textMuted;
     const statusBackground = STATUS_BACKGROUNDS[row.status?.name || ''];
     const cellShading = statusBackground ? { fill: statusBackground } : undefined;
+
+    const tableCell = (config: ColumnConfig) =>
+      new TableCell({
+        children: [
+          new Paragraph({
+            // Parse HTML preserving formatting (colors, bold, etc.)
+            children: parseHtmlToTextRuns(row[config.key as keyof CCTComparison] as string),
+          }),
+        ],
+        width: { size: dynamicColumnWidth, type: WidthType.DXA },
+        shading: cellShading,
+      });
 
     const cells = [
       new TableCell({
@@ -640,19 +656,8 @@ function createComparisonTable(
         width: { size: fixedColumnWidth, type: WidthType.DXA },
         shading: cellShading,
       }),
-      ...activeConfigs.map(
-        (config) =>
-          new TableCell({
-            children: [
-              new Paragraph({
-                // Parse HTML preserving formatting (colors, bold, etc.)
-                children: parseHtmlToTextRuns(row[config.key as keyof CCTComparison] as string),
-              }),
-            ],
-            width: { size: dynamicColumnWidth, type: WidthType.DXA },
-            shading: cellShading,
-          })
-      ),
+      ...columnsForAllRoles.map((config) => tableCell(config)),
+      ...activeConfigs.map((config) => tableCell(config)),
     ];
 
     return new TableRow({ children: cells });
