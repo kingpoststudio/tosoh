@@ -9,7 +9,7 @@
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
   import Select from '../Select/Select.svelte';
   import { deleteMultipleSearchParams, getUrlParam, updateUrl } from '../../utils/urlUtils';
-  import { generateCCTDocument } from '../../utils/generateCCTDocument';
+  import { generateCCTDocument } from '../../utils/cctDocument/generateCCTDocument';
 
   const allProductLines = window?.Tosoh?.CCT?.allProductLines || [];
   const activeCompetitorInstruments = window?.Tosoh?.CCT?.activeCompetitorInstruments || [];

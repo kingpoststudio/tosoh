@@ -600,9 +600,10 @@ tosoh-header {
   }
 }
 
+.cct-wrapper,
 .fc-wrapper {
   ul,
   ol {
-    @apply pl-[calc(var(--spacing-base)+0.125rem)];
+    padding: revert;
   }
 }
