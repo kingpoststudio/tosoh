@@ -78,10 +78,14 @@
               <tr class="{{ bg_color }} table-row" id="{{ row.category.name }}">
                 <td class="table-cell">{{ row.category.label }}</td>
                 <td class="table-cell">
+                
+                {% if row.status.name %}
                   <span
                     class="px-base py-xs {{ status_badge_color }} inline-flex items-center rounded-lg text-xs font-medium text-white">
                     {{ row.status.name }}
                   </span>
+                {% endif %}
+
                 </td>
                 <td class="table-cell">{{ row.sub_category }}</td>
                 <td class="table-cell">{{ row.description }}</td>

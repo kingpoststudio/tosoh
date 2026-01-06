@@ -23,8 +23,13 @@
 
   let categorySelectValue: string = $state('none');
 
-  const categoryOptions =
-    window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map((row: any) => row?.category) || [];
+  const uniqueCategoryOptions =
+    (
+      window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map((row: any) => row?.category) || []
+    )?.filter(
+      (category: any, index: number, self: any[]) =>
+        category && self?.findIndex((cat: any) => cat?.id === category?.id) === index
+    ) || [];
 
   const resetSearchInput = () => {
     tableSearchManager.clearHighlights();
@@ -206,7 +211,7 @@
         excludeAllOption={true}
         placeholder={'Select Category'}
         displayLabel={false}
-        options={categoryOptions}
+        options={uniqueCategoryOptions}
         name={'category'}
         disabled={false}
         bind:value={categorySelectValue}
