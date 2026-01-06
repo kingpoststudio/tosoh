@@ -578,7 +578,7 @@ function createComparisonTable(
     ...activeConfigs.map(() => dynamicColumnWidth),
   ];
 
-  const headerCell = (config: { key: string; label: string }) =>
+  const headerCell = (config: { key: string; label: string }, width: number) =>
     new TableCell({
       children: [
         new Paragraph({
@@ -586,30 +586,14 @@ function createComparisonTable(
         }),
       ],
       shading: { fill: COLORS.headerBackground },
-      width: { size: dynamicColumnWidth, type: WidthType.DXA },
+      width: { size: width, type: WidthType.DXA },
     });
 
   const headerCells = [
-    new TableCell({
-      children: [
-        new Paragraph({
-          children: [new TextRun({ text: 'Category', bold: true, font: FONTS.default })],
-        }),
-      ],
-      shading: { fill: COLORS.headerBackground },
-      width: { size: fixedColumnWidth, type: WidthType.DXA },
-    }),
-    new TableCell({
-      children: [
-        new Paragraph({
-          children: [new TextRun({ text: 'Status', bold: true, font: FONTS.default })],
-        }),
-      ],
-      shading: { fill: COLORS.headerBackground },
-      width: { size: fixedColumnWidth, type: WidthType.DXA },
-    }),
-    ...columnsForAllRoles.map((config) => headerCell(config)),
-    ...activeConfigs.map((config) => headerCell(config)),
+    headerCell({ key: 'category', label: 'Category' }, fixedColumnWidth),
+    headerCell({ key: 'status', label: 'Status' }, fixedColumnWidth),
+    ...columnsForAllRoles.map((config) => headerCell(config, dynamicColumnWidth)),
+    ...activeConfigs.map((config) => headerCell(config, dynamicColumnWidth)),
   ];
 
   const headerRow = new TableRow({ children: headerCells });
