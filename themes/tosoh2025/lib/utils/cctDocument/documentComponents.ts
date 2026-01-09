@@ -187,7 +187,7 @@ export function createComparisonTable(
 
   const activeConfigs = getActiveColumnConfigs(selectedColumns);
   const columnsForAllRoles = [
-    { key: 'subcategory', label: 'Subcategory' },
+    { key: 'sub_category', label: 'Subcategory' },
     { key: 'description', label: 'Description' },
     { key: 'proof', label: 'Proof' },
   ];
