@@ -206,11 +206,6 @@
     padding: var(--spacing-sm) var(--spacing-md);
     box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.1);
 
-    .cta {
-      position: relative;
-      top: var(--spacing-xs);
-    }
-
     > div {
       display: flex;
       flex-direction: column;
