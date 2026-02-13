@@ -117,7 +117,7 @@
 
 {#snippet navItem(item: HubSpotMenu)}
   {#if item.url}
-    <a href={item.url}>{@html item.label}</a>
+    <a href={item.url} target={item?.linkTarget || '_self'}>{@html item.label}</a>
   {:else}
     <span>{@html item.label}</span>
   {/if}

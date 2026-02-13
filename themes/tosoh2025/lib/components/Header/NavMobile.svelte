@@ -63,7 +63,7 @@
   <li class="item level-{level}">
     <div class="content">
       {#if item.url}
-        <a href={item.url} class="link" onclick={handleLinkClick}>
+        <a href={item.url} class="link" target={item?.linkTarget || '_self'} onclick={handleLinkClick}>
           {@html item.label}
         </a>
       {:else}
@@ -175,7 +175,7 @@
         {#if auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0}
           <div class="aux">
             {#each auxiliaryMenu.children ?? [] as item}
-              <a href={item.url} class="link">{@html item.label}</a>
+              <a href={item.url} class="link" target={item?.linkTarget || '_self'}>{@html item.label}</a>
             {/each}
           </div>
         {/if}
