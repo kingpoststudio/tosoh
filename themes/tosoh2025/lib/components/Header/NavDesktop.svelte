@@ -326,14 +326,25 @@
           }
         }
 
+
+         &:last-child {
+         > .dropdown {
+          max-width: 16rem;
+           }
+         }
+         &:nth-last-child(2) {
+          > .dropdown {
+            max-width: 18rem;
+          }
+         }
         /* Dropdown menu */
         > .dropdown {
           position: absolute;
           top: calc(100% + 1px);
           left: -1rem;
           z-index: var(--z-index-dropdown);
-          max-width: fit-content;
-          min-width: 12rem;
+          width: max-content;
+          max-width: 24rem;
           font-size: 0.9rem;
           background: var(--color-white);
           border: 1px solid var(--color-zinc-300);
