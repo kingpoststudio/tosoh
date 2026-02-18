@@ -45,6 +45,7 @@ export default defineConfig(({ command, mode }) => {
         viteStaticCopy({
           targets: [
             { src: 'src/modules/*', dest: 'modules' },
+            { src: 'src/images/*', dest: 'images' },
             { src: 'src/templates/*', dest: 'templates' },
             { src: 'src/fields.json', dest: '' },
             { src: 'src/theme.json', dest: '' },
