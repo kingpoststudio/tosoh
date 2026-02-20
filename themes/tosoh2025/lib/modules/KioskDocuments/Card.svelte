@@ -32,7 +32,7 @@
     </div>
 
     <a
-      href={`kiosk-documents/${path}`}
+      href={`${path}`}
       class="button gap-sm w-full! flex items-center justify-center text-center"
       target="_blank"
     >
