@@ -110,9 +110,9 @@
 
 <div class="wrapper">
   <div class="header">
-    <a class="logo" href="/" aria-label="Home" onclick={closeMenu}>
+    <button class="logo" aria-label="Home" onclick={closeMenu}>
       <svelte:element this={'slot'} name="logo" />
-    </a>
+    </button>
 
     <button
       class="hamburger"
@@ -216,6 +216,10 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: background-color 200ms ease-in-out;
     }
 
     /* Hamburger Button */
