@@ -62,7 +62,6 @@
   );
 
   const moveBackward = () => {
-    const canGoBackward = pagination && pagination - 1 > 0;
     if (canGoBackward) {
       const previousPagination = pagination - 1;
       onPaginationChange(previousPagination);
@@ -76,7 +75,6 @@
   };
 
   const moveForward = () => {
-    const canGoForward = pagination && pagination + 1 <= numberOfPages;
     if (canGoForward) {
       const nextPagination = pagination + 1;
       onPaginationChange(nextPagination);
