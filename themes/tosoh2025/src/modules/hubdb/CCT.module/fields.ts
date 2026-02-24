@@ -26,7 +26,10 @@ const generateFields = () => {
       inline_help_text: 'The hubDB table that contains the CCT instruments data.',
       required: true,
     }),
-
+    hubDbTableField('cct_comparison_table_id', 'CCT Comparison Table', {
+      inline_help_text: 'The hubDB table that contains the CCT comparison data.',
+      required: true,
+    }),
     groupField('dynamic_path_settings', 'Dynamic Path Settings', {
       inline_help_text:
         'These settings will be used to generate the dynamic paths for the CCT details page, submit a suggestion page, and the Tosoh column name and the competitor column name.',

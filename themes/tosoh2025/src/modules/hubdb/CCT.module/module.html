@@ -6,6 +6,8 @@
 {% set access_level = module.access_level or "all" %}
 {% set docx_logo = module.docx_logo or "" %}
 {% set cct_instruments_table_id = module.cct_instruments_table_id %}
+{% set cct_comparison_table_id = module.cct_comparison_table_id %}
+  
 {% set dynamic_path_settings = module.dynamic_path_settings or {} %}
 {% set all_instruments = access_level == 'all' ? hubdb_table_rows(cct_instruments_table_id,'&active__eq=true') : hubdb_table_rows(cct_instruments_table_id,'&active__eq=true&access_level__contains='~access_level) %}
 
@@ -14,7 +16,7 @@
 {% set active_competitor_instruments = [] %}
  
  {% if tosoh_instrument_name %}
-  {% set active_comparison_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__in='~tosoh_instrument_name) %}
+  {% set active_comparison_rows_based_on_tosoh_instrument = hubdb_table_rows(cct_comparison_table_id, '&tosoh_instrument_name__in='~tosoh_instrument_name) %}
     
     {% for row in active_comparison_rows_based_on_tosoh_instrument %}
       {% for foreign_row in row.competitor_instrument_name %}
@@ -26,7 +28,7 @@
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %} 
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
 
-{% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__in='~tosoh_instrument_name~"&competitor_instrument_name__in="~competitor_instrument_name) : [] %}
+{% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows(cct_comparison_table_id,'&tosoh_instrument_name__in='~tosoh_instrument_name~"&competitor_instrument_name__in="~competitor_instrument_name) : [] %}
 {% set general_comparison_row = comparison_rows|selectattr('category.name', 'equalto', 'General Comparison')|first %}
  
 

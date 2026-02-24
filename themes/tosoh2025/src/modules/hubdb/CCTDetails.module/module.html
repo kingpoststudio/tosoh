@@ -1,10 +1,12 @@
 {% set no_data_message = module.no_data_message %}
 {% set return_to_main_screen_message = module.return_to_main_screen_message %}
 
+{% set cct_details_table_id = module.cct_details_table_id %}
+{% set return_to_main_screen_path = module.return_to_main_screen_path %}
 {% set tosoh_instrument_name = request.query_dict.tosoh_instrument_name or "" %}
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name or "" %}
 
-{% set all_instruments = hubdb_table_rows("cct_instruments") %}
+{% set all_instruments = hubdb_table_rows(cct_details_table_id) %}
 
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %}
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
@@ -22,7 +24,7 @@
   ] %}
 
 {% macro return_to_main_screen_button(instruments_are_selected) %}
-{% set href = instruments_are_selected ? "/cct?tosoh_instrument_name={{ tosoh_instrument_name }}&competitor_instrument_name={{ competitor_instrument_name }}" : "/cct" %}
+{% set href = instruments_are_selected ? "{{return_to_main_screen_path.href}}?tosoh_instrument_name={{ tosoh_instrument_name }}&competitor_instrument_name={{ competitor_instrument_name }}" : "{{return_to_main_screen_path.href}}" %}
 
   <a
   href="{{ href }}"
