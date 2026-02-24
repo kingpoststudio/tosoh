@@ -33,6 +33,8 @@
   const handleImageError = () => {
     imgSrc = '';
   };
+
+  let viewHref = $derived(`${window.location.pathname.replace(/\/+$/, '')}/${item.path}`);
 </script>
 
 {#snippet pdfIcon()}
@@ -54,6 +56,7 @@
       <img
         alt={item.name}
         src={imgSrc}
+        width={300}
         loading="lazy"
         class="aspect-video w-full rounded-lg object-contain"
         onerror={handleImageError}
@@ -88,7 +91,7 @@
         class="button flex items-center justify-center gap-[1.25rem] text-center {viewAs === 'list'
           ? 'w-fit!'
           : 'w-full!'}"
-        href={`support-portal/${item.path}`}>View</a
+        href={viewHref}>View</a
       >
     {:else}
       <a

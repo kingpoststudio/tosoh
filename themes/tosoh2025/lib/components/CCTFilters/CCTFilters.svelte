@@ -16,6 +16,8 @@
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
   const tosohInstrument = window?.Tosoh?.CCT?.tosohInstrument;
   const competitorInstrument = window?.Tosoh?.CCT?.competitorInstrument;
+  const { cct_details_path : cctDetailsPath, submit_a_suggestion_path : submitASuggestionPath } = window?.Tosoh?.CCT?.dynamicPathSettings || {};
+
   const _rawComparisonRows = window?.Tosoh?.CCT?.comparisonRows;
   const comparisonRows = Array.isArray(_rawComparisonRows)
     ? _rawComparisonRows
@@ -105,7 +107,7 @@
       ? competitorInstrumentSelectValue
       : '';
 
-    const url = `/cct-details?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
+    const url = `${cctDetailsPath?.href || ''}?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
     window.open(url);
   };
 
@@ -239,7 +241,7 @@
   </div>
 
   <a
-    href="/cct-submit-a-suggestion"
+    href={submitASuggestionPath?.href || ''}
     target="_blank"
     class="button mt-md dark block w-full text-center hover:bg-red-50"
   >

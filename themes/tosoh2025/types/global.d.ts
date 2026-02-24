@@ -122,6 +122,10 @@ declare global {
         upcoming_section_title: string;
       };
       CCT: {
+        dynamicPathSettings: {
+          cct_details_path: { href: string };
+          submit_a_suggestion_path: { href: string };
+        };
         activeCompetitorInstruments: {
           name: string;
           label: string;
