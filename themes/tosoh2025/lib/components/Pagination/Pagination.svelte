@@ -25,7 +25,7 @@
 
   const resetPagination = () => {
     setSearchParams({ pagination: defaultPagination.toString() });
-    pagination = defaultPagination as any;
+    pagination = defaultPagination as number;
   };
 
   const onLimitChange = (newLimit: number) => {

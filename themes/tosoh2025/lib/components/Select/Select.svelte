@@ -37,11 +37,7 @@
   <div class={`gap-sm flex h-full ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     {#if displayLabel}
       <div class="gap-sm flex items-center">
-        {#if displayLabel}
-          <label for={name} class="text-lg font-semibold"
-            >{label ? label : setupFilterTitle(name)}</label
-          >
-        {/if}
+        <label for={name} class="text-lg font-semibold">{label ? label : setupFilterTitle(name)}</label>
         {#if customClearFilter && activeFilter}
           <button
             type="button"
@@ -65,7 +61,7 @@
         id={name}
         {name}
         disabled={disabled || options?.length === 0 || !options}
-        class="p-sm focus:ring-imperial-red peer h-full w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+        class="p-sm focus:ring-imperial-red peer focus:ring-opacity-50 h-full w-full cursor-pointer appearance-none rounded-lg border border-slate-200 focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
         bind:value
       >
         <option

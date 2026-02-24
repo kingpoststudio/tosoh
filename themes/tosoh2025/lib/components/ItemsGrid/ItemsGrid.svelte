@@ -11,8 +11,8 @@
     tableRows,
     viewAs = 'grid',
   }: {
-    Card: Component | any;
-    SkeletonCard: Component | any;
+    Card: Component;
+    SkeletonCard: Component;
     hasLargeElements?: boolean;
     isLoading: boolean;
     tableRows: any[];

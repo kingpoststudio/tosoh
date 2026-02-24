@@ -21,7 +21,7 @@
     filter: TopicFilters['filters'][number];
     isLoading: boolean;
     labelPosition?: 'top' | 'left';
-    name: string | any;
+    name: string;
     options: any[];
     placeholder?: string;
   } = $props();
