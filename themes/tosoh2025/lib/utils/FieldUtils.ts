@@ -111,6 +111,24 @@ export const topicFiltersNoTitle = groupField('topic_filters', 'Topic Filters', 
   children: topicFiltersBaseChildren,
 });
 
+export const topicFiltersWithViewAs = groupField('topic_filters', 'Topic Filters', {
+  children: [
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
+    }),
+    textField('view_as_label', 'View As Label', {
+      default: 'View As',
+    }),
+    textField('grid_label', 'Grid Label', {
+      default: 'Grid',
+    }),
+    textField('list_label', 'List Label', {
+      default: 'List',
+    }),
+    ...topicFiltersBaseChildren,
+  ],
+});
+
 export const searchVisibilityRule = {
   visibility: {
     controlling_field: 'search.enable_search',

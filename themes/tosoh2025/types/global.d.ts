@@ -1,4 +1,4 @@
-import type { Search, TopicFilters } from './fields';
+import type { Search, TopicFilters, TopicFiltersWithViewAs } from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
@@ -30,8 +30,11 @@ declare global {
         display_video_download: boolean;
         search: Search;
         title: string;
-        topic_filters: TopicFilters;
-
+        topic_filters: TopicFiltersWithViewAs;
+        card_configuration: {
+          download_label: string;
+          view_label: string;
+        };
         type: 'module';
       };
       SupportPortalDocsContent: {

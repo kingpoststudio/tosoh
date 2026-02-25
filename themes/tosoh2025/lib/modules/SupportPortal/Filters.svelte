@@ -42,6 +42,12 @@
   let accessLevel = supportPortalContent?.access_level || 'Customer';
   let forceListView = supportPortalContent?.force_list_view || false;
 
+  const filtersTitle = supportPortalContent?.topic_filters?.filters_title;
+  const resetFiltersLabel = supportPortalContent?.topic_filters?.reset_filters_label;
+  const viewAsLabel = supportPortalContent?.topic_filters?.view_as_label;
+  const listLabel = supportPortalContent?.topic_filters?.list_label;
+  const gridLabel = supportPortalContent?.topic_filters?.grid_label;
+
   const topic_filters = supportPortalContent?.topic_filters?.filters;
   let filtersFromFields = getFilterColumnIds(topic_filters, 'all', searchColumnIds) || [];
   const filtersTableId = getFiltersTableId(
@@ -240,7 +246,7 @@
     <div class="pb-sm"></div>
   {/if}
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}
   </div>
 
@@ -272,7 +278,7 @@
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetFiltersLabel}
       </button>
       {#if !forceListView}
         <button
@@ -280,7 +286,7 @@
           class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
           onclick={handleChangeView}
         >
-          {viewAs === 'grid' ? 'View As List' : 'View As Grid'}
+          {viewAs === 'grid' ? `${viewAsLabel} ${gridLabel}` : `${viewAsLabel} ${listLabel}`}
         </button>
       {/if}
     </div>

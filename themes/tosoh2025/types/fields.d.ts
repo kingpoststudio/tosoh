@@ -14,6 +14,12 @@ export type TopicFilters = {
   hubdb_table_id: string;
 };
 
+export type TopicFiltersWithViewAs = TopicFilters & {
+  view_as_label?: string;
+  grid_label?: string;
+  list_label?: string;
+};
+
 export type Search = {
   enable_search: boolean;
   hubdb_column_ids:
