@@ -26,7 +26,7 @@
     getFilter,
     getFilterColumnIds,
     getFiltersTableId,
-    parseSearchColumnId,
+    parseSearchColumnIds,
   } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
@@ -36,7 +36,7 @@
 
   const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
   const searchFromFields = hemoglobinVariantsLibraryContent?.search;
-  const searchColumnId = parseSearchColumnId(searchFromFields);
+  const searchColumnIds = parseSearchColumnIds(searchFromFields);
   const searchTableId = PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID;
 
   const filtersTableId = getFiltersTableId(
@@ -45,7 +45,7 @@
   );
 
   const topic_filters = hemoglobinVariantsLibraryContent?.topic_filters?.filters;
-  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', searchColumnIds) || [];
 
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
@@ -188,7 +188,7 @@
       const options: FilterOptionsWithQuantity = {};
 
       filtersFromFields.forEach((columnId: ColumnId) => {
-        if (columnId === searchColumnId) return;
+        if (searchColumnIds?.includes(columnId as string)) return;
 
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
@@ -264,7 +264,7 @@
   <FilterForm updateUrl={false} trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
-      {#if searchColumnId !== columnId}
+      {#if !searchColumnIds?.includes(columnId as string)}
         <TopicFilter
           {filter}
           options={(allAvailableFiltersWithTheirOptions as FilterOptionsWithQuantity)[

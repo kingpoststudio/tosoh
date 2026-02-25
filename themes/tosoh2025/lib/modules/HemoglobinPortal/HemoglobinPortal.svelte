@@ -27,7 +27,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
   const formId = 'portale-emogiobine-filters';
@@ -39,9 +39,9 @@
     portaleEmogiobineContent?.topic_filters?.hubdb_table_id
   );
   let searchEnabled = portaleEmogiobineContent?.search?.enable_search;
-  let searchColumnId = parseSearchColumnId(portaleEmogiobineContent?.search);
+  let searchColumnIds = parseSearchColumnIds(portaleEmogiobineContent?.search);
 
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   let title = portaleEmogiobineContent?.title;
   let eyebrow = portaleEmogiobineContent?.eyebrow;

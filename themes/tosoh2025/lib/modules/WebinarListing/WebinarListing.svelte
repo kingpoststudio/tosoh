@@ -29,7 +29,7 @@
     getFilterColumnIds,
     isPastEvent,
     isUpcomingEvent,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
   import { fade } from 'svelte/transition';
@@ -52,10 +52,12 @@
   const pastSectionTitle = webinarListingsWindow?.past_section_title;
   const filterByTopic = webinarListingsWindow?.advanced?.filter_by_topic;
   const searchGroup = webinarListingsWindow?.search;
-  const searchColumnId = parseSearchColumnId(searchGroup);
+  const searchColumnIds = parseSearchColumnIds(searchGroup);
   const topicFilters = webinarListingsWindow?.topic_filters?.filters || [];
 
-  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
+
+  console.log(searchColumnIds);
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
@@ -119,7 +121,10 @@
     if (preselectedLanguage) {
       const params = new URLSearchParams(window.location.search);
 
-      if (!params.has('language') && !params?.has(searchColumnId)) {
+      if (
+        !params.has('language') &&
+        !params?.has(searchColumnIds?.find((columnId) => columnId === 'language') as string)
+      ) {
         setSearchParams({
           language: preselectedLanguage,
         });

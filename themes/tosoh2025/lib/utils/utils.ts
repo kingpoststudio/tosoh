@@ -150,8 +150,10 @@ export const scrollToTop = (behavior: ScrollBehavior = 'smooth', idToScrollToTop
 export const setupFilterTitle = (column: string) =>
   column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
 
-export const parseSearchColumnId = (search: Search) => {
-  return search && search?.enable_search ? search?.hubdb_column_id : '';
+export const parseSearchColumnIds = (search: Search) => {
+  return search && search?.enable_search
+    ? search?.hubdb_column_ids?.map((column) => column?.hubdb_column_id)
+    : [];
 };
 
 export const getFiltersTableId = (

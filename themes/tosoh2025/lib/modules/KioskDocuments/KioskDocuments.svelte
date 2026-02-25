@@ -27,7 +27,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
   const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
@@ -37,9 +37,9 @@
     kioskDocumentsContent?.topic_filters?.hubdb_table_id
   );
 
-  let searchColumnId = parseSearchColumnId(kioskDocumentsContent?.search);
+  let searchColumnIds = parseSearchColumnIds(kioskDocumentsContent?.search);
 
-  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   let title = kioskDocumentsContent?.title;
   let description = kioskDocumentsContent?.description;

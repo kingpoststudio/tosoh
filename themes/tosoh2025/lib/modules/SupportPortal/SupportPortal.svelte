@@ -26,7 +26,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
 
@@ -36,13 +36,13 @@
   const formId = 'support-portal';
   let accessLevel = supportPortalContent?.access_level || 'Customer';
 
-  let searchColumnId = parseSearchColumnId(supportPortalContent?.search);
+  let searchColumnIds = parseSearchColumnIds(supportPortalContent?.search);
   const tableId = getFiltersTableId(
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
     supportPortalContent?.topic_filters?.hubdb_table_id
   );
 
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
   const rangePmFilters = constructRangePmFilters(topicFilters);
 
   let title = supportPortalContent?.title;

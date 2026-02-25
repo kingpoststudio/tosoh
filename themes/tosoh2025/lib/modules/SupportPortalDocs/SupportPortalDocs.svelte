@@ -30,7 +30,7 @@
     constructRangePmFilters,
     getFilterColumnIds,
     getFiltersTableId,
-    parseSearchColumnId,
+    parseSearchColumnIds,
   } from '../../utils/utils';
 
   import { mockPortalDocsItems } from './mock';
@@ -42,12 +42,12 @@
   const topicFilters = supportPortalDocsContent?.topic_filters?.filters || [];
   const formId = 'support-portal-docs';
   let accessLevel = supportPortalDocsContent?.access_level || DEFAULT_ACCESS_LEVEL;
-  let searchColumnId = parseSearchColumnId(supportPortalDocsContent?.search);
+  let searchColumnIds = parseSearchColumnIds(supportPortalDocsContent?.search);
   const documentsTableId = getFiltersTableId(
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
     supportPortalDocsContent?.topic_filters?.hubdb_table_id
   );
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
   const rangePmFilters = constructRangePmFilters(topicFilters);
 
   let title = supportPortalDocsContent?.title;
@@ -105,7 +105,10 @@
     if (defaultLanguage) {
       const params = new URLSearchParams(window.location.search);
 
-      if (!params.has('languages') && !params?.has(searchColumnId)) {
+      if (
+        !params.has('languages') &&
+        !params?.has(searchColumnIds?.find((columnId) => columnId === 'languages') as string)
+      ) {
         setSearchParams({
           languages: defaultLanguage,
         });

@@ -23,7 +23,7 @@
     disabled?: boolean;
     formId: string;
     isActivatedQuery?: boolean;
-    manualTableId?: string;
+    manualTableId?: string | number;
     onReset: (searchCb: () => void) => void;
     searchFromFields: Search;
   } = $props();
@@ -195,7 +195,7 @@
             bind:value={searchValue}
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
             name={columnIds[0]}
-            class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50"
+            class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             placeholder={placeholder || 'Search here...'}
             {disabled}
           />
@@ -213,14 +213,14 @@
       {#if showDropdown && matches.length > 0}
         <div
           transition:fade={{ duration: 100 }}
-          class="border-imperial-red border-1 mt-xs absolute left-0 z-10 max-h-[24rem] w-full overflow-y-auto rounded-lg bg-white shadow-md lg:max-w-[19.75rem]"
+          class="border-imperial-red mt-xs absolute left-0 z-10 max-h-[24rem] w-full overflow-y-auto rounded-lg border-1 bg-white shadow-md lg:max-w-[19.75rem]"
         >
           <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
           {#each matches as match}
             {#if match}
               <button
                 type="button"
-                class="plain text-left! p-sm! w-full cursor-pointer break-all text-sm font-semibold hover:bg-red-50"
+                class="plain p-sm! w-full cursor-pointer text-left! text-sm font-semibold break-all hover:bg-red-50"
                 onclick={() => {
                   onClick(match);
                 }}

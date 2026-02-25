@@ -12,7 +12,7 @@
     viewAs = 'grid',
   }: {
     Card: Component | any;
-    SkeletonCard: Component;
+    SkeletonCard: Component | any;
     hasLargeElements?: boolean;
     isLoading: boolean;
     tableRows: any[];

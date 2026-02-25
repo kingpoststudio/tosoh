@@ -17,7 +17,8 @@ export type ColumnId =
   | keyof PortaleEmogiobineItem['values']
   | keyof CCTComparison['values']
   | keyof CCTInstrumentForFilter['values']
-  | string;
+  | string
+  | number;
 
 export type FilterWithOptions = Record<ColumnId, ColumnItem[]>;
 

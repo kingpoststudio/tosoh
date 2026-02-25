@@ -27,7 +27,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
 
@@ -39,9 +39,9 @@
     PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
     hemoglobinVariantsLibraryContent?.topic_filters?.hubdb_table_id
   );
-  let searchColumnId = parseSearchColumnId(hemoglobinVariantsLibraryContent?.search);
+  let searchColumnIds = parseSearchColumnIds(hemoglobinVariantsLibraryContent?.search);
 
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   let title = hemoglobinVariantsLibraryContent?.title;
   let eyebrow = hemoglobinVariantsLibraryContent?.eyebrow;

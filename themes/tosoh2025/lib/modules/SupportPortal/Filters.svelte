@@ -14,7 +14,7 @@
     getFilter,
     getFilterColumnIds,
     getFiltersTableId,
-    parseSearchColumnId,
+    parseSearchColumnIds,
   } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
   import {
@@ -33,7 +33,7 @@
 
   const supportPortalContent = window?.Tosoh?.SupportPortalContent;
   const searchFromFields = supportPortalContent?.search;
-  const searchColumnId = parseSearchColumnId(searchFromFields);
+  const searchColumnIds = parseSearchColumnIds(searchFromFields);
   const prodSupportPortalTableId = PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID;
 
   const isSearchAccessLevelFilterEnabled =
@@ -43,7 +43,7 @@
   let forceListView = supportPortalContent?.force_list_view || false;
 
   const topic_filters = supportPortalContent?.topic_filters?.filters;
-  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', searchColumnIds) || [];
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
     supportPortalContent?.topic_filters?.hubdb_table_id
@@ -180,7 +180,7 @@
       const options: any = {};
 
       filtersFromFields.forEach((columnId: ColumnId) => {
-        if (columnId === searchColumnId) return;
+        if (searchColumnIds?.includes(columnId as string)) return;
 
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
@@ -259,7 +259,7 @@
         columnId as string
       ) as TopicFilters['filters'][number]}
 
-      {#if searchColumnId !== columnId}
+      {#if !searchColumnIds?.includes(columnId as string)}
         <TopicFilter
           {filter}
           options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
