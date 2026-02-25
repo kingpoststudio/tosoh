@@ -271,7 +271,14 @@ table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) th {
 }
 
 .pt-header-height {
-  padding-top: calc(var(--spacing-header-height) + var(--spacing-subheader-height, 0rem) + 2rem);
+  padding-top: calc(
+    var(--spacing-header-height) + var(--spacing-subheader-height, 0rem) + var(--spacing-md)
+  );
+  @media (min-width: 768px) {
+    padding-top: calc(
+      var(--spacing-header-height) + var(--spacing-subheader-height, 0rem) + var(--spacing-2xl)
+    );
+  }
 }
 
 .grid-accent {

@@ -59,6 +59,17 @@ const generateFields = () => {
         legalFields,
       ],
     }),
+
+    groupField('blog_listing_template_config', 'Blog Listing Template Configuration', {
+      children: [
+        textField('read_more_label', 'Read More Label', {
+          default: 'Read More',
+        }),
+        textField('load_more_label', 'Load More Label', {
+          default: 'Load More',
+        }),
+      ],
+    }),
   ];
 };
 
