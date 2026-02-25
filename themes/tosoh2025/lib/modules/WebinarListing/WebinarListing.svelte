@@ -154,7 +154,7 @@
   >
     <div>
       <div class=" h-md min-w-3xl rounded-lg bg-red-50"></div>
-      <div class="mt-sm min-w-5xl h-14 rounded-lg bg-gray-200"></div>
+      <div class="mt-sm h-14 min-w-5xl rounded-lg bg-gray-200"></div>
     </div>
 
     <WebinarListingsFilters {formId} isSkeleton={true} />
@@ -172,7 +172,7 @@
       <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
       ></ItemsGrid>
 
-      <div class={`${rows?.length > 0 ? 'block' : 'hidden'}`}>
+      <div class={`${rows?.length > 0 && displayPagination ? 'block' : 'hidden'}`}>
         <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
         ></PaginationWithLimit>
       </div>
@@ -190,7 +190,7 @@
     {@render grid([], true, false)}
   {/if}
 
-  {#if !isLoading}
+  {#if !isLoading && tableRows?.length > 0}
     {@const upcomingEvents = getUpcoming(tableRows)}
     {@const hasUpcomingEvents = upcomingEvents?.length > 0}
 
