@@ -58,6 +58,7 @@ declare global {
           subtitle_2: string;
           subtitle_3: string;
           subtitle_4: string;
+          language_label: string;
         };
       };
       HemoglobinVariantsLibraryContent: {

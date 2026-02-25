@@ -42,6 +42,9 @@
   const searchColumnIds = parseSearchColumnIds(searchFromFields);
   const prodSupportPortalDocsTableId = PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID;
 
+  const filtersTitle = supportPortalDocsContent?.topic_filters?.filters_title;
+  const resetFiltersLabel = supportPortalDocsContent?.topic_filters?.reset_filters_label;
+
   const isSearchAccessLevelFilterEnabled =
     supportPortalDocsContent?.search?.is_access_level_filter_enabled || false;
 
@@ -245,7 +248,7 @@
     <div class="pb-sm"></div>
   {/if}
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}
   </div>
 
@@ -277,7 +280,7 @@
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetFiltersLabel}
       </button>
     </div>
   </FilterForm>

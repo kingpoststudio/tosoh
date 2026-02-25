@@ -23,6 +23,7 @@
 
   const cardFields = window?.Tosoh?.SupportPortalDocsContent?.card_fields;
   const documentType = window?.Tosoh?.SupportPortalDocsContent?.document_type;
+  const languageLabel = cardFields?.language_label;
 
   const documentFolder = item?.values?.document_folder;
   const documentUrlPart = item?.values?.document_url_part;
@@ -92,7 +93,7 @@
         <Select
           options={item?.values?.languages?.length > 0 ? [...item?.values?.languages] : []}
           name="languages"
-          label="Language"
+          label={languageLabel}
           labelPosition="left"
           bind:value={selectedCardLanguage}
           customClasses="w-full max-w-4xl"
@@ -101,7 +102,7 @@
         <a
           href={constructDownloadUrl()}
           aria-label="Download Document"
-          class="button min-w-0! p-0! gap-sm group flex w-fit items-center justify-center rounded-lg text-center"
+          class="button gap-sm group flex w-fit min-w-0! items-center justify-center rounded-lg p-0! text-center"
           target="_blank"
         >
           <svg
@@ -126,7 +127,7 @@
   </div>
 
   <span
-    class="top-base right-base p-xs text-md text-imperial-red absolute max-h-fit self-center break-all rounded-lg bg-red-100 text-xs font-bold"
+    class="top-base right-base p-xs text-md text-imperial-red absolute max-h-fit self-center rounded-lg bg-red-100 text-xs font-bold break-all"
   >
     {@render pdfIcon()}
   </span>
