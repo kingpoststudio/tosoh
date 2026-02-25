@@ -1,5 +1,5 @@
 import type { Search, TopicFilters } from './fields';
-import type { CCTComparisons, CCTInstruments, CCTComparison } from './hubdb';
+import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
 export type FilterType = 'dropdown' | 'checkbox' | 'range-pm';
@@ -122,10 +122,16 @@ declare global {
         upcoming_section_title: string;
       };
       CCT: {
-        dynamicPathSettings: {
-          cct_details_path: { href: string };
-          submit_a_suggestion_path: { href: string };
-        };
+        filtersSidebarTitle: string;
+        productLineTitle: string;
+        tosohInstrumentTitle: string;
+        competitorInstrumentTitle: string;
+        printColumnsTitle: string;
+        printButtonLabel: string;
+        detailsButtonLabel: string;
+        submitASuggestionButtonLabel: string;
+        cctDetailsPath: Link;
+        submitASuggestionPath: Link;
         activeCompetitorInstruments: {
           name: string;
           label: string;

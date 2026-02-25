@@ -16,7 +16,16 @@
   const instrumentsBasedOnProductLine = window?.Tosoh?.CCT?.instrumentsBasedOnProductLine || [];
   const tosohInstrument = window?.Tosoh?.CCT?.tosohInstrument;
   const competitorInstrument = window?.Tosoh?.CCT?.competitorInstrument;
-  const { cct_details_path : cctDetailsPath, submit_a_suggestion_path : submitASuggestionPath } = window?.Tosoh?.CCT?.dynamicPathSettings || {};
+  const cctDetailsPath = window?.Tosoh?.CCT?.cctDetailsPath;
+  const submitASuggestionPath = window?.Tosoh?.CCT?.submitASuggestionPath;
+  const filtersSidebarTitle = window?.Tosoh?.CCT?.filtersSidebarTitle;
+  const productLineTitle = window?.Tosoh?.CCT?.productLineTitle;
+  const tosohInstrumentTitle = window?.Tosoh?.CCT?.tosohInstrumentTitle;
+  const competitorInstrumentTitle = window?.Tosoh?.CCT?.competitorInstrumentTitle;
+  const printColumnsTitle = window?.Tosoh?.CCT?.printColumnsTitle;
+  const printButtonLabel = window?.Tosoh?.CCT?.printButtonLabel;
+  const detailsButtonLabel = window?.Tosoh?.CCT?.detailsButtonLabel;
+  const submitASuggestionButtonLabel = window?.Tosoh?.CCT?.submitASuggestionButtonLabel;
 
   const _rawComparisonRows = window?.Tosoh?.CCT?.comparisonRows;
   const comparisonRows = Array.isArray(_rawComparisonRows)
@@ -100,17 +109,6 @@
     updateUrl(event);
   };
 
-  const onDetails = () => {
-    const tosohInstrumentName = tosohInstrumentSelectValue ? tosohInstrumentSelectValue : '';
-
-    const competitorInstrumentName = competitorInstrumentSelectValue
-      ? competitorInstrumentSelectValue
-      : '';
-
-    const url = `${cctDetailsPath?.href || ''}?tosoh_instrument_name=${tosohInstrumentName}&competitor_instrument_name=${competitorInstrumentName}`;
-    window.open(url);
-  };
-
   const onPrint = async () => {
     const docxLogo = window?.Tosoh?.CCT?.docxLogo;
     if (!tosohInstrument && !competitorInstrument) {
@@ -157,7 +155,7 @@
   class="bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem]"
 >
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Select</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersSidebarTitle}</p>
   </div>
   <FilterForm trigger="change" {onChange} {formId}>
     <div class="mt-base">
@@ -166,7 +164,7 @@
         options={allProductLines}
         placeholder="All Product Lines"
         name="product_line"
-        label="Product Line"
+        label={productLineTitle}
         customClearFilter={clearOnProductLineReset}
       />
     </div>
@@ -180,7 +178,7 @@
             }))
           : []}
         name="tosoh_instrument_name"
-        label="Tosoh Instrument"
+        label={tosohInstrumentTitle}
         customClearFilter={clearOnTosohInstrumentReset}
         bind:value={tosohInstrumentSelectValue}
       />
@@ -190,7 +188,7 @@
         excludeAllOption={true}
         options={splitCompetitorInstruments(activeCompetitorInstruments)}
         name="competitor_instrument_name"
-        label="Competitor Instrument"
+        label={competitorInstrumentTitle}
         disabled={!isTosohInstrumentSelected}
         {customDisabledOption}
         customClearFilter={clearOnCompetitorInstrumentReset}
@@ -201,7 +199,7 @@
 
   <div class="mt-base">
     <div class="gap-sm flex flex-col">
-      <div class="text-lg font-semibold">For Who (Option to print)</div>
+      <div class="text-lg font-semibold">{printColumnsTitle}</div>
       <div class="gap-sm flex flex-col">
         {#each printColumnOptions as option (option.name)}
           <label
@@ -213,7 +211,7 @@
               value={option.name}
               checked={selectedPrintColumns.includes(option.name)}
               onchange={handlePrintColumnChange}
-              class="checkbox-custom focus:ring-imperial-red text-imperial-red h-base w-base cursor-pointer rounded border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50"
+              class="checkbox-custom focus:ring-imperial-red text-imperial-red h-base w-base focus:ring-opacity-50 cursor-pointer rounded border-slate-200 focus:ring-1 focus:outline-none"
             />
             <span class="text-default select-none">{option.label}</span>
           </label>
@@ -228,24 +226,25 @@
         selectedPrintColumns?.length === 0}
       class="outlined mt-md w-full hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      Print
+      {printButtonLabel}
     </button>
-    <button
-      type="button"
-      onclick={onDetails}
-      disabled={!isTosohInstrumentSelected || !isCompetitorInstrumentSelected}
-      class="mt-sm w-full hover:bg-red-50"
+    <a
+      href={`${cctDetailsPath?.url?.href || ''}?tosoh_instrument_name=${tosohInstrumentSelectValue}&competitor_instrument_name=${competitorInstrumentSelectValue}`}
+      target={cctDetailsPath?.open_in_new_tab ? '_blank' : '_self'}
+      rel={cctDetailsPath?.no_follow ? 'nofollow' : ''}
+      class={`button mt-sm! block w-full! text-center hover:bg-red-50 ${!isTosohInstrumentSelected || !isCompetitorInstrumentSelected ? 'cursor-not-allowed opacity-50' : ''}`}
     >
-      Details
-    </button>
+      {detailsButtonLabel}
+    </a>
   </div>
 
   <a
-    href={submitASuggestionPath?.href || ''}
-    target="_blank"
+    href={submitASuggestionPath?.url?.href || ''}
+    target={submitASuggestionPath?.open_in_new_tab ? '_blank' : '_self'}
+    rel={submitASuggestionPath?.no_follow ? 'nofollow' : ''}
     class="button mt-md dark block w-full text-center hover:bg-red-50"
   >
-    Submit a Suggestion
+    {submitASuggestionButtonLabel}
   </a>
 </div>
 
