@@ -58,6 +58,31 @@ const generateFields = () => {
         }),
       ],
     }),
+
+    groupField('five_zero_zero_template_config', '500 Template Configuration', {
+      children: [
+        textField('title', 'Title', {
+          default: 'Something went wrong.',
+        }),
+        textField('description', 'Description', {
+          default:
+            'An internal server error occurred. Please click the button below to return to the homepage.',
+        }),
+        textField('go_home_label', 'Go Home Label', {
+          default: 'Go Home',
+        }),
+        linkField('go_home_url', 'Go Home URL', {
+          default: {
+            url: {
+              content_id: null,
+              href: '/',
+            },
+            open_in_new_tab: false,
+            no_follow: false,
+          },
+        }),
+      ],
+    }),
   ];
 };
 
