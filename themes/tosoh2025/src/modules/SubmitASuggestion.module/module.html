@@ -9,7 +9,9 @@
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md mt-header-height m-auto flex flex-col">
   <div>
     <a
-      href="{{ return_to_cct_tool_path.href }}"
+      href="{{ return_to_cct_tool_path.url.href }}"
+      target="{{ return_to_cct_tool_path.open_in_new_tab ? '_blank' : '_self' }}"
+      rel="{{ return_to_cct_tool_path.rel }}"
       class="plain text-nickel! mb-md flex items-center transition-colors hover:text-gray-800">
       <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>

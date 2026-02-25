@@ -1,4 +1,4 @@
-import { formField, richTextField, textField, urlField } from 'hs-fieldkit';
+import { formField, linkField, richTextField, textField } from 'hs-fieldkit';
 import { contentBlockRtfFeatures } from '../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
@@ -7,9 +7,18 @@ const generateFields = () => {
     richTextField('description', 'Description', {
       enabled_features: contentBlockRtfFeatures,
     }),
-    urlField('return_to_cct_tool_path', 'Return to CCT Tool Path', {
+    linkField('return_to_cct_tool_path', 'Return to CCT Tool Path', {
       inline_help_text: 'The URL to the main CCT Tool screen.',
       required: true,
+      default: {
+        url: {
+          content_id: null,
+          type: 'INTERNAL',
+          href: '/cct',
+        },
+        open_in_new_tab: false,
+        no_follow: false,
+      },
     }),
     textField('return_to_main_screen_message', 'Return to main screen message', {
       inline_help_text: 'The message to display when returning to the main screen.',
