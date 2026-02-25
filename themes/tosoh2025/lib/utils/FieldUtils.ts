@@ -32,68 +32,83 @@ export const systemPageFields = [
   }),
 ];
 
+const topicFiltersBaseChildren = [
+  hubDbTableField('hubdb_table_id', 'Table', {
+    required: false,
+    inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
+  }),
+  textField('reset_filters_label', 'Reset Filters Label', {
+    default: 'Reset',
+  }),
+  groupField('filters', 'Filters', {
+    children: [
+      textField('filter_label', 'Filter Label'),
+      textField('hubdb_column_id', 'HubDB Column ID'),
+
+      choiceField('type', 'Type', {
+        id: 'filters.type',
+        choices: [
+          ['dropdown', 'Dropdown'],
+          ['checkbox', 'Checkbox'],
+          ['range-pm', 'Range (plus/minus)'],
+        ],
+      }),
+      numberField('min', 'Minimum', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text: 'Determines the minimum value for the range inputs.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 0,
+      }),
+      numberField('max', 'Maximum', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text: 'Determines the maximum value for the range inputs.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 0,
+      }),
+      numberField('tolerance', '+/- Tolerance', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text:
+          "Determines the +/- tolerance. If the tolerance is zero (0), the search will yield results that contain the user's input within an RT min/max range <em>(i.e; RT range is 2.66 and 2.74, if user enters 2.71, it will be displayed)</em>.",
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 1,
+      }),
+    ],
+    occurrence: {
+      min: 0,
+      max: null,
+    },
+  }),
+];
+
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
-    hubDbTableField('hubdb_table_id', 'Table', {
-      required: false,
-      inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
     }),
-    groupField('filters', 'Filters', {
-      children: [
-        textField('filter_label', 'Filter Label'),
-        textField('hubdb_column_id', 'HubDB Column ID'),
-        choiceField('type', 'Type', {
-          id: 'filters.type',
-          choices: [
-            ['dropdown', 'Dropdown'],
-            ['checkbox', 'Checkbox'],
-            ['range-pm', 'Range (plus/minus)'],
-          ],
-        }),
-        numberField('min', 'Minimum', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text: 'Determines the minimum value for the range inputs.',
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 0,
-        }),
-        numberField('max', 'Maximum', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text: 'Determines the maximum value for the range inputs.',
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 0,
-        }),
-        numberField('tolerance', '+/- Tolerance', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text:
-            "Determines the +/- tolerance. If the tolerance is zero (0), the search will yield results that contain the user's input within an RT min/max range <em>(i.e; RT range is 2.66 and 2.74, if user enters 2.71, it will be displayed)</em>.",
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 1,
-        }),
-      ],
-      occurrence: {
-        min: 0,
-        max: null,
-      },
-    }),
+    ...topicFiltersBaseChildren,
   ],
+});
+
+export const topicFiltersNoTitle = groupField('topic_filters', 'Topic Filters', {
+  children: topicFiltersBaseChildren,
 });
 
 export const searchVisibilityRule = {

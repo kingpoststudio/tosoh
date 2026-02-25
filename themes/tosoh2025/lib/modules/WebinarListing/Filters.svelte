@@ -47,6 +47,8 @@
 
   const toleranceConfig = extractToleranceConfig(topicFilters || []);
 
+  const resetFiltersLabel = webinarListingsWindow?.topic_filters?.reset_filters_label;
+
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
@@ -244,7 +246,7 @@
           />
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">
-          Reset Filters
+          {resetFiltersLabel}
         </button>
       </div>
     </FilterForm>

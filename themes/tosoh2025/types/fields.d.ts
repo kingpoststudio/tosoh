@@ -1,6 +1,8 @@
 import type { FilterType } from './global';
 
 export type TopicFilters = {
+  filters_title?: string;
+  reset_filters_label: string;
   filters: {
     filter_label: string;
     hubdb_column_id: string;
