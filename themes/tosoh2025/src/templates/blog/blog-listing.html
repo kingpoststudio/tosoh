@@ -7,7 +7,7 @@
 {% extends "../layouts/base.html" %}
 {% block body %}
   {# Config Settings #}
-  {% set config_settings = widget_data.config_settings %}
+  {% set config_settings = widget_data.global_config_settings %}
   {% set blog_listing_template_config = config_settings.blog_listing_template_config %}
   {% set read_more_label = blog_listing_template_config.read_more_label or 'Read More' %}
   {% set load_more_label = blog_listing_template_config.load_more_label or 'Load More' %}

@@ -7,17 +7,17 @@
 {% extends "../layouts/base-no-globals.html" %}
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 
-{# Config Settings #}
-{% set config_settings = widget_data.config_settings %}
-{% set four_zero_three_template_config = config_settings.four_zero_three_template_config %}
-{% set title = four_zero_three_template_config.title or "You don't have access to view this page" %}
-{% set sign_in_label = four_zero_three_template_config.sign_in_label or 'Sign In' %}
-{% set sign_in_url = four_zero_three_template_config.sign_in_url or '/_hcms/mem/login' %}
-
 {% block header %}
 {% endblock %}
 
 {% block body %}
+
+  {# Config Settings #}
+  {% set four_zero_three_template_config = widget_data.global_config_settings.four_zero_three_template_config %}
+  {% set title = four_zero_three_template_config.title or "You don't have access to view this page" %}
+  {% set sign_in_label = four_zero_three_template_config.sign_in_label or 'Sign In' %}
+  {% set sign_in_url = four_zero_three_template_config.sign_in_url or {url:{href: '/_hcms/mem/login'}} %}
+
   {% call macros.auth_wrapper() %}
     <div class="gap-base flex flex-col">
       {%

@@ -59,39 +59,6 @@ const generateFields = () => {
         legalFields,
       ],
     }),
-
-    groupField('blog_listing_template_config', 'Blog Listing Template Configuration', {
-      children: [
-        textField('read_more_label', 'Read More Label', {
-          default: 'Read More',
-        }),
-        textField('load_more_label', 'Load More Label', {
-          default: 'Load More',
-        }),
-      ],
-    }),
-
-    groupField('four_zero_three_template_config', '403 Template Configuration', {
-      children: [
-        textField('title', 'Title', {
-          default: "You don't have access to view this page",
-        }),
-        textField('sign_in_label', 'Sign In Label', {
-          default: 'Sign In',
-        }),
-        linkField('sign_in_url', 'Sign In URL', {
-          default: {
-            url: {
-              content_id: null,
-              type: 'INTERNAL',
-              href: '/_hcms/mem/login',
-            },
-            open_in_new_tab: false,
-            no_follow: false,
-          },
-        }),
-      ],
-    }),
   ];
 };
 
