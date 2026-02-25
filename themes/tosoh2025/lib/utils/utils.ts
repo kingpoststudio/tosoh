@@ -140,7 +140,9 @@ export const scrollToTop = (behavior: ScrollBehavior = 'smooth', idToScrollToTop
 
   if (typeof window !== 'undefined') {
     if (elementToScrollTo) {
-      elementToScrollTo.scrollIntoView({ block: 'start', inline: 'nearest', behavior });
+      const offset = 120;
+      const top = elementToScrollTo.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior });
     } else {
       window.scrollTo({ top: 120, behavior });
     }
