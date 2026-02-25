@@ -4,6 +4,7 @@ import {
   groupField,
   hubDbTableField,
   imageField,
+  linkField,
   numberField,
   textField,
   urlField,
@@ -21,6 +22,15 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
     max: null,
   },
 });
+
+export const systemPageFields = [
+  textField('having_trouble_text', 'Having Trouble Text', {
+    default: 'Having trouble?',
+  }),
+  textField('contact_admin_text', 'Contact Admin Text', {
+    default: 'Contact the admin.',
+  }),
+];
 
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [

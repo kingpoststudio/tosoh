@@ -1,4 +1,5 @@
 import { groupField, linkField, textField } from 'hs-fieldkit';
+import { systemPageFields } from '../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -128,12 +129,94 @@ const generateFields = () => {
         textField('submit_button_text', 'Submit Button Text', {
           default: 'Sign In',
         }),
-        textField('having_trouble_text', 'Having Trouble Text', {
-          default: 'Having trouble?',
+        ...systemPageFields,
+      ],
+    }),
+
+    groupField(
+      'membership_register_template_config',
+      'Membership Register Template Configuration',
+      {
+        children: [
+          textField('title', 'Title', {
+            default: 'Sign Up',
+          }),
+          textField('description', 'Description', {
+            default: 'Tosoh Bioscience - Diagnostics EMEA Support Portal Registration',
+          }),
+          textField('email_label', 'Email Label', {
+            default: 'Email Address',
+          }),
+          textField('password_label', 'Password Label', {
+            default: 'Password',
+          }),
+          textField('password_confirm_label', 'Password Confirm Label', {
+            default: 'Confirm Password',
+          }),
+          textField('submit_button_text', 'Submit Button Text', {
+            default: 'Register',
+          }),
+          ...systemPageFields,
+        ],
+      }
+    ),
+
+    groupField(
+      'membership_reset_password_request_template_config',
+      'Membership Reset Password Request Template Configuration',
+      {
+        children: [
+          textField('title', 'Title', {
+            default: 'Reset Your Password',
+          }),
+          textField('description', 'Description', {
+            default: 'What email address should we send a password reset email to?',
+          }),
+          textField('email_label', 'Email Label', {
+            default: 'Email Address',
+          }),
+          textField('submit_button_text', 'Submit Button Text', {
+            default: 'Send Reset Email',
+          }),
+          ...systemPageFields,
+        ],
+      }
+    ),
+
+    groupField(
+      'membership_reset_password_template_config',
+      'Membership Reset Password Template Configuration',
+      {
+        children: [
+          textField('title', 'Title', {
+            default: 'Reset Your Password',
+          }),
+          textField('description', 'Description', {
+            default: 'Enter your new password.',
+          }),
+          textField('password_label', 'Password Label', {
+            default: 'Password',
+          }),
+          textField('password_confirm_label', 'Password Confirm Label', {
+            default: 'Confirm Password',
+          }),
+          textField('submit_button_text', 'Submit Button Text', {
+            default: 'Save Password',
+          }),
+          ...systemPageFields,
+        ],
+      }
+    ),
+
+    groupField('password_prompt_template_config', 'Password Prompt Template Configuration', {
+      children: [
+        textField('title', 'Title', {
+          default: 'This page is password-protected.',
         }),
-        textField('contact_admin_text', 'Contact Admin Text', {
-          default: 'Contact the admin.',
+        textField('description', 'Description', {
+          default: 'Please enter the password required to view this page.',
         }),
+        ...systemPageFields,
       ],
     }),
   ];
