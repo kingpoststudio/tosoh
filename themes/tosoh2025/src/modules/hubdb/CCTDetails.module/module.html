@@ -56,7 +56,7 @@
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-header-height flex flex-col">
   {% if tosoh_instrument_name and competitor_instrument_name %}
 
-    {% set category_exclusion_filter = '&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name~"&category__ne=General Comparison" %}
+    {% set category_exclusion_filter = '&tosoh_instrument_name__in='~tosoh_instrument_name~"&competitor_instrument_name__in="~competitor_instrument_name~"&category__ne=General Comparison" %}
     {% set comparison_rows = hubdb_table_rows(cct_comparison_table_id, category_exclusion_filter) %}
 
       {% require_js position="head" %}
@@ -68,6 +68,10 @@
         const searchPlaceholder = {{ dynamic_content_settings.search_placeholder|tojson }};
         const firstPartOfMatchesText = {{ dynamic_content_settings.first_part_of_matches_text|tojson }};
         const secondPartOfMatchesText = {{ dynamic_content_settings.second_part_of_matches_text|tojson }};
+
+
+        console.log('{{ comparison_rows|tojson }}');
+
 
         window.Tosoh.CCTDetails = { comparisonRows, resetButtonLabel, selectCategoryPlaceholder, searchPlaceholder, firstPartOfMatchesText, secondPartOfMatchesText };
         </script>
