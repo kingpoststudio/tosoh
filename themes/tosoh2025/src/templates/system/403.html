@@ -7,6 +7,13 @@
 {% extends "../layouts/base-no-globals.html" %}
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 
+{# Config Settings #}
+{% set config_settings = widget_data.config_settings %}
+{% set four_zero_three_template_config = config_settings.four_zero_three_template_config %}
+{% set title = four_zero_three_template_config.title or "You don't have access to view this page" %}
+{% set sign_in_label = four_zero_three_template_config.sign_in_label or 'Sign In' %}
+{% set sign_in_url = four_zero_three_template_config.sign_in_url or '/_hcms/mem/login' %}
+
 {% block header %}
 {% endblock %}
 
@@ -16,9 +23,14 @@
       {%
         module "content"
         path="@hubspot/rich_text",
-        html="<h2 class='font-semibold'>You don't have access to view this page</h2>"
+        html="<h2 class='font-semibold'>{{ title }}</h2>"
       %}
-      <a href="/_hcms/mem/login" class="button w-fit">Sign In</a>
+      <a
+        href="{{ sign_in_url.url.href }}"
+        target="{{ sign_in_url.open_in_new_tab ? '_blank' : '_self' }}"
+        class="button w-fit">
+        {{ sign_in_label }}
+      </a>
     </div>
   {% endcall %}
 {% endblock %}

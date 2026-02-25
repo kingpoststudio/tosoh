@@ -70,6 +70,28 @@ const generateFields = () => {
         }),
       ],
     }),
+
+    groupField('four_zero_three_template_config', '403 Template Configuration', {
+      children: [
+        textField('title', 'Title', {
+          default: "You don't have access to view this page",
+        }),
+        textField('sign_in_label', 'Sign In Label', {
+          default: 'Sign In',
+        }),
+        linkField('sign_in_url', 'Sign In URL', {
+          default: {
+            url: {
+              content_id: null,
+              type: 'INTERNAL',
+              href: '/_hcms/mem/login',
+            },
+            open_in_new_tab: false,
+            no_follow: false,
+          },
+        }),
+      ],
+    }),
   ];
 };
 
