@@ -22,14 +22,19 @@
   let tableFilterManager: TableFilterManager | null = null;
 
   let categorySelectValue: string = $state('none');
+  let CCTDetailsWindow = window?.Tosoh?.CCTDetails;
 
   const uniqueCategoryOptions =
-    (
-      window?.Tosoh?.CCTDetails?.comparisonRows?.objects?.map((row: any) => row?.category) || []
-    )?.filter(
+    (CCTDetailsWindow?.comparisonRows?.objects?.map((row: any) => row?.category) || [])?.filter(
       (category: any, index: number, self: any[]) =>
         category && self?.findIndex((cat: any) => cat?.id === category?.id) === index
     ) || [];
+
+  const resetButtonLabel = CCTDetailsWindow?.resetButtonLabel;
+  const selectCategoryPlaceholder = CCTDetailsWindow?.selectCategoryPlaceholder;
+  const searchPlaceholder = CCTDetailsWindow?.searchPlaceholder;
+  const firstPartOfMatchesText = CCTDetailsWindow?.firstPartOfMatchesText;
+  const secondPartOfMatchesText = CCTDetailsWindow?.secondPartOfMatchesText;
 
   const resetSearchInput = () => {
     tableSearchManager.clearHighlights();
@@ -170,7 +175,7 @@
           onkeydown={handleKeyDown}
           name={'search_term'}
           class="p-base placeholder:text-default focus:outline-imperial-red h-full w-full rounded-md pr-8"
-          placeholder={'Search in table...'}
+          placeholder={searchPlaceholder}
           autocomplete="off"
         />
         <div
@@ -184,7 +189,12 @@
           transition:fade={{ duration: 100 }}
           class="gap-sm flex items-center text-sm text-gray-600"
         >
-          <span>{searchMatches.current} of {searchMatches.total} matches</span>
+          <span
+            >{searchMatches.current}
+            {firstPartOfMatchesText}
+            {searchMatches.total}
+            {secondPartOfMatchesText}</span
+          >
           <div class="flex gap-1">
             <button
               onclick={navigateToPrevious}
@@ -209,7 +219,7 @@
     <div class="w-full min-w-[16rem] md:w-fit">
       <Select
         excludeAllOption={true}
-        placeholder={'Select Category'}
+        placeholder={selectCategoryPlaceholder}
         displayLabel={false}
         options={uniqueCategoryOptions}
         name={'category'}
@@ -217,6 +227,6 @@
         bind:value={categorySelectValue}
       />
     </div>
-    <button type="button" data-type="reset" class="w-full md:w-fit"> Reset </button>
+    <button type="button" data-type="reset" class="w-full md:w-fit"> {resetButtonLabel} </button>
   </div>
 </FilterForm>

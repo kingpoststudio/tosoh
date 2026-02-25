@@ -150,6 +150,11 @@ declare global {
       };
       CCTDetails: {
         comparisonRows: CCTComparisons;
+        resetButtonLabel: string;
+        selectCategoryPlaceholder: string;
+        searchPlaceholder: string;
+        firstPartOfMatchesText: string;
+        secondPartOfMatchesText: string;
       };
     };
     hsVideoApi?: any;
