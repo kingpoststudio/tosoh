@@ -14,6 +14,16 @@ const generateFields = () => {
       ],
     }),
 
+    groupField('auth_wrapper_template_config', 'Auth Wrapper Template Configuration', {
+      children: [
+        textField('title', 'Title', {
+          default: 'CONNECTING SCIENCE WITH CARE',
+        }),
+        textField('description', 'Description', {
+          default: 'At Tosoh, we enable precision and reliability for better patient outcomes.',
+        }),
+      ],
+    }),
     groupField('four_zero_three_template_config', '403 Template Configuration', {
       children: [
         textField('title', 'Title', {

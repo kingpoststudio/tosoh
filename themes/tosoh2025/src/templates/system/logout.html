@@ -17,7 +17,7 @@
   {% set sign_back_in_label = logout_template_config.sign_back_in_label or 'Sign Back In' %}
   {% set sign_back_in_url = logout_template_config.sign_back_in_url or {url:{href: '/_hcms/mem/login'}} %}
 
-  {% call macros.auth_wrapper() %}
+  {% call macros.auth_wrapper(widget_data) %}
     <div class="gap-base flex flex-col">
       {%
         module "content"

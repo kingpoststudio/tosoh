@@ -18,7 +18,9 @@
   {% set sign_in_label = four_zero_three_template_config.sign_in_label or 'Sign In' %}
   {% set sign_in_url = four_zero_three_template_config.sign_in_url or {url:{href: '/_hcms/mem/login'}} %}
 
-  {% call macros.auth_wrapper() %}
+  {# Auth Wrapper Config Settings #}
+
+  {% call macros.auth_wrapper(widget_data) %}
     <div class="gap-base flex flex-col">
       {%
         module "content"

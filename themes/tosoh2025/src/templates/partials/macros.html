@@ -142,7 +142,12 @@
   {%- endif -%}
 {%- endmacro -%}
 
-{%- macro auth_wrapper() -%}
+{%- macro auth_wrapper(widget_data) -%}
+
+  {% set auth_wrapper_template_config = widget_data.global_config_settings.auth_wrapper_template_config %}
+  {% set auth_wrapper_title = auth_wrapper_template_config.title or 'CONNECTING SCIENCE WITH CARE' %}
+  {% set auth_wrapper_description = auth_wrapper_template_config.description or 'At Tosoh, we enable precision and reliability for better patient outcomes.' %}
+
   <div class="max-w-max-page relative m-auto flex min-h-[100vh] flex-col-reverse lg:flex-row">
     <img
       src="{{ get_asset_url('../../images/logo_auth_wrapper.png') }}"
@@ -153,10 +158,8 @@
         class="absolute top-0 left-0 h-full w-full object-cover" />
       <div class="absolute top-0 left-0 h-full w-full bg-[#013B57E3]"></div>
       <div class="pt-md md:pt-2xl lg:pt-3xl gap-sm relative flex w-full flex-col">
-        <p class="text-thin text-lg tracking-widest">CONNECTING SCIENCE WITH CARE</p>
-        <h2 class="leading-12 font-semibold">
-          At Tosoh, we enable precision and reliability for better patient outcomes.
-        </h2>
+        <p class="text-thin text-lg tracking-widest">{{ auth_wrapper_title }}</p>
+        <h2 class="leading-12 font-semibold">{{ auth_wrapper_description }}</h2>
       </div>
       <img
         src="{{ get_asset_url('../../images/close-up-portrait-focused-young-male-doctor.png') }}"
