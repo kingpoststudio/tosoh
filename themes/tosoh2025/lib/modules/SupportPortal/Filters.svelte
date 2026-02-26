@@ -43,6 +43,14 @@
 
   const filtersTitle = supportPortalContent?.topic_filters?.filters_title;
   const resetFiltersLabel = supportPortalContent?.topic_filters?.reset_filters_label;
+
+  // Additional Configuration Settings
+  const additionalConfSettings = supportPortalContent?.additional_conf_settings;
+  const checkboxNoOptionsLabel =
+    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
+  const possibleResultsLabel =
+    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
+
   const viewAsLabel = supportPortalContent?.topic_filters?.view_as_label;
   const listLabel = supportPortalContent?.topic_filters?.list_label;
   const gridLabel = supportPortalContent?.topic_filters?.grid_label;
@@ -247,6 +255,7 @@
     manualTableId={prodSupportPortalTableId}
     {searchFromFields}
     onReset={onResetForSearch}
+    {possibleResultsLabel}
   />
   <FilterForm trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}
@@ -262,6 +271,7 @@
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
+          {checkboxNoOptionsLabel}
         />
       {/if}
     {/each}

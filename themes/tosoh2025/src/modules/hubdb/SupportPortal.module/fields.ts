@@ -1,5 +1,6 @@
 import { textField, booleanField, choiceField, groupField } from 'hs-fieldkit';
 import {
+  additionalConfSettingsFields,
   breadCrumbField,
   errorCardFields,
   searchField,
@@ -57,6 +58,7 @@ const generateFields = () => {
       default: false,
     }),
     errorCardFields,
+    additionalConfSettingsFields,
   ];
 };
 

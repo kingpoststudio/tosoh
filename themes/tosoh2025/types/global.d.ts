@@ -44,6 +44,7 @@ declare global {
         };
         type: 'module';
         error_card: ErrorFields;
+        additional_conf_settings: AdditionalConfSettings;
       };
       SupportPortalDocsContent: {
         access_level: 'Customer' | 'Distributor' | 'Internal';

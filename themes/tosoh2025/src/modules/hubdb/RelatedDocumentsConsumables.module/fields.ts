@@ -1,4 +1,4 @@
-import { choiceField, groupField, textField } from 'hs-fieldkit';
+import { choiceField, groupField, hubDbTableField, textField } from 'hs-fieldkit';
 import { lockedGroupFields, relatedDocumentsSharedFields } from '../../../../lib/utils/fieldUtils';
 
 const columnLabelField = (defaultValue: string) =>
@@ -17,6 +17,18 @@ const generateFields = () => {
       ],
       required: true,
       default: 'Customer',
+    }),
+    hubDbTableField('hubdb_table_ifu', 'IFU HubDB Table', {
+      required: true,
+      inline_help_text: 'The hubDB table that contains the IFU documents.',
+    }),
+    hubDbTableField('hubdb_table_sds', 'SDS HubDB Table', {
+      required: true,
+      inline_help_text: 'The hubDB table that contains the SDS documents.',
+    }),
+    hubDbTableField('hubdb_table_cofa', 'CofA HubDB Table', {
+      required: true,
+      inline_help_text: 'The hubDB table that contains the CofA documents.',
     }),
     textField('product_code', 'Product Code', {
       required: true,
