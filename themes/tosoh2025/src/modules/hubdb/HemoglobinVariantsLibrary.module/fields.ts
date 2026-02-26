@@ -48,7 +48,7 @@ const generateFields = () => {
         textField('value_label', 'Value Label', {
           default: 'Value:',
         }),
-        groupField('table_configuration', 'Table Configuration', {
+        groupField('table_configuration', 'Table In Modal - Configuration', {
           children: [
             textField('variant_name_label', 'Variant Name Label', {
               default: 'Variant Name',

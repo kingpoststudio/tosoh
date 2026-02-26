@@ -154,6 +154,7 @@ declare global {
             advice_label: string;
           };
         };
+        error_card: ErrorFields;
       };
       KioskDocumentsContent: {
         description: string;

@@ -3,7 +3,6 @@
   import { IS_MOCK, PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
-  import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
 
@@ -209,11 +208,6 @@
     }
   };
 
-  const reloadFilterOptions = () => {
-    hasError = false;
-    fetchInitialData();
-  };
-
   onMount(() => {
     fetchInitialData();
   });
@@ -244,10 +238,6 @@
 <div
   class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
 >
-  {#if hasError}
-    <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />
-    <div class="pb-sm"></div>
-  {/if}
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}

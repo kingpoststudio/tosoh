@@ -48,7 +48,7 @@
   const adviceLabel = schemaConfiguration?.advice_label || 'Consigliare';
 
   const schema = [
-    { label: sexLabel, value: sex.label },
+    { label: sexLabel, value: sex?.label },
     { label: patientDobLabel, value: patient_dob },
     { label: ethnicityLabel, value: ethnicity },
     { label: historyLabel, value: history },
