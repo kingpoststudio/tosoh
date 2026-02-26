@@ -57,6 +57,12 @@
   const reloadLabel = errorCard?.reload_label || 'Reload';
   const tryAgainLabel = errorCard?.try_again_label || 'Try again';
 
+  // Additional Configuration Settings
+  const additionalConfSettings = kioskDocumentsContent?.additional_conf_settings;
+  const noResultsLabel =
+    additionalConfSettings?.results_settings?.no_results_label || 'No results found.';
+  const paginationSettings = additionalConfSettings?.pagination_settings;
+
   const constructDateComparisonFilters = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -158,10 +164,10 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard}></ItemsGrid>
+      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} {noResultsLabel}></ItemsGrid>
 
       <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
+        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId} {paginationSettings}
         ></PaginationWithLimit>
       </div>
     {/if}

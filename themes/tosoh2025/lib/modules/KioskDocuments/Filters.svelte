@@ -41,6 +41,13 @@
   const filtersTitle = kioskDocumentsContent?.topic_filters?.filters_title;
   const resetFiltersLabel = kioskDocumentsContent?.topic_filters?.reset_filters_label || 'Reset';
 
+  // Additional Configuration Settings
+  const additionalConfSettings = kioskDocumentsContent?.additional_conf_settings;
+  const checkboxNoOptionsLabel =
+    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
+  const possibleResultsLabel =
+    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
+
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
     kioskDocumentsContent?.topic_filters?.hubdb_table_id
@@ -240,6 +247,7 @@
     manualTableId={searchTableId}
     {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
+    {possibleResultsLabel}
   />
 
   <FilterForm trigger="change" {onChange} {onReset} {formId}>
@@ -255,6 +263,7 @@
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
+          {checkboxNoOptionsLabel}
         />
       {/if}
     {/each}

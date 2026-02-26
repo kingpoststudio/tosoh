@@ -178,6 +178,7 @@ declare global {
           view_details_label: string;
         };
         error_card: ErrorFields;
+        additional_conf_settings: AdditionalConfSettings;
       };
       WebinarListings: {
         advanced: {
