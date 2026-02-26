@@ -20,6 +20,10 @@ export type TopicFiltersWithViewAs = TopicFilters & {
   list_label?: string;
 };
 
+export type TopicFiltersWithApplyButton = TopicFilters & {
+  apply_button_label?: string;
+};
+
 export type Search = {
   enable_search: boolean;
   hubdb_column_ids:

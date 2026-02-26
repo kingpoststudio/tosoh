@@ -25,28 +25,75 @@
     rt_min,
     variant_image,
     variant_name,
-    window,
+    window: windowType,
   } = item?.values;
 
+  const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
+  const viewDetailsLabel =
+    hemoglobinVariantsLibraryContent?.card_configuration?.view_details_label || 'View Details';
+  const cardConfiguration = hemoglobinVariantsLibraryContent?.card_configuration;
+
+  const downloadLabel = cardConfiguration?.download_label || 'Download PDF';
+  const alsoKnownAsLabel = cardConfiguration?.also_known_as_label || 'Also known as:';
+  const mutationTypeLabel = cardConfiguration?.mutation_type_label || 'Mutation Type:';
+  const mutationDescriptionLabel =
+    cardConfiguration?.mutation_description_label || 'Mutation Description:';
+  const migrationZoneLabel = cardConfiguration?.migration_zone_label || 'Migration Zone:';
+  const variantDetailsLabel = cardConfiguration?.variant_details_label || 'Variant Details:';
+  const propertyLabel = cardConfiguration?.property_label || 'Property:';
+  const valueLabel = cardConfiguration?.value_label || 'Value:';
+
+  const schemaConfiguration = cardConfiguration?.schema_configuration;
+  const variantNameLabel = schemaConfiguration?.variant_name_label || 'Variant Name';
+  const hgvsNameLabel = schemaConfiguration?.hgvs_name_label || 'HGVS Name';
+  const mutationLabel = schemaConfiguration?.mutation_label || 'Mutation';
+  const mutationDescriptionSchemaLabel =
+    schemaConfiguration?.mutation_description_label || 'Mutation Description';
+  const heterozygoteClinicalPresentationLabel =
+    schemaConfiguration?.heterozygote_clinical_presentation_label ||
+    'Heterozygote Clinical Presentation';
+  const heterozygoteLaboratoryFindingsLabel =
+    schemaConfiguration?.heterozygote_laboratory_findings_label ||
+    'Heterozygote Laboratory Findings';
+  const heterozygoteCommentsLabel =
+    schemaConfiguration?.heterozygote_comments_label || 'Heterozygote Comments';
+  const homozygoteClinicalPresentationLabel =
+    schemaConfiguration?.homozygote_clinical_presentation_label ||
+    'Homozygote Clinical Presentation';
+  const homozygoteLaboratoryFindingsLabel =
+    schemaConfiguration?.homozygote_laboratory_findings_label || 'Homozygote Laboratory Findings';
+  const homozygoteCommentsLabel =
+    schemaConfiguration?.homozygote_comments_label || 'Homozygote Comments';
+  const ethnicityLabel = schemaConfiguration?.ethnicity_label || 'Ethnicity';
+  const additionalCommentsLabel =
+    schemaConfiguration?.additional_comments_label || 'Additional Comments';
+  const instrumentLabel = schemaConfiguration?.instrument_label || 'Instrument';
+  const percentMinMaxLabel = schemaConfiguration?.percent_min_max_label || '% Min-Max';
+  const rtMinLabel = schemaConfiguration?.rt_min_label || 'RT Min';
+  const rtMaxLabel = schemaConfiguration?.rt_max_label || 'RT Max';
+  const migrationInWindowLabel =
+    schemaConfiguration?.migration_in_window_label || 'Migration in window';
+  const referencesLabel = schemaConfiguration?.references_label || 'References';
+
   const schema = [
-    { label: 'Variant Name', value: variant_name },
-    { label: 'HGVS Name', value: hgvs_name },
-    { label: 'Mutation', value: mutation.label },
-    { label: 'Mutation Description', value: mutation_description },
-    { label: 'Heterozygote Clinical Presentation', value: heterozygote_clinical_presentation },
-    { label: 'Heterozygote Laboratory Findings', value: heterozygote_laboratory_findings },
-    { label: 'Heterozygote Comments', value: heterozygote_comments },
-    { label: 'Homozygote Clinical Presentation', value: homozygote_clinical_presentation },
-    { label: 'Homozygote Laboratory Findings', value: homozygote_laboratory_findings },
-    { label: 'Homozygote Comments', value: homozygote_comments },
-    { label: 'Ethnicity', value: ethnicity },
-    { label: 'Additional Comments', value: comments },
-    { label: 'Instrument', value: instrument.label },
-    { label: '% Min-Max', value: area_under_peak },
-    { label: 'RT Min', value: rt_min },
-    { label: 'RT Max', value: rt_max },
-    { label: 'Migration in window', value: window.label },
-    { label: 'References', value: references },
+    { label: variantNameLabel, value: variant_name },
+    { label: hgvsNameLabel, value: hgvs_name },
+    { label: mutationLabel, value: mutation.label },
+    { label: mutationDescriptionSchemaLabel, value: mutation_description },
+    { label: heterozygoteClinicalPresentationLabel, value: heterozygote_clinical_presentation },
+    { label: heterozygoteLaboratoryFindingsLabel, value: heterozygote_laboratory_findings },
+    { label: heterozygoteCommentsLabel, value: heterozygote_comments },
+    { label: homozygoteClinicalPresentationLabel, value: homozygote_clinical_presentation },
+    { label: homozygoteLaboratoryFindingsLabel, value: homozygote_laboratory_findings },
+    { label: homozygoteCommentsLabel, value: homozygote_comments },
+    { label: ethnicityLabel, value: ethnicity },
+    { label: additionalCommentsLabel, value: comments },
+    { label: instrumentLabel, value: instrument.label },
+    { label: percentMinMaxLabel, value: area_under_peak },
+    { label: rtMinLabel, value: rt_min },
+    { label: rtMaxLabel, value: rt_max },
+    { label: migrationInWindowLabel, value: windowType?.label },
+    { label: referencesLabel, value: references },
   ];
 </script>
 
@@ -99,35 +146,35 @@
     <div class="flex flex-col">
       <div class="gap-xs align-start flex flex-row flex-wrap">
         <button
-          onclick={() => onTagClick('window', window?.name)}
-          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
+          onclick={() => onTagClick('window', windowType?.name)}
+          class="plain p-xs! text-md text-default rounded-2xl! bg-gray-100 text-center font-bold! md:text-left"
         >
-          {window?.label}
+          {windowType?.label}
         </button>
         <button
           onclick={() => onTagClick('instrument', instrument?.name)}
-          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
+          class="plain p-xs! text-md text-default rounded-2xl! bg-gray-100 text-center font-bold! md:text-left"
         >
           {instrument?.label}
         </button>
       </div>
 
       <button
-        class="plain px-sm! py-xs! text-default font-bold! rounded-2xl! absolute right-[1.25rem] top-[1.25rem] bg-gray-100 uppercase"
+        class="plain px-sm! py-xs! text-default absolute top-[1.25rem] right-[1.25rem] rounded-2xl! bg-gray-100 font-bold! uppercase"
         onclick={() => onTagClick('mutation', mutation?.name)}
       >
         {mutation?.label}
       </button>
       <tosoh-modal variant="action" modalId={variant_name}>
-        <button class="gap-sm w-full! mt-sm flex items-center justify-center text-center">
-          View Details
+        <button class="gap-sm mt-sm flex w-full! items-center justify-center text-center">
+          {viewDetailsLabel}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="12"
             height="14"
             viewBox="0 0 12 14"
             fill="none"
-            class="h-sm w-sm min-w-base"
+            class="h-sm min-w-base w-sm"
           >
             <path
               d="M0.629487 12.2917C0.363957 12.6236 0.417771 13.1079 0.749684 13.3734C1.0816 13.639 1.56592 13.5852 1.83145 13.2532L1.23047 12.7725L0.629487 12.2917ZM11.231 1.14299C11.184 0.720533 10.8035 0.416117 10.3811 0.463057L3.49674 1.22798C3.07428 1.27492 2.76987 1.65544 2.81681 2.0779C2.86375 2.50035 3.24427 2.80477 3.66672 2.75783L9.78612 2.0779L10.4661 8.19729C10.513 8.61975 10.8935 8.92417 11.316 8.87723C11.7384 8.83029 12.0428 8.44977 11.9959 8.02731L11.231 1.14299ZM1.23047 12.7725L1.83145 13.2532L11.067 1.70877L10.4661 1.22798L9.86507 0.747196L0.629487 12.2917L1.23047 12.7725Z"
@@ -139,7 +186,7 @@
 
       <tosoh-modal variant="modal" modalId={variant_name}>
         <div slot="title" class="w-full">
-          <a href={document_url} class="button" target="_blank">DOWNLOAD PDF</a>
+          <a href={document_url} class="button" target="_blank">{downloadLabel}</a>
         </div>
         <div slot="content">
           <div class="space-y-md flex flex-col">
@@ -154,25 +201,25 @@
               />
             </div>
             <br />
-            <div class="italic"><span class="font-bold">Also known as:</span> {@html aka}</div>
+            <div class="italic"><span class="font-bold">{alsoKnownAsLabel}</span> {@html aka}</div>
             <div class="space-y-xs">
-              <div><span class="font-bold">Mutation Type:</span> {mutation.label}</div>
+              <div><span class="font-bold">{mutationTypeLabel}</span> {mutation.label}</div>
               <div>
-                <span class="font-bold">Mutation Description:</span>
+                <span class="font-bold">{mutationDescriptionLabel}</span>
                 {@html mutation_description}
               </div>
-              <div><span class="font-bold">Migration Zone:</span> {window.label}</div>
+              <div><span class="font-bold">{migrationZoneLabel}</span> {windowType?.label}</div>
             </div>
             <hr />
 
             <div class="relative overflow-auto">
-              <h3 class="text-2xl">Variant Details</h3>
+              <h3 class="text-2xl">{variantDetailsLabel}</h3>
               <div class="my-md overflow-hidden rounded-t-lg">
                 <table class="w-full table-auto border-collapse text-sm">
                   <thead>
                     <tr class="bg-zinc-700 text-white">
-                      <th class="p-base border-b text-left font-bold">Property</th>
-                      <th class="p-base border-b text-left font-bold">Value</th>
+                      <th class="p-base border-b text-left font-bold">{propertyLabel}</th>
+                      <th class="p-base border-b text-left font-bold">{valueLabel}</th>
                     </tr>
                   </thead>
                   <tbody class="bg-white">

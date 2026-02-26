@@ -49,6 +49,11 @@
 
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
+  const filtersTitle = hemoglobinVariantsLibraryContent?.topic_filters?.filters_title;
+  const applyButtonLabel = hemoglobinVariantsLibraryContent?.topic_filters?.apply_button_label;
+  const resetFiltersLabel =
+    hemoglobinVariantsLibraryContent?.topic_filters?.reset_filters_label || 'Reset';
+
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
@@ -248,7 +253,7 @@
     <div class="pb-sm"></div>
   {/if}
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}
   </div>
 
@@ -277,7 +282,7 @@
 
         {#if filter?.type === 'range-pm'}
           <button type="button" onclick={onClickSubmit} class=" mt-sm w-full hover:bg-red-50"
-            >Apply</button
+            >{applyButtonLabel}</button
           >
         {/if}
       {/if}
@@ -285,7 +290,7 @@
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetFiltersLabel}
       </button>
     </div>
   </FilterForm>

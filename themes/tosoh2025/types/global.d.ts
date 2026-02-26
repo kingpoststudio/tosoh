@@ -1,4 +1,9 @@
-import type { Search, TopicFilters, TopicFiltersWithViewAs } from './fields';
+import type {
+  Search,
+  TopicFilters,
+  TopicFiltersWithApplyButton,
+  TopicFiltersWithViewAs,
+} from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
@@ -78,7 +83,38 @@ declare global {
         title: string;
         search: Search;
         title: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithApplyButton;
+        card_configuration: {
+          view_details_label: string;
+          download_label: string;
+          also_known_as_label: string;
+          mutation_type_label: string;
+          mutation_description_label: string;
+          migration_zone_label: string;
+          variant_details_label: string;
+          property_label: string;
+          value_label: string;
+          schema_configuration: {
+            variant_name_label: string;
+            hgvs_name_label: string;
+            mutation_label: string;
+            mutation_description_label: string;
+            heterozygote_clinical_presentation_label: string;
+            heterozygote_laboratory_findings_label: string;
+            heterozygote_comments_label: string;
+            homozygote_clinical_presentation_label: string;
+            homozygote_laboratory_findings_label: string;
+            homozygote_comments_label: string;
+            ethnicity_label: string;
+            additional_comments_label: string;
+            instrument_label: string;
+            percent_min_max_label: string;
+            rt_min_label: string;
+            rt_max_label: string;
+            migration_in_window_label: string;
+            references_label: string;
+          };
+        };
       };
       HemoglobinPortalContent: {
         breadcrumbs: {

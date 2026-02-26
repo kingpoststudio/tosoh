@@ -111,6 +111,19 @@ export const topicFiltersNoTitle = groupField('topic_filters', 'Topic Filters', 
   children: topicFiltersBaseChildren,
 });
 
+export const topicFiltersWithApplyButton = groupField('topic_filters', 'Topic Filters', {
+  children: [
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
+    }),
+    textField('apply_button_label', 'Apply Button Label', {
+      default: 'Apply',
+    }),
+
+    ...topicFiltersBaseChildren,
+  ],
+});
+
 export const topicFiltersWithViewAs = groupField('topic_filters', 'Topic Filters', {
   children: [
     textField('filters_title', 'Filters Title', {
