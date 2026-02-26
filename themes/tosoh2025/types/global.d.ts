@@ -183,7 +183,7 @@ declare global {
         topic_filters: TopicFilters;
         upcoming_section_eyebrow: string;
         upcoming_section_title: string;
-        grid_error_card: ErrorFields;
+        error_card: ErrorFields;
       };
       CCT: {
         filtersSidebarTitle: string;

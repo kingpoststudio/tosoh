@@ -58,12 +58,12 @@
   const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   // Error Card
-  const gridErrorCard = webinarListingsWindow?.grid_error_card;
-  const errorMessage = gridErrorCard?.message || 'Failed to load webinars';
-  const reloadInLabel = gridErrorCard?.reload_in_label || 'Reload in';
-  const secondReloadLabel = gridErrorCard?.second_reload_label || 'seconds';
-  const reloadLabel = gridErrorCard?.reload_label || 'Reload';
-  const tryAgainLabel = gridErrorCard?.try_again_label || 'Try again';
+  const errorCard = webinarListingsWindow?.error_card;
+  const errorMessage = errorCard?.message || 'Failed to load webinars';
+  const reloadInLabel = errorCard?.reload_in_label || 'Reload in';
+  const secondReloadLabel = errorCard?.second_reload_label || 'seconds';
+  const reloadLabel = errorCard?.reload_label || 'Reload';
+  const tryAgainLabel = errorCard?.try_again_label || 'Try again';
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);

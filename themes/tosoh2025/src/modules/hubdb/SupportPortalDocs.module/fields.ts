@@ -2,6 +2,7 @@ import { textField, booleanField, choiceField, groupField, richTextField } from 
 import {
   breadCrumbField,
   contentBlockRtfFeatures,
+  errorCardFields,
   searchField,
   searchVisibilityRule,
   topicFilters,

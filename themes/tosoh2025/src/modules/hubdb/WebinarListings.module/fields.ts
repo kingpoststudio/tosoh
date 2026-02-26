@@ -28,7 +28,6 @@ const generateFields = () => {
 
     searchField(),
     topicFiltersNoTitle,
-
     errorCardFields,
     groupField('advanced', 'Advanced', {
       children: [
