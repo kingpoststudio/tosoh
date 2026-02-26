@@ -59,6 +59,12 @@
   const reloadLabel = errorCard?.reload_label || 'Reload';
   const tryAgainLabel = errorCard?.try_again_label || 'Try again';
 
+  // Additional Configuration Settings
+  const additionalConfSettings = portaleEmogiobineContent?.additional_conf_settings;
+  const noResultsLabel =
+    additionalConfSettings?.results_settings?.no_results_label || 'No results found.';
+  const paginationSettings = additionalConfSettings?.pagination_settings;
+
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     const rangePmFilters = constructRangePmFilters(topicFilters);
@@ -147,10 +153,10 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
+      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true} {noResultsLabel}></ItemsGrid>
 
       <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
+        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId} {paginationSettings}
         ></PaginationWithLimit>
       </div>
     {/if}

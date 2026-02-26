@@ -159,6 +159,7 @@ declare global {
           };
         };
         error_card: ErrorFields;
+        additional_conf_settings: AdditionalConfSettings;
       };
       KioskDocumentsContent: {
         description: string;
