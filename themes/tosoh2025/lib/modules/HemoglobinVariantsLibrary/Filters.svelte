@@ -53,6 +53,13 @@
   const resetFiltersLabel =
     hemoglobinVariantsLibraryContent?.topic_filters?.reset_filters_label || 'Reset';
 
+  // Additional Configuration Settings
+  const additionalConfSettings = hemoglobinVariantsLibraryContent?.additional_conf_settings;
+  const checkboxNoOptionsLabel =
+    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
+  const possibleResultsLabel =
+    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
+
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
@@ -254,6 +261,7 @@
     {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
     onReset={onResetForSearch}
+    {possibleResultsLabel}
   />
 
   <FilterForm updateUrl={false} trigger="change" {onChange} {onReset} {formId}>
@@ -268,6 +276,7 @@
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
+          {checkboxNoOptionsLabel}
         />
 
         {#if filter?.type === 'range-pm'}

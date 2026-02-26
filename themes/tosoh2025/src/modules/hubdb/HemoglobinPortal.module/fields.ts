@@ -1,5 +1,6 @@
 import { groupField, richTextField, textField } from 'hs-fieldkit';
 import {
+  additionalConfSettingsFields,
   breadCrumbField,
   errorCardFields,
   searchField,

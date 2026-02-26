@@ -122,6 +122,7 @@ declare global {
           };
         };
         error_card: ErrorFields;
+        additional_conf_settings: AdditionalConfSettings;
       };
       HemoglobinPortalContent: {
         breadcrumbs: {
