@@ -1,4 +1,4 @@
-import { groupField, imageField, textField, urlField } from 'hs-fieldkit';
+import { groupField, imageField, linkField, textField } from 'hs-fieldkit';
 
 const generateFields = () => {
   return [
@@ -13,7 +13,7 @@ const generateFields = () => {
         imageField('product_image', 'Product Image', {
           required: true,
         }),
-        urlField('product_link', 'Product Link', {
+        linkField('product_link', 'Product Link', {
           required: true,
         }),
       ],

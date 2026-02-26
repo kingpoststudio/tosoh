@@ -47,6 +47,11 @@
 {% set download_brochure_url = module.download_brochure_url %}
 {% set product_type = module.product_type %}
 {% set breadcrumbs = module.breadcrumbs %}
+{% set content_configuration = module.content_configuration %}
+{% set pack_size_label = content_configuration.pack_size_label %}
+{% set quantity_label = content_configuration.quantity_label %}
+{% set request_quote_button_label = content_configuration.request_quote_button_label %}
+{% set download_brochure_button_label = content_configuration.download_brochure_button_label %}
 
 {{ macros.breadcrumbs(breadcrumbs) }}
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex w-[100vw] flex-col md:flex-row">
@@ -128,7 +133,7 @@
         <select
           class="border-imperial-red p-sm focus:ring-imperial-red peer focus:ring-opacity-50 h-full w-full cursor-pointer appearance-none rounded-lg border focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
           name="pack_size">
-          <option disabled value="none">Pack Size</option>
+          <option disabled value="none">{{ pack_size_label }}</option>
           {% for pack_size in pack_sizes %}
             <option {{ loop.index == 1 ? 'selected' : '' }} value="{{ pack_size.pack_size_value }}">
               {{ pack_size.pack_size_value }}
@@ -145,7 +150,7 @@
       <div class="gap-sm flex w-full flex-row items-center md:max-w-[8rem]">
         <div
           class="focus-within:border-imperial-red border-imperial-red py-sm px-base gap-xs relative flex h-full w-full flex-row items-center rounded-lg border">
-          <div class="text-sm">Qty:</div>
+          <div class="text-sm">{{ quantity_label }}</div>
           <input
             type="number"
             name="quantity"
@@ -162,13 +167,13 @@
             id="request-quote-button"
             disabled
             class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[10rem]">
-            Request a Quote
+            {{ request_quote_button_label }}
           </button>
         </tosoh-modal>
       {% endif %}
     </div>
     <tosoh-modal variant="modal" modalId="request-quote">
-      <h4 slot="title">Request a Quote</h4>
+      <h4 slot="title">{{ request_quote_button_label }}</h4>
       <div slot="content">
         <div class="fc-form default">
           {%
@@ -197,16 +202,16 @@
             id="request-quote-button"
             disabled
             class="p-sm! with-arrow w-full rounded-xl text-sm whitespace-nowrap text-white md:max-w-[12rem]">
-            Request a Quote
+            {{ request_quote_button_label }}
           </button>
         </tosoh-modal>
 
-        {% if download_brochure_url.href %}
+        {% if download_brochure_url.url.href %}
           <a
-            href="{{ download_brochure_url.href }}"
-            target="_blank"
+            href="{{ download_brochure_url.url.href }}"
+            target="{{ download_brochure_url.url.open_in_new_tab ? '_blank' : '_self' }}"
             class="button p-sm! outlined gap-2xs flex w-full items-center justify-center rounded-xl text-sm whitespace-nowrap md:max-w-[12rem]">
-            Download Brochure
+            {{ download_brochure_button_label }}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="23"

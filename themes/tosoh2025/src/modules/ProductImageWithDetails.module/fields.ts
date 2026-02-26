@@ -6,7 +6,7 @@ import {
   textField,
   numberField,
   formField,
-  urlField,
+  linkField,
 } from 'hs-fieldkit';
 import { breadCrumbField, contentBlockRtfFeatures } from '../../../lib/utils/fieldUtils';
 
@@ -35,6 +35,23 @@ const generateFields = () => {
     }),
     richTextField('description', 'Description', {
       enabled_features: contentBlockRtfFeatures,
+    }),
+
+    groupField('content_configuration', 'Content Configuration', {
+      children: [
+        textField('pack_size_label', 'Pack Size Label', {
+          default: 'Pack Size:',
+        }),
+        textField('quantity_label', 'Quantity Label', {
+          default: 'Qty:',
+        }),
+        textField('request_quote_button_label', 'Request Quote Button Label', {
+          default: 'Request a Quote',
+        }),
+        textField('download_brochure_button_label', 'Download Brochure Button Label', {
+          default: 'Download Brochure',
+        }),
+      ],
     }),
 
     groupField('part_no_group', 'Part No Group', {
@@ -79,7 +96,7 @@ const generateFields = () => {
       },
     }),
     formField('form', 'Form'),
-    urlField('download_brochure_url', 'Download Brochure URL', {
+    linkField('download_brochure_url', 'Download Brochure URL', {
       visibility: {
         controlling_field: 'product_type',
         controlling_value_regex: 'instrument',
