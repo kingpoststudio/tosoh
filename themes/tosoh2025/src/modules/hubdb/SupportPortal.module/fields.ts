@@ -1,6 +1,7 @@
 import { textField, booleanField, choiceField, groupField } from 'hs-fieldkit';
 import {
   breadCrumbField,
+  errorCardFields,
   searchField,
   searchVisibilityRule,
   topicFiltersWithViewAs,
@@ -55,6 +56,7 @@ const generateFields = () => {
         'If enabled, a button will be displayed on the video player that allows the user to download the video.',
       default: false,
     }),
+    errorCardFields,
   ];
 };
 

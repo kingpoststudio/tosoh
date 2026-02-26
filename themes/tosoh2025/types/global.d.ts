@@ -42,6 +42,7 @@ declare global {
           view_label: string;
         };
         type: 'module';
+        error_card: ErrorFields;
       };
       SupportPortalDocsContent: {
         access_level: 'Customer' | 'Distributor' | 'Internal';
