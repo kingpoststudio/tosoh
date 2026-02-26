@@ -18,6 +18,13 @@ const generateFields = () => {
     }),
     searchField(),
     topicFilters,
+    groupField('card_configuration', 'Card Configuration', {
+      children: [
+        textField('view_details_label', 'View Details Label', {
+          default: 'View Details',
+        }),
+      ],
+    }),
   ];
 };
 

@@ -111,6 +111,9 @@ declare global {
         search: Search;
         title: string;
         topic_filters: TopicFilters;
+        card_configuration: {
+          view_details_label: string;
+        };
       };
       WebinarListings: {
         advanced: {

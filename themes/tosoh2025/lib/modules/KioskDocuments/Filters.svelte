@@ -39,6 +39,9 @@
   const searchColumnIds = parseSearchColumnIds(searchFromFields);
   const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
 
+  const filtersTitle = kioskDocumentsContent?.topic_filters?.filters_title;
+  const resetFiltersLabel = kioskDocumentsContent?.topic_filters?.reset_filters_label || 'Reset';
+
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
     kioskDocumentsContent?.topic_filters?.hubdb_table_id
@@ -237,7 +240,7 @@
   {/if}
 
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}
   </div>
 
@@ -269,7 +272,7 @@
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetFiltersLabel}
       </button>
     </div>
   </FilterForm>
