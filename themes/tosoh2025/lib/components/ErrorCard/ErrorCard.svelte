@@ -2,7 +2,14 @@
   import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
 
-  let { message, retryCallback }: { message: string; retryCallback: () => void } = $props();
+  let {
+    message,
+    retryCallback,
+    reloadInLabel = 'Reload in',
+    secondReloadLabel = 'seconds',
+    reloadLabel = 'Reload',
+    tryAgainLabel = 'Try again',
+  } = $props();
 
   let enableReload = $state(false);
   let countdown = $state(30);
@@ -39,13 +46,13 @@
 
     <span transition:fade class="text-imperial-red text-sm">
       {#if countdown > 0}
-        Reload in {countdown} seconds
+        {reloadInLabel} {countdown} {secondReloadLabel}
       {:else}
-        You can try again
+        {tryAgainLabel}
       {/if}
     </span>
     {#if enableReload}
-      <button transition:fade onclick={handleRetry}> Reload </button>
+      <button transition:fade onclick={handleRetry}> {reloadLabel} </button>
     {/if}
   </div>
 </div>

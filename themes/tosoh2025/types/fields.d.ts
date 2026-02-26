@@ -37,3 +37,11 @@ export type Search = {
   typeahead_enabled: boolean;
   is_access_level_filter_enabled?: boolean;
 };
+
+export type ErrorFields = {
+  message: string;
+  reload_in_label: string;
+  second_reload_label: string;
+  reload_label: string;
+  try_again_label: string;
+};

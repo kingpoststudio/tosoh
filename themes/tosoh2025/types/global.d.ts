@@ -3,6 +3,7 @@ import type {
   TopicFilters,
   TopicFiltersWithApplyButton,
   TopicFiltersWithViewAs,
+  ErrorFields,
 } from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
@@ -182,6 +183,7 @@ declare global {
         topic_filters: TopicFilters;
         upcoming_section_eyebrow: string;
         upcoming_section_title: string;
+        grid_error_card: ErrorFields;
       };
       CCT: {
         filtersSidebarTitle: string;

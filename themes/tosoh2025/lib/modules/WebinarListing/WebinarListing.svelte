@@ -57,7 +57,13 @@
 
   const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
-  console.log(searchColumnIds);
+  // Error Card
+  const gridErrorCard = webinarListingsWindow?.grid_error_card;
+  const errorMessage = gridErrorCard?.message || 'Failed to load webinars';
+  const reloadInLabel = gridErrorCard?.reload_in_label || 'Reload in';
+  const secondReloadLabel = gridErrorCard?.second_reload_label || 'seconds';
+  const reloadLabel = gridErrorCard?.reload_label || 'Reload';
+  const tryAgainLabel = gridErrorCard?.try_again_label || 'Try again';
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
@@ -166,22 +172,26 @@
   </div>
 {/snippet}
 
+{#snippet errorCardSnippet()}
+  <div class="p-sm">
+    <ErrorCard
+      message={errorMessage}
+      retryCallback={reloadData}
+      {reloadInLabel}
+      {secondReloadLabel}
+      {reloadLabel}
+      {tryAgainLabel}
+    />
+  </div>
+{/snippet}
+
 {#snippet grid(rows: WebinarListingsItem[], displayOnLoad: boolean, displayPagination: boolean)}
   {#if (isLoading && displayOnLoad) || !isLoading}
-    {#if hasError}
-      <div class="p-sm">
-        <ErrorCard message="Failed to load webinars" retryCallback={reloadData} />
-        <div class="pb-sm"></div>
-      </div>
-    {:else}
-      <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
-      ></ItemsGrid>
-
-      <div class={`${rows?.length > 0 && displayPagination ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
-        ></PaginationWithLimit>
-      </div>
-    {/if}
+    <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
+    ></ItemsGrid>
+    <div class={`${rows?.length > 0 && displayPagination ? 'block' : 'hidden'}`}>
+      <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}></PaginationWithLimit>
+    </div>
   {/if}
 {/snippet}
 
@@ -193,6 +203,10 @@
   {#if isLoading}
     {@render headerSkeleton()}
     {@render grid([], true, false)}
+  {/if}
+
+  {#if hasError && !isLoading}
+    {@render errorCardSnippet()}
   {/if}
 
   {#if !isLoading && tableRows?.length > 0}

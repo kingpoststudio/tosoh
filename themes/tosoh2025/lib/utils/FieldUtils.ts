@@ -32,6 +32,26 @@ export const systemPageFields = [
   }),
 ];
 
+export const errorCardFields = groupField('error_card', 'Error Card', {
+  children: [
+    textField('message', 'Message', {
+      default: 'An error occurred while loading the data.',
+    }),
+    textField('reload_in_label', 'Reload In Label', {
+      default: 'Reload in',
+    }),
+    textField('second_reload_label', 'Second Reload Label', {
+      default: 'seconds',
+    }),
+    textField('reload_label', 'Reload Label', {
+      default: 'Reload',
+    }),
+    textField('try_again_label', 'Try Again Label', {
+      default: 'Try again',
+    }),
+  ],
+});
+
 const topicFiltersBaseChildren = [
   hubDbTableField('hubdb_table_id', 'Table', {
     required: false,
