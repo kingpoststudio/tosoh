@@ -11,8 +11,10 @@
     tryAgainLabel = 'Try again',
   } = $props();
 
+  const RELOAD_COUNTDOWN_SECONDS = 30;
+
   let enableReload = $state(false);
-  let countdown = $state(30);
+  let countdown = $state(RELOAD_COUNTDOWN_SECONDS);
 
   const handleRetry = () => {
     if (retryCallback) {

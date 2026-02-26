@@ -16,7 +16,6 @@
     isLoading?: boolean;
     label?: string;
     labelPosition?: 'top' | 'left';
-    multiple?: boolean;
     name: string;
     options: any[];
     checkboxNoOptionsLabel?: string;

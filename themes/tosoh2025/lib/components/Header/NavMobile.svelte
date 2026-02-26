@@ -50,7 +50,7 @@
 
   const keydownHandler = on(window, 'keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      isMenuOpen = false;
+      closeMenu();
     }
   });
 

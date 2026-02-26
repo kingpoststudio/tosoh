@@ -1,7 +1,9 @@
 <script lang="ts">
-  import type { Component } from 'svelte';
   import { fade } from 'svelte/transition';
+
   import { getUrlParam } from '../../utils/urlUtils';
+
+  import type { Component } from 'svelte';
 
   const {
     Card,

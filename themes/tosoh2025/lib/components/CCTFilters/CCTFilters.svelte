@@ -75,25 +75,19 @@
     deleteMultipleSearchParams(['competitor_instrument_name']);
   };
 
-  const clearOnProductLineReset = () => {
-    deleteMultipleSearchParams([
-      'product_line',
-      'tosoh_instrument_name',
-      'competitor_instrument_name',
-    ]);
-
-    window.location.search = window.location.search;
+  const clearAndReload = (params: string[]) => {
+    deleteMultipleSearchParams(params);
+    window.location.reload();
   };
 
-  const clearOnTosohInstrumentReset = () => {
-    deleteMultipleSearchParams(['tosoh_instrument_name', 'competitor_instrument_name']);
-    window.location.search = window.location.search;
-  };
+  const clearOnProductLineReset = () =>
+    clearAndReload(['product_line', 'tosoh_instrument_name', 'competitor_instrument_name']);
 
-  const clearOnCompetitorInstrumentReset = () => {
-    deleteMultipleSearchParams(['competitor_instrument_name']);
-    window.location.search = window.location.search;
-  };
+  const clearOnTosohInstrumentReset = () =>
+    clearAndReload(['tosoh_instrument_name', 'competitor_instrument_name']);
+
+  const clearOnCompetitorInstrumentReset = () =>
+    clearAndReload(['competitor_instrument_name']);
 
   const onChange = (event: Event) => {
     let name = (event?.target as HTMLSelectElement)?.name;
