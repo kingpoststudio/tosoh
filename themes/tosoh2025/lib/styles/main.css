@@ -86,7 +86,7 @@ html {
 }
 
 main {
-  @apply min-h-[calc(100vh-25rem)];
+  @apply min-h-[calc(100vh-25rem)] pt-[calc(var(--spacing-header-height)+var(--spacing-subheader-height,0rem))];
 }
 
 h1,
@@ -263,21 +263,6 @@ table:not(:where(:has(.table-cell), :has(.table-row))):not(tosoh-modal *) th {
   }
   50% {
     opacity: 0.5;
-  }
-}
-
-.mt-header-height {
-  margin-top: calc(var(--spacing-header-height) + var(--spacing-subheader-height, 0rem));
-}
-
-.pt-header-height {
-  padding-top: calc(
-    var(--spacing-header-height) + var(--spacing-subheader-height, 0rem) + var(--spacing-md)
-  );
-  @media (min-width: 768px) {
-    padding-top: calc(
-      var(--spacing-header-height) + var(--spacing-subheader-height, 0rem) + var(--spacing-2xl)
-    );
   }
 }
 
