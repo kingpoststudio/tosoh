@@ -172,6 +172,7 @@ declare global {
         card_configuration: {
           view_details_label: string;
         };
+        error_card: ErrorFields;
       };
       WebinarListings: {
         advanced: {
