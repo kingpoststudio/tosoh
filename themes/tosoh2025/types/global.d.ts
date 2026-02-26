@@ -118,6 +118,7 @@ declare global {
             references_label: string;
           };
         };
+        error_card: ErrorFields;
       };
       HemoglobinPortalContent: {
         breadcrumbs: {

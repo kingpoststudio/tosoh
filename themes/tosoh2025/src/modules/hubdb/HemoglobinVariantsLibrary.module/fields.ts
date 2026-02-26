@@ -1,6 +1,7 @@
 import { groupField, textField } from 'hs-fieldkit';
 import {
   breadCrumbField,
+  errorCardFields,
   searchField,
   topicFiltersWithApplyButton,
 } from '../../../../lib/utils/fieldUtils';
@@ -123,6 +124,7 @@ const generateFields = () => {
         }),
       ],
     }),
+    errorCardFields,
   ];
 };
 
