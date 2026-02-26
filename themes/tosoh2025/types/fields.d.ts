@@ -45,3 +45,23 @@ export type ErrorFields = {
   reload_label: string;
   try_again_label: string;
 };
+
+export type AdditionalConfSettings = {
+  checkbox_settings: {
+    no_options_label: string;
+  };
+  results_settings: {
+    no_results_label: string;
+  };
+  pagination_settings: {
+    items_per_page_label: string;
+    of_label: string;
+    pages_label: string;
+    page_label: string;
+    items_label: string;
+    item_label: string;
+  };
+  search_settings: {
+    possible_results_label: string;
+  };
+};

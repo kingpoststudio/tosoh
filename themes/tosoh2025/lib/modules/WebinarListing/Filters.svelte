@@ -49,6 +49,13 @@
 
   const resetFiltersLabel = webinarListingsWindow?.topic_filters?.reset_filters_label;
 
+  // Additional Configuration Settings
+  const additionalConfSettings = webinarListingsWindow?.additional_conf_settings;
+  const checkboxNoOptionsLabel =
+    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
+  const possibleResultsLabel =
+    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
+
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
   let isLoading = $state(false);
   let hasError = $state(false);
@@ -224,6 +231,7 @@
     {searchFromFields}
     {formId}
     onReset={onResetForSearch}
+    {possibleResultsLabel}
   />
 
   {#if areFiltersEnabled}
@@ -243,6 +251,7 @@
             labelPosition="left"
             displayLabel={false}
             customClasses="min-w-[16rem] h-full"
+            {checkboxNoOptionsLabel}
           />
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">

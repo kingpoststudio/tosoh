@@ -32,6 +32,58 @@ export const systemPageFields = [
   }),
 ];
 
+export const additionalConfSettingsFields = groupField(
+  'additional_conf_settings',
+  'Additional Configuration Settings',
+  {
+    children: [
+      groupField('checkbox_settings', 'Checkbox Settings', {
+        children: [
+          textField('no_options_label', 'No Options Label', {
+            default: 'No options available.',
+          }),
+        ],
+      }),
+      groupField('results_settings', 'Results Settings', {
+        children: [
+          textField('no_results_label', 'No Results Label', {
+            default: 'No results found.',
+          }),
+        ],
+      }),
+      groupField('pagination_settings', 'Pagination Settings', {
+        children: [
+          textField('items_per_page_label', 'Items Per Page Label', {
+            default: 'Items per page:',
+          }),
+          textField('of_label', 'Of Label', {
+            default: 'of',
+          }),
+          textField('pages_label', 'Pages Label', {
+            default: 'pages',
+          }),
+          textField('page_label', 'Page Label', {
+            default: 'page',
+          }),
+          textField('items_label', 'Items Label', {
+            default: 'items',
+          }),
+          textField('item_label', 'Item Label', {
+            default: 'item',
+          }),
+        ],
+      }),
+      groupField('search_settings', 'Search Settings', {
+        children: [
+          textField('possible_results_label', 'Possible Results Label', {
+            default: 'Possible results',
+          }),
+        ],
+      }),
+    ],
+  }
+);
+
 export const errorCardFields = groupField('error_card', 'Error Card', {
   children: [
     textField('message', 'Message', {

@@ -65,6 +65,12 @@
   const reloadLabel = errorCard?.reload_label || 'Reload';
   const tryAgainLabel = errorCard?.try_again_label || 'Try again';
 
+  // Additional Configuration Settings
+  const additionalConfSettings = webinarListingsWindow?.additional_conf_settings;
+  const noResultsLabel =
+    additionalConfSettings?.results_settings?.no_results_label || 'No results found.';
+  const paginationSettings = additionalConfSettings?.pagination_settings;
+
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
     const rangePmFilters = constructRangePmFilters(topicFilters);
@@ -187,10 +193,17 @@
 
 {#snippet grid(rows: WebinarListingsItem[], displayOnLoad: boolean, displayPagination: boolean)}
   {#if (isLoading && displayOnLoad) || !isLoading}
-    <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
+    <ItemsGrid
+      tableRows={rows}
+      {isLoading}
+      {Card}
+      {SkeletonCard}
+      hasLargeElements={true}
+      {noResultsLabel}
     ></ItemsGrid>
     <div class={`${rows?.length > 0 && displayPagination ? 'block' : 'hidden'}`}>
-      <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}></PaginationWithLimit>
+      <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId} {paginationSettings}
+      ></PaginationWithLimit>
     </div>
   {/if}
 {/snippet}

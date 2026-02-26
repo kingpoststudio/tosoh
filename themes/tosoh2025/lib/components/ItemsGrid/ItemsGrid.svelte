@@ -10,6 +10,7 @@
     isLoading,
     tableRows,
     viewAs = 'grid',
+    noResultsLabel = 'No results found',
   }: {
     Card: Component | any;
     SkeletonCard: Component | any;
@@ -17,6 +18,7 @@
     isLoading: boolean;
     tableRows: any[];
     viewAs?: string;
+    noResultsLabel?: string;
   } = $props();
 
   const constructLengthForSkeletons = () => {
@@ -51,7 +53,7 @@
     {/each}
   {:else}
     <div class="p-sm">
-      <p class="text-center text-2xl font-bold">No results found</p>
+      <p class="text-center text-2xl font-bold">{noResultsLabel}</p>
     </div>
   {/if}
 </div>

@@ -10,7 +10,16 @@
   import { setSearchParams } from '../../utils/urlUtils';
   import { scrollToTop } from '../../utils/utils';
 
-  let { totalItems, fetchData, idToScrollToTop } = $props();
+  let { totalItems, fetchData, idToScrollToTop, paginationSettings } = $props();
+
+  const paginationConfig = {
+    itemsPerPageLabel: paginationSettings?.items_per_page_label || 'Items per page:',
+    ofLabel: paginationSettings?.of_label || 'of',
+    pagesLabel: paginationSettings?.pages_label || 'pages',
+    pageLabel: paginationSettings?.page_label || 'page',
+    itemsLabel: paginationSettings?.items_label || 'items',
+    itemLabel: paginationSettings?.item_label || 'item',
+  };
 
   const params = new URLSearchParams(window.location.search);
   const limitOptions = [12, 24, 48];
@@ -100,7 +109,7 @@
     class="lg:p-sm gap-sm mt-base flex w-full flex-col-reverse justify-center lg:flex-row lg:justify-between"
   >
     <div class="gap-sm flex items-center justify-center text-[#4E4F54]">
-      <p>Items per page:</p>
+      <p>{paginationConfig.itemsPerPageLabel}</p>
       <select
         value={limit}
         onchange={(event) => {
@@ -118,9 +127,10 @@
         {/each}
       </select>
       <p>
-        {(pagination - 1) * limit || 1} - {Math.min((pagination - 1) * limit + limit, totalItems)} of
+        {(pagination - 1) * limit || 1} - {Math.min((pagination - 1) * limit + limit, totalItems)}
+        {paginationConfig.ofLabel}
         {totalItems}
-        items
+        {totalItems > 1 ? paginationConfig.itemsLabel : paginationConfig.itemLabel}
       </p>
     </div>
     <div class="gap-sm flex justify-center">
@@ -143,14 +153,15 @@
           {/each}
         </select>
         <p>
-          of {numberOfPages}
-          {numberOfPages === 1 ? 'page' : 'pages'}
+          {paginationConfig.ofLabel}
+          {numberOfPages}
+          {numberOfPages === 1 ? paginationConfig.pageLabel : paginationConfig.pagesLabel}
         </p>
       </div>
       <div class="gap-sm flex">
         <button
           type="button"
-          class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:cursor-not-allowed disabled:opacity-50"
+          class="p-sm! outlined text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border border-[#E1E2E3]! disabled:cursor-not-allowed disabled:opacity-50"
           aria-label="go one page back"
           onclick={moveBackward}
           disabled={!canGoBackward}
@@ -175,7 +186,7 @@
         </button>
         <button
           type="button"
-          class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:cursor-not-allowed disabled:opacity-50"
+          class="p-sm! outlined text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border border-[#E1E2E3]! disabled:cursor-not-allowed disabled:opacity-50"
           aria-label="go one page after"
           onclick={moveForward}
           disabled={!canGoForward}

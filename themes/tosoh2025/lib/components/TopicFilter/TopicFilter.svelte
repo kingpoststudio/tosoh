@@ -14,6 +14,7 @@
     name,
     options,
     placeholder,
+    checkboxNoOptionsLabel = 'No options available.',
   }: {
     customClasses?: string;
     disabled: boolean;
@@ -24,6 +25,7 @@
     name: string;
     options: any[];
     placeholder?: string;
+    checkboxNoOptionsLabel?: string;
   } = $props();
 </script>
 
@@ -49,6 +51,7 @@
         label={filter?.filter_label}
         {labelPosition}
         {displayLabel}
+        {checkboxNoOptionsLabel}
       />
     {/if}
     {#if filter?.type === 'range-pm'}

@@ -1,6 +1,7 @@
 import { groupField, textField } from 'hs-fieldkit';
 import {
   errorCardFields,
+  additionalConfSettingsFields,
   searchField,
   topicFiltersNoTitle,
 } from '../../../../lib/utils/fieldUtils';
@@ -29,6 +30,7 @@ const generateFields = () => {
     searchField(),
     topicFiltersNoTitle,
     errorCardFields,
+    additionalConfSettingsFields,
     groupField('advanced', 'Advanced', {
       children: [
         textField('filter_by_topic', 'Filter By Topic', {

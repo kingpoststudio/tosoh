@@ -9,6 +9,7 @@
     labelPosition = 'top',
     name,
     options,
+    checkboxNoOptionsLabel = 'No options available.',
   }: {
     disabled: boolean;
     displayLabel?: boolean;
@@ -18,6 +19,7 @@
     multiple?: boolean;
     name: string;
     options: any[];
+    checkboxNoOptionsLabel?: string;
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
@@ -45,7 +47,7 @@
                 value={option.name}
                 disabled={disabled || option?.quantity === 0 ? true : false}
                 checked={activeFilters.includes(option.name)}
-                class="checkbox-custom focus:ring-imperial-red text-imperial-red h-base w-base cursor-pointer rounded border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+                class="checkbox-custom focus:ring-imperial-red text-imperial-red h-base w-base focus:ring-opacity-50 cursor-pointer rounded border-slate-200 focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
               />
               <span class={`text-default select-none`}
                 >{option.label}{option.quantity !== undefined ? ` (${option?.quantity})` : ''}</span
@@ -64,16 +66,16 @@
                 {name}
                 value={skeletonOption}
                 disabled={true}
-                class="checkbox-custom focus:ring-imperial-red text-imperial-red h-base w-base cursor-pointer rounded border-slate-200 focus:outline-none focus:ring-1 focus:ring-opacity-50 disabled:cursor-not-allowed disabled:opacity-50"
+                class="checkbox-custom focus:ring-imperial-red text-imperial-red h-base w-base focus:ring-opacity-50 cursor-pointer rounded border-slate-200 focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
               />
               <span
-                class={`h-6 animate-pulse select-none rounded bg-slate-200 ${skeletonOption === 2 ? 'w-24' : 'w-32'}`}
+                class={`h-6 animate-pulse rounded bg-slate-200 select-none ${skeletonOption === 2 ? 'w-24' : 'w-32'}`}
               ></span>
             </label>
           {/each}
         </div>
       {:else}
-        <div>No options available</div>
+        <div>{checkboxNoOptionsLabel}</div>
       {/if}
     </div>
   </div>

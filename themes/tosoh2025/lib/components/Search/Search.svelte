@@ -17,6 +17,7 @@
     manualTableId,
     onReset,
     searchFromFields,
+    possibleResultsLabel = 'Possible results',
   }: {
     accessLevel?: string;
     customClasses?: string;
@@ -26,6 +27,7 @@
     manualTableId?: string | number;
     onReset: (searchCb: () => void) => void;
     searchFromFields: Search;
+    possibleResultsLabel?: string;
   } = $props();
 
   const {
@@ -215,7 +217,9 @@
           transition:fade={{ duration: 100 }}
           class="border-imperial-red mt-xs absolute left-0 z-10 max-h-[24rem] w-full overflow-y-auto rounded-lg border-1 bg-white shadow-md lg:max-w-[19.75rem]"
         >
-          <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
+          <div class="p-sm border-shadow-white w-full border-b text-center">
+            {possibleResultsLabel}
+          </div>
           {#each matches as match}
             {#if match}
               <button
