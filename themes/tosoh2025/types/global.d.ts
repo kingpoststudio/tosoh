@@ -72,6 +72,7 @@ declare global {
           language_label: string;
         };
         error_card: ErrorFields;
+        additional_conf_settings: AdditionalConfSettings;
       };
       HemoglobinVariantsLibraryContent: {
         breadcrumbs: {
