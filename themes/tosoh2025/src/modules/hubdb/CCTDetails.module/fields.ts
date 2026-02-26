@@ -1,11 +1,4 @@
-import {
-  groupField,
-  hubDbTableField,
-  linkField,
-  richTextField,
-  textField,
-  urlField,
-} from 'hs-fieldkit';
+import { groupField, hubDbTableField, linkField, richTextField, textField } from 'hs-fieldkit';
 import { contentBlockRtfFeatures } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
