@@ -67,6 +67,7 @@ const generateFields = () => {
       }),
     ]),
     topicFilters,
+    errorCardFields,
   ];
 };
 

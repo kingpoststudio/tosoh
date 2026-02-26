@@ -58,6 +58,14 @@
   let hasError = $state(false);
   let isLoading = $state(false);
 
+  // Error Card
+  const errorCard = supportPortalDocsContent?.error_card;
+  const errorMessage = errorCard?.message || 'Failed to load portal items';
+  const reloadInLabel = errorCard?.reload_in_label || 'Reload in';
+  const secondReloadLabel = errorCard?.second_reload_label || 'seconds';
+  const reloadLabel = errorCard?.reload_label || 'Reload';
+  const tryAgainLabel = errorCard?.try_again_label || 'Try again';
+
   const defaultLanguage = supportPortalDocsContent?.default_language;
   const viewAs = 'list';
 
@@ -139,11 +147,21 @@
   id={formId}
   class={`p-md md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading} {formId}></Filters>
+  {#key hasError}
+    <Filters isParentLoading={isLoading} {formId}></Filters>
+  {/key}
+
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <ErrorCard
+          message={errorMessage}
+          retryCallback={reloadData}
+          {reloadInLabel}
+          {secondReloadLabel}
+          {reloadLabel}
+          {tryAgainLabel}
+        />
         <div class="pb-sm"></div>
       </div>
     {:else}

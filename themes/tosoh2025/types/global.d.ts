@@ -69,6 +69,7 @@ declare global {
           subtitle_4: string;
           language_label: string;
         };
+        error_card: ErrorFields;
       };
       HemoglobinVariantsLibraryContent: {
         breadcrumbs: {
