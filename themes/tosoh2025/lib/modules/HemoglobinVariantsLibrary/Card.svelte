@@ -43,7 +43,7 @@
   const propertyLabel = cardConfiguration?.property_label || 'Property:';
   const valueLabel = cardConfiguration?.value_label || 'Value:';
 
-  const schemaConfiguration = cardConfiguration?.schema_configuration;
+  const schemaConfiguration = cardConfiguration?.table_configuration;
   const variantNameLabel = schemaConfiguration?.variant_name_label || 'Variant Name';
   const hgvsNameLabel = schemaConfiguration?.hgvs_name_label || 'HGVS Name';
   const mutationLabel = schemaConfiguration?.mutation_label || 'Mutation';

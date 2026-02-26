@@ -94,7 +94,7 @@ declare global {
           variant_details_label: string;
           property_label: string;
           value_label: string;
-          schema_configuration: {
+          table_configuration: {
             variant_name_label: string;
             hgvs_name_label: string;
             mutation_label: string;
@@ -130,7 +130,26 @@ declare global {
         title: string;
         description: string;
         eyebrow: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithApplyButton;
+        card_configuration: {
+          property_label: string;
+          value_label: string;
+          attachments_label: string;
+          attachments_description: string;
+          table_configuration: {
+            sex_label: string;
+            patient_dob_label: string;
+            ethnicity_label: string;
+            history_label: string;
+            anomaly_label: string;
+            blood_count_label: string;
+            hemoglobin_status_label: string;
+            other_label: string;
+            diagnosis_label: string;
+            other_diagnosis_label: string;
+            advice_label: string;
+          };
+        };
       };
       KioskDocumentsContent: {
         description: string;

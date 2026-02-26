@@ -23,18 +23,42 @@
     summary,
   } = item?.values;
 
+  const cardConfiguration = window?.Tosoh?.HemoglobinPortalContent?.card_configuration;
+  const propertyLabel = cardConfiguration?.property_label || 'Proprietà';
+  const valueLabel = cardConfiguration?.value_label || 'Valore';
+  const attachmentsLabel = cardConfiguration?.attachments_label || 'Allegati';
+  const attachmentsDescription =
+    cardConfiguration?.attachments_description || "Clicca su un'immagine per vedere di più.";
+
+  const schemaConfiguration = cardConfiguration?.table_configuration;
+  const sexLabel = schemaConfiguration?.sex_label || 'Sesso';
+  const patientDobLabel =
+    schemaConfiguration?.patient_dob_label || 'Data di nascita paziente (gg/mm/00)';
+  const ethnicityLabel =
+    schemaConfiguration?.ethnicity_label || "Eventuali informazioni sull'etnia";
+  const historyLabel = schemaConfiguration?.history_label || 'Anamnesi';
+  const anomalyLabel =
+    schemaConfiguration?.anomaly_label || 'Eventuali anomalie nelle indagini svolte';
+  const bloodCountLabel = schemaConfiguration?.blood_count_label || 'Emocromo';
+  const hemoglobinStatusLabel =
+    schemaConfiguration?.hemoglobin_status_label || 'Assetto emoglobinico';
+  const otherLabel = schemaConfiguration?.other_label || 'Altro';
+  const diagnosisLabel = schemaConfiguration?.diagnosis_label || 'Diagnosi';
+  const otherDiagnosisLabel = schemaConfiguration?.other_diagnosis_label || 'Altro';
+  const adviceLabel = schemaConfiguration?.advice_label || 'Consigliare';
+
   const schema = [
-    { label: 'Sesso', value: sex.label },
-    { label: 'Data di nascita paziente (gg/mm/00)', value: patient_dob },
-    { label: "Eventuali informazioni sull'etnia", value: ethnicity },
-    { label: 'Anamnesi', value: history },
-    { label: 'Eventuali anomalie nelle indagini svolte', value: anomaly },
-    { label: 'Emocromo', value: blood_count },
-    { label: 'Assetto emoglobinico', value: hemoglobin_status },
-    { label: 'Altro', value: other },
-    { label: 'Diagnosi', value: diagnosis },
-    { label: 'Altro', value: other_diagnosis },
-    { label: 'Consigliare', value: advice },
+    { label: sexLabel, value: sex.label },
+    { label: patientDobLabel, value: patient_dob },
+    { label: ethnicityLabel, value: ethnicity },
+    { label: historyLabel, value: history },
+    { label: anomalyLabel, value: anomaly },
+    { label: bloodCountLabel, value: blood_count },
+    { label: hemoglobinStatusLabel, value: hemoglobin_status },
+    { label: otherLabel, value: other },
+    { label: diagnosisLabel, value: diagnosis },
+    { label: otherDiagnosisLabel, value: other_diagnosis },
+    { label: adviceLabel, value: advice },
   ];
 </script>
 
@@ -72,8 +96,8 @@
                 <table class="w-full table-auto border-collapse text-sm">
                   <thead>
                     <tr class="bg-zinc-700 text-white">
-                      <th class="p-base border-b text-left font-bold">Proprietà</th>
-                      <th class="p-base border-b text-left font-bold">Valore</th>
+                      <th class="p-base border-b text-left font-bold">{propertyLabel}</th>
+                      <th class="p-base border-b text-left font-bold">{valueLabel}</th>
                     </tr>
                   </thead>
                   <tbody class="bg-white">
@@ -86,8 +110,8 @@
                   </tbody>
                 </table>
                 <div class="mt-sm gap-sm flex flex-col flex-wrap">
-                  <h5>Allegati</h5>
-                  <p>Clicca su un'immagine per vedere di più.</p>
+                  <h5>{attachmentsLabel}</h5>
+                  <p>{attachmentsDescription}</p>
                   <hr />
                   <div class="gap-sm flex">
                     {#if attachment_1}

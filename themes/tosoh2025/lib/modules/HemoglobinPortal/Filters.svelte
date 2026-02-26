@@ -1,10 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import {
-    IS_MOCK,
-    PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
-    USE_HARDCODED_IDS,
-  } from '../../utils/constants';
+  import { IS_MOCK, PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
@@ -43,6 +39,9 @@
   const searchFromFields = windowTosohPortaleEmogiobineContent?.search;
   const searchColumnIds = parseSearchColumnIds(searchFromFields);
   const searchTableId = PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID;
+  const applyButtonLabel = windowTosohPortaleEmogiobineContent?.topic_filters?.apply_button_label;
+  const resetFiltersLabel = windowTosohPortaleEmogiobineContent?.topic_filters?.reset_filters_label;
+  const filtersTitle = windowTosohPortaleEmogiobineContent?.topic_filters?.filters_title;
 
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
@@ -250,7 +249,7 @@
     <div class="pb-sm"></div>
   {/if}
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}
   </div>
 
@@ -280,7 +279,7 @@
 
         {#if filter?.type === 'range-pm'}
           <button type="button" onclick={onClickSubmit} class=" mt-sm w-full hover:bg-red-50"
-            >Apply</button
+            >{applyButtonLabel}</button
           >
         {/if}
       {/if}
@@ -288,7 +287,7 @@
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetFiltersLabel}
       </button>
     </div>
   </FilterForm>
