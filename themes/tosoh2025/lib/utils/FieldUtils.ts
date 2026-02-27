@@ -265,6 +265,8 @@ export const limitedSizeChoices = [
   ['base', 'Base'],
   ['md', 'Medium'],
   ['lg', 'Large'],
+  ['xl', 'Extra-large'],
+  ['2xl', '2X-large'],
 ];
 
 export const sizeChoices = [
