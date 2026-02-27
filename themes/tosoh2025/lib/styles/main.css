@@ -86,7 +86,7 @@ html {
 }
 
 main {
-  @apply min-h-[calc(100vh-25rem)] pt-[calc(var(--spacing-header-height)+var(--spacing-subheader-height,0rem))];
+  @apply min-h-[100vh] pt-[calc(var(--spacing-header-height)+var(--spacing-subheader-height,0rem))];
 }
 
 h1,

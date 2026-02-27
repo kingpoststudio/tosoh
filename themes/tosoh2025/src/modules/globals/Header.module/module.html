@@ -9,7 +9,7 @@
   'italian_microsite': module.italian_microsite,
   'internal': module.internal
 } %}
-{% set active_configuration = config_map[config_settings.selected_configuration] %}
+{% set active_configuration = config_map[config_settings.selected_configuration || 'default'] %}
 
 {% set active_configuration_menu =  header_overrides.menu ? menu(header_overrides.menu) : menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
