@@ -26,7 +26,7 @@
       setupWistiaThumbnail(item?.values?.wistia_video_url as string)
   );
   let name = $derived(item?.values?.name);
-  let downloadUrl = $derived(item?.values?.document_url || item?.wistia_video_url);
+  let downloadUrl = $derived(item?.values?.document_url);
   let documentType = $derived(item?.values?.document_type?.label);
   let productTypes = $derived(item?.values?.product_type?.map((type: any) => `${type.label}`));
 
