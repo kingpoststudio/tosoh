@@ -8,6 +8,7 @@
   const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
   const viewDetailsLabel =
     kioskDocumentsContent?.card_configuration?.view_details_label || 'View Details';
+  let viewHref = $derived(`${window.location.pathname.replace(/\/+$/, '')}/${path}`);
 </script>
 
 <div
@@ -35,7 +36,7 @@
     </div>
 
     <a
-      href={`${path}`}
+      href={viewHref}
       class="button gap-sm flex w-full! items-center justify-center text-center"
       target="_blank"
     >
