@@ -1,7 +1,11 @@
-import { textField } from 'hs-fieldkit';
+import { hubDbTableField, linkField, textField } from 'hs-fieldkit';
 
 const generateFields = () => {
   return [
+    hubDbTableField('events_table_id', 'Events Table', {
+      required: true,
+      inline_help_text: 'The hubDB table that contains the events data.',
+    }),
     textField('eyebrow', 'Eyebrow'),
     textField('title', 'Title'),
     textField('exclude_event_id', 'Exclude Event ID', {
@@ -13,8 +17,16 @@ const generateFields = () => {
         'If no event type is provided, all events will be displayed. Example types are webinar, conference and workshop. The type is the "INTERNAL_NAME" of the "event_type" column in the HubDB table.',
     }),
 
-    textField('cta_label', 'CTA Label', {
-      default: 'Read More',
+    linkField('events_page_link', 'Events Page Link', {
+      default: {
+        url: {
+          content_id: null,
+          href: '/events',
+        },
+      },
+    }),
+    textField('view_details_label', 'View Details Label', {
+      default: 'View Details',
     }),
   ];
 };

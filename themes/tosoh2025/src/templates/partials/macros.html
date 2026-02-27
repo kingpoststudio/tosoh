@@ -23,7 +23,7 @@
   -}}
 {%- endmacro -%}
 
-{%- macro render_event_card(event, is_carousel_slide) -%}
+{%- macro render_event_card(event, is_carousel_slide, view_details_label, events_page_link) -%}
   {% set is_carousel_slide = is_carousel_slide ? 'embla__slide min-w-[100%] basis-[100%] md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%] max-w-[32rem]' : 'w-full' %}
   {% set current_time = local_dt|unixtimestamp %}
   <div
@@ -38,7 +38,9 @@
         <div class="absolute -top-2 right-4 items-center justify-center text-black">
           <div class="relative h-[9rem] w-[7.5rem]">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 141 164" fill="none" class="absolute top-0">
-              <path d="M0.804688 0H140.195V163.316L70.5001 128.114L0.804688 163.316V0Z" fill="#013a55"></path>
+              <path
+                d="M0.804688 0H140.195V163.316L70.5001 128.114L0.804688 163.316V0Z"
+                fill="var(--color-prussian-blue)"></path>
             </svg>
 
             <div class="pt-md absolute left-0 flex h-full w-full flex-col items-center">
@@ -66,10 +68,10 @@
     </div>
     <div class="p-md w-full">
       <a
-        target="_blank"
+        target="{{ events_page_link.open_in_new_tab ? '_blank' : '_self' }}"
         class="button with-arrow bg-imperial-red block w-full! rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
-        href="{{ event.hs_path ? '/events/' ~ event.hs_path : event.cta_url }}">
-        {{ module.cta_label || 'View Details' }}
+        href="{{ event.hs_path ? events_page_link.url.href ~ '/' ~ event.hs_path : event.cta_url }}">
+        {{ view_details_label }}
       </a>
     </div>
   </div>

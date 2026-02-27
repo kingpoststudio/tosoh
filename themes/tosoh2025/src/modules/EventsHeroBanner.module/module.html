@@ -5,7 +5,7 @@
 {% set date = module.date %}
 
 <div
-  class="p-md md:pr-2xl md:pl-2xl max-w-max-page gap-md relative m-auto mt-[5.4rem] flex min-h-[32rem] w-full flex-col justify-center overflow-hidden">
+  class="p-md md:pr-2xl md:pl-2xl max-w-max-page gap-md relative m-auto flex min-h-[32rem] w-full flex-col justify-center overflow-hidden">
   <div
     class="absolute top-0 left-0 h-full w-full object-cover"
     style="background: linear-gradient(135deg,  var(--color-black-charcoal) 0%,  var(--color-prussian-blue) 100%);"></div>
@@ -27,7 +27,7 @@
       </div>
     </div>
     {% if image.src %}
-      <div class="gap-md relative h-[25rem] w-full flex-col overflow-hidden rounded-l-[20rem] rounded-r-2xl shadow-lg">
+      <div class="gap-md relative h-[25rem] w-full flex-col overflow-hidden rounded-2xl shadow-lg">
         <img src="{{ image.src }}" class="h-full w-full object-cover" />
       </div>
     {% endif %}
