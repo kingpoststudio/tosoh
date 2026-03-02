@@ -47,12 +47,7 @@
 
   const toleranceConfig = extractToleranceConfig(topicFilters || []);
 
-  const resetFiltersLabel = webinarListingsWindow?.topic_filters?.reset_filters_label;
-
-  // Additional Configuration Settings
-  const additionalConfSettings = webinarListingsWindow?.additional_conf_settings;
-  const checkboxNoOptionsLabel =
-    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
+  const resetFiltersLabel = webinarListingsWindow?.topic_filters?.reset_filters_label || 'Reset';
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
   let isLoading = $state(false);
@@ -248,7 +243,7 @@
             labelPosition="left"
             displayLabel={false}
             customClasses="min-w-[16rem] h-full"
-            {checkboxNoOptionsLabel}
+            checkboxNoOptionsLabel={filter?.checkbox_no_options_label || 'No options available.'}
           />
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">

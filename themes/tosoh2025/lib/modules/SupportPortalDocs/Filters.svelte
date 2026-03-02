@@ -43,11 +43,6 @@
   const filtersTitle = supportPortalDocsContent?.topic_filters?.filters_title;
   const resetFiltersLabel = supportPortalDocsContent?.topic_filters?.reset_filters_label;
 
-  // Additional Configuration Settings
-  const additionalConfSettings = supportPortalDocsContent?.additional_conf_settings;
-  const checkboxNoOptionsLabel =
-    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
-
   const isSearchAccessLevelFilterEnabled =
     supportPortalDocsContent?.search?.is_access_level_filter_enabled || false;
 
@@ -268,7 +263,7 @@
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
-          {checkboxNoOptionsLabel}
+          checkboxNoOptionsLabel={filter?.checkbox_no_options_label || 'No options available.'}
         />
       {/if}
     {/each}

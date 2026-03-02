@@ -42,12 +42,7 @@
   let forceListView = supportPortalContent?.force_list_view || false;
 
   const filtersTitle = supportPortalContent?.topic_filters?.filters_title;
-  const resetFiltersLabel = supportPortalContent?.topic_filters?.reset_filters_label;
-
-  // Additional Configuration Settings
-  const additionalConfSettings = supportPortalContent?.additional_conf_settings;
-  const checkboxNoOptionsLabel =
-    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
+  const resetFiltersLabel = supportPortalContent?.topic_filters?.reset_filters_label || 'Reset';
 
   const viewAsLabel = supportPortalContent?.topic_filters?.view_as_label;
   const listLabel = supportPortalContent?.topic_filters?.list_label;
@@ -268,7 +263,7 @@
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
-          {checkboxNoOptionsLabel}
+          checkboxNoOptionsLabel={filter?.checkbox_no_options_label || 'No options available.'}
         />
       {/if}
     {/each}

@@ -37,13 +37,6 @@ export const additionalConfSettingsFields = groupField(
   'Additional Configuration Settings',
   {
     children: [
-      groupField('checkbox_settings', 'Checkbox Settings', {
-        children: [
-          textField('no_options_label', 'No Options Label', {
-            default: 'No options available.',
-          }),
-        ],
-      }),
       groupField('results_settings', 'Results Settings', {
         children: [
           textField('no_results_label', 'No Results Label', {
@@ -117,6 +110,14 @@ const topicFiltersBaseChildren = [
           ['checkbox', 'Checkbox'],
           ['range-pm', 'Range (plus/minus)'],
         ],
+      }),
+      textField('checkbox_no_options_label', 'Checkbox: No Options Label', {
+        default: 'No options available.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'checkbox',
+          operator: 'EQUAL',
+        },
       }),
       numberField('min', 'Minimum', {
         step: 0.01,

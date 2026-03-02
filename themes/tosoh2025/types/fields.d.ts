@@ -10,6 +10,7 @@ export type TopicFilters = {
     min?: number | null;
     tolerance?: number | null;
     type: FilterType;
+    checkbox_no_options_label?: string;
   }[];
   hubdb_table_id: string;
 };
@@ -48,9 +49,6 @@ export type ErrorFields = {
 };
 
 export type AdditionalConfSettings = {
-  checkbox_settings: {
-    no_options_label: string;
-  };
   results_settings: {
     no_results_label: string;
   };

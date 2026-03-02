@@ -42,11 +42,6 @@
   const resetFiltersLabel = windowTosohPortaleEmogiobineContent?.topic_filters?.reset_filters_label;
   const filtersTitle = windowTosohPortaleEmogiobineContent?.topic_filters?.filters_title;
 
-  // Additional Configuration Settings
-  const additionalConfSettings = windowTosohPortaleEmogiobineContent?.additional_conf_settings;
-  const checkboxNoOptionsLabel =
-    additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
-
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
     windowTosohPortaleEmogiobineContent?.topic_filters?.hubdb_table_id
@@ -270,7 +265,7 @@
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
-          {checkboxNoOptionsLabel}
+          checkboxNoOptionsLabel={filter?.checkbox_no_options_label || 'No options available.'}
         />
 
         {#if filter?.type === 'range-pm'}
