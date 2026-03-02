@@ -226,7 +226,7 @@
 {/snippet}
 
 <div
-  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
+  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[8rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
 >
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>

@@ -86,8 +86,7 @@
   const clearOnTosohInstrumentReset = () =>
     clearAndReload(['tosoh_instrument_name', 'competitor_instrument_name']);
 
-  const clearOnCompetitorInstrumentReset = () =>
-    clearAndReload(['competitor_instrument_name']);
+  const clearOnCompetitorInstrumentReset = () => clearAndReload(['competitor_instrument_name']);
 
   const onChange = (event: Event) => {
     let name = (event?.target as HTMLSelectElement)?.name;
@@ -146,7 +145,7 @@
 </script>
 
 <div
-  class="bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem]"
+  class="bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[8rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem]"
 >
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">{filtersSidebarTitle}</p>
