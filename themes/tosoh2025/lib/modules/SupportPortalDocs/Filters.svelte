@@ -47,8 +47,6 @@
   const additionalConfSettings = supportPortalDocsContent?.additional_conf_settings;
   const checkboxNoOptionsLabel =
     additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
-  const possibleResultsLabel =
-    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
 
   const isSearchAccessLevelFilterEnabled =
     supportPortalDocsContent?.search?.is_access_level_filter_enabled || false;
@@ -255,7 +253,6 @@
     manualTableId={prodSupportPortalDocsTableId}
     {searchFromFields}
     onReset={onResetForSearch}
-    {possibleResultsLabel}
   />
   <FilterForm trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}

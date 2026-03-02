@@ -46,8 +46,6 @@
   const additionalConfSettings = windowTosohPortaleEmogiobineContent?.additional_conf_settings;
   const checkboxNoOptionsLabel =
     additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
-  const possibleResultsLabel =
-    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
 
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
@@ -258,7 +256,6 @@
     disabled={isParentLoading || isLoading || hasError}
     onReset={onResetForSearch}
     isActivatedQuery={false}
-    {possibleResultsLabel}
   />
 
   <FilterForm updateUrl={false} trigger="change" {onChange} {onReset} {formId}>

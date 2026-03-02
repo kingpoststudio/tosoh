@@ -45,8 +45,6 @@
   const additionalConfSettings = kioskDocumentsContent?.additional_conf_settings;
   const checkboxNoOptionsLabel =
     additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
-  const possibleResultsLabel =
-    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
 
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
@@ -247,7 +245,6 @@
     manualTableId={searchTableId}
     {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
-    {possibleResultsLabel}
   />
 
   <FilterForm trigger="change" {onChange} {onReset} {formId}>

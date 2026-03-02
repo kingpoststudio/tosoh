@@ -73,13 +73,6 @@ export const additionalConfSettingsFields = groupField(
           }),
         ],
       }),
-      groupField('search_settings', 'Search Settings', {
-        children: [
-          textField('possible_results_label', 'Possible Results Label', {
-            default: 'Possible results',
-          }),
-        ],
-      }),
     ],
   }
 );
@@ -229,6 +222,10 @@ export const searchField = (extraFields: any = []) => {
       hubDbTableField('hubdb_table_id', 'HubDB Table', {
         required: true,
         inline_help_text: 'Defines the hubDB table that will be used to search against.',
+        ...searchVisibilityRule,
+      }),
+      textField('possible_results_label', 'Possible Results Label', {
+        default: 'Possible results',
         ...searchVisibilityRule,
       }),
       groupField('hubdb_column_ids', 'HubDB Column IDs', {

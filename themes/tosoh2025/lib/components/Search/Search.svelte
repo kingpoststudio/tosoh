@@ -18,7 +18,6 @@
     manualTableId,
     onReset,
     searchFromFields,
-    possibleResultsLabel = 'Possible results',
   }: {
     accessLevel?: string;
     customClasses?: string;
@@ -28,7 +27,6 @@
     manualTableId?: string | number;
     onReset: (searchCb: () => void) => void;
     searchFromFields: Search;
-    possibleResultsLabel?: string;
   } = $props();
 
   const {
@@ -38,6 +36,7 @@
     placeholder,
     typeahead_enabled: typeaheadEnabled,
     enable_search: isSearchEnabled,
+    possible_results_label: possibleResultsLabel = 'Possible results',
   } = searchFromFields || {};
 
   // Extract column ID strings from the array of objects
@@ -157,7 +156,6 @@
     />
   </svg>
 {/snippet}
-
 
 {#if isSearchEnabled}
   <FilterForm

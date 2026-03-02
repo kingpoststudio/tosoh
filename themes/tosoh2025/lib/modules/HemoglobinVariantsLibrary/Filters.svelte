@@ -57,8 +57,6 @@
   const additionalConfSettings = hemoglobinVariantsLibraryContent?.additional_conf_settings;
   const checkboxNoOptionsLabel =
     additionalConfSettings?.checkbox_settings?.no_options_label || 'No options available.';
-  const possibleResultsLabel =
-    additionalConfSettings?.search_settings?.possible_results_label || 'Possible results';
 
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
   let isLoading = $state(false);
@@ -261,7 +259,6 @@
     {searchFromFields}
     disabled={isParentLoading || isLoading || hasError}
     onReset={onResetForSearch}
-    {possibleResultsLabel}
   />
 
   <FilterForm updateUrl={false} trigger="change" {onChange} {onReset} {formId}>

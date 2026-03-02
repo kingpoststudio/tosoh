@@ -32,6 +32,7 @@ export type Search = {
       }[]
     | null;
   hubdb_table_id: number | string;
+  possible_results_label?: string;
   placeholder: string;
   title: string;
   typeahead_enabled: boolean;
@@ -60,8 +61,5 @@ export type AdditionalConfSettings = {
     page_label: string;
     items_label: string;
     item_label: string;
-  };
-  search_settings: {
-    possible_results_label: string;
   };
 };
