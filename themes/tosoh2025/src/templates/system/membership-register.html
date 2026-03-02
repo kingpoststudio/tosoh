@@ -7,36 +7,52 @@
 {% extends "../layouts/base-no-globals.html" %}
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 
+{# pageTitle is used on system templates for setting a value for the title tag #}
+{% set pageTitle = "Tosoh | Register" %}
+
+{% block header %}
+{% endblock %}
+
 {% block body %}
-  {% call macros.auth_wrapper() %}
-    {%
-      module 'content'
-      path='@hubspot/rich_text',
-      html='<h2 class="font-semibold">Sign Up</h2>
-      <p class="text-lg mt-sm text-nickel">Tosoh Bioscience - Diagnostics EMEA Support Portal Registration</p>'
-    %}
-    {%
-      member_register 'my_register'
-      email_label='Email Address',
-      password_confirm_label='Confirm Password',
-      password_label='Password',
-      submit_button_text='Register'
-    %}
+  {# Config Settings #}
+  {% set membership_register_template_config = widget_data.global_config_settings.membership_register_template_config %}
+  {% set title = membership_register_template_config.title or "Sign Up" %}
+  {% set description = membership_register_template_config.description or 'Tosoh Bioscience - Diagnostics EMEA Support Portal Registration' %}
+  {% set email_label = membership_register_template_config.email_label or 'Email Address' %}
+  {% set password_label = membership_register_template_config.password_label or 'Password' %}
+  {% set password_confirm_label = membership_register_template_config.password_confirm_label or 'Confirm Password' %}
+  {% set submit_button_text = membership_register_template_config.submit_button_text or 'Register' %}
+  {% set having_trouble_text = membership_register_template_config.having_trouble_text or 'Having trouble?' %}
+  {% set contact_admin_text = membership_register_template_config.contact_admin_text or 'Contact the admin.' %}
 
+  {% call macros.auth_wrapper(widget_data) %}
     {%
-      module_block module 'membership_admin_content'
-      label='Contact admin',
-      path='@hubspot/rich_text'
+      module "content"
+      path="@hubspot/rich_text",
+      html="<h2 class='font-semibold'>{{ title }}</h2><p class='mt-sm text-nickel text-xl'>{{ description }}</p>"
     %}
-
-      {% module_attribute 'html' %}
-        <br />
-        <p>
-          Having trouble?
-          <a href="{{ 'mailto:' ~ site_settings.membershipWebsiteAdmin }}">Contact the admin</a>
-          .
-        </p>
-      {% end_module_attribute %}
-    {% end_module_block %}
+    <div class="form-container">
+      {%
+        member_register "my_register"
+        email_label= '{{email_label}}',
+        password_confirm_label= '{{password_confirm_label}}',
+        password_label= '{{password_label}}',
+        submit_button_text= '{{submit_button_text}}'
+      %}
+    </div>
+    <div>
+      {%
+        module_block module "membership_admin_content"
+        label="Contact admin",
+        path="@hubspot/rich_text"
+      %}
+        {% module_attribute "html" %}
+          <p>
+            {{ having_trouble_text }}
+            <a href="{{ ("mailto:" ~ site_settings.membershipWebsiteAdmin)|escape_url }}">{{ contact_admin_text }}</a>
+          </p>
+        {% end_module_attribute %}
+      {% end_module_block %}
+    </div>
   {% endcall %}
 {% endblock %}

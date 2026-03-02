@@ -17,6 +17,9 @@
     width: 'full' | 'fit-content';
   } = $props();
 
+  const DIALOG_OPEN_DELAY_MS = 50;
+  const DIALOG_CLOSE_DELAY_MS = 300;
+
   let dialogEl: HTMLDialogElement | null = $state(null);
 
   function setModalActive() {
@@ -69,7 +72,7 @@
           dialogEl.showModal();
           window.addEventListener('keydown', escKeyHandler);
         }
-      }, 50);
+      }, DIALOG_OPEN_DELAY_MS);
     }
   });
 
@@ -82,7 +85,7 @@
           dialogEl.close();
           window.removeEventListener('keydown', escKeyHandler);
         }
-      }, 300);
+      }, DIALOG_CLOSE_DELAY_MS);
     }
   });
 
@@ -173,14 +176,13 @@
 
     > .overlay {
       position: fixed;
-      z-index: 100;
       inset: 0;
       display: block;
       width: 100vw;
       height: 100vh;
       opacity: 0;
       background: rgba(0, 0, 0, 0.174);
-      z-index: 12345;
+      z-index: var(--z-index-modal);
       pointer-events: none;
       transition: opacity 200ms ease-out;
 

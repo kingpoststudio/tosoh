@@ -10,6 +10,10 @@
 
   const menuJustification: 'center' | 'end' = window.Tosoh?.Header?.menuJustification || 'end';
 
+  const MENU_CLOSE_DELAY_MS = 300;
+  const SUBMENU_CLOSE_DELAY_MS = 150;
+  const ESTIMATED_SUBMENU_WIDTH_PX = 192;
+
   let activeMenuItem: number | null = $state(null);
   let activeSecondLevelItem: string | null = $state(null);
   let timeout: ReturnType<typeof setTimeout> | null = $state(null);
@@ -29,7 +33,7 @@
     timeout = setTimeout(() => {
       activeMenuItem = null;
       activeSecondLevelItem = null;
-    }, 300);
+    }, MENU_CLOSE_DELAY_MS);
   }
 
   function handleMenuMouseEnter() {
@@ -48,8 +52,7 @@
 
       // Estimate if a submenu on the right would overflow
       // Assuming submenu min-width is 12rem = ~192px
-      const estimatedMenuWidth = 192;
-      const wouldOverflow = rect.right + estimatedMenuWidth > viewportWidth - 10;
+      const wouldOverflow = rect.right + ESTIMATED_SUBMENU_WIDTH_PX > viewportWidth - 10;
 
       // Set the flipped state immediately
       const newFlipped = new Map(thirdLevelFlipped);
@@ -61,11 +64,10 @@
   function handleSecondLevelMouseLeave(itemId: string) {
     if (thirdLevelTimeout) clearTimeout(thirdLevelTimeout);
     thirdLevelTimeout = setTimeout(() => {
-      // Only hide if we're still showing this specific item's menu
       if (activeSecondLevelItem === itemId) {
         activeSecondLevelItem = null;
       }
-    }, 150);
+    }, SUBMENU_CLOSE_DELAY_MS);
   }
 
   function handleThirdLevelMouseEnter(itemId: string) {

@@ -14,6 +14,7 @@
     name,
     options,
     placeholder,
+    checkboxNoOptionsLabel = 'No options available.',
   }: {
     customClasses?: string;
     disabled: boolean;
@@ -21,9 +22,10 @@
     filter: TopicFilters['filters'][number];
     isLoading: boolean;
     labelPosition?: 'top' | 'left';
-    name: string | any;
+    name: string;
     options: any[];
     placeholder?: string;
+    checkboxNoOptionsLabel?: string;
   } = $props();
 </script>
 
@@ -49,6 +51,7 @@
         label={filter?.filter_label}
         {labelPosition}
         {displayLabel}
+        {checkboxNoOptionsLabel}
       />
     {/if}
     {#if filter?.type === 'range-pm'}

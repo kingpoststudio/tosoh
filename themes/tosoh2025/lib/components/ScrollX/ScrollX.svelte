@@ -25,10 +25,12 @@
   let dragStartX = $state(0);
   let dragStartScrollLeft = $state(0);
 
+  const MIN_THUMB_WIDTH_PX = 20;
+
   const canScroll = $derived(scrollWidth > clientWidth);
   const maxScrollLeft = $derived(scrollWidth - clientWidth);
   const scrollRatio = $derived(clientWidth / scrollWidth);
-  const thumbWidth = $derived(Math.max(trackWidth * scrollRatio, 20));
+  const thumbWidth = $derived(Math.max(trackWidth * scrollRatio, MIN_THUMB_WIDTH_PX));
   const thumbLeft = $derived(
     maxScrollLeft > 0 ? (scrollLeft / maxScrollLeft) * (trackWidth - thumbWidth) : 0
   );

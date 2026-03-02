@@ -6,6 +6,7 @@
   import { updateFormEvent } from '../../utils/formManager';
   import { USE_HARDCODED_IDS } from '../../utils/constants';
   import FilterForm from '../FiltersForm/FiltersForm.svelte';
+  import MagnifierIcon from '../icons/MagnifierIcon.svelte';
 
   import type { Search } from '../../../types/fields';
   const {
@@ -23,7 +24,7 @@
     disabled?: boolean;
     formId: string;
     isActivatedQuery?: boolean;
-    manualTableId?: string;
+    manualTableId?: string | number;
     onReset: (searchCb: () => void) => void;
     searchFromFields: Search;
   } = $props();
@@ -35,6 +36,7 @@
     placeholder,
     typeahead_enabled: typeaheadEnabled,
     enable_search: isSearchEnabled,
+    possible_results_label: possibleResultsLabel = 'Possible results',
   } = searchFromFields || {};
 
   // Extract column ID strings from the array of objects
@@ -155,24 +157,6 @@
   </svg>
 {/snippet}
 
-{#snippet magnifier()}
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="100%"
-    height="100%"
-    viewBox="0 0 23 23"
-    fill="none"
-  >
-    <path
-      d="M17.3528 17.8152L21.1977 21.6601M19.9831 11.0491C19.9831 13.5323 18.9966 15.9137 17.2408 17.6695C15.485 19.4254 13.1036 20.4118 10.6204 20.4118C8.13731 20.4118 5.75589 19.4254 4.00006 17.6695C2.24423 15.9137 1.25781 13.5323 1.25781 11.0491C1.25781 8.56603 2.24423 6.18461 4.00006 4.42877C5.75589 2.67294 8.13731 1.68652 10.6204 1.68652C13.1036 1.68652 15.485 2.67294 17.2408 4.42877C18.9966 6.18461 19.9831 8.56603 19.9831 11.0491Z"
-      stroke="#ED1A3A"
-      stroke-width="1.87252"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-    />
-  </svg>
-{/snippet}
-
 {#if isSearchEnabled}
   <FilterForm
     {onSubmit}
@@ -195,7 +179,7 @@
             bind:value={searchValue}
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
             name={columnIds[0]}
-            class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50"
+            class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:ring-1 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             placeholder={placeholder || 'Search here...'}
             {disabled}
           />
@@ -205,7 +189,8 @@
             {#if isLoading}
               {@render loader()}
             {:else}
-              {@render magnifier()}{/if}
+              <span class="text-imperial-red"><MagnifierIcon /></span>
+            {/if}
           </div>
         </div>
       </div>
@@ -213,14 +198,16 @@
       {#if showDropdown && matches.length > 0}
         <div
           transition:fade={{ duration: 100 }}
-          class="border-imperial-red border-1 mt-xs absolute left-0 z-10 max-h-[24rem] w-full overflow-y-auto rounded-lg bg-white shadow-md lg:max-w-[19.75rem]"
+          class="border-imperial-red mt-xs absolute left-0 z-10 max-h-[24rem] w-full overflow-y-auto rounded-lg border-1 bg-white shadow-md lg:max-w-[19.75rem]"
         >
-          <div class="p-sm border-shadow-white w-full border-b text-center">Possible results</div>
+          <div class="p-sm border-shadow-white w-full border-b text-center">
+            {possibleResultsLabel}
+          </div>
           {#each matches as match}
             {#if match}
               <button
                 type="button"
-                class="plain text-left! p-sm! w-full cursor-pointer break-all text-sm font-semibold hover:bg-red-50"
+                class="plain p-sm! w-full cursor-pointer text-left! text-sm font-semibold break-all hover:bg-red-50"
                 onclick={() => {
                   onClick(match);
                 }}

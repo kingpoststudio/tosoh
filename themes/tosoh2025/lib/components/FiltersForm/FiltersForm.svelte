@@ -1,5 +1,4 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
   import { onDestroy } from 'svelte';
   import { on } from 'svelte/events';
 
@@ -10,6 +9,8 @@
     type FormManagerInstance,
     type triggerType,
   } from '../../utils/formManager';
+
+  import type { Snippet } from 'svelte';
 
   let {
     children,
@@ -34,6 +35,8 @@
     trigger: triggerType;
     updateUrl?: boolean;
   } = $props();
+
+  const DEBOUNCE_DELAY_MS = 100;
 
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
@@ -79,7 +82,7 @@
         }
         initiateFormManager();
       }
-    }, 100);
+    }, DEBOUNCE_DELAY_MS);
   };
 
   const clickOutside = on(document, 'click', (event: MouseEvent) => {

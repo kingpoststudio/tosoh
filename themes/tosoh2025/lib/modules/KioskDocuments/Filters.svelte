@@ -3,7 +3,6 @@
   import { IS_MOCK, PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
-  import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
 
@@ -25,7 +24,7 @@
     getFilter,
     getFilterColumnIds,
     getFiltersTableId,
-    parseSearchColumnId,
+    parseSearchColumnIds,
   } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
@@ -36,8 +35,11 @@
 
   const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
   const searchFromFields = kioskDocumentsContent?.search;
-  const searchColumnId = parseSearchColumnId(searchFromFields);
+  const searchColumnIds = parseSearchColumnIds(searchFromFields);
   const searchTableId = PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID;
+
+  const filtersTitle = kioskDocumentsContent?.topic_filters?.filters_title;
+  const resetFiltersLabel = kioskDocumentsContent?.topic_filters?.reset_filters_label || 'Reset';
 
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
@@ -45,7 +47,7 @@
   );
 
   const topic_filters = kioskDocumentsContent?.topic_filters?.filters;
-  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', searchColumnIds) || [];
 
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
@@ -176,7 +178,7 @@
       const options: any = {};
 
       filtersFromFields.forEach((columnId: ColumnId) => {
-        if (columnId === searchColumnId) return;
+        if (searchColumnIds?.includes(columnId as string)) return;
 
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
@@ -194,11 +196,6 @@
       console.error('Error updating filter options:', error);
       allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
     }
-  };
-
-  const reloadFilterOptions = () => {
-    hasError = false;
-    fetchInitialData();
   };
 
   onMount(() => {
@@ -229,15 +226,10 @@
 {/snippet}
 
 <div
-  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
+  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[8rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
 >
-  {#if hasError}
-    <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />
-    <div class="pb-sm"></div>
-  {/if}
-
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}
   </div>
 
@@ -254,7 +246,7 @@
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
 
-      {#if searchColumnId !== columnId}
+      {#if !searchColumnIds?.includes(columnId as string)}
         <TopicFilter
           {filter}
           options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[
@@ -263,13 +255,14 @@
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
+          checkboxNoOptionsLabel={filter?.checkbox_no_options_label || 'No options available.'}
         />
       {/if}
     {/each}
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetFiltersLabel}
       </button>
     </div>
   </FilterForm>

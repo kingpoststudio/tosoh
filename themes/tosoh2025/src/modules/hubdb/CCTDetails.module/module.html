@@ -1,13 +1,28 @@
 {% set no_data_message = module.no_data_message %}
 {% set return_to_main_screen_message = module.return_to_main_screen_message %}
 
+{% set cct_instruments_table_id = module.cct_instruments_table_id %}
+{% set cct_comparison_table_id = module.cct_comparison_table_id %}
+{% set return_to_main_screen_path = module.return_to_main_screen_path %}
 {% set tosoh_instrument_name = request.query_dict.tosoh_instrument_name or "" %}
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name or "" %}
 
-{% set all_instruments = hubdb_table_rows("cct_instruments") %}
+{% set all_instruments = hubdb_table_rows(cct_instruments_table_id) %}
 
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %}
 {% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
+
+{# Dynamic Content Settings #}
+{% set dynamic_content_settings = module.dynamic_content_settings or {} %}
+{% set details_title = dynamic_content_settings.details_title or 'Details for' %}
+{% set versus_text = dynamic_content_settings.versus_text or 'versus' %}
+{% set reset_button_label = dynamic_content_settings.reset_button_label or 'Reset' %}
+{% set select_category_placeholder = dynamic_content_settings.select_category_placeholder or 'Select Category' %}
+{% set search_placeholder = dynamic_content_settings.search_placeholder or 'Search in table...' %}
+{% set first_part_of_matches_text = dynamic_content_settings.first_part_of_matches_text or 'of' %}
+{% set second_part_of_matches_text = dynamic_content_settings.second_part_of_matches_text or 'matches' %}
+
+
 
 {% set table_columns = [
     {label: "Category"},
@@ -22,10 +37,12 @@
   ] %}
 
 {% macro return_to_main_screen_button(instruments_are_selected) %}
-{% set href = instruments_are_selected ? "/cct?tosoh_instrument_name={{ tosoh_instrument_name }}&competitor_instrument_name={{ competitor_instrument_name }}" : "/cct" %}
+{% set href = instruments_are_selected ? "{{return_to_main_screen_path.url.href}}?tosoh_instrument_name={{ tosoh_instrument_name }}&competitor_instrument_name={{ competitor_instrument_name }}" : "{{return_to_main_screen_path.url.href}}" %}
 
   <a
   href="{{ href }}"
+  target="{{ return_to_main_screen_path.open_in_new_tab ? '_blank' : '_self' }}"
+  rel="{{ return_to_main_screen_path.rel}}"
   class="button plain text-nickel! mb-md w-fit! flex items-center transition-colors hover:text-gray-800">
   <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -36,16 +53,27 @@
  {% endmacro %}
 
 
-<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto mt-header-height flex flex-col">
+<div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
   {% if tosoh_instrument_name and competitor_instrument_name %}
 
-    {% set category_exclusion_filter = '&tosoh_instrument_name__eq='~tosoh_instrument_name~"&competitor_instrument_name__eq="~competitor_instrument_name~"&category__ne=General Comparison" %}
-    {% set comparison_rows = hubdb_table_rows("cct_comparison", category_exclusion_filter) %}
+    {% set category_exclusion_filter = '&tosoh_instrument_name__in='~tosoh_instrument_name~"&competitor_instrument_name__in="~competitor_instrument_name~"&category__ne=General Comparison" %}
+    {% set comparison_rows = hubdb_table_rows(cct_comparison_table_id, category_exclusion_filter) %}
 
       {% require_js position="head" %}
         <script>
         const comparisonRows = {{ comparison_rows|tojson }};
-        window.Tosoh.CCTDetails = { comparisonRows };
+        {# Dynamic Content Settings #}
+        const resetButtonLabel = {{ dynamic_content_settings.reset_button_label|tojson }};
+        const selectCategoryPlaceholder = {{ dynamic_content_settings.select_category_placeholder|tojson }};
+        const searchPlaceholder = {{ dynamic_content_settings.search_placeholder|tojson }};
+        const firstPartOfMatchesText = {{ dynamic_content_settings.first_part_of_matches_text|tojson }};
+        const secondPartOfMatchesText = {{ dynamic_content_settings.second_part_of_matches_text|tojson }};
+
+
+        console.log('{{ comparison_rows|tojson }}');
+
+
+        window.Tosoh.CCTDetails = { comparisonRows, resetButtonLabel, selectCategoryPlaceholder, searchPlaceholder, firstPartOfMatchesText, secondPartOfMatchesText };
         </script>
       {% end_require_js %}
 
@@ -53,7 +81,7 @@
       {{ return_to_main_screen_button(true) }}
 
       <h3 class="mb-sm text-3xl font-bold text-gray-900">
-        Details for {{ tosoh_instrument.product_name }} versus {{ competitor_instrument.product_name }}
+        {{ details_title }} TOSOH : {{ tosoh_instrument.product_name }} {{ versus_text }} {{ competitor_instrument.company.label }} : {{ competitor_instrument.product_name }}
       </h3>
       <div class="text-gray-600">{{ module.description }}</div>
     </div>

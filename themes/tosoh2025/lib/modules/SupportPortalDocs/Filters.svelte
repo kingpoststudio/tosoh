@@ -6,11 +6,9 @@
     DEFAULT_ACCESS_LEVEL,
     IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
-    PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
   } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
-  import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
   import type { FilterWithOptions, ColumnId } from '../../../types/hubdb';
@@ -20,7 +18,7 @@
     getFilter,
     getFilterColumnIds,
     getFiltersTableId,
-    parseSearchColumnId,
+    parseSearchColumnIds,
   } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
   import {
@@ -39,8 +37,11 @@
 
   const supportPortalDocsContent = window?.Tosoh?.SupportPortalDocsContent;
   const searchFromFields = supportPortalDocsContent?.search;
-  const searchColumnId = parseSearchColumnId(searchFromFields);
+  const searchColumnIds = parseSearchColumnIds(searchFromFields);
   const prodSupportPortalDocsTableId = PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID;
+
+  const filtersTitle = supportPortalDocsContent?.topic_filters?.filters_title;
+  const resetFiltersLabel = supportPortalDocsContent?.topic_filters?.reset_filters_label;
 
   const isSearchAccessLevelFilterEnabled =
     supportPortalDocsContent?.search?.is_access_level_filter_enabled || false;
@@ -48,7 +49,7 @@
   let accessLevel = supportPortalDocsContent?.access_level || DEFAULT_ACCESS_LEVEL;
 
   const topic_filters = supportPortalDocsContent?.topic_filters?.filters;
-  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', searchColumnIds) || [];
   const filtersTableId = getFiltersTableId(
     prodSupportPortalDocsTableId,
     supportPortalDocsContent?.topic_filters?.hubdb_table_id
@@ -185,7 +186,7 @@
       const options: any = {};
 
       filtersFromFields.forEach((columnId: ColumnId) => {
-        if (columnId === searchColumnId) return;
+        if (searchColumnIds?.includes(columnId as string)) return;
 
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
@@ -203,11 +204,6 @@
       console.error('Error updating filter options:', error);
       allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
     }
-  };
-
-  const reloadFilterOptions = () => {
-    hasError = false;
-    fetchInitialData();
   };
 
   onMount(() => {
@@ -238,14 +234,10 @@
 {/snippet}
 
 <div
-  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
+  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[8rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
 >
-  {#if hasError}
-    <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />
-    <div class="pb-sm"></div>
-  {/if}
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <p class="font-sans-narrow text-2xl font-semibold">{filtersTitle}</p>
     {@render filterIcon()}
   </div>
 
@@ -264,20 +256,21 @@
         columnId as string
       ) as TopicFilters['filters'][number]}
 
-      {#if searchColumnId !== columnId}
+      {#if !searchColumnIds?.includes(columnId as string)}
         <TopicFilter
           {filter}
           options={(allAvailableFiltersWithTheirOptions as FilterWithOptions)[columnId as ColumnId]}
           name={columnId}
           disabled={isParentLoading || isLoading || hasError}
           {isLoading}
+          checkboxNoOptionsLabel={filter?.checkbox_no_options_label || 'No options available.'}
         />
       {/if}
     {/each}
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetFiltersLabel}
       </button>
     </div>
   </FilterForm>

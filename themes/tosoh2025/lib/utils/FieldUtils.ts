@@ -4,6 +4,7 @@ import {
   groupField,
   hubDbTableField,
   imageField,
+  linkField,
   numberField,
   textField,
   urlField,
@@ -22,67 +23,188 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
   },
 });
 
+export const systemPageFields = [
+  textField('having_trouble_text', 'Having Trouble Text', {
+    default: 'Having trouble?',
+  }),
+  textField('contact_admin_text', 'Contact Admin Text', {
+    default: 'Contact the admin.',
+  }),
+];
+
+export const additionalConfSettingsFields = groupField(
+  'additional_conf_settings',
+  'Additional Configuration Settings',
+  {
+    children: [
+      groupField('results_settings', 'Results Settings', {
+        children: [
+          textField('no_results_label', 'No Results Label', {
+            default: 'No results found.',
+          }),
+        ],
+      }),
+      groupField('pagination_settings', 'Pagination Settings', {
+        children: [
+          textField('items_per_page_label', 'Items Per Page Label', {
+            default: 'Items per page:',
+          }),
+          textField('of_label', 'Of Label', {
+            default: 'of',
+          }),
+          textField('pages_label', 'Pages Label', {
+            default: 'pages',
+          }),
+          textField('page_label', 'Page Label', {
+            default: 'page',
+          }),
+          textField('items_label', 'Items Label', {
+            default: 'items',
+          }),
+          textField('item_label', 'Item Label', {
+            default: 'item',
+          }),
+        ],
+      }),
+    ],
+  }
+);
+
+export const errorCardFields = groupField('error_card', 'Error Card', {
+  children: [
+    textField('message', 'Message', {
+      default: 'An error occurred while loading the data.',
+    }),
+    textField('reload_in_label', 'Reload In Label', {
+      default: 'Reload in',
+    }),
+    textField('second_reload_label', 'Second Reload Label', {
+      default: 'seconds',
+    }),
+    textField('reload_label', 'Reload Label', {
+      default: 'Reload',
+    }),
+    textField('try_again_label', 'Try Again Label', {
+      default: 'Try again',
+    }),
+  ],
+});
+
+const topicFiltersBaseChildren = [
+  hubDbTableField('hubdb_table_id', 'Table', {
+    required: false,
+    inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
+  }),
+  textField('reset_filters_label', 'Reset Filters Label', {
+    default: 'Reset',
+  }),
+  groupField('filters', 'Filters', {
+    children: [
+      textField('filter_label', 'Filter Label'),
+      textField('hubdb_column_id', 'HubDB Column ID'),
+
+      choiceField('type', 'Type', {
+        id: 'filters.type',
+        choices: [
+          ['dropdown', 'Dropdown'],
+          ['checkbox', 'Checkbox'],
+          ['range-pm', 'Range (plus/minus)'],
+        ],
+      }),
+      textField('checkbox_no_options_label', 'Checkbox: No Options Label', {
+        default: 'No options available.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'checkbox',
+          operator: 'EQUAL',
+        },
+      }),
+      numberField('min', 'Minimum', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text: 'Determines the minimum value for the range inputs.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 0,
+      }),
+      numberField('max', 'Maximum', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text: 'Determines the maximum value for the range inputs.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 0,
+      }),
+      numberField('tolerance', '+/- Tolerance', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text:
+          "Determines the +/- tolerance. If the tolerance is zero (0), the search will yield results that contain the user's input within an RT min/max range <em>(i.e; RT range is 2.66 and 2.74, if user enters 2.71, it will be displayed)</em>.",
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 1,
+      }),
+    ],
+    occurrence: {
+      min: 0,
+      max: null,
+    },
+  }),
+];
+
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
-    hubDbTableField('hubdb_table_id', 'Table', {
-      required: false,
-      inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
     }),
-    groupField('filters', 'Filters', {
-      children: [
-        textField('filter_label', 'Filter Label'),
-        textField('hubdb_column_id', 'HubDB Column ID'),
-        choiceField('type', 'Type', {
-          id: 'filters.type',
-          choices: [
-            ['dropdown', 'Dropdown'],
-            ['checkbox', 'Checkbox'],
-            ['range-pm', 'Range (plus/minus)'],
-          ],
-        }),
-        numberField('min', 'Minimum', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text: 'Determines the minimum value for the range inputs.',
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 0,
-        }),
-        numberField('max', 'Maximum', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text: 'Determines the maximum value for the range inputs.',
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 0,
-        }),
-        numberField('tolerance', '+/- Tolerance', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text:
-            "Determines the +/- tolerance. If the tolerance is zero (0), the search will yield results that contain the user's input within an RT min/max range <em>(i.e; RT range is 2.66 and 2.74, if user enters 2.71, it will be displayed)</em>.",
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 1,
-        }),
-      ],
-      occurrence: {
-        min: 0,
-        max: null,
-      },
+    ...topicFiltersBaseChildren,
+  ],
+});
+
+export const topicFiltersNoTitle = groupField('topic_filters', 'Topic Filters', {
+  children: topicFiltersBaseChildren,
+});
+
+export const topicFiltersWithApplyButton = groupField('topic_filters', 'Topic Filters', {
+  children: [
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
     }),
+    textField('apply_button_label', 'Apply Button Label', {
+      default: 'Apply',
+    }),
+
+    ...topicFiltersBaseChildren,
+  ],
+});
+
+export const topicFiltersWithViewAs = groupField('topic_filters', 'Topic Filters', {
+  children: [
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
+    }),
+    textField('view_as_label', 'View As Label', {
+      default: 'View As',
+    }),
+    textField('grid_label', 'Grid Label', {
+      default: 'Grid',
+    }),
+    textField('list_label', 'List Label', {
+      default: 'List',
+    }),
+    ...topicFiltersBaseChildren,
   ],
 });
 
@@ -101,6 +223,10 @@ export const searchField = (extraFields: any = []) => {
       hubDbTableField('hubdb_table_id', 'HubDB Table', {
         required: true,
         inline_help_text: 'Defines the hubDB table that will be used to search against.',
+        ...searchVisibilityRule,
+      }),
+      textField('possible_results_label', 'Possible Results Label', {
+        default: 'Possible results',
         ...searchVisibilityRule,
       }),
       groupField('hubdb_column_ids', 'HubDB Column IDs', {
@@ -137,6 +263,8 @@ export const limitedSizeChoices = [
   ['base', 'Base'],
   ['md', 'Medium'],
   ['lg', 'Large'],
+  ['xl', 'Extra-large'],
+  ['2xl', '2X-large'],
 ];
 
 export const sizeChoices = [
@@ -524,6 +652,17 @@ export const documentTypeChoices: string[][] = [
 ];
 
 export const lockedGroupFields = [
+  linkField('login_link', 'Login Link', {
+    inline_help_text: 'URL that will point to the login page when the document is locked.',
+    default: {
+      url: {
+        content_id: null,
+        href: '/_hcms/mem/login',
+      },
+      open_in_new_tab: false,
+      no_follow: false,
+    },
+  }),
   textField('locked_message', 'Locked Message', {
     default: 'Login to unlock and download this file',
   }),
@@ -536,19 +675,12 @@ export const relatedDocumentsSharedFields = [
   groupField('tab_group_columns', 'Tab Group Columns', {
     children: [
       textField('column_label', 'Column Label'),
-      urlField('url', 'URL', {
-        inline_help_text:
-          'URL that will point to another page on the site. If url is provided, the tab group button will act as a link. ',
-      }),
       groupField('documents', 'Documents', {
         children: [
           textField('document_name', 'Document Name'),
           textField('document_description', 'Document Description'),
           imageField('document_image', 'Document Image'),
-          urlField('document_url', 'Document URL', {
-            inline_help_text:
-              'URL that will point to another page on the site. If url is provided, the tab group button will act as a link. ',
-          }),
+          linkField('document_url', 'Document URL'),
           choiceField('document_type', 'Document Type', {
             choices: documentTypeChoices,
             default: 'PDF',
