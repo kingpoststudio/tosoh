@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
-
+  import LanguagePicker from './components/LanguagePicker.svelte';
   const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
   const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
   const hasAuxiliaryMenu =
@@ -190,6 +190,7 @@
     </nav>
 
     <div class="aux">
+      <LanguagePicker />
       {#if auxiliaryMenu}
         {#each auxiliaryMenu.children ?? [] as item}
           {@render navItem(item)}
@@ -206,6 +207,8 @@
 </div>
 
 <style lang="postcss">
+  @import 'tailwindcss';
+
   * {
     box-sizing: border-box;
     margin: 0;
@@ -328,17 +331,16 @@
           }
         }
 
-
-         &:last-child {
-         > .dropdown {
-          max-width: 16rem;
-           }
-         }
-         &:nth-last-child(2) {
+        &:last-child {
+          > .dropdown {
+            max-width: 16rem;
+          }
+        }
+        &:nth-last-child(2) {
           > .dropdown {
             max-width: 18rem;
           }
-         }
+        }
         /* Dropdown menu */
         > .dropdown {
           position: absolute;
