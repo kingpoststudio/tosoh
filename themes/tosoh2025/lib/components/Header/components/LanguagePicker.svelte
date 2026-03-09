@@ -35,10 +35,22 @@
       aria-haspopup="listbox"
       onclick={toggle}
     >
-      <svg class="globe" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <svg
+        class="globe"
+        width="14"
+        height="14"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
         <circle cx="12" cy="12" r="10" />
         <path d="M2 12h20" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+        <path
+          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+        />
       </svg>
       {currentLanguage}
       <svg width="10" height="6" viewBox="0 0 10 6" fill="none" class="chevron" class:open>
@@ -69,6 +81,7 @@
 <style lang="postcss">
   .language-picker {
     position: relative;
+    width: fit-content;
   }
 
   .language-trigger {
@@ -78,20 +91,29 @@
     border-radius: 0.25rem;
     padding: 0.25rem 0.5rem;
     font-size: 0.85rem;
-    color: var(--color-zinc-900);
+    color: var(--color-imperial-red);
     cursor: pointer;
+    width: fit-content;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    transition: border-color 200ms ease-in-out;
+    transition:
+      border-color 200ms ease-in-out,
+      color 200ms ease-in-out;
 
     &:hover {
       border-color: var(--color-imperial-red);
+      color: var(--color-raisin-black);
     }
 
     &:focus {
       outline: none;
       border-color: var(--color-imperial-red);
+      color: var(--color-raisin-black);
+    }
+
+    @media (min-width: 768px) {
+      margin-top: 0;
     }
   }
 
@@ -117,7 +139,7 @@
     border: 1px solid var(--color-zinc-300);
     border-radius: 0.25rem;
     list-style: none;
-    min-width: 100%;
+    width: 100%;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     z-index: 100;
 

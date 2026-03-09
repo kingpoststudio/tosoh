@@ -190,12 +190,12 @@
     </nav>
 
     <div class="aux">
-      <LanguagePicker />
       {#if auxiliaryMenu}
         {#each auxiliaryMenu.children ?? [] as item}
           {@render navItem(item)}
         {/each}
       {/if}
+      <LanguagePicker />
     </div>
 
     {#if hasCTAs}

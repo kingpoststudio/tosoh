@@ -3,6 +3,7 @@
   import { on } from 'svelte/events';
   import { fade, slide, fly } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
+  import LanguagePicker from './components/LanguagePicker.svelte';
 
   let menu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
   let auxiliaryMenu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.auxiliaryMenu || {});
@@ -63,7 +64,12 @@
   <li class="item level-{level}">
     <div class="content">
       {#if item.url}
-        <a href={item.url} class="link" target={item?.linkTarget || '_self'} onclick={handleLinkClick}>
+        <a
+          href={item.url}
+          class="link"
+          target={item?.linkTarget || '_self'}
+          onclick={handleLinkClick}
+        >
           {@html item.label}
         </a>
       {:else}
@@ -175,8 +181,11 @@
         {#if auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0}
           <div class="aux">
             {#each auxiliaryMenu.children ?? [] as item}
-              <a href={item.url} class="link" target={item?.linkTarget || '_self'}>{@html item.label}</a>
+              <a href={item.url} class="link" target={item?.linkTarget || '_self'}
+                >{@html item.label}</a
+              >
             {/each}
+            <LanguagePicker />
           </div>
         {/if}
       </div>
