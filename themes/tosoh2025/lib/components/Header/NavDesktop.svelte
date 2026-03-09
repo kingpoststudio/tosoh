@@ -498,6 +498,8 @@
       position: relative;
       color: inherit;
       transition: color 200ms ease-in-out;
+      display: flex;
+      align-items: center;
 
       &:hover {
         color: var(--color-black-charcoal);
