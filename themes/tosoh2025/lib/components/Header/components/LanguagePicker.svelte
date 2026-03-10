@@ -89,15 +89,15 @@
     appearance: none;
     background: transparent;
     border: 1px solid var(--color-slate-200);
-    border-radius: 0.25rem;
-    padding: 0.25rem 0.5rem;
+    border-radius: var(--spacing-2xs);
+    padding: var(--spacing-2xs) var(--spacing-xs);
     font-size: var(--spacing-base);
     color: var(--color-imperial-red);
     cursor: pointer;
     width: fit-content;
     display: inline-flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: var(--spacing-2xs);
     transition:
       border-color 200ms ease-in-out,
       color 200ms ease-in-out;
@@ -135,20 +135,20 @@
     top: 100%;
     left: 0;
     margin-top: 0.25rem;
-    padding: 0.25rem 0;
+    padding: var(--spacing-2xs) 0;
     background: white;
     border: 1px solid var(--color-slate-200);
-    border-radius: 0.25rem;
+    border-radius: var(--spacing-2xs);
     list-style: none;
     width: 100%;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 var(--spacing-2xs) var(--spacing-sm) rgba(0, 0, 0, 0.1);
     z-index: 100;
 
     li button {
       all: unset;
       display: block;
       width: 100%;
-      padding: 0.35rem 0.65rem;
+      padding: var(--spacing-2xs) var(--spacing-xs);
       font-size: var(--spacing-base);
       color: var(--color-zinc-900);
       cursor: pointer;
