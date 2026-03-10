@@ -27,7 +27,7 @@
 
 <svelte:document onclick={handleClickOutside} />
 
-{#if variants}
+{#if variants?.length > 0}
   <div class="language-picker" bind:this={pickerRef}>
     <button
       type="button"
@@ -140,6 +140,7 @@
     border: 1px solid var(--color-slate-200);
     border-radius: var(--spacing-2xs);
     list-style: none;
+    max-width: fit-content;
     width: 100%;
     box-shadow: 0 var(--spacing-2xs) var(--spacing-sm) rgba(0, 0, 0, 0.1);
     z-index: 100;
@@ -154,6 +155,9 @@
       cursor: pointer;
       white-space: nowrap;
       box-sizing: border-box;
+      &:first-letter {
+        text-transform: uppercase;
+      }
 
       &:hover {
         background: var(--color-slate-100);
