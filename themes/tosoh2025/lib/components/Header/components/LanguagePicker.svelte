@@ -2,6 +2,7 @@
   import { getLanguage } from '../../../utils/utils';
 
   const translatedContent = window.Tosoh?.TranslatedContent;
+  const variants = translatedContent?.variants ?? [];
   const currentLanguage = translatedContent?.currentLanguage;
 
   let open = $state(false);
@@ -26,7 +27,7 @@
 
 <svelte:document onclick={handleClickOutside} />
 
-{#if translatedContent}
+{#if variants}
   <div class="language-picker" bind:this={pickerRef}>
     <button
       type="button"
@@ -66,7 +67,7 @@
 
     {#if open}
       <ul class="language-options" role="listbox">
-        {#each translatedContent.variants ?? [] as item}
+        {#each variants as item}
           <li role="option" aria-selected={item.language === currentLanguage}>
             <button type="button" onclick={() => select(item.absoluteUrl)}>
               {getLanguage(item.language)}
@@ -87,10 +88,10 @@
   .language-trigger {
     appearance: none;
     background: transparent;
-    border: 1px solid var(--color-zinc-300);
+    border: 1px solid var(--color-slate-200);
     border-radius: 0.25rem;
     padding: 0.25rem 0.5rem;
-    font-size: 0.85rem;
+    font-size: var(--spacing-base);
     color: var(--color-imperial-red);
     cursor: pointer;
     width: fit-content;
@@ -136,7 +137,7 @@
     margin-top: 0.25rem;
     padding: 0.25rem 0;
     background: white;
-    border: 1px solid var(--color-zinc-300);
+    border: 1px solid var(--color-slate-200);
     border-radius: 0.25rem;
     list-style: none;
     width: 100%;
@@ -148,14 +149,14 @@
       display: block;
       width: 100%;
       padding: 0.35rem 0.65rem;
-      font-size: 0.85rem;
+      font-size: var(--spacing-base);
       color: var(--color-zinc-900);
       cursor: pointer;
       white-space: nowrap;
       box-sizing: border-box;
 
       &:hover {
-        background: var(--color-zinc-100, #f4f4f5);
+        background: var(--color-slate-100);
       }
     }
   }

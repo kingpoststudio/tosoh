@@ -13,7 +13,7 @@
     name,
     options,
     placeholder,
-    customClasses,
+    customClasses = '',
     value = $bindable(),
   }: {
     customClearFilter?: () => void;
@@ -37,7 +37,9 @@
   <div class={`gap-sm flex h-full ${labelPosition === 'top' ? 'flex-col' : 'flex-row'}`}>
     {#if displayLabel}
       <div class="gap-sm flex items-center">
-        <label for={name} class="text-lg font-semibold">{label ? label : setupFilterTitle(name)}</label>
+        <label for={name} class="text-lg font-semibold"
+          >{label ? label : setupFilterTitle(name)}</label
+        >
         {#if customClearFilter && activeFilter}
           <button
             type="button"
