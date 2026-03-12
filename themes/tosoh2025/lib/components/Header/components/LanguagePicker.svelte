@@ -8,21 +8,21 @@
   let open = $state(false);
   let pickerRef: HTMLDivElement | undefined = $state();
 
-  function select(url: string) {
+  const select = (url: string) => {
     open = false;
     window.location.href = url;
-  }
+  };
 
-  function handleClickOutside(e: MouseEvent) {
+  const handleClickOutside = (e: MouseEvent) => {
     if (pickerRef && !pickerRef.contains(e.target as Node)) {
       open = false;
     }
-  }
+  };
 
-  function toggle(e: MouseEvent) {
+  const toggle = (e: MouseEvent) => {
     e.stopPropagation();
     open = !open;
-  }
+  };
 </script>
 
 <svelte:document onclick={handleClickOutside} />
@@ -140,7 +140,6 @@
     border: 1px solid var(--color-slate-200);
     border-radius: var(--spacing-2xs);
     list-style: none;
-    max-width: fit-content;
     width: 100%;
     box-shadow: 0 var(--spacing-2xs) var(--spacing-sm) rgba(0, 0, 0, 0.1);
     z-index: 100;

@@ -11,18 +11,24 @@
   let expandedItems: Set<string> = $state(new Set());
 
   function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      closeMenu();
     } else {
-      document.body.style.overflow = '';
+      isMenuOpen = true;
+      document.body.style.overflow = 'hidden';
     }
   }
 
+  const TRANSITION_DURATION = 300;
+
   function closeMenu() {
     isMenuOpen = false;
-    document.body.style.overflow = '';
     expandedItems.clear();
+    setTimeout(() => {
+      if (!isMenuOpen) {
+        document.body.style.overflow = '';
+      }
+    }, TRANSITION_DURATION);
   }
 
   function toggleSubmenu(itemPath: string, event: Event) {
@@ -120,24 +126,27 @@
       <svelte:element this={'slot'} name="logo" />
     </button>
 
-    <button
-      class="hamburger"
-      onclick={toggleMenu}
-      aria-expanded={isMenuOpen}
-      aria-label="Toggle navigation menu"
-    >
-      <div class:open={isMenuOpen}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </button>
+    <div class="language-hamburger-wrapper">
+      <LanguagePicker />
+      <button
+        class="hamburger"
+        onclick={toggleMenu}
+        aria-expanded={isMenuOpen}
+        aria-label="Toggle navigation menu"
+      >
+        <div class:open={isMenuOpen}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
   </div>
 
   {#if isMenuOpen}
     <div
       class="overlay"
-      transition:fade={{ duration: 200 }}
+      transition:fade={{ duration: TRANSITION_DURATION }}
       onclick={closeMenu}
       onkeydown={(e) => e.key === 'Enter' && closeMenu()}
       role="button"
@@ -146,7 +155,7 @@
     >
       <div
         class="menu"
-        transition:fly={{ duration: 300, x: -300 }}
+        transition:fly={{ duration: TRANSITION_DURATION, x: -300 }}
         onclick={(e) => e.stopPropagation()}
         onkeydown={(e) => e.stopPropagation()}
         role="dialog"
@@ -185,7 +194,6 @@
                 >{@html item.label}</a
               >
             {/each}
-            <LanguagePicker />
           </div>
         {/if}
       </div>
@@ -237,6 +245,7 @@
       align-items: center;
       justify-content: center;
       padding: 0;
+      flex-shrink: 0;
       background: transparent;
       border: none;
       cursor: pointer;
@@ -281,6 +290,13 @@
         stroke-width: 0.125rem;
       }
     }
+
+    .language-hamburger-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      flex-direction: row;
+    }
   }
 
   /* Mobile Menu Overlay */
@@ -292,6 +308,8 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     z-index: var(--z-index-overlay);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 
     &:focus-within {
       .menu {
@@ -310,6 +328,9 @@
       overflow-y: auto;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
 
       /* Mobile-specific optimizations */
       @media (max-width: 30rem) {
