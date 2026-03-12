@@ -39,29 +39,29 @@ export const additionalConfSettingsFields = groupField(
     children: [
       groupField('results_settings', 'Results Settings', {
         children: [
-          textField('no_results_label', 'No Results Label', {
+          textField('no_results_label', 'No Results Found: Text', {
             default: 'No results found.',
           }),
         ],
       }),
       groupField('pagination_settings', 'Pagination Settings', {
         children: [
-          textField('items_per_page_label', 'Items Per Page Label', {
+          textField('items_per_page_label', 'Items Per Page: Text', {
             default: 'Items per page:',
           }),
-          textField('of_label', 'Of Label', {
+          textField('of_label', 'Of: Text', {
             default: 'of',
           }),
-          textField('pages_label', 'Pages Label', {
+          textField('pages_label', 'Pages: Text', {
             default: 'pages',
           }),
-          textField('page_label', 'Page Label', {
+          textField('page_label', 'Page: Text', {
             default: 'page',
           }),
-          textField('items_label', 'Items Label', {
+          textField('items_label', 'Items: Text', {
             default: 'items',
           }),
-          textField('item_label', 'Item Label', {
+          textField('item_label', 'Item: Text', {
             default: 'item',
           }),
         ],
