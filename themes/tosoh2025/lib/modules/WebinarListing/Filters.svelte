@@ -24,7 +24,7 @@
     getFilter,
     getFilterColumnIds,
     getFiltersTableId,
-    parseSearchColumnId,
+    parseSearchColumnIds,
   } from '../../utils/utils';
   import type { TopicFilters } from '../../../types/fields';
   import { resetPaginationAndFetchDataEvent } from '../../utils/paginationAndLimitUtils';
@@ -42,10 +42,12 @@
 
   const areFiltersEnabled = topicFilters?.length > 0;
   const searchFromFields = webinarListingsWindow?.search;
-  const searchColumnId = parseSearchColumnId(searchFromFields);
-  const filtersArray = getFilterColumnIds(topicFilters, 'all', [searchColumnId]) || [];
+  const searchColumnIds = parseSearchColumnIds(searchFromFields);
+  const filtersArray = getFilterColumnIds(topicFilters, 'all', searchColumnIds) || [];
 
   const toleranceConfig = extractToleranceConfig(topicFilters || []);
+
+  const resetFiltersLabel = webinarListingsWindow?.topic_filters?.reset_filters_label || 'Reset';
 
   let allAvailableFiltersWithTheirOptions: FilterWithOptions | {} = $state({});
   let isLoading = $state(false);
@@ -176,7 +178,7 @@
       const options: any = {};
 
       filtersArray.forEach((columnId: ColumnId) => {
-        if (columnId === searchColumnId) return;
+        if (searchColumnIds?.includes(columnId as string)) return;
 
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
@@ -241,10 +243,11 @@
             labelPosition="left"
             displayLabel={false}
             customClasses="min-w-[16rem] h-full"
+            checkboxNoOptionsLabel={filter?.checkbox_no_options_label || 'No options available.'}
           />
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">
-          Reset Filters
+          {resetFiltersLabel}
         </button>
       </div>
     </FilterForm>

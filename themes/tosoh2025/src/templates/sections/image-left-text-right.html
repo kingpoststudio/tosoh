@@ -1,0 +1,82 @@
+<!--
+  templateType: section
+  label: Image Left Text Right
+  description: "A section with an image column on the left and a content column on the right."
+  isAvailableForNewContent: true
+  screenshotPath: /TosohTheme2025/images/sections/image-left-text-right.png
+-->
+
+{% dnd_section %}
+  {% dnd_column %}
+    {% dnd_row %}
+      {%
+        dnd_module path="../../modules/FlexColumns.module", offset=0, width=12,
+        fields={
+          module_settings: {
+            text_color: "text-default",
+            gap: "gap-md",
+            overflow_scroll_x: false,
+            is_reversed_mobile: false,
+            pb_desktop: "md:pb-xl"
+          },
+          columns: [
+            {
+              type: "image",
+              image: {
+                type: "single",
+                image: {
+                  src: "{{ get_asset_url('../../images/customer-service.jpg') }}",
+                  alt: "customer-service"
+                },
+                is_image_contained: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
+                }
+              },
+              column_settings: {
+                flex_factor: 0,
+                column_size: "w-6xl",
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
+              }
+            },
+            {
+              type: "content",
+              content: {
+                text_align: "text-left",
+                horizontal_align: "items-start",
+                description: "<h6><span style=\"color: #000000;\"><strong>Our devoted customer service team efficiently acts to</strong></span></h6><ul><li>Take your order</li><li>Manage order preparation</li><li>Organise stock management</li><li>Plan the shipping delivery</li><li>Handle administration</li></ul><p>&nbsp;</p><h6><span style=\"color: #000000;\"><strong>Our skilled technical and application engineers</strong></span></h6><ul><li>Provide accurate solutions to your needs</li><li>Are regularly trained to be up-to-date and enable quick reactions</li><li>Benefit of new technologies to support remotely and on-site an instrument uptime in excess of 99%</li></ul><p>&nbsp;</p><h3><strong><span style=\"color: #ed1a3b;\">NPS = 80%</span></strong></h3><p>&nbsp;</p><p>With a Net Promoter Score* of 80%, our customers prove to be very satisfied with the unique Tosoh customer service and support.</p><p><br>*<span>&nbsp;</span><em>Net Promoter Score (NPS) is a metric that organisations use to measure customer loyalty towards their brand, product or service.</em></p>",
+                is_cta: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
+                }
+              },
+              column_settings: {
+                flex_factor: 0,
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
+              }
+            }
+          ]
+        }
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+{% end_dnd_section %}

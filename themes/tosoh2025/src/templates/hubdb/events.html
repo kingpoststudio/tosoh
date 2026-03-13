@@ -23,6 +23,16 @@
 
 {% block body %}
 
+  {# Config Settings #}
+  {% set config_settings = widget_data.global_config_settings %}
+  {% set events_template_config = config_settings.events_template_config %}
+  {% set events_page_link = events_template_config.events_page_link or {url:{href: '/events'}} %}
+  {% set about_this_event_title = events_template_config.about_this_event_title or 'About this event' %}
+  {% set load_more_label = events_template_config.load_more_label or 'Load More' %}
+  {% set no_results_found_title = events_template_config.no_results_found_title or 'No results found.' %}
+  {% set no_results_found_description = events_template_config.no_results_found_description or 'Please try another selection.' %}
+  {% set view_details_label = events_template_config.view_details_label or 'View Details' %}
+
   {% set event = dynamic_page_hubdb_row %}
 
   {# Event: View #}
@@ -31,7 +41,7 @@
     {# If Event is deactivated, immediately redirect to listing. #}
     {% if event.deactivate %}
       <script>
-        window.location.href = '/events';
+        window.location.href = '{{ events_page_link.url.href }}';
       </script>
     {% endif %}
 
@@ -42,7 +52,7 @@
         <div class="gap-md max-w-max-page p-md md:pl-2xl md:pr-2xl m-auto flex flex-col md:flex-row">
           {% if event.event_details %}
             <div class="gap-sm flex w-full flex-col items-start">
-              <h3 class="font-sans-narrow font-semibold">About this event</h3>
+              <h3 class="font-sans-narrow font-semibold">{{ about_this_event_title }}</h3>
               <div>{{ event.event_details }}</div>
               <div class="gap-base flex flex-col md:flex-row">
                 {% if event.cta_title and event.cta_url %}
@@ -63,8 +73,10 @@
             title="Related Events"
             exclude_event_id='{{ event.hs_id }}'
             eyebrow="Tosoh Events"
-            include_by_type='{{ event.event_type.name }}'
             path="/TosohTheme2025/modules/hubdb/RelatedEvents"
+            events_table_id="{{ events_template_config.events_table_id }}"
+            view_details_label="{{ view_details_label }}"
+            events_page_link="{{ events_page_link }}"
           %}
         </div>
       </div>
@@ -118,21 +130,21 @@
               <div class="gap-base mx-auto grid w-full grid-cols-1 justify-center md:grid-cols-2 xl:grid-cols-4">
                 {% for row in group %}
                   {% if row %}
-                    {{ macros.render_event_card(row, false) }}
+                    {{ macros.render_event_card(row, false, view_details_label, events_page_link) }}
                   {% endif %}
                 {% endfor %}
               </div>
               {% if not loop.last %}
                 <tosoh-reveal-group variant="action" groupId="{{ groupIndex + 1 }}" class="mt-lg mx-auto block w-fit">
-                  <button>Load more</button>
+                  <button>{{ load_more_label }}</button>
                 </tosoh-reveal-group>
               {% endif %}
             </tosoh-reveal-group>
           {% endfor %}
         {% else %}
           <div class="gap-sm flex flex-col items-center">
-            <h3>No results found.</h3>
-            <h5>Please try another selection.</h5>
+            <h3>{{ no_results_found_title }}</h3>
+            <h5>{{ no_results_found_description }}</h5>
           </div>
         {% endif %}
       </div>

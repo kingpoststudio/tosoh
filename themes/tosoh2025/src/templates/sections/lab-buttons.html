@@ -1,0 +1,171 @@
+<!--
+  templateType: section
+  label: Lab Buttons
+  description: "A section with a list of decorated buttons."
+  isAvailableForNewContent: true
+  screenshotPath: /TosohTheme2025/images/sections/lab-buttons.png
+-->
+
+{% dnd_section %}
+  {% dnd_column %}
+    {% dnd_row %}
+      {%
+        dnd_module path="../../modules/LabButtons.module", offset=0, width=12,
+        fields={
+          enable_headline: false,
+          grid_rows: [
+            {
+              lab_buttons: [
+                {
+                  button_label: "Cardiac",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/CARDIAC.jpg') }}",
+                    alt: "CARDIAC"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "large"
+                },
+                {
+                  button_label: "Diabetes",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Diabetes.jpg') }}",
+                    alt: "Diabetes"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "small"
+                },
+                {
+                  button_label: "Fertility",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/fertility2.jpg') }}",
+                    alt: "fertility2"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "large"
+                }
+              ]
+            },
+            {
+              lab_buttons: [
+                {
+                  button_label: "Tumour",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Tumour.jpg') }}",
+                    alt: "Tumour"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "large"
+                },
+                {
+                  button_label: "Thyroid",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Thyroid.jpg') }}",
+                    alt: "Thyroid"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "small"
+                }
+              ]
+            },
+            {
+              lab_buttons: [
+                {
+                  button_label: "Emergency",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Emergency.jpg') }}",
+                    alt: "Emergency"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "large"
+                },
+                {
+                  button_label: "Anaemia",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Anaemia.jpg') }}",
+                    alt: "Anaemia"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "large"
+                },
+                {
+                  button_label: "Infectious",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Infectious.jpg') }}",
+                    alt: "Infectious"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "medium"
+                }
+              ]
+            },
+            {
+              lab_buttons: [
+                {
+                  button_label: "Sepsis",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Sepsis.jpg') }}",
+                    alt: "Sepsis"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "small"
+                },
+                {
+                  button_label: "Metabolism",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/metabolism.jpg') }}",
+                    alt: "metabolism"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "large"
+                },
+                {
+                  button_label: "Lung Function",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Lung.jpg') }}",
+                    alt: "Lung"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "small"
+                }
+              ]
+            },
+            {
+              lab_buttons: [
+                {
+                  button_label: "Allergy",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/Allergy.jpg') }}",
+                    alt: "Allergy"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "medium"
+                },
+                {
+                  button_label: "Bone",
+                  image: {
+                        src: "{{ get_asset_url('../../images/pathology/bone.jpg') }}",
+                    alt: "bone"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "small"
+                },
+                {
+                  button_label: "Others",
+                  image: {
+                    src: "{{ get_asset_url('../../images/pathology/others.jpg') }}",
+                    alt: "others"
+                  },
+                  bracket_color: "fill-imperial-red",
+                  size: "small"
+                }
+              ]
+            }
+          ],
+          display_footnote: true,
+          footnote: "<p>Depending on the assay,&nbsp;<strong>the results of AIA-CL series reagents&nbsp;</strong><strong>can be obtained between 15 minutes (for the majority of&nbsp;</strong><strong>analytes) to 35 minutes.</strong>&nbsp;In spite of the compactness of the AIA-CL300, the results accuracy and precision are equivalent to the already existing AIA-CL1200 and AIA-CL2400 instruments.</p>"
+        }
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+{% end_dnd_section %}

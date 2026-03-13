@@ -1,5 +1,10 @@
-import { groupField, textField, hubDbTableField, booleanField } from 'hs-fieldkit';
-import { searchField, topicFilters } from '../../../../lib/utils/fieldUtils';
+import { groupField, textField } from 'hs-fieldkit';
+import {
+  errorCardFields,
+  additionalConfSettingsFields,
+  searchField,
+  topicFiltersNoTitle,
+} from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -23,8 +28,9 @@ const generateFields = () => {
     }),
 
     searchField(),
-    topicFilters,
-
+    topicFiltersNoTitle,
+    errorCardFields,
+    additionalConfSettingsFields,
     groupField('advanced', 'Advanced', {
       children: [
         textField('filter_by_topic', 'Filter By Topic', {

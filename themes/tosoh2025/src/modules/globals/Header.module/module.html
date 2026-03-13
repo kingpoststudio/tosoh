@@ -9,7 +9,7 @@
   'italian_microsite': module.italian_microsite,
   'internal': module.internal
 } %}
-{% set active_configuration = config_map[config_settings.selected_configuration] %}
+{% set active_configuration = config_map[config_settings.selected_configuration || 'default'] %}
 
 {% set active_configuration_menu =  header_overrides.menu ? menu(header_overrides.menu) : menu(active_configuration.menu) %}
 {% set active_configuration_menu_json = active_configuration_menu|tojson %}
@@ -22,6 +22,8 @@
 {% set active_logo_alt = active_configuration.logo.alt or 'Tosoh' %}
 {% set active_ctas = header_overrides.ctas ? header_overrides.ctas : active_configuration.ctas %}
 {% set menu_justification = header_overrides.menu_justification or module.menu_justification or 'end' %}
+
+{% set is_language_switcher_enabled = header_overrides.is_language_switcher_enabled or false %}
 
 {% set active_portal_access = active_configuration.portal_access %}
 
@@ -39,7 +41,8 @@
     window.Tosoh.Header = {
       mainNavigationMenu: {{ active_configuration_menu_json }},
       auxiliaryMenu: {{ active_auxiliary_menu_json }},
-      menuJustification: '{{ menu_justification }}'
+      menuJustification: '{{ menu_justification }}',
+      isLanguageSwitcherEnabled: {{ is_language_switcher_enabled }}
     };
   </script>
 {% end_require_js %}

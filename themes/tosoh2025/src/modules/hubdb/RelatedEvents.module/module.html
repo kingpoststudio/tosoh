@@ -1,8 +1,14 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 
-{% set all_events = hubdb_table_rows("events",'&deactivate__eq=false') %}
+{% set all_events = hubdb_table_rows(module.events_table_id, '&deactivate__eq=false') %}
 {% set filtered_events = module.exclude_event_id ? all_events|selectattr('hs_id', 'ne', module.exclude_event_id): all_events %}
 {% set filtered_by_type = module.include_by_type ? filtered_events|selectattr('event_type.name', 'eq', module.include_by_type): filtered_events %}
+
+{# Config Settings #}
+{% set view_details_label = module.view_details_label or 'View Details' %}
+{% set events_page_link = module.events_page_link or {url:{href: '/events'}} %}
+
+{{  }}
 
 {% if filtered_by_type|length > 0 %}
   <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
@@ -23,7 +29,7 @@
       <div class="embla py-sm w-full overflow-hidden">
         <div class="embla__container gap-sm flex items-stretch active:cursor-grabbing">
           {% for event in filtered_by_type %}
-            {{ macros.render_event_card(event, true) }}
+            {{ macros.render_event_card(event, true, view_details_label, events_page_link) }}
           {% endfor %}
         </div>
       </div>

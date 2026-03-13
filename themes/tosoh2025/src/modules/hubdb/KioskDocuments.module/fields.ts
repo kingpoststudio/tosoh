@@ -1,5 +1,11 @@
 import { groupField, textField, booleanField, formField } from 'hs-fieldkit';
-import { breadCrumbField, searchField, topicFilters } from '../../../../lib/utils/fieldUtils';
+import {
+  additionalConfSettingsFields,
+  breadCrumbField,
+  errorCardFields,
+  searchField,
+  topicFilters,
+} from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -18,6 +24,15 @@ const generateFields = () => {
     }),
     searchField(),
     topicFilters,
+    groupField('card_configuration', 'Card Configuration', {
+      children: [
+        textField('view_details_label', 'View Details Label', {
+          default: 'View Details',
+        }),
+      ],
+    }),
+    errorCardFields,
+    additionalConfSettingsFields,
   ];
 };
 

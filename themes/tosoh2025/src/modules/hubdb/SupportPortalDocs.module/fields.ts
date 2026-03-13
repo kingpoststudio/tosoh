@@ -1,7 +1,9 @@
 import { textField, booleanField, choiceField, groupField, richTextField } from 'hs-fieldkit';
 import {
+  additionalConfSettingsFields,
   breadCrumbField,
   contentBlockRtfFeatures,
+  errorCardFields,
   searchField,
   searchVisibilityRule,
   topicFilters,
@@ -45,6 +47,9 @@ const generateFields = () => {
         textField('subtitle_2', 'Subtitle 2 Column ID'),
         textField('subtitle_3', 'Subtitle 3 Column ID'),
         textField('subtitle_4', 'Subtitle 4 Column ID'),
+        textField('language_label', 'Language Label', {
+          default: 'Language',
+        }),
       ],
     }),
 
@@ -63,6 +68,8 @@ const generateFields = () => {
       }),
     ]),
     topicFilters,
+    errorCardFields,
+    additionalConfSettingsFields,
   ];
 };
 

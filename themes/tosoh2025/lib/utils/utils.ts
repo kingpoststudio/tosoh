@@ -140,7 +140,9 @@ export const scrollToTop = (behavior: ScrollBehavior = 'smooth', idToScrollToTop
 
   if (typeof window !== 'undefined') {
     if (elementToScrollTo) {
-      elementToScrollTo.scrollIntoView({ block: 'start', inline: 'nearest', behavior });
+      const offset = 120;
+      const top = elementToScrollTo.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior });
     } else {
       window.scrollTo({ top: 120, behavior });
     }
@@ -150,13 +152,20 @@ export const scrollToTop = (behavior: ScrollBehavior = 'smooth', idToScrollToTop
 export const setupFilterTitle = (column: string) =>
   column?.replace(/_/g, ' ')?.replace(/\b\w/g, (c) => c?.toUpperCase());
 
-export const parseSearchColumnId = (search: Search) => {
-  return search && search?.enable_search ? search?.hubdb_column_id : '';
+export const parseSearchColumnIds = (search: Search) => {
+  return search && search?.enable_search
+    ? search?.hubdb_column_ids?.map((column) => column?.hubdb_column_id)
+    : [];
 };
 
 export const getFiltersTableId = (
-  hardcodedTableId: string,
+  hardcodedTableId: any,
   topicFiltersTableId: TopicFilters['hubdb_table_id']
 ) => {
   return USE_HARDCODED_IDS ? hardcodedTableId : topicFiltersTableId;
+};
+
+export const getLanguage = (code: string) => {
+  const lang = new Intl.DisplayNames([code], { type: 'language' }) as any;
+  return lang.of(code);
 };

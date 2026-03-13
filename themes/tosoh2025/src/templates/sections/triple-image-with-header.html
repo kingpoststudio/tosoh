@@ -1,0 +1,176 @@
+<!--
+  templateType: section
+  label: Triple Image With Header
+  description: "A section with a header and a list of three images."
+  isAvailableForNewContent: true
+  screenshotPath: /TosohTheme2025/images/sections/triple-image-with-header.png
+-->
+
+{% dnd_section %}
+  {% dnd_column %}
+    {# Row 1: Full-width header with eyebrow, title, and description #}
+    {% dnd_row %}
+      {%
+        dnd_module path="../../modules/FlexColumns.module", offset=0, width=12,
+        fields={
+          module_settings: {
+            text_color: "text-default",
+            gap: "gap-md",
+            overflow_scroll_x: false,
+            is_reversed_mobile: false
+          },
+          columns: [
+            {
+              type: "content",
+              content: {
+                text_align: "text-left",
+                horizontal_align: "items-start",
+                eyebrow: "<span slot=\"eyebrow\" style=\"color: #000000;\">AIA<sup>®</sup>-CL TECHNOLOGY</span>",
+                title: "<h2><span style=\"color: #ed1a3b;\">All AIA-CL analysers share the same technology, components, and reagents</span></h2>",
+                description: "<div width=\"full\" alignitems=\"center\" px=\"lg\" py=\"none\" gap=\"base\"><div align-items=\"start\" gap=\"sm\"><p slot=\"description\">The AIA-CL300 is the most compact of Tosoh AIA-CL analysers. All AIA-CL analysers share the same technology, components, and CL AIA-PACK<sup>®</sup>. These guarantee optimal reagent management, inventory, consistency of data and result performance.</p></div></div>",
+                is_cta: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
+                }
+              },
+              column_settings: {
+                flex_factor: 0,
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
+              }
+            }
+          ]
+        }
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+
+    {# Row 2: Two-column image layout #}
+    {% dnd_row %}
+      {%
+        dnd_module path="../../modules/FlexColumns.module", offset=0, width=6,
+        fields={
+          module_settings: {
+            text_color: "text-default",
+            gap: "gap-md",
+            overflow_scroll_x: false,
+            is_reversed_mobile: false,
+            pr_desktop: "md:pr-4xl",
+            pl_desktop: "md:pl-4xl"
+          },
+          columns: [
+            {
+              type: "image",
+              image: {
+                type: "single",
+                image: {
+                  src: "{{ get_asset_url('../../images/cl2400-results-hr.jpg') }}",
+                  alt: "cl2400-results-hr"
+                },
+                is_image_contained: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
+                }
+              },
+              column_settings: {
+                flex_factor: 1,
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
+              }
+            },
+            {
+              type: "image",
+              image: {
+                type: "single",
+                image: {
+                  src: "{{ get_asset_url('../../images/cl1200-result-hr.jpg') }}",
+                  alt: "cl1200-result-hr"
+                },
+                is_image_contained: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
+                }
+              },
+              column_settings: {
+                flex_factor: 1,
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
+              }
+            }
+          ]
+        }
+      %}
+      {% end_dnd_module %}
+
+      {%
+        dnd_module path="../../modules/FlexColumns.module", offset=6, width=6,
+        fields={
+          module_settings: {
+            text_color: "text-default",
+            gap: "gap-md",
+            justify: "justify-center",
+            overflow_scroll_x: false,
+            is_reversed_mobile: false,
+            pr_desktop: "md:pr-4xl",
+            pl_desktop: "md:pl-4xl"
+          },
+          columns: [
+            {
+              type: "image",
+              image: {
+                type: "single",
+                image: {
+                  src: "{{ get_asset_url('../../images/CL300-results-hr.jpg') }}",
+                  alt: "CL300-results-hr"
+                },
+                is_image_contained: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
+                }
+              },
+              column_settings: {
+                flex_factor: 0,
+                column_size: "w-7xl",
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
+              }
+            }
+          ]
+        }
+      %}
+      {% end_dnd_module %}
+    {% end_dnd_row %}
+  {% end_dnd_column %}
+{% end_dnd_section %}

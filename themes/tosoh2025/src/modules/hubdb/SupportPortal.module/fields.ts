@@ -1,9 +1,11 @@
-import { groupField, textField, hubDbTableField, booleanField, choiceField } from 'hs-fieldkit';
+import { textField, booleanField, choiceField, groupField } from 'hs-fieldkit';
 import {
+  additionalConfSettingsFields,
   breadCrumbField,
+  errorCardFields,
   searchField,
   searchVisibilityRule,
-  topicFilters,
+  topicFiltersWithViewAs,
 } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
@@ -22,6 +24,18 @@ const generateFields = () => {
         'When enabled, the module will always display the results as a list and will also hide the grid view button.',
       default: false,
     }),
+
+    groupField('card_configuration', 'Card Configuration', {
+      children: [
+        textField('download_label', 'Download Label', {
+          default: 'Download',
+        }),
+        textField('view_label', 'View Label', {
+          default: 'View',
+        }),
+      ],
+    }),
+
     breadCrumbField,
     textField('title', 'Title', {
       default: 'Tosoh Support Portal',
@@ -37,12 +51,14 @@ const generateFields = () => {
         ...searchVisibilityRule,
       }),
     ]),
-    topicFilters,
+    topicFiltersWithViewAs,
     booleanField('display_video_download', 'Display video download?', {
       inline_help_text:
         'If enabled, a button will be displayed on the video player that allows the user to download the video.',
       default: false,
     }),
+    errorCardFields,
+    additionalConfSettingsFields,
   ];
 };
 
