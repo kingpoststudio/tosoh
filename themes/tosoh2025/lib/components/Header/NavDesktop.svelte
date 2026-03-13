@@ -3,12 +3,13 @@
   import { fade, fly } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
   import LanguagePicker from './components/LanguagePicker.svelte';
-  const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
-  const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
+
+  const header = window.Tosoh?.Header;
+  const menu: HubSpotMenu | undefined = header?.mainNavigationMenu;
+  const auxiliaryMenu: HubSpotMenu | undefined = header?.auxiliaryMenu;
   const hasAuxiliaryMenu =
     auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0;
-
-  const menuJustification: 'center' | 'end' = window.Tosoh?.Header?.menuJustification || 'end';
+  const menuJustification: 'center' | 'end' = header?.menuJustification || 'end';
 
   const MENU_CLOSE_DELAY_MS = 300;
   const SUBMENU_CLOSE_DELAY_MS = 150;

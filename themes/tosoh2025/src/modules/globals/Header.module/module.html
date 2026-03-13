@@ -23,6 +23,8 @@
 {% set active_ctas = header_overrides.ctas ? header_overrides.ctas : active_configuration.ctas %}
 {% set menu_justification = header_overrides.menu_justification or module.menu_justification or 'end' %}
 
+{% set is_language_switcher_enabled = header_overrides.is_language_switcher_enabled or false %}
+
 {% set active_portal_access = active_configuration.portal_access %}
 
 {% set logged_in = request_contact.is_logged_in %}
@@ -39,7 +41,8 @@
     window.Tosoh.Header = {
       mainNavigationMenu: {{ active_configuration_menu_json }},
       auxiliaryMenu: {{ active_auxiliary_menu_json }},
-      menuJustification: '{{ menu_justification }}'
+      menuJustification: '{{ menu_justification }}',
+      isLanguageSwitcherEnabled: {{ is_language_switcher_enabled }}
     };
   </script>
 {% end_require_js %}

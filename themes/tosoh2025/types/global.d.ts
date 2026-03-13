@@ -56,6 +56,7 @@ declare global {
         mainNavigationMenu?: HubSpotMenu;
         auxiliaryMenu?: HubSpotMenu;
         menuJustification?: 'center' | 'end';
+        isLanguageSwitcherEnabled?: boolean;
       };
 
       SupportPortalContent: {

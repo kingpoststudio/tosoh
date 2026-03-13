@@ -1,7 +1,9 @@
 <script lang="ts">
   import { getLanguage } from '../../../utils/utils';
 
-  const translatedContent = window.Tosoh?.TranslatedContent;
+  const header = window?.Tosoh?.Header;
+  const isLanguageSwitcherEnabled = header?.isLanguageSwitcherEnabled || false;
+  const translatedContent = window?.Tosoh?.TranslatedContent;
   const variants = translatedContent?.variants ?? [];
   const currentLanguage = translatedContent?.currentLanguage;
 
@@ -27,7 +29,7 @@
 
 <svelte:document onclick={handleClickOutside} />
 
-{#if variants?.length > 0}
+{#if variants?.length > 0 && isLanguageSwitcherEnabled}
   <div class="language-picker" bind:this={pickerRef}>
     <button
       type="button"
