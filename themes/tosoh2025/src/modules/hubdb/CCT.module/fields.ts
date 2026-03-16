@@ -51,16 +51,7 @@ const generateFields = () => {
         linkField('submit_a_suggestion_path', 'Submit a Suggestion Path', {
           inline_help_text:
             'The URL to the submit a suggestion page. For example: https://www.example.com/submit-a-suggestion.',
-          required: true,
-          default: {
-            url: {
-              content_id: null,
-              type: 'INTERNAL',
-              href: '/cct-submit-a-suggestion',
-            },
-            open_in_new_tab: false,
-            no_follow: false,
-          },
+          required: false,
         }),
       ],
     }),

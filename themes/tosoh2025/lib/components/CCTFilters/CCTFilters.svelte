@@ -231,14 +231,16 @@
     </a>
   </div>
 
-  <a
-    href={submitASuggestionPath?.url?.href || ''}
-    target={submitASuggestionPath?.open_in_new_tab ? '_blank' : '_self'}
-    rel={submitASuggestionPath?.no_follow ? 'nofollow' : ''}
-    class="button mt-md dark block w-full text-center hover:bg-red-50"
-  >
-    {submitASuggestionButtonLabel}
-  </a>
+  {#if submitASuggestionPath?.url?.href}
+    <a
+      href={submitASuggestionPath?.url?.href || ''}
+      target={submitASuggestionPath?.open_in_new_tab ? '_blank' : '_self'}
+      rel={submitASuggestionPath?.no_follow ? 'nofollow' : ''}
+      class="button mt-md dark block w-full text-center hover:bg-red-50"
+    >
+      {submitASuggestionButtonLabel}
+    </a>
+  {/if}
 </div>
 
 <style>
