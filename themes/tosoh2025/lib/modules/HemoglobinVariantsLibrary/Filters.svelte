@@ -49,7 +49,8 @@
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
   const filtersTitle = hemoglobinVariantsLibraryContent?.topic_filters?.filters_title;
-  const applyButtonLabel = hemoglobinVariantsLibraryContent?.topic_filters?.apply_button_label;
+  const applyButtonLabel =
+    hemoglobinVariantsLibraryContent?.topic_filters?.apply_button_label || 'Apply';
   const resetFiltersLabel =
     hemoglobinVariantsLibraryContent?.topic_filters?.reset_filters_label || 'Reset';
 

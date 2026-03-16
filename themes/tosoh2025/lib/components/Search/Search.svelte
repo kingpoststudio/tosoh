@@ -207,7 +207,7 @@
             {#if match}
               <button
                 type="button"
-                class="plain p-sm! w-full cursor-pointer text-left! text-sm font-semibold break-all hover:bg-red-50"
+                class="plain p-sm! w-full cursor-pointer rounded-none! text-left text-sm break-all hover:bg-red-50"
                 onclick={() => {
                   onClick(match);
                 }}
