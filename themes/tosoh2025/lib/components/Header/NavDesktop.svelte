@@ -24,24 +24,24 @@
   let thirdLevelMenuRefs = new Map<string, HTMLElement | null>();
   let thirdLevelFlipped: Map<string, boolean> = $state(new Map());
 
-  function setActiveFirstLevelItem(idx: number) {
+  const setActiveFirstLevelItem = (idx: number) => {
     if (timeout) clearTimeout(timeout);
     activeMenuItem = idx;
-  }
+  };
 
-  function handleMenuMouseLeave() {
+  const handleMenuMouseLeave = () => {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
       activeMenuItem = null;
       activeSecondLevelItem = null;
     }, MENU_CLOSE_DELAY_MS);
-  }
+  };
 
-  function handleMenuMouseEnter() {
+  const handleMenuMouseEnter = () => {
     if (timeout) clearTimeout(timeout);
-  }
+  };
 
-  function setActiveSecondLevelItem(itemId: string, event?: MouseEvent) {
+  const setActiveSecondLevelItem = (itemId: string, event?: MouseEvent) => {
     if (thirdLevelTimeout) clearTimeout(thirdLevelTimeout);
     activeSecondLevelItem = itemId;
 
@@ -60,28 +60,28 @@
       newFlipped.set(itemId, wouldOverflow);
       thirdLevelFlipped = newFlipped;
     }
-  }
+  };
 
-  function handleSecondLevelMouseLeave(itemId: string) {
+  const handleSecondLevelMouseLeave = (itemId: string) => {
     if (thirdLevelTimeout) clearTimeout(thirdLevelTimeout);
     thirdLevelTimeout = setTimeout(() => {
       if (activeSecondLevelItem === itemId) {
         activeSecondLevelItem = null;
       }
     }, SUBMENU_CLOSE_DELAY_MS);
-  }
+  };
 
-  function handleThirdLevelMouseEnter(itemId: string) {
+  const handleThirdLevelMouseEnter = (itemId: string) => {
     if (thirdLevelTimeout) clearTimeout(thirdLevelTimeout);
     // Ensure the menu stays active when hovering the submenu
     activeSecondLevelItem = itemId;
-  }
+  };
 
-  function hasChildren(item: HubSpotMenu): boolean {
+  const hasChildren = (item: HubSpotMenu): boolean => {
     return !!(item.children && item.children.length > 0);
-  }
+  };
 
-  function checkPositionAction(node: HTMLElement, itemId: string) {
+  const checkPositionAction = (node: HTMLElement, itemId: string) => {
     thirdLevelMenuRefs.set(itemId, node);
 
     // Check position as early as possible
@@ -111,7 +111,7 @@
         thirdLevelMenuRefs.delete(itemId);
       },
     };
-  }
+  };
 
   onMount(() => {
     hasCTAs = ctasSlotElement?.assignedNodes()?.length > 0 || false;
@@ -208,8 +208,6 @@
 </div>
 
 <style lang="postcss">
-  @import 'tailwindcss';
-
   * {
     box-sizing: border-box;
     margin: 0;
