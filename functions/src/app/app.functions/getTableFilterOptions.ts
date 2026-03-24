@@ -35,7 +35,11 @@ exports.main = async (req: any) => {
 
     const constructAccessLevelQuery = () => {
       if (accessLevel && typeof accessLevel == "string") {
-        return `&visibility__in=${accessLevel}`;
+        if (accessLevel === "Distributor") {
+          return `&visibility__in=Distributor,Customer`;
+        } else {
+          return `&visibility__in=${accessLevel}`;
+        }
       }
 
       return "";
@@ -49,7 +53,7 @@ exports.main = async (req: any) => {
           Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!res.ok) {

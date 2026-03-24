@@ -28,7 +28,13 @@
   {% set document_name = language.label ~ '_' ~ document.f %}
   {% set document_url = document.document_folder ~ language.label ~ '_' ~ document.document_url_part %}
 
-  {% if document.visibility.label == module.access_level && !document.deactivate %}
+  {%
+    set does_access_level_match =
+    (module.access_level == 'Distributor' and (document.visibility.label == 'Customer' or document.visibility.label == 'Distributor'))
+    or (module.access_level == 'Customer' and document.visibility.label == 'Customer')
+  %}
+
+  {% if does_access_level_match && !document.deactivate %}
     <a
       href="{{ is_locked ? '/_hcms/mem/login' : document_url }}"
       target="_blank"
