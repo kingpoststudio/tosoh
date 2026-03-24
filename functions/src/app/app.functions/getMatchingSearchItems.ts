@@ -165,7 +165,6 @@ function buildQueryParams(request: FetchMatchesRequest): URLSearchParams {
 }
 
 function buildApiUrl(tableId: string, queryParams: URLSearchParams): string {
-  console.log(queryParams.toString(), "queryParams");
   return `${HS_API_URL}/hubdb/tables/${tableId}/rows?${queryParams.toString()}`;
 }
 
