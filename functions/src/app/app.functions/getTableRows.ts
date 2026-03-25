@@ -27,7 +27,7 @@ exports.main = async (req: any) => {
 
     if (!tableId || !properties) {
       throw new Error(
-        "Make sure to include tableId and properties in request body"
+        "Make sure to include tableId and properties in request body",
       );
     }
 
@@ -55,7 +55,7 @@ exports.main = async (req: any) => {
             if (column.name === filterKey && filters?.[filterKey]) {
               if (column.type === "MULTISELECT" || column.type === "TEXT") {
                 filterConditions.push(
-                  `${filterKey}__contains=${filters[filterKey]}`
+                  `${filterKey}__contains=${filters[filterKey]}`,
                 );
               }
               if (column.type === "SELECT" || column.type === "FOREIGN_ID") {
@@ -89,9 +89,9 @@ exports.main = async (req: any) => {
             const { columnId, comparison, value } = filterObj;
 
             numericComparisonFilterConditions.push(
-              `${columnId}__${comparison}=${value}`
+              `${columnId}__${comparison}=${value}`,
             );
-          }
+          },
         );
 
         return `&${numericComparisonFilterConditions.join("&")}`;
@@ -130,12 +130,12 @@ exports.main = async (req: any) => {
           Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!portalItemsRes.ok) {
       throw new Error(
-        `Portal Items - HubDB Error: ${portalItemsRes.statusText}`
+        `Portal Items - HubDB Error: ${portalItemsRes.statusText}`,
       );
     }
 

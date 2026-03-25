@@ -84,7 +84,7 @@ function extractSearchableText(value: unknown, columnType: string): string[] {
     case "SELECT":
       // Single {id, name, label, type} object
       return [(value as any)?.name || (value as any)?.label || ""].filter(
-        Boolean
+        Boolean,
       );
 
     default:
@@ -97,11 +97,11 @@ function extractSearchableText(value: unknown, columnType: string): string[] {
 function findMatchesInValue(
   value: unknown,
   searchTerm: string,
-  columnType: string
+  columnType: string,
 ): string[] {
   const searchableTexts = extractSearchableText(value, columnType);
   return searchableTexts.filter((text) =>
-    text.toLowerCase().includes(searchTerm.toLowerCase())
+    text.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 }
 
@@ -109,7 +109,7 @@ function findMatchesInRows(
   rows: HubDBRow[],
   searchTerm: string,
   columnIds: string[],
-  columnMetadata: Map<string, ColumnMetadata>
+  columnMetadata: Map<string, ColumnMetadata>,
 ): MatchResult[] {
   const matchesMap = new Map<string, MatchResult>();
 
@@ -122,7 +122,7 @@ function findMatchesInRows(
       const valueMatches = findMatchesInValue(
         columnValue,
         searchTerm,
-        columnType
+        columnType,
       );
 
       valueMatches.forEach((match) => {
@@ -175,7 +175,7 @@ async function fetchTableSchema(tableId: string): Promise<ColumnMetadata[]> {
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch table schema: ${response.status} ${response.statusText}`
+      `Failed to fetch table schema: ${response.status} ${response.statusText}`,
     );
   }
 
@@ -235,7 +235,7 @@ async function fetchHubDBRows(apiUrl: string): Promise<HubDBRow[]> {
 
   if (!response.ok) {
     throw new Error(
-      `Failed to fetch HubDB data: ${response.status} ${response.statusText}`
+      `Failed to fetch HubDB data: ${response.status} ${response.statusText}`,
     );
   }
 
@@ -249,7 +249,7 @@ async function fetchHubDBRows(apiUrl: string): Promise<HubDBRow[]> {
 }
 
 async function fetchPartialMatchesByTerm(
-  request: FetchMatchesRequest
+  request: FetchMatchesRequest,
 ): Promise<MatchResult[]> {
   const { tableId, term, columnIds } = request;
 

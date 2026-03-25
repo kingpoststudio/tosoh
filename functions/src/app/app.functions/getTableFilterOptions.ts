@@ -49,7 +49,7 @@ exports.main = async (req: any) => {
           Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     if (!res.ok) {

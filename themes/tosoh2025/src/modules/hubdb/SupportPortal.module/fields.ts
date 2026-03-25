@@ -1,4 +1,4 @@
-import { groupField, textField, hubDbTableField, booleanField, choiceField } from 'hs-fieldkit';
+import { textField, booleanField, choiceField } from 'hs-fieldkit';
 import {
   breadCrumbField,
   searchField,
