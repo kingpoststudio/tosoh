@@ -35,11 +35,7 @@ exports.main = async (req: any) => {
 
     const constructAccessLevelQuery = () => {
       if (accessLevel && typeof accessLevel == "string") {
-        if (accessLevel === "Distributor") {
-          return `&visibility__in=Distributor,Customer`;
-        } else {
-          return `&visibility__in=${accessLevel}`;
-        }
+        return `&visibility__in=${accessLevel}`;
       }
 
       return "";

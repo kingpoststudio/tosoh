@@ -15,7 +15,7 @@ declare global {
 
       SupportPortalContent: {
         force_list_view: boolean;
-        access_level: 'Customer' | 'Distributor' | 'Internal';
+        access_level: 'Customer' | 'Distributor,Customer' | 'Internal';
         breadcrumbs: {
           title: string;
           url: {
@@ -35,7 +35,7 @@ declare global {
         type: 'module';
       };
       SupportPortalDocsContent: {
-        access_level: 'Customer' | 'Distributor' | 'Internal';
+        access_level: 'Customer' | 'Distributor,Customer' | 'Internal';
         document_type: 'ifu' | 'sds' | 'cofa';
         breadcrumbs: {
           title: string;

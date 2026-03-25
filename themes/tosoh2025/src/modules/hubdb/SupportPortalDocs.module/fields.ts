@@ -12,7 +12,7 @@ const generateFields = () => {
     choiceField('access_level', 'Access Level', {
       choices: [
         ['Customer', 'Customer'],
-        ['Distributor', 'Distributor'],
+        ['Distributor,Customer', 'Distributor'],
         ['Internal', 'Internal'],
       ],
       required: true,

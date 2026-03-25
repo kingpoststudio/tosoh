@@ -154,11 +154,7 @@ function buildQueryParams(request: FetchMatchesRequest): URLSearchParams {
   }
 
   if (accessLevel && typeof accessLevel === "string") {
-    if (accessLevel === "Distributor") {
-      params.append(QUERY_PARAMS.VISIBILITY, "Distributor,Customer");
-    } else {
-      params.append(QUERY_PARAMS.VISIBILITY, accessLevel);
-    }
+    params.append(QUERY_PARAMS.VISIBILITY, accessLevel);
   }
 
   return params;
