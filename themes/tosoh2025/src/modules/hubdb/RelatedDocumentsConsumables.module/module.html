@@ -29,8 +29,8 @@
   {% set document_url = document.document_folder ~ language.label ~ '_' ~ document.document_url_part %}
 
   {%
-    set does_access_level_match =
-    (module.access_level == 'Distributor' and (document.visibility.label == 'Customer' or document.visibility.label == 'Distributor'))
+    set does_access_level_match = (module.access_level == 'Internal' and (document.visibility.label == 'Customer' or document.visibility.label == 'Distributor' or document.visibility.label == 'Internal'))
+    or (module.access_level == 'Distributor' and (document.visibility.label == 'Customer' or document.visibility.label == 'Distributor'))
     or (module.access_level == 'Customer' and document.visibility.label == 'Customer')
   %}
 

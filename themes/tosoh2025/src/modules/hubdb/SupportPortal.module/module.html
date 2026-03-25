@@ -1,7 +1,7 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
 {% set row = dynamic_page_hubdb_row %}
 {% set breadcrumbs = module.breadcrumbs %}
-{% set access_level = module.access_level == 'Distributor' ? 'Distributor,Customer' : module.access_level %}
+{% set access_level = module.access_level == 'Internal' ? 'Distributor,Customer,Internal' : module.access_level == 'Distributor' ? 'Distributor,Customer' : module.access_level %}
 
 
 
