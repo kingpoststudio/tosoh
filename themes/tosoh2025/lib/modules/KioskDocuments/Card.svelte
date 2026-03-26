@@ -3,7 +3,9 @@
 
   let { item }: { item: any } = $props();
 
+  // svelte-ignore state_referenced_locally
   const { path } = item;
+  // svelte-ignore state_referenced_locally
   const { image, title, document_type } = item?.values;
   const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
   const viewDetailsLabel =

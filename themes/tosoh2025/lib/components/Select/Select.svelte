@@ -30,6 +30,7 @@
     excludeAllOption?: boolean;
   } = $props();
 
+  // svelte-ignore state_referenced_locally
   const activeFilter = new URLSearchParams(window.location.search)?.get(name);
 </script>
 

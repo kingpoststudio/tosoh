@@ -3,6 +3,7 @@
   import { getUrlParam } from '../../utils/urlUtils';
   let { item, hasSiblings }: { item: any; hasSiblings: boolean } = $props();
 
+  // svelte-ignore state_referenced_locally
   let activeLanguage = $state(getUrlParam('languages') || item?.values?.languages?.[0]?.label);
   let selectedCardLanguage = $state(activeLanguage);
 
@@ -25,8 +26,11 @@
   const documentType = window?.Tosoh?.SupportPortalDocsContent?.document_type;
   const languageLabel = cardFields?.language_label;
 
+  // svelte-ignore state_referenced_locally
   const documentFolder = item?.values?.document_folder;
+  // svelte-ignore state_referenced_locally
   const documentUrlPart = item?.values?.document_url_part;
+  // svelte-ignore state_referenced_locally
   const batchNumber = item?.values?.batch_number;
   const aboveTitle = parseColumnId(cardFields?.above_title);
   const title = parseColumnId(cardFields?.title);

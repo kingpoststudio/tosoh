@@ -28,6 +28,7 @@
   } = $props();
 
   const urlParams = new URLSearchParams(window.location.search);
+  // svelte-ignore state_referenced_locally
   const activeFilter = urlParams.get(name);
 </script>
 

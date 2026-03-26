@@ -29,6 +29,7 @@
     searchFromFields: Search;
   } = $props();
 
+  // svelte-ignore state_referenced_locally
   const {
     hubdb_table_id: searchTableId,
     hubdb_column_ids: searchColumnIds = [],

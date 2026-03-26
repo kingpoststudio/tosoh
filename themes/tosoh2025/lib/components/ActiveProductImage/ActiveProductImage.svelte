@@ -6,6 +6,7 @@
   import { fade } from 'svelte/transition';
 
   let { src }: { src: string } = $props();
+  // svelte-ignore state_referenced_locally
   let mainImage = $state(src);
 
   const mainImageHandler = on(window, 'TosohSetActiveProductImage', (e: Event) => {

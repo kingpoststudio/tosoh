@@ -12,6 +12,7 @@
 
   let { totalItems, fetchData, idToScrollToTop, paginationSettings } = $props();
 
+  // svelte-ignore state_referenced_locally
   const paginationConfig = {
     itemsPerPageLabel: paginationSettings?.items_per_page_label || 'Items per page:',
     ofLabel: paginationSettings?.of_label || 'of',

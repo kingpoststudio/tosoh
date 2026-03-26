@@ -4,6 +4,7 @@
 
   let { item }: { item: HemoglobinVariantsLibraryItem } = $props();
 
+  // svelte-ignore state_referenced_locally
   const {
     aka,
     area_under_peak,

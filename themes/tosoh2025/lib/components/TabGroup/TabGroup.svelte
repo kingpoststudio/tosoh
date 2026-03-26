@@ -22,6 +22,7 @@
     isLast = false,
   }: { groupId: string; variant: 'action' | 'tab'; active: boolean; isLast: boolean } = $props();
 
+  // svelte-ignore state_referenced_locally
   let isActive = $state(active);
 
   function setTabActive() {

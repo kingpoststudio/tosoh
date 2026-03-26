@@ -3,6 +3,7 @@
   import type { PortaleEmogiobineItem } from '../../../types/portaleEmogiobine';
   let { item }: { item: PortaleEmogiobineItem } = $props();
 
+  // svelte-ignore state_referenced_locally
   const {
     advice,
     anomaly,

@@ -7,17 +7,18 @@
   let { duration = 500, delay = 0, x = '0rem', y = '0rem', threshold = 0.4 } = $props();
 
   let inView = $state(false);
-
+  // svelte-ignore state_referenced_locally
   if (typeof duration === 'string') {
     duration = parseFloat(duration);
   }
-
+  // svelte-ignore state_referenced_locally
   if (typeof delay === 'string') {
     delay = parseFloat(delay);
   }
 
   const handleChange = ({ detail }: CustomEvent<ObserverEventDetails>) => (inView = detail.inView);
 
+  // svelte-ignore state_referenced_locally
   const inViewOptions: Options = {
     unobserveOnEnter: true,
     threshold,

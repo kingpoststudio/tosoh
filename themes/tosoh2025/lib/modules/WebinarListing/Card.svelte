@@ -4,6 +4,7 @@
 
   let { item }: { item: WebinarListingsItem } = $props();
 
+  // svelte-ignore state_referenced_locally
   const {
     cta_label,
     date,
