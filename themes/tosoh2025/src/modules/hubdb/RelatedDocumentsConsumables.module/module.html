@@ -25,23 +25,25 @@
 {% set filtered_ifu_documents = hubdb_table_rows(module.hubdb_table_ifu,'&linked_product_codes__in='~module.product_code) %}
 {% set filtered_cofa_documents = hubdb_table_rows(module.hubdb_table_cofa,'&linked_product_codes__in='~module.product_code) %}
 
+{% set document_types = { 'SDS': 'sds', 'IFU': 'ifu', 'CofA': 'cofa' } %}
+
 {% macro construct_document_url(document, language, document_type) %}
-  {% if document_type == 'SDS' %}
+  {% if document_type == document_types.SDS %}
     {{ document.document_folder ~ language.label ~ '_' ~ document.document_url_part ~ '.pdf' }}
-  {% elif document_type == 'IFU' %}
+  {% elif document_type == document_types.IFU %}
     {{ document.document_folder ~ document.document_url_part ~ '_' ~ language.label ~ '.pdf' }}
-  {% elif document_type == 'CofA' %}
+  {% elif document_type == document_types.CofA %}
     {{ document.document_folder ~ document.batch_number ~ '.pdf' }}
   {% endif %}
 {% endmacro %}
 
 {% macro construct_document_name(document, language, document_type) %}
-  {% if document_type == 'SDS' %}
+  {% if document_type == document_types.SDS %}
     {{ language.label ~ '_' ~ document.f }}
-  {% elif document_type == 'IFU' %}
+  {% elif document_type == document_types.IFU %}
     {{ document.document_url_part ~ '_' ~ language.label ~ '.pdf' }}
-  {% elif document_type == 'CofA' %}
-    {{ language.label ~ '_' ~ document.f ~ '.pdf' }}
+  {% elif document_type == document_types.CofA %}
+    {{ language.label ~ '_' ~ document.f }}
   {% endif %}
 {% endmacro %}
 
@@ -83,7 +85,7 @@
   <tosoh-tab-group variant="tab" groupId="{{ ifu_documents.column_label }}" active="true">
     <div class="gap-base flex flex-col">
       {% for language in filtered_ifu_documents[0].languages %}
-        {{ render_document_card(filtered_ifu_documents[0], language, ifu_locked, ifu_locked_message, ifu_login_link, 'IFU') }}
+        {{ render_document_card(filtered_ifu_documents[0], language, ifu_locked, ifu_locked_message, ifu_login_link, document_types.IFU) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
@@ -91,15 +93,17 @@
   <tosoh-tab-group variant="tab" groupId="{{ sds_documents.column_label }}">
     <div class="gap-base flex flex-col">
       {% for language in filtered_sds_documents[0].languages %}
-        {{ render_document_card(filtered_sds_documents[0], language, sds_locked, sds_locked_message, sds_login_link, 'SDS') }}
+        {{ render_document_card(filtered_sds_documents[0], language, sds_locked, sds_locked_message, sds_login_link, document_types.SDS) }}
       {% endfor %}
     </div>
   </tosoh-tab-group>
 
   <tosoh-tab-group variant="tab" groupId="{{ cofa_documents.column_label }}">
     <div class="gap-base flex flex-col">
-      {% for language in filtered_cofa_documents[0].languages %}
-        {{ render_document_card(filtered_cofa_documents[0], language, cofa_locked, cofa_locked_message, cofa_login_link, 'CofA') }}
+    {% for document in filtered_cofa_documents%}
+      {% for language in document.languages %}
+        {{ render_document_card(document, language, cofa_locked, cofa_locked_message, cofa_login_link, document_types.CofA) }}
+      {% endfor %}
       {% endfor %}
     </div>
   </tosoh-tab-group>
