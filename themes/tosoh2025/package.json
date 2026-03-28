@@ -6,9 +6,9 @@
     "dev": "vite",
     "dev:hs": "bunx --bun vite build --watch --mode develop",
     "build": "bunx --bun vite build",
-    "build:dev": "bunx --bun vite build --mode development",
+    "build:dev": "bunx --bun vite build --mode develop",
+    "build:staging": "bunx --bun vite build --mode staging",
     "build:prod": "bunx --bun vite build --mode production",
-    "deploy:staging": "bunx --bun vite build --mode tosoh-sandbox",
     "format": "prettier --write \"**/*.{ts,js,svelte,html,css,json,md}\" \"!dist/**\" \"!build/**\" \"!node_modules/**\"",
     "format:check": "prettier --check \"**/*.{ts,js,svelte,html,css,json,md}\" \"!dist/**\" \"!build/**\" \"!node_modules/**\"",
     "format:lib": "prettier --write \"lib/**/*.{ts,js,svelte,css}\"",
@@ -48,6 +48,7 @@
     "embla-carousel": "^8.6.0",
     "file-saver": "^2.0.5",
     "svelte": "^5.38.1",
+    "svelte-inview": "^4.0.4",
     "tailwindcss": "^4.1.11"
   },
   "prettier": {
