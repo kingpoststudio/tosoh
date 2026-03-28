@@ -29,7 +29,7 @@
     getFilterColumnIds,
     isPastEvent,
     isUpcomingEvent,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
   import { fade } from 'svelte/transition';
@@ -52,10 +52,10 @@
   const pastSectionTitle = webinarListingsWindow?.past_section_title;
   const filterByTopic = webinarListingsWindow?.advanced?.filter_by_topic;
   const searchGroup = webinarListingsWindow?.search;
-  const searchColumnId = parseSearchColumnId(searchGroup);
+  const searchColumnIds = parseSearchColumnIds(searchGroup);
   const topicFilters = webinarListingsWindow?.topic_filters?.filters || [];
 
-  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   const constructBody = () => {
     const params = new URLSearchParams(window.location.search);
@@ -119,7 +119,10 @@
     if (preselectedLanguage) {
       const params = new URLSearchParams(window.location.search);
 
-      if (!params.has('language') && !params?.has(searchColumnId)) {
+      if (
+        !params.has('language') &&
+        !params?.has(searchColumnIds?.find((columnId) => columnId === 'language') as string)
+      ) {
         setSearchParams({
           language: preselectedLanguage,
         });
@@ -154,7 +157,7 @@
   >
     <div>
       <div class=" h-md min-w-3xl rounded-lg bg-red-50"></div>
-      <div class="mt-sm min-w-5xl h-14 rounded-lg bg-gray-200"></div>
+      <div class="mt-sm h-14 min-w-5xl rounded-lg bg-gray-200"></div>
     </div>
 
     <WebinarListingsFilters {formId} isSkeleton={true} />
@@ -163,20 +166,11 @@
 
 {#snippet grid(rows: WebinarListingsItem[], displayOnLoad: boolean, displayPagination: boolean)}
   {#if (isLoading && displayOnLoad) || !isLoading}
-    {#if hasError}
-      <div class="p-sm">
-        <ErrorCard message="Failed to load webinars" retryCallback={reloadData} />
-        <div class="pb-sm"></div>
-      </div>
-    {:else}
-      <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
-      ></ItemsGrid>
-
-      <div class={`${rows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
-        ></PaginationWithLimit>
-      </div>
-    {/if}
+    <ItemsGrid tableRows={rows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}
+    ></ItemsGrid>
+    <div class={`${rows?.length > 0 && displayPagination ? 'block' : 'hidden'}`}>
+      <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}></PaginationWithLimit>
+    </div>
   {/if}
 {/snippet}
 
@@ -190,7 +184,14 @@
     {@render grid([], true, false)}
   {/if}
 
-  {#if !isLoading}
+  {#if hasError && !isLoading}
+    <div class="p-sm">
+      <ErrorCard message="Failed to load webinars" retryCallback={reloadData} />
+      <div class="pb-sm"></div>
+    </div>
+  {/if}
+
+  {#if !isLoading && tableRows?.length > 0}
     {@const upcomingEvents = getUpcoming(tableRows)}
     {@const hasUpcomingEvents = upcomingEvents?.length > 0}
 
