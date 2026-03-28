@@ -8,6 +8,7 @@
   {% for tab_group_column in tab_group_columns %}
     {% set is_locked = tab_group_column.is_locked and not logged_in %}
     {% set locked_message = tab_group_column.locked_message %}
+    {% set login_link = tab_group_column.login_link %}
 
     <tosoh-tab-group
       variant="tab"
@@ -19,8 +20,8 @@
           {% set document_url = document.document_url %}
 
           <a
-            href="{{ is_locked ? '/_hcms/mem/login' : document_url.href }}"
-            target="_blank"
+            href="{{ is_locked ? login_link.url.href : document_url.url.href }}"
+            target="{{ document_url.open_in_new_tab ? '_blank' : '_self' }}"
             {{ is_locked ? 'disabled' : '' }}
             class="group border-border relative flex aspect-square min-h-[24rem] max-w-full cursor-pointer flex-col items-center overflow-hidden rounded-2xl border transition-[shadow] duration-500 hover:shadow-sm">
             {{ macros.render_download_document_icon(true) }}
