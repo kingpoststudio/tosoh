@@ -21,7 +21,6 @@
     DEFAULT_ACCESS_LEVEL,
     defaultItemsLimit,
     defaultPagination,
-    IS_MOCK,
     PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
   } from '../../utils/constants';
   import { getPaginationParams, setSearchParams } from '../../utils/urlUtils';
@@ -32,8 +31,6 @@
     getFiltersTableId,
     parseSearchColumnIds,
   } from '../../utils/utils';
-
-  import { mockPortalDocsItems } from './mock';
 
   const SUPPORT_DOCS_PROPERTIES =
     'f,document_folder,document_url_part,languages,designation,category,linked_product_codes,expiration_date,batch_number';
@@ -80,12 +77,7 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      let data;
-      if (!IS_MOCK) {
-        data = await fetchTableRows(constructBody());
-      } else {
-        data = mockPortalDocsItems;
-      }
+      const data = await fetchTableRows(constructBody());
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;

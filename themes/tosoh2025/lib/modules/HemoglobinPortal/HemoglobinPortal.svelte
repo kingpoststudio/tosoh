@@ -14,7 +14,6 @@
   import {
     defaultItemsLimit,
     defaultPagination,
-    IS_MOCK,
     PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
   } from '../../utils/constants';
   import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
@@ -22,7 +21,6 @@
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
   import { fetchTableRows } from '../../services/fetchTableRows';
-  import { mockPortaleEmogiobineTableRowsResponse } from './mock';
   import {
     constructFilterParams,
     constructRangePmFilters,
@@ -73,14 +71,7 @@
   const fetchData = async () => {
     try {
       isLoading = true;
-      let data;
-
-      if (!IS_MOCK) {
-        data = await fetchTableRows(constructBody());
-      } else {
-        data = mockPortaleEmogiobineTableRowsResponse;
-      }
-
+      const data = await fetchTableRows(constructBody());
       const { results, total } = data ?? { results: [], total: 0 };
       tableRows = results;
       totalItems = total;

@@ -28,7 +28,14 @@
   let name = $derived(item?.values?.name);
   let downloadUrl = $derived(item?.values?.document_url);
   let documentType = $derived(item?.values?.document_type?.label);
-  let productTypes = $derived(item?.values?.product_type?.map((type: any) => `${type.label}`));
+  let productTypes = $derived(
+    item?.values?.product_type?.map((type: any) => {
+      return {
+        name: type.name,
+        label: type.label,
+      };
+    })
+  );
 
   let viewHref = $derived(`${window.location.pathname.replace(/\/+$/, '')}/${item.path}`);
 
@@ -76,7 +83,7 @@
           {@const isLast = index === productTypes?.length - 1}
           <button
             onclick={() => onTagClick('product_type', productType.name)}
-            class="plain text-imperial-red! text-xl">{productType}{isLast ? '' : ','}</button
+            class="plain text-imperial-red! text-xl">{productType.label}{isLast ? '' : ','}</button
           >
         {/each}
       </div>
