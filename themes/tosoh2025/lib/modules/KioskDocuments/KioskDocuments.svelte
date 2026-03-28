@@ -27,7 +27,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
   const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
@@ -37,9 +37,9 @@
     kioskDocumentsContent?.topic_filters?.hubdb_table_id
   );
 
-  let searchColumnId = parseSearchColumnId(kioskDocumentsContent?.search);
+  let searchColumnIds = parseSearchColumnIds(kioskDocumentsContent?.search);
 
-  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   let title = kioskDocumentsContent?.title;
   let description = kioskDocumentsContent?.description;
@@ -134,7 +134,9 @@
   id={formId}
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading} {formId}></Filters>
+  {#key hasError}
+    <Filters isParentLoading={isLoading} {formId}></Filters>
+  {/key}
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
