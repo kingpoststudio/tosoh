@@ -3,7 +3,6 @@
   import {
     IS_MOCK,
     PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
-    USE_HARDCODED_IDS,
   } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
@@ -30,7 +29,7 @@
     getFilter,
     getFilterColumnIds,
     getFiltersTableId,
-    parseSearchColumnId,
+    parseSearchColumnIds,
   } from '../../utils/utils';
   import TopicFilter from '../../components/TopicFilter/TopicFilter.svelte';
   import type { TopicFilters } from '../../../types/fields';
@@ -41,8 +40,8 @@
 
   const windowTosohPortaleEmogiobineContent = window?.Tosoh?.HemoglobinPortalContent;
   const searchFromFields = windowTosohPortaleEmogiobineContent?.search;
-  const searchColumnId = parseSearchColumnId(searchFromFields);
-  const searchTableId = PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID;
+  const searchColumnIds = parseSearchColumnIds(searchFromFields);
+    const searchTableId = PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID;
 
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
@@ -50,7 +49,7 @@
   );
 
   const topic_filters = windowTosohPortaleEmogiobineContent?.topic_filters?.filters;
-  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', [searchColumnId]) || [];
+  let filtersFromFields = getFilterColumnIds(topic_filters, 'all', searchColumnIds) || [];
   const toleranceConfig = extractToleranceConfig(topic_filters || []);
 
   let allAvailableFiltersWithTheirOptions: FilterOptionsWithQuantity | {} = $state({});
@@ -190,8 +189,8 @@
       const options: FilterOptionsWithQuantity = {};
 
       filtersFromFields.forEach((columnId: ColumnId) => {
-        if (columnId === searchColumnId) return;
-
+        if (searchColumnIds?.includes(columnId as string)) return;
+        
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
           columnId,
@@ -210,10 +209,6 @@
     }
   };
 
-  const reloadFilterOptions = () => {
-    hasError = false;
-    fetchInitialData();
-  };
 
   onMount(() => {
     fetchInitialData();
@@ -243,12 +238,8 @@
 {/snippet}
 
 <div
-  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[6rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
+  class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[8rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${isLoading ? 'animate-pulse' : ''}`}
 >
-  {#if hasError}
-    <ErrorCard message="Failed to load filter options" retryCallback={reloadFilterOptions} />
-    <div class="pb-sm"></div>
-  {/if}
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
     {@render filterIcon()}
@@ -267,7 +258,7 @@
   <FilterForm updateUrl={false} trigger="change" {onChange} {onReset} {formId}>
     {#each filtersFromFields as columnId}
       {@const filter = getFilter(topic_filters, columnId) as TopicFilters['filters'][number]}
-      {#if searchColumnId !== columnId}
+      {#if !searchColumnIds?.includes(columnId as string)}
         <TopicFilter
           {filter}
           options={(allAvailableFiltersWithTheirOptions as FilterOptionsWithQuantity)[

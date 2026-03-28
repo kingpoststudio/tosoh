@@ -27,7 +27,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
   const formId = 'portale-emogiobine-filters';
@@ -39,9 +39,9 @@
     portaleEmogiobineContent?.topic_filters?.hubdb_table_id
   );
   let searchEnabled = portaleEmogiobineContent?.search?.enable_search;
-  let searchColumnId = parseSearchColumnId(portaleEmogiobineContent?.search);
+  let searchColumnIds = parseSearchColumnIds(portaleEmogiobineContent?.search);
 
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   let title = portaleEmogiobineContent?.title;
   let eyebrow = portaleEmogiobineContent?.eyebrow;
@@ -122,7 +122,9 @@
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
   {#if topicFilters?.length > 0 || searchEnabled}
-    <Filters isParentLoading={isLoading} {formId}></Filters>
+    {#key hasError}
+      <Filters isParentLoading={isLoading} {formId}></Filters>
+    {/key}
   {/if}
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
