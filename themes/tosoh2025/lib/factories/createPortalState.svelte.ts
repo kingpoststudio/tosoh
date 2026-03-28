@@ -38,7 +38,6 @@ export function createPortalState(config: PortalStateConfig) {
   const tableId = getFiltersTableId(prodTableId, content?.topic_filters?.hubdb_table_id);
   const searchColumnIds = parseSearchColumnIds(content?.search);
   const nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
-  const rangePmFilters = constructRangePmFilters(topicFilters);
 
   const title = content?.title;
   const eyebrow = content?.eyebrow;
@@ -53,6 +52,7 @@ export function createPortalState(config: PortalStateConfig) {
   const constructBody = () => {
     const { limit, pagination, offset } = getPaginationParams(defaultItemsLimit, defaultPagination);
     const extra = extraNumericFilters?.() || [];
+    const rangePmFilters = constructRangePmFilters(topicFilters);
 
     return {
       tableId,
