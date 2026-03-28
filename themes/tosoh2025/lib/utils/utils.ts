@@ -160,3 +160,8 @@ export const getFiltersTableId = (
 ) => {
   return USE_HARDCODED_IDS ? hardcodedTableId : topicFiltersTableId;
 };
+
+export const getLanguage = (code: string) => {
+  const lang = new Intl.DisplayNames([code], { type: 'language' }) as any;
+  return lang.of(code);
+};

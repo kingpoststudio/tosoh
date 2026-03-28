@@ -2,13 +2,18 @@
   import { onMount } from 'svelte';
   import { fade, fly } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
+  import LanguagePicker from './components/LanguagePicker/LanguagePicker.svelte';
 
-  const menu: HubSpotMenu | undefined = window.Tosoh?.Header?.mainNavigationMenu;
-  const auxiliaryMenu: HubSpotMenu | undefined = window.Tosoh?.Header?.auxiliaryMenu;
+  const header = window.Tosoh?.Header;
+  const menu: HubSpotMenu | undefined = header?.mainNavigationMenu;
+  const auxiliaryMenu: HubSpotMenu | undefined = header?.auxiliaryMenu;
   const hasAuxiliaryMenu =
     auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0;
+  const menuJustification: 'center' | 'end' = header?.menuJustification || 'end';
 
-  const menuJustification: 'center' | 'end' = window.Tosoh?.Header?.menuJustification || 'end';
+  const MENU_CLOSE_DELAY_MS = 300;
+  const SUBMENU_CLOSE_DELAY_MS = 150;
+  const ESTIMATED_SUBMENU_WIDTH_PX = 192;
 
   let activeMenuItem: number | null = $state(null);
   let activeSecondLevelItem: string | null = $state(null);
@@ -19,24 +24,24 @@
   let thirdLevelMenuRefs = new Map<string, HTMLElement | null>();
   let thirdLevelFlipped: Map<string, boolean> = $state(new Map());
 
-  function setActiveFirstLevelItem(idx: number) {
+  const setActiveFirstLevelItem = (idx: number) => {
     if (timeout) clearTimeout(timeout);
     activeMenuItem = idx;
-  }
+  };
 
-  function handleMenuMouseLeave() {
+  const handleMenuMouseLeave = () => {
     if (timeout) clearTimeout(timeout);
     timeout = setTimeout(() => {
       activeMenuItem = null;
       activeSecondLevelItem = null;
-    }, 300);
-  }
+    }, MENU_CLOSE_DELAY_MS);
+  };
 
-  function handleMenuMouseEnter() {
+  const handleMenuMouseEnter = () => {
     if (timeout) clearTimeout(timeout);
-  }
+  };
 
-  function setActiveSecondLevelItem(itemId: string, event?: MouseEvent) {
+  const setActiveSecondLevelItem = (itemId: string, event?: MouseEvent) => {
     if (thirdLevelTimeout) clearTimeout(thirdLevelTimeout);
     activeSecondLevelItem = itemId;
 
@@ -48,37 +53,35 @@
 
       // Estimate if a submenu on the right would overflow
       // Assuming submenu min-width is 12rem = ~192px
-      const estimatedMenuWidth = 192;
-      const wouldOverflow = rect.right + estimatedMenuWidth > viewportWidth - 10;
+      const wouldOverflow = rect.right + ESTIMATED_SUBMENU_WIDTH_PX > viewportWidth - 10;
 
       // Set the flipped state immediately
       const newFlipped = new Map(thirdLevelFlipped);
       newFlipped.set(itemId, wouldOverflow);
       thirdLevelFlipped = newFlipped;
     }
-  }
+  };
 
-  function handleSecondLevelMouseLeave(itemId: string) {
+  const handleSecondLevelMouseLeave = (itemId: string) => {
     if (thirdLevelTimeout) clearTimeout(thirdLevelTimeout);
     thirdLevelTimeout = setTimeout(() => {
-      // Only hide if we're still showing this specific item's menu
       if (activeSecondLevelItem === itemId) {
         activeSecondLevelItem = null;
       }
-    }, 150);
-  }
+    }, SUBMENU_CLOSE_DELAY_MS);
+  };
 
-  function handleThirdLevelMouseEnter(itemId: string) {
+  const handleThirdLevelMouseEnter = (itemId: string) => {
     if (thirdLevelTimeout) clearTimeout(thirdLevelTimeout);
     // Ensure the menu stays active when hovering the submenu
     activeSecondLevelItem = itemId;
-  }
+  };
 
-  function hasChildren(item: HubSpotMenu): boolean {
+  const hasChildren = (item: HubSpotMenu): boolean => {
     return !!(item.children && item.children.length > 0);
-  }
+  };
 
-  function checkPositionAction(node: HTMLElement, itemId: string) {
+  const checkPositionAction = (node: HTMLElement, itemId: string) => {
     thirdLevelMenuRefs.set(itemId, node);
 
     // Check position as early as possible
@@ -108,7 +111,7 @@
         thirdLevelMenuRefs.delete(itemId);
       },
     };
-  }
+  };
 
   onMount(() => {
     hasCTAs = ctasSlotElement?.assignedNodes()?.length > 0 || false;
@@ -193,6 +196,7 @@
           {@render navItem(item)}
         {/each}
       {/if}
+      <LanguagePicker />
     </div>
 
     {#if hasCTAs}
@@ -326,17 +330,16 @@
           }
         }
 
-
-         &:last-child {
-         > .dropdown {
-          max-width: 16rem;
-           }
-         }
-         &:nth-last-child(2) {
+        &:last-child {
+          > .dropdown {
+            max-width: 16rem;
+          }
+        }
+        &:nth-last-child(2) {
           > .dropdown {
             max-width: 18rem;
           }
-         }
+        }
         /* Dropdown menu */
         > .dropdown {
           position: absolute;
@@ -494,6 +497,8 @@
       position: relative;
       color: inherit;
       transition: color 200ms ease-in-out;
+      display: flex;
+      align-items: center;
 
       &:hover {
         color: var(--color-black-charcoal);

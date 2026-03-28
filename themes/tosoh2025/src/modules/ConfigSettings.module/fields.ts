@@ -1,4 +1,11 @@
-import { choiceField, groupField, linkField, menuField, textField } from 'hs-fieldkit';
+import {
+  booleanField,
+  choiceField,
+  groupField,
+  linkField,
+  menuField,
+  textField,
+} from 'hs-fieldkit';
 import { themeConfigurationChoices } from '../../../lib/utils/fieldUtils';
 import { headerCtasFields, portalAccessLabelsFields } from '../globals/Header.module/fields';
 import { legalFields } from '../globals/Footer.module/fields';
@@ -40,6 +47,10 @@ const generateFields = () => {
         ...portalAccessLabelsFields(false),
         menuField('auxiliary_menu', 'Auxiliary menu', {
           inline_help_text: 'Override the auxiliary menu in the header with a custom menu.',
+        }),
+        booleanField('is_language_switcher_enabled', 'Is language switcher enabled?', {
+          inline_help_text: 'If enabled, a language switcher will be displayed in the header.',
+          default: false,
         }),
       ],
     }),

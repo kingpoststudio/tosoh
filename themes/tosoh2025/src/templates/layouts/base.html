@@ -28,6 +28,20 @@
   </head>
 
   <body class="{{ builtin_body_classes }}">
+
+    {% if content.translated_content.values()|selectattr('published')|length || is_listing_view && group.translations %}
+    {% require_js position="head" %}
+      <script>
+        window.Tosoh = window.Tosoh || {};
+        window.Tosoh.TranslatedContent =
+        {
+          variants: {{ content.translated_content.values()|selectattr('published')|tojson }},
+          currentLanguage: '{{ locale_name(locale) }}'
+        };
+      </script>
+    {% end_require_js %}
+  {% endif %}
+
     {% block header %}
       {% module "global_header" path="/TosohTheme2025/modules/globals/Header.module", label="Header" %}
     {% endblock header %}
