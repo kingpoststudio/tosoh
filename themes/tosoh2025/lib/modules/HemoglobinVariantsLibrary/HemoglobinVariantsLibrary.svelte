@@ -7,86 +7,26 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-
+  import { createPortalState } from '../../factories/createPortalState.svelte';
+  import { PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID } from '../../utils/constants';
   import Filters from './Filters.svelte';
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
-
-  import {
-    defaultItemsLimit,
-    defaultPagination,
-    PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
-  } from '../../utils/constants';
   import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
   import Card from './Card.svelte';
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
-  import { fetchTableRows } from '../../services/fetchTableRows';
-  import {
-    constructFilterParams,
-    constructRangePmFilters,
-    getFilterColumnIds,
-    parseSearchColumnIds,
-    getFiltersTableId,
-  } from '../../utils/utils';
 
-  const formId = 'hemoglobin-variants-library-filters';
+  const portal = createPortalState({
+    formId: 'hemoglobin-variants-library-filters',
+    content: window?.Tosoh?.HemoglobinVariantsLibraryContent,
+    prodTableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
+    properties:
+      'document_url,heterozygote_comments,aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
+    sort: '-start_date',
+    isActivated: true,
+  });
 
-  const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
-  const topicFilters = hemoglobinVariantsLibraryContent?.topic_filters?.filters || [];
-  const tableId = getFiltersTableId(
-    PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
-    hemoglobinVariantsLibraryContent?.topic_filters?.hubdb_table_id
-  );
-  let searchColumnIds = parseSearchColumnIds(hemoglobinVariantsLibraryContent?.search);
-
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
-
-  let title = hemoglobinVariantsLibraryContent?.title;
-  let eyebrow = hemoglobinVariantsLibraryContent?.eyebrow;
-
-  let tableRows: any = $state([]);
-  let totalItems = $state(0);
-  let hasError = $state(false);
-  let isLoading = $state(false);
-
-  const constructBody = () => {
-    const params = new URLSearchParams(window.location.search);
-    const rangePmFilters = constructRangePmFilters(topicFilters);
-
-    return {
-      sort: '-start_date',
-      tableId: tableId,
-      properties:
-        'document_url,heterozygote_comments,aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
-      limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
-      pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
-      offset:
-        parseInt(params?.get('limit') || `${defaultItemsLimit}`) *
-          (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
-      filters: constructFilterParams(nonNumericFilters),
-      numericComparisonFilters: [...rangePmFilters],
-      isActivated: true,
-    };
-  };
-
-  const fetchData = async () => {
-    try {
-      isLoading = true;
-      const data = await fetchTableRows(constructBody());
-      const { results, total } = data ?? { results: [], total: 0 };
-      tableRows = results;
-      totalItems = total;
-    } catch (error) {
-      hasError = true;
-    } finally {
-      isLoading = false;
-    }
-  };
-
-  const reloadData = () => {
-    hasError = false;
-    fetchData();
-  };
+  const { title, eyebrow, formId, fetchData, reloadData } = portal;
 
   onMount(() => {
     fetchData();
@@ -110,20 +50,20 @@
   id={formId}
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
-  {#key hasError}
-    <Filters isParentLoading={isLoading} {formId}></Filters>
+  {#key portal.hasError}
+    <Filters isParentLoading={portal.isLoading} {formId}></Filters>
   {/key}
   <div class="flex w-full flex-col justify-between">
-    {#if hasError}
+    {#if portal.hasError}
       <div class="p-sm">
         <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
+      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
 
-      <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
+      <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
+        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
         ></PaginationWithLimit>
       </div>
     {/if}

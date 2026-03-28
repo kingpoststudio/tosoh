@@ -7,7 +7,12 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-
+  import { createPortalState } from '../../factories/createPortalState.svelte';
+  import {
+    DEFAULT_ACCESS_LEVEL,
+    PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
+  } from '../../utils/constants';
+  import { setSearchParams } from '../../utils/urlUtils';
   import Card from './Card.svelte';
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import Filters from './Filters.svelte';
@@ -15,83 +20,22 @@
   import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
   import SkeletonCard from './SkeletonCard.svelte';
 
-  import { fetchTableRows } from '../../services/fetchTableRows';
-
-  import {
-    DEFAULT_ACCESS_LEVEL,
-    defaultItemsLimit,
-    defaultPagination,
-    PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
-  } from '../../utils/constants';
-  import { getPaginationParams, setSearchParams } from '../../utils/urlUtils';
-  import {
-    constructFilterParams,
-    constructRangePmFilters,
-    getFilterColumnIds,
-    getFiltersTableId,
-    parseSearchColumnIds,
-  } from '../../utils/utils';
-
-  const SUPPORT_DOCS_PROPERTIES =
-    'f,document_folder,document_url_part,languages,designation,category,linked_product_codes,expiration_date,batch_number';
   const supportPortalDocsContent = window?.Tosoh?.SupportPortalDocsContent;
 
-  const topicFilters = supportPortalDocsContent?.topic_filters?.filters || [];
-  const formId = 'support-portal-docs';
-  let accessLevel = supportPortalDocsContent?.access_level || DEFAULT_ACCESS_LEVEL;
-  let searchColumnIds = parseSearchColumnIds(supportPortalDocsContent?.search);
-  const documentsTableId = getFiltersTableId(
-    PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
-    supportPortalDocsContent?.topic_filters?.hubdb_table_id
-  );
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
-  const rangePmFilters = constructRangePmFilters(topicFilters);
+  const portal = createPortalState({
+    formId: 'support-portal-docs',
+    content: supportPortalDocsContent,
+    prodTableId: PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID,
+    properties:
+      'f,document_folder,document_url_part,languages,designation,category,linked_product_codes,expiration_date,batch_number',
+    isActivated: true,
+    accessLevel: supportPortalDocsContent?.access_level || DEFAULT_ACCESS_LEVEL,
+  });
 
-  let title = supportPortalDocsContent?.title;
-  let description = supportPortalDocsContent?.description;
-
-  let tableRows: any = $state([]);
-  let totalItems = $state(0);
-  let hasError = $state(false);
-  let isLoading = $state(false);
+  const { title, description, searchColumnIds, formId, fetchData, reloadData } = portal;
 
   const defaultLanguage = supportPortalDocsContent?.default_language;
   const viewAs = 'list';
-
-  const constructBody = () => {
-    const { limit, pagination, offset } = getPaginationParams(defaultItemsLimit, defaultPagination);
-
-    return {
-      tableId: documentsTableId,
-      properties: SUPPORT_DOCS_PROPERTIES,
-      limit,
-      accessLevel,
-      pagination,
-      offset,
-      filters: constructFilterParams(nonNumericFilters),
-      numericComparisonFilters: [...rangePmFilters],
-      isActivated: true,
-    };
-  };
-
-  const fetchData = async () => {
-    try {
-      isLoading = true;
-      const data = await fetchTableRows(constructBody());
-      const { results, total } = data ?? { results: [], total: 0 };
-      tableRows = results;
-      totalItems = total;
-    } catch (error) {
-      hasError = true;
-    } finally {
-      isLoading = false;
-    }
-  };
-
-  const reloadData = () => {
-    hasError = false;
-    fetchData();
-  };
 
   const setDefaultLanguage = () => {
     if (defaultLanguage) {
@@ -128,20 +72,20 @@
   id={formId}
   class={`p-md md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  {#key hasError}
-    <Filters isParentLoading={isLoading} {formId}></Filters>
+  {#key portal.hasError}
+    <Filters isParentLoading={portal.isLoading} {formId}></Filters>
   {/key}
   <div class="flex w-full flex-col justify-between">
-    {#if hasError}
+    {#if portal.hasError}
       <div class="p-sm">
         <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid {tableRows} {isLoading} {viewAs} {Card} {SkeletonCard}></ItemsGrid>
+      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {viewAs} {Card} {SkeletonCard}></ItemsGrid>
 
-      <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
+      <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
+        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
         ></PaginationWithLimit>
       </div>
     {/if}
