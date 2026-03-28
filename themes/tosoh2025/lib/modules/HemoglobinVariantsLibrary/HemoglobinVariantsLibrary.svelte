@@ -27,7 +27,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
 
@@ -39,9 +39,9 @@
     PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
     hemoglobinVariantsLibraryContent?.topic_filters?.hubdb_table_id
   );
-  let searchColumnId = parseSearchColumnId(hemoglobinVariantsLibraryContent?.search);
+  let searchColumnIds = parseSearchColumnIds(hemoglobinVariantsLibraryContent?.search);
 
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
 
   let title = hemoglobinVariantsLibraryContent?.title;
   let eyebrow = hemoglobinVariantsLibraryContent?.eyebrow;
@@ -119,7 +119,9 @@
   id={formId}
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading} {formId}></Filters>
+  {#key hasError}
+    <Filters isParentLoading={isLoading} {formId}></Filters>
+  {/key}
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">

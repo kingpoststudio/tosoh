@@ -23,7 +23,7 @@
     disabled?: boolean;
     formId: string;
     isActivatedQuery?: boolean;
-    manualTableId?: string;
+    manualTableId?: any;
     onReset: (searchCb: () => void) => void;
     searchFromFields: Search;
   } = $props();
