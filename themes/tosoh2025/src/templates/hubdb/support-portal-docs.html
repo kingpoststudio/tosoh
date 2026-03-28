@@ -8,8 +8,10 @@
 
 {% block body %}
   <main>
-    {% module 'support_portal_docs' path="../../modules/hubdb/SupportPortalDocs" %}
     {% dnd_area 'main_dnd' %}
+    {% end_dnd_area %}
+    {% module 'support_portal_docs' path="../../modules/hubdb/SupportPortalDocs" %}
+    {% dnd_area 'main_dnd2' %}
     {% end_dnd_area %}
   </main>
 {% endblock body %}
