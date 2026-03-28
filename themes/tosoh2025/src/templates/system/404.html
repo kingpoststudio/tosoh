@@ -7,8 +7,16 @@
 {% extends "../layouts/base.html" %}
 
 {% block body %}
+  {# Config Settings #}
+  {% set four_zero_four_template_config = widget_data.global_config_settings.four_zero_four_template_config %}
+  {% set title = four_zero_four_template_config.title or "Page not found." %}
+  {% set description = four_zero_four_template_config.description or 'The page you requested does not exist. Please click the button below to return to the homepage.' %}
+  {% set go_home_label = four_zero_four_template_config.go_home_label or 'Go Home' %}
+  {% set go_home_url = four_zero_four_template_config.go_home_url or {url:{href: '/'}} %}
+
   <main>
-    <div class="p-lg gap-md max-w-max-page mt-header-height m-auto flex flex-col items-center justify-center">
+    <div
+      class="p-lg gap-md max-w-max-page m-auto flex h-[calc(100vh-var(--spacing-header-height))] min-h-fit flex-col items-center justify-center">
       <svg viewBox="0 0 477.065 477.065" width="64" height="64" style="color:var(--color-imperial-red);">
         <g style="fill:currentColor;">
           <path
@@ -21,9 +29,14 @@
             d="M355.531,195.779h-3.338v-55.238c0-2.942-2.377-5.319-5.311-5.319h-21.307c-1.832,0-3.54,0.948-4.503,2.509l-35.78,57.59   c-1.164,1.856-1.77,3.999-1.77,6.189v7.065c0,2.944,2.376,5.319,5.311,5.319h40.469v13.192c0,6.321,5.125,11.445,11.445,11.445   c6.321,0,11.446-5.124,11.446-11.445v-13.192h3.338c5.001,0,9.055-4.053,9.055-9.061   C364.585,199.832,360.532,195.779,355.531,195.779z M329.302,172.889v22.89h-23.201v-0.318l13.822-22.572   c3.494-6.515,6.195-12.556,9.535-19.226h0.636C329.612,160.333,329.302,166.692,329.302,172.889z" />
         </g>
       </svg>
-      <h3>Page not found.</h3>
-      <p>The page you requested does not exist. Please click the button below to return to the homepage.</p>
-      <a class="button w-fit" href="/">Go Home</a>
+      <h3>{{ title }}</h3>
+      <p>{{ description }}</p>
+      <a
+        class="button w-fit"
+        href="{{ go_home_url.url.href }}"
+        target="{{ go_home_url.open_in_new_tab ? '_blank' : '_self' }}">
+        {{ go_home_label }}
+      </a>
     </div>
     <br />
     <br />

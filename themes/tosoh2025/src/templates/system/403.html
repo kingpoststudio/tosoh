@@ -11,14 +11,28 @@
 {% endblock %}
 
 {% block body %}
-  {% call macros.auth_wrapper() %}
+
+  {# Config Settings #}
+  {% set four_zero_three_template_config = widget_data.global_config_settings.four_zero_three_template_config %}
+  {% set title = four_zero_three_template_config.title or "You don't have access to view this page" %}
+  {% set sign_in_label = four_zero_three_template_config.sign_in_label or 'Sign In' %}
+  {% set sign_in_url = four_zero_three_template_config.sign_in_url or {url:{href: '/_hcms/mem/login'}} %}
+
+  {# Auth Wrapper Config Settings #}
+
+  {% call macros.auth_wrapper(widget_data) %}
     <div class="gap-base flex flex-col">
       {%
         module "content"
         path="@hubspot/rich_text",
-        html="<h2 class='font-semibold'>You don't have access to view this page</h2>"
+        html="<h2 class='font-semibold'>{{ title }}</h2>"
       %}
-      <a href="/_hcms/mem/login" class="button w-fit">Sign In</a>
+      <a
+        href="{{ sign_in_url.url.href }}"
+        target="{{ sign_in_url.open_in_new_tab ? '_blank' : '_self' }}"
+        class="button w-fit">
+        {{ sign_in_label }}
+      </a>
     </div>
   {% endcall %}
 {% endblock %}
