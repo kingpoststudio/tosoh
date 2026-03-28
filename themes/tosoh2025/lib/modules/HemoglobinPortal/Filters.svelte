@@ -1,9 +1,6 @@
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte';
-  import {
-    IS_MOCK,
-    PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
-  } from '../../utils/constants';
+  import { IS_MOCK, PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
@@ -41,7 +38,7 @@
   const windowTosohPortaleEmogiobineContent = window?.Tosoh?.HemoglobinPortalContent;
   const searchFromFields = windowTosohPortaleEmogiobineContent?.search;
   const searchColumnIds = parseSearchColumnIds(searchFromFields);
-    const searchTableId = PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID;
+  const searchTableId = PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID;
 
   const filtersTableId = getFiltersTableId(
     PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
@@ -190,7 +187,7 @@
 
       filtersFromFields.forEach((columnId: ColumnId) => {
         if (searchColumnIds?.includes(columnId as string)) return;
-        
+
         const columnOptions = getMemoizedFilterOptionsForColumnWithTolerance(
           data,
           columnId,
@@ -208,7 +205,6 @@
       allAvailableFiltersWithTheirOptions = extractFilterOptions(data);
     }
   };
-
 
   onMount(() => {
     fetchInitialData();
