@@ -3,7 +3,6 @@
   import { IS_MOCK, PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID } from '../../utils/constants';
   import { setClearParams, setSearchParams, updateUrlFromCheckbox } from '../../utils/urlUtils';
 
-  import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
   import SearchInput from '../../components/Search/Search.svelte';
   import FilterForm from '../../components/FiltersForm/FiltersForm.svelte';
 

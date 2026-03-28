@@ -26,7 +26,7 @@
     constructFilterParams,
     constructRangePmFilters,
     getFilterColumnIds,
-    parseSearchColumnId,
+    parseSearchColumnIds,
     getFiltersTableId,
   } from '../../utils/utils';
 
@@ -36,13 +36,13 @@
   const formId = 'support-portal';
   let accessLevel = supportPortalContent?.access_level || 'Customer';
 
-  let searchColumnId = parseSearchColumnId(supportPortalContent?.search);
+  let searchColumnIds = parseSearchColumnIds(supportPortalContent?.search);
   const tableId = getFiltersTableId(
     PROD_TOSOH_SUPPORT_PORTAL_TABLE_ID,
     supportPortalContent?.topic_filters?.hubdb_table_id
   );
 
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
+  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', searchColumnIds) || [];
   const rangePmFilters = constructRangePmFilters(topicFilters);
 
   let title = supportPortalContent?.title;
@@ -131,7 +131,9 @@
   id={formId}
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || description ? '' : 'mt-lg'}`}
 >
-  <Filters isParentLoading={isLoading} {viewAs} {handleChangeView} {formId}></Filters>
+  {#key hasError}
+    <Filters isParentLoading={isLoading} {viewAs} {handleChangeView} {formId}></Filters>
+  {/key}
   <div class="flex w-full flex-col justify-between">
     {#if hasError}
       <div class="p-sm">
