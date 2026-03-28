@@ -190,9 +190,9 @@
         {#if auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0}
           <div class="aux">
             {#each auxiliaryMenu.children ?? [] as item}
-              <a href={item.url} class="link" target={item?.linkTarget || '_self'}
-                >{@html item.label}</a
-              >
+              <a href={item.url} class="link" target={item?.linkTarget || '_self'}>
+                {@html item.label}
+              </a>
             {/each}
           </div>
         {/if}
