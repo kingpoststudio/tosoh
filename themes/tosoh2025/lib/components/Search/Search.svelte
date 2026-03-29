@@ -45,7 +45,7 @@
   const activeFilter = columnIds.find((colId) => urlParams.get(colId))
     ? urlParams.get(columnIds.find((colId) => urlParams.get(colId)) as string)
     : '';
-  const activeColumnId = columnIds.find((colId) => urlParams.get(colId)) || '';
+  let activeColumnId = $state(columnIds.find((colId) => urlParams.get(colId)) || '');
 
   interface MatchResult {
     value: string;
@@ -61,6 +61,7 @@
   const handleFetch = (searchTerm: string, columnId: string) => {
     showDropdown = false;
     searchValue = searchTerm;
+    activeColumnId = columnId;
 
     onReset?.(() => {
       setSearchParams({ [columnId]: searchTerm });
@@ -185,7 +186,7 @@
       <div class="gap-sm flex flex-col">
         {#if title}
           <div class="gap-sm flex items-center">
-            <label for={columnIds[0]} class=" text-xl font-black">{title}</label>
+            <label for={activeColumnId || columnIds[0]} class=" text-xl font-black">{title}</label>
           </div>
         {/if}
         <div
@@ -194,7 +195,7 @@
           <input
             bind:value={searchValue}
             oninput={typeaheadEnabled ? fetchMatches : () => {}}
-            name={columnIds[0]}
+            name={activeColumnId || columnIds[0]}
             class=" p-base placeholder:text-default focus:ring-imperial-red focus:outline-imperial-red h-full w-full rounded-md pr-8 focus:outline-none focus:ring-1 disabled:cursor-not-allowed disabled:opacity-50"
             placeholder={placeholder || 'Search here...'}
             {disabled}
