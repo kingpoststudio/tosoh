@@ -60,17 +60,17 @@ exports.main = async (req: any) => {
     const resolveForeignIdFilters = () => {
       const foreignIdCols = tableCols?.filter(
         (col: ColumnDef) =>
-          col.type === "FOREIGN_ID" &&
-          col.foreignIds?.length &&
-          filters?.[col.name],
+          col?.type === "FOREIGN_ID" &&
+          col?.foreignIds?.length &&
+          filters?.[col?.name],
       );
 
       for (const col of foreignIdCols || []) {
         try {
-          const decoded = decodeURIComponent(filters[col.name]);
+          const decoded = decodeURIComponent(filters[col?.name]);
           const decodedLower = decoded.trim().toLowerCase();
 
-          const matchingIds = (col.foreignIds || [])
+          const matchingIds = (col?.foreignIds || [])
             .filter(
               (entry) => entry.name?.trim().toLowerCase() === decodedLower,
             )
