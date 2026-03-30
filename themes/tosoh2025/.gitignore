@@ -33,3 +33,4 @@ hubspot.config.yml
 # Temporary files
 *.tmp
 *.temp
+package-lock.json
