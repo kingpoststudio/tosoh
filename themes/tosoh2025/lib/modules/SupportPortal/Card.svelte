@@ -37,7 +37,7 @@
     })
   );
 
-  let viewHref = $derived(`${window.location?.pathname.replace(/\/+$/, '')}/${item.path}`);
+  let viewHref = $derived(`${window.location.pathname?.replace(/\/+$/, '')}/${item.path}`);
 
   const handleImageError = () => {
     imgSrc = '';

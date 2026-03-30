@@ -5,7 +5,7 @@
 
   const { path } = item;
   const { image, title, document_type } = item?.values;
-  let viewHref = $derived(`${window.location?.pathname.replace(/\/+$/, '')}/${path}`);
+  let viewHref = $derived(`${window.location.pathname?.replace(/\/+$/, '')}/${path}`);
 </script>
 
 <div
