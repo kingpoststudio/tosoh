@@ -39,17 +39,6 @@ const CAROUSEL_OPTIONS = {
   containScroll: 'trimSnaps' as const,
 } as const;
 
-const SUBHEADER_SELECTORS = {
-  ELEMENT: '.subheader',
-  SECTION: 'section',
-  CUSTOM_ELEMENT: 'tosoh-sub-header',
-} as const;
-
-const CSS_VARIABLES = {
-  SUBHEADER_HEIGHT: '--spacing-subheader-height',
-} as const;
-
-const ZERO_HEIGHT = 0;
 
 /**
  * Sets the disabled state of a button based on a condition
@@ -135,85 +124,17 @@ function initializeCarousels() {
   emblaNodes.forEach(initializeCarouselInstance);
 }
 
-/**
- * Updates the CSS variable for subheader height
- */
-function updateSubheaderHeightVariable(height: number) {
-  document.documentElement.style.setProperty(CSS_VARIABLES.SUBHEADER_HEIGHT, `${height}px`);
-}
 
-/**
- * Creates a ResizeObserver to track subheader height changes
- */
-function createSubheaderResizeObserver(sectionElement: HTMLElement) {
-  let lastHeight = 0;
-
-  const resizeObserver = new ResizeObserver((entries) => {
-    for (const entry of entries) {
-      const height = Math.round(entry.contentRect.height);
-
-      if (height !== lastHeight && height > ZERO_HEIGHT) {
-        lastHeight = height;
-        updateSubheaderHeightVariable(height);
-      }
-    }
-  });
-
-  resizeObserver.observe(sectionElement);
-}
-
-/**
- * Sets up dynamic subheader height tracking using ResizeObserver
- */
-function setupSubheaderHeight() {
-  const subheaderElement = document.querySelector(
-    SUBHEADER_SELECTORS.ELEMENT
-  ) as HTMLElement | null;
-
-  if (!subheaderElement) {
-    return;
-  }
-
-  const shadowRoot = subheaderElement.shadowRoot;
-  if (!shadowRoot) {
-    console.warn('Shadow root not found for subheader element');
-    return;
-  }
-
-  const sectionElement = shadowRoot.querySelector(
-    SUBHEADER_SELECTORS.SECTION
-  ) as HTMLElement | null;
-  if (!sectionElement) {
-    console.warn('Section element not found in shadow root');
-    return;
-  }
-
-  createSubheaderResizeObserver(sectionElement);
-}
-
-/**
- * Initializes subheader height tracking when custom element is ready
- */
-function initializeSubheader() {
-  if (customElements.get(SUBHEADER_SELECTORS.CUSTOM_ELEMENT)) {
-    setupSubheaderHeight();
-  } else {
-    customElements.whenDefined(SUBHEADER_SELECTORS.CUSTOM_ELEMENT).then(() => {
-      setupSubheaderHeight();
-    });
-  }
-}
 
 /**
  * Initializes all application components
  */
 function initializeApp() {
-  initializeSubheader();
   initializeCarousels();
 }
 
 // Initialize all components when DOM is ready
 document.addEventListener('DOMContentLoaded', initializeApp);
 
-// Also setup subheader on window load to ensure all resources are loaded
-window.addEventListener('load', setupSubheaderHeight);
+
+
