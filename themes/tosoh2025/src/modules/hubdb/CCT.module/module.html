@@ -5,8 +5,8 @@
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name  or "" %}
 {% set access_level = module.access_level or "all" %}
 {% set docx_logo = module.docx_logo or "" %}
-{% set cct_instruments_table_id = module.cct_instruments_table_id %}
-{% set cct_comparison_table_id = module.cct_comparison_table_id %}
+{% set cct_instruments_table_id = "cct_instruments" %}
+{% set cct_comparison_table_id = "cct_comparison" %}
   
 {% set dynamic_path_settings = module.dynamic_path_settings or {} %}
 {% set dynamic_content_settings = module.dynamic_content_settings or {} %}

@@ -1,8 +1,8 @@
 {% set no_data_message = module.no_data_message %}
 {% set return_to_main_screen_message = module.return_to_main_screen_message %}
 
-{% set cct_instruments_table_id = module.cct_instruments_table_id %}
-{% set cct_comparison_table_id = module.cct_comparison_table_id %}
+{% set cct_instruments_table_id = "cct_instruments" %}
+{% set cct_comparison_table_id = "cct_comparison" %}
 {% set return_to_main_screen_path = module.return_to_main_screen_path %}
 {% set tosoh_instrument_name = request.query_dict.tosoh_instrument_name or "" %}
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name or "" %}

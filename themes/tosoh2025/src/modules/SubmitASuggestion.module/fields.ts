@@ -14,7 +14,7 @@ const generateFields = () => {
         url: {
           content_id: null,
           type: 'INTERNAL',
-          href: '/cct',
+          href: '/competitor-comparison-tool',
         },
         open_in_new_tab: false,
         no_follow: false,

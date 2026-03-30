@@ -1,17 +1,8 @@
-import { groupField, hubDbTableField, linkField, richTextField, textField } from 'hs-fieldkit';
+import { groupField, linkField, richTextField, textField } from 'hs-fieldkit';
 import { contentBlockRtfFeatures } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
-    hubDbTableField('cct_instruments_table_id', 'CCT Instruments Table', {
-      inline_help_text: 'The hubDB table that contains the CCT details data.',
-      required: true,
-    }),
-    hubDbTableField('cct_comparison_table_id', 'CCT Comparison Table', {
-      inline_help_text: 'The hubDB table that contains the CCT comparison data.',
-      required: true,
-    }),
-
     groupField('dynamic_content_settings', 'Dynamic Content Settings', {
       children: [
         textField('details_title', 'Details Title', {
@@ -44,7 +35,7 @@ const generateFields = () => {
         url: {
           content_id: null,
           type: 'INTERNAL',
-          href: '/cct',
+          href: '/competitor-comparison-tool',
         },
       },
     }),

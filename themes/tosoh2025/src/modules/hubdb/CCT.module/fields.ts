@@ -1,7 +1,6 @@
 import {
   choiceField,
   groupField,
-  hubDbTableField,
   imageField,
   linkField,
   richTextField,
@@ -21,14 +20,6 @@ const generateFields = () => {
       inline_help_text:
         "If you select 'All', the module will display all instruments. If you select a specific access level, the module will only display instruments with that access level.",
       default: 'all',
-    }),
-    hubDbTableField('cct_instruments_table_id', 'CCT Instruments Table', {
-      inline_help_text: 'The hubDB table that contains the CCT instruments data.',
-      required: true,
-    }),
-    hubDbTableField('cct_comparison_table_id', 'CCT Comparison Table', {
-      inline_help_text: 'The hubDB table that contains the CCT comparison data.',
-      required: true,
     }),
     groupField('dynamic_path_settings', 'Dynamic Path Settings', {
       inline_help_text:
@@ -88,13 +79,9 @@ const generateFields = () => {
     imageField('docx_logo', 'Document Logo', {
       inline_help_text: 'The logo to display in the document header.',
     }),
-    textField('title', 'Title', {
-      default: 'Competitor Comparison Tool (CCT)',
-    }),
+    textField('title', 'Title'),
     richTextField('description', 'Description', {
       enabled_features: contentBlockRtfFeatures,
-      default:
-        'Your centralized hub for technical assistance, product resources, and expert guidance across Tosoh Comparison Tool.',
     }),
     richTextField('no_instrument_selected_message', 'No instrument selected message', {
       enabled_features: contentBlockRtfFeatures,
