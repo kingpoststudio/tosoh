@@ -5,14 +5,21 @@
 {% set competitor_instrument_name = request.query_dict.competitor_instrument_name  or "" %}
 {% set access_level = module.access_level or "all" %}
 {% set docx_logo = module.docx_logo or "" %}
-{% set all_instruments = access_level == 'all' ? hubdb_table_rows("cct_instruments",'&active__eq=true') : hubdb_table_rows("cct_instruments",'&active__eq=true&access_level__contains='~access_level) %}
+{% set cct_instruments_table_id = "cct_instruments" %}
+{% set cct_comparison_table_id = "cct_comparison" %}
+  
+{% set dynamic_path_settings = module.dynamic_path_settings or {} %}
+{% set dynamic_content_settings = module.dynamic_content_settings or {} %}
+
+{% set all_instruments = access_level == 'all' ? hubdb_table_rows(cct_instruments_table_id,'&active__eq=true') : hubdb_table_rows(cct_instruments_table_id,'&active__eq=true&access_level__contains='~access_level) %}
+{% set all_instruments_for_competitor = hubdb_table_rows(cct_instruments_table_id,'&active__eq=true') %}
 
 {% set all_product_lines = all_instruments|selectattr('product_line')|map(attribute='product_line')|unique %}
 {% set instruments_based_on_product_line = product_line == 'all' ? all_instruments|selectattr('company.name', 'equalto', 'Tosoh')|map(attribute='product_name')|unique : all_instruments|selectattr('company.name', 'equalto', 'Tosoh')|selectattr('product_line.name', 'equalto', product_line)|map(attribute='product_name')|unique %}
 {% set active_competitor_instruments = [] %}
  
  {% if tosoh_instrument_name %}
-  {% set active_comparison_rows_based_on_tosoh_instrument = hubdb_table_rows("cct_comparison", '&tosoh_instrument_name__in='~tosoh_instrument_name) %}
+  {% set active_comparison_rows_based_on_tosoh_instrument = hubdb_table_rows(cct_comparison_table_id, '&tosoh_instrument_name__in='~tosoh_instrument_name) %}
     
     {% for row in active_comparison_rows_based_on_tosoh_instrument %}
       {% for foreign_row in row.competitor_instrument_name %}
@@ -22,9 +29,10 @@
 {% endif %} 
 
 {% set tosoh_instrument = all_instruments|selectattr('product_name', 'equalto', tosoh_instrument_name)|first %} 
-{% set competitor_instrument = all_instruments|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
+{% set competitor_instrument = all_instruments_for_competitor|selectattr('product_name', 'equalto', competitor_instrument_name)|first %}
 
-{% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows("cct_comparison",'&tosoh_instrument_name__in='~tosoh_instrument_name~"&competitor_instrument_name__in="~competitor_instrument_name) : [] %}
+
+{% set comparison_rows = (tosoh_instrument_name and competitor_instrument_name) ? hubdb_table_rows(cct_comparison_table_id,'&tosoh_instrument_name__in='~tosoh_instrument_name~"&competitor_instrument_name__in="~competitor_instrument_name) : [] %}
 {% set general_comparison_row = comparison_rows|selectattr('category.name', 'equalto', 'General Comparison')|first %}
  
 
@@ -41,7 +49,39 @@
   const competitorInstrument = {{ competitor_instrument|tojson }};
   const comparisonRows = {{ comparison_rows|tojson }};
   const docxLogo = {{ docx_logo|tojson }};
-  window.Tosoh.CCT = { allInstruments, activeCompetitorInstruments, allProductLines, instrumentsBasedOnProductLine, tosohInstrument, competitorInstrument, comparisonRows, docxLogo };
+  const cctDetailsPath = {{ dynamic_path_settings.cct_details_path|tojson }};
+  const submitASuggestionPath = {{ dynamic_path_settings.submit_a_suggestion_path|tojson }};
+
+  {# Dynamic Content Settings #}
+  const filtersSidebarTitle = {{ dynamic_content_settings.filters_sidebar_title|tojson }};
+  const productLineTitle = {{ dynamic_content_settings.product_line_title|tojson }};
+  const tosohInstrumentTitle = {{ dynamic_content_settings.tosoh_instrument_title|tojson }};
+  const competitorInstrumentTitle = {{ dynamic_content_settings.competitor_instrument_title|tojson }};
+  const printColumnsTitle = {{ dynamic_content_settings.print_columns_title|tojson }};
+  const printButtonLabel = {{ dynamic_content_settings.print_button_label|tojson }};
+  const detailsButtonLabel = {{ dynamic_content_settings.details_button_label|tojson }};
+  const submitASuggestionButtonLabel = {{ dynamic_content_settings.submit_a_suggestion_button_label|tojson }};
+
+  window.Tosoh.CCT = { 
+    allInstruments,
+    activeCompetitorInstruments, 
+    allProductLines, 
+    instrumentsBasedOnProductLine, 
+    tosohInstrument, 
+    competitorInstrument, 
+    comparisonRows, 
+    docxLogo, 
+    cctDetailsPath, 
+    submitASuggestionPath,
+    filtersSidebarTitle,
+    productLineTitle,
+    tosohInstrumentTitle,
+    competitorInstrumentTitle,
+    printColumnsTitle,
+    printButtonLabel,
+    detailsButtonLabel,
+    submitASuggestionButtonLabel,
+  };
   </script>
 {% end_require_js %}
 
