@@ -22,8 +22,6 @@
 {% set first_part_of_matches_text = dynamic_content_settings.first_part_of_matches_text or 'of' %}
 {% set second_part_of_matches_text = dynamic_content_settings.second_part_of_matches_text or 'matches' %}
 
-
-
 {% set table_columns = [
     {label: "Category"},
     {label: "Status"},
@@ -52,7 +50,6 @@
 
  {% endmacro %}
 
-
 <div class="max-w-max-page p-md md:pl-2xl md:pr-2xl gap-md m-auto flex flex-col">
   {% if tosoh_instrument_name and competitor_instrument_name %}
 
@@ -68,10 +65,6 @@
         const searchPlaceholder = {{ dynamic_content_settings.search_placeholder|tojson }};
         const firstPartOfMatchesText = {{ dynamic_content_settings.first_part_of_matches_text|tojson }};
         const secondPartOfMatchesText = {{ dynamic_content_settings.second_part_of_matches_text|tojson }};
-
-
-        console.log('{{ comparison_rows|tojson }}');
-
 
         window.Tosoh.CCTDetails = { comparisonRows, resetButtonLabel, selectCategoryPlaceholder, searchPlaceholder, firstPartOfMatchesText, secondPartOfMatchesText };
         </script>
