@@ -73,7 +73,7 @@
             viewBox="0 0 35 35"
             fill="none"
           >
-            <rect width="35" height="35" rx="17.5" fill="#E4032D" />
+            <rect width="35" height="35" rx="17.5" fill="var(--color-imperial-red)" />
             <path
               d="M23.5 14.5L17.5 20.5L11.5 14.5"
               stroke="white"
@@ -100,13 +100,13 @@
   }
 
   .accordion-wrapper.action.isOpen {
-    background-color: #ffffff14;
+    background-color: rgba(255, 255, 255, 0.08);
     transition: background-color 0.2s ease-in-out;
     border-top-left-radius: 0.5rem;
     border-top-right-radius: 0.5rem;
   }
   .accordion-wrapper.reveal.isOpen {
-    background-color: #ffffff14;
+    background-color: rgba(255, 255, 255, 0.08);
     transition: background-color 0.2s ease-in-out;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
