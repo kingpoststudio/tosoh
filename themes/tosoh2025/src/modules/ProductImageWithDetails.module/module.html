@@ -209,7 +209,7 @@
         {% if download_brochure_url.url.href %}
           <a
             href="{{ download_brochure_url.url.href }}"
-            target="{{ download_brochure_url.url.open_in_new_tab ? '_blank' : '_self' }}"
+            target="{{ download_brochure_url.open_in_new_tab ? '_blank' : '_self' }}"
             class="button p-sm! outlined gap-2xs flex w-full items-center justify-center rounded-xl text-sm whitespace-nowrap md:max-w-[12rem]">
             {{ download_brochure_button_label }}
             <svg
