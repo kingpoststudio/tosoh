@@ -1,5 +1,5 @@
 import { groupField, hubDbTableField, linkField, textField } from 'hs-fieldkit';
-import { systemPageFields } from '../../../lib/utils/fieldUtils';
+import { systemPageFields } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
