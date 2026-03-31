@@ -45,7 +45,7 @@
     });
   };
 
-  const destoryPlaceholder = () => {
+  const destroyPlaceholder = () => {
     document.querySelectorAll('.active-product-image-placeholder').forEach((placeholder) => {
       placeholder.remove();
     });
@@ -53,7 +53,7 @@
 
   onMount(() => {
     assignOnClick();
-    destoryPlaceholder();
+    destroyPlaceholder();
   });
   onDestroy(() => mainImageHandler());
 </script>
