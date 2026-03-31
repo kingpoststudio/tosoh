@@ -6,7 +6,7 @@ const generateFields = () => {
     groupField('dynamic_content_settings', 'Dynamic Content Settings', {
       children: [
         textField('details_title', 'Details Title', {
-          default: 'Details for',
+          default: 'Details for TOSOH :',
         }),
         textField('versus_text', 'Versus Text', {
           default: 'versus',

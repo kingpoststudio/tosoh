@@ -35,12 +35,12 @@
   ] %}
 
 {% macro return_to_main_screen_button(instruments_are_selected) %}
-{% set href = instruments_are_selected ? "{{return_to_main_screen_path.url.href}}?tosoh_instrument_name={{ tosoh_instrument_name }}&competitor_instrument_name={{ competitor_instrument_name }}" : "{{return_to_main_screen_path.url.href}}" %}
+{% set href = instruments_are_selected ? "{{ return_to_main_screen_path.url.href }}?tosoh_instrument_name={{ tosoh_instrument_name }}&competitor_instrument_name={{ competitor_instrument_name }}" : "{{ return_to_main_screen_path.url.href }}" %}
 
   <a
   href="{{ href }}"
   target="{{ return_to_main_screen_path.open_in_new_tab ? '_blank' : '_self' }}"
-  rel="{{ return_to_main_screen_path.rel}}"
+  rel="{{ return_to_main_screen_path.rel }}"
   class="button plain text-nickel! mb-md w-fit! flex items-center transition-colors hover:text-gray-800">
   <svg class="mr-sm h-sm w-sm" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -59,7 +59,6 @@
       {% require_js position="head" %}
         <script>
         const comparisonRows = {{ comparison_rows|tojson }};
-        {# Dynamic Content Settings #}
         const resetButtonLabel = {{ dynamic_content_settings.reset_button_label|tojson }};
         const selectCategoryPlaceholder = {{ dynamic_content_settings.select_category_placeholder|tojson }};
         const searchPlaceholder = {{ dynamic_content_settings.search_placeholder|tojson }};
@@ -74,7 +73,7 @@
       {{ return_to_main_screen_button(true) }}
 
       <h3 class="mb-sm text-3xl font-bold text-gray-900">
-        {{ details_title }} TOSOH : {{ tosoh_instrument.product_name }} {{ versus_text }} {{ competitor_instrument.company.label }} : {{ competitor_instrument.product_name }}
+        {{ details_title }} {{ tosoh_instrument.product_name }} {{ versus_text }} {{ competitor_instrument.company.label }} : {{ competitor_instrument.product_name }}
       </h3>
       <div class="text-gray-600">{{ module.description }}</div>
     </div>

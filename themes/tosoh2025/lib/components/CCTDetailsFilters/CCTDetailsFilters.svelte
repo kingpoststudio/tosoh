@@ -33,11 +33,13 @@
         category && self?.findIndex((cat: any) => cat?.id === category?.id) === index
     ) || [];
 
-  const resetButtonLabel = cctDetailsConfig?.resetButtonLabel;
-  const selectCategoryPlaceholder = cctDetailsConfig?.selectCategoryPlaceholder;
-  const searchPlaceholder = cctDetailsConfig?.searchPlaceholder;
-  const firstPartOfMatchesText = cctDetailsConfig?.firstPartOfMatchesText;
-  const secondPartOfMatchesText = cctDetailsConfig?.secondPartOfMatchesText;
+  const {
+    resetButtonLabel = 'Reset',
+    selectCategoryPlaceholder = 'Select a category',
+    searchPlaceholder = 'Search…',
+    firstPartOfMatchesText = 'of',
+    secondPartOfMatchesText = 'matches',
+  } = cctDetailsConfig || {};
 
   const resetSearchInput = () => {
     tableSearchManager.clearHighlights();

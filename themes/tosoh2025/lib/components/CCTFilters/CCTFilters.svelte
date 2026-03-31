@@ -75,18 +75,18 @@
     deleteMultipleSearchParams(['competitor_instrument_name']);
   };
 
-  const clearAndReload = (params: string[]) => {
+  const executeCleanReload = (params: string[]) => {
     deleteMultipleSearchParams(params);
     window.location.reload();
   };
 
   const clearOnProductLineReset = () =>
-    clearAndReload(['product_line', 'tosoh_instrument_name', 'competitor_instrument_name']);
+    executeCleanReload(['product_line', 'tosoh_instrument_name', 'competitor_instrument_name']);
 
   const clearOnTosohInstrumentReset = () =>
-    clearAndReload(['tosoh_instrument_name', 'competitor_instrument_name']);
+    executeCleanReload(['tosoh_instrument_name', 'competitor_instrument_name']);
 
-  const clearOnCompetitorInstrumentReset = () => clearAndReload(['competitor_instrument_name']);
+  const clearOnCompetitorInstrumentReset = () => executeCleanReload(['competitor_instrument_name']);
 
   const onChange = (event: Event) => {
     let name = (event?.target as HTMLSelectElement)?.name;
@@ -142,10 +142,14 @@
   const customDisabledOption = (option: any) => {
     return option.sufficient_data_status === 'non_sufficient_data';
   };
+
+  let detailsButtonHref = $derived(
+    `${cctDetailsPath?.url?.href || ''}?tosoh_instrument_name=${tosohInstrumentSelectValue}&competitor_instrument_name=${competitorInstrumentSelectValue}`
+  );
 </script>
 
 <div
-  class="bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-[8rem] lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem]"
+  class="bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-32 lg:z-10 lg:min-w-64 xl:min-w-80"
 >
   <div class="flex w-full items-center justify-between">
     <p class="font-sans-narrow text-2xl font-semibold">{filtersSidebarTitle}</p>
@@ -222,7 +226,7 @@
       {printButtonLabel}
     </button>
     <a
-      href={`${cctDetailsPath?.url?.href || ''}?tosoh_instrument_name=${tosohInstrumentSelectValue}&competitor_instrument_name=${competitorInstrumentSelectValue}`}
+      href={detailsButtonHref}
       target={cctDetailsPath?.open_in_new_tab ? '_blank' : '_self'}
       rel={cctDetailsPath?.no_follow ? 'nofollow' : ''}
       class={`button mt-sm! block w-full! text-center hover:bg-red-50 ${!isTosohInstrumentSelected || !isCompetitorInstrumentSelected ? 'cursor-not-allowed opacity-50' : ''}`}
