@@ -80,7 +80,7 @@
           {% set isRevealed = groupIndex == 0 ? "isRevealed=\"true\"" : null %}
 
           <tosoh-reveal-group groupId="{{ groupIndex }}" {{ isRevealed }}>
-            <div class="gap-base mx-auto grid w-fit grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-4">
+            <div class="gap-base mx-auto grid w-full grid-cols-1 justify-center sm:grid-cols-2 lg:grid-cols-4">
               {% for post in group %}
                 {% if post %}
                   {{ render_listing(post) }}

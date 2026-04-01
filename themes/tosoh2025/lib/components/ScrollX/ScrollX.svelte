@@ -13,6 +13,8 @@
     scrollbarTrackColor = 'var(--color-ghost-white)',
   } = $props();
 
+  const MIN_THUMB_WIDTH_PX = 20;
+
   let scrollContainer: HTMLDivElement | null = null;
   let scrollTrack: HTMLDivElement | null = $state(null);
   let scrollThumb: HTMLDivElement | null = $state(null);
@@ -28,7 +30,7 @@
   const canScroll = $derived(scrollWidth > clientWidth);
   const maxScrollLeft = $derived(scrollWidth - clientWidth);
   const scrollRatio = $derived(clientWidth / scrollWidth);
-  const thumbWidth = $derived(Math.max(trackWidth * scrollRatio, 20));
+  const thumbWidth = $derived(Math.max(trackWidth * scrollRatio, MIN_THUMB_WIDTH_PX));
   const thumbLeft = $derived(
     maxScrollLeft > 0 ? (scrollLeft / maxScrollLeft) * (trackWidth - thumbWidth) : 0
   );

@@ -1,8 +1,44 @@
-import { richTextField } from 'hs-fieldkit';
+import { groupField, linkField, richTextField, textField } from 'hs-fieldkit';
 import { contentBlockRtfFeatures } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
+    groupField('dynamic_content_settings', 'Dynamic Content Settings', {
+      children: [
+        textField('details_title', 'Details Title', {
+          default: 'Details for TOSOH :',
+        }),
+        textField('versus_text', 'Versus Text', {
+          default: 'versus',
+        }),
+        textField('first_part_of_matches_text', 'First Part of Matches Text', {
+          default: 'of ',
+        }),
+        textField('second_part_of_matches_text', 'Second Part of Matches Text', {
+          default: ' matches',
+        }),
+        textField('search_placeholder', 'Search Placeholder', {
+          default: 'Search in table...',
+        }),
+        textField('select_category_placeholder', 'Select Category Placeholder', {
+          default: 'Select Category',
+        }),
+        textField('reset_button_label', 'Reset Button Label', {
+          default: 'Reset',
+        }),
+      ],
+    }),
+    linkField('return_to_main_screen_path', 'Return to CCT Tool Path', {
+      inline_help_text: 'The URL to the main CCT Tool screen.',
+      required: true,
+      default: {
+        url: {
+          content_id: null,
+          type: 'INTERNAL',
+          href: '/competitor-comparison-tool',
+        },
+      },
+    }),
     richTextField('description', 'Description', {
       enabled_features: contentBlockRtfFeatures,
     }),

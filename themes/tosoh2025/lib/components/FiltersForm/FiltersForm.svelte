@@ -38,6 +38,7 @@
   let formElement: HTMLFormElement | null = $state(null);
   let formManager: FormManagerInstance | null = $state(null);
   let debounceTimeout: Timer | null = null;
+  const DEBOUNCE_DELAY_MS = 100;
 
   const initiateFormManager = () => {
     if (formElement && !formManager) {
@@ -79,7 +80,7 @@
         }
         initiateFormManager();
       }
-    }, 100);
+    }, DEBOUNCE_DELAY_MS);
   };
 
   const clickOutside = on(document, 'click', (event: MouseEvent) => {
