@@ -7,6 +7,12 @@ const columnLabelField = (defaultValue: string) =>
     default: defaultValue,
   });
 
+const noDocumentsFoundMessageField = (defaultValue: string) =>
+  textField('no_documents_found_message', 'No Documents Found Message', {
+    required: true,
+    default: defaultValue,
+  });
+
 const generateFields = () => {
   return [
     choiceField('access_level', 'Access Level', {
@@ -34,16 +40,27 @@ const generateFields = () => {
       required: true,
       inline_help_text:
         'Product code to match the documents to the product. This will be used to filter the documents by product code.',
-    }),
-
+    }), 
     groupField('ifu_documents', 'Instructions For Use (IFU) Documents', {
-      children: [columnLabelField('Instructions For Use (IFU)'), ...lockedGroupFields],
+      children: [
+        columnLabelField('Instructions For Use (IFU)'),
+        noDocumentsFoundMessageField('No IFU documents found for this product.'),
+        ...lockedGroupFields,
+      ],
     }),
     groupField('sds_documents', 'Safety Data Sheets (SDS) Documents', {
-      children: [columnLabelField('Safety Data Sheets (SDS)'), ...lockedGroupFields],
+      children: [
+        columnLabelField('Safety Data Sheets (SDS)'),
+        noDocumentsFoundMessageField('No SDS documents found for this product.'),
+        ...lockedGroupFields,
+      ],
     }),
     groupField('cofa_documents', 'Certificates of Analysis (CofA) Documents', {
-      children: [columnLabelField('Certificates of Analysis (CofA)'), ...lockedGroupFields],
+      children: [
+        columnLabelField('Certificates of Analysis (CofA)'),
+        noDocumentsFoundMessageField('No CofA documents found for this product.'),
+        ...lockedGroupFields,
+      ],
     }),
     ...relatedDocumentsSharedFields,
   ];
