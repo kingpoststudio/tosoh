@@ -97,6 +97,7 @@
 
   <tosoh-tab-group variant="tab" groupId="{{ cofa_settings.column_label }}">
     <div class="gap-base flex flex-col">
+      {# Each product can have multiple CofA documents #}
       {% if cofa_documents|length > 0 %}
         {% for document in cofa_documents %}
           {% for language in document.languages %}
