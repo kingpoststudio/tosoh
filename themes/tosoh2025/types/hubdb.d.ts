@@ -17,6 +17,20 @@ export type ColumnId =
   | keyof PortaleEmogiobineItem['values']
   | keyof CCTComparison['values']
   | keyof CCTInstrumentForFilter['values']
-  | string;
+  | string
+  | number;
 
 export type FilterWithOptions = Record<ColumnId, ColumnItem[]>;
+
+export type Link = {
+  no_follow: boolean;
+  open_in_new_tab: boolean;
+  rel: string;
+  sponsored: boolean;
+  url: {
+    content_id: string | null;
+    href: string;
+    href_with_scheme: string;
+    type: string;
+  };
+};

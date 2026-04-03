@@ -7,94 +7,25 @@
 
 <script lang="ts">
   import { onMount } from 'svelte';
-
+  import { createPortalState } from '../../factories/createPortalState.svelte';
+  import { PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID } from '../../utils/constants';
   import Filters from './Filters.svelte';
   import ErrorCard from '../../components/ErrorCard/ErrorCard.svelte';
-
-  import {
-    defaultItemsLimit,
-    defaultPagination,
-    IS_MOCK,
-    PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
-  } from '../../utils/constants';
   import PaginationWithLimit from '../../components/Pagination/Pagination.svelte';
   import Card from './Card.svelte';
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
-  import { fetchTableRows } from '../../services/fetchTableRows';
-  import { mockPortaleEmogiobineTableRowsResponse } from './mock';
-  import {
-    constructFilterParams,
-    constructRangePmFilters,
-    getFilterColumnIds,
-    parseSearchColumnId,
-    getFiltersTableId,
-  } from '../../utils/utils';
-  const formId = 'portale-emogiobine-filters';
 
-  const portaleEmogiobineContent = window?.Tosoh?.HemoglobinPortalContent;
-  const topicFilters = portaleEmogiobineContent?.topic_filters?.filters || [];
-  const tableId = getFiltersTableId(
-    PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
-    portaleEmogiobineContent?.topic_filters?.hubdb_table_id
-  );
-  let searchEnabled = portaleEmogiobineContent?.search?.enable_search;
-  let searchColumnId = parseSearchColumnId(portaleEmogiobineContent?.search);
+  const portal = createPortalState({
+    formId: 'portale-emogiobine-filters',
+    content: window?.Tosoh?.HemoglobinPortalContent,
+    prodTableId: PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
+    properties:
+      'name,summary,sex,patient_dob,ethnicity,history,anomaly,blood_count,hemoglobin_status,other,advice,diagnosis,other_diagnosis,attachment_1,attachment_2,attachment_3,attachment_4',
+  });
 
-  let nonNumericFilters = getFilterColumnIds(topicFilters, 'non-numeric', [searchColumnId]) || [];
-
-  let title = portaleEmogiobineContent?.title;
-  let eyebrow = portaleEmogiobineContent?.eyebrow;
-  let description = portaleEmogiobineContent?.description;
-
-  let tableRows: any = $state([]);
-  let totalItems = $state(0);
-  let hasError = $state(false);
-  let isLoading = $state(false);
-
-  const constructBody = () => {
-    const params = new URLSearchParams(window.location.search);
-    const rangePmFilters = constructRangePmFilters(topicFilters);
-
-    return {
-      tableId: tableId,
-      properties:
-        'name,summary,sex,patient_dob,ethnicity,history,anomaly,blood_count,hemoglobin_status,other,advice,diagnosis,other_diagnosis,attachment_1,attachment_2,attachment_3,attachment_4',
-      limit: parseInt(params?.get('limit') || `${defaultItemsLimit}`),
-      pagination: parseInt(params?.get('pagination') || `${defaultPagination}`),
-      offset:
-        parseInt(params?.get('limit') || `${defaultItemsLimit}`) *
-          (parseInt(params?.get('pagination') || `${defaultPagination}`) - 1) || 0,
-      filters: constructFilterParams(nonNumericFilters),
-      numericComparisonFilters: [...rangePmFilters],
-    };
-  };
-
-  const fetchData = async () => {
-    try {
-      isLoading = true;
-      let data;
-
-      if (!IS_MOCK) {
-        data = await fetchTableRows(constructBody());
-      } else {
-        data = mockPortaleEmogiobineTableRowsResponse;
-      }
-
-      const { results, total } = data ?? { results: [], total: 0 };
-      tableRows = results;
-      totalItems = total;
-    } catch (error) {
-      hasError = true;
-    } finally {
-      isLoading = false;
-    }
-  };
-
-  const reloadData = () => {
-    hasError = false;
-    fetchData();
-  };
+  const { title, eyebrow, description, searchEnabled, topicFilters, formId, fetchData, reloadData } =
+    portal;
 
   onMount(() => {
     fetchData();
@@ -122,19 +53,21 @@
   class={`p-md  md:pl-2xl md:pr-2xl gap-base max-w-max-page relative m-auto mb-32 flex w-full flex-col justify-around lg:flex-row ${title || eyebrow ? '' : 'mt-lg'}`}
 >
   {#if topicFilters?.length > 0 || searchEnabled}
-    <Filters isParentLoading={isLoading} {formId}></Filters>
+    {#key portal.hasError}
+      <Filters isParentLoading={portal.isLoading} {formId}></Filters>
+    {/key}
   {/if}
   <div class="flex w-full flex-col justify-between">
-    {#if hasError}
+    {#if portal.hasError}
       <div class="p-sm">
         <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid {tableRows} {isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
+      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
 
-      <div class={`${tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit {totalItems} {fetchData} idToScrollToTop={formId}
+      <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
+        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
         ></PaginationWithLimit>
       </div>
     {/if}

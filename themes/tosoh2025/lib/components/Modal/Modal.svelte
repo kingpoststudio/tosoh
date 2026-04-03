@@ -19,23 +19,26 @@
 
   let dialogEl: HTMLDialogElement | null = $state(null);
 
-  function setModalActive() {
+  const DIALOG_OPEN_DELAY_MS = 50;
+  const DIALOG_CLOSE_DELAY_MS = 300;
+
+  const setModalActive = () => {
     $host().dispatchEvent(
       new CustomEvent('TosohModalOpen', {
         detail: { modalId },
         bubbles: true,
       })
     );
-  }
+  };
 
-  function closeModal() {
+  const closeModal = () => {
     $host().dispatchEvent(
       new CustomEvent('TosohModalClose', {
         detail: { modalId },
         bubbles: true,
       })
     );
-  }
+  };
 
   const escKeyHandler = (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
@@ -69,7 +72,7 @@
           dialogEl.showModal();
           window.addEventListener('keydown', escKeyHandler);
         }
-      }, 50);
+      }, DIALOG_OPEN_DELAY_MS);
     }
   });
 
@@ -82,7 +85,7 @@
           dialogEl.close();
           window.removeEventListener('keydown', escKeyHandler);
         }
-      }, 300);
+      }, DIALOG_CLOSE_DELAY_MS);
     }
   });
 
@@ -180,7 +183,7 @@
       height: 100vh;
       opacity: 0;
       background: rgba(0, 0, 0, 0.174);
-      z-index: 12345;
+      z-index: var(--z-index-modal);
       pointer-events: none;
       transition: opacity 200ms ease-out;
 
