@@ -3,6 +3,7 @@
   import { on } from 'svelte/events';
   import { fade, slide, fly } from 'svelte/transition';
   import type { HubSpotMenu } from '../../../types/hubspot';
+  import LanguagePicker from './components/LanguagePicker/LanguagePicker.svelte';
 
   let menu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.mainNavigationMenu || {});
   let auxiliaryMenu: HubSpotMenu = $state((window as any)?.Tosoh?.Header?.auxiliaryMenu || {});
@@ -10,18 +11,24 @@
   let expandedItems: Set<string> = $state(new Set());
 
   function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
+      closeMenu();
     } else {
-      document.body.style.overflow = '';
+      isMenuOpen = true;
+      document.body.style.overflow = 'hidden';
     }
   }
 
+  const TRANSITION_DURATION = 300;
+
   function closeMenu() {
     isMenuOpen = false;
-    document.body.style.overflow = '';
     expandedItems.clear();
+    setTimeout(() => {
+      if (!isMenuOpen) {
+        document.body.style.overflow = '';
+      }
+    }, TRANSITION_DURATION);
   }
 
   function toggleSubmenu(itemPath: string, event: Event) {
@@ -50,7 +57,7 @@
 
   const keydownHandler = on(window, 'keydown', (e: KeyboardEvent) => {
     if (e.key === 'Escape') {
-      isMenuOpen = false;
+      closeMenu();
     }
   });
 
@@ -63,7 +70,12 @@
   <li class="item level-{level}">
     <div class="content">
       {#if item.url}
-        <a href={item.url} class="link" target={item?.linkTarget || '_self'} onclick={handleLinkClick}>
+        <a
+          href={item.url}
+          class="link"
+          target={item?.linkTarget || '_self'}
+          onclick={handleLinkClick}
+        >
           {@html item.label}
         </a>
       {:else}
@@ -110,28 +122,31 @@
 
 <div class="wrapper">
   <div class="header">
-    <a class="logo" href="/" aria-label="Home" onclick={closeMenu}>
+    <button class="logo" aria-label="Home" onclick={closeMenu}>
       <svelte:element this={'slot'} name="logo" />
-    </a>
-
-    <button
-      class="hamburger"
-      onclick={toggleMenu}
-      aria-expanded={isMenuOpen}
-      aria-label="Toggle navigation menu"
-    >
-      <div class:open={isMenuOpen}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
     </button>
+
+    <div class="language-hamburger-wrapper">
+      <LanguagePicker />
+      <button
+        class="hamburger"
+        onclick={toggleMenu}
+        aria-expanded={isMenuOpen}
+        aria-label="Toggle navigation menu"
+      >
+        <div class:open={isMenuOpen}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
   </div>
 
   {#if isMenuOpen}
     <div
       class="overlay"
-      transition:fade={{ duration: 200 }}
+      transition:fade={{ duration: TRANSITION_DURATION }}
       onclick={closeMenu}
       onkeydown={(e) => e.key === 'Enter' && closeMenu()}
       role="button"
@@ -140,7 +155,7 @@
     >
       <div
         class="menu"
-        transition:fly={{ duration: 300, x: -300 }}
+        transition:fly={{ duration: TRANSITION_DURATION, x: -300 }}
         onclick={(e) => e.stopPropagation()}
         onkeydown={(e) => e.stopPropagation()}
         role="dialog"
@@ -175,7 +190,9 @@
         {#if auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0}
           <div class="aux">
             {#each auxiliaryMenu.children ?? [] as item}
-              <a href={item.url} class="link" target={item?.linkTarget || '_self'}>{@html item.label}</a>
+              <a href={item.url} class="link" target={item?.linkTarget || '_self'}>
+                {@html item.label}
+              </a>
             {/each}
           </div>
         {/if}
@@ -216,6 +233,10 @@
       display: flex;
       align-items: center;
       text-decoration: none;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: background-color 200ms ease-in-out;
     }
 
     /* Hamburger Button */
@@ -224,6 +245,7 @@
       align-items: center;
       justify-content: center;
       padding: 0;
+      flex-shrink: 0;
       background: transparent;
       border: none;
       cursor: pointer;
@@ -268,6 +290,13 @@
         stroke-width: 0.125rem;
       }
     }
+
+    .language-hamburger-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-sm);
+      flex-direction: row;
+    }
   }
 
   /* Mobile Menu Overlay */
@@ -279,6 +308,8 @@
     height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     z-index: var(--z-index-overlay);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 
     &:focus-within {
       .menu {
@@ -297,6 +328,9 @@
       overflow-y: auto;
       overscroll-behavior: contain;
       -webkit-overflow-scrolling: touch;
+      will-change: transform;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
 
       /* Mobile-specific optimizations */
       @media (max-width: 30rem) {
