@@ -3,9 +3,7 @@
 
   const header = window?.Tosoh?.Header;
   const isLanguageSwitcherEnabled = header?.isLanguageSwitcherEnabled || false;
-  const translatedContent = window?.Tosoh?.TranslatedContent;
-  const variants = translatedContent?.variants ?? [];
-  const currentLanguage = translatedContent?.currentLanguage;
+  const { variants = [], currentLanguage } = window?.Tosoh?.TranslatedContent ?? {};
 
   let open = $state(false);
   let pickerRef: HTMLDivElement | undefined = $state();
