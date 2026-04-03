@@ -76,7 +76,7 @@
             path="/TosohTheme2025/modules/hubdb/RelatedEvents"
             events_table_id="{{ events_template_config.events_table_id }}"
             view_details_label="{{ view_details_label }}"
-            events_page_link="{{ events_page_link }}"
+            events_page_link={url:{href: events_page_link.url.href, content_id: events_page_link.url.content_id}, open_in_new_tab: events_page_link.open_in_new_tab}
           %}
         </div>
       </div>
