@@ -1,13 +1,11 @@
 {% import "/TosohTheme2025/templates/partials/macros.html" as macros %}
-{% set tab_group_columns = module.tab_group_columns %}
 {% set logged_in = request_contact.is_logged_in %}
 
 {% set ifu_settings = module.ifu_settings %}
 {% set sds_settings = module.sds_settings %}
 {% set cofa_settings = module.cofa_settings %}
 
-{% set hubdb_tab_group_columns = [ifu_settings, sds_settings, cofa_settings] %}
-{% set all_tab_group_columns = hubdb_tab_group_columns + tab_group_columns %}
+{% set all_tab_group_columns = [ifu_settings, sds_settings, cofa_settings] + module.tab_group_columns %}
 
 {% set sds_documents = hubdb_table_rows(module.hubdb_table_sds,'&linked_product_codes__in='~module.product_code) %}
 {% set ifu_documents = hubdb_table_rows(module.hubdb_table_ifu,'&linked_product_codes__in='~module.product_code) %}
