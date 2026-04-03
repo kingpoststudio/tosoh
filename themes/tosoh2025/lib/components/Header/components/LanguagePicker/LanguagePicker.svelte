@@ -38,8 +38,6 @@
     >
       <svg
         class="globe"
-        width="14"
-        height="14"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -54,7 +52,7 @@
         />
       </svg>
       {currentLanguage}
-      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" class="chevron" class:open>
+      <svg viewBox="0 0 10 6" fill="none" class="chevron" class:open>
         <path
           d="M1 1L5 5L9 1"
           stroke="currentColor"
@@ -83,83 +81,88 @@
   .language-picker {
     position: relative;
     width: fit-content;
-  }
 
-  .language-trigger {
-    appearance: none;
-    background: transparent;
-    border: 1px solid var(--color-slate-200);
-    border-radius: var(--spacing-2xs);
-    padding: var(--spacing-2xs) var(--spacing-xs);
-    font-size: var(--spacing-base);
-    color: var(--color-imperial-red);
-    cursor: pointer;
-    width: fit-content;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--spacing-2xs);
-    transition:
-      border-color 200ms ease-in-out,
-      color 200ms ease-in-out;
-
-    &:hover {
-      border-color: var(--color-imperial-red);
-      color: var(--color-raisin-black);
-    }
-
-    &:focus {
-      outline: none;
-      border-color: var(--color-imperial-red);
-      color: var(--color-raisin-black);
-    }
-
-    @media (min-width: 768px) {
-      margin-top: 0;
-    }
-  }
-
-  .globe {
-    flex-shrink: 0;
-  }
-
-  .chevron {
-    transition: transform 200ms ease-in-out;
-
-    &.open {
-      transform: rotate(180deg);
-    }
-  }
-
-  .language-options {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    margin-top: 0.25rem;
-    padding: var(--spacing-2xs) 0;
-    background: white;
-    border: 1px solid var(--color-slate-200);
-    border-radius: var(--spacing-2xs);
-    list-style: none;
-    width: 100%;
-    box-shadow: 0 var(--spacing-2xs) var(--spacing-sm) rgba(0, 0, 0, 0.1);
-    z-index: 100;
-
-    li button {
-      all: unset;
-      display: block;
-      width: 100%;
+    .language-trigger {
+      appearance: none;
+      background: transparent;
+      border: 1px solid var(--color-slate-200);
+      border-radius: var(--spacing-2xs);
       padding: var(--spacing-2xs) var(--spacing-xs);
       font-size: var(--spacing-base);
-      color: var(--color-zinc-900);
+      color: var(--color-imperial-red);
       cursor: pointer;
-      white-space: nowrap;
-      box-sizing: border-box;
-      &:first-letter {
-        text-transform: uppercase;
-      }
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-2xs);
+      transition:
+        border-color 200ms ease-in-out,
+        color 200ms ease-in-out;
 
       &:hover {
-        background: var(--color-slate-100);
+        border-color: var(--color-imperial-red);
+        color: var(--color-raisin-black);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-imperial-red);
+        color: var(--color-raisin-black);
+      }
+
+      @media (min-width: 768px) {
+        margin-top: 0;
+      }
+
+      .globe {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+
+      .chevron {
+        width: 1rem;
+        height: 1rem;
+        transition: transform 200ms ease-in-out;
+
+        &.open {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .language-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.25rem;
+      padding: var(--spacing-2xs) 0;
+      background: white;
+      border: 1px solid var(--color-slate-200);
+      border-radius: var(--spacing-2xs);
+      list-style: none;
+      width: 100%;
+      box-shadow: 0 var(--spacing-2xs) var(--spacing-sm) rgba(0, 0, 0, 0.1);
+      z-index: 100;
+
+      li button {
+        all: unset;
+        display: block;
+        width: 100%;
+        padding: var(--spacing-2xs) var(--spacing-xs);
+        font-size: var(--spacing-base);
+        color: var(--color-zinc-900);
+        cursor: pointer;
+        white-space: nowrap;
+        box-sizing: border-box;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
+
+        &:hover {
+          background: var(--color-slate-100);
+        }
       }
     }
   }

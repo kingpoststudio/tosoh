@@ -29,7 +29,8 @@
 
   <body class="{{ builtin_body_classes }}">
 
-    {% if content.translated_content.values()|selectattr('published')|length || is_listing_view && group.translations %}
+    {% set hasTranslations = content.translated_content.values()|selectattr('published')|length || is_listing_view && group.translations %}
+    {% if hasTranslations %}
     {% require_js position="head" %}
       <script>
         window.Tosoh = window.Tosoh || {};

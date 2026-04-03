@@ -4,12 +4,13 @@
   import type { HubSpotMenu } from '../../../types/hubspot';
   import LanguagePicker from './components/LanguagePicker/LanguagePicker.svelte';
 
-  const header = window.Tosoh?.Header;
-  const menu: HubSpotMenu | undefined = header?.mainNavigationMenu;
-  const auxiliaryMenu: HubSpotMenu | undefined = header?.auxiliaryMenu;
+  const {
+    mainNavigationMenu: menu,
+    auxiliaryMenu,
+    menuJustification = 'end',
+  } = window.Tosoh?.Header ?? {};
   const hasAuxiliaryMenu =
     auxiliaryMenu && auxiliaryMenu?.children && auxiliaryMenu?.children?.length > 0;
-  const menuJustification: 'center' | 'end' = header?.menuJustification || 'end';
 
   const MENU_CLOSE_DELAY_MS = 300;
   const SUBMENU_CLOSE_DELAY_MS = 150;
