@@ -41,21 +41,21 @@ const generateFields = () => {
       inline_help_text:
         'Product code to match the documents to the product. This will be used to filter the documents by product code.',
     }), 
-    groupField('ifu_documents', 'Instructions For Use (IFU) Documents', {
+    groupField('ifu_settings', 'Instructions For Use (IFU) Settings', {
       children: [
         columnLabelField('Instructions For Use (IFU)'),
         noDocumentsFoundMessageField('No IFU documents found for this product.'),
         ...lockedGroupFields,
       ],
     }),
-    groupField('sds_documents', 'Safety Data Sheets (SDS) Documents', {
+    groupField('sds_settings', 'Safety Data Sheets (SDS) Settings', {
       children: [
         columnLabelField('Safety Data Sheets (SDS)'),
         noDocumentsFoundMessageField('No SDS documents found for this product.'),
         ...lockedGroupFields,
       ],
     }),
-    groupField('cofa_documents', 'Certificates of Analysis (CofA) Documents', {
+    groupField('cofa_settings', 'Certificates of Analysis (CofA) Settings', {
       children: [
         columnLabelField('Certificates of Analysis (CofA)'),
         noDocumentsFoundMessageField('No CofA documents found for this product.'),
