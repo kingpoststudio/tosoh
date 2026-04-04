@@ -32,12 +32,8 @@
   }
 
   header {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     background: var(--color-white);
-    z-index: var(--z-index-header);
     transition: background 150ms ease-in-out;
   }
 </style>
