@@ -1,5 +1,5 @@
 import type { Search, TopicFilters } from './fields';
-import type { CCTComparisons, CCTInstruments, CCTComparison } from './hubdb';
+import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
 export type FilterType = 'dropdown' | 'checkbox' | 'range-pm';
@@ -7,10 +7,48 @@ export type FilterType = 'dropdown' | 'checkbox' | 'range-pm';
 declare global {
   interface Window {
     Tosoh: {
+      TranslatedContent?: {
+        variants: {
+          ab: false;
+          absoluteUrl: string;
+          approvalStatus: null;
+          archived: boolean;
+          archivedInDashboard: boolean;
+          audienceAccess: string;
+          authorName: string | null;
+          businessUnitId: string | null;
+          campaign: string | null;
+          campaignName: string | null;
+          created: number;
+          currentState: 'PUBLISHED';
+          htmlTitle: string;
+          id: number;
+          language: string;
+          mab: false;
+          masterId: number;
+          name: string;
+          password: string | null;
+          previewKey: string;
+          publicAccessRules: [];
+          publicAccessRulesEnabled: false;
+          publishDate: number;
+          published: boolean;
+          resolvedDomain: string;
+          securityState: string;
+          slug: string;
+          state: string;
+          teamPerms: [];
+          themePath: string | null;
+          updated: number;
+          updatedById: number;
+        }[];
+        currentLanguage: string;
+      };
       Header?: {
         mainNavigationMenu?: HubSpotMenu;
         auxiliaryMenu?: HubSpotMenu;
         menuJustification?: 'center' | 'end';
+        isLanguageSwitcherEnabled?: boolean;
       };
 
       SupportPortalContent: {
@@ -122,6 +160,16 @@ declare global {
         upcoming_section_title: string;
       };
       CCT: {
+        filtersSidebarTitle: string;
+        productLineTitle: string;
+        tosohInstrumentTitle: string;
+        competitorInstrumentTitle: string;
+        printColumnsTitle: string;
+        printButtonLabel: string;
+        detailsButtonLabel: string;
+        submitASuggestionButtonLabel: string;
+        cctDetailsPath: Link;
+        submitASuggestionPath: Link;
         activeCompetitorInstruments: {
           name: string;
           label: string;
@@ -140,6 +188,11 @@ declare global {
       };
       CCTDetails: {
         comparisonRows: CCTComparisons;
+        resetButtonLabel: string;
+        selectCategoryPlaceholder: string;
+        searchPlaceholder: string;
+        firstPartOfMatchesText: string;
+        secondPartOfMatchesText: string;
       };
     };
     hsVideoApi?: any;

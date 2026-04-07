@@ -1,5 +1,6 @@
 import type { TopicFilters } from '../../../types/fields';
-import type { ColumnId, ColumnItem, SupportPortalRowForFilter } from '../../../types/hubdb';
+import type { ColumnId, ColumnItem } from '../../../types/hubdb';
+import type { SupportPortalRowForFilter } from '../../../types/supportPortal';
 
 // Types for better type safety
 type FilterValue = string | number | ColumnItem | ColumnItem[];
@@ -179,7 +180,7 @@ export const getMemoizedFilterOptionsForColumnWithTolerance = (
     .map(([key, value]) => `${key}:${value}`)
     .join('|');
 
-  const cacheKey = `${columnId}-${filterStateKey}-${toleranceKey}`;
+  const cacheKey = `${String(columnId)}-${filterStateKey}-${toleranceKey}`;
 
   // Return cached result if available
   if (cache?.has(cacheKey)) {
@@ -191,7 +192,7 @@ export const getMemoizedFilterOptionsForColumnWithTolerance = (
   // Collect all unique filter options and calculate quantities
   rows.forEach((row) => {
     const rowValues = row?.values || row;
-    const columnValue = rowValues[columnId];
+    const columnValue = (rowValues as Record<string, FilterValue | undefined>)[columnId as string];
 
     if (!columnValue) return;
 
@@ -212,7 +213,7 @@ export const getMemoizedFilterOptionsForColumnWithTolerance = (
         // Check if this row matches all other active filters (excluding current column) with tolerance
         const matchesOtherFilters = Object.entries(currentFilters).every(([key, value]) => {
           if (key === columnId) return true; // Skip current column
-          const otherColumnValue = rowValues[key as ColumnId];
+          const otherColumnValue = (rowValues as Record<string, FilterValue | undefined>)[key];
           const tolerance = toleranceConfig[key] || 0;
           return otherColumnValue
             ? checkColumnValueMatch(otherColumnValue, value, tolerance)
@@ -263,7 +264,7 @@ export const getMemoizedFilterOptionsForColumnWithTolerance = (
       // Check if this row matches all other active filters (excluding current column) with tolerance
       const matchesOtherFilters = Object.entries(currentFilters).every(([key, value]) => {
         if (key === columnId) return true; // Skip current column
-        const otherColumnValue = rowValues[key as ColumnId];
+        const otherColumnValue = (rowValues as Record<string, FilterValue | undefined>)[key];
         const tolerance = toleranceConfig[key] || 0;
         return otherColumnValue ? checkColumnValueMatch(otherColumnValue, value, tolerance) : false;
       });

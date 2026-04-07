@@ -4,6 +4,7 @@ import {
   groupField,
   hubDbTableField,
   imageField,
+  linkField,
   numberField,
   textField,
   urlField,
@@ -533,6 +534,17 @@ export const documentTypeChoices: string[][] = [
 ];
 
 export const lockedGroupFields = [
+  linkField('login_link', 'Login Link', {
+    inline_help_text: 'URL that will point to the login page when the document is locked.',
+    default: {
+      url: {
+        content_id: null,
+        href: '/_hcms/mem/login',
+      },
+      open_in_new_tab: false,
+      no_follow: false,
+    },
+  }),
   textField('locked_message', 'Locked Message', {
     default: 'Login to unlock and download this file',
   }),
@@ -545,19 +557,12 @@ export const relatedDocumentsSharedFields = [
   groupField('tab_group_columns', 'Tab Group Columns', {
     children: [
       textField('column_label', 'Column Label'),
-      urlField('url', 'URL', {
-        inline_help_text:
-          'URL that will point to another page on the site. If url is provided, the tab group button will act as a link. ',
-      }),
       groupField('documents', 'Documents', {
         children: [
           textField('document_name', 'Document Name'),
           textField('document_description', 'Document Description'),
           imageField('document_image', 'Document Image'),
-          urlField('document_url', 'Document URL', {
-            inline_help_text:
-              'URL that will point to another page on the site. If url is provided, the tab group button will act as a link. ',
-          }),
+          linkField('document_url', 'Document URL'),
           choiceField('document_type', 'Document Type', {
             choices: documentTypeChoices,
             default: 'PDF',

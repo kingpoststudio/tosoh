@@ -9,9 +9,9 @@
         "tsc": "^2.0.4"
     },
     "scripts": {
-        "hs:upload:develop":"hs project upload --account=develop",
-        "hs:upload:tosoh-sandbox":"hs project upload --account=tosoh-sandbox",
+        "hs:upload:develop": "hs project upload --account=develop",
+        "hs:upload:tosoh-sandbox": "hs project upload --account=tosoh-sandbox",
         "hs:init": "hs init",
         "hs:auth": "hs auth"
-      }
+    }
 }

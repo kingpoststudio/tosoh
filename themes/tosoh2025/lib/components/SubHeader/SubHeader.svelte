@@ -1,9 +1,18 @@
 <svelte:options customElement="tosoh-sub-header" />
 
 <script lang="ts">
+  const CSS_VARIABLE = '--spacing-subheader-height';
+
+  let sectionHeight = $state(0);
+
+  $effect(() => {
+    if (sectionHeight > 0) {
+      document.documentElement.style.setProperty(CSS_VARIABLE, `${Math.round(sectionHeight)}px`);
+    }
+  });
 </script>
 
-<section>
+<section bind:clientHeight={sectionHeight}>
   <div class="wrapper">
     <svelte:element this={'slot'} name="logo" />
     <svelte:element this={'slot'} name="cta" />
@@ -50,7 +59,6 @@
         }
 
         &::slotted(img) {
-          width: 100%;
           object-fit: contain;
         }
       }

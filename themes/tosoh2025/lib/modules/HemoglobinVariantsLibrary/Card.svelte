@@ -100,26 +100,25 @@
       <div class="gap-xs align-start flex flex-row flex-wrap">
         <button
           onclick={() => onTagClick('window', window?.name)}
-          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
+          class="plain p-xs! text-md text-default rounded-2xl! bg-gray-100 text-center font-bold! md:text-left"
         >
           {window?.label}
         </button>
-        <button
-          onclick={() => onTagClick('instrument', instrument?.name)}
-          class="plain p-xs! text-md text-default rounded-2xl! font-bold! bg-gray-100 text-center md:text-left"
+        <span
+          class="p-xs text-md text-default rounded-2xl bg-gray-100 text-center font-bold md:text-left"
         >
           {instrument?.label}
-        </button>
+        </span>
       </div>
 
       <button
-        class="plain px-sm! py-xs! text-default font-bold! rounded-2xl! absolute right-[1.25rem] top-[1.25rem] bg-gray-100 uppercase"
+        class="plain px-sm! py-xs! text-default absolute top-[1.25rem] right-[1.25rem] rounded-2xl! bg-gray-100 font-bold! uppercase"
         onclick={() => onTagClick('mutation', mutation?.name)}
       >
         {mutation?.label}
       </button>
       <tosoh-modal variant="action" modalId={variant_name}>
-        <button class="gap-sm w-full! mt-sm flex items-center justify-center text-center">
+        <button class="gap-sm mt-sm flex w-full! items-center justify-center text-center">
           View Details
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -127,7 +126,7 @@
             height="14"
             viewBox="0 0 12 14"
             fill="none"
-            class="h-sm w-sm min-w-base"
+            class="h-sm min-w-base w-sm"
           >
             <path
               d="M0.629487 12.2917C0.363957 12.6236 0.417771 13.1079 0.749684 13.3734C1.0816 13.639 1.56592 13.5852 1.83145 13.2532L1.23047 12.7725L0.629487 12.2917ZM11.231 1.14299C11.184 0.720533 10.8035 0.416117 10.3811 0.463057L3.49674 1.22798C3.07428 1.27492 2.76987 1.65544 2.81681 2.0779C2.86375 2.50035 3.24427 2.80477 3.66672 2.75783L9.78612 2.0779L10.4661 8.19729C10.513 8.61975 10.8935 8.92417 11.316 8.87723C11.7384 8.83029 12.0428 8.44977 11.9959 8.02731L11.231 1.14299ZM1.23047 12.7725L1.83145 13.2532L11.067 1.70877L10.4661 1.22798L9.86507 0.747196L0.629487 12.2917L1.23047 12.7725Z"

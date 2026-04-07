@@ -26,9 +26,18 @@
       setupWistiaThumbnail(item?.values?.wistia_video_url as string)
   );
   let name = $derived(item?.values?.name);
-  let downloadUrl = $derived(item?.values?.document_url || item?.wistia_video_url);
+  let downloadUrl = $derived(item?.values?.document_url);
   let documentType = $derived(item?.values?.document_type?.label);
-  let productTypes = $derived(item?.values?.product_type?.map((type: any) => `${type.label}`));
+  let productTypes = $derived(
+    item?.values?.product_type?.map((type: any) => {
+      return {
+        name: type.name,
+        label: type.label,
+      };
+    })
+  );
+
+  let viewHref = $derived(`${window.location.pathname?.replace(/\/+$/, '')}/${item.path}`);
 
   const handleImageError = () => {
     imgSrc = '';
@@ -54,6 +63,7 @@
       <img
         alt={item.name}
         src={imgSrc}
+        width="300"
         loading="lazy"
         class="aspect-video w-full rounded-lg object-contain"
         onerror={handleImageError}
@@ -73,7 +83,7 @@
           {@const isLast = index === productTypes?.length - 1}
           <button
             onclick={() => onTagClick('product_type', productType.name)}
-            class="plain text-imperial-red! text-xl">{productType}{isLast ? '' : ','}</button
+            class="plain text-imperial-red! text-xl">{productType.label}{isLast ? '' : ','}</button
           >
         {/each}
       </div>
@@ -88,7 +98,7 @@
         class="button flex items-center justify-center gap-[1.25rem] text-center {viewAs === 'list'
           ? 'w-fit!'
           : 'w-full!'}"
-        href={`support-portal/${item.path}`}>View</a
+        href={`${viewHref}`}>View</a
       >
     {:else}
       <a
@@ -120,7 +130,7 @@
   </div>
 
   <span
-    class="p-xs text-md text-imperial-red absolute right-[1.25rem] top-[1.25rem] break-all rounded-lg bg-red-100 text-xs font-bold"
+    class="p-xs text-md text-imperial-red absolute top-[1.25rem] right-[1.25rem] rounded-lg bg-red-100 text-xs font-bold break-all"
   >
     {#if documentType === 'PDF'}
       {@render pdfIcon()}

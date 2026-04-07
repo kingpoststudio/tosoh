@@ -13,7 +13,7 @@
   let { totalItems, fetchData, idToScrollToTop } = $props();
 
   const params = new URLSearchParams(window.location.search);
-  const limitOptions = [12, 24, 48];
+  const LIMIT_OPTIONS = [12, 24, 48];
 
   let limit = $state(parseInt(params?.get('limit') || `${defaultItemsLimit}`));
   let pagination = $state(parseInt(params?.get('pagination') || `${defaultPagination}`));
@@ -62,7 +62,6 @@
   );
 
   const moveBackward = () => {
-    const canGoBackward = pagination && pagination - 1 > 0;
     if (canGoBackward) {
       const previousPagination = pagination - 1;
       onPaginationChange(previousPagination);
@@ -76,7 +75,6 @@
   };
 
   const moveForward = () => {
-    const canGoForward = pagination && pagination + 1 <= numberOfPages;
     if (canGoForward) {
       const nextPagination = pagination + 1;
       onPaginationChange(nextPagination);
@@ -115,18 +113,17 @@
         name="limit"
         class="bg-ghost-white p-xs rounded border border-slate-200"
       >
-        {#each limitOptions as option}
+        {#each LIMIT_OPTIONS as option}
           <option value={option}>{option}</option>
         {/each}
       </select>
       <p>
         {(pagination - 1) * limit || 1} - {Math.min((pagination - 1) * limit + limit, totalItems)} of
-        {totalItems}
-        items
+        {totalItems}{totalItems > 1 ? ' items' : ' item'}
       </p>
     </div>
     <div class="gap-sm flex justify-center">
-      <div class="gap-sm flex items-center text-[#4E4F54]">
+      <div class="gap-sm text-nickel flex items-center">
         <select
           value={pagination}
           name="pagination"
@@ -152,7 +149,7 @@
       <div class="gap-sm flex">
         <button
           type="button"
-          class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:cursor-not-allowed disabled:opacity-50"
+          class="p-sm! outlined text-nickel! border-light-silver! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:cursor-not-allowed disabled:opacity-50"
           aria-label="go one page back"
           onclick={moveBackward}
           disabled={!canGoBackward}
@@ -167,7 +164,7 @@
             >
               <path
                 d="M8.39266 16.0549L1.38184 9.04403L8.39266 2.0332"
-                stroke="#4E4F54"
+                stroke="currentColor"
                 stroke-width="2.54939"
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -177,7 +174,7 @@
         </button>
         <button
           type="button"
-          class="p-sm! outlined border-[#E1E2E3]! text-default! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:cursor-not-allowed disabled:opacity-50"
+          class="p-sm! outlined text-nickel! border-light-silver! flex aspect-square h-[2.75rem] cursor-pointer items-center justify-center rounded-xl border disabled:cursor-not-allowed disabled:opacity-50"
           aria-label="go one page after"
           onclick={moveForward}
           disabled={!canGoForward}
@@ -192,7 +189,7 @@
             >
               <path
                 d="M1.64258 16.0549L8.6534 9.04403L1.64258 2.0332"
-                stroke="#4E4F54"
+                stroke="currentColor"
                 stroke-width="2.54939"
                 stroke-linecap="round"
                 stroke-linejoin="round"

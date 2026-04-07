@@ -5,9 +5,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build:ts": "tsc",
-    "copy:files": "rsync -av --exclude='node_modules' --include='*/' --include='*.json' --include='*.js' --include='*.lock' --exclude='*' src/ dist/",
-    "copy:config": "cp hubspot.config.yml dist/ && echo '{\"name\":\"tosoh\",\"srcDir\":\".\",\"platformVersion\":\"2025.1\"}' > dist/hsproject.json",
-    "build": "bun run clean && bun run build:ts && bun run copy:files && bun run copy:config",
+    "copy:files": "bun run copy-files.ts",
+    "build": "bun run clean && bun run build:ts && bun run copy:files",
     "watch": "tsc --watch",
     "upload": "cd dist && hs project upload",
     "deploy": "bun run build && bun run upload",

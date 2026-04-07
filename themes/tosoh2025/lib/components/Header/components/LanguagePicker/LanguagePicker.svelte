@@ -1,0 +1,169 @@
+<script lang="ts">
+  import { getLanguage } from '../../../../utils/utils';
+
+  const header = window?.Tosoh?.Header;
+  const isLanguageSwitcherEnabled = header?.isLanguageSwitcherEnabled || false;
+  const { variants = [], currentLanguage } = window?.Tosoh?.TranslatedContent ?? {};
+
+  let open = $state(false);
+  let pickerRef: HTMLDivElement | undefined = $state();
+
+  const select = (url: string) => {
+    open = false;
+    window.location.href = url;
+  };
+
+  const handleClickOutside = (e: MouseEvent) => {
+    if (pickerRef && !pickerRef.contains(e.target as Node)) {
+      open = false;
+    }
+  };
+
+  const toggle = (e: MouseEvent) => {
+    e.stopPropagation();
+    open = !open;
+  };
+</script>
+
+<svelte:document onclick={handleClickOutside} />
+
+{#if variants?.length > 0 && isLanguageSwitcherEnabled}
+  <div class="language-picker" bind:this={pickerRef}>
+    <button
+      type="button"
+      class="language-trigger"
+      aria-expanded={open}
+      aria-haspopup="listbox"
+      onclick={toggle}
+    >
+      <svg
+        class="globe"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M2 12h20" />
+        <path
+          d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+        />
+      </svg>
+      {currentLanguage}
+      <svg viewBox="0 0 10 6" fill="none" class="chevron" class:open>
+        <path
+          d="M1 1L5 5L9 1"
+          stroke="currentColor"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+
+    {#if open}
+      <ul class="language-options" role="listbox">
+        {#each variants as item}
+          <li role="option" aria-selected={item.language === currentLanguage}>
+            <button type="button" onclick={() => select(item.absoluteUrl)}>
+              {getLanguage(item.language)}
+            </button>
+          </li>
+        {/each}
+      </ul>
+    {/if}
+  </div>
+{/if}
+
+<style lang="postcss">
+  .language-picker {
+    position: relative;
+    width: fit-content;
+
+    .language-trigger {
+      appearance: none;
+      background: transparent;
+      border: 1px solid var(--color-slate-200);
+      border-radius: var(--spacing-2xs);
+      padding: var(--spacing-2xs) var(--spacing-xs);
+      font-size: var(--spacing-base);
+      color: var(--color-imperial-red);
+      cursor: pointer;
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--spacing-2xs);
+      transition:
+        border-color 200ms ease-in-out,
+        color 200ms ease-in-out;
+
+      &:hover {
+        border-color: var(--color-imperial-red);
+        color: var(--color-raisin-black);
+      }
+
+      &:focus {
+        outline: none;
+        border-color: var(--color-imperial-red);
+        color: var(--color-raisin-black);
+      }
+
+      @media (min-width: 768px) {
+        margin-top: 0;
+      }
+
+      .globe {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+
+      .chevron {
+        width: 1rem;
+        height: 1rem;
+        transition: transform 200ms ease-in-out;
+
+        &.open {
+          transform: rotate(180deg);
+        }
+      }
+    }
+
+    .language-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.25rem;
+      padding: var(--spacing-2xs) 0;
+      background: white;
+      border: 1px solid var(--color-slate-200);
+      border-radius: var(--spacing-2xs);
+      list-style: none;
+      width: 100%;
+      box-shadow: 0 var(--spacing-2xs) var(--spacing-sm) rgba(0, 0, 0, 0.1);
+      z-index: 100;
+
+      li button {
+        all: unset;
+        display: block;
+        width: 100%;
+        padding: var(--spacing-2xs) var(--spacing-xs);
+        font-size: var(--spacing-base);
+        color: var(--color-zinc-900);
+        cursor: pointer;
+        white-space: nowrap;
+        box-sizing: border-box;
+
+        &:first-letter {
+          text-transform: uppercase;
+        }
+
+        &:hover {
+          background: var(--color-slate-100);
+        }
+      }
+    }
+  }
+</style>

@@ -1,10 +1,21 @@
+type ForeignIdEntry = {
+  id: string;
+  name: string;
+  type: string;
+};
+
+type ColumnDef = {
+  name: string;
+  label: string;
+  id: string;
+  type: "TEXT" | "MULTISELECT" | "SELECT" | "FOREIGN_ID";
+  foreignTableId?: number;
+  foreignColumnId?: number;
+  foreignIds?: ForeignIdEntry[];
+};
+
 type TableData = {
-  columns: {
-    name: string;
-    label: string;
-    id: string;
-    type: "TEXT" | "MULTISELECT" | "SELECT" | "FOREIGN_ID";
-  }[];
+  columns: ColumnDef[];
 };
 
 exports.main = async (req: any) => {
@@ -46,12 +57,44 @@ exports.main = async (req: any) => {
     const tableData = await tableRes.json();
     tableCols = (tableData as TableData)?.columns;
 
+    const resolveForeignIdFilters = () => {
+      const foreignIdCols = tableCols?.filter(
+        (col: ColumnDef) =>
+          col?.type === "FOREIGN_ID" &&
+          col?.foreignIds?.length &&
+          filters?.[col?.name],
+      );
+
+      for (const col of foreignIdCols || []) {
+        try {
+          const decoded = decodeURIComponent(filters[col?.name]);
+          const decodedLower = decoded.trim().toLowerCase();
+
+          const matchingIds = (col?.foreignIds || [])
+            .filter(
+              (entry) => entry.name?.trim().toLowerCase() === decodedLower,
+            )
+            .map((entry) => String(entry.id));
+
+          if (matchingIds.length > 0) {
+            filters[col.name] = matchingIds.join(",");
+          } else {
+            delete filters[col.name];
+          }
+        } catch {
+          continue;
+        }
+      }
+    };
+
+    resolveForeignIdFilters();
+
     const createFilterConditions = () => {
       const filterConditions: any[] = [];
 
       if (typeof filters === "object" && Object?.keys(filters)?.length) {
         Object?.keys(filters)?.map((filterKey) => {
-          tableCols?.map((column) => {
+          tableCols?.map((column: ColumnDef) => {
             if (column.name === filterKey && filters?.[filterKey]) {
               if (column.type === "MULTISELECT" || column.type === "TEXT") {
                 filterConditions.push(
@@ -122,16 +165,15 @@ exports.main = async (req: any) => {
       return "";
     };
 
-    const portalItemsRes = await fetch(
-      `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}${createNumericComparisonFilters()}${createAccessLevelQuery()}${createSortQuery()}${createDeactivateQuery()}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
-          "Content-Type": "application/json",
-        },
+    const finalQueryUrl = `${HUBDB_ENDPOINT}/rows?limit=${limit}&offset=${offset}&properties=${properties}${createFilterConditions()}${createNumericComparisonFilters()}${createAccessLevelQuery()}${createSortQuery()}${createDeactivateQuery()}`;
+
+    const portalItemsRes = await fetch(finalQueryUrl, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${process.env.HUBSPOT_API_KEY}`,
+        "Content-Type": "application/json",
       },
-    );
+    });
 
     if (!portalItemsRes.ok) {
       throw new Error(
@@ -139,7 +181,7 @@ exports.main = async (req: any) => {
       );
     }
 
-    const json = await portalItemsRes.json();
+    const json: any = await portalItemsRes.json();
 
     return {
       statusCode: 200,
