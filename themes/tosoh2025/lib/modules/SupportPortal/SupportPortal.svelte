@@ -81,7 +81,7 @@
         {viewAs}
         {Card}
         {SkeletonCard}
-        additionalConfSettings={supportPortalContent?.additional_conf_settings}
+        additionalConfSettings={supportPortalContent?.additional_settings}
       ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
@@ -89,7 +89,7 @@
           totalItems={portal.totalItems}
           {fetchData}
           idToScrollToTop={formId}
-          additionalConfSettings={supportPortalContent?.additional_conf_settings}
+          additionalConfSettings={supportPortalContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

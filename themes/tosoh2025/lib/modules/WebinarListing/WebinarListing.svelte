@@ -110,14 +110,14 @@
       {Card}
       {SkeletonCard}
       hasLargeElements={true}
-      additionalConfSettings={webinarListingsWindow?.additional_conf_settings}
+      additionalConfSettings={webinarListingsWindow?.additional_settings}
     ></ItemsGrid>
     <div class={`${rows?.length > 0 && displayPagination ? 'block' : 'hidden'}`}>
       <PaginationWithLimit
         totalItems={portal.totalItems}
         {fetchData}
         idToScrollToTop={formId}
-        additionalConfSettings={webinarListingsWindow?.additional_conf_settings}
+        additionalConfSettings={webinarListingsWindow?.additional_settings}
       ></PaginationWithLimit>
     </div>
   {/if}

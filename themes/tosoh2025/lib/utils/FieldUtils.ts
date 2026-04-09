@@ -43,9 +43,9 @@ export const errorCardFields = groupField('error_card', 'Error Card', {
   ],
 });
 
-export const additionalConfSettingsFields = groupField(
-  'additional_conf_settings',
-  'Additional Configuration Settings',
+export const additionalSettingsFields = groupField(
+  'additional_settings',
+  'Additional Settings',
   {
     children: [
       groupField('results_settings', 'Results settings', {

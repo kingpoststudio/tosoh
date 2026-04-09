@@ -34,7 +34,7 @@ export type ErrorFields = {
   try_again_label: string;
 };
 
-export type AdditionalConfSettings = {
+export type AdditionalSettings = {
   results_settings: {
     no_results_label: string;
   };

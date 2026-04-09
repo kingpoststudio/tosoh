@@ -58,7 +58,10 @@
   <div class="flex w-full flex-col justify-between">
     {#if portal.hasError}
       <div class="p-sm">
-        <ErrorCard errorCard={hemoglobinVariantsLibraryContent?.error_card} retryCallback={reloadData} />
+        <ErrorCard
+          errorCard={hemoglobinVariantsLibraryContent?.error_card}
+          retryCallback={reloadData}
+        />
         <div class="pb-sm"></div>
       </div>
     {:else}
@@ -68,7 +71,7 @@
         {Card}
         {SkeletonCard}
         hasLargeElements={true}
-        additionalConfSettings={hemoglobinVariantsLibraryContent?.additional_conf_settings}
+        additionalConfSettings={hemoglobinVariantsLibraryContent?.additional_settings}
       ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
@@ -76,7 +79,7 @@
           totalItems={portal.totalItems}
           {fetchData}
           idToScrollToTop={formId}
-          additionalConfSettings={hemoglobinVariantsLibraryContent?.additional_conf_settings}
+          additionalConfSettings={hemoglobinVariantsLibraryContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

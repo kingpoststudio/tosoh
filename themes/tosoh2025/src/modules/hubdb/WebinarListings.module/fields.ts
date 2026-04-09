@@ -1,6 +1,6 @@
 import { groupField, textField } from 'hs-fieldkit';
 import {
-  additionalConfSettingsFields,
+  additionalSettingsFields,
   errorCardFields,
   searchField,
   topicFilters,
@@ -30,7 +30,7 @@ const generateFields = () => {
     searchField(),
     topicFilters,
     errorCardFields,
-    additionalConfSettingsFields,
+    additionalSettingsFields,
 
     groupField('advanced', 'Advanced', {
       children: [

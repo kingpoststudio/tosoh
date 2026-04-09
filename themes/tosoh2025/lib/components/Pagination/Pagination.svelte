@@ -2,7 +2,7 @@
   import { onDestroy, onMount } from 'svelte';
   import { on } from 'svelte/events';
 
-  import type { AdditionalConfSettings } from '../../../types/fields';
+  import type { AdditionalSettings } from '../../../types/fields';
   import {
     defaultItemsLimit,
     defaultPagination,
@@ -20,14 +20,12 @@
     totalItems: number;
     fetchData: () => void | Promise<void>;
     idToScrollToTop: string;
-    additionalConfSettings?: AdditionalConfSettings;
+    additionalConfSettings?: AdditionalSettings;
   } = $props();
 
   const paginationSettings = $derived(additionalConfSettings?.pagination_settings);
 
-  const itemsPerPageLabel = $derived(
-    paginationSettings?.items_per_page_label ?? 'Items per page:'
-  );
+  const itemsPerPageLabel = $derived(paginationSettings?.items_per_page_label ?? 'Items per page:');
   const ofLabel = $derived(paginationSettings?.of_label ?? 'of');
   const pagesLabel = $derived(paginationSettings?.pages_label ?? 'pages');
   const pageLabel = $derived(paginationSettings?.page_label ?? 'page');

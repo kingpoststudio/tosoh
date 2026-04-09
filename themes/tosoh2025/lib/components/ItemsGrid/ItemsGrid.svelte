@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Component } from 'svelte';
   import { fade } from 'svelte/transition';
-  import type { AdditionalConfSettings } from '../../../types/fields';
+  import type { AdditionalSettings } from '../../../types/fields';
   import { getUrlParam } from '../../utils/urlUtils';
 
   const {
@@ -19,7 +19,7 @@
     isLoading: boolean;
     tableRows: any[];
     viewAs?: string;
-    additionalConfSettings?: AdditionalConfSettings;
+    additionalConfSettings?: AdditionalSettings;
   } = $props();
 
   const noResultsLabel = $derived(

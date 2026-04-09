@@ -26,8 +26,16 @@
       'name,summary,sex,patient_dob,ethnicity,history,anomaly,blood_count,hemoglobin_status,other,advice,diagnosis,other_diagnosis,attachment_1,attachment_2,attachment_3,attachment_4',
   });
 
-  const { title, eyebrow, description, searchEnabled, topicFilters, formId, fetchData, reloadData } =
-    portal;
+  const {
+    title,
+    eyebrow,
+    description,
+    searchEnabled,
+    topicFilters,
+    formId,
+    fetchData,
+    reloadData,
+  } = portal;
 
   onMount(() => {
     fetchData();
@@ -72,7 +80,7 @@
         {Card}
         {SkeletonCard}
         hasLargeElements={true}
-        additionalConfSettings={hemoglobinPortalContent?.additional_conf_settings}
+        additionalConfSettings={hemoglobinPortalContent?.additional_settings}
       ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
@@ -80,7 +88,7 @@
           totalItems={portal.totalItems}
           {fetchData}
           idToScrollToTop={formId}
-          additionalConfSettings={hemoglobinPortalContent?.additional_conf_settings}
+          additionalConfSettings={hemoglobinPortalContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}
