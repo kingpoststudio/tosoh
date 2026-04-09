@@ -5,7 +5,7 @@ import {
   errorCardFields,
   searchField,
   searchVisibilityRule,
-  topicFilters,
+  topicFiltersWithViewAs,
 } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
@@ -39,7 +39,7 @@ const generateFields = () => {
         ...searchVisibilityRule,
       }),
     ]),
-    topicFilters,
+    topicFiltersWithViewAs,
     errorCardFields,
     additionalSettingsFields,
     booleanField('display_video_download', 'Display video download?', {

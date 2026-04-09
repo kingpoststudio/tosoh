@@ -19,6 +19,8 @@
     updateUrl,
     extraButtons,
     filterExtra,
+    filtersTitle,
+    resetLabel,
   }: {
     formId: string;
     filterState: FilterState;
@@ -30,7 +32,12 @@
     updateUrl?: boolean;
     extraButtons?: Snippet;
     filterExtra?: Snippet<[{ filter: TopicFilters['filters'][number] }]>;
+    filtersTitle?: string;
+    resetLabel?: string;
   } = $props();
+
+  const filtersTitleValue = filtersTitle ?? 'Filter';
+  const resetLabelValue = resetLabel ?? 'Reset';
 </script>
 
 {#snippet filterIcon()}
@@ -54,7 +61,9 @@
   class={`bg-ghost-white p-md h-fit rounded-lg transition-all duration-100 lg:sticky lg:top-32 lg:z-10 lg:min-w-[16rem] xl:min-w-[20rem] ${filterState.isLoading ? 'animate-pulse' : ''}`}
 >
   <div class="flex w-full items-center justify-between">
-    <p class="font-sans-narrow text-2xl font-semibold">Filter</p>
+    <div class="min-w-0 flex-1">
+        <p class="font-sans-narrow text-2xl font-semibold">{filtersTitleValue}</p>
+    </div>
     {@render filterIcon()}
   </div>
 
@@ -99,7 +108,7 @@
 
     <div class="gap-sm mt-md flex w-full flex-row lg:flex-col">
       <button type="button" data-type="reset" class="outlined w-full hover:bg-red-50">
-        Reset
+        {resetLabelValue}
       </button>
       {#if extraButtons}
         {@render extraButtons()}

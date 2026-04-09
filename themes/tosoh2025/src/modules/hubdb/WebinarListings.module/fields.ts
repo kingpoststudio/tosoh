@@ -3,7 +3,7 @@ import {
   additionalSettingsFields,
   errorCardFields,
   searchField,
-  topicFilters,
+  topicFiltersNoTitle,
 } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
@@ -28,7 +28,7 @@ const generateFields = () => {
     }),
 
     searchField(),
-    topicFilters,
+    topicFiltersNoTitle,
     errorCardFields,
     additionalSettingsFields,
 

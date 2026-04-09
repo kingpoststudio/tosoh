@@ -14,6 +14,7 @@
 
   const webinarListingsWindow = window.Tosoh?.WebinarListings;
   const areFiltersEnabled = webinarListingsWindow?.topic_filters?.filters?.length > 0;
+  const resetFiltersLabel = webinarListingsWindow?.topic_filters?.reset_filters_label ?? 'Reset Filters';
 
   const filterState = createFilterState({
     formId,
@@ -67,7 +68,7 @@
           />
         {/each}
         <button type="button" data-type="reset" class="plain text-imperial-red! w-fit">
-          Reset Filters
+          {resetFiltersLabel}
         </button>
       </div>
     </FilterForm>

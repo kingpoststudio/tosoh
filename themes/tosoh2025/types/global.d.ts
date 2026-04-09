@@ -1,4 +1,11 @@
-import type { AdditionalSettings, ErrorFields, Search, TopicFilters } from './fields';
+import type {
+  AdditionalSettings,
+  ErrorFields,
+  Search,
+  TopicFilters,
+  TopicFiltersWithApplyButton,
+  TopicFiltersWithViewAs,
+} from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
@@ -68,7 +75,7 @@ declare global {
         display_video_download: boolean;
         search: Search;
         title: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithViewAs;
         error_card: ErrorFields;
         additional_settings?: AdditionalSettings;
 
@@ -115,8 +122,7 @@ declare global {
         eyebrow: string;
         title: string;
         search: Search;
-        title: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithApplyButton;
         error_card: ErrorFields;
         additional_settings?: AdditionalSettings;
       };
@@ -134,7 +140,7 @@ declare global {
         title: string;
         description: string;
         eyebrow: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithApplyButton;
         error_card: ErrorFields;
         additional_settings?: AdditionalSettings;
       };

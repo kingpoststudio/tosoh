@@ -4,7 +4,7 @@ import {
   breadCrumbField,
   errorCardFields,
   searchField,
-  topicFilters,
+  topicFiltersWithApplyButton,
 } from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
@@ -19,7 +19,7 @@ const generateFields = () => {
     }),
 
     searchField(),
-    topicFilters,
+    topicFiltersWithApplyButton,
     errorCardFields,
     additionalSettingsFields,
   ];
