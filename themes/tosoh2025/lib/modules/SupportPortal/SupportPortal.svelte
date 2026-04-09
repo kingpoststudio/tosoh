@@ -75,10 +75,21 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {viewAs} {Card} {SkeletonCard}></ItemsGrid>
+      <ItemsGrid
+        tableRows={portal.tableRows}
+        isLoading={portal.isLoading}
+        {viewAs}
+        {Card}
+        {SkeletonCard}
+        additionalConfSettings={supportPortalContent?.additional_conf_settings}
+      ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
+        <PaginationWithLimit
+          totalItems={portal.totalItems}
+          {fetchData}
+          idToScrollToTop={formId}
+          additionalConfSettings={supportPortalContent?.additional_conf_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

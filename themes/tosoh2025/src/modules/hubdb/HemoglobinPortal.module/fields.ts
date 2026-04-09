@@ -1,5 +1,6 @@
 import { richTextField } from 'hs-fieldkit';
 import {
+  additionalConfSettingsFields,
   breadCrumbField,
   errorCardFields,
   searchField,
@@ -23,6 +24,7 @@ const generateFields = () => {
     searchField(),
     topicFilters,
     errorCardFields,
+    additionalConfSettingsFields,
   ];
 };
 

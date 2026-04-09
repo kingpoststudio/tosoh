@@ -66,10 +66,21 @@
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
+      <ItemsGrid
+        tableRows={portal.tableRows}
+        isLoading={portal.isLoading}
+        {Card}
+        {SkeletonCard}
+        hasLargeElements={true}
+        additionalConfSettings={hemoglobinPortalContent?.additional_conf_settings}
+      ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
+        <PaginationWithLimit
+          totalItems={portal.totalItems}
+          {fetchData}
+          idToScrollToTop={formId}
+          additionalConfSettings={hemoglobinPortalContent?.additional_conf_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

@@ -1,4 +1,4 @@
-import type { ErrorFields, Search, TopicFilters } from './fields';
+import type { AdditionalConfSettings, ErrorFields, Search, TopicFilters } from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
@@ -70,6 +70,7 @@ declare global {
         title: string;
         topic_filters: TopicFilters;
         error_card: ErrorFields;
+        additional_conf_settings?: AdditionalConfSettings;
 
         type: 'module';
       };
@@ -99,6 +100,7 @@ declare global {
           subtitle_3: string;
           subtitle_4: string;
         };
+        additional_conf_settings?: AdditionalConfSettings;
       };
       HemoglobinVariantsLibraryContent: {
         breadcrumbs: {
@@ -116,6 +118,7 @@ declare global {
         title: string;
         topic_filters: TopicFilters;
         error_card: ErrorFields;
+        additional_conf_settings?: AdditionalConfSettings;
       };
       HemoglobinPortalContent: {
         breadcrumbs: {
@@ -133,6 +136,7 @@ declare global {
         eyebrow: string;
         topic_filters: TopicFilters;
         error_card: ErrorFields;
+        additional_conf_settings?: AdditionalConfSettings;
       };
       KioskDocumentsContent: {
         description: string;
@@ -150,6 +154,7 @@ declare global {
         title: string;
         topic_filters: TopicFilters;
         error_card: ErrorFields;
+        additional_conf_settings?: AdditionalConfSettings;
       };
       WebinarListings: {
         advanced: {
@@ -164,6 +169,7 @@ declare global {
         upcoming_section_eyebrow: string;
         upcoming_section_title: string;
         error_card: ErrorFields;
+        additional_conf_settings?: AdditionalConfSettings;
       };
       CCT: {
         filtersSidebarTitle: string;

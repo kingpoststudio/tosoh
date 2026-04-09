@@ -43,6 +43,44 @@ export const errorCardFields = groupField('error_card', 'Error Card', {
   ],
 });
 
+export const additionalConfSettingsFields = groupField(
+  'additional_conf_settings',
+  'Additional Configuration Settings',
+  {
+    children: [
+      groupField('results_settings', 'Results settings', {
+        children: [
+          textField('no_results_label', 'No results label', {
+            default: 'No results found.',
+          }),
+        ],
+      }),
+      groupField('pagination_settings', 'Pagination labels', {
+        children: [
+          textField('items_per_page_label', 'Items per page label', {
+            default: 'Items per page:',
+          }),
+          textField('of_label', '"Of" label (range and page count)', {
+            default: 'of',
+          }),
+          textField('pages_label', 'Plural "pages" label', {
+            default: 'pages',
+          }),
+          textField('page_label', 'Singular "page" label', {
+            default: 'page',
+          }),
+          textField('items_label', 'Plural "items" label', {
+            default: 'items',
+          }),
+          textField('item_label', 'Singular "item" label', {
+            default: 'item',
+          }),
+        ],
+      }),
+    ],
+  }
+);
+
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
     hubDbTableField('hubdb_table_id', 'Table', {
