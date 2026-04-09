@@ -15,15 +15,15 @@
     totalItems,
     fetchData,
     idToScrollToTop,
-    additionalConfSettings,
+    additionalSettings,
   }: {
     totalItems: number;
     fetchData: () => void | Promise<void>;
     idToScrollToTop: string;
-    additionalConfSettings?: AdditionalSettings;
+    additionalSettings?: AdditionalSettings;
   } = $props();
 
-  const paginationSettings = $derived(additionalConfSettings?.pagination_settings);
+  const paginationSettings = $derived(additionalSettings?.pagination_settings);
 
   const itemsPerPageLabel = $derived(paginationSettings?.items_per_page_label ?? 'Items per page:');
   const ofLabel = $derived(paginationSettings?.of_label ?? 'of');

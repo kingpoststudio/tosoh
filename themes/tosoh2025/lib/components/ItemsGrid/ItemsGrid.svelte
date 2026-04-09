@@ -11,7 +11,7 @@
     isLoading,
     tableRows,
     viewAs = 'grid',
-    additionalConfSettings,
+    additionalSettings,
   }: {
     Card: Component | any;
     SkeletonCard: Component | any;
@@ -19,11 +19,11 @@
     isLoading: boolean;
     tableRows: any[];
     viewAs?: string;
-    additionalConfSettings?: AdditionalSettings;
+    additionalSettings?: AdditionalSettings;
   } = $props();
 
   const noResultsLabel = $derived(
-    additionalConfSettings?.results_settings?.no_results_label ?? 'No results found.'
+    additionalSettings?.results_settings?.no_results_label ?? 'No results found.'
   );
 
   const constructLengthForSkeletons = () => {

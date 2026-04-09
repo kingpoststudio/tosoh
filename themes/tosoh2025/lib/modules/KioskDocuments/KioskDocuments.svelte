@@ -85,7 +85,7 @@
         isLoading={portal.isLoading}
         {Card}
         {SkeletonCard}
-        additionalConfSettings={kioskDocumentsContent?.additional_settings}
+        additionalSettings={kioskDocumentsContent?.additional_settings}
       ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
@@ -93,7 +93,7 @@
           totalItems={portal.totalItems}
           {fetchData}
           idToScrollToTop={formId}
-          additionalConfSettings={kioskDocumentsContent?.additional_settings}
+          additionalSettings={kioskDocumentsContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

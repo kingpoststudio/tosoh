@@ -71,7 +71,7 @@
         {Card}
         {SkeletonCard}
         hasLargeElements={true}
-        additionalConfSettings={hemoglobinVariantsLibraryContent?.additional_settings}
+        additionalSettings={hemoglobinVariantsLibraryContent?.additional_settings}
       ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
@@ -79,7 +79,7 @@
           totalItems={portal.totalItems}
           {fetchData}
           idToScrollToTop={formId}
-          additionalConfSettings={hemoglobinVariantsLibraryContent?.additional_settings}
+          additionalSettings={hemoglobinVariantsLibraryContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}
