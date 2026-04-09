@@ -22,10 +22,9 @@
 {% extends "../layouts/base.html" %}
 
 {% block body %}
-
+  {% module "events_settings" path="/TosohTheme2025/modules/EventsConfig.module", label="Events Settings" export_to_template_context=true %}
   {# Config Settings #}
-  {% set config_settings = widget_data.global_config_settings %}
-  {% set events_template_config = config_settings.events_template_config %}
+  {% set events_template_config = widget_data.events_settings %}
   {% set events_page_link = events_template_config.events_page_link or {url:{href: '/events'}} %}
   {% set about_this_event_title = events_template_config.about_this_event_title or 'About this event' %}
   {% set load_more_label = events_template_config.load_more_label or 'Load More' %}
