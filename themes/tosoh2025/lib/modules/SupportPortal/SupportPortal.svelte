@@ -71,7 +71,7 @@
   <div class="flex w-full flex-col justify-between">
     {#if portal.hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <ErrorCard errorCard={supportPortalContent?.error_card} retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}

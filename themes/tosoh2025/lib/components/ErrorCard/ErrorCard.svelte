@@ -1,8 +1,23 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
   import { onMount } from 'svelte';
+  import type { ErrorFields } from '../../../types/fields';
 
-  let { message, retryCallback }: { message: string; retryCallback: () => void } = $props();
+  let {
+    errorCard,
+    defaultMessage = 'Failed to load items',
+    retryCallback,
+  }: {
+    errorCard?: Partial<ErrorFields> | null;
+    defaultMessage?: string;
+    retryCallback: () => void;
+  } = $props();
+
+  const message = $derived(errorCard?.message || defaultMessage);
+  const reloadInLabel = $derived(errorCard?.reload_in_label || 'Reload in');
+  const secondReloadLabel = $derived(errorCard?.second_reload_label || 'seconds');
+  const reloadLabel = $derived(errorCard?.reload_label || 'Reload');
+  const tryAgainLabel = $derived(errorCard?.try_again_label || 'Try again');
 
   const RELOAD_COUNTDOWN_SECONDS = 30;
 
@@ -41,13 +56,13 @@
 
     <span transition:fade class="text-imperial-red text-sm">
       {#if countdown > 0}
-        Reload in {countdown} seconds
+        {reloadInLabel} {countdown} {secondReloadLabel}
       {:else}
-        You can try again
+        {tryAgainLabel}
       {/if}
     </span>
     {#if enableReload}
-      <button transition:fade onclick={handleRetry}> Reload </button>
+      <button transition:fade onclick={handleRetry}>{reloadLabel}</button>
     {/if}
   </div>
 </div>

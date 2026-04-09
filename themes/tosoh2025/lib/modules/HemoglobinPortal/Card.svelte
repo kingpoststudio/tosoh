@@ -24,7 +24,7 @@
   } = item?.values;
 
   const schema = [
-    { label: 'Sesso', value: sex.label },
+    { label: 'Sesso', value: sex?.label },
     { label: 'Data di nascita paziente (gg/mm/00)', value: patient_dob },
     { label: "Eventuali informazioni sull'etnia", value: ethnicity },
     { label: 'Anamnesi', value: history },

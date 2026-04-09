@@ -16,9 +16,11 @@
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
 
+  const hemoglobinPortalContent = window?.Tosoh?.HemoglobinPortalContent;
+
   const portal = createPortalState({
     formId: 'portale-emogiobine-filters',
-    content: window?.Tosoh?.HemoglobinPortalContent,
+    content: hemoglobinPortalContent,
     prodTableId: PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
     properties:
       'name,summary,sex,patient_dob,ethnicity,history,anomaly,blood_count,hemoglobin_status,other,advice,diagnosis,other_diagnosis,attachment_1,attachment_2,attachment_3,attachment_4',
@@ -60,7 +62,7 @@
   <div class="flex w-full flex-col justify-between">
     {#if portal.hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <ErrorCard errorCard={hemoglobinPortalContent?.error_card} retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}

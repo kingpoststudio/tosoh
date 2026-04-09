@@ -16,9 +16,11 @@
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
 
+  const hemoglobinVariantsLibraryContent = window?.Tosoh?.HemoglobinVariantsLibraryContent;
+
   const portal = createPortalState({
     formId: 'hemoglobin-variants-library-filters',
-    content: window?.Tosoh?.HemoglobinVariantsLibraryContent,
+    content: hemoglobinVariantsLibraryContent,
     prodTableId: PROD_TOSOH_HEMOGLOBIN_VARIANTS_LIBRARY_TABLE_ID,
     properties:
       'document_url,heterozygote_comments,aka,variant_image,variant_name,hgvs_name,mutation,mutation_description,heterozygote_clinical_presentation,heterozygote_laboratory_findings,heterozygote_comments,homozygote_clinical_presentation,homozygote_laboratory_findings,homozygote_comments,ethnicity,comments,instrument,area_under_peak,rt_min,rt_max,window,references',
@@ -56,7 +58,7 @@
   <div class="flex w-full flex-col justify-between">
     {#if portal.hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <ErrorCard errorCard={hemoglobinVariantsLibraryContent?.error_card} retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
