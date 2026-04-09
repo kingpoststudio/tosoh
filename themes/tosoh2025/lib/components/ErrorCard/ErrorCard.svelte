@@ -5,15 +5,13 @@
 
   let {
     errorCard,
-    defaultMessage = 'Failed to load items',
     retryCallback,
   }: {
     errorCard?: Partial<ErrorFields> | null;
-    defaultMessage?: string;
     retryCallback: () => void;
   } = $props();
 
-  const message = $derived(errorCard?.message || defaultMessage);
+  const message = $derived(errorCard?.message || 'Failed to load items');
   const reloadInLabel = $derived(errorCard?.reload_in_label || 'Reload in');
   const secondReloadLabel = $derived(errorCard?.second_reload_label || 'seconds');
   const reloadLabel = $derived(errorCard?.reload_label || 'Reload');
