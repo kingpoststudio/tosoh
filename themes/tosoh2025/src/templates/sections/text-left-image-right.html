@@ -20,59 +20,60 @@
             pb_desktop: "md:pb-xl"
           },
           columns: [
-          {
-            type: "content",
-            content: {
-              text_align: "text-left",
-              horizontal_align: "items-start",
-              title: "<h3>Designed with Growth in Mind</h3>",
-              description: "<p><strong>• Scalability</strong>&nbsp; 90 sample loader or 290 sample loader</p><p><strong>• Haematology line connection</strong></p><p><strong>• Total Laboratory Track Automation</strong></p>",
-              is_cta: false,
-              link: {
-                url: {
-                  href: ""
+            {
+              type: "content",
+              content: {
+                text_align: "text-left",
+                horizontal_align: "items-start",
+                title: "<h3>Designed with Growth in Mind</h3>",
+                description: "<p><strong>• Scalability</strong>&nbsp; 90 sample loader or 290 sample loader</p><p><strong>• Haematology line connection</strong></p><p><strong>• Total Laboratory Track Automation</strong></p>",
+                is_cta: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
                 }
-              }
-            },
-            column_settings: {
-              flex_factor: 3,
-              is_rounded: false,
-              match_tallest_column: false,
-              align: "self-center",
-              justify: "justify-self-start",
-              border_color: "border-transparent"
-            },
-            animation_settings: {
-              is_animated: false
-            }
-          },{
-            type: "image",
-            image: {
-              type: "single",
-              image: {
-                src: "{{ get_asset_url('../../images/connectivity4.jpg') }}",
-                alt: "connectivity4"
               },
-              is_image_contained: false,
-              link: {
-                url: {
-                  href: ""
-                }
+              column_settings: {
+                flex_factor: 3,
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
               }
             },
-            column_settings: {
-              flex_factor: 3,
-              is_rounded: false,
-              match_tallest_column: false,
-              align: "self-center",
-              justify: "justify-self-start",
-              border_color: "border-transparent"
-            },
-            animation_settings: {
-              is_animated: false
+            {
+              type: "image",
+              image: {
+                type: "single",
+                image: {
+                  src: "{{ get_asset_url('../../images/connectivity4.jpg') }}",
+                  alt: "connectivity4"
+                },
+                is_image_contained: false,
+                link: {
+                  url: {
+                    href: ""
+                  }
+                }
+              },
+              column_settings: {
+                flex_factor: 3,
+                is_rounded: false,
+                match_tallest_column: false,
+                align: "self-center",
+                justify: "justify-self-start",
+                border_color: "border-transparent"
+              },
+              animation_settings: {
+                is_animated: false
+              }
             }
-          }
-        ]
+          ]
         }
       %}
       {% end_dnd_module %}
