@@ -187,10 +187,10 @@ export const topicFiltersWithViewAs = groupField('topic_filters', 'Topic Filters
       inline_help_text: 'Optional line under the filter sidebar title.',
     }),
     textField('grid_label', 'Grid Label', {
-      default: 'View As Grid',
+      default: 'Grid',
     }),
     textField('list_label', 'List Label', {
-      default: 'View As List',
+      default: 'List',
     }),
     ...topicFiltersBaseChildren,
   ],

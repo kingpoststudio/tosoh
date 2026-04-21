@@ -62,7 +62,7 @@
 >
   <div class="flex w-full items-center justify-between">
     <div class="min-w-0 flex-1">
-        <p class="font-sans-narrow text-2xl font-semibold">{filtersTitleValue}</p>
+      <p class="font-sans-narrow text-2xl font-semibold">{filtersTitleValue}</p>
     </div>
     {@render filterIcon()}
   </div>

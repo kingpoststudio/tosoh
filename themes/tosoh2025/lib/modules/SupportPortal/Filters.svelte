@@ -47,7 +47,7 @@
         class="border-imperial-red p-sm w-full cursor-pointer rounded-lg border hover:bg-red-50"
         onclick={handleChangeView}
       >
-        {viewAs === 'grid' ? `${viewAsLabel} ${gridLabel}` : `${viewAsLabel} ${listLabel}`}
+        {viewAs === 'grid' ? `${viewAsLabel} ${listLabel}` : `${viewAsLabel} ${gridLabel}`}
       </button>
     {/if}
   {/snippet}
