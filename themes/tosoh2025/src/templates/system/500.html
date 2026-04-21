@@ -7,6 +7,13 @@
 {% extends "../layouts/base.html" %}
 
 {% block body %}
+  {# Config Settings #}
+  {% set five_zero_zero_template_config = widget_data.global_config_settings.five_zero_zero_template_config %}
+  {% set title = five_zero_zero_template_config.title or "Something went wrong." %}
+  {% set description = five_zero_zero_template_config.description or 'An internal server error occurred. Please click the button below to return to the homepage.' %}
+  {% set go_home_label = five_zero_zero_template_config.go_home_label or 'Go Home' %}
+  {% set go_home_url = five_zero_zero_template_config.go_home_url or {url:{href: '/'}} %}
+
   <main>
     <div class="p-lg gap-md max-w-max-page m-auto flex flex-col items-center justify-center">
       <svg width="64" height="64" viewBox="0 0 16 16" style="color:var(--color-imperial-red);">
@@ -14,9 +21,14 @@
           style="fill:currentColor;"
           d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0-2A5 5 0 1 0 8 3a5 5 0 0 0 0 10zm0-9a1 1 0 0 1 1 1v3a1 1 0 1 1-2 0V5a1 1 0 0 1 1-1zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
       </svg>
-      <h3>Something went wrong.</h3>
-      <p>An internal server error occurred. Please click the button below to return to the homepage.</p>
-      <a class="button w-fit" href="/">Go Home</a>
+      <h3>{{ title }}</h3>
+      <p>{{ description }}</p>
+      <a
+        class="button w-fit"
+        href="{{ go_home_url.url.href }}"
+        target="{{ go_home_url.open_in_new_tab ? '_blank' : '_self' }}">
+        {{ go_home_label }}
+      </a>
     </div>
     <br />
     <br />

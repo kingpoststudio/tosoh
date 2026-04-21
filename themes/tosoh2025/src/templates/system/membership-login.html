@@ -14,20 +14,32 @@
 {% endblock %}
 
 {% block body %}
-  {% call macros.auth_wrapper() %}
+  {# Config Settings #}
+  {% set membership_login_template_config = widget_data.global_config_settings.membership_login_template_config %}
+  {% set title = membership_login_template_config.title or "Sign In" %}
+  {% set description = membership_login_template_config.description or 'This Page Is Only Available To People Who Have Been Given Access.' %}
+  {% set email_label = membership_login_template_config.email_label or 'Email Address' %}
+  {% set password_label = membership_login_template_config.password_label or 'Password' %}
+  {% set remember_me_label = membership_login_template_config.remember_me_label or 'Remember Me' %}
+  {% set reset_password_text = membership_login_template_config.reset_password_text or 'Forgot Password?' %}
+  {% set submit_button_text = membership_login_template_config.submit_button_text or 'Sign In' %}
+  {% set having_trouble_text = membership_login_template_config.having_trouble_text or 'Having trouble?' %}
+  {% set contact_admin_text = membership_login_template_config.contact_admin_text or 'Contact the admin.' %}
+
+  {% call macros.auth_wrapper(widget_data) %}
     {%
       module "content"
       path="@hubspot/rich_text",
-      html="<h2 class='font-semibold'>Sign In</h2><p class='mt-sm text-nickel text-xl'>This Page Is Only Available To People Who Have Been Given Access.</p>"
+      html="<h2 class='font-semibold'>{{ title }}</h2><p class='mt-sm text-nickel text-xl'>{{ description }}</p>"
     %}
     <div class="form-container">
       {%
         member_login "my_login"
-        email_label= "Email Address",
-        password_label= "Password",
-        remember_me_label= "Remember Me",
-        reset_password_text= "Forgot Password?",
-        submit_button_text= "Sign In"
+        email_label= '{{email_label}}',
+        password_label= '{{password_label}}',
+        remember_me_label= '{{remember_me_label}}',
+        reset_password_text= '{{reset_password_text}}',
+        submit_button_text= '{{submit_button_text}}'
       %}
     </div>
     <div>
@@ -38,9 +50,8 @@
       %}
         {% module_attribute "html" %}
           <p>
-            Having trouble?
-            <a href="{{ ("mailto:" ~ site_settings.membershipWebsiteAdmin)|escape_url }}">Contact the admin</a>
-            .
+            {{ having_trouble_text }}
+            <a href="{{ ("mailto:" ~ site_settings.membershipWebsiteAdmin)|escape_url }}">{{ contact_admin_text }}</a>
           </p>
         {% end_module_attribute %}
       {% end_module_block %}

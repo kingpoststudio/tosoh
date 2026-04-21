@@ -6,6 +6,10 @@
 
 {% extends "../layouts/base.html" %}
 {% block body %}
+  {% module "blog_listing_settings" path="/TosohTheme2025/modules/BlogListingConfig.module", label="Blog Listing Settings" export_to_template_context=true %}
+  {% set blog_listing_settings = widget_data.blog_listing_settings %}
+  {% set read_more_label = blog_listing_settings.read_more_label or 'Read More' %}
+  {% set load_more_label = blog_listing_settings.load_more_label or 'Load More' %}
 
   {% set blog_id = content.parent_blog.id or "default" %}
   {% set standard_posts = [] %}
@@ -40,7 +44,7 @@
 
         <span class="text-nickel break-word line-clamp-2">
           {{ post.meta_description|truncate(70) }}{{ post.meta_description|length >= 70 ? '...' : '.' }}
-          <span class="text-imperial-red underline">Read more</span>
+          <span class="text-imperial-red underline">{{ read_more_label }}</span>
         </span>
       </div>
     </a>
@@ -90,7 +94,7 @@
 
             {% if not loop.last %}
               <tosoh-reveal-group variant="action" groupId="{{ groupIndex + 1 }}" class="mt-lg mx-auto block w-fit">
-                <button>Load more</button>
+                <button>{{ load_more_label }}</button>
               </tosoh-reveal-group>
             {% endif %}
           </tosoh-reveal-group>

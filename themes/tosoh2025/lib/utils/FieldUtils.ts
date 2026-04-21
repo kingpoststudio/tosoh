@@ -23,6 +23,15 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
   },
 });
 
+export const systemPageFields = [
+  textField('having_trouble_text', 'Having Trouble Text', {
+    default: 'Having trouble?',
+  }),
+  textField('contact_admin_text', 'Contact Admin Text', {
+    default: 'Contact the admin.',
+  }),
+];
+
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
     hubDbTableField('hubdb_table_id', 'Table', {

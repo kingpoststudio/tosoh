@@ -23,7 +23,7 @@
   -}}
 {%- endmacro -%}
 
-{%- macro render_event_card(event, is_carousel_slide) -%}
+{%- macro render_event_card(event, is_carousel_slide, view_details_label, events_page_link) -%}
   {% set is_carousel_slide = is_carousel_slide ? 'embla__slide min-w-[100%] basis-[100%] md:min-w-[50%] md:basis-[50%] xl:min-w-[30%] xl:basis-[30%] max-w-[32rem]' : 'w-full' %}
   {% set current_time = local_dt|unixtimestamp %}
   <div
@@ -38,7 +38,9 @@
         <div class="absolute -top-2 right-4 items-center justify-center text-black">
           <div class="relative h-[9rem] w-[7.5rem]">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 141 164" fill="none" class="absolute top-0">
-              <path d="M0.804688 0H140.195V163.316L70.5001 128.114L0.804688 163.316V0Z" fill="#013a55"></path>
+              <path
+                d="M0.804688 0H140.195V163.316L70.5001 128.114L0.804688 163.316V0Z"
+                fill="var(--color-prussian-blue)"></path>
             </svg>
 
             <div class="pt-md absolute left-0 flex h-full w-full flex-col items-center">
@@ -66,10 +68,10 @@
     </div>
     <div class="p-md w-full">
       <a
-        target="_blank"
+        target="{{ events_page_link.open_in_new_tab ? '_blank' : '_self' }}"
         class="button with-arrow bg-imperial-red block w-full! rounded-lg px-4 py-3 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
-        href="{{ event.hs_path ? '/events/' ~ event.hs_path : event.cta_url }}">
-        {{ module.cta_label || 'View Details' }}
+        href="{{ event.hs_path ? events_page_link.url.href ~ '/' ~ event.hs_path : event.cta_url }}">
+        {{ view_details_label }}
       </a>
     </div>
   </div>
@@ -140,8 +142,13 @@
   {%- endif -%}
 {%- endmacro -%}
 
-{%- macro auth_wrapper() -%}
-  <div class="max-w-max-page relative m-auto flex min-h-[100vh] flex-col-reverse lg:flex-row">
+{%- macro auth_wrapper(widget_data) -%}
+
+  {% set auth_wrapper_template_config = widget_data.global_config_settings.auth_wrapper_template_config %}
+  {% set auth_wrapper_title = auth_wrapper_template_config.title or 'CONNECTING SCIENCE WITH CARE' %}
+  {% set auth_wrapper_description = auth_wrapper_template_config.description or 'At Tosoh, we enable precision and reliability for better patient outcomes.' %}
+
+  <div class="max-w-max-page relative m-auto flex flex-col-reverse lg:min-h-[100vh] lg:flex-row">
     <img
       src="{{ get_asset_url('../../images/logo_auth_wrapper.png') }}"
       class="top-sm right-sm absolute max-h-[5rem] lg:max-h-[7rem]" />
@@ -151,10 +158,8 @@
         class="absolute top-0 left-0 h-full w-full object-cover" />
       <div class="absolute top-0 left-0 h-full w-full bg-[#013B57E3]"></div>
       <div class="pt-md md:pt-2xl lg:pt-3xl gap-sm relative flex w-full flex-col">
-        <p class="text-thin text-lg tracking-widest">CONNECTING SCIENCE WITH CARE</p>
-        <h2 class="leading-12 font-semibold">
-          At Tosoh, we enable precision and reliability for better patient outcomes.
-        </h2>
+        <p class="text-thin text-lg tracking-widest">{{ auth_wrapper_title }}</p>
+        <h2 class="leading-12 font-semibold">{{ auth_wrapper_description }}</h2>
       </div>
       <img
         src="{{ get_asset_url('../../images/close-up-portrait-focused-young-male-doctor.png') }}"
