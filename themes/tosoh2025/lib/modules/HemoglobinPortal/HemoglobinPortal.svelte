@@ -16,16 +16,26 @@
   import SkeletonCard from './SkeletonCard.svelte';
   import ItemsGrid from '../../components/ItemsGrid/ItemsGrid.svelte';
 
+  const hemoglobinPortalContent = window?.Tosoh?.HemoglobinPortalContent;
+
   const portal = createPortalState({
     formId: 'portale-emogiobine-filters',
-    content: window?.Tosoh?.HemoglobinPortalContent,
+    content: hemoglobinPortalContent,
     prodTableId: PROD_TOSOH_EMOGLOBINE_ITALIA_TABLE_ID,
     properties:
       'name,summary,sex,patient_dob,ethnicity,history,anomaly,blood_count,hemoglobin_status,other,advice,diagnosis,other_diagnosis,attachment_1,attachment_2,attachment_3,attachment_4',
   });
 
-  const { title, eyebrow, description, searchEnabled, topicFilters, formId, fetchData, reloadData } =
-    portal;
+  const {
+    title,
+    eyebrow,
+    description,
+    searchEnabled,
+    topicFilters,
+    formId,
+    fetchData,
+    reloadData,
+  } = portal;
 
   onMount(() => {
     fetchData();
@@ -60,14 +70,25 @@
   <div class="flex w-full flex-col justify-between">
     {#if portal.hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <ErrorCard errorCard={hemoglobinPortalContent?.error_card} retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {Card} {SkeletonCard} hasLargeElements={true}></ItemsGrid>
+      <ItemsGrid
+        tableRows={portal.tableRows}
+        isLoading={portal.isLoading}
+        {Card}
+        {SkeletonCard}
+        hasLargeElements={true}
+        additionalSettings={hemoglobinPortalContent?.additional_settings}
+      ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
+        <PaginationWithLimit
+          totalItems={portal.totalItems}
+          {fetchData}
+          idToScrollToTop={formId}
+          additionalSettings={hemoglobinPortalContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

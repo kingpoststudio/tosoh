@@ -1,4 +1,11 @@
-import type { Search, TopicFilters } from './fields';
+import type {
+  AdditionalSettings,
+  ErrorFields,
+  Search,
+  TopicFilters,
+  TopicFiltersWithApplyButton,
+  TopicFiltersWithViewAs,
+} from './fields';
 import type { CCTComparisons, CCTInstruments, CCTComparison, Link } from './hubdb';
 import { HubSpotMenu } from './hubspot';
 
@@ -68,7 +75,9 @@ declare global {
         display_video_download: boolean;
         search: Search;
         title: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithViewAs;
+        error_card: ErrorFields;
+        additional_settings?: AdditionalSettings;
 
         type: 'module';
       };
@@ -89,6 +98,7 @@ declare global {
         search: Search;
         title: string;
         topic_filters: TopicFilters;
+        error_card: ErrorFields;
         card_fields: {
           above_title: string;
           title: string;
@@ -97,6 +107,7 @@ declare global {
           subtitle_3: string;
           subtitle_4: string;
         };
+        additional_settings?: AdditionalSettings;
       };
       HemoglobinVariantsLibraryContent: {
         breadcrumbs: {
@@ -111,8 +122,9 @@ declare global {
         eyebrow: string;
         title: string;
         search: Search;
-        title: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithApplyButton;
+        error_card: ErrorFields;
+        additional_settings?: AdditionalSettings;
       };
       HemoglobinPortalContent: {
         breadcrumbs: {
@@ -128,7 +140,9 @@ declare global {
         title: string;
         description: string;
         eyebrow: string;
-        topic_filters: TopicFilters;
+        topic_filters: TopicFiltersWithApplyButton;
+        error_card: ErrorFields;
+        additional_settings?: AdditionalSettings;
       };
       KioskDocumentsContent: {
         description: string;
@@ -145,6 +159,8 @@ declare global {
         search: Search;
         title: string;
         topic_filters: TopicFilters;
+        error_card: ErrorFields;
+        additional_settings?: AdditionalSettings;
       };
       WebinarListings: {
         advanced: {
@@ -158,6 +174,8 @@ declare global {
         topic_filters: TopicFilters;
         upcoming_section_eyebrow: string;
         upcoming_section_title: string;
+        error_card: ErrorFields;
+        additional_settings?: AdditionalSettings;
       };
       CCT: {
         filtersSidebarTitle: string;

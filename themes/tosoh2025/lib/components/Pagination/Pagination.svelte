@@ -2,6 +2,7 @@
   import { onDestroy, onMount } from 'svelte';
   import { on } from 'svelte/events';
 
+  import type { AdditionalSettings } from '../../../types/fields';
   import {
     defaultItemsLimit,
     defaultPagination,
@@ -10,7 +11,26 @@
   import { setSearchParams } from '../../utils/urlUtils';
   import { scrollToTop } from '../../utils/utils';
 
-  let { totalItems, fetchData, idToScrollToTop } = $props();
+  let {
+    totalItems,
+    fetchData,
+    idToScrollToTop,
+    additionalSettings,
+  }: {
+    totalItems: number;
+    fetchData: () => void | Promise<void>;
+    idToScrollToTop: string;
+    additionalSettings?: AdditionalSettings;
+  } = $props();
+
+  const paginationSettings = $derived(additionalSettings?.pagination_settings);
+
+  const itemsPerPageLabel = $derived(paginationSettings?.items_per_page_label ?? 'Items per page:');
+  const ofLabel = $derived(paginationSettings?.of_label ?? 'of');
+  const pagesLabel = $derived(paginationSettings?.pages_label ?? 'pages');
+  const pageLabel = $derived(paginationSettings?.page_label ?? 'page');
+  const itemsLabel = $derived(paginationSettings?.items_label ?? 'items');
+  const itemLabel = $derived(paginationSettings?.item_label ?? 'item');
 
   const params = new URLSearchParams(window.location.search);
   const LIMIT_OPTIONS = [12, 24, 48];
@@ -100,7 +120,7 @@
     class="lg:p-sm gap-sm mt-base flex w-full flex-col-reverse justify-center lg:flex-row lg:justify-between"
   >
     <div class="gap-sm flex items-center justify-center text-[#4E4F54]">
-      <p>Items per page:</p>
+      <p>{itemsPerPageLabel}</p>
       <select
         value={limit}
         onchange={(event) => {
@@ -118,8 +138,10 @@
         {/each}
       </select>
       <p>
-        {(pagination - 1) * limit || 1} - {Math.min((pagination - 1) * limit + limit, totalItems)} of
-        {totalItems}{totalItems > 1 ? ' items' : ' item'}
+        {(pagination - 1) * limit || 1} - {Math.min((pagination - 1) * limit + limit, totalItems)}
+        {ofLabel}
+        {totalItems}
+        {totalItems > 1 ? itemsLabel : itemLabel}
       </p>
     </div>
     <div class="gap-sm flex justify-center">
@@ -142,8 +164,9 @@
           {/each}
         </select>
         <p>
-          of {numberOfPages}
-          {numberOfPages === 1 ? 'page' : 'pages'}
+          {ofLabel}
+          {numberOfPages}
+          {numberOfPages === 1 ? pageLabel : pagesLabel}
         </p>
       </div>
       <div class="gap-sm flex">

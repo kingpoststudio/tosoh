@@ -1,5 +1,11 @@
 import { groupField, textField, booleanField, formField } from 'hs-fieldkit';
-import { breadCrumbField, searchField, topicFilters } from '../../../../lib/utils/fieldUtils';
+import {
+  additionalSettingsFields,
+  breadCrumbField,
+  errorCardFields,
+  searchField,
+  topicFiltersWithApplyButton,
+} from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -13,7 +19,9 @@ const generateFields = () => {
     }),
 
     searchField(),
-    topicFilters,
+    topicFiltersWithApplyButton,
+    errorCardFields,
+    additionalSettingsFields,
   ];
 };
 

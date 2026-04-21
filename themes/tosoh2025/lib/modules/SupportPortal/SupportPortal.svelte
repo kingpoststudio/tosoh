@@ -71,14 +71,25 @@
   <div class="flex w-full flex-col justify-between">
     {#if portal.hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <ErrorCard errorCard={supportPortalContent?.error_card} retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {viewAs} {Card} {SkeletonCard}></ItemsGrid>
+      <ItemsGrid
+        tableRows={portal.tableRows}
+        isLoading={portal.isLoading}
+        {viewAs}
+        {Card}
+        {SkeletonCard}
+        additionalSettings={supportPortalContent?.additional_settings}
+      ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
+        <PaginationWithLimit
+          totalItems={portal.totalItems}
+          {fetchData}
+          idToScrollToTop={formId}
+          additionalSettings={supportPortalContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

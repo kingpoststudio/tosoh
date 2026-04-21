@@ -23,67 +23,176 @@ export const breadCrumbField = groupField('breadcrumbs', 'Breadcrumbs', {
   },
 });
 
+export const errorCardFields = groupField('error_card', 'Error Card', {
+  children: [
+    textField('message', 'Message', {
+      default: 'An error occurred while loading the data.',
+    }),
+    textField('reload_in_label', 'Reload In Label', {
+      default: 'Reload in',
+    }),
+    textField('second_reload_label', 'Second Reload Label', {
+      default: 'seconds',
+    }),
+    textField('reload_label', 'Reload Label', {
+      default: 'Reload',
+    }),
+    textField('try_again_label', 'Try Again Label', {
+      default: 'Try again',
+    }),
+  ],
+});
+
+export const additionalSettingsFields = groupField(
+  'additional_settings',
+  'Additional Settings',
+  {
+    children: [
+      groupField('results_settings', 'Results settings', {
+        children: [
+          textField('no_results_label', 'No results label', {
+            default: 'No results found.',
+          }),
+        ],
+      }),
+      groupField('pagination_settings', 'Pagination labels', {
+        children: [
+          textField('items_per_page_label', 'Items per page label', {
+            default: 'Items per page:',
+          }),
+          textField('of_label', '"Of" label (range and page count)', {
+            default: 'of',
+          }),
+          textField('pages_label', 'Plural "pages" label', {
+            default: 'pages',
+          }),
+          textField('page_label', 'Singular "page" label', {
+            default: 'page',
+          }),
+          textField('items_label', 'Plural "items" label', {
+            default: 'items',
+          }),
+          textField('item_label', 'Singular "item" label', {
+            default: 'item',
+          }),
+        ],
+      }),
+    ],
+  }
+);
+
+const topicFiltersBaseChildren = [
+  hubDbTableField('hubdb_table_id', 'Table', {
+    required: false,
+    inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
+  }),
+  textField('reset_filters_label', 'Reset Filters Label', {
+    default: 'Reset',
+  }),
+  groupField('filters', 'Filters', {
+    children: [
+      textField('filter_label', 'Filter Label'),
+      textField('hubdb_column_id', 'HubDB Column ID'),
+      choiceField('type', 'Type', {
+        id: 'filters.type',
+        choices: [
+          ['dropdown', 'Dropdown'],
+          ['checkbox', 'Checkbox'],
+          ['range-pm', 'Range (plus/minus)'],
+        ],
+      }),
+      numberField('min', 'Minimum', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text: 'Determines the minimum value for the range inputs.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 0,
+      }),
+      numberField('max', 'Maximum', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text: 'Determines the maximum value for the range inputs.',
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 0,
+      }),
+      numberField('tolerance', '+/- Tolerance', {
+        step: 0.01,
+        display: 'text',
+        type: 'number',
+        inline_help_text:
+          "Determines the +/- tolerance. If the tolerance is zero (0), the search will yield results that contain the user's input within an RT min/max range <em>(i.e; RT range is 2.66 and 2.74, if user enters 2.71, it will be displayed)</em>.",
+        visibility: {
+          controlling_field: 'filters.type',
+          controlling_value_regex: 'range-pm',
+          operator: 'EQUAL',
+        },
+        default: 1,
+      }),
+    ],
+    occurrence: {
+      min: 0,
+      max: null,
+    },
+  }),
+];
+
+/** Title + table + reset + repeatable filters (e.g. Support Portal Docs, Kiosk). */
 export const topicFilters = groupField('topic_filters', 'Topic Filters', {
   children: [
-    hubDbTableField('hubdb_table_id', 'Table', {
-      required: false,
-      inline_help_text: 'Defines the hubDB table that will be used to fetch the filters.',
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
     }),
-    groupField('filters', 'Filters', {
-      children: [
-        textField('filter_label', 'Filter Label'),
-        textField('hubdb_column_id', 'HubDB Column ID'),
-        choiceField('type', 'Type', {
-          id: 'filters.type',
-          choices: [
-            ['dropdown', 'Dropdown'],
-            ['checkbox', 'Checkbox'],
-            ['range-pm', 'Range (plus/minus)'],
-          ],
-        }),
-        numberField('min', 'Minimum', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text: 'Determines the minimum value for the range inputs.',
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 0,
-        }),
-        numberField('max', 'Maximum', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text: 'Determines the maximum value for the range inputs.',
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 0,
-        }),
-        numberField('tolerance', '+/- Tolerance', {
-          step: 0.01,
-          display: 'text',
-          type: 'number',
-          inline_help_text:
-            "Determines the +/- tolerance. If the tolerance is zero (0), the search will yield results that contain the user's input within an RT min/max range <em>(i.e; RT range is 2.66 and 2.74, if user enters 2.71, it will be displayed)</em>.",
-          visibility: {
-            controlling_field: 'filters.type',
-            controlling_value_regex: 'range-pm',
-            operator: 'EQUAL',
-          },
-          default: 1,
-        }),
-      ],
-      occurrence: {
-        min: 0,
-        max: null,
-      },
+    ...topicFiltersBaseChildren,
+  ],
+});
+
+/** No filters title field in the editor (e.g. Webinar listings). */
+export const topicFiltersNoTitle = groupField('topic_filters', 'Topic Filters', {
+  children: topicFiltersBaseChildren,
+});
+
+/** Hemoglobin: deferred Apply for range-pm. */
+export const topicFiltersWithApplyButton = groupField('topic_filters', 'Topic Filters', {
+  children: [
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
     }),
+    textField('apply_button_label', 'Apply Button Label', {
+      default: 'Apply',
+      inline_help_text:
+        'Used when a numeric range filter defers URL updates until Apply is clicked.',
+    }),
+    ...topicFiltersBaseChildren,
+  ],
+});
+
+/** Support Portal: grid/list toggle + optional view-as subtitle. */
+export const topicFiltersWithViewAs = groupField('topic_filters', 'Topic Filters', {
+  children: [
+    textField('filters_title', 'Filters Title', {
+      default: 'Filter',
+    }),
+    textField('view_as_label', 'View As Label', {
+      default: 'View As',
+      inline_help_text: 'Optional line under the filter sidebar title.',
+    }),
+    textField('grid_label', 'Grid Label', {
+      default: 'Grid',
+    }),
+    textField('list_label', 'List Label', {
+      default: 'List',
+    }),
+    ...topicFiltersBaseChildren,
   ],
 });
 

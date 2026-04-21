@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Component } from 'svelte';
   import { fade } from 'svelte/transition';
+  import type { AdditionalSettings } from '../../../types/fields';
   import { getUrlParam } from '../../utils/urlUtils';
 
   const {
@@ -10,6 +11,7 @@
     isLoading,
     tableRows,
     viewAs = 'grid',
+    additionalSettings,
   }: {
     Card: Component | any;
     SkeletonCard: Component | any;
@@ -17,7 +19,12 @@
     isLoading: boolean;
     tableRows: any[];
     viewAs?: string;
+    additionalSettings?: AdditionalSettings;
   } = $props();
+
+  const noResultsLabel = $derived(
+    additionalSettings?.results_settings?.no_results_label ?? 'No results found.'
+  );
 
   const constructLengthForSkeletons = () => {
     return parseInt(getUrlParam('limit') || '12');
@@ -51,7 +58,7 @@
     {/each}
   {:else}
     <div class="p-sm">
-      <p class="text-center text-2xl font-bold">No results found</p>
+      <p class="text-center text-2xl font-bold">{noResultsLabel}</p>
     </div>
   {/if}
 </div>

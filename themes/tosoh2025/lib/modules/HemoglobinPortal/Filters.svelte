@@ -9,6 +9,8 @@
   let { isParentLoading, formId } = $props();
 
   const content = window?.Tosoh?.HemoglobinPortalContent;
+  const topicFiltersMeta = content?.topic_filters;
+  const applyButtonLabel = topicFiltersMeta?.apply_button_label ?? 'Apply';
 
   const filterState = createFilterState({
     formId,
@@ -41,11 +43,13 @@
   searchFromFields={content?.search}
   isActivatedQuery={false}
   updateUrl={false}
+  filtersTitle={topicFiltersMeta?.filters_title}
+  resetLabel={topicFiltersMeta?.reset_filters_label}
 >
   {#snippet filterExtra({ filter })}
     {#if filter?.type === 'range-pm'}
       <button type="button" onclick={onClickSubmit} class=" mt-sm w-full hover:bg-red-50"
-        >Apply</button
+        >{applyButtonLabel}</button
       >
     {/if}
   {/snippet}

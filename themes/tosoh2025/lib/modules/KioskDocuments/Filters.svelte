@@ -7,6 +7,7 @@
   let { isParentLoading, formId } = $props();
 
   const content = window?.Tosoh?.KioskDocumentsContent;
+  const topicFiltersMeta = content?.topic_filters;
 
   const filterState = createFilterState({
     formId,
@@ -27,4 +28,6 @@
   {isParentLoading}
   searchTableId={PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID}
   searchFromFields={content?.search}
+  filtersTitle={topicFiltersMeta?.filters_title}
+  resetLabel={topicFiltersMeta?.reset_filters_label}
 />

@@ -35,9 +35,11 @@
     ];
   };
 
+  const kioskDocumentsContent = window?.Tosoh?.KioskDocumentsContent;
+
   const portal = createPortalState({
     formId: 'kiosk-documents',
-    content: window?.Tosoh?.KioskDocumentsContent,
+    content: kioskDocumentsContent,
     prodTableId: PROD_TOSOH_KIOSK_DOCUMENTS_TABLE_ID,
     properties: 'title,document_type,image,page_path,start_date,end_date',
     sort: '-start_date',
@@ -74,14 +76,24 @@
   <div class="flex w-full flex-col justify-between">
     {#if portal.hasError}
       <div class="p-sm">
-        <ErrorCard message="Failed to load portal items" retryCallback={reloadData} />
+        <ErrorCard errorCard={kioskDocumentsContent?.error_card} retryCallback={reloadData} />
         <div class="pb-sm"></div>
       </div>
     {:else}
-      <ItemsGrid tableRows={portal.tableRows} isLoading={portal.isLoading} {Card} {SkeletonCard}></ItemsGrid>
+      <ItemsGrid
+        tableRows={portal.tableRows}
+        isLoading={portal.isLoading}
+        {Card}
+        {SkeletonCard}
+        additionalSettings={kioskDocumentsContent?.additional_settings}
+      ></ItemsGrid>
 
       <div class={`${portal.tableRows?.length > 0 ? 'block' : 'hidden'}`}>
-        <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}
+        <PaginationWithLimit
+          totalItems={portal.totalItems}
+          {fetchData}
+          idToScrollToTop={formId}
+          additionalSettings={kioskDocumentsContent?.additional_settings}
         ></PaginationWithLimit>
       </div>
     {/if}

@@ -10,6 +10,7 @@
   let { isParentLoading, formId } = $props();
 
   const content = window?.Tosoh?.SupportPortalDocsContent;
+  const topicFiltersMeta = content?.topic_filters;
   const isSearchAccessLevelFilterEnabled =
     content?.search?.is_access_level_filter_enabled || false;
   const accessLevel = content?.access_level || DEFAULT_ACCESS_LEVEL;
@@ -35,4 +36,6 @@
   searchTableId={PROD_TOSOH_SUPPORT_PORTAL_SDS_DOCS_TABLE_ID}
   searchFromFields={content?.search}
   accessLevel={isSearchAccessLevelFilterEnabled ? accessLevel : undefined}
+  filtersTitle={topicFiltersMeta?.filters_title}
+  resetLabel={topicFiltersMeta?.reset_filters_label}
 />

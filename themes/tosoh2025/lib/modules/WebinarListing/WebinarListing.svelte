@@ -104,10 +104,21 @@
 
 {#snippet grid(rows: WebinarListingsItem[], displayOnLoad: boolean, displayPagination: boolean)}
   {#if (portal.isLoading && displayOnLoad) || !portal.isLoading}
-    <ItemsGrid tableRows={rows} isLoading={portal.isLoading} {Card} {SkeletonCard} hasLargeElements={true}
+    <ItemsGrid
+      tableRows={rows}
+      isLoading={portal.isLoading}
+      {Card}
+      {SkeletonCard}
+      hasLargeElements={true}
+      additionalSettings={webinarListingsWindow?.additional_settings}
     ></ItemsGrid>
     <div class={`${rows?.length > 0 && displayPagination ? 'block' : 'hidden'}`}>
-      <PaginationWithLimit totalItems={portal.totalItems} {fetchData} idToScrollToTop={formId}></PaginationWithLimit>
+      <PaginationWithLimit
+        totalItems={portal.totalItems}
+        {fetchData}
+        idToScrollToTop={formId}
+        additionalSettings={webinarListingsWindow?.additional_settings}
+      ></PaginationWithLimit>
     </div>
   {/if}
 {/snippet}
@@ -124,7 +135,7 @@
 
   {#if portal.hasError && !portal.isLoading}
     <div class="p-sm">
-      <ErrorCard message="Failed to load webinars" retryCallback={reloadData} />
+      <ErrorCard errorCard={webinarListingsWindow?.error_card} retryCallback={reloadData} />
       <div class="pb-sm"></div>
     </div>
   {/if}

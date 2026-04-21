@@ -1,5 +1,11 @@
 import { richTextField } from 'hs-fieldkit';
-import { breadCrumbField, searchField, topicFilters } from '../../../../lib/utils/fieldUtils';
+import {
+  additionalSettingsFields,
+  breadCrumbField,
+  errorCardFields,
+  searchField,
+  topicFiltersWithApplyButton,
+} from '../../../../lib/utils/fieldUtils';
 
 const generateFields = () => {
   return [
@@ -16,7 +22,9 @@ const generateFields = () => {
         "Casi clinici posti dagli utenti agli esperti del sito, con relativi allegati (laddove disponibili). La numerazione dei casi segue l'ordine del database presente in archivio (non sono visibili alcuni casi simulati).",
     }),
     searchField(),
-    topicFilters,
+    topicFiltersWithApplyButton,
+    errorCardFields,
+    additionalSettingsFields,
   ];
 };
 
